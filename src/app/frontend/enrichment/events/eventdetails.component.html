@@ -1,0 +1,34 @@
+<section class="section p-16 mt-100 single-article">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <div>
+                  <img [src]="articleData.image_url" alt="" class="img-responsive">
+              </div>
+              <div>
+                  <h3 class="text-red">{{articleData.title}}</h3>
+                  <p class="text-gray">Event by {{articleData.author_name}}</p>
+                  <!--<ul class="social-link mt-30">
+                      <li>
+                          <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
+                           <span>5</span>
+                      </li>
+                      <li>
+                          <a href="#" class="linked-bg"><i class="fa fa-linkedin"></i></a>
+                          <span>5</span>
+                      </li>
+                      <li>
+                          <a href="#" class="twitter-bg"><i class="ion-social-twitter"></i></a>
+                          <span>5</span>
+                      </li>
+                  </ul>-->
+              </div>
+          </div>
+          <div class="col-md-8">
+              <h1>{{articleData.title}}</h1>
+              <p class="font-weight-bold mb-30">{{articleData.short_desc}}</p>
+              <div [innerHTML]="articleData.description" class="mb-30"></div>
+          </div>
+      </div>
+  </div>
+</section>
