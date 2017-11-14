@@ -14,6 +14,9 @@ export class FindfriendsComponent implements OnInit {
   errorMsg: string='';
   successMsg: string='';
   public loading = false;
+  public loginUserId:any;
+  public userRequestFrndList =[];
+  public userSearchFrndList =[];
 
   constructor(
     private builder:FormBuilder, 
@@ -24,7 +27,7 @@ export class FindfriendsComponent implements OnInit {
   ) { 
     //alert();
     this.postform = builder.group({
-			search_name: ['', [
+			suname: ['', [
 			   //Validators.required,
 			   //Validators.minLength(3)
 			 ]]
@@ -33,6 +36,52 @@ export class FindfriendsComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.loginUserId=localStorage.getItem("loginUserId");
+    this.getPendingFrndList();
+  }
+  
+  public getPendingFrndList(){
+      if(this.loginUserId!=''){
+          let dataUserDet ={
+            "user_id": this.loginUserId
+          };
+          this.dataService.getRequestFrndListById(dataUserDet)
+          .subscribe(data => {
+                let details=data;
+                //console.log(details);
+                if (details.Ack=="1") {
+                    this.userRequestFrndList = details.PendingFriendListById;
+                }else{
+                  
+                }
+            },
+            error => {
+              
+            }
+          ); 
+        }else{
+        }
   }
 
+  public submitSearchUser() {
+      this.loading = true;
+      this.loginUserId=localStorage.getItem("loginUserId");
+      var result,
+      userValue = this.postform.value;
+      userValue.user_id = this.loginUserId;   
+      
+      this.dataService.searchFrndListByName(userValue)
+        .subscribe(
+              data => {
+                  this.loading = false;
+                  if(data.Ack==1){
+                      this.userSearchFrndList=data.FriendListById;
+                  }
+                  //console.log(data);
+                  //this.postform.reset();
+        },
+        error => {
+          alert(error);
+        });
+  }
 }

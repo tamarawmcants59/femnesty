@@ -47,7 +47,7 @@ export class UserService {
         form_data
     ).map(data => data);
   }
-
+  
   userSignup(form_data){
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
     return this.apiService.post(
@@ -89,4 +89,24 @@ export class UserService {
       .map(data => data);
   }
 
+  getUserFrndListById(form_data){
+    return this.apiService.post(
+        `/users/appuserfriendslistbyid`,
+        form_data
+    ).map(data => data);
+  }
+
+  getRequestFrndListById(form_data){
+    return this.apiService.post(
+        `/users/appuserpendfriendlistbyid`,
+        form_data
+    ).map(data => data);
+  }
+
+  searchFrndListByName(form_data){
+    return this.apiService.post(
+        `/users/appsearchfriend`,
+        form_data
+    ).map(data => data);
+  }
 }

@@ -26,6 +26,7 @@ export class EditprofileComponent implements OnInit {
   public loading = false;
   public loginUserDet: Object = {};
   public userPostList =[];
+  public userFrndList =[];
   
   prfImageData: any;
   coverImageData: any;
@@ -148,6 +149,32 @@ export class EditprofileComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.getUserDetails();
     this.getUserPostDetails();
+    this.getConnectionList();
+  }
+
+  public getConnectionList(){
+      let loginUserId=localStorage.getItem("loginUserId");
+      if(loginUserId!=''){
+          let dataUserDet ={
+            "user_id": loginUserId
+          };
+          this.dataService.getUserFrndListById(dataUserDet)
+          .subscribe(data => {
+                let details=data;
+                //console.log(details);
+                if (details.Ack=="1") {
+                  this.userFrndList = details.FriendListById;
+                }else{
+                  
+                }
+            },
+            error => {
+              
+            }
+          ); 
+        }else{
+        }
+
   }
 
   public getUserDetails(){
