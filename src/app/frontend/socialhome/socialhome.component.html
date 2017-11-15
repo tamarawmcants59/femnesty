@@ -90,7 +90,7 @@
                       <div class="col-md-10 col-xs-8">
                         <ul>
                           <li><a href="#"><i class="fa fa-thumbs-o-up"></i></a></li>
-                          <li><a (click)="userPostComment(postData.id)"><i class="fa  fa-commenting-o"></i></a></li>
+                          <li><a (click)="userPostComment(postData.id, i)"><i class="fa  fa-commenting-o"></i></a></li>
                         </ul>
                       </div>
                       <div class="col-md-2 col-xs-4">
@@ -142,7 +142,7 @@
                         </div>
                       </div>
                     </div>-->
-                    <div class="comment-text-box">
+                    <div class="comment-text-box" *ngIf="postData.showCmtDiv">
                       <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(commentform.value)" #commentForm="ngForm">
                         <div class="input-group">
                           <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
