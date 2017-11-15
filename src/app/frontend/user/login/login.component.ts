@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   errorMsg: string = '';
   public loading = false;
+  public isLoggedIn: any;
 
   constructor(
     private builder: FormBuilder,
@@ -32,10 +33,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    if (localStorage.getItem('isLoggedIn') === '1') {
-      this.router.navigateByUrl('/');
-    }
+    this.isLoggedIn=localStorage.getItem("isLoggedIn");
+      if(this.isLoggedIn == 1){
+        //this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl('/user/profile');
+        
+      }
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   public checkLogin(values: Object): void {

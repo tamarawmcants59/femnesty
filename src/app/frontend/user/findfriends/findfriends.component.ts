@@ -65,11 +65,12 @@ export class FindfriendsComponent implements OnInit {
 
   public submitSearchUser() {
       this.loading = true;
-      this.loginUserId=localStorage.getItem("loginUserId");
+      //this.loginUserId=localStorage.getItem("loginUserId");
       var result,
       userValue = this.postform.value;
       userValue.user_id = this.loginUserId;   
-      
+      this.successMsg='';
+      this.errorMsg='';
       this.dataService.searchFrndListByName(userValue)
         .subscribe(
               data => {
@@ -79,6 +80,68 @@ export class FindfriendsComponent implements OnInit {
                   }
                   //console.log(data);
                   //this.postform.reset();
+        },
+        error => {
+          alert(error);
+        });
+  }
+  
+  public sendFriendRequest(friend_id) {
+      this.loading = true;
+      //console.log(friend_id);
+      let requestJsonData={"user_id": this.loginUserId, "friend_id": friend_id};
+      this.dataService.sendFrndRequest(requestJsonData)
+        .subscribe(
+              data => {
+                  this.loading = false;
+                  if(data.Ack==1){
+                    this.successMsg='You have successfully send the friend request';
+                    this.submitSearchUser();
+                  }else{
+                    this.errorMsg='You have already send the friend request';
+                  }
+                  //console.log(data);
+                  //this.postform.reset();
+        },
+        error => {
+          alert(error);
+        });
+  }
+  
+  public acceptFriendRequest(request_id) {
+      this.loading = true;
+      //console.log(friend_id);
+      let requestJsonData={"id": request_id};
+      this.dataService.acceptFrndRequest(requestJsonData)
+        .subscribe(
+              data => {
+                  this.loading = false;
+                  if(data.Ack==1){
+                    this.successMsg=data.msg;
+                    this.getPendingFrndList();
+                  }else{
+                    //this.errorMsg='You have already send the friend request';
+                  }
+        },
+        error => {
+          alert(error);
+        });
+  }
+
+  public rejectFriendRequest(request_id) {
+      this.loading = true;
+      //console.log(friend_id);
+      let requestJsonData={"id": request_id};
+      this.dataService.rejectFrndRequest(requestJsonData)
+        .subscribe(
+              data => {
+                  this.loading = false;
+                  if(data.Ack==1){
+                    this.successMsg=data.msg;
+                    this.getPendingFrndList();
+                  }else{
+                    //this.errorMsg='You have already send the friend request';
+                  }
         },
         error => {
           alert(error);
