@@ -75,7 +75,7 @@ export class SocialhomeComponent implements OnInit {
     );
     
   }
-  
+
   public getUserPostDetails(){
     
     if(this.isLoggedIn=='1'){

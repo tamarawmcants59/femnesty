@@ -7,6 +7,7 @@ import { ApplicationPipes } from "../../application-pipe.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../components/shared.module";
+import { UserService } from '../user/user.service';
 
 
 @NgModule({
@@ -27,6 +28,6 @@ import { SharedModule } from "../../components/shared.module";
   })
   ],
   declarations: [SocialhomeComponent],
-  providers: [SocialService]
+  providers: [SocialService, UserService]
 })
 export class SocialhomeModule { }

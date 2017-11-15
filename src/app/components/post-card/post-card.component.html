@@ -31,7 +31,7 @@
                 <div class="col-md-10 col-xs-8">
                     <ul>
                         <li><a href="#"><i class="fa fa-thumbs-o-up"></i></a></li>
-                        <li><a (click)="userPostComment(postData.id)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
+                        <li><a (click)="userPostComment(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-xs-4">
@@ -41,19 +41,20 @@
                 </div>
             </div>
         </div>
-        <!--<div class="reply-comment-wrapper">
+        <div *ngIf="postData.comments?.length > 0">
+        <div class="reply-comment-wrapper" *ngFor="let cmtList of postData.comments">
             <div class="left-comment-content">
-            <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+            <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
             </div>
             <div class="right-comment-content">
             <div class="profTextPart">
-                <h4 class="commentee-name">Monalisa Dsouza</h4>
-                <p class="post-date">19 May 2017</p>
+                <h4 class="commentee-name">{{cmtList.name}}</h4>
+                <p class="post-date">{{cmtList.comment_date}}</p>
                 <div class="commenteeComment">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                    <p>{{cmtList.comment}}</p>
                 </div>
                 </div>
-                <div class="sub-reply-comment-wrapper">
+                <!--<div class="sub-reply-comment-wrapper">
                 <div class="left-comment-content">
                 <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
                 </div>
@@ -80,10 +81,11 @@
                     </div>
                     </div>
                 </div>
+            </div>-->
             </div>
-            </div>
-        </div>-->
-        <div class="comment-text-box">
+        </div>
+        </div>
+        <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
             <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(commentform.value)" #commentForm="ngForm">
                 <div class="input-group">
                 <input placeholder="Write your comment here..." formControlName="comment" class="form-control">

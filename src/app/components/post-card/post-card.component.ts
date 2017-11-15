@@ -13,6 +13,9 @@ export class PostCardComponent implements OnInit {
   public IsloginUserId: any;
   public isLoggedIn:any;
   public postCmtId:any;
+  //public postCmtDiv:boolean = false;
+  public postCmtDiv:any = {};
+
   @Input() postData: {
     id: number;
     name: string;
@@ -43,16 +46,43 @@ export class PostCardComponent implements OnInit {
 
   }
 
-  public userPostComment(post_id){
+  public userPostComment(post_id, postdata){
     if(this.isLoggedIn==1){
       this.postCmtId=post_id;
     }else{
       this.router.navigateByUrl('/user/login');
     }
-    console.log(post_id);
-    //this.userPostList[index].showCmtDiv = !this.userPostList[index].showCmtDiv;
-    //console.log(post_id);
+    Object.keys(this.postCmtDiv).forEach(h => {
+      this.postCmtDiv[h] = false;
+    });
+    this.postCmtDiv[postdata.id] = true;
     
   }
-
+  
+  public submitPostComment(){
+      if(this.isLoggedIn==1){
+      
+      }else{
+        this.router.navigateByUrl('/user/login');
+      }
+      var userValue = this.commentform.value;
+      userValue.user_id = this.IsloginUserId;   
+      userValue.post_id = this.postCmtId;  
+      
+      this.dataService.userPostDataSend(userValue)
+        .subscribe(
+              data => {
+                  /*this.showPostImgDive=false;
+                  //let details = data;
+                  this.loading = false;
+                  this.successMsg='Successfully post data';
+                  this.getUserPostDetails();*/
+                  this.commentform.reset();
+                
+        },
+        error => {
+          alert(error);
+        });
+      
+  }
 }

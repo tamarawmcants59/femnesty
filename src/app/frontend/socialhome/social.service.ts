@@ -32,6 +32,13 @@ export class SocialService {
     ).map(data => data);
   }
   
+  userPostDataSend(form_data){
+    return this.apiService.post(
+        `/enrichment/appuseraddpostcomment`,
+        form_data
+    ).map(data => data);
+  }
+
   getFourArticleList(){
     return this.apiService.get(`/enrichment/apparticlelistlast`)
       .map(data => data);
