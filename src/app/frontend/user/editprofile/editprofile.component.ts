@@ -74,6 +74,7 @@ export class EditprofileComponent implements OnInit {
     this.coverCropperSettings.canvasWidth = 600;
     this.coverCropperSettings.canvasHeight = 300;
     this.coverCropperSettings.noFileInput = true;
+    this.coverCropperSettings.dynamicSizing = true;
     //this.coverCropperSettings.minWidth = 250;
     //this.coverCropperSettings.minHeight = 100;
     this.coverImageData = {};

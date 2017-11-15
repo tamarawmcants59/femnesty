@@ -30,10 +30,7 @@
                                     <div class="txt">Update Profile <br> Picture</div>
                                     <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
                                 </div>
-                                <!--<img-cropper [image]="prfImageData" [settings]="prfCropperSettings"></img-cropper>-->
-
                             </div>
-
                         </div>
                         <div class="img result rounded" *ngIf="prfImageData.image">
                             <img [src]="prfImageData.image" style="width:100%; height:100%">
@@ -41,11 +38,6 @@
                     </div>
                     <div class="col-md-12" *ngIf="showImgDive">
                         <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
-                            <!-- <div class="col-md-8">
-                                <span class="result rounded" *ngIf="prfImageData.image">
-                                  <img [src]="prfImageData.image" [width]="prfCropperSettings.croppedWidth" [height]="prfCropperSettings.croppedHeight">
-                              </span>
-                            </div> -->
                             <div class="col-md-4" style="padding-top: 90px;">
                                 <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
                             </div>
@@ -54,16 +46,12 @@
                     </div>
                     <div class="col-md-12" *ngIf="showCoverImgDive">
                         <div class="col-md-12" *ngIf="coverImageData.image" style="padding-bottom:10px;">
-                            <div class="col-md-12">
-                                <!-- <span class="result" *ngIf="coverImageData.image">
-                                    <img [src]="coverImageData.image" [width]="coverCropperSettings.croppedWidth" [height]="coverCropperSettings.croppedHeight">
-                                </span> -->
-                            </div>
+
                             <div class="col-md-4" style="padding-top: 10px;">
                                 <button type="button" class="btn btn-primary" (click)="UploadCoverImg()">Upload</button>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 text-center">
                             <img-cropper #cropper [image]="coverImageData" [settings]="coverCropperSettings" (onCrop)="cropped($event)"></img-cropper>
                         </div>
                     </div>
