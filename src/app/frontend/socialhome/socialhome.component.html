@@ -57,7 +57,8 @@
 
           <div *ngIf="userPostList?.length > 0">
               <div class="likePart" *ngFor="let postData of userPostList">
-                <div class="row">
+                  <app-post-card [postData]="postData"></app-post-card>
+                <!--<div class="row">
                   <div class="col-md-10">
                     <div class="imageParts">
                       <div class="profImageP">
@@ -90,7 +91,7 @@
                       <div class="col-md-10 col-xs-8">
                         <ul>
                           <li><a href="#"><i class="fa fa-thumbs-o-up"></i></a></li>
-                          <li><a (click)="userPostComment(postData.id, i)"><i class="fa  fa-commenting-o"></i></a></li>
+                          <li><a (click)="userPostComment(postData.id)"><i class="fa  fa-commenting-o"></i></a></li>
                         </ul>
                       </div>
                       <div class="col-md-2 col-xs-4">
@@ -100,61 +101,9 @@
                       </div>
                     </div>
                   </div>
-                  <!--<div class="reply-comment-wrapper">
-                      <div class="left-comment-content">
-                        <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
-                      </div>
-                      <div class="right-comment-content">
-                        <div class="profTextPart">
-                            <h4 class="commentee-name">Monalisa Dsouza</h4>
-                            <p class="post-date">19 May 2017</p>
-                            <div class="commenteeComment">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-                            </div>
-                          </div>
-                          <div class="sub-reply-comment-wrapper">
-                          <div class="left-comment-content">
-                            <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
-                          </div>
-                          <div class="right-comment-content">
-                            <div class="profTextPart">
-                                <h4 class="commentee-name">Monalisa Dsouza</h4>
-                                <p class="post-date">19 May 2017</p>
-                                <div class="commenteeComment">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="sub-reply-comment-wrapper">
-                          <div class="left-comment-content">
-                            <div class="user-image" style="background: url('images/womanImage.png') no-repeat center center;"></div>
-                          </div>
-                          <div class="right-comment-content">
-                            <div class="profTextPart">
-                                <h4 class="commentee-name">Monalisa Dsouza</h4>
-                                <p class="post-date">19 May 2017</p>
-                                <div class="commenteeComment">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>-->
-                    <div class="comment-text-box" *ngIf="postData.showCmtDiv">
-                      <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(commentform.value)" #commentForm="ngForm">
-                        <div class="input-group">
-                          <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
-                          <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default" [disabled]="!commentform.valid"><i class="fa fa-send"></i></button>
-                          </span>
-                        </div>
-                        <div class="text-danger" *ngIf="!commentform.controls['comment'].valid && commentform.controls['comment'].touched">Write a comment.</div>
-                      </form>
-                    </div>
+                  
                   </div>
-                </div>
+                </div>-->
               </div>
               </div>
               <div class="likePart" *ngIf="userPostList?.length == 0">
