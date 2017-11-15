@@ -25,6 +25,7 @@ export class SocialhomeComponent implements OnInit {
   IsloginUserId: any;
   isLoggedIn:any;
   public postCmtId: any;
+  public showCmtDiv:boolean = false;
 
   constructor(
     private builder:FormBuilder, 
@@ -83,6 +84,7 @@ export class SocialhomeComponent implements OnInit {
   
   public userPostComment(post_id){
     this.postCmtId=post_id;
+    //this.userPostList[index].showCmtDiv = !this.userPostList[index].showCmtDiv;
     //console.log(post_id);
     
   }
