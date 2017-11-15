@@ -1,0 +1,44 @@
+<div class="shareYourThought">
+    <div class="row" *ngIf="(successMsg != '')">
+        <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+            <!--<strong>Success: </strong>-->{{successMsg}}
+        </div>
+    </div>
+    <form class="" [formGroup]="postform" (ngSubmit)="submitPost(postform.value)" #postForm="ngForm">
+        <div class="col-md-12" *ngIf="showPostImgDive">
+            <span class="result" *ngIf="postImgData">
+                <img [src]="postImgData" [height]="200" >
+            </span>
+        </div>
+        <div class="textarea">
+            <div class="form-group">
+                <textarea class="form-control" rows="5" id="comment" formControlName="description" placeholder="Share your thoughts..."></textarea>
+                <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Thoughts Required</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <ul class="uploadVideo">
+                    <li>
+                        <div class="upload-btn-wrapper uploadButtonPart">
+                            <button class="btn">Upload Image</button>
+                            <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                        </div>
+                    </li>
+                    <li>
+                        <p>
+                            <i class="icon ion-ios-people-outline"></i>
+                            <span>
+                        <input class="styled-checkbox" formControlName="is_connection" id="ConnectionsOnly" value="1" type="checkbox">
+                        <label for="ConnectionsOnly"> Connections Only </label>
+                    </span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid">Post</button>
+            </div>
+        </div>
+    </form>
+</div>
