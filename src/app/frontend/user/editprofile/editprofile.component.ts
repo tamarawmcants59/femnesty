@@ -19,7 +19,6 @@ export class EditprofileComponent implements OnInit {
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
   public form: FormGroup;
-  public postform: FormGroup;
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
@@ -127,22 +126,6 @@ export class EditprofileComponent implements OnInit {
       ]]
 
     });
-
-    this.postform = builder.group({
-      description: ['', [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
-      file_name: ['', [
-        //Validators.required,
-        //Validators.minLength(3)
-      ]],
-      is_connection: ['', [
-        //Validators.required,
-        //Validators.minLength(3)
-      ]]
-    });
-
     //console.log(this.cropper);
   }
 
@@ -254,35 +237,6 @@ export class EditprofileComponent implements OnInit {
 
   }
 
-  public submitPost() {
-    this.loading = true;
-    const loginUserId = localStorage.getItem("loginUserId");
-    const result = {},
-      userValue = this.postform.value;
-    userValue.user_id = loginUserId;
-    userValue.file_name = this.postImgData;
-
-    this.dataService.postDataSend(userValue)
-      .subscribe(
-      data => {
-        this.showPostImgDive = false;
-        //let details = data;
-        this.loading = false;
-        this.successMsg = 'Successfully post data';
-        this.getUserPostDetails();
-        this.postform.reset();
-
-        //window.location.reload();
-        //this.router.navigateByUrl('/user/profile');
-        //this.router.navigate(['/user/profile']);
-
-      },
-      error => {
-        alert(error);
-      });
-
-  }
-
   public fileChangeListener($event) {
     this.showImgDive = true;
     const image: any = new Image();
@@ -307,21 +261,6 @@ export class EditprofileComponent implements OnInit {
       image.src = loadEvent.target.result;
       that.cropper.setImage(image);
       //console.log(that.cropper);
-    };
-    myReader.readAsDataURL(file);
-  }
-
-  public fileChangePost($event) {
-    this.showPostImgDive = true;
-    const image: any = new Image();
-    const file: File = $event.target.files[0];
-    const myReader: FileReader = new FileReader();
-    const that = this;
-    myReader.onloadend = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      that.postImgData = image.src;
-      //that.cropper.setImage(image);
-      //console.log(image.src);
     };
     myReader.readAsDataURL(file);
   }
