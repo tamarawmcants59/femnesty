@@ -13,6 +13,7 @@ import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 export class SocialhomeComponent implements OnInit {
   public showPostImgDive:boolean =false;
   public postform:FormGroup;
+  public commentform:FormGroup;
   returnUrl: string;
   errorMsg: string='';
   successMsg: string='';
@@ -23,6 +24,7 @@ export class SocialhomeComponent implements OnInit {
   postImgData: any;
   IsloginUserId: any;
   isLoggedIn:any;
+  public postCmtId: any;
 
   constructor(
     private builder:FormBuilder, 
@@ -46,6 +48,13 @@ export class SocialhomeComponent implements OnInit {
        is_connection: ['', [
       ]] 
     });
+
+    this.commentform = builder.group({
+			comment: ['', [
+				Validators.required,
+				//Validators.minLength(3)
+			]]
+    });
       this.IsloginUserId=loginUserId;
    }
 
@@ -63,12 +72,18 @@ export class SocialhomeComponent implements OnInit {
           if (details.Ack=="1") {
             this.latestArticles = details.LastArticleList;
           }
-          console.log(this.latestArticles);
+          //console.log(this.latestArticles);
       },
       error => {
         
       }
     );
+    
+  }
+  
+  public userPostComment(post_id){
+    this.postCmtId=post_id;
+    //console.log(post_id);
     
   }
 

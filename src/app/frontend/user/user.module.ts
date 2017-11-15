@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { EqualValidator } from '../../validator.directive';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChatComponent } from './chat/chat.component';
 //import { DashboardComponent } from './dashboard/dashboard.component';
 //import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 
@@ -35,6 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SignupComponent, 
     EqualValidator, 
     DashboardComponent, 
+    ChatComponent, 
     //ImageCropperComponent
   ],
   providers: [UserService]
