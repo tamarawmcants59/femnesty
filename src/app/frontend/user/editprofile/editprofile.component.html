@@ -67,11 +67,6 @@
                             <li [ngClass]="{'active' : activeTab=='connections'}"><a (click)="toggleTab('connections')">Connections</a></li>
                             <li [ngClass]="{'active' : activeTab=='group'}"><a (click)="toggleTab('group')">Group</a></li>
                         </ul>
-                        <!--<mat-tab-group>
-        <mat-tab label="Activity">Content 1</mat-tab>
-        <mat-tab label="About">Content 2</mat-tab>
-      </mat-tab-group>-->
-
                         <div class="tab-content">
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                                 <div class="shareYourThought">
@@ -81,6 +76,11 @@
                                         </div>
                                     </div>
                                     <form class="" [formGroup]="postform" (ngSubmit)="submitPost(postform.value)" #postForm="ngForm">
+                                        <div class="col-md-12" *ngIf="showPostImgDive">
+                                            <span class="result" *ngIf="postImgData">
+                                                    <img [src]="postImgData" [height]="200" >
+                                                </span>
+                                        </div>
                                         <div class="textarea">
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="5" id="comment" formControlName="description" placeholder="Share your thoughts..."></textarea>
@@ -110,61 +110,17 @@
                                             <div class="col-md-3">
                                                 <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid">Post</button>
                                             </div>
-                                            <div class="col-md-12" *ngIf="showPostImgDive">
+                                            <!-- <div class="col-md-12" *ngIf="showPostImgDive">
                                                 <span class="result" *ngIf="postImgData">
-                      <img [src]="postImgData" [height]="200" >
-                  </span>
-                                            </div>
+                                                    <img [src]="postImgData" [height]="200" >
+                                                </span>
+                                            </div> -->
                                         </div>
                                     </form>
                                 </div>
                                 <div *ngIf="userPostList?.length > 0">
                                     <div class="likePart" *ngFor="let postData of userPostList">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="imageParts">
-                                                    <div class="profImageP">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div>
-                                                    </div>
-                                                    <div class="profTextPart">
-                                                        <h2>{{postData.name}}</h2>
-                                                        <p>{{postData.created_date_mod}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <p class="icondown"><i class="icon ion-chevron-down"></i></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="userComment">
-                                                    <p>{{postData.description}}</p>
-                                                    <div class="imageLikeP" *ngIf="postData.file_name != ''">
-                                                        <img [src]="postData.file_image_url" class="img-responsive">
-                                                    </div>
-                                                    <ul>
-                                                        <li><a href="javascript: void(0);">{{postData.likecount}} Likes</a></li>
-                                                        <li><a href="javascript: void(0);">{{postData.commentcount}} Comments</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="likeComment">
-                                                    <div class="row">
-                                                        <div class="col-md-10">
-                                                            <ul>
-                                                                <li><a href="#"><i class="fa fa-thumbs-o-up"></i></a></li>
-                                                                <li><a href="#"><i class="fa  fa-commenting-o"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <ul>
-                                                                <li class="float-right"><a href="#"><i class="fa fa-share"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <app-post-card [postData]="postData"></app-post-card>
                                     </div>
                                 </div>
                                 <div class="likePart" *ngIf="userPostList?.length == 0">
