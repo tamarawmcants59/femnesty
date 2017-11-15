@@ -1947,6 +1947,30 @@ z-index: 2;
   z-index: 999;
   cursor: pointer;
 }
+
+/*=============================================
+				Added by Soumen
+===============================================*/
+
+/********* Visiting-other-profile ********/
+
+.reply-comment-wrapper{margin-top: 20px; display: flex; flex-wrap:nowrap}
+.reply-comment-wrapper .left-comment-content{margin-right: 10px;}
+.reply-comment-wrapper .left-comment-content .user-image{width:40px; height: 40px; border-radius:100%; overflow: hidden; background-size: cover !important;}
+.reply-comment-wrapper .right-comment-content{width:100%;}
+.reply-comment-wrapper .right-comment-content .commentee-name{margin-top: 0; margin-bottom: 2px; font-size:16px}
+.profTextPart p.post-date{font-size:13px}
+.commenteeComment{margin: 5px 0 10px;}
+.commenteeComment p {color: #4e4e4e;font-size: 14px;line-height: 18px;margin: 0;}
+.sub-reply-comment-wrapper{display: flex; flex-wrap:nowrap; margin-bottom: 10px}
+.sub-reply-comment-wrapper:last-child{margin-bottom:0}
+.sub-reply-comment-wrapper .left-comment-content .user-image{width:30px; height: 30px; border-radius:100%; overflow: hidden; background-size: cover !important;}
+.comment-text-box{margin-top:10px}
+.comment-text-box .form-control{box-shadow:none; text-shadow:none}
+.comment-text-box .btn-default{box-shadow:none; text-shadow:none; color:#fff; background: #bb1926; border:1px solid #bb1926}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus{background: #9e141f;color:#fff; transition: ease all 0.2s}
+.left-list .profImage .img{margin: 0 auto}
+
 /*********** Suman css *****************/
 .uilist{ margin-top: 20px;
 }

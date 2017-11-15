@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit {
   errorMsg: string='';
   public loading = false;
   public checkEmailExist:boolean = false;
+  public isLoggedIn: any;
 
   constructor(
     private builder:FormBuilder, 
@@ -59,6 +60,12 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn=localStorage.getItem("isLoggedIn");
+    if(this.isLoggedIn == 1){
+      //this.router.navigateByUrl(this.returnUrl);
+      this.router.navigateByUrl('/user/profile');
+    }
+    
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   

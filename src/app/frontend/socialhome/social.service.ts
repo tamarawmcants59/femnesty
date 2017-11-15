@@ -10,10 +10,6 @@ export class SocialService {
     private apiService: ApiService
   ) {}
 
-  /*getArticleData(){
-    return this.apiService.get(`/enrichment/apparticleWithCat`)
-      .map(data => data);
-  }*/
   
   getAllUserPost(form_data){
     return this.apiService.post(
@@ -36,6 +32,10 @@ export class SocialService {
     ).map(data => data);
   }
   
+  getFourArticleList(){
+    return this.apiService.get(`/enrichment/apparticlelistlast`)
+      .map(data => data);
+  }
   /*getArticleBySlug(slug){
     return this.apiService.get(`/enrichment/apparticledetailsbyslug/${slug}`)
       .map(data => data);

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   errorMsg: string='';
   public loading = false;
+  public isLoggedIn: any;
   //public routerLinkVariable: string ='';
 
   constructor(
@@ -44,7 +45,14 @@ export class LoginComponent implements OnInit {
   });*/
 
   ngOnInit() {
+      this.isLoggedIn=localStorage.getItem("isLoggedIn");
+      if(this.isLoggedIn == 1){
+        //this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl('/user/profile');
+        
+      }
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
   }
 
   public checkLogin(values:Object):void {

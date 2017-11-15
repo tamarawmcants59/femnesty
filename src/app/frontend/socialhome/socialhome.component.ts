@@ -19,6 +19,7 @@ export class SocialhomeComponent implements OnInit {
   public loading = false;
   public loginUserDet: Object = {};
   public userPostList =[];
+  public latestArticles =[];
   postImgData: any;
   IsloginUserId: any;
   isLoggedIn:any;
@@ -51,7 +52,24 @@ export class SocialhomeComponent implements OnInit {
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.getUserPostDetails();
+    this.getLastFourArticle();
     //console.log(this.IsloginUserId);
+  }
+  ;
+  public getLastFourArticle(){
+    this.dataService.getFourArticleList()
+    .subscribe(data => {
+          let details=data;
+          if (details.Ack=="1") {
+            this.latestArticles = details.LastArticleList;
+          }
+          console.log(this.latestArticles);
+      },
+      error => {
+        
+      }
+    );
+    
   }
 
   public getUserPostDetails(){
