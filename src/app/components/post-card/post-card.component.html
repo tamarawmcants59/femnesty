@@ -2,10 +2,10 @@
     <div class="col-md-10">
         <div class="imageParts">
             <div class="profImageP">
-                <div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div>
+                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
             </div>
             <div class="profTextPart">
-                <h2>{{postData.name}}</h2>
+                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
                 <p>{{postData.created_date_mod}}</p>
 
             </div>
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-md-10 col-xs-8">
                     <ul>
-                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i></a></li>
+                        <li><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
                         <li><a (click)="userPostComment(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
                     </ul>
                 </div>
@@ -45,11 +45,15 @@
         <div *ngIf="postData.comments?.length > 0">
             <div class="reply-comment-wrapper" *ngFor="let cmtList of postData.comments">
                 <div class="left-comment-content">
-                    <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                    <a [routerLink]="['/user/profile',cmtList.display_name]">
+                        <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                    </a>
                 </div>
                 <div class="right-comment-content">
                     <div class="profTextPart">
-                        <h4 class="commentee-name">{{cmtList.name}}</h4>
+                        <a [routerLink]="['/user/profile',cmtList.display_name]">
+                            <h4 class="commentee-name">{{cmtList.name}}</h4>
+                        </a>
                         <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                         <div class="commenteeComment">
                             <p>{{cmtList.comment}}</p>
