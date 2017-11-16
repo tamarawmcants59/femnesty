@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   public aboutActiveTab: string = 'overview';
   public successMsg: string ='';
   public errorMsg: string = '';
+  public checkIsFriend:boolean = false;
 
   constructor(
     private dataService: UserService,
@@ -52,11 +53,34 @@ export class ProfileComponent implements OnInit {
 
             this.getUserPostDetails();
             this.getConnectionList();
+            this.checkMyFrndData();
           }
         },
         error => {
 
         });
+    }
+  }
+  
+  public checkMyFrndData() {
+    //console.log(this.otherProfileId);
+    if (this.otherProfileId != '' && this.isloginUserId != '') {
+      const dataUserDet = {
+        "user_id": this.isloginUserId, "friend_id": this.otherProfileId
+      };
+      this.dataService.getUserIsMyFrnd(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.msg == "Friend" && details.Ack == "1") {
+            this.checkIsFriend = true;
+          }else{
+            this.checkIsFriend = false;
+          }
+        },
+        error => {
+
+        }
+        );
     }
   }
 
