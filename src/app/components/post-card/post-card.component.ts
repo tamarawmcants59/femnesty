@@ -81,9 +81,15 @@ export class PostCardComponent implements OnInit {
     userValue.post_id = this.postCmtId;
 
     this.dataService.userPostDataSend(userValue)
-      .subscribe(
-      data => {
-        comments.push(userValue);
+      .subscribe( data => {
+        userValue.profile_image_url=this.userPrfImgStr;
+        userValue.name=this.userNameStr;
+        userValue.first_name=this.getCurrentUser.first_name;
+        userValue.last_name=this.getCurrentUser.last_name;
+        userValue.c_date=this.currentDate;
+        userValue.display_name=this.getCurrentUser.display_name;
+        comments.push(userValue); 
+        this.commentform.reset();
       },
       error => {
         alert(error);

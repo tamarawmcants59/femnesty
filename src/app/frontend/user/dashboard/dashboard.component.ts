@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   coverImageData: any;
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
+  public loginuserId: number;
 
   constructor(
     private builder:FormBuilder, 
@@ -91,9 +92,10 @@ export class DashboardComponent implements OnInit {
 
   public getUserDetails(){
     let loginUserId=localStorage.getItem("loginUserId");
+    //this.loginuserId=localStorage.getItem("loginUserId");
     if(loginUserId!=''){
         let dataUserDet ={
-          "id": loginUserId
+          "id": parseInt(loginUserId)
         };
         this.dataService.getUserDetById(dataUserDet)
         .subscribe(data => {
@@ -111,7 +113,6 @@ export class DashboardComponent implements OnInit {
         ); 
       }else{
       }
-
   }
 
   public userUploadPrfImg(values:Object):void {

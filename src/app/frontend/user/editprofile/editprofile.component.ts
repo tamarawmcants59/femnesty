@@ -165,7 +165,7 @@ export class EditprofileComponent implements OnInit {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
       const dataUserDet = {
-        "id": loginUserId
+        "id": parseInt(loginUserId)
       };
       this.dataService.getUserDetById(dataUserDet)
         .subscribe(data => {
