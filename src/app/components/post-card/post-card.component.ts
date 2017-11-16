@@ -13,7 +13,8 @@ export class PostCardComponent implements OnInit {
   public IsloginUserId: any;
   public isLoggedIn: any;
   public postCmtId: any;
-  //public postCmtDiv:boolean = false;public postCmtDiv:any = {};
+  //public postCmtDiv:boolean = false;
+  public postCmtDiv:any = {};
   public postCmtHtml:string = '';
   public userPrfImgStr:string = '';
   public userNameStr:string = '';
