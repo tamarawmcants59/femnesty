@@ -1,0 +1,95 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <user-sidebar></user-sidebar>
+            </div>
+            <div class="col-md-6">
+                <div class="middlePart">
+                    <div class="notification-wrap">
+                        <ul>
+                            <li>
+                                <div class="image-area">
+                                    <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                </div>
+                                <div class="text-area">
+                                    <h4>Michel Jones</h4>
+                                    <p class="desc">lorem ipsum dolor sit amet conseqr td omolo paoli solanki toder molle pao djak jackn...</p>
+                                    <p class="time">3 hours ago</p>
+                                </div>
+                            </li>
+                            <li *ngFor="let chatHead of chatHeads">
+                                <div class="image-area">
+                                    <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                </div>
+                                <div class="text-area">
+                                    <h4>Michel Jones</h4>
+                                    <p class="desc">{{chatHead.message.text}}</p>
+                                    <p class="time">{{chatHead.created | timeAgo}}</p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="see-all"><a href="">See All</a></p>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="rightPart">
+                    <div class="innerRightPart">
+                        <h2>CONNECTIONS</h2>
+                        <div class="inline-search">
+                            <div class="input-group">
+                                <input placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+	                						<button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+	                					</span>
+                            </div>
+                        </div>
+                        <ul class="connectionlist">
+                            <li>
+                                <div class="image-area">
+                                    <div class="round-image-holder" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                </div>
+                                <div class="text-area">
+                                    <h5>Susan Boyle <span>5.43pm</span></h5>
+                                    <p>You: Stop screming Susan!</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="image-area">
+                                    <div class="round-image-holder" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                </div>
+                                <div class="text-area">
+                                    <h5>Susan Boyle <span>5.43pm</span></h5>
+                                    <p>You: Stop screming Susan!</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="image-area">
+                                    <div class="round-image-holder" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                </div>
+                                <div class="text-area">
+                                    <h5>Susan Boyle <span>5.43pm</span></h5>
+                                    <p>You: Stop screming Susan!</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="image-area">
+                                    <div class="round-image-holder" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                </div>
+                                <div class="text-area">
+                                    <h5>Susan Boyle <span>5.43pm</span></h5>
+                                    <p>You: Stop screming Susan!</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

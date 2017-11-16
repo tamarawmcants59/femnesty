@@ -6,6 +6,7 @@ import { SignupComponent } from "./signup/signup.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuard } from '../../auth.guard';
 import { ChatComponent } from "./chat/chat.component";
+import { ChatListComponent } from './chat-list/chat-list.component';
 //import { FindfriendsComponent } from './findfriends/findfriends.component';
 const routes: Routes = [
   {
@@ -58,6 +59,14 @@ const routes: Routes = [
         loadChildren: './editprofile/editprofile.module#EditprofileModule',
       }
     ]
+  },
+  {
+    path: 'chat/list',
+    canActivate: [AuthGuard],
+    component: ChatListComponent,
+    data: {
+      title: 'Unread Messages'
+    }
   },
   {
     path: 'chat',
