@@ -7,7 +7,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuard } from '../../auth.guard';
 import { ChatComponent } from "./chat/chat.component";
 import { ChatListComponent } from './chat-list/chat-list.component';
-//import { FindfriendsComponent } from './findfriends/findfriends.component';
+import { ProfileComponent } from "./profile/profile.component";
 const routes: Routes = [
   {
     path: '',
@@ -59,6 +59,14 @@ const routes: Routes = [
         loadChildren: './editprofile/editprofile.module#EditprofileModule',
       }
     ]
+  },
+  {
+    path: 'profile/:uname',
+    //canActivate: [AuthGuard],
+    component: ProfileComponent,
+    data: {
+      title: 'Other Profile'
+    }
   },
   {
     path: 'chat/list',

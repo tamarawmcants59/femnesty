@@ -15,6 +15,7 @@ export class PostCardComponent implements OnInit {
   public postCmtId: any;
   //public postCmtDiv:boolean = false;
   public postCmtDiv: any = {};
+  public postCmtLike: any = {};
   public postCmtHtml: string = '';
   public userPrfImgStr: string = '';
   public userNameStr: string = '';
@@ -31,6 +32,7 @@ export class PostCardComponent implements OnInit {
     likecount: string;
     commentcount: string;
     created_date: string;
+    c_date: string;
   };
   constructor(
     private builder: FormBuilder,
@@ -68,6 +70,19 @@ export class PostCardComponent implements OnInit {
     this.postCmtDiv[postdata.id] = true;
 
     this.postCmtHtml = '';
+  }
+  
+  public userPostLike(post_id, postdata) {
+    if (this.isLoggedIn == 1) {
+      this.postCmtId = post_id;
+    } else {
+      this.router.navigateByUrl('/user/login');
+    }
+
+    Object.keys(this.postCmtLike).forEach(h => {
+      this.postCmtLike[h] = false;
+    });
+    this.postCmtLike[postdata.id] = true;
   }
 
   public submitPostComment(comments) {
