@@ -78,12 +78,28 @@ export class PostCardComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/user/login');
     }
-    if(postdata.post_like){
-      postdata.post_like=false;
-    }else{
-      postdata.post_like=true;
-    }
     
+
+    let dataUserDet ={
+      "user_id": this.IsloginUserId,
+      "post_id": post_id
+    };
+    //console.log(dataUserDet);
+    this.dataService.likePostUser(dataUserDet)
+    .subscribe(data => {
+          let details=data;
+          if (details.Ack=="1") {
+            if(postdata.post_like){
+              postdata.post_like=false;
+            }else{
+              postdata.post_like=true;
+            }
+          }
+      },
+      error => {
+        
+      }
+    );
     //this.postCmtLike[postdata.id] = true;
   }
 
