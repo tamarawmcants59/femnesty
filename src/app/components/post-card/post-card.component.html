@@ -7,7 +7,7 @@
             <div class="profTextPart">
                 <h2>{{postData.name}}</h2>
                 <p>{{postData.created_date_mod}}</p>
-                
+
             </div>
         </div>
     </div>
@@ -43,19 +43,19 @@
             </div>
         </div>
         <div *ngIf="postData.comments?.length > 0">
-        <div class="reply-comment-wrapper" *ngFor="let cmtList of postData.comments">
-            <div class="left-comment-content">
-            <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
-            </div>
-            <div class="right-comment-content">
-            <div class="profTextPart">
-                <h4 class="commentee-name">{{cmtList.name}}</h4>
-                <p class="post-date">{{cmtList.comment_date}}</p>
-                <div class="commenteeComment">
-                    <p>{{cmtList.comment}}</p>
+            <div class="reply-comment-wrapper" *ngFor="let cmtList of postData.comments">
+                <div class="left-comment-content">
+                    <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
                 </div>
-                </div>
-                <!--<div class="sub-reply-comment-wrapper">
+                <div class="right-comment-content">
+                    <div class="profTextPart">
+                        <h4 class="commentee-name">{{cmtList.name}}</h4>
+                        <p class="post-date">{{cmtList.comment_date}}</p>
+                        <div class="commenteeComment">
+                            <p>{{cmtList.comment}}</p>
+                        </div>
+                    </div>
+                    <!--<div class="sub-reply-comment-wrapper">
                 <div class="left-comment-content">
                 <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
                 </div>
@@ -83,15 +83,15 @@
                     </div>
                 </div>
             </div>-->
+                </div>
             </div>
-        </div>
-        <div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>
+            <div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>
         </div>
         <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
-            <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(commentform.value)" #commentForm="ngForm">
+            <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments)" #commentForm="ngForm">
                 <div class="input-group">
-                <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
-                <span class="input-group-btn">
+                    <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
+                    <span class="input-group-btn">
                     <button type="submit" class="btn btn-default" [disabled]="!commentform.valid"><i class="fa fa-send"></i></button>
                 </span>
                 </div>
