@@ -74,15 +74,17 @@ export class PostCardComponent implements OnInit {
   
   public userPostLike(post_id, postdata) {
     if (this.isLoggedIn == 1) {
-      this.postCmtId = post_id;
+      //this.postCmtId = post_id;
     } else {
       this.router.navigateByUrl('/user/login');
     }
-
-    Object.keys(this.postCmtLike).forEach(h => {
-      this.postCmtLike[h] = false;
-    });
-    this.postCmtLike[postdata.id] = true;
+    if(postdata.post_like){
+      postdata.post_like=false;
+    }else{
+      postdata.post_like=true;
+    }
+    
+    //this.postCmtLike[postdata.id] = true;
   }
 
   public submitPostComment(comments) {
