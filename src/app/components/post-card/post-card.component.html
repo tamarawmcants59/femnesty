@@ -50,7 +50,7 @@
                 <div class="right-comment-content">
                     <div class="profTextPart">
                         <h4 class="commentee-name">{{cmtList.name}}</h4>
-                        <p class="post-date">{{cmtList.comment_date}}</p>
+                        <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                         <div class="commenteeComment">
                             <p>{{cmtList.comment}}</p>
                         </div>
@@ -85,7 +85,7 @@
             </div>-->
                 </div>
             </div>
-            <div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>
+            <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
         </div>
         <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
             <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments)" #commentForm="ngForm">
