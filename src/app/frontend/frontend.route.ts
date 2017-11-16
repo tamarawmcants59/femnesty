@@ -4,16 +4,16 @@ import { HomeComponent } from "./home/home.component";
 //import { EnrichmentComponent } from "./enrichment/enrichment.component";
 const frontendRoute: Routes = [
     {
-        path:'',
-        data:{
-            title:"Frontend"
+        path: '',
+        data: {
+            title: "Frontend"
         },
-        children:[{
-            path:'',
-            data:{
+        children: [{
+            path: '',
+            data: {
                 title: "Home Page"
             },
-            component:HomeComponent
+            component: HomeComponent
         }
         ]
     }/*,
@@ -33,7 +33,7 @@ const frontendRoute: Routes = [
     }*/
 ];
 @NgModule({
-    imports: [ RouterModule.forChild(frontendRoute) ],
-    exports: [ RouterModule ]
-  })
-  export class FrontendRoute {}
+    imports: [RouterModule.forChild(frontendRoute)],
+    exports: [RouterModule]
+})
+export class FrontendRoute { }

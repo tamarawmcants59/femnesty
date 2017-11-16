@@ -7,31 +7,24 @@
             <div class="col-md-6">
                 <div class="middlePart">
                     <div class="notification-wrap">
-                        <pre>{{chatHeads | json}}</pre>
                         <ul>
-                            <li>
+                            <li *ngFor="let chatHead of chatHeads" style="cursor:pointer" [routerLink]="['/user/chat',chatHead.from_user_id]">
                                 <div class="image-area">
-                                    <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                                    <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
+                                        <img src="{{chatHead.userDetails.image_url}}" style="width:50px" alt="" />
+                                    </div>
                                 </div>
                                 <div class="text-area">
-                                    <h4>Michel Jones</h4>
-                                    <p class="desc">lorem ipsum dolor sit amet conseqr td omolo paoli solanki toder molle pao djak jackn...</p>
-                                    <p class="time">3 hours ago</p>
-                                </div>
-                            </li>
-                            <li *ngFor="let chatHead of chatHeads">
-                                <div class="image-area">
-                                    <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h4>Michel Jones</h4>
+                                    <a [routerLink]="['/user/chat',chatHead.from_user_id]">
+                                        <h4>{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
+                                    </a>
                                     <p class="desc">{{chatHead.message.text}}</p>
                                     <p class="time">{{chatHead.created | timeAgo}}</p>
                                 </div>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <p class="see-all"><a href="">See All</a></p>
-                            </li>
+                            </li> -->
                         </ul>
 
                     </div>

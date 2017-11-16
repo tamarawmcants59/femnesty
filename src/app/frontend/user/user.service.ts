@@ -47,7 +47,7 @@ export class UserService {
     ).map(data => data);
   }
 
-  getUserDetById(form_data: { id: number }) {
+  getUserDetById(form_data: { id: any }) {
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)
     return this.apiService.post(
       `/users/appuserdetails`,

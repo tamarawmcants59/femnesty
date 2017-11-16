@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild,Type } from '@angular/core';
-import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { Component, OnInit, ViewChild, Type } from '@angular/core';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
-import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 //import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 //import {Bounds} from "ng2-img-cropper/src/model/bounds";
 //@ViewChild('cropper', undefined)
@@ -17,15 +17,15 @@ import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 })
 
 export class DashboardComponent implements OnInit {
-//export class DashboardComponent extends Type {  
-  @ViewChild('cropper', undefined) 
-  cropper:ImageCropperComponent;
+  //export class DashboardComponent extends Type {  
+  @ViewChild('cropper', undefined)
+  cropper: ImageCropperComponent;
 
-  public form:FormGroup;
+  public form: FormGroup;
   //public email:AbstractControl;
   //public password:AbstractControl;
   returnUrl: string;
-  errorMsg: string='';
+  errorMsg: string = '';
   public loading = false;
   public loginUserDet: Object = {};
   prfImageData: any;
@@ -34,12 +34,12 @@ export class DashboardComponent implements OnInit {
   coverCropperSettings: CropperSettings;
 
   constructor(
-    private builder:FormBuilder, 
-    private dataService: UserService, 
+    private builder: FormBuilder,
+    private dataService: UserService,
     private route: ActivatedRoute,
     private router: Router,
     //private cropper: ImageCropperComponent
-  ) { 
+  ) {
     //super();
     let getUserDet = localStorage.getItem("currentUser");
     this.loginUserDet = JSON.parse(getUserDet);
@@ -89,74 +89,74 @@ export class DashboardComponent implements OnInit {
     //console.log(this.loginUserDet);
   }
 
-  public getUserDetails(){
-    let loginUserId=localStorage.getItem("loginUserId");
-    if(loginUserId!=''){
-        let dataUserDet ={
-          "id": loginUserId
-        };
-        this.dataService.getUserDetById(dataUserDet)
+  public getUserDetails() {
+    const loginUserId = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
+    if (loginUserId != 0) {
+      const dataUserDet = {
+        "id": loginUserId
+      };
+      this.dataService.getUserDetById(dataUserDet)
         .subscribe(data => {
-              let details=data;
-              //console.log(details);
-              if (details.Ack=="1") {
-                this.loginUserDet = details.UserDetails[0];
-              }else{
-                
-              }
-          },
-          error => {
-            
+          const details = data;
+          //console.log(details);
+          if (details.Ack == "1") {
+            this.loginUserDet = details.UserDetails[0];
+          } else {
+
           }
-        ); 
-      }else{
-      }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
 
   }
 
-  public userUploadPrfImg(values:Object):void {
-      /*if(values!=''){
-        let signupCheckEmail={
-          "email": values
-        };
-        this.dataService.userCheckEmail(signupCheckEmail)
-        .subscribe(data => {
-              let details=data;
-              //console.log(details);
-              if (details.Ack=="1") {
-                  this.checkEmailExist = false;
-                  return false;
-              }else{
-                //alert('Invalid login');
-                this.checkEmailExist = true;
+  public userUploadPrfImg(values: Object): void {
+    /*if(values!=''){
+      let signupCheckEmail={
+        "email": values
+      };
+      this.dataService.userCheckEmail(signupCheckEmail)
+      .subscribe(data => {
+            let details=data;
+            //console.log(details);
+            if (details.Ack=="1") {
+                this.checkEmailExist = false;
                 return false;
-              }
-          },
-          error => {
-            
-          }
-        ); 
-      }else{
+            }else{
+              //alert('Invalid login');
+              this.checkEmailExist = true;
+              return false;
+            }
+        },
+        error => {
+          
+        }
+      ); 
+    }else{
 
-      }*/
+    }*/
   }
 
   public fileChangeListener($event) {
-      var image:any = new Image();
-      var file:File = $event.target.files[0];
-      var myReader:FileReader = new FileReader();
-      var that = this;
-      //console.log(this.cropper);
-      myReader.onloadend = function (loadEvent:any) {
-          image.src = loadEvent.target.result;
-          console.log(image);
-          that.cropper.setImage(image);
-      };
-      myReader.readAsDataURL(file);
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    //console.log(this.cropper);
+    myReader.onloadend = function (loadEvent: any) {
+      image.src = loadEvent.target.result;
+      console.log(image);
+      that.cropper.setImage(image);
+    };
+    myReader.readAsDataURL(file);
   }
-  
-  public cropped(bounds:Bounds) {
-      console.log(bounds);
+
+  public cropped(bounds: Bounds) {
+    console.log(bounds);
   }
 
 }
