@@ -288,14 +288,15 @@
                                         <ul class="uilist" *ngIf="userFrndList?.length > 0">
                                             <li class="connectionList" *ngFor="let friendData of userFrndList">
                                                 <div class="connectionImage">
-                                                    <a href="#">
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]">
                                                         <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
                                                     </a>
                                                 </div>
                                                 <div class="connectionText">
                                                     <h2>{{friendData.name}}</h2>
                                                     <!--<p>3 mutual friend</p>-->
-                                                    <button type="button" class="btn btn-primary">View Profile</button> </div>
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> 
+                                                </div>
                                             </li>
                                         </ul>
                                         <div class="likePart" *ngIf="userFrndList?.length == 0">

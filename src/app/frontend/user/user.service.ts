@@ -136,4 +136,12 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  
+  getUserDetByUname(form_data) {
+    return this.apiService.post(
+      `/users/appuserbydisplayname`,
+      form_data
+    ).map(data => data);
+  }
+
 }

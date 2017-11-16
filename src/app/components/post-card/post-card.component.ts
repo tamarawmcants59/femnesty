@@ -15,6 +15,7 @@ export class PostCardComponent implements OnInit {
   public postCmtId: any;
   //public postCmtDiv:boolean = false;
   public postCmtDiv: any = {};
+  public postCmtLike: any = {};
   public postCmtHtml: string = '';
   public userPrfImgStr: string = '';
   public userNameStr: string = '';
@@ -31,6 +32,7 @@ export class PostCardComponent implements OnInit {
     likecount: string;
     commentcount: string;
     created_date: string;
+    c_date: string;
   };
   constructor(
     private builder: FormBuilder,
@@ -69,6 +71,19 @@ export class PostCardComponent implements OnInit {
 
     this.postCmtHtml = '';
   }
+  
+  public userPostLike(post_id, postdata) {
+    if (this.isLoggedIn == 1) {
+      this.postCmtId = post_id;
+    } else {
+      this.router.navigateByUrl('/user/login');
+    }
+
+    Object.keys(this.postCmtLike).forEach(h => {
+      this.postCmtLike[h] = false;
+    });
+    this.postCmtLike[postdata.id] = true;
+  }
 
   public submitPostComment(comments) {
     if (this.isLoggedIn == 1) {
@@ -81,9 +96,15 @@ export class PostCardComponent implements OnInit {
     userValue.post_id = this.postCmtId;
 
     this.dataService.userPostDataSend(userValue)
-      .subscribe(
-      data => {
-        comments.push(userValue);
+      .subscribe( data => {
+        userValue.profile_image_url=this.userPrfImgStr;
+        userValue.name=this.userNameStr;
+        userValue.first_name=this.getCurrentUser.first_name;
+        userValue.last_name=this.getCurrentUser.last_name;
+        userValue.c_date=this.currentDate;
+        userValue.display_name=this.getCurrentUser.display_name;
+        comments.push(userValue); 
+        this.commentform.reset();
       },
       error => {
         alert(error);
