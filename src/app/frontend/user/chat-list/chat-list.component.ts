@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -11,7 +12,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class ChatListComponent implements OnInit {
   chatHeads: any[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private userService: UserService) { }
 
   ngOnInit() {
     this.getUnreadMessages();
@@ -30,6 +31,16 @@ export class ChatListComponent implements OnInit {
     messages.subscribe(data => {
       console.log(data);
       this.chatHeads = data;
+      this.fillUserDetails();
+    });
+  }
+
+  fillUserDetails() {
+    this.chatHeads.map(ch => {
+      this.userService.getUserDetById({ id: ch.from_user_id }).subscribe(res => {
+        console.log(res);
+        ch['userDetails'] = res.UserDetails[0];
+      });
     });
   }
 
