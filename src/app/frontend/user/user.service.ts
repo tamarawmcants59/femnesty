@@ -115,25 +115,25 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-  
-  sendFrndRequest(form_data){
+
+  sendFrndRequest(form_data) {
     return this.apiService.post(
-        `/users/appsendfriendrequest`,
-        form_data
-    ).map(data => data);
-  }
-  
-  acceptFrndRequest(form_data){
-    return this.apiService.post(
-        `/users/appacceptfriendrequest`,
-        form_data
+      `/users/appsendfriendrequest`,
+      form_data
     ).map(data => data);
   }
 
-  rejectFrndRequest(form_data){
+  acceptFrndRequest(form_data) {
     return this.apiService.post(
-        `/users/apprejectfriendrequest`,
-        form_data
+      `/users/appacceptfriendrequest`,
+      form_data
+    ).map(data => data);
+  }
+
+  rejectFrndRequest(form_data) {
+    return this.apiService.post(
+      `/users/apprejectfriendrequest`,
+      form_data
     ).map(data => data);
   }
 }

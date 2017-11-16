@@ -3,6 +3,7 @@ import { NgZone } from "@angular/core";
 import { FrontendService } from "../frontend-app-header/frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
+import { AngularFirestore } from 'angularfire2/firestore';
 @Component({
   selector: 'user-sidebar',
   templateUrl: './user-sidebar.component.html'
@@ -11,13 +12,14 @@ export class UserSidebar implements OnInit {
   public userloggedIn: string = '';
   public currentUserDet: Object = {};
   public currentUserLoginDet: Object = {};
-  
+  public unreadMessages: number = 0;
   constructor(
     private el: ElementRef,
     lc: NgZone,
     private route: ActivatedRoute,
     private router: Router,
-    private _service: FrontendService
+    private _service: FrontendService,
+    private db: AngularFirestore
   ) {
     this.userloggedIn = localStorage.getItem("isLoggedIn");
     const getUserDet = localStorage.getItem("currentUser");
@@ -25,7 +27,6 @@ export class UserSidebar implements OnInit {
     //console.log(this.currentUserDet);
   }
 
-  //wait for the component to render completely
   ngOnInit(): void {
     //console.log(currentUserDet);
     //localStorage.removeItem("isLoggedIn");
@@ -41,11 +42,12 @@ export class UserSidebar implements OnInit {
   }
 
   public getUserDetails() {
-    const loginUserId = localStorage.getItem("loginUserId");
-    if (loginUserId != '') {
+    const loginUserId = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
+    if (loginUserId != 0) {
       const dataUserDet = {
         "id": loginUserId
       };
+      this.getUnreadMessageCount(loginUserId);
       this._service.getUserDetById(dataUserDet)
         .subscribe(data => {
           const details = data;
@@ -63,6 +65,21 @@ export class UserSidebar implements OnInit {
     } else {
     }
 
+  }
+
+  getUnreadMessageCount(user_id: number) {
+    const messages = this.db.collection('Messages', ref => {
+      return ref.where('to_user_id', '==', user_id).where('is_read', '==', false);
+    }).snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data();
+        const id = action.payload.doc.id;
+        return { id, ...data };
+      });
+    });
+    messages.subscribe(message => {
+      this.unreadMessages = message.length;
+    });
   }
 
   public userLogout() {

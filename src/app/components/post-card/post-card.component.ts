@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
 
 @Component({
@@ -9,12 +9,11 @@ import { SocialService } from "../../frontend/socialhome/social.service";
   styleUrls: ['./post-card.component.css']
 })
 export class PostCardComponent implements OnInit {
-  public commentform:FormGroup;
+  public commentform: FormGroup;
   public IsloginUserId: any;
-  public isLoggedIn:any;
-  public postCmtId:any;
-  //public postCmtDiv:boolean = false;
-  public postCmtDiv:any = {};
+  public isLoggedIn: any;
+  public postCmtId: any;
+  //public postCmtDiv:boolean = false;public postCmtDiv:any = {};
   public postCmtHtml:string = '';
   public userPrfImgStr:string = '';
   public userNameStr:string = '';
@@ -33,25 +32,22 @@ export class PostCardComponent implements OnInit {
     created_date: string;
   };
   constructor(
-    private builder:FormBuilder, 
-    private dataService: SocialService, 
+    private builder: FormBuilder,
+    private dataService: SocialService,
     private route: ActivatedRoute,
     private router: Router
   ) { 
     this.getCurrentUser=localStorage.getItem("currentUser");
     this.getCurrentUser=JSON.parse(this.getCurrentUser);
-    //console.log(this.getCurrentUser);
-    //let datefrmt = (this.currentDate | dateFormat);
-    //console.log(datefrmt);
-    this.IsloginUserId=localStorage.getItem("loginUserId");
+    this.IsloginUserId = localStorage.getItem("loginUserId");
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    this.userPrfImgStr=this.getCurrentUser.image_url;
+    this.userPrfImgStr=this.getCurrentUser.image_url;  
     this.userNameStr=this.getCurrentUser.name;
     this.commentform = builder.group({
-			comment: ['', [
-				Validators.required,
-				//Validators.minLength(3)
-			]]
+      comment: ['', [
+        Validators.required,
+        //Validators.minLength(3)
+      ]]
     });
   }
 
@@ -59,16 +55,17 @@ export class PostCardComponent implements OnInit {
     
   }
 
-  public userPostComment(post_id, postdata){
-    if(this.isLoggedIn==1){
-      this.postCmtId=post_id;
-    }else{
+  public userPostComment(post_id, postdata) {
+    if (this.isLoggedIn == 1) {
+      this.postCmtId = post_id;
+    } else {
       this.router.navigateByUrl('/user/login');
     }
     Object.keys(this.postCmtDiv).forEach(h => {
       this.postCmtDiv[h] = false;
     });
     this.postCmtDiv[postdata.id] = true;
+
     this.postCmtHtml='';
   }
   
@@ -104,6 +101,6 @@ export class PostCardComponent implements OnInit {
       this.postCmtHtml+='<p class="post-date">{{currentDate | dateFormat: "dd MMM yyyy"}}</p>';
       this.postCmtHtml+='<div class="commenteeComment">'
       this.postCmtHtml+='<p>'+userValue.comment+'</p></div></div></div></div>';
-          //console.log(this.postCmtHtml);
   }
+  
 }
