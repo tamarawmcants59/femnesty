@@ -30,7 +30,7 @@
         <div class="likeComment">
             <div class="row">
                 <div class="col-md-10 col-xs-8">
-                    <ul>{{postData.post_like}}
+                    <ul>
                         <li *ngIf="postData.post_like"><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i></a></li>
                         <li *ngIf="!postData.post_like"><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
                         <li><a (click)="userPostComment(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>

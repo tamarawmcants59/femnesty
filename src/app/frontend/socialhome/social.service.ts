@@ -43,6 +43,13 @@ export class SocialService {
     return this.apiService.get(`/enrichment/apparticlelistlast`)
       .map(data => data);
   }
+  
+  likePostUser(form_data){
+    return this.apiService.post(
+        `/enrichment/appuseraddpostlike`,
+        form_data
+    ).map(data => data);
+  }
   /*getArticleBySlug(slug){
     return this.apiService.get(`/enrichment/apparticledetailsbyslug/${slug}`)
       .map(data => data);
