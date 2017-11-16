@@ -8,8 +8,9 @@ import { SocialService } from '../frontend/socialhome/social.service';
 import { UserSidebar } from "./user-sidebar/user-sidebar.component";
 import { PostCardComponent } from './post-card/post-card.component';
 import { PostCreateComponent } from './post-create/post-create.component';
-import { GroupCreateComponent } from './group-create/group-create.component';
 
+import { ApplicationPipes } from "../application-pipe.module";
+import { GroupCreateComponent } from './group-create/group-create.component';
 @NgModule({
     declarations: [
         UserSidebar,
@@ -17,7 +18,13 @@ import { GroupCreateComponent } from './group-create/group-create.component';
         PostCreateComponent,
         GroupCreateComponent
     ],
-    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+    imports: [
+        CommonModule, 
+        RouterModule,
+        FormsModule, 
+        ReactiveFormsModule,
+        ApplicationPipes
+    ],
     exports: [
         UserSidebar,
         PostCardComponent,
