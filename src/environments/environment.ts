@@ -6,5 +6,7 @@
 export const environment = {
   production: false,
   api_url: 'http://192.168.1.118/team2/Femnesty/webservice',
-  site_url: 'http://192.168.1.118/team2/Femnesty/'
+  site_url: 'http://192.168.1.118/team2/Femnesty/',
+  DATE_FMT: 'dd/MMM/yyyy',
+  DATE_TIME_FMT:'dd/MMM/yyyy hh:mm:ss',
 };

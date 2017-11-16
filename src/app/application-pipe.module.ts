@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { TruncatePipe,SafePipe } from "./exponential-strength.pipe";
+import { TruncatePipe,SafePipe,DateFormatPipe,DateTimeFormatPipe } from "./exponential-strength.pipe";
 //import { FrontendService } from "./components/frontend-app-header/frontend.service";
 @NgModule({
   declarations: [
     TruncatePipe ,
     SafePipe,
-    //FrontendService
+    DateFormatPipe,
+    DateTimeFormatPipe
   ],
   imports: [
     CommonModule
   ],
   exports:[
     TruncatePipe ,
-    SafePipe
+    SafePipe,
+    DateFormatPipe,
+    DateTimeFormatPipe
   ]
 })
 export class ApplicationPipes { }

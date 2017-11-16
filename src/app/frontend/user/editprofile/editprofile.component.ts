@@ -284,6 +284,7 @@ export class EditprofileComponent implements OnInit {
         this.loading = false;
         this.showImgDive = false;
         this.getUserDetails();
+        //localStorage.setItem('profile_image', this.loginUserDet[0].image_url);
         window.location.reload();
         //this.router.navigateByUrl('/user/profile');
         //let details = data;
