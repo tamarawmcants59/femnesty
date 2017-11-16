@@ -13,7 +13,7 @@
                 <a href="#">
                     <span class="iconWidth">
                     <img src="assets/images/icon1.png">
-                  </span> MESSAGES <span class="badge" style="background-color:red">5</span>
+                  </span> MESSAGES <span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
                 </a>
             </li>
             <li><a href="#"><span class="iconWidth"><img src="assets/images/icon2.png"></span>CONNECTIONS</a></li>
