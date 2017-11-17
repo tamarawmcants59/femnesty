@@ -7,14 +7,13 @@
             <div class="col-md-6">
                 <div class="middlePart">
                     <div class="main-chat-wrap" *ngIf="withUser.first_name">
-                        <h4>Your message with : {{withUser.first_name}} {{withUser.last_name}}</h4>
+                        <h4>Group: </h4>
                         <div class="chat-holder" *ngIf="chats">
                             <ul>
                                 <li *ngFor="let chat of chats" class="{{chat.cssClass}}">
                                     <div class="image-area">
                                         <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;">
-                                            <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" style="width:70px;margin-top:0px" alt="" /> -->
-                                            <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" style="width:70px;margin-top:-20px" alt="" /> -->
+                                            <img src="{{chat.userDetail.image_url}}" style="width:70px;margin-top:0px" alt="" />
                                         </div>
                                     </div>
                                     <div class="text-area">

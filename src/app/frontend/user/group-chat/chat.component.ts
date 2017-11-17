@@ -7,25 +7,15 @@ import { UserService } from '../../user/user.service';
 import { Promise } from 'q';
 
 @Component({
-  selector: 'app-chat',
+  selector: 'app-group-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class GroupChatComponent implements OnInit, OnDestroy {
 
   chats: any[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
-  fromUserId: number;
-  withUser = {
-    first_name: '',
-    last_name: '',
-    image_url: ''
-  };
-  thisUser = {
-    first_name: '',
-    last_name: '',
-    image_url: ''
-  };
+  groupId: number;
   room_id: string;
   users = [];
   message: string;
@@ -40,12 +30,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.fromUserId = parseInt(params['userId'], 0);
-      this.getWithUser(this.fromUserId);
-      this.getThisUser(this.loginUserId);
-      this.room_id = (this.fromUserId > this.loginUserId) ?
-        '' + this.loginUserId + "_" + this.fromUserId
-        : '' + this.fromUserId + '_' + this.loginUserId;
+      this.groupId = parseInt(params['groupId'], 0);
+      this.room_id = '_' + this.groupId;
       this.getMessages();
     });
     this.isComponentActive = true;
@@ -57,16 +43,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.isComponentActive = false;
   }
 
-  getWithUser(user_id) {
-    return this.userService.getUserDetById({ id: user_id }).subscribe(res => {
-      this.withUser = res.UserDetails[0];
-    });
-  }
-  getThisUser(user_id) {
-    return this.userService.getUserDetById({ id: user_id }).subscribe(res => {
-      this.thisUser = res.UserDetails[0];
-    });
-  }
 
   getMessages() {
     this.dbRef = this.db.collection('Messages', ref => {
@@ -75,16 +51,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       return actions.map(action => {
         const data = action.payload.doc.data();
         const id = action.payload.doc.id;
-        if (data.to_user_id == this.loginUserId && this.isComponentActive) {
-          console.log(id);
-          setTimeout(() => {
-            this.db.collection('Messages').doc(id).update({ is_read: true }).then(res => {
-              console.log(res);
-            }).catch(err => {
-              console.log(err);
-            });
-          }, 3000);
-        }
         return { id, ...data };
       });
     });
@@ -106,19 +72,21 @@ export class ChatComponent implements OnInit, OnDestroy {
         chat.isSelf = false;
         chat.cssClass = "odd";
       }
+      this.userService.getUserDetById({ id: chat.from_user_id }).subscribe(res => {
+        chat.userDetail = res.UserDetails[0];
+      });
     });
   }
 
   sendMessage() {
     const data = {
       room_id: this.room_id,
-      to_user_id: this.fromUserId,
       from_user_id: this.loginUserId,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       message: {
         text: this.message
       },
-      is_read: false
+      is_read: true
     };
     console.log(data);
     this.db.collection('Messages').add(data).then(res => {
@@ -132,13 +100,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   sendFile(file_name) {
     const data = {
       room_id: this.room_id,
-      to_user_id: this.fromUserId,
       from_user_id: this.loginUserId,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       message: {
         file: file_name
       },
-      is_read: false
+      is_read: true
     };
     console.log(data);
     this.db.collection('Messages').add(data).then(res => {
