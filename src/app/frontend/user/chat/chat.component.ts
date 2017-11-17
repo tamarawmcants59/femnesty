@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
   room_id: string;
   users = [];
   message: string;
+  fileData: any;
   constructor(
     private db: AngularFirestore,
     private userService: UserService,
@@ -101,6 +102,36 @@ export class ChatComponent implements OnInit {
     }).catch(err => {
       console.log('error with fb: ', err);
     });
+  }
+
+  public fileChangePost($event) {
+    //this.showPostImgDive = true;
+    console.log($event);
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    myReader.onloadend = (loadEvent: any) => {
+      image.src = loadEvent.target.result;
+      this.fileData = image.src;
+      //that.cropper.setImage(image);
+      //console.log(image.src);
+    };
+    myReader.readAsDataURL(file);
+  }
+
+  public submitPost() {
+    const formData = {
+      file_name : this.fileData
+    };
+    this.userService.uploadFile(formData)
+      .subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        alert(error);
+      });
+
   }
 
 }
