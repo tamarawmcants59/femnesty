@@ -30,5 +30,13 @@ export class FrontendService {
         form_data
     ).map(data => data);
   }
+
+  getSiteSettings(){
+    return this.apiService.get(`/enrichment/appallsitesettings`)
+      .map(data => data);
+  }
   
+  userContactDataSend(form_data){
+    return this.apiService.post(`/users/appusercontactus`, form_data).map(data => data);
+  }
 }

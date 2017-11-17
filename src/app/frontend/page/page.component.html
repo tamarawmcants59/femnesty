@@ -8,35 +8,78 @@
   </div>
 </section>-->
 
-<section class="section about-content-area">
+<section class="section about-content-area" *ngIf="pageSlugName != 'contact-us'">
     <div class="container">
         <div class="row">
           <h1>{{pageDetData.page_heading}}</h1>
           <div [innerHTML]="pageDetData.content" ></div>
-            <!--<div class="col-md-8">
-                <h1>Woman was taken out of man; not out of his head to top 
-him, nor out of his feet to be trampled underfoot, 
-but out of his side to be equal to him.</h1>
-                <p class="text-italic">Femnesty is a network that connects women from all around the world. It exists to help women recognise and unleash the potential in their own personal and professional lives, and to promote the positive roles we play as parents, professionals, family members and friends.</p>
-                <p>We’re not a feminist organisation, but we do believe that men and women are born with equal values and status, that same equality should continue into our personal and professional adult lives.</p>
-                <p>Our logo illustrates our ethos: strength through unity. It also emphasises equality - the male and female deer stand strong by standing together, and though the male deer has horns and may be seen as a protector, the two are rooted together for stability and support. The heart-shaped roots represent friendship, harmony, love and respect; qualities that enrich all human relationships, regardless of sex or situation.</p>
-                <p>Women can face different challenges to men as we strive to be great mothers, loving partners and achieve financial independence. We often have to make sacrifices, personally and professionally, to achieve the things we set out to achieve. But while our nurturing instinct can get in the way of our ambition to succeed, it can also be used to great effect.</p>
-                <p>Whether we want to discuss our role in society, debate professional issues, seek personal advice or simply share our coping strategies for being a wife, mother, single mother, student – or all of the above – in the 21st century, Femnesty gives us a space to do just that.</p>
-                <p><a href="#">Sign up</a> to Femnesty to share the strength, encouragement and wisdom of women around the world today.
-</p>
+        </div>
+    </div>
+</section>
+
+<section class="section contact-section" *ngIf="pageSlugName == 'contact-us'">
+    <div class="contact-left">
+        <img src="assets/images/contact-banner.jpg" alt="" class="img-responsive">
+    </div>
+    <div class="contact-right">
+        <h1>Get in Touch.</h1>
+        <h4>If you have any questions about our organisation, have any comment or feedback then please use the contact details below.</h4>
+        <ul class="contact-dtls">
+            <li>
+                <div class="icon"><img src="assets/images/mobile.png" alt=""></div>
+                <div class="number">+{{getPageSiteSetData?.mobile}}</div>
+            </li>
+            <li>
+                <div class="icon"><img src="assets/images/mail.png" alt=""></div>
+                <div class="number">{{getPageSiteSetData?.admin_email}}</div>
+            </li>
+        </ul>
+        <div class="row" *ngIf="(successMsg != '')">
+            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                 {{successMsg}}
             </div>
-            <div class="col-md-4">
-                <div class="pic-icon">
-                    <img src="images/pic-1.jpg" alt="" class="img-responsive">
-                    <div class="pic-logo-icon">
-                        <img src="images/logo-icon.png" alt="">
+        </div>
+        <form class="form-area" [formGroup]="commentform" (ngSubmit)="submitContactForm()" #postForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name" formControlName="name" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['name'].valid && commentform.controls['name'].touched">Name is required</div>
                     </div>
                 </div>
-                <div class="text-center gray pic-icon-content">
-                    <h2 class="text-red">Our Logo</h2>
-                    <p>Our logo illustrates our ethos: strength through unity. It also emphasises equality - the male and female deer stand strong by standing together, and though the male deer has horns and may be seen as a protector, the two are rooted together for stability and support. The heart-shaped roots represent friendship, harmony, love and respect; qualities that enrich all human relationships, regardless of sex or situation.</p>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" formControlName="email" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['email'].valid && commentform.controls['email'].touched">Please enter the correct email, this email not valid.</div>
+                        <!--<div class="text-danger" *ngIf="(commentform.controls['email'].hasError('email', 'email') && !commentform.controls['email'].valid) && commentform.controls['email'].touched">
+                            Please enter the correct email, this email not valid.
+                          </div>-->
+                    </div>
                 </div>
-            </div>-->
-        </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <input type="text" placeholder="Mobile No" formControlName="mobile_no" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['mobile_no'].valid && commentform.controls['mobile_no'].touched">Mobile no is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" formControlName="subject" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['subject'].valid && commentform.controls['subject'].touched">Subject is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <textarea rows="6" placeholder="Your Message" formControlName="message" class="form-control"></textarea>
+                        <div class="text-danger" *ngIf="!commentform.controls['message'].valid && commentform.controls['message'].touched">Message is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </section>

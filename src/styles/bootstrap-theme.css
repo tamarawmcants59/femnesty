@@ -3297,6 +3297,38 @@ ul.connectionlist li .text-area p {
     font-size: 14px
 }
 
+/********* Search Result ********/
+
+.result-count{font-weight:600}
+.result-count span{color:#414141; font-weight:normal}
+.search-list{list-style-type: none; padding: 0; margin: 0; margin-top: 20px}
+.search-list li{display:flex; flex-wrap:no-wrap; margin-bottom: 15px; min-height: 140px}
+.search-list li .left-side{background-size: cover !important; background-repeat:no-repeat !important; background-position:center center !important; width:35%; position: relative;}
+.search-list li .left-side .image-title{width:100%; position: absolute; top:50%; transform: translateY(-50%); text-align: center; color:#fff; font-size:13px}
+.search-list li .right-side{padding: 10px;flex-grow:2; background: #fff; position: relative; width:65%;}
+.search-list li .right-side .title{position: absolute; right:10px; bottom: 5px; color:#e1e1e1}
+.search-list li .right-side h4{margin-top: 0; letter-spacing: 1px}
+.search-list li .right-side small.text{display: block; min-height:34px}
+.search-list li .right-side a.more{margin-top: 10px; text-transform: uppercase; color:#d23545; font-family: "Montserrat",sans-serif; font-weight:500; display: inline-block; letter-spacing: 1px}
+
+.filter-reslt{margin: 0; list-style-type: none; padding-left: 15px}
+.filter-reslt li{display: block; padding: 10px 0}
+.filter-reslt li a{color:#222; text-transform: uppercase; font-family: "Montserrat",sans-serif; font-weight:600;}
+.filter-reslt li a span{color:#666;}
+
+.share-story{text-align: center; }
+.share-story h1{color:#be1620;padding-bottom: 0; margin-bottom: 20px}
+.share-story h1:after{content: none;}
+
+/********* Contact ********/
+
+.contact-section{display: flex; width:100%; padding-bottom: 0; padding-top:100px}
+.contact-left{width:50%}
+.contact-right{background: #fff; width:50%; padding: 50px 50px}
+.contact-right h4{margin-bottom: 30px; line-height: 28px}
+.contact-dtls{list-style-type: none; margin-bottom: 40px;}
+.contact-dtls li{display:flex; flex-wrap:nowrap; align-items:center; margin-bottom: 20px; font-size:24px}
+.contact-dtls li .icon{margin-right: 15px}
 
 /*********** Suman css *****************/
 
