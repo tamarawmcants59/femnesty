@@ -8,7 +8,7 @@
                 <div class="middlePart">
                     <div class="notification-wrap">
                         <ul>
-                            <li *ngFor="let chatHead of chatHeads" style="cursor:pointer" [routerLink]="['/user/chat',chatHead.from_user_id]">
+                            <li *ngFor="let chatHead of chatHeads" style="cursor:pointer">
                                 <div class="image-area">
                                     <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
                                         <img src="{{chatHead.userDetails.image_url}}" style="width:50px" alt="" />
@@ -19,6 +19,15 @@
                                         <h4>{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
                                     </a>
                                     <p class="desc">{{chatHead.message.text}}</p>
+                                    <p class="desc" *ngIf="chatHead.message.file">
+                                        Sent you a file
+                                    </p>
+                                    <div style="display:block">
+                                        <a *ngIf="chatHead.message.file" download href="{{chatHead.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
                                     <p class="time">{{chatHead.created | timeAgo}}</p>
                                 </div>
                             </li>
