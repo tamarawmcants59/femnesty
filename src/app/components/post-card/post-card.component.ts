@@ -91,8 +91,10 @@ export class PostCardComponent implements OnInit {
           if (details.Ack=="1") {
             if(postdata.post_like){
               postdata.post_like=false;
+              postdata.likecount = parseInt(postdata.likecount)-1
             }else{
               postdata.post_like=true;
+              postdata.likecount = parseInt(postdata.likecount)+1
             }
           }
       },
@@ -103,7 +105,7 @@ export class PostCardComponent implements OnInit {
     //this.postCmtLike[postdata.id] = true;
   }
 
-  public submitPostComment(comments) {
+  public submitPostComment(comments, postList) {
     if (this.isLoggedIn == 1) {
 
     } else {
@@ -123,6 +125,7 @@ export class PostCardComponent implements OnInit {
         userValue.display_name=this.getCurrentUser.display_name;
         comments.push(userValue); 
         this.commentform.reset();
+        postList.commentcount=parseInt(postList.commentcount)+1;
       },
       error => {
         alert(error);

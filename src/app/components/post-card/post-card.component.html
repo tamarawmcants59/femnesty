@@ -93,7 +93,7 @@
             <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
         </div>
         <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
-            <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments)" #commentForm="ngForm">
+            <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments, postData)" #commentForm="ngForm">
                 <div class="input-group">
                     <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
                     <span class="input-group-btn">
