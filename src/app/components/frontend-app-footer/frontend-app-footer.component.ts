@@ -7,6 +7,7 @@ import { Component, ElementRef } from '@angular/core';
 })
 export class FrontendAppFooter {
   current_year='';
+  public pageContactData:string ='';
   constructor(private el: ElementRef) { }
 
   //wait for the component to render completely
@@ -20,5 +21,6 @@ export class FrontendAppFooter {
     // remove the empty element(the host)
     parentElement.removeChild(nativeElement);
     //this.current_year=Date();
+    this.pageContactData='contact-us';
   }
 }
