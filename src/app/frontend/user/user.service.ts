@@ -160,4 +160,32 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  
+  getmyGroupList(form_data) {
+    return this.apiService.post(
+      `/users/appgrouplistbyuserid`,
+      form_data
+    ).map(data => data);
+  }
+  
+  createGroupDataSend(form_data) {
+    return this.apiService.post(
+      `/users/appcreategroup`,
+      form_data
+    ).map(data => data);
+  }
+
+  getGroupDetById(form_data) {
+    return this.apiService.post(
+      `/users/appgroupdetailsbygroupid`,
+      form_data
+    ).map(data => data);
+  }
+  
+  editGroupDataSend(form_data) {
+    return this.apiService.post(
+      `/users/appeditgroup`,
+      form_data
+    ).map(data => data);
+  }
 }

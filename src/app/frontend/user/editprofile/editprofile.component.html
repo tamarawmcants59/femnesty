@@ -93,12 +93,7 @@
                                                 <ul class="nav-tabs tabs-left sideways">
                                                     <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
                                                     <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
-                                                    <!--<li><a data-toggle="tab" href="#menu-v">Work and Education</a></li>
-                    <li><a data-toggle="tab" href="#profile-v">Place you've lived</a></li>
-                    <li><a data-toggle="tab" href="#message-v">Contact and basic info</a></li>
-                    <li><a data-toggle="tab" href="#message-p">Family and Relationship</a></li>
-                    <li><a data-toggle="tab" href="#message-q">Details about You</a></li>
-                    <li><a data-toggle="tab" href="#message-r">Life Events</a></li>-->
+                                                    
                                                 </ul>
                                             </div>
                                             <div class="col-md-7">
@@ -295,7 +290,8 @@
                                                 <div class="connectionText">
                                                     <h2>{{friendData.name}}</h2>
                                                     <!--<p>3 mutual friend</p>-->
-                                                    <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> 
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a>
+                                                    <br><a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a> 
                                                 </div>
                                             </li>
                                         </ul>
@@ -313,74 +309,13 @@
                                 <div class="connectionsPart">
                                     <h2>Groups</h2>
                                     <div class="connections">
-                                        <!--<ul class="uilist">
-                <li class="connectionList">
-                  <div class="connectionImage"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-                <li class="connectionList">
-                  <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
-                  <div class="connectionText">
-                    <h2>Lorem Ipsum</h2>
-                    <p>3 mutual friend</p>
-                    <button type="button" class="btn btn-primary">Add Group</button>											</div>
-                </li>
-              </ul>-->
+                                        <app-group-create></app-group-create>   
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!--<div>
-            <ngx-cropper [config]="prfImageData" (returnData)="onReturnData($event)"></ngx-cropper>
-          </div>-->
             </div>
             <div class="col-md-3">
                 <div class="rightPart">
