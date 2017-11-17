@@ -31,7 +31,7 @@
                             </div>
                             <div class="text-right">
                                 <div class="attach-file">
-                                    <input type="file" />
+                                    <input type="file" name="myfile" (change)="fileChangePost($event)" />
                                     <span>Attach File</span>
                                 </div>
                                 <button type="button" (click)="sendMessage()" [disabled]="!message" class="btn btn-primary pull-right">Send</button>

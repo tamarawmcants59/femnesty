@@ -83,6 +83,16 @@ export class UserService {
     ).map(data => data);
   }
 
+  uploadFile(form_data) {
+    return this.apiService.post(
+      `/users/uploadfile`,
+      form_data
+    ).map(data => {
+      console.log(data);
+      return data;
+    });
+  }
+
   getUserPostById(form_data) {
     return this.apiService.post(
       `/enrichment/appactivepostbyuser`,
@@ -136,14 +146,14 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-  
+
   getUserDetByUname(form_data) {
     return this.apiService.post(
       `/users/appuserbydisplayname`,
       form_data
     ).map(data => data);
   }
-  
+
   getUserIsMyFrnd(form_data) {
     return this.apiService.post(
       `/users/appsearchexistfriendornot`,
