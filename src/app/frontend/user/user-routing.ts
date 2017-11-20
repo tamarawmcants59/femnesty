@@ -8,6 +8,7 @@ import { AuthGuard } from '../../auth.guard';
 import { ChatComponent } from "./chat/chat.component";
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ProfileComponent } from "./profile/profile.component";
+import { ShareyourstoryComponent } from "./shareyourstory/shareyourstory.component";
 const routes: Routes = [
   {
     path: '',
@@ -90,6 +91,14 @@ const routes: Routes = [
     component: ChatComponent,
     data: {
       title: 'Chat'
+    }
+  },
+  {
+    path: 'shareyourstory',
+    canActivate: [AuthGuard],
+    component: ShareyourstoryComponent,
+    data: {
+      title: 'Share your story'
     }
   }
 ];
