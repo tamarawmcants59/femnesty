@@ -156,6 +156,20 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'company',
+    component: FrontendLayout,
+    data: {
+      title: 'Login'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './frontend/company/company.module#CompanyModule',
+      }
+      
+    ]
+  },
+  {
     path:'social_home',
     component: FrontendLayout,
     //canActivateChild: [AuthGuard],
