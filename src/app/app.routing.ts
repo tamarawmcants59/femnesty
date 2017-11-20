@@ -65,7 +65,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './frontend/group.module#GroupModule'
+        loadChildren: './frontend/group/group.module#GroupModule'
       }
     ]
   },
