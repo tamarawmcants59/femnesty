@@ -188,4 +188,19 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+
+  saveShareYourStory(form_data) {
+    return this.apiService.post(
+      `/users/appuserpendfriendlistbyid`,
+      form_data
+    ).map(data => data);
+  }
+
+  myShareStoryList(form_data) {
+    return this.apiService.post(
+      `/users/appuserpendfriendlistbyid`,
+      form_data
+    ).map(data => data);
+  }
+
 }
