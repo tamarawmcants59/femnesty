@@ -57,6 +57,19 @@ export const routes: Routes = [
     ]
   },
   {
+    path:'group',
+    component: FrontendLayout,
+    data:{
+      title: 'Group Page'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './frontend/group.module#GroupModule'
+      }
+    ]
+  },
+  {
     path:'enrichment',
     component: FrontendLayout,
     data:{

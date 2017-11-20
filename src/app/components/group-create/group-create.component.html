@@ -21,12 +21,12 @@
                                 <ul class="uilist" *ngIf="groupList?.length > 0">
                                     <li class="connectionList" *ngFor="let groupData of groupList">
                                         <div class="connectionImage">
-                                            <a [routerLink]="['/group',groupData.group_uname]">
+                                            <a [routerLink]="['/group/details',groupData.group_uname]">
                                                 <div class="img" [ngStyle]="{'background-image':'url('+groupData.group_image+')'}"></div>
                                             </a>
                                         </div>
                                         <div class="connectionText">
-                                            <a [routerLink]="['/group',groupData.group_uname]"><h2>{{groupData.group_name}}</h2></a>
+                                            <a [routerLink]="['/group/details',groupData.group_uname]"><h2>{{groupData.group_name}}</h2></a>
                                             <p>{{groupData.member_count}} members</p>
                                             <button type="button" class="btn btn-primary" (click)="editGroupTab(groupData.id)">Edit Group</button>											
                                         </div>
