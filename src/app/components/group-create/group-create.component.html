@@ -37,6 +37,7 @@
                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                         <strong>Success: </strong> {{successMsg}}
                     </div>
+                    
                     <h3>Create Group</h3>
                     <div class="menu">
                         <form class="login-form" [formGroup]="postform" (ngSubmit)="createGroupPost()" #createGroupForm="ngForm">

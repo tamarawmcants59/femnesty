@@ -94,7 +94,6 @@ export class GroupCreateComponent implements OnInit {
       "user_id": this.loginUserId
     };
     this.dataService.getmyGroupList(dataUserDet).subscribe(data=>{
-        //console.log(data);
         if (data.Ack=="1") {
             this.groupList = data.GroupListByuserID;
         }
