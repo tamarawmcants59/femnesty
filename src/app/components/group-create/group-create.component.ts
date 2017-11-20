@@ -21,7 +21,7 @@ export class GroupCreateComponent implements OnInit {
   public loginUserId: any;
   public groupList: any;
   public groupEditId: any;
-  public groupEditDataJson: any;
+  public groupEditDataJson={};
 
   constructor(
     private builder: FormBuilder,
@@ -87,6 +87,8 @@ export class GroupCreateComponent implements OnInit {
         console.log('Something went wrong!');
       }); 
     this.aboutActiveTab='edit_group';
+    this.successMsg = '';
+    this.postImgData = '';
   }
   
   public getMyGroupListData(){
@@ -168,6 +170,7 @@ export class GroupCreateComponent implements OnInit {
     this.postImgData = '';
     this.aboutActiveTab = data;
     this.showPostImgDive=false;
+    this.postform.reset();
   }
 
 }
