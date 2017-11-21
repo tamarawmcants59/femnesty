@@ -9,7 +9,7 @@
           <div class="middlePart">
             <div class="tabPart">
           <div *ngIf="(isLoggedIn == '1')">
-              <app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+              <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
           </div>
           <div *ngIf="userPostList?.length > 0">
               <div class="likePart" *ngFor="let postData of userPostList">

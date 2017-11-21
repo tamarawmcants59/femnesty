@@ -22,8 +22,11 @@ export class GroupLeftbarComponent implements OnInit {
   public userNameStr: string = '';
   public getCurrentUser: any;
   public currentDate: Date = new Date();*/
+  public isloginUserId: string = '';
+  public isUserLogin: string = '';
+  
 
-  @Input() postData: {
+  @Input() groupData: {
     id: number;
     user_id: number;
     slug: string;
@@ -47,9 +50,23 @@ export class GroupLeftbarComponent implements OnInit {
     private dataService: UserService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.isloginUserId = localStorage.getItem("loginUserId");
+    this.isUserLogin = localStorage.getItem("isLoggedIn");
+   }
 
   ngOnInit() {
+    //console.log(this.groupData);
   }
 
+  public userLogout() {
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("profile_image");
+    localStorage.removeItem("loginUserId");
+    //this.router.navigate(['/']);
+    this.router.navigateByUrl('/');
+    //return false;
+  }
 }

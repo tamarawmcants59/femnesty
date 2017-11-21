@@ -32,7 +32,8 @@ export class EditprofileComponent implements OnInit {
   postImgData: any;
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
-
+  public groupPostDetData: object = { };
+  
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
@@ -131,6 +132,7 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.groupPostDetData = {activitytype:'', activityid:''};
     this.getUserDetails();
     this.getUserPostDetails();
     this.getConnectionList();

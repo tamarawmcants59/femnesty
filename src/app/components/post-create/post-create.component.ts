@@ -9,6 +9,11 @@ import { UserService } from "../../frontend/user/user.service";
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
+  @Input() postType: {
+    //activitytype:'',
+    //activityid:''
+  };
+  
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   public form: FormGroup;
   public postform: FormGroup;
@@ -35,11 +40,14 @@ export class PostCreateComponent implements OnInit {
       is_connection: ['', [
         //Validators.required,
         //Validators.minLength(3)
-      ]]
+      ]],
+      group_type: ['', [ ]],
+      group_id: ['', [ ]]
     });
   }
 
   ngOnInit() {
+    //console.log(this.postType.activitytype);
   }
 
   public submitPost() {

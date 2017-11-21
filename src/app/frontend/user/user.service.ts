@@ -223,4 +223,32 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  
+  joinGroupRequestByUser(form_data) {
+    return this.apiService.post(
+      `/users/appsendjoinrequesttogrp`,
+      form_data
+    ).map(data => data);
+  }
+  
+  joinGroupMemberByAdmin(form_data) {
+    return this.apiService.post(
+      `/users/appaddgroupmember`,
+      form_data
+    ).map(data => data);
+  }
+  
+  getGroupRequestMemberListById(form_data) {
+    return this.apiService.post(
+      `/users/apppedingrquestcountByGid`,
+      form_data
+    ).map(data => data);
+  }
+  
+  responseGroupRequestByAdmin(form_data) {
+    return this.apiService.post(
+      `/users/appacceptorrejectgrouprequest`,
+      form_data
+    ).map(data => data);
+  }
 }
