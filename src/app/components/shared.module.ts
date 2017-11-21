@@ -12,13 +12,17 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import { ApplicationPipes } from "../application-pipe.module";
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { UserPrfrsidebarComponent } from './user-prfrsidebar/user-prfrsidebar.component';
+import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
+import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
 @NgModule({
     declarations: [
         UserSidebar,
         PostCardComponent,
         PostCreateComponent,
         GroupCreateComponent,
-        UserPrfrsidebarComponent
+        UserPrfrsidebarComponent,
+        GroupLeftbarComponent,
+        GroupRightbarComponent
     ],
     imports: [
         CommonModule, 
@@ -32,7 +36,9 @@ import { UserPrfrsidebarComponent } from './user-prfrsidebar/user-prfrsidebar.co
         PostCardComponent,
         PostCreateComponent,
         GroupCreateComponent,
-        UserPrfrsidebarComponent
+        UserPrfrsidebarComponent,
+        GroupLeftbarComponent,
+        GroupRightbarComponent
     ],
     providers: [
         SocialService

@@ -12,27 +12,9 @@ export class GroupComponent implements OnInit {
   public isloginUserId:any;
   public isUserLogin:any;
   public isGroupId:any;
-  public groupDetailsData: object = {
-    id : "",
-    user_id: "",
-    slug: "",
-    group_uname: "",
-    group_name: "",
-    short_desc: "",
-    image: "",
-    long_desc: "",
-    status: "",
-    cdate: "",
-    first_name: "",
-    last_name: "",
-    name: "",
-    profile_image: "",
-    display_name: "",
-    group_image: "",
-    member_count: ""
-  };
-  //public userPostList = [];
-  //public userFrndList = [];
+  public groupDetailsData: object = { };
+  public groupPostList = [];
+  public groupMemberList = [];
   public activeTab: string = 'activity';
   //public aboutActiveTab: string = 'overview';
   public successMsg: string ='';
@@ -65,10 +47,10 @@ export class GroupComponent implements OnInit {
          //console.log(data);
           if (data.Ack == "1") {
             this.groupDetailsData = data.GroupDetails[0];
-            //console.log(this.otherProfileDet.id);
+            //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
-            //this.getGroupPostDetails();
-            //this.getGroupMemberList();
+            this.getGroupPostDetails();
+            this.getGroupMemberList();
           }
         },
         error => {
@@ -77,4 +59,49 @@ export class GroupComponent implements OnInit {
     }
   }
 
+  public getGroupPostDetails() {
+    if (this.isGroupId != '') {
+      const dataUserDet = {
+        "page_no": 1,
+        "group_id": this.isGroupId
+      };
+      this.dataService.getGroupPostById(dataUserDet)
+        .subscribe(data => {
+          console.log(data);
+          if (data.Ack == "1") {
+            this.groupPostList = data.ActivePostByUser;
+          }
+        },
+        error => {
+
+        }
+        );
+    }
+  }
+
+  public getGroupMemberList() {
+    if (this.isGroupId != '') {
+      const dataUserDet = {
+        "group_id": this.isGroupId
+      };
+      this.dataService.getGroupMemberListById(dataUserDet)
+        .subscribe(data => {
+          console.log(data);
+          if (data.Ack == "1") {
+            this.groupMemberList = data.groupMembers;
+          } 
+          //console.log(this.userFrndList);
+        },
+        error => {
+
+        });
+    }
+  }
+
+  public toggleTab(data: any) {
+    //console.log(data);
+    this.activeTab = data;
+    this.successMsg = '';
+    this.errorMsg = '';
+  }
 }
