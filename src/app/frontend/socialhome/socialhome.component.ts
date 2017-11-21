@@ -26,7 +26,8 @@ export class SocialhomeComponent implements OnInit {
   isLoggedIn:any;
   public postCmtId: any;
   public showCmtDiv:boolean = false;
-
+  public groupPostDetData: object ={ };
+  
   constructor(
     private builder:FormBuilder, 
     private dataService: SocialService, 
@@ -55,6 +56,7 @@ export class SocialhomeComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.groupPostDetData = {activitytype:'', activityid:''};
     this.getUserPostDetails();
     this.getLastFourArticle();
     //console.log(this.IsloginUserId);

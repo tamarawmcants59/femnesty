@@ -5,7 +5,7 @@
           <div class="col-md-3">
             <div>
             <!--<div *ngIf="isUserLogin == 1"> --> 
-                <!--<app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>-->
+                <app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>
             </div>
           </div>
           <div class="col-md-6">
@@ -19,7 +19,7 @@
                       <p class="text-center">
                           <br />
                             <a *ngIf="checkIsFriend" [routerLink]="['/user/chat',otherProfileDet?.id]" class="btn btn-primary">Chat With {{otherProfileDet?.first_name}}</a>  
-                            <button *ngIf="groupDetailsData.user_id!=isloginUserId && isloginUserId !=''" type="button" class="btn btn-primary" (click)="joinGroupRequest(isloginUserId)">Join Group</button>
+                            <button *ngIf="groupDetailsData.user_id!=isloginUserId && isloginUserId !='' && isJoinGroup" type="button" class="btn btn-primary" (click)="joinGroupRequest(isloginUserId)">Join Group</button>
                         </p>
                       
                   </div>
@@ -42,7 +42,9 @@
                       
                       <div class="tab-content">
                           <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
-                              <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
+                              <div *ngIf="(isUserLogin == '1' && isJoinGroup)">
+                                <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+                              </div>
                               <div *ngIf="groupPostList?.length > 0">
                                   <div class="likePart" *ngFor="let postData of groupPostList">
                                       <app-post-card [postData]="postData"></app-post-card>
@@ -58,14 +60,40 @@
 
                           </div>
                           <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
-                              <div class="aboutPart">
-                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h3>
-                                  <div class="abouts">
-                                      <div class="row">
-                                          <div class="col-md-12">
-                                              
-                                          </div>
-                                      </div>
+                              <div class="connectionsPart">
+                                  <div class="connections" *ngIf="requestGrpJoinList?.length > 0">
+                                      <h3 style="margin-top: 0px;">Request to join group</h3>
+                                      <ul class="uilist" *ngIf="requestGrpJoinList?.length > 0">
+                                          <li class="connectionList" *ngFor="let friendData of requestGrpJoinList">
+                                              <div class="connectionImage">
+                                                  <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                      <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                  </a>
+                                              </div>
+                                              <div class="connectionText">
+                                                  <a [routerLink]="['/user/profile',friendData.display_name]"> <h2>{{friendData.name}}</h2> </a>
+                                                  <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="requestGroupAction(friendData.id,'2')">Accept</button><br>
+                                                  <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="requestGroupAction(friendData.id,'3')">Reject</button>
+                                              </div>
+                                          </li>
+                                      </ul>
+                                  </div>
+
+                                  <div class="connections" *ngIf="userFrndList?.length > 0">
+                                      <h3 style="margin-top: 0px;">Join member to group</h3>
+                                      <ul class="uilist" *ngIf="userFrndList?.length > 0">
+                                          <li class="connectionList" *ngFor="let joinFrnd of userFrndList">
+                                              <div class="connectionImage">
+                                                  <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                      <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd.profile_image+')'}"></div>
+                                                  </a>
+                                              </div>
+                                              <div class="connectionText">
+                                                  <a [routerLink]="['/user/profile',joinFrnd.display_name]"> <h2>{{joinFrnd.name}}</h2> </a>
+                                                  <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !=''" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Add</button>
+                                              </div>
+                                          </li>
+                                      </ul>
                                   </div>
                               </div>
                           </div>
