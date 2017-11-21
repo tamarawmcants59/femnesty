@@ -202,5 +202,11 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-
+  
+  getGrpDetBySlug(form_data) {
+    return this.apiService.post(
+      `/users/appgroupdetailsbygroupslug`,
+      form_data
+    ).map(data => data);
+  }
 }

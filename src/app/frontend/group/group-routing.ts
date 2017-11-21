@@ -5,7 +5,7 @@ import { GroupComponent } from "./group.component";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'details/:gname',
+    //redirectTo: 'details/:gname',
   },
   {
     path: 'details/:gname',
