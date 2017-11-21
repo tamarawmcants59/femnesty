@@ -209,4 +209,18 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  
+  getGroupPostById(form_data) {
+    return this.apiService.post(
+      `/enrichment/appallallpostbygroupid`,
+      form_data
+    ).map(data => data);
+  }
+
+  getGroupMemberListById(form_data) {
+    return this.apiService.post(
+      `/users/appgroupmemberbygroupid`,
+      form_data
+    ).map(data => data);
+  }
 }
