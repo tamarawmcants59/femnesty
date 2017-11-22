@@ -1,0 +1,16 @@
+.right-map-details h5{font-family: 'Montserrat', sans-serif;font-size:12px;text-transform: uppercase;display: block;margin-bottom:15px;font-weight: bold}
+.right-map{width:100%;height:100px;overflow: hidden;margin-bottom: 30px;}
+.right-map img{width:100%;}
+
+.right-map-details b{font-size:14px;display: block;}
+.right-map-details span{font-size:14px;font-size:14px;color:#8c8c8c;line-height: 18px;font-weight: normal;}
+.right-map-details p{font-size:14px;color:#8c8c8c;line-height: 18px}
+
+.right-followers ul{list-style: none;padding: 0;display: flex;flex-wrap:wrap;justify-content:flex-start;margin-bottom: 15px;}
+.right-followers ul li{margin: 2px}
+.right-followers ul li a{width:50px;height:50px;display: block;border-radius: 100%;overflow: hidden;border:1px solid #ddd;}
+.right-followers ul li a img{width:100%}
+
+.right-sharing ul{display: flex;}
+.right-sharing li{margin:0 2px}
+.right-sharing li a{display: block;width:40px;height:40px;line-height:38px;border-radius:100%;overflow: hidden;color:#fff;text-decoration: none;font-size:20px;text-align: center;}

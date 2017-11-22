@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     this.getUserDetailsByUname();
   }
 
-  public getUserDetailsByUname() {
+  public getUserDetailsByUname() {   
     if (this.userNameByUrl != '') {
       const dataUserDet = {
         "display_name": this.userNameByUrl

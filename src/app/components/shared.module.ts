@@ -14,6 +14,8 @@ import { GroupCreateComponent } from './group-create/group-create.component';
 import { UserPrfrsidebarComponent } from './user-prfrsidebar/user-prfrsidebar.component';
 import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
 import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
+import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
+
 @NgModule({
     declarations: [
         UserSidebar,
@@ -22,7 +24,8 @@ import { GroupRightbarComponent } from './group-rightbar/group-rightbar.componen
         GroupCreateComponent,
         UserPrfrsidebarComponent,
         GroupLeftbarComponent,
-        GroupRightbarComponent
+        GroupRightbarComponent,
+        CompanyRightbarComponent
     ],
     imports: [
         CommonModule, 
@@ -38,7 +41,8 @@ import { GroupRightbarComponent } from './group-rightbar/group-rightbar.componen
         GroupCreateComponent,
         UserPrfrsidebarComponent,
         GroupLeftbarComponent,
-        GroupRightbarComponent
+        GroupRightbarComponent,
+        CompanyRightbarComponent
     ],
     providers: [
         SocialService
