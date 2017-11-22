@@ -105,6 +105,11 @@ export class UserService {
       .map(data => data);
   }
 
+  apparticleWithCat() {
+    return this.apiService.get(`/enrichment/apparticleWithCat`)
+      .map(data => data);
+  }
+
   getUserFrndListById(form_data) {
     return this.apiService.post(
       `/users/appuserfriendslistbyid`,
@@ -171,6 +176,13 @@ export class UserService {
   createGroupDataSend(form_data) {
     return this.apiService.post(
       `/users/appcreategroup`,
+      form_data
+    ).map(data => data);
+  }
+
+  appsharestory(form_data) {
+    return this.apiService.post(
+      `/enrichment/appuseraddarticle`,
       form_data
     ).map(data => data);
   }
