@@ -56,7 +56,7 @@ export class CompanyService {
 
   getUserDetByUname(form_data) {
     return this.apiService.post(
-      `/users/appuserbydisplayname`,
+      `/users/appsearchbycompanyslug`,
       form_data
     ).map(data => data);
   }
@@ -98,6 +98,13 @@ export class CompanyService {
   }
 
   updateAccountDet(form_data) {
+    return this.apiService.post(
+      `/users/appupdateaccount`,
+      form_data
+    ).map(data => data);
+  }
+
+  createEmployeeDet(form_data) {
     return this.apiService.post(
       `/users/appupdateaccount`,
       form_data

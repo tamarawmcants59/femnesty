@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CmpeditprofileComponent } from "./cmpeditprofile.component";
+import { CmpEditprofileComponent } from "./cmpeditprofile.component";
 const routes: Routes = [
   {
     path: '',
-    component: CmpeditprofileComponent,
+    component: CmpEditprofileComponent,
     data: {
       title: 'Edit Profile'
     }

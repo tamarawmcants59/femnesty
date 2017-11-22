@@ -27,7 +27,17 @@ const routes: Routes = [
         loadChildren: './cmpeditprofile/cmpeditprofile.module#CmpeditprofileModule',
       }
     ]
-  }/*,
+  },
+  {
+    path: 'profile/:uname',
+    //canActivate: [AuthGuard],
+    component: ProfileComponent,
+    data: {
+      title: 'Other Profile'
+    }
+  },
+  
+  /*,
   {
     path: 'shareyourstory',
     canActivate: [AuthGuard],

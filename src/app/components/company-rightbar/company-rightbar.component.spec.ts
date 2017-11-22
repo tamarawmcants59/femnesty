@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CmpEditprofileComponent } from './cmpeditprofile.component';
+import { CompanyRightbarComponent } from './company-rightbar.component';
 
-describe('CmpeditprofileComponent', () => {
-  let component: CmpEditprofileComponent;
-  let fixture: ComponentFixture<CmpEditprofileComponent>;
+describe('CompanyRightbarComponent', () => {
+  let component: CompanyRightbarComponent;
+  let fixture: ComponentFixture<CompanyRightbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CmpEditprofileComponent ]
+      declarations: [ CompanyRightbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CmpEditprofileComponent);
+    fixture = TestBed.createComponent(CompanyRightbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
