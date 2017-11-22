@@ -251,4 +251,12 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+
+  getGroupImgListById(form_data) {
+    return this.apiService.post(
+      `/users/appallgroupimagebygrpid`,
+      form_data
+    ).map(data => data);
+  }
+  
 }
