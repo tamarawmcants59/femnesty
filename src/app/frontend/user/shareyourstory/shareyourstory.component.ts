@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../user.service";
 
 @Component({
   selector: 'app-shareyourstory',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShareyourstoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dataService: UserService
+  ) { }
 
   ngOnInit() {
   }
