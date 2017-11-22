@@ -1,0 +1,245 @@
+<section class="section about-content-area visitingProfile">
+  <div class="container">
+      <div class="row">
+          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+          <div class="col-md-3">
+            <div *ngIf="isloginUser == 1">
+                <user-sidebar></user-sidebar>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <div class="middlePart">
+                  <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
+                  </div>
+                  <div class="profPhoto">
+                      <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.image_url+')'}">
+                      </div>
+                  </div>
+                 
+                  <div class="profDes">
+                      <h2 class="text-center">{{otherProfileDet?.name}}</h2>
+                      <p class="text-center">{{otherProfileDet?.bio}}</p>
+                      <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
+                      
+                      
+                  </div>
+                  <div class="row" *ngIf="(successMsg != '')">
+                      <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                           {{successMsg}}
+                      </div>
+                  </div>
+                  <div class="row" *ngIf="(errorMsg != '')">
+                      <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                           {{errorMsg}}
+                      </div>
+                  </div>
+                  <div class="tabPart">
+                      <ul class="nav nav-pills">
+                          <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
+                          <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
+                          <li [ngClass]="{'active' : activeTab=='contact'}"><a (click)="toggleTab('contact')">Contact</a></li>
+                          <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>
+                      </ul>
+                      
+                      <div class="tab-content">
+                          <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
+                              <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
+                              <div *ngIf="userPostList?.length > 0">
+                                  <div class="likePart" *ngFor="let postData of userPostList">
+                                      <app-post-card [postData]="postData"></app-post-card>
+                                  </div>
+                              </div>
+                              <div class="likePart" *ngIf="userPostList?.length == 0">
+                                  <div class="row">
+                                      <div class="col-md-10">
+                                          <div class="nothing">Nothing more to show</div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                          </div>
+                          <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
+                              <div class="aboutPart">
+                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h3>
+                                  <div class="abouts">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                              <div class="tab-content">
+                                                  <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                      <ul class="ulList">
+                                                          <div class="menu">
+                                                              <div class="">
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.first_name}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.last_name}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.email}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.mobile_number}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.occupation}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.state}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.city}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.address}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
+                                                                      <div class="col-sm-8">
+                                                                          <span>{{otherProfileDet?.bio}}</span>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </ul>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
+                              <div class="connectionsPart">
+                                  <h2>contact</h2>
+                                  <div class="connections">
+                                      <ul class="uilist" *ngIf="userFrndList?.length > 0">
+                                          <li class="connectionList" *ngFor="let friendData of userFrndList">
+                                              <div class="connectionImage">
+                                                  <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                      <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                  </a>
+                                              </div>
+                                              <div class="connectionText">
+                                                  <h2>{{friendData.name}}</h2>
+                                                  <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> 
+                                                  <button *ngIf="friendData.friend_id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFriendRequest(friendData.friend_id)">Add Friend</button>
+                                              </div>
+                                          </li>
+                                      </ul>
+                                      <div class="likePart" *ngIf="userFrndList?.length == 0">
+                                          <div class="row">
+                                              <div class="col-md-10">
+                                                  <div class="nothing">No connection found</div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
+                              <div class="connectionsPart">
+                                  <h2>invite</h2>
+                                  <div class="connections">
+                                      No Invite
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="rightPart">
+
+                  <div class="innerRightPart">
+                      <h2>Company Detai ls</h2>
+                      <div>
+
+                        Map
+                      </div>
+                      <h2>Klarna AB</h2>
+                      <div>
+
+                        Location
+                      </div>
+                      <h2>Klarna AB</h2>
+                      <div>
+
+                        Location
+                      </div>
+                  </div>
+                  <div class="innerRightPart">
+                      <h2>ATTENDING HUBS</h2>
+                      <div class="hubMet hubMet1">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="img" style="background-image: url('assets/images/dog1.jpg')"></div>
+                              </div>
+                              <div class="col-md-8">
+                                  <h2>Femnesty Hub Met</h2>
+                                  <p>2017-09-04, London</p>
+                                  <button type="button" class="btn btn-primary">View Hub</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="innerRightPart">
+                      <h2>Groups</h2>
+                      <div class="hubMet hubMet1">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="img" style="background-image: url('assets/images/dog1.jpg')">
+                                  </div>
+                              </div>
+                              <div class="col-md-8">
+                                  <h2>London Women Group</h2>
+                                  <button type="button" class="btn btn-primary">View Group</button>
+                              </div>
+                          </div>
+
+                      </div>
+                      <div class="hubMet hubMet1">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="img" style="background-image: url('assets/images/dog1.jpg')">
+                                  </div>
+                              </div>
+                              <div class="col-md-8">
+                                  <h2>London Women Group</h2>
+                                  <button type="button" class="btn btn-primary">View Group</button>
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
