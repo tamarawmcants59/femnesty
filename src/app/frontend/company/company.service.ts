@@ -54,4 +54,61 @@ export class CompanyService {
     ).map(data => data);
   }
 
+  getUserDetByUname(form_data) {
+    return this.apiService.post(
+      `/users/appuserbydisplayname`,
+      form_data
+    ).map(data => data);
+  }
+
+  getUserIsMyFrnd(form_data) {
+    return this.apiService.post(
+      `/users/appsearchexistfriendornot`,
+      form_data
+    ).map(data => data);
+  }
+
+  getUserPostById(form_data) {
+    return this.apiService.post(
+      `/enrichment/appactivepostbyuser`,
+      form_data
+    ).map(data => data);
+  }
+
+  getUserFrndListById(form_data) {
+    return this.apiService.post(
+      `/users/appuserfriendslistbyid`,
+      form_data
+    ).map(data => data);
+  }
+
+  sendFrndRequest(form_data) {
+    return this.apiService.post(
+      `/users/appsendfriendrequest`,
+      form_data
+    ).map(data => data);
+  }
+
+  getUserDetById(form_data: { id: any }) {
+    //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)
+    return this.apiService.post(
+      `/users/appuserdetails`,
+      form_data
+    ).map(data => data);
+  }
+
+  updateAccountDet(form_data) {
+    return this.apiService.post(
+      `/users/appupdateaccount`,
+      form_data
+    ).map(data => data);
+  }
+
+  updateImgService(form_data) {
+    return this.apiService.post(
+      `/users/appupdateaccount`,
+      form_data
+    ).map(data => data);
+  }
+
 }
