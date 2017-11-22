@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'profile',
     //canActivate: [AuthGuard],
-    //component: DashboardComponent,
+    //component: ProfileComponent,
     data: {
       title: 'Company Profile'
     },
@@ -24,7 +24,7 @@ const routes: Routes = [
       {
         path: '',
         canActivateChild: [AuthGuard],
-        loadChildren: './editprofile/editprofile.module#EditprofileModule',
+        loadChildren: './cmpeditprofile/cmpeditprofile.module#CmpeditprofileModule',
       }
     ]
   }/*,
