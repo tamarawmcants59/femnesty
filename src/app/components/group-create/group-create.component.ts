@@ -146,7 +146,6 @@ export class GroupCreateComponent implements OnInit {
       error => {
         alert(error);
       });
-
   }
 
   public fileChangePost($event) {
@@ -172,5 +171,4 @@ export class GroupCreateComponent implements OnInit {
     this.showPostImgDive=false;
     this.postform.reset();
   }
-
 }
