@@ -187,6 +187,13 @@ export class UserService {
     ).map(data => data);
   }
 
+  mentorship(form_data) {
+    return this.apiService.post(
+      `/enrichment/appaddmentorship`,
+      form_data
+    ).map(data => data);
+  }
+
   getGroupDetById(form_data) {
     return this.apiService.post(
       `/users/appgroupdetailsbygroupid`,

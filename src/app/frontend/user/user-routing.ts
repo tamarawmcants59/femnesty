@@ -9,6 +9,7 @@ import { ChatComponent } from "./chat/chat.component";
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ProfileComponent } from "./profile/profile.component";
 import { ShareyourstoryComponent } from "./shareyourstory/shareyourstory.component";
+import { MentorComponent } from "./mentor/mentor.component";
 const routes: Routes = [
   {
     path: '',
@@ -99,6 +100,13 @@ const routes: Routes = [
     component: ShareyourstoryComponent,
     data: {
       title: 'Share your story'
+    }
+  },
+  {
+    path: 'mentor',
+    component: MentorComponent,
+    data: {
+      title: 'Mentor'
     }
   }
 ];
