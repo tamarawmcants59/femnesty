@@ -41,7 +41,7 @@ export class ShareyourstoryComponent implements OnInit {
         //Validators.minLength(3)
       ]],
       image: ['', [
-        Validators.required,
+        //Validators.required,
         //Validators.minLength(3)
       ]]
     });
