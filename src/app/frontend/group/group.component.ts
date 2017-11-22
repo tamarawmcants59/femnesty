@@ -12,8 +12,9 @@ export class GroupComponent implements OnInit {
   public groupNameByUrl: string='';
   public isloginUserId:any;
   public isUserLogin:any;
-  public isGroupId:any;
+  public isGroupId="";
   public groupDetailsData: object = { };
+  //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
   public userFrndList =[];
@@ -57,6 +58,8 @@ export class GroupComponent implements OnInit {
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
             this.groupPostDetData = { activitytype:'2', activityid:this.isGroupId };
+            //this.groupPidData = { 'groupId': this.isGroupId};
+            //console.log(this.groupPidData);
             //this.getUserPostDetails();
             this.getUserPostDetails();
             this.getGroupMemberList();
