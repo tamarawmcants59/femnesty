@@ -5,7 +5,6 @@ import { SignupComponent } from './signup/signup.component';
 import { CompanyService } from "./company.service";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
-import { EditprofileComponent } from './editprofile/editprofile.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../components/shared.module";
 @NgModule({
@@ -24,7 +23,7 @@ import { SharedModule } from "../../components/shared.module";
     }),
     SharedModule
   ],
-  declarations: [SignupComponent, ProfileComponent, EditprofileComponent],
+  declarations: [SignupComponent, ProfileComponent],
   providers: [CompanyService]
 })
 export class CompanyModule { }
