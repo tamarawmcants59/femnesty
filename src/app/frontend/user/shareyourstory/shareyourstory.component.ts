@@ -47,6 +47,7 @@ export class ShareyourstoryComponent implements OnInit {
     });
    
   }
+     
 
   ngOnInit() {
     this.loginUserId = localStorage.getItem("loginUserId");
