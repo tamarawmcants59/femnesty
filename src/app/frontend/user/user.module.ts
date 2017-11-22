@@ -46,6 +46,7 @@ import { ShareyourstoryComponent } from './shareyourstory/shareyourstory.compone
     ChatComponent, ChatListComponent, ProfileComponent, ShareyourstoryComponent,
     //ImageCropperComponent
   ],
-  providers: [UserService]
+  providers: [UserService],
+  exports:[CommonModule]
 })
 export class UserModule { }
