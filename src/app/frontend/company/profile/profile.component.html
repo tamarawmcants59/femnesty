@@ -9,18 +9,21 @@
           </div>
           <div class="col-md-6">
               <div class="middlePart">
-                  <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
+                  <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
                   </div>
                   <div class="profPhoto">
-                      <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.image_url+')'}">
+                      <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.profile_image+')'}">
                       </div>
                   </div>
                  
                   <div class="profDes">
-                      <h2 class="text-center">{{otherProfileDet?.name}}</h2>
+                      <h2 class="text-center">{{otherProfileDet?.company_name}}</h2>
                       <p class="text-center">{{otherProfileDet?.bio}}</p>
                       <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
-                      
+                      <p class="text-center">
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
+                        </p>
                       
                   </div>
                   <div class="row" *ngIf="(successMsg != '')">
@@ -70,17 +73,17 @@
                                                           <div class="menu">
                                                               <div class="">
                                                                   <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
                                                                       <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.first_name}}</span>
+                                                                          <span>{{otherProfileDet?.company_name}}</span>
                                                                       </div>
-                                                                  </div>
+                                                                  </div> 
                                                                   <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.last_name}}</span>
-                                                                      </div>
-                                                                  </div>
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Website</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{otherProfileDet?.website}}</span>
+                                                                        </div>
+                                                                    </div>                                                                 
                                                                   <div class="form-group row">
                                                                       <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
                                                                       <div class="col-sm-8">
@@ -92,13 +95,7 @@
                                                                       <div class="col-sm-8">
                                                                           <span>{{otherProfileDet?.mobile_number}}</span>
                                                                       </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.occupation}}</span>
-                                                                      </div>
-                                                                  </div>
+                                                                  </div>                                                                  
                                                                   <div class="form-group row">
                                                                       <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
                                                                       <div class="col-sm-8">
@@ -134,32 +131,61 @@
                               </div>
                           </div>
                           <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
-                              <div class="connectionsPart">
-                                  <h2>contact</h2>
-                                  <div class="connections">
-                                      <ul class="uilist" *ngIf="userFrndList?.length > 0">
-                                          <li class="connectionList" *ngFor="let friendData of userFrndList">
-                                              <div class="connectionImage">
-                                                  <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                      <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-                                                  </a>
-                                              </div>
-                                              <div class="connectionText">
-                                                  <h2>{{friendData.name}}</h2>
-                                                  <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> 
-                                                  <button *ngIf="friendData.friend_id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFriendRequest(friendData.friend_id)">Add Friend</button>
-                                              </div>
-                                          </li>
-                                      </ul>
-                                      <div class="likePart" *ngIf="userFrndList?.length == 0">
-                                          <div class="row">
-                                              <div class="col-md-10">
-                                                  <div class="nothing">No connection found</div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                            <div class="connectionsPart">
+                                
+                                <h2>Employee List</h2>
+                                <div class="connections">
+                                    <ul class="uilist" *ngIf="userEmployeeList?.length > 0">
+                                        <li class="connectionList" *ngFor="let userData of userEmployeeList">
+                                            <div class="connectionImage">
+                                                <a [routerLink]="['/user/profile',userData.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                </a>
+                                            </div>
+                                            <div class="connectionText">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <h2>{{userData.name}}</h2>
+                                                    </a>                                                  
+                                                
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="likePart" *ngIf="userEmployeeList?.length == 0">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="nothing">No employee found</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h2>Follower List</h2>
+                                <div class="connections">
+                                    <ul class="uilist" *ngIf="userFollowerList?.length > 0">
+                                        <li class="connectionList" *ngFor="let followData of userFollowerList">
+                                            <div class="connectionImage">
+                                                <a [routerLink]="['/user/profile',followData.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
+                                                </a>
+                                            </div>
+                                            <div class="connectionText">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <h2>{{followData.name}}</h2>
+                                                    </a>                                                  
+                                                
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="likePart" *ngIf="userFollowerList?.length == 0">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="nothing">No employee found</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                           </div>
                           <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
                               <div class="connectionsPart">
@@ -174,71 +200,7 @@
               </div>
           </div>
           <div class="col-md-3">
-              <div class="rightPart">
-
-                  <div class="innerRightPart">
-                      <h2>Company Detai ls</h2>
-                      <div>
-
-                        Map
-                      </div>
-                      <h2>Klarna AB</h2>
-                      <div>
-
-                        Location
-                      </div>
-                      <h2>Klarna AB</h2>
-                      <div>
-
-                        Location
-                      </div>
-                  </div>
-                  <div class="innerRightPart">
-                      <h2>ATTENDING HUBS</h2>
-                      <div class="hubMet hubMet1">
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <div class="img" style="background-image: url('assets/images/dog1.jpg')"></div>
-                              </div>
-                              <div class="col-md-8">
-                                  <h2>Femnesty Hub Met</h2>
-                                  <p>2017-09-04, London</p>
-                                  <button type="button" class="btn btn-primary">View Hub</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="innerRightPart">
-                      <h2>Groups</h2>
-                      <div class="hubMet hubMet1">
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <div class="img" style="background-image: url('assets/images/dog1.jpg')">
-                                  </div>
-                              </div>
-                              <div class="col-md-8">
-                                  <h2>London Women Group</h2>
-                                  <button type="button" class="btn btn-primary">View Group</button>
-                              </div>
-                          </div>
-
-                      </div>
-                      <div class="hubMet hubMet1">
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <div class="img" style="background-image: url('assets/images/dog1.jpg')">
-                                  </div>
-                              </div>
-                              <div class="col-md-8">
-                                  <h2>London Women Group</h2>
-                                  <button type="button" class="btn btn-primary">View Group</button>
-                              </div>
-                          </div>
-
-                      </div>
-                  </div>
-              </div>
+                <app-company-rightbar></app-company-rightbar>             
           </div>
       </div>
   </div>

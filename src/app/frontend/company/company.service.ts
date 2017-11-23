@@ -54,7 +54,35 @@ export class CompanyService {
     ).map(data => data);
   }
 
-  getUserDetByUname(form_data) {
+  getCompanyRequestList(form_data) {
+    return this.apiService.post(
+      `/users/apppendingemployeeListBycompanyId`,
+      form_data
+    ).map(data => data);
+  }
+
+  getCompanyEmployeetList(form_data) {
+    return this.apiService.post(
+      `/users/appemployeelistbycompanyid`,
+      form_data
+    ).map(data => data);
+  }
+
+  getCompanyFollowerList(form_data) {
+    return this.apiService.post(
+      `/enrichment/appcompanyfollowerlist`,
+      form_data
+    ).map(data => data);
+  }
+
+  RequestAcceptReject(form_data) {
+    return this.apiService.post(
+      `/users/appacceptorrejectemployeerequest`,
+      form_data
+    ).map(data => data);
+  }
+  
+  getCompanyDetByname(form_data) {
     return this.apiService.post(
       `/users/appsearchbycompanyslug`,
       form_data
@@ -82,9 +110,15 @@ export class CompanyService {
     ).map(data => data);
   }
 
-  sendFrndRequest(form_data) {
+  sendEmployeeRequest(form_data) {
     return this.apiService.post(
-      `/users/appsendfriendrequest`,
+      `/users/appsendjoinrequesttocompany`,
+      form_data
+    ).map(data => data);
+  }
+  sendFollowRequest(form_data) {
+    return this.apiService.post(
+      `/users/appusercompanyfollowunfollow`,
       form_data
     ).map(data => data);
   }

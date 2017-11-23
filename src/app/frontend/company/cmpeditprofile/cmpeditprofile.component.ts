@@ -27,6 +27,9 @@ export class CmpEditprofileComponent implements OnInit {
   public loginUserDet: Object = {};
   public userPostList = [];
   public userFrndList = [];
+  public userRequestList = [];
+  public userEmployeeList = [];
+  public userFollowerList = [];
 
   prfImageData: any;
   coverImageData: any;
@@ -85,19 +88,7 @@ export class CmpEditprofileComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]],
-      first_name: ['', [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
-      last_name: ['', [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
-			email: ['', [
-				Validators.required,
-				//BasicValidators.email
-				Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-			]],
+      
       mobile_number: ['', [
         Validators.required,
         Validators.minLength(10)
@@ -141,21 +132,23 @@ export class CmpEditprofileComponent implements OnInit {
     this.groupPostDetData = {activitytype:'3', activityid:' '};
     this.getUserDetails();
     this.getUserPostDetails();
-    //this.getConnectionList();
+    this.getRequestList();
+    this.getEmployeeList();
+    this.getFollowerList();
   }
 
-  public getConnectionList() {
+  public getFollowerList() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
       const dataUserDet = {
-        "user_id": loginUserId
+        "company_id": loginUserId
       };
-      this.dataService.getUserFrndListById(dataUserDet)
+      this.dataService.getCompanyFollowerList(dataUserDet)
         .subscribe(data => {
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {
-            this.userFrndList = details.FriendListById;
+            this.userFollowerList = details.CompanyFollowers;
           } else {
 
           }
@@ -168,6 +161,59 @@ export class CmpEditprofileComponent implements OnInit {
     }
 
   }
+
+  public getEmployeeList() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "company_id": loginUserId
+      };
+      this.dataService.getCompanyEmployeetList(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          //console.log(details);
+          if (details.Ack == "1") {
+            this.userEmployeeList = details.EmployeelistBycompanyID;
+          } else {
+
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
+
+  }
+
+
+  public getRequestList() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "company_id": loginUserId
+      };
+      this.dataService.getCompanyRequestList(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          //console.log(details);
+          if (details.Ack == "1") {
+            this.userRequestList = details.PendingEmployeelistBycompanyID;
+          } else {
+
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
+
+  }
+
+ 
 
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
@@ -347,6 +393,29 @@ export class CmpEditprofileComponent implements OnInit {
         this.loading = false;
         this.showCoverImgDive = false;
         this.getUserDetails();
+        window.location.reload();
+        //this.router.navigateByUrl('/user/profile');
+      },
+      error => {
+        alert(error);
+      });
+  }
+
+  public RequestAccept(id, request_type){    
+    const loginUserId = localStorage.getItem("loginUserId");
+    const uploadJsonData = {
+      "id": id,
+      "request_type": request_type
+    };
+    //console.log(uploadJsonData);
+    this.dataService.RequestAcceptReject(uploadJsonData)
+      .subscribe(
+      data => {
+        if(data.Ack==1){
+          this.successMsg='Accept successfull';
+        }else{
+          this.errorMsg='Reject';
+        }          
         window.location.reload();
         //this.router.navigateByUrl('/user/profile');
       },
