@@ -44,7 +44,7 @@ export class UserPrfrsidebarComponent implements OnInit {
         "user_id": this.loginUserId
       };
       this.dataService.getUseGroupListById(dataUserDet).subscribe(data => {
-          console.log(data);
+          //console.log(data);
           if (data.Ack == "1") {
               this.userGrpList = data.GroupListByuserID;
               //console.log(this.groupMemberList);
