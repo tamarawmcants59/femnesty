@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService } from "../../frontend/company/company.service";
 
 @Component({
@@ -8,16 +7,40 @@ import { CompanyService } from "../../frontend/company/company.service";
   styleUrls: ['./company-rightbar.component.css']
 })
 export class CompanyRightbarComponent implements OnInit {
-  public companyNameByUrl: string='';
-  public otherProfileDet = [];
-  public userFollowerList = [];
-  public otherProfileId: any;
+ 
+
+  @Input() profileData: {
+    id: number;
+    company_name: string;
+    bio: string;
+    address: string;
+    city: string;
+    website: string;
+    phone: string;
+   
+  };
+
+  /*@Input() followerList: {
+    id: number;
+    user_id: number;
+    slug: string;
+    group_uname: string;
+    group_name: string;
+    short_desc: string;
+    long_desc: string;
+    status: string;
+    first_name: string;
+    last_name: string;
+    name: string;
+    profile_image: string;
+    display_name: string;
+    group_image: string;
+    member_count: number;
+    cdate: string;
+  };*/
 
   constructor(
-    private dataService: CompanyService,
-    private activatedRoute: ActivatedRoute,
-    private route: ActivatedRoute,
-    private router: Router
+   
   ) { 
     
   }
