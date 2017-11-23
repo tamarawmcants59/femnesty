@@ -40,6 +40,7 @@ export class CompanyRightbarComponent implements OnInit {
   };*/
 
   constructor(
+    private dataService: CompanyService
    
   ) { 
     
