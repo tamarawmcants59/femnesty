@@ -231,158 +231,91 @@
                                 </div>
                             </div>
                             <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
-                                <!--<div class="connectionsPart">
-                                    <h2>Contact</h2>
+                                <div class="connectionsPart">
+                                    
+                                    <h2>Employee List</h2>
                                     <div class="connections">
-                                        <ul class="uilist" *ngIf="userFrndList?.length > 0">
-                                            <li class="connectionList" *ngFor="let friendData of userFrndList">
+                                        <ul class="uilist" *ngIf="userEmployeeList?.length > 0">
+                                            <li class="connectionList" *ngFor="let userData of userEmployeeList">
                                                 <div class="connectionImage">
-                                                    <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
                                                     </a>
                                                 </div>
                                                 <div class="connectionText">
-                                                        <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                            <h2>{{friendData.name}}</h2>
-                                                        </a>                                                    
-                                                    <a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a> 
+                                                        <a [routerLink]="['/user/profile',userData.display_name]">
+                                                            <h2>{{userData.name}}</h2>
+                                                        </a>                                                  
+                                                    
                                                 </div>
                                             </li>
                                         </ul>
-                                        <div class="likePart" *ngIf="userFrndList?.length == 0">
+                                        <div class="likePart" *ngIf="userEmployeeList?.length == 0">
                                             <div class="row">
                                                 <div class="col-md-10">
-                                                    <div class="nothing">No connection found</div>
+                                                    <div class="nothing">No employee found</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>-->
 
-                                <div class="aboutPart">
-                                    <h2>Contact</h2>
-                                    <div class="abouts">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <ul class="nav-tabs tabs-left sideways">
-                                                   
-                                                    <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('add_employee')">Add Employee</a></li>
+                                    <h2>Follower List</h2>
+                                    <div class="connections">
+                                        <ul class="uilist" *ngIf="userFollowerList?.length > 0">
+                                            <li class="connectionList" *ngFor="let followData of userFollowerList">
+                                                <div class="connectionImage">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="connectionText">
+                                                        <a [routerLink]="['/user/profile',followData.display_name]">
+                                                            <h2>{{followData.name}}</h2>
+                                                        </a>                                                  
                                                     
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <div class="tab-content">
-                                                   <!--<div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
-                                                        <ul class="ulList">
-                                                            <div class="menu">
-                                                                <h3>About Company</h3>
-                                                                <div class="">
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.company_name}}</span>
-                                                                        </div>
-                                                                    </div> 
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Website </label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.website}}</span>
-                                                                        </div>
-                                                                    </div>                                                                  
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.email}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.mobile_number}}</span>
-                                                                        </div>
-                                                                    </div>                                                                    
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.state}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.city}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.address}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.bio}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </ul>
-                                                    </div>-->
-                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_employee'}">
-                                                        <ul class="ulList">
-                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                                <strong>Success: </strong> {{successMsg}}
-                                                            </div>
-                                                            <h3>Add Employee</h3>
-                                                            <div class="menu">
-                                                                <form class="login-form" [formGroup]="form" (ngSubmit)="createEmployee(form.value)" #loginForm="ngForm">
-                                                                    <div class="">
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name">
-                                                                                <div class="text-danger" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name">
-                                                                                <div class="text-danger" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
-                                                                            </div>
-                                                                        </div>  
-                                                                        
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" formControlName="email">
-                                                                                <div class="text-danger" *ngIf="!form.controls['email'].valid && form.controls['email'].touched">Email Required</div>
-                                                                            </div>
-                                                                        </div>  
-                                                                        
-                                                                        <div class="saveChanges">
-                                                                            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Add Employee</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-
-                                                            </div>
-                                                        </ul>
-                                                    </div>
-                                                    
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userFollowerList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div>
 
                             <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
                                 <div class="connectionsPart">
-                                    <h2>Invite</h2>
+                                    <h2>Request List</h2>
                                     <div class="connections">
-                                       
+                                        <ul class="uilist" *ngIf="userRequestList?.length > 0">
+                                            <li class="connectionList" *ngFor="let userData of userRequestList">
+                                                <div class="connectionImage">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="connectionText">
+                                                        <a [routerLink]="['/user/profile',userData.display_name]">
+                                                            <h2>{{userData.name}}</h2>
+                                                        </a>                                                    
+                                                    <a (click)="RequestAccept(userData.id, 2)" class="btn btn-primary">Accept</a>
+                                                    <a (click)="RequestAccept(userData.id, 3)" class="btn btn-primary">Reject</a> 
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userRequestList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No request found</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

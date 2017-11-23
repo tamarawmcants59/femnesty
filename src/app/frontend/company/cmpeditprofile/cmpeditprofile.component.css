@@ -23,3 +23,13 @@
     background-size: cover;
     border-radius: 50%;
 }
+
+.connectionList {
+    border: 1px solid #e9ebee;
+    display: inline-block;
+    margin: 0 0 13px 13px;
+    padding: 0 10px 0 0;
+    position: relative;
+    vertical-align: top;
+    width: 80%;
+}
