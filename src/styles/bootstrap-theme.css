@@ -1980,6 +1980,114 @@ z-index: 2;
   font-size: 12px;
 }
 /*saikat bala -(end)*/
+/*=============================================
+				Added by Soumen
+===============================================*/
+
+/********* Visiting-other-profile ********/
+
+.reply-comment-wrapper{margin-top: 20px; display: flex; flex-wrap:nowrap}
+.reply-comment-wrapper .left-comment-content{margin-right: 10px;}
+.reply-comment-wrapper .left-comment-content .user-image{width:40px; height: 40px; border-radius:100%; overflow: hidden; background-size: cover !important;}
+.reply-comment-wrapper .right-comment-content{width:100%;}
+.reply-comment-wrapper .right-comment-content .commentee-name{margin-top: 0; margin-bottom: 2px; font-size:16px}
+.profTextPart p.post-date{font-size:13px}
+.commenteeComment{margin: 5px 0 10px;}
+.commenteeComment p {color: #4e4e4e;font-size: 14px;line-height: 18px;margin: 0;}
+.sub-reply-comment-wrapper{display: flex; flex-wrap:nowrap; margin-bottom: 10px}
+.sub-reply-comment-wrapper:last-child{margin-bottom:0}
+.sub-reply-comment-wrapper .left-comment-content .user-image{width:30px; height: 30px; border-radius:100%; overflow: hidden; background-size: cover !important;}
+.comment-text-box{margin-top:10px}
+.comment-text-box .form-control{box-shadow:none; text-shadow:none}
+.comment-text-box .btn-default{box-shadow:none; text-shadow:none; color:#fff; background: #bb1926; border:1px solid #bb1926}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus{background: #9e141f;color:#fff; transition: ease all 0.2s}
+.left-list .profImage .img{margin: 0 auto}
+
+/********* Main-chat ********/
+
+.main-chat-wrap{background: #fff; padding: 20px}
+.chat-holder{width:100%; height: 400px; overflow-y: scroll;}
+.chat-holder ul{list-style-type: none; padding: 0; margin: 0}
+.chat-holder ul li{display: flex; flex-wrap:nowrap; margin-bottom: 10px; padding: 5px}
+.chat-holder ul li .image-area{margin-right: 10px}
+.chat-holder ul li .image-area .round-image-holder{width:70px; height: 70px; border-radius:100%; overflow: hidden; background-size: cover !important}
+.chat-holder ul li .text-area h5{padding: 15px; border-radius:10px; font-size:16px; line-height: 20px; margin: 0 0 5px;}
+.chat-holder ul li .text-area p{color:#8f8f8f;margin: 0; font-size:12px}
+.chat-holder ul li:nth-child(odd) .text-area h5{background: #f8e8e9;}
+.chat-holder ul li:nth-child(even) .text-area h5{background: #f7f7f7;}
+.chat-holder ul li:nth-child(odd) .text-area p{text-align:right}
+.chat-holder ul li:nth-child(even) .text-area p{text-align:left}
+.chat-holder ul li:nth-child(even){flex-direction:row-reverse}
+.chat-holder ul li:nth-child(even) .image-area{margin-right: 0px; margin-left: 10px}
+
+.message-writing-wrap{border-top:1px solid #e1e1e1; padding-top: 10px}
+.message-writing-wrap .form-control{border: 0; text-shadow:none; box-shadow:none; resize: none}
+.message-writing-wrap .btn{font-family: "Montserrat",sans-serif; padding: 8px 20px; font-weight:500; text-transform: uppercase; }
+.message-writing-wrap .attach-file{font-family: "Montserrat",sans-serif;font-weight:500; text-transform: uppercase; color:#bb1926; background: #fff; border:2px solid #bb1926; border-radius:40px; display: inline-block; position: relative; width:145px; height: 38px; cursor: pointer; margin-right: 10px}
+.message-writing-wrap .attach-file span{ position: absolute; left:50%; transform: translateX(-50%); top:8px; width:93px; cursor: pointer;}
+.message-writing-wrap .attach-file input[type='file']{opacity: 0; width:100%; height: 100%; position: absolute; cursor: pointer; z-index: 1}
+
+.inline-search{margin-bottom: 25px}
+.inline-search .form-control{border-radius:40px; background: #f7f7f7; box-shadow:none; text-shadow:none; border: 0; font-family: "Montserrat",sans-serif; text-transform: uppercase; font-size:13px; font-weight:500;letter-spacing: 1px}
+.inline-search .input-group-btn .btn{border-radius:40px; border-top-left-radius:0; border-bottom-left-radius:0; background-image:none; background:#f7f7f7;box-shadow:none; text-shadow:none; border-color:#f7f7f7; color:#999}
+
+ul.connectionlist{padding:0; margin: 0; list-style-type: none}
+ul.connectionlist li{display: flex; flex-wrap:nowrap}
+ul.connectionlist li .image-area{margin-right: 8px}
+ul.connectionlist li .image-area .round-image-holder{width:50px; height: 50px; border-radius:100%; overflow: hidden; background-size: cover !important}
+ul.connectionlist li .text-area {flex-grow:2}
+ul.connectionlist li .text-area h5{margin-bottom: 1px}
+ul.connectionlist li .text-area h5 span{float: right; color:#cc535c; font-size:11px;}
+ul.connectionlist li .text-area p{font-size:12px; color:#8f8f8f}
+
+
+/********* Notification ********/
+
+.notification-wrap{background: #fff; padding: 20px}
+.notification-wrap ul{padding:0; margin: 0; list-style-type: none}
+.notification-wrap ul li{display: flex; flex-wrap:nowrap; padding: 10px 5px; border-bottom:1px solid #eeeeee; margin-bottom: 5px}
+.notification-wrap ul li:last-child{border-bottom:0; margin-bottom: 0}
+.notification-wrap ul li .image-area{margin-right:10px}
+.notification-wrap ul li .image-area .noti-image{width:50px; height: 50px; border-radius:100%; overflow: hidden; background-size: cover !important}
+.notification-wrap ul li h4{margin-top: 0; margin-bottom: 5px}
+.notification-wrap ul li .time{font-size:12px; color:#8f8f8f; margin: 0}
+.notification-wrap ul li .desc{font-size:14px; line-height: 18px; margin-bottom: 5px}
+.see-all{text-align: right; margin: 0 !important; width:100%}
+.see-all a{font-weight:400!important; font-size:14px}
+
+/********* Search Result ********/
+
+.result-count{font-weight:600}
+.result-count span{color:#414141; font-weight:normal}
+.search-list{list-style-type: none; padding: 0; margin: 0; margin-top: 20px}
+.search-list li{display:flex; flex-wrap:no-wrap; margin-bottom: 15px; min-height: 140px}
+.search-list li .left-side{background-size: cover !important; background-repeat:no-repeat !important; background-position:center center !important; width:35%; position: relative;}
+.search-list li .left-side .image-title{width:100%; position: absolute; top:50%; transform: translateY(-50%); text-align: center; color:#fff; font-size:13px}
+.search-list li .right-side{padding: 10px;flex-grow:2; background: #fff; position: relative; width:65%;}
+.search-list li .right-side .title{position: absolute; right:10px; bottom: 5px; color:#e1e1e1}
+.search-list li .right-side h4{margin-top: 0; letter-spacing: 1px}
+.search-list li .right-side small.text{display: block; min-height:34px}
+.search-list li .right-side a.more{margin-top: 10px; text-transform: uppercase; color:#d23545; font-family: "Montserrat",sans-serif; font-weight:500; display: inline-block; letter-spacing: 1px}
+
+.filter-reslt{margin: 0; list-style-type: none; padding-left: 15px}
+.filter-reslt li{display: block; padding: 10px 0}
+.filter-reslt li a{color:#222; text-transform: uppercase; font-family: "Montserrat",sans-serif; font-weight:600;}
+.filter-reslt li a span{color:#666;}
+
+.share-story{text-align: center; }
+.share-story h1{color:#be1620;padding-bottom: 0; margin-bottom: 20px}
+.share-story h1:after{content: none;}
+
+/********* Contact ********/
+
+.contact-section{display: flex; width:100%; padding-bottom: 0; padding-top:150px}
+.contact-left{width:50%}
+.contact-right{background: #fff; width:50%; padding: 100px 50px}
+.contact-right h4{margin-bottom: 30px; line-height: 28px}
+.contact-dtls{list-style-type: none; margin-bottom: 40px;}
+.contact-dtls li{display:flex; flex-wrap:nowrap; align-items:center; margin-bottom: 20px; font-size:24px}
+.contact-dtls li .icon{margin-right: 15px}
+
 @media screen and (max-width:991px){
     .col-log-in{
         margin-bottom: 15px;

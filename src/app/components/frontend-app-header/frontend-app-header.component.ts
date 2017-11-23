@@ -11,7 +11,8 @@ export class FrontendAppHeader {
   HeaderNavCls: string ='';
   lastScrollTop: number = 200;
   public userloggedIn: string = '';
-  public currentUserDet: Object = {};
+  public currentUserDet: Object = { };
+  public userNotiCnt: number = 0;
   constructor(
     private el: ElementRef, 
     lc: NgZone,
@@ -72,7 +73,26 @@ export class FrontendAppHeader {
       }
     );
 
-    
+    if(this.userloggedIn=='1'){
+        this.userNotiCountList();
+    }
+  }
+
+  public userNotiCountList(){
+    let loginUserId=localStorage.getItem("loginUserId");
+    if(loginUserId!=''){
+      const dataUserDet = {
+        "user_id": parseInt(loginUserId)
+      };
+      this._service.getUserNotiData(dataUserDet).subscribe(data=>{
+        //console.log(data);
+          if (data.Ack=="1") {
+            this.userNotiCnt = data.Notificationcount; 
+          }
+        },error => {
+          console.log('Something went wrong!');
+        });
+    }
   }
 
   public userLogout(){

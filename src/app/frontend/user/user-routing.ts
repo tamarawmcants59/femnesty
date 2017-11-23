@@ -10,6 +10,7 @@ import { ChatListComponent } from './chat-list/chat-list.component';
 import { ProfileComponent } from "./profile/profile.component";
 import { ShareyourstoryComponent } from "./shareyourstory/shareyourstory.component";
 import { MentorComponent } from "./mentor/mentor.component";
+import { NotificationComponent } from "./notification/notification.component";
 const routes: Routes = [
   {
     path: '',
@@ -92,6 +93,14 @@ const routes: Routes = [
     component: ChatComponent,
     data: {
       title: 'Chat'
+    }
+  },
+  {
+    path: 'notification',
+    canActivate: [AuthGuard],
+    component: NotificationComponent,
+    data: {
+      title: 'Notification List'
     }
   },
   {
