@@ -39,4 +39,8 @@ export class FrontendService {
   userContactDataSend(form_data){
     return this.apiService.post(`/users/appusercontactus`, form_data).map(data => data);
   }
+  
+  getUserNotiData(form_data){
+    return this.apiService.post(`/users/appallviewnotifibycount`,form_data ).map(data => data);
+  }
 }
