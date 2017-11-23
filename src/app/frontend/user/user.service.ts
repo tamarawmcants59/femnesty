@@ -278,4 +278,17 @@ export class UserService {
     ).map(data => data);
   }
   
+  getUserImgListById(form_data) {
+    return this.apiService.post(
+      `/users/appuserallimagesbyid`,
+      form_data
+    ).map(data => data);
+  }
+  
+  getUseGroupListById(form_data) {
+    return this.apiService.post(
+      `/users/appgrouplistbyuserid`,
+      form_data
+    ).map(data => data);
+  }
 }

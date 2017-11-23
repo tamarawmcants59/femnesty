@@ -44,8 +44,7 @@ export class ShareyourstoryComponent implements OnInit {
         //Validators.required,
         //Validators.minLength(3)
       ]]
-    });
-   
+    }); 
   }
      
 

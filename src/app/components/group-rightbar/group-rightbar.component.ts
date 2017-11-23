@@ -96,7 +96,7 @@ export class GroupRightbarComponent implements OnInit {
           //console.log(data);
           if (data.Ack == "1") {
               this.groupMemberList = data.groupMembers;
-              console.log(this.groupMemberList);
+              //console.log(this.groupMemberList);
           } 
       },error => {
 
