@@ -2913,9 +2913,6 @@ footer {
 
 /*saikat bala -(start)*/
 
-
-/*saikat bala -(start)*/
-
 .msg-item-worp {
     left: auto;
     right: 0;
@@ -2979,138 +2976,6 @@ footer {
     color: #000;
     font-size: 12px;
 }
-
-
-/* ---------- LIVE-CHAT ---------- */
-
-.live-chat {
-    bottom: 0;
-    font-size: 12px;
-    right: 10px;
-    position: fixed;
-    width: 290px;
-}
-
-.live-chat .chat-header {
-    background: #bb1926;
-    border-radius: 5px 5px 0 0;
-    color: #fff;
-    cursor: pointer;
-    padding: 0 15px;
-}
-
-.live-chat h4:before {
-    background: #1a8a34;
-    border-radius: 50%;
-    content: "";
-    display: inline-block;
-    height: 8px;
-    margin: 0 8px 0 0;
-    width: 8px;
-}
-
-.live-chat h4 {
-    font-size: 12px;
-}
-
-.live-chat h5 {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
-.live-chat form {
-    padding: 10px;
-}
-
-.live-chat input[type="text"] {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    padding: 8px;
-    outline: none;
-    width: 100%;
-}
-
-.chat-message-counter {
-    background: #e62727;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    display: none;
-    font-size: 12px;
-    height: 20px;
-    left: 10px;
-    line-height: 20px;
-    margin: -15px 0 0 -15px;
-    position: absolute;
-    text-align: center;
-    top: 10px;
-    width: 20px;
-}
-
-.chat-close {
-    background: #fff;
-    border-radius: 50%;
-    color: #BB1926;
-    display: block;
-    float: right;
-    font-size: 13px;
-    height: 20px;
-    line-height: 20px;
-    margin: 4px 0 0;
-    text-align: center;
-    width: 20px;
-}
-
-.chat {
-    background: #fff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-}
-
-.chat-history {
-    height: 252px;
-    padding: 8px 24px;
-    overflow-y: scroll;
-}
-
-.chat-message {
-    border-bottom: 1px solid #ddd;
-    margin: 15px 0;
-}
-
-.chat-message img {
-    border-radius: 50%;
-    float: left;
-}
-
-.chat-message.right-section img {
-    float: right
-}
-
-.chat-message-content {
-    margin-left: 56px;
-}
-
-.chat-message.right-section .chat-message-content {
-    margin-left: 0;
-    margin-right: 56px;
-}
-
-.chat-time {
-    display: block;
-    float: none;
-    font-size: 10px;
-    padding-bottom: 10px;
-}
-
-.chat-feedback {
-    font-style: italic;
-    margin: 0 0 0 80px;
-}
-
-
-/*saikat bala -(end)*/
 
 
 /*saikat bala -(end)*/
@@ -3251,20 +3116,6 @@ footer {
     border-radius: 100%;
     overflow: hidden;
     background-size: cover !important
-}
-
-.chat-holder ul li .text-area h5 {
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 16px;
-    line-height: 20px;
-    margin: 0 0 5px;
-}
-
-.chat-holder ul li .text-area p {
-    color: #8f8f8f;
-    margin: 0;
-    font-size: 12px
 }
 
 .chat-holder ul li.odd .text-area h5 {
@@ -3517,17 +3368,7 @@ ul.connectionlist li .text-area p {
     position: relative;
 }
 
-<<<<<<< HEAD=======
-/*.profPhoto i{ position: absolute; bottom: 10px; left: 50%; right: 0px;
-}*/
-
-
-/*saikat bala -(start)*/
-
-
-/*saikat bala -(start)*/
-
->>>>>>>0c3465d1d01e951c19e77f4129527d44a0c11dfd .search-list li .left-side .image-title {
+.search-list li .left-side .image-title {
     width: 100%;
     position: absolute;
     top: 50%;
@@ -3598,146 +3439,6 @@ ul.connectionlist li .text-area p {
     text-align: center;
 }
 
-
-/* ---------- LIVE-CHAT ---------- */
-
-.live-chat {
-    bottom: 0;
-    font-size: 12px;
-    right: 10px;
-    position: fixed;
-    width: 290px;
-}
-
-.live-chat .chat-header {
-    background: #bb1926;
-    border-radius: 5px 5px 0 0;
-    color: #fff;
-    cursor: pointer;
-    padding: 0 15px;
-}
-
-.live-chat h4:before {
-    background: #1a8a34;
-    border-radius: 50%;
-    content: "";
-    display: inline-block;
-    height: 8px;
-    margin: 0 8px 0 0;
-    width: 8px;
-}
-
-.live-chat h4 {
-    font-size: 12px;
-}
-
-.live-chat h5 {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
-.live-chat form {
-    padding: 10px;
-}
-
-.live-chat input[type="text"] {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    padding: 8px;
-    outline: none;
-    width: 100%;
-}
-
-.chat-message-counter {
-    background: #e62727;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    display: none;
-    font-size: 12px;
-    height: 20px;
-    left: 10px;
-    line-height: 20px;
-    margin: -15px 0 0 -15px;
-    position: absolute;
-    text-align: center;
-    top: 10px;
-    width: 20px;
-}
-
-.chat-close {
-    background: #fff;
-    border-radius: 50%;
-    color: #BB1926;
-    display: block;
-    float: right;
-    font-size: 13px;
-    height: 20px;
-    line-height: 24px;
-    margin: 4px 0 0;
-    text-align: center;
-    width: 20px;
-}
-
-.chat {
-    background: #fff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-}
-
-.chat-history {
-    height: 252px;
-    padding: 8px 24px;
-    overflow-y: scroll;
-}
-
-.chat-message {
-    border-bottom: 1px solid #ddd;
-    margin: 15px 0;
-}
-
-.chat-message img {
-    border-radius: 50%;
-    float: left;
-}
-
-.chat-message.right-section img {
-    float: right
-}
-
-.chat-message-content {
-    margin-left: 56px;
-}
-
-.chat-message.right-section .chat-message-content {
-    margin-left: 0;
-    margin-right: 56px;
-}
-
-.chat-time {
-    display: block;
-    float: none;
-    font-size: 10px;
-    padding-bottom: 10px;
-}
-
-.chat-feedback {
-    font-style: italic;
-    margin: 0 0 0 80px;
-}
-
-
-/*saikat bala -(end)*/
-
-
-/*saikat bala -(end)*/
-
-
-/*=============================================
-				Added by Soumen
-===============================================*/
-
 .share-story h1 {
     color: #be1620;
     padding-bottom: 0;
@@ -3748,194 +3449,36 @@ ul.connectionlist li .text-area p {
     content: none;
 }
 
-background: #fff;
-padding: 20px
-}
-.chat-holder {
-    width: 100%;
-    height: 400px;
-    overflow-y: scroll;
-}
-.chat-holder ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0
-}
-.chat-holder ul li {
+
+/********* Contact ********/
+
+.contact-section {
     display: flex;
-    flex-wrap: nowrap;
-    margin-bottom: 10px;
-    padding: 5px
-}
-.chat-holder ul li .image-area {
-    margin-right: 10px
-}
-.chat-holder ul li .image-area .round-image-holder {
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
-    overflow: hidden;
-    background-size: cover !important
-}
-.chat-holder ul li .text-area h5 {
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 16px;
-    line-height: 20px;
-    margin: 0 0 5px;
-}
-.chat-holder ul li .text-area p {
-    color: #8f8f8f;
-    margin: 0;
-    font-size: 12px
-}
-.chat-holder ul li.odd .text-area h5 {
-    background: #f8e8e9;
-}
-.chat-holder ul li.even .text-area h5 {
-    background: #f7f7f7;
-}
-.chat-holder ul li.odd .text-area p {
-    text-align: right
-}
-.chat-holder ul li.even .text-area p {
-    text-align: left
-}
-.chat-holder ul li.even {
-    flex-direction: row-reverse
-}
-.chat-holder ul li.even .image-area {
-    margin-right: 0px;
-    margin-left: 10px
-}
-.message-writing-wrap {
-    border-top: 1px solid #e1e1e1;
-    padding-top: 10px
-}
-.message-writing-wrap .form-control {
-    border: 0;
-    text-shadow: none;
-    box-shadow: none;
-    resize: none
-}
-.message-writing-wrap .btn {
-    font-family: "Montserrat", sans-serif;
-    padding: 8px 20px;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-.message-writing-wrap .attach-file {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: #bb1926;
-    background: #fff;
-    border: 2px solid #bb1926;
-    border-radius: 40px;
-    display: inline-block;
-    position: relative;
-    width: 145px;
-    height: 38px;
-    cursor: pointer;
-    margin-right: 10px
-}
-.message-writing-wrap .attach-file span {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 8px;
-    width: 93px;
-    cursor: pointer;
-}
-.message-writing-wrap .attach-file input[type='file'] {
-    opacity: 0;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    cursor: pointer;
-    z-index: 1
+    padding-bottom: 0;
+    padding-top: 150px
 }
-.inline-search {
-    margin-bottom: 25px
-}
-.inline-search .form-control {
-    border-radius: 40px;
-    background: #f7f7f7;
-    box-shadow: none;
-    text-shadow: none;
-    border: 0;
-    font-family: "Montserrat", sans-serif;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1px
-}
-.inline-search .input-group-btn .btn {
-    border-radius: 40px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    background-image: none;
-    background: #f7f7f7;
-    box-shadow: none;
-    text-shadow: none;
-    border-color: #f7f7f7;
-    color: #999
-}
-ul.connectionlist {
-    padding: 0;
-    margin: 0;
-    list-style-type: none
-}
-ul.connectionlist li {
-    display: flex;
-    flex-wrap: nowrap
-}
-ul.connectionlist li .image-area {
-    margin-right: 8px
-}
-ul.connectionlist li .image-area .round-image-holder {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    overflow: hidden;
-    background-size: cover !important
-}
-ul.connectionlist li .text-area {
-    flex-grow: 2
-}
-ul.connectionlist li .text-area h5 {
-    margin-bottom: 1px
-}
-ul.connectionlist li .text-area h5 span {
-    float: right;
-    color: #cc535c;
-    font-size: 11px;
-}
-ul.connectionlist li .text-area p {
-    font-size: 12px;
-    color: #8f8f8f
-}
-display: flex;
-width: 100%;
-padding-bottom: 0;
-padding-top: 150px
-}
+
 .contact-left {
     width: 50%
 }
+
 .contact-right {
     background: #fff;
     width: 50%;
     padding: 100px 50px
 }
+
 .contact-right h4 {
     margin-bottom: 30px;
     line-height: 28px
 }
+
 .contact-dtls {
     list-style-type: none;
     margin-bottom: 40px;
 }
+
 .contact-dtls li {
     display: flex;
     flex-wrap: nowrap;
@@ -3943,9 +3486,11 @@ padding-top: 150px
     margin-bottom: 20px;
     font-size: 24px
 }
+
 .contact-dtls li .icon {
     margin-right: 15px
 }
+
 @media screen and (max-width:991px) {
     .col-log-in {
         margin-bottom: 15px;
@@ -3954,6 +3499,7 @@ padding-top: 150px
         justify-content: flex-start;
     }
 }
+
 @media screen and (max-width:767px) {
     .log-row {
         display: block;
