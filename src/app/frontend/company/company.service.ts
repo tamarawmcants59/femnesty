@@ -159,4 +159,8 @@ export class CompanyService {
   getSubadminListById(form_data) {
     return this.apiService.post(`/users/appadminsubListBycompanyId`,form_data ).map(data => data);
   }
+  
+  deleteSubAdmin(form_data) {
+    return this.apiService.post(`/users/appdeleteaccount`,form_data ).map(data => data);
+  }
 }

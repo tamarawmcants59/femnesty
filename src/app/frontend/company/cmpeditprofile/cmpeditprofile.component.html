@@ -287,15 +287,25 @@
                                                         </ul>
                                                     </div>
                                                     <div *ngIf="loginUserDet.user_type == 'CA'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='list_subadmin'}">
-                                                        <ul class="ulList">
                                                             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                 <strong>Success: </strong> {{successMsg}}
                                                             </div>
                                                             <h3>List Subadmin</h3>
-                                                            <div class="menu">
-                                                                
+                                                            <div class="menu" *ngIf="cmpSubadminList?.length > 0">
+                                                                <ul class="ulList">
+                                                                <li class="connectionList" *ngFor="let friendData of cmpSubadminList">
+                                                                    <div class="connectionImage">
+                                                                            <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="connectionText">
+                                                                        <h2>{{friendData.name}}</h2>
+                                                                        <button type="button" class="btn btn-primary" (click)="deleteAdmin(friendData.id)">Delete</button>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
                                                             </div>
-                                                        </ul>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
