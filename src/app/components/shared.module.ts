@@ -3,6 +3,7 @@ import { RouterModule } from "@angular/router";
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialService } from '../frontend/socialhome/social.service';
 
 import { UserSidebar } from "./user-sidebar/user-sidebar.component";
@@ -15,7 +16,6 @@ import { UserPrfrsidebarComponent } from './user-prfrsidebar/user-prfrsidebar.co
 import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
 import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
 import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
-
 @NgModule({
     declarations: [
         UserSidebar,
@@ -28,11 +28,12 @@ import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.co
         CompanyRightbarComponent
     ],
     imports: [
-        CommonModule, 
+        CommonModule,
         RouterModule,
-        FormsModule, 
+        FormsModule,
         ReactiveFormsModule,
-        ApplicationPipes
+        ApplicationPipes,
+        NgbModule
     ],
     exports: [
         UserSidebar,
