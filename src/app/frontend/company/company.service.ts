@@ -151,5 +151,12 @@ export class CompanyService {
       form_data
     ).map(data => data);
   }
-
+  
+  createCmpSubadmin(form_data) {
+    return this.apiService.post(`/users/appaddcomsubadmin`,form_data ).map(data => data);
+  }
+  
+  getSubadminListById(form_data) {
+    return this.apiService.post(`/users/appadminsubListBycompanyId`,form_data ).map(data => data);
+  }
 }
