@@ -28,7 +28,7 @@ export class UserPrfrsidebarComponent implements OnInit {
         "id": this.loginUserId
       };
       this.dataService.getUserImgListById(dataUserDet).subscribe(data => {
-          console.log(data);
+          //console.log(data);
           if (data.Ack == "1") {
               this.userImgList = data.UserAllImageById;
               //console.log(this.groupMemberList);

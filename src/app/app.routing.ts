@@ -70,6 +70,19 @@ export const routes: Routes = [
     ]
   },
   {
+    path:'mentorship',
+    component: FrontendLayout,
+    data:{
+      title: 'Mentorship Page'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './frontend/mentorship/mentorship.module#MentorshipModule'
+      }
+    ]
+  },
+  {
     path:'enrichment',
     component: FrontendLayout,
     data:{

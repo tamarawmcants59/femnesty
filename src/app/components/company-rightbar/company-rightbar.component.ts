@@ -16,7 +16,7 @@ export class CompanyRightbarComponent implements OnInit {
     address: string;
     city: string;
     website: string;
-    phone: string;
+    mobile_number: string;
    
   };
 

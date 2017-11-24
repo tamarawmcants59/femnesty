@@ -31,7 +31,7 @@
                     <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }}</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
-                    <li><a href="#">Mentorship</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                     <li><a href="#">Contribute</a></li>
                     <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
                 </ul>
@@ -238,7 +238,7 @@
                               </div>
                             </div>
                           </li>
-                        <li><a href="#"><i class="icon ion-android-globe"></i> <span class="badge" style="background-color:red">5</span></a></li>
+                        <li><a [routerLink]="['/user/notification']"><i class="icon ion-android-globe"></i> <span *ngIf="userNotiCnt > 0" class="badge" style="background-color:red">{{userNotiCnt}}</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav">
                         <li class="show-on-hover">
@@ -284,8 +284,8 @@
                     <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }} </a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
-                    <li><a href="#">Mentorship</a></li>
-                    <li><a href="#">Contribute</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                    <!--<li><a href="#">Contribute</a></li>-->
                     <li *ngIf="userloggedIn == 1"><a routerLinkActive="active" href="Javascript: void(0)" (click)="userLogout()" style="padding-top: 0px;"><button>Logout</button></a></li>
                 </ul>
             </div>

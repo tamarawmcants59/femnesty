@@ -39,18 +39,6 @@ export class UserService {
     });
   }
 
-  getAllMentorshipList() {
-    return this.apiService.get(`/enrichment/appallmentorlist`)
-      .map(data => data);
-  }
-  
-  getMentorshipDetailsById(form_data) {
-    return this.apiService.post(
-      `/enrichment/appmentorshipdetailsbyid`,
-      form_data
-    ).map(data => data);
-  }
-  
   userCheckEmail(form_data) {
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
     return this.apiService.post(
@@ -302,5 +290,25 @@ export class UserService {
       `/users/appgrouplistbyuserid`,
       form_data
     ).map(data => data);
+  }
+  
+  getAllMentorshipList() {
+    return this.apiService.get(`/enrichment/appallmentorlist`)
+      .map(data => data);
+  }
+  
+  getMentorshipDetailsById(form_data) {
+    return this.apiService.post(
+      `/enrichment/appmentorshipdetailsbyid`,
+      form_data
+    ).map(data => data);
+  }
+
+  getUserAllNotiData(form_data){
+    return this.apiService.post(`/users/appnotificationall`,form_data ).map(data => data);
+  }
+  
+  editNotificationById(form_data){
+    return this.apiService.post(`/users/appallupdateNotifiisreaded`,form_data ).map(data => data);
   }
 }
