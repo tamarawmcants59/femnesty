@@ -43,4 +43,8 @@ export class FrontendService {
   getUserNotiData(form_data){
     return this.apiService.post(`/users/appallviewnotifibycount`,form_data ).map(data => data);
   }
+  
+  getUserSearchdata(form_data){
+    return this.apiService.post(`/enrichment/appsearchbykeyword`,form_data ).map(data => data);
+  }
 }
