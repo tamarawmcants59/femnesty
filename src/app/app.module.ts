@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import { TruncatePipe ,SafePipe} from './exponential-strength.pipe';
@@ -60,7 +61,9 @@ import { AppRoutingModule } from './app.routing';
     CommonModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features

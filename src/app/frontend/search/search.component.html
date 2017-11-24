@@ -1,0 +1,74 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+              <div *ngIf="isloginUser == 1">
+                  <user-sidebar></user-sidebar>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="middlePart">
+                    <div class="main-chat-wrap">
+                      <h3 class="result-count">Showing Results for: <span>”{{searchKeyword}}”</span></h3>
+                    </div>
+                </div>
+                <ul class="search-list">
+                  <div *ngIf="searchData.userresult?.length > 0">
+                      <li *ngFor="let friendData of searchData.userresult">
+                          
+                            <div class="left-side" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                          <div class="right-side">
+                            <h4>{{friendData.bio}}</h4>
+                            <small class="text">By {{friendData.name}}</small>
+                            <a [routerLink]="['/user/profile',friendData.display_name]" class="more">View Profile</a>
+                          </div>
+                        </li>
+                        <li *ngFor="let friendData of searchData.articleresult">
+                            
+                              <div class="left-side" [ngStyle]="{'background-image':'url('+friendData.image+')'}"></div>
+                            <div class="right-side">
+                              <h4>{{friendData.title}}</h4>
+                              <small class="text">By {{friendData.author_name}}</small>
+                              <a [routerLink]="['/articles/details',friendData.slug]" class="more">View Article</a>
+                            </div>
+                          </li>
+                          <li *ngFor="let friendData of searchData.companyresult">
+                              
+                                <div class="left-side" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                              <div class="right-side">
+                                <h4>{{friendData.company_name}}</h4>
+                                <a [routerLink]="['/company/profile',friendData.company_slug]" class="more">View Company</a>
+                              </div>
+                            </li>
+                          
+                  </div>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <div class="rightPart">
+                    <div class="innerRightPart">
+                      <h2>FILTER RESULT</h2>
+                      <ul class="filter-reslt">
+                        <li><a href="">USERS <span>(12)</span></a></li>
+                        <li><a href="">COMPANYS <span>(12)</span></a></li>
+                        <li><a href="">ARTICLES <span>(12)</span></a></li>
+                        <li><a href="">HUBS  <span>(12)</span></a></li>
+                        <li><a href="">EVENTS <span>(12)</span></a></li>
+                        <li><a href="">OTHER <span>(12)</span></a></li>
+                      </ul>
+                    </div>
+                    <div class="innerRightPart share-story">
+                      <h1>Share your Story</h1>
+                      <p>Femnesty is always looking for strong, positive contributors to join our team.</p>
+                      <p><a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">Share</a></p>
+                    </div>
+                    <div class="innerRightPart share-story">
+                      <h1>Start a Hub</h1>
+                      <p>Make a difference where you are, start a Hub today.</p>
+                      <p><a href="" class="btn btn-primary">Start</a></p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </section>

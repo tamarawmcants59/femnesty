@@ -163,7 +163,7 @@ export class CmpEditprofileComponent implements OnInit {
     this.getEmployeeList();
     this.getFollowerList();
     this.getFollowerList();
-    console.log(this.loginUserDet);
+    //console.log(this.loginUserDet);
   }
 
   public getFollowerList() {

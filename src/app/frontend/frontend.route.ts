@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
-//import { EnrichmentComponent } from "./enrichment/enrichment.component";
+import { SearchComponent } from "./search/search.component";
 const frontendRoute: Routes = [
     {
         path: '',
@@ -16,21 +16,14 @@ const frontendRoute: Routes = [
             component: HomeComponent
         }
         ]
-    }/*,
+    },
     {
-        path:'enrichment',
-        data:{
-            title:"Enrichment Frontend"
-        },
-        children:[{
-            path:'',
-            data:{
-                title: "Enrichment Page"
-            },
-            component:EnrichmentComponent
-        }
-        ]
-    }*/
+      path: 'search/:keyword',
+      component: SearchComponent,
+      data: {
+        title: 'Search'
+      }
+    }
 ];
 @NgModule({
     imports: [RouterModule.forChild(frontendRoute)],

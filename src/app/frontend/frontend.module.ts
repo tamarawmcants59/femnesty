@@ -1,32 +1,28 @@
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import { ApplicationPipes } from "../application-pipe.module";
 import { FrontendRoute  } from "./frontend.route";
 import { HomeComponent } from "./home/home.component";
 import { FrontendComponent } from "./frontend.component";
-//import { FrontendService } from "../components/frontend-app-header/frontend.service";
-//import { TruncatePipe, SafePipe } from '../exponential-strength.pipe';
-//import { EnrichmentComponent } from "./enrichment/enrichment.component";
-//import { ArticleComponent } from "./article/article.component";
-//import { ArticleModule } from "./article/article.module";
-//import { EnrichmentModule } from "./enrichment/enrichment.module";
+import { SearchComponent } from './search/search.component';
+import { SharedModule } from "../components/shared.module";
 @NgModule({
   imports: [
     FrontendRoute,
-    //EnrichmentModule,
-    //ArticleModule
+    SharedModule,
+    CommonModule,
+    ApplicationPipes
   ],
   //exports:[TruncatePipe, SafePipe],
   declarations: [
     HomeComponent, 
     FrontendComponent, 
+    SearchComponent, 
     //TruncatePipe, 
     //SafePipe
   ],providers:[]
 })
 
 export class FrontendModule {
-  constructor(){
-    //alert();
-  }
-
+  
 }

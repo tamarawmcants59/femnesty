@@ -1,6 +1,7 @@
 import { ChatListnerService } from './../../service/chat.listner.service';
 import { Component, ElementRef } from '@angular/core';
 import { NgZone } from "@angular/core";
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { FrontendService } from "./frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -18,12 +19,16 @@ export class FrontendAppHeader {
   public userloggedIn: string = '';
   public currentUserDet: Object = {};
   public userNotiCnt: number = 0;
+  public searchResultStr:string ='';
+  public form:FormGroup;
+  
   constructor(
     private el: ElementRef,
     lc: NgZone,
     private route: ActivatedRoute,
     private router: Router,
     private _service: FrontendService,
+    private builder:FormBuilder,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore
   ) {
@@ -45,7 +50,12 @@ export class FrontendAppHeader {
     this.userloggedIn = localStorage.getItem("isLoggedIn");
     let getUserDet = localStorage.getItem("currentUser");
     this.currentUserDet = JSON.parse(getUserDet);
-    //console.log(this.currentUserDet);
+
+    this.form = builder.group({
+      skeyword: ['', [
+        
+      ]]
+    });
   }
 
   //wait for the component to render completely
@@ -132,6 +142,16 @@ export class FrontendAppHeader {
         console.log('Something went wrong!');
       });
     }
+  }
+    
+  public searchResult(values) {
+    //console.log(values);
+    this.searchResultStr = values; 
+  }
+  
+  public searchDataResult() {
+    //console.log(values);
+    this.router.navigateByUrl('/home/search/'+this.searchResultStr);
   }
 
   public userLogout() {
