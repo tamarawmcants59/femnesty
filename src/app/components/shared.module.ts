@@ -3,6 +3,7 @@ import { RouterModule } from "@angular/router";
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialService } from '../frontend/socialhome/social.service';
 
 import { UserSidebar } from "./user-sidebar/user-sidebar.component";
@@ -30,11 +31,12 @@ import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
         ImageCropperComponent
     ],
     imports: [
-        CommonModule, 
+        CommonModule,
         RouterModule,
-        FormsModule, 
+        FormsModule,
         ReactiveFormsModule,
-        ApplicationPipes
+        ApplicationPipes,
+        NgbModule
     ],
     exports: [
         UserSidebar,

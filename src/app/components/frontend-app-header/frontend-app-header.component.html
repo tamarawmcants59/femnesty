@@ -80,166 +80,28 @@
 
                     </ul>
                     <ul class="nav navbar-nav navIcon">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="icon ion-chatboxes"></i>
+                        <li ngbDropdown class="dropdown">
+                            <a href="javascript:void(0)" ngbDropdownToggle class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon ion-chatboxes"></i>
+                                <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                             </a>
-                            <div class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
-                              <div class="innr">
-                                <a class="msg-item unread" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item unread" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item unread" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item unread" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item unread" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a class="msg-item unread" href="#">
-                                  <div class="img" style="background-image: url('images/img-1.jpg')"></div>
-                                  <div class="txt">
-                                    <div class="upr">
-                                      <div class="name">Saikat Bala</div>
-                                      <div class="time">MON</div>
-                                    </div>
-                                    <div class="msg">this is a massage</div>
-                                  </div>
-                                </a>
-                                <a href="" class="viewall">View all</a>
-                              </div>
+                            <div ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
+                                <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
+                                    <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread" href="#">
+                                        <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />
+                                        <div *ngIf="chat.userDetails" class="txt">
+                                            <div class="upr">
+                                                <div class="name">{{chat.userDetails.first_name}} {{chat.userDetails.last_name}}</div>
+                                                <div class="time">{{chat.created | date}}</div>
+                                            </div>
+                                            <div class="msg">{{chat.message.text}}</div>
+                                        </div>
+                                    </a>
+
+                                    <!-- <a href="" class="viewall">View all</a> -->
+                                </div>
                             </div>
-                          </li>
+                        </li>
                         <li><a [routerLink]="['/user/notification']"><i class="icon ion-android-globe"></i> <span *ngIf="userNotiCnt > 0" class="badge" style="background-color:red">{{userNotiCnt}}</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav">

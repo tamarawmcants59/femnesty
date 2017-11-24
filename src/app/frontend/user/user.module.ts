@@ -49,6 +49,6 @@ import { NotificationComponent } from './notification/notification.component';
     //ImageCropperComponent
   ],
   providers: [UserService],
-  exports:[CommonModule]
+  exports: [CommonModule]
 })
 export class UserModule { }
