@@ -39,6 +39,18 @@ export class UserService {
     });
   }
 
+  getAllMentorshipList() {
+    return this.apiService.get(`/enrichment/appallmentorlist`)
+      .map(data => data);
+  }
+  
+  getMentorshipDetailsById(form_data) {
+    return this.apiService.post(
+      `/enrichment/appmentorshipdetailsbyid`,
+      form_data
+    ).map(data => data);
+  }
+  
   userCheckEmail(form_data) {
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
     return this.apiService.post(
