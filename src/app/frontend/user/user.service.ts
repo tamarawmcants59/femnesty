@@ -38,7 +38,7 @@ export class UserService {
       return data;
     });
   }
-
+  
   userCheckEmail(form_data) {
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
     return this.apiService.post(
