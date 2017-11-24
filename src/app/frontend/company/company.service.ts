@@ -61,6 +61,13 @@ export class CompanyService {
     ).map(data => data);
   }
 
+  getCompanyImageList(form_data) {
+    return this.apiService.post(
+      `users/appallgroupimagebygrpid`,
+      form_data
+    ).map(data => data);
+  }
+
   getCompanyEmployeetList(form_data) {
     return this.apiService.post(
       `/users/appemployeelistbycompanyid`,

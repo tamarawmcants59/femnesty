@@ -27,8 +27,7 @@ import { SharedModule } from "../../../components/shared.module";
     })*/
   ],
   declarations: [
-    EditprofileComponent,
-    ImageCropperComponent
+    EditprofileComponent
   ]
 })
 export class EditprofileModule { }
