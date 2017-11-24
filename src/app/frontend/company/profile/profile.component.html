@@ -63,7 +63,7 @@
                           </div>
                           <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
                               <div class="aboutPart">
-                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h3>
+                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.company_name}}</h3>
                                   <div class="abouts">
                                       <div class="row">
                                           <div class="col-md-12">
@@ -199,8 +199,8 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3">
-                <app-company-rightbar [profileData]="otherProfileDet"></app-company-rightbar> 
+          <div class="col-md-3">              
+                <app-company-rightbar [profileData]="otherProfileDet" [companyID]="otherProfileDet.id"></app-company-rightbar> 
           </div>
       </div>
   </div>

@@ -12,58 +12,26 @@
       <b>Website <span>{{profileData.website}}</span></b>
       <b>Phone <span>{{profileData.mobile_number}}</span></b>
       <b>Email <span>{{profileData.email}}</span></b>
-      <b>Opening Hour <span>8am - 6pm</span></b>
+      <b>Opening Hour <span>{{profileData.opening_hour}}</span></b>
     </div>
     <div class="innerRightPart right-map-details right-followers">
       <h5>Followers</h5>
-      <ul>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-  <li><a href=""><img src="assets/images/team-2.jpg" alt="" /></a></li>
-</ul>
+      <ul *ngIf="userFollowerList?.length > 0">         
+        <li *ngFor="let followData of userFollowerList">               
+          <a [routerLink]="['/user/profile',followData.display_name]"><img src="{{followData.profile_image}}" alt="{{followData.first_name}} {{followData.last_name}}" /></a>
+        </li>
+       
+      </ul>
 <a href="#" class="viewAll text-center">View All</a>
     </div>
     <div class="innerRightPart right-map-details">
       <h5>Photos & Videos</h5>
-      <ul class="photoImage">
-        <li>
+      <ul class="photoImage" *ngIf="companyImageList?.length > 0">
+        <li *ngFor="let imageList of  companyImageList">
           <a href="#">
-            <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+            <div class="img" style="background-image: url(imageList.file_name)"></div>
           </a>
-        </li>
-        <li>
-          <a href="#">
-            <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
-          </a>
-        </li>
+        </li>       
 
       </ul>
       <a href="#" class="viewAll text-center">View All</a>

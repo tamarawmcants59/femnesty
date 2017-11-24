@@ -117,6 +117,10 @@ export class CmpEditprofileComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]],
+      opening_hour: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
       
       bio: ['', [
         //Validators.required,
