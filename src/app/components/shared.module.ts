@@ -15,6 +15,7 @@ import { UserPrfrsidebarComponent } from './user-prfrsidebar/user-prfrsidebar.co
 import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
 import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
 import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
+import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.co
         UserPrfrsidebarComponent,
         GroupLeftbarComponent,
         GroupRightbarComponent,
-        CompanyRightbarComponent
+        CompanyRightbarComponent,
+        ImageCropperComponent
     ],
     imports: [
         CommonModule, 
@@ -42,7 +44,8 @@ import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.co
         UserPrfrsidebarComponent,
         GroupLeftbarComponent,
         GroupRightbarComponent,
-        CompanyRightbarComponent
+        CompanyRightbarComponent,
+        ImageCropperComponent
     ],
     providers: [
         SocialService
