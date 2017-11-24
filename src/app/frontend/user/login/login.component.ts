@@ -49,14 +49,17 @@ export class LoginComponent implements OnInit {
       this.loginService.userLogin(values)
         .subscribe(data => {
           const details = data;
-          console.log(data);
           if (details.Ack === 1) {
             localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
             localStorage.setItem('isLoggedIn', '1');
             localStorage.setItem('loginUserId', details.UserDetails.id);
             localStorage.setItem('userName', details.UserDetails.first_name);
             localStorage.setItem('profile_image', details.UserDetails.image_url);
-            this.router.navigateByUrl(this.returnUrl);
+            if(details.UserDetails.user_type == 'CA' || details.UserDetails.user_type == 'CSA'){
+              this.router.navigateByUrl('/company/profile');
+            }else{
+              this.router.navigateByUrl(this.returnUrl);
+            }
             this.loading = false;
           } else {
             this.errorMsg = details.msg;
