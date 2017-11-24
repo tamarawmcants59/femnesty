@@ -20,16 +20,19 @@ export class CmpEditprofileComponent implements OnInit {
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
   public form: FormGroup;
+  public adminform: FormGroup;
+
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
   public loading = false;
-  public loginUserDet: Object = {};
+  public loginUserDet: object = { };
   public userPostList = [];
   public userFrndList = [];
   public userRequestList = [];
   public userEmployeeList = [];
   public userFollowerList = [];
+  public cmpId ='';
 
   prfImageData: any;
   coverImageData: any;
@@ -37,7 +40,8 @@ export class CmpEditprofileComponent implements OnInit {
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
   public groupPostDetData: object = { };
-  
+  public checkEmailExist:boolean = false;
+
   constructor(
     private builder: FormBuilder,
     private dataService: CompanyService,
@@ -124,17 +128,37 @@ export class CmpEditprofileComponent implements OnInit {
       ]]
 
     });
+
+    this.adminform = builder.group({
+      email: ['', [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(3)
+      ]],
+      txt_password: ['', [
+        Validators.required
+      ]],
+			name: ['', [
+        Validators.required
+      ]],
+			state: ['', [ ]],
+			city: ['', [ ]],
+			address: ['', [ ]]
+
+    });
+    
     //console.log(this.cropper);
   }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.groupPostDetData = {activitytype:'3', activityid:' '};
     this.getUserDetails();
     this.getUserPostDetails();
     this.getRequestList();
     this.getEmployeeList();
     this.getFollowerList();
+    this.getFollowerList();
+    console.log(this.loginUserDet);
   }
 
   public getFollowerList() {
@@ -210,10 +234,7 @@ export class CmpEditprofileComponent implements OnInit {
         );
     } else {
     }
-
   }
-
- 
 
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
@@ -227,6 +248,16 @@ export class CmpEditprofileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
+            if(details.UserDetails[0].user_type=='CA' || details.UserDetails[0].user_type=='CSA'){
+              if(details.UserDetails[0].user_type=='CA'){
+                this.cmpId = details.UserDetails[0].id;
+              }else if(details.UserDetails[0].user_type=='CSA'){
+                this.cmpId = details.UserDetails[0].company_uid;
+              }
+              this.groupPostDetData = {activitytype:'3', activityid:this.cmpId};
+            }else{
+              this.router.navigate(['/user/profile']);
+            }
           } else {
 
           }
@@ -424,10 +455,49 @@ export class CmpEditprofileComponent implements OnInit {
       });
   }
 
-  /*public onReturnData(data: any) {
-      // Do what you want to do
-      console.warn(JSON.parse(data));
-  }*/
+  public addSubadminForm() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const result = {},
+    userValue = this.adminform.value;
+    userValue.company_uid = loginUserId;
+    this.dataService.createCmpSubadmin(userValue).subscribe( data => {
+        this.loading = false;
+        this.successMsg = 'Admin added successfully';
+        //this.router.navigate(['/company/profile']);
+        this.adminform.reset();
+      },error => {
+        alert(error);
+      });
+  }
+
+  public checkEmail(values:Object):void {
+    if(values!=''){
+      let signupCheckEmail={
+        "email": values
+      };
+      this.dataService.userCheckEmail(signupCheckEmail)
+      .subscribe(data => {
+             let details=data;
+             //console.log(details);
+             if (details.Ack=="1") {
+                 this.checkEmailExist = false;
+                 return false;
+             }else{
+               //alert('Invalid login');
+               this.checkEmailExist = true;
+               return false;
+             }
+         },
+         error => {
+           
+         }
+       ); 
+    }else{
+
+    }
+  }
+
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;

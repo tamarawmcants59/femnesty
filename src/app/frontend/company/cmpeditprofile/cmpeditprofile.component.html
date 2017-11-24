@@ -93,7 +93,8 @@
                                                 <ul class="nav-tabs tabs-left sideways">
                                                     <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
                                                     <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
-                                                    
+                                                    <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}"><a (click)="aboutToggleTab('add_subadmin')">Add Subadmin</a></li>
+                                                    <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-7">
@@ -223,7 +224,79 @@
                                                             </div>
                                                         </ul>
                                                     </div>
-                                                    
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_subadmin'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Add Subadmin</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="adminform" (ngSubmit)="addSubadminForm()" #adminForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="name">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="email" class="form-control-plaintext" formControlName="email" (ngModelChange)="checkEmail($event)">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['email'].valid && adminform.controls['email'].touched">Email Required</div>
+                                                                                <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
+                                                                                    This email already exist.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="password" class="form-control-plaintext" formControlName="txt_password">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="state">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="city">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="address">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Create</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div *ngIf="loginUserDet.user_type == 'CA'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='list_subadmin'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>List Subadmin</h3>
+                                                            <div class="menu">
+                                                                
+                                                            </div>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

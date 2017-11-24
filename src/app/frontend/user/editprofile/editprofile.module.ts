@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditprofileComponent } from './editprofile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+//import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 import { EditprofileRouting } from "./editprofile-routing";
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../../components/shared.module";
@@ -26,8 +26,8 @@ import { SharedModule } from "../../../components/shared.module";
     })
   ],
   declarations: [
-    EditprofileComponent,
-    ImageCropperComponent
+    EditprofileComponent
+    //ImageCropperComponent
   ]
 })
 export class EditprofileModule { }

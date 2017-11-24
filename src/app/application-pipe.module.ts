@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { TruncatePipe,SafePipe,DateFormatPipe,DateTimeFormatPipe } from "./exponential-strength.pipe";
+
 //import { FrontendService } from "./components/frontend-app-header/frontend.service";
 @NgModule({
   declarations: [

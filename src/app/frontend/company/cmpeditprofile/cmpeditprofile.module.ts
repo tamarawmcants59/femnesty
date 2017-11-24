@@ -4,10 +4,11 @@ import { CmpeditprofileRouting } from "./cmpeditprofile-routing";
 import { CmpEditprofileComponent } from "./cmpeditprofile.component";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+//import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../../components/shared.module";
 import { UserService } from "../../user/user.service";
+//import { ApplicationPipes } from "../../../application-pipe.module";
 //import { NgxCropperModule } from 'ngx-cropper';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { UserService } from "../../user/user.service";
     ReactiveFormsModule,
     CmpeditprofileRouting,
     SharedModule,
+    //ApplicationPipes,
     //NgxCropperModule,
     LoadingModule.forRoot({
         animationType: ANIMATION_TYPES.wanderingCubes,
@@ -29,7 +31,7 @@ import { UserService } from "../../user/user.service";
   ],
   declarations: [
     CmpEditprofileComponent,
-    ImageCropperComponent
+    //ImageCropperComponent
   ],
   providers:[UserService]
 })
