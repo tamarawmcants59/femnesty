@@ -1,6 +1,7 @@
 import { ChatListnerService } from './service/chat.listner.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import { TruncatePipe ,SafePipe} from './exponential-strength.pipe';
 import { FrontendService } from './components/frontend-app-header/frontend.service';
+import { UserService } from './frontend/user/user.service';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './service/auth.service';
 // import { UserSidebar } from "./components/user-sidebar";
@@ -64,7 +66,8 @@ import { AppRoutingModule } from './app.routing';
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FormsModule
   ],
   exports: [],
   providers: [
@@ -76,7 +79,8 @@ import { AppRoutingModule } from './app.routing';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    ChatListnerService
+    ChatListnerService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

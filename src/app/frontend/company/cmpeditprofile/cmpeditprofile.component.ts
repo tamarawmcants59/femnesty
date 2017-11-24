@@ -32,6 +32,7 @@ export class CmpEditprofileComponent implements OnInit {
   public userRequestList = [];
   public userEmployeeList = [];
   public userFollowerList = [];
+  public cmpSubadminList = [];
   public cmpId ='';
 
   prfImageData: any;
@@ -251,6 +252,7 @@ export class CmpEditprofileComponent implements OnInit {
             if(details.UserDetails[0].user_type=='CA' || details.UserDetails[0].user_type=='CSA'){
               if(details.UserDetails[0].user_type=='CA'){
                 this.cmpId = details.UserDetails[0].id;
+                this.getSubadminListByAdmin();
               }else if(details.UserDetails[0].user_type=='CSA'){
                 this.cmpId = details.UserDetails[0].company_uid;
               }
@@ -270,7 +272,21 @@ export class CmpEditprofileComponent implements OnInit {
     }
 
   }
-
+  
+  public getSubadminListByAdmin(){
+    const dataUserDet = {
+      "company_id": this.cmpId
+    };
+    this.dataService.getSubadminListById(dataUserDet).subscribe(data => {
+      const details = data;
+      if (details.Ack == "1") {
+        this.cmpSubadminList = details.subadminlist;
+      } 
+    },
+    error => {
+    });
+    
+  }
   public getUserPostDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
@@ -426,6 +442,23 @@ export class CmpEditprofileComponent implements OnInit {
         this.getUserDetails();
         window.location.reload();
         //this.router.navigateByUrl('/user/profile');
+      },
+      error => {
+        alert(error);
+      });
+  }
+  
+  public deleteAdmin(del_id) {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const uploadJsonData = {
+      "id": del_id
+    };
+    //console.log(uploadJsonData);
+    this.dataService.deleteSubAdmin(uploadJsonData).subscribe(
+      data => {
+        this.loading = false;
+        window.location.reload();
       },
       error => {
         alert(error);

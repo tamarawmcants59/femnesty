@@ -65,88 +65,32 @@
             </ul>
         </div>
     </div>
-    <div id="live-chat">
-        <header class="clearfix">
-            <a href="#" class="chat-close">x</a>
-            <h4>John Doe</h4>
-            <span class="chat-message-counter">3</span>
-        </header>
-        <div class="chat">
-            <div class="chat-history">
-                <div class="chat-message clearfix">
-                    <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
-                    <div class="chat-message-content clearfix">
-                        <span class="chat-time">13:37</span>
-                        <h5>Marco Biedermann</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="chat-message clearfix right-section">
-                    <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
-                    <div class="chat-message-content clearfix">
-                        <span class="chat-time">13:37</span>
-                        <h5>Marco Biedermann</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="chat-message clearfix">
-                    <!-- <img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32"> -->
-                    <div class="chat-message-content clearfix">
-                        <span class="chat-time">13:38</span>
-                        <h5>John Doe</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            <p class="chat-feedback">Your partner is typing…</p>
-            <form action="#" method="post">
-                <fieldset>
-                    <input type="text" placeholder="Type your message…" autofocus>
-                    <input type="hidden">
-                </fieldset>
-            </form>
-        </div>
-    </div>
-    </div>
-    <div id="live-chat" class="live-chat hide">
+    <div id="live-chat" class="{{chatClass}}">
         <div class="clearfix chat-header">
-            <a href="#" class="chat-close"><i class="ion-close"></i></a>
-            <h4>John Doe</h4>
+            <a href="javascript:void(0)" (click)="closeChat()" class="chat-close"><i class="ion-close"></i></a>
+            <h4>{{withUser.first_name}} {{withUser.last_name}}</h4>
             <span class="chat-message-counter">3</span>
         </div>
         <div class="chat">
-            <div class="chat-history">
-                <div class="chat-message clearfix">
-                    <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
+            <div class="chat-history" *ngIf="chats">
+                <div class="chat-message clearfix {{chat.cssClass}}" *ngFor="let chat of chats">
+                    <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
+                    <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
                     <div class="chat-message-content clearfix">
-                        <h5>Marco Biedermann</h5>
-                        <span class="chat-time">13:37</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
-                    </div>
-                </div>
-                <div class="chat-message clearfix right-section">
-                    <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
-                    <div class="chat-message-content clearfix">
-                        <h5>Marco Biedermann</h5>
-                        <span class="chat-time">13:37</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
-                    </div>
-                </div>
-                <div class="chat-message clearfix">
-                    <img src="https://img.kpopmap.com/2016/01/sm-rookies-kun-profile.jpg" alt="" width="32" height="32">
-                    <div class="chat-message-content clearfix">
-                        <h5>John Doe</h5>
-                        <span class="chat-time">13:38</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                        <h5 *ngIf="!chat.isSelf">{{withUser.first_name}} {{withUser.last_name}}</h5>
+                        <h5 *ngIf="chat.isSelf">{{thisUser.first_name}} {{thisUser.last_name}}</h5>
+                        <span *ngIf="!chat.isSelf" class="chat-time">{{chat.created | date}}</span>
+                        <img class="img img-responsive" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                        <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                        <p *ngIf="chat.message.text">
+                            {{chat.message.text}}
+                        </p>
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <form (submit)="sendMessage()">
                 <fieldset>
-                    <input type="text" placeholder="Type your message">
+                    <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
                 </fieldset>
             </form>
         </div>
