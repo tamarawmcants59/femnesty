@@ -231,7 +231,7 @@ export class UserService {
   
   getGroupPostById(form_data) {
     return this.apiService.post(
-      `/enrichment/appallallpostbygroupid`,
+      `/enrichment/appallpostbygroupid`,
       form_data
     ).map(data => data);
   }

@@ -63,7 +63,7 @@ export class CompanyService {
 
   getCompanyImageList(form_data) {
     return this.apiService.post(
-      `users/appallgroupimagebygrpid`,
+      `/users/appallgroupimagebygrpid`,
       form_data
     ).map(data => data);
   }
@@ -103,9 +103,16 @@ export class CompanyService {
     ).map(data => data);
   }
 
-  getUserPostById(form_data) {
+  /*getUserPostById(form_data) {
     return this.apiService.post(
       `/enrichment/appactivepostbyuser`,
+      form_data
+    ).map(data => data);
+  }*/
+  
+  getUserPostById(form_data) {
+    return this.apiService.post(
+      `/enrichment/appallpostbygroupid`,
       form_data
     ).map(data => data);
   }

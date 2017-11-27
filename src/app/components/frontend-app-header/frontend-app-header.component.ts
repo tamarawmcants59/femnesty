@@ -60,7 +60,7 @@ export class FrontendAppHeader {
 
   //wait for the component to render completely
   ngOnInit(): void {
-    //console.log(currentUserDet);
+    //console.log(this.currentUserDet);
     //localStorage.removeItem("isLoggedIn");
     var nativeElement: HTMLElement = this.el.nativeElement,
       parentElement: HTMLElement = nativeElement.parentElement;
@@ -108,7 +108,6 @@ export class FrontendAppHeader {
       });
     });
     messages.subscribe(data => {
-      console.log(data);
       this.chatHeads = data;
       this.fillUserDetails();
     });
@@ -117,7 +116,6 @@ export class FrontendAppHeader {
   fillUserDetails() {
     this.chatHeads.map(ch => {
       this._service.getUserDetById({ id: ch.from_user_id }).subscribe(res => {
-        console.log(res);
         ch['userDetails'] = res.UserDetails[0];
       });
     });
