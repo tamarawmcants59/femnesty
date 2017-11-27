@@ -27,7 +27,7 @@
                             <input type="file" name="myfile" (change)="fileChangePost($event)" />
                         </div>
                     </li>
-                    <li>
+                    <li *ngIf="postType.activitytype==''">
                         <p>
                             <i class="icon ion-ios-people-outline"></i>
                             <span>

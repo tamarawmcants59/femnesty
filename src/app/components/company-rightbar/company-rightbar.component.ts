@@ -57,11 +57,12 @@ export class CompanyRightbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.profileData.id);
+    //console.log(this.profileData.id);
     //this.getFollowerList(); 
   }
 
   public getFollowerList() {    
+    //console.log(this.isCompanyId);
     if (this.isCompanyId) {
       const dataUserDet = {
         "company_id": this.isCompanyId
@@ -91,8 +92,8 @@ export class CompanyRightbarComponent implements OnInit {
         "image_type": 3,
         "count":"true"
       };
-      this.dataService.getCompanyImageList(dataUserDet)
-        .subscribe(data => {
+      //console.log(dataUserDet);
+      this.dataService.getCompanyImageList(dataUserDet).subscribe(data => {
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {

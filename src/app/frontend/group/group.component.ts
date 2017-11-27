@@ -94,7 +94,8 @@ export class GroupComponent implements OnInit {
     if (this.isGroupId != '') {
       const dataUserDet = {
         "page_no": 1,
-        "group_id": this.isGroupId
+        "group_id": this.isGroupId,
+        "type": '2'
       };
       this.dataService.getGroupPostById(dataUserDet)
         .subscribe(data => {
@@ -121,7 +122,8 @@ export class GroupComponent implements OnInit {
           if (data.Ack == "1") {
             this.groupMemberList = data.groupMembers;
             if(this.isUserLogin=='1'){
-              let joinItemData=this.groupMemberList.filter(item => item.user_id == this.isUserLogin);
+              let joinItemData=this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
+              //console.log(this.isloginUserId);
               if(joinItemData.length>0){
                 this.isJoinGroup=false;
               }

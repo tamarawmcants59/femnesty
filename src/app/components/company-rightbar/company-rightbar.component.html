@@ -1,11 +1,11 @@
 <div class="rightPart">                			
     <div class="innerRightPart right-map-details">
       <h5>Company details</h5>
-      <div class="right-map">
+      <!--<div class="right-map">
         <img src="assets/images/map.jpg" alt="" />
-      </div>
-      <b>Thammavongsa</b>
-      <p>Lorem ipsum dolor sit amet, consectetur.</p>
+      </div>-->
+      <b>{{profileData.company_name}}</b>
+      <!--<p>Lorem ipsum dolor sit amet, consectetur.</p>-->
       
       <b>About Company</b>
       <p>{{profileData.bio}}</p>
@@ -22,19 +22,15 @@
         </li>
        
       </ul>
-<a href="#" class="viewAll text-center">View All</a>
+<!--<a href="#" class="viewAll text-center">View All</a>-->
     </div>
     <div class="innerRightPart right-map-details">
       <h5>Photos & Videos</h5>
       <ul class="photoImage" *ngIf="companyImageList?.length > 0">
         <li *ngFor="let imageList of  companyImageList">
-          <a href="#">
-            <div class="img" style="background-image: url(imageList.file_name)"></div>
-          </a>
+            <div class="img" [ngStyle]="{'background-image':'url('+imageList.file_name+')'}"></div>
         </li>       
-
       </ul>
-      <a href="#" class="viewAll text-center">View All</a>
     </div>
 <div class="innerRightPart right-map-details right-sharing">
 <h5>Share</h5>
