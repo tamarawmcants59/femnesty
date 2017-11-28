@@ -19,6 +19,7 @@ export class GroupComponent implements OnInit {
   public groupMemberList = [];
   public userFrndList =[];
   public requestGrpJoinList =[];
+  
   //public userPostList =[];
   public activeTab: string = 'activity';
   //public aboutActiveTab: string = 'overview';
@@ -64,6 +65,7 @@ export class GroupComponent implements OnInit {
             this.getUserPostDetails();
             this.getGroupMemberList();
             this.myFrndListforGrp();
+            
           }
         },
         error => {
@@ -94,7 +96,8 @@ export class GroupComponent implements OnInit {
     if (this.isGroupId != '') {
       const dataUserDet = {
         "page_no": 1,
-        "group_id": this.isGroupId
+        "group_id": this.isGroupId,
+        "type": '2'
       };
       this.dataService.getGroupPostById(dataUserDet)
         .subscribe(data => {
@@ -121,7 +124,8 @@ export class GroupComponent implements OnInit {
           if (data.Ack == "1") {
             this.groupMemberList = data.groupMembers;
             if(this.isUserLogin=='1'){
-              let joinItemData=this.groupMemberList.filter(item => item.user_id == this.isUserLogin);
+              let joinItemData=this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
+              //console.log(this.isloginUserId);
               if(joinItemData.length>0){
                 this.isJoinGroup=false;
               }
@@ -222,8 +226,7 @@ export class GroupComponent implements OnInit {
         "id": pid,
         "request_type": type 
       };
-      this.dataService.responseGroupRequestByAdmin(dataUserDet)
-        .subscribe(data => {
+      this.dataService.responseGroupRequestByAdmin(dataUserDet).subscribe(data => {
           //console.log(data);
           this.successMsg = '';
           this.errorMsg = '';
@@ -242,7 +245,7 @@ export class GroupComponent implements OnInit {
         });
     }
   }
-
+  
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;

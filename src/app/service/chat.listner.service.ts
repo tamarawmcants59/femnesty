@@ -11,7 +11,7 @@ export class ChatListnerService {
     }
 
     onChatHeadClick(chat: object){
-        console.log(chat);
+        //console.log(chat);
         this._listners.next(chat);
     }
 }
