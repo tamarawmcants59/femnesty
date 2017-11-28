@@ -27,12 +27,12 @@
                             <input type="file" name="myfile" (change)="fileChangePost($event)" />
                         </div>
                     </li>
-                    <li>
+                    <li *ngIf="postType.activitytype==''">
                         <p>
-                            <!--<i class="icon ion-ios-people-outline"></i>-->
-                            <span class="icon ion-ios-people-outline">
+                            <i class="icon ion-ios-people-outline"></i>
+                            <span>
                         <input class="styled-checkbox" formControlName="is_connection" id="ConnectionsOnly" value="1" type="checkbox">
-                        <label for="ConnectionsOnly">Connections Only </label>
+                        <label for="ConnectionsOnly"> Connections Only </label>
                     </span>
                         </p>
                     </li>

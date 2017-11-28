@@ -38,6 +38,7 @@ export class FindfriendsComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.loginUserId=localStorage.getItem("loginUserId");
     this.getPendingFrndList();
+    this.submitSearchUser();
   }
   
   public getPendingFrndList(){
@@ -75,8 +76,10 @@ export class FindfriendsComponent implements OnInit {
         .subscribe(
               data => {
                   this.loading = false;
-                  if(data.Ack==1){
+                  if(data.Ack=='1'){
                       this.userSearchFrndList=data.FriendListById;
+                  }else{
+                    this.userSearchFrndList=[];
                   }
                   //console.log(data);
                   //this.postform.reset();
