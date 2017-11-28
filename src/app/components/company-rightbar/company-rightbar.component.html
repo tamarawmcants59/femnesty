@@ -1,11 +1,11 @@
 <div class="rightPart">                			
     <div class="innerRightPart right-map-details">
-      <h5>Company details</h5>
-      <!--<div class="right-map">
+      <h2>Company details</h2>
+      <div class="right-map">
         <img src="assets/images/map.jpg" alt="" />
-      </div>-->
-      <b>{{profileData.company_name}}</b>
-      <!--<p>Lorem ipsum dolor sit amet, consectetur.</p>-->
+      </div>
+      <b>Thammavongsa</b>
+      <p>Lorem ipsum dolor sit amet, consectetur.</p>
       
       <b>About Company</b>
       <p>{{profileData.bio}}</p>
@@ -15,25 +15,29 @@
       <b>Opening Hour <span>{{profileData.opening_hour}}</span></b>
     </div>
     <div class="innerRightPart right-map-details right-followers">
-      <h5>Followers</h5>
+      <h2>Followers</h2>
       <ul *ngIf="userFollowerList?.length > 0">         
         <li *ngFor="let followData of userFollowerList">               
           <a [routerLink]="['/user/profile',followData.display_name]"><img src="{{followData.profile_image}}" alt="{{followData.first_name}} {{followData.last_name}}" /></a>
         </li>
        
       </ul>
-<!--<a href="#" class="viewAll text-center">View All</a>-->
+<a href="#" class="viewAll text-center">View All</a>
     </div>
     <div class="innerRightPart right-map-details">
-      <h5>Photos & Videos</h5>
+      <h2>Photos & Videos</h2>
       <ul class="photoImage" *ngIf="companyImageList?.length > 0">
         <li *ngFor="let imageList of  companyImageList">
-            <div class="img" [ngStyle]="{'background-image':'url('+imageList.file_name+')'}"></div>
+          <a href="#">
+            <div class="img" style="background-image: url(imageList.file_name)"></div>
+          </a>
         </li>       
+
       </ul>
+      <a href="#" class="viewAll text-center">View All</a>
     </div>
 <div class="innerRightPart right-map-details right-sharing">
-<h5>Share</h5>
+<h2>Share</h2>
       <ul>
   <li><a href="" class="fa fa-facebook" style="background: #395899"></a></li>
   <li><a href="" class="fa fa-linkedin" style="background: #19699c"></a></li>

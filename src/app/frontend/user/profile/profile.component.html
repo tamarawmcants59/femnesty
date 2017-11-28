@@ -1,13 +1,13 @@
 <section class="section about-content-area visitingProfile">
-  <div class="container">
-      <div class="row">
+  <div class="container-fluid">
+      <div class="row flex-profile">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-          <div class="col-md-3">
+          <div class="col-md-3 flex-left">
             <div *ngIf="isloginUser == 1">
                 <user-sidebar></user-sidebar>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 flex-middle">
               <div class="middlePart">
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
                   </div>
@@ -63,7 +63,7 @@
                           </div>
                           <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
                               <div class="aboutPart">
-                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h3>
+                                  <h2 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h2><br/>
                                   <div class="abouts">
                                       <div class="row">
                                           <div class="col-md-12">
@@ -140,7 +140,7 @@
                               <div class="connectionsPart">
                                   <h2>Connections</h2>
                                   <div class="connections">
-                                      <ul class="uilist" *ngIf="userFrndList?.length > 0">
+                                      <ul class="uilist connection-box" *ngIf="userFrndList?.length > 0">
                                           <li class="connectionList" *ngFor="let friendData of userFrndList">
                                               <div class="connectionImage">
                                                   <a [routerLink]="['/user/profile',friendData.display_name]">
@@ -168,22 +168,64 @@
                               <div class="connectionsPart">
                                   <h2>Groups</h2>
                                   <div class="connections">
-                                    <ul class="uilist" *ngIf="userGroupList.length > 0">
-                                        <li class="connectionList" *ngFor="let grpData of userGroupList">
-                                            <div class="connectionImage">
-                                                <a [routerLink]="['/group/details',grpData.group_uname]">
-                                                    <div class="img" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
-                                                </a>
-                                            </div>
-                                            <div class="connectionText">
-                                                <a [routerLink]="['/group/details',grpData.group_uname]">
-                                                    <h2>{{grpData.group_name}}</h2>
-                                                </a>
-                                                <p>{{grpData.member_count}} members</p>
-                                                <a [routerLink]="['/group/details',grpData.group_uname]" class="btn btn-primary">View Group</a>											
-                                            </div>
-                                        </li>
-                                    </ul>
+                                      <!--<ul class="uilist">
+              <li class="connectionList">
+                <div class="connectionImage"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+              <li class="connectionList">
+                <div class="connectionImage"><a href="#"><div class="img" style="background-image: url('images/manImage.jpg')"></div></a></div>
+                <div class="connectionText">
+                  <h2>Lorem Ipsum</h2>
+                  <p>3 mutual friend</p>
+                  <button type="button" class="btn btn-primary">Add Group</button>											</div>
+              </li>
+            </ul>-->
                                   </div>
                               </div>
                           </div>
@@ -191,7 +233,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 flex-right">
                 <app-user-prfrsidebar></app-user-prfrsidebar>
           </div>
       </div>

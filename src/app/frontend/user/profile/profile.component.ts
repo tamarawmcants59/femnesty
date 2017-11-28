@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   public isloginUser:any;
   public userPostList = [];
   public userFrndList = [];
-  public userGroupList =[];
   public activeTab: string = 'activity';
   public aboutActiveTab: string = 'overview';
   public successMsg: string ='';
@@ -55,7 +54,6 @@ export class ProfileComponent implements OnInit {
             this.getUserPostDetails();
             this.getConnectionList();
             this.checkMyFrndData();
-            this.getUserGroupList();
           }
         },
         error => {
@@ -122,22 +120,6 @@ export class ProfileComponent implements OnInit {
           error => {
 
           });
-      }
-    }
-
-    public getUserGroupList() {
-      if (this.isloginUserId != '') {
-        const dataUserDet = {
-          "user_id": this.isloginUserId
-        };
-        this.dataService.getUseGroupListById(dataUserDet).subscribe(data => {
-            if (data.Ack == "1") {
-              //console.log(data);
-                this.userGroupList = data.GroupListByuserID;
-            } 
-        },error => {
-  
-        });
       }
     }
 

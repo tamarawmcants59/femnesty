@@ -96,22 +96,6 @@ const routes: Routes = [
     }
   },
   {
-    path: 'connections',
-    canActivate: [AuthGuard],
-    redirectTo: 'profile',
-    data: {
-      title: 'Connection'
-    }
-  },
-  {
-    path: 'group',
-    canActivate: [AuthGuard],
-    redirectTo: 'profile',
-    data: {
-      title: 'Group'
-    }
-  },
-  {
     path: 'notification',
     canActivate: [AuthGuard],
     component: NotificationComponent,

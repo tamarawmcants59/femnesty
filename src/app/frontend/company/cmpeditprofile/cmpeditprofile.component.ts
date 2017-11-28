@@ -21,15 +21,6 @@ export class CmpEditprofileComponent implements OnInit {
   public showPostImgDive: boolean = false;
   public form: FormGroup;
   public adminform: FormGroup;
-  public editSubAdminId: string = '';
-  public editSubAdmindata:object= { 
-    email: '',
-    txt_password: '',
-    name: '',
-    state: '',
-    city: '',
-    address: ''
-  };
 
   returnUrl: string;
   errorMsg: string = '';
@@ -43,7 +34,6 @@ export class CmpEditprofileComponent implements OnInit {
   public userFollowerList = [];
   public cmpSubadminList = [];
   public cmpId ='';
-  public publicCmpDet: object = { };
 
   prfImageData: any;
   coverImageData: any;
@@ -168,6 +158,7 @@ export class CmpEditprofileComponent implements OnInit {
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.getUserDetails();
+    this.getUserPostDetails();
     this.getRequestList();
     this.getEmployeeList();
     this.getFollowerList();
@@ -256,41 +247,31 @@ export class CmpEditprofileComponent implements OnInit {
       const dataUserDet = {
         "id": parseInt(loginUserId)
       };
-      this.dataService.getUserDetById(dataUserDet).subscribe(data => {
+      this.dataService.getUserDetById(dataUserDet)
+        .subscribe(data => {
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
             if(details.UserDetails[0].user_type=='CA' || details.UserDetails[0].user_type=='CSA'){
               if(details.UserDetails[0].user_type=='CA'){
-                this.publicCmpDet=details.UserDetails[0];
                 this.cmpId = details.UserDetails[0].id;
                 this.getSubadminListByAdmin();
               }else if(details.UserDetails[0].user_type=='CSA'){
                 this.cmpId = details.UserDetails[0].company_uid;
-
-                this.dataService.getUserDetById({"id": parseInt(this.cmpId)}).subscribe(data => {
-                  if (data.Ack == "1") {
-                    this.publicCmpDet=data.UserDetails[0];
-                  } 
-                },
-                error => {
-        
-                });
               }
               this.groupPostDetData = {activitytype:'3', activityid:this.cmpId};
             }else{
               this.router.navigate(['/user/profile']);
             }
-            this.getUserPostDetails();
           } else {
 
           }
-          
         },
         error => {
 
-        });
+        }
+        );
     } else {
     }
 
@@ -314,15 +295,13 @@ export class CmpEditprofileComponent implements OnInit {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
       const dataUserDet = {
-        "page_no": '1',
-        "group_id": this.cmpId,
-        "type": '3'
+        "user_id": loginUserId
       };
       this.dataService.getUserPostById(dataUserDet)
         .subscribe(data => {
           const details = data;
           if (details.Ack == "1") {
-            this.userPostList = details.AllPost;
+            this.userPostList = details.ActivePostByUser;
             //console.log(this.userPostList);
           } else {
 
@@ -425,7 +404,7 @@ export class CmpEditprofileComponent implements OnInit {
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const uploadJsonData = {
-      "id": this.cmpId,
+      "id": loginUserId,
       "profile_image": this.cropper.image.image
     };
     //console.log(uploadJsonData);
@@ -455,7 +434,7 @@ export class CmpEditprofileComponent implements OnInit {
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const uploadJsonData = {
-      "id": this.cmpId,
+      "id": loginUserId,
       "cover_img": this.cropper.image.image
     };
     //console.log(uploadJsonData);
@@ -524,41 +503,7 @@ export class CmpEditprofileComponent implements OnInit {
         this.successMsg = 'Admin added successfully';
         //this.router.navigate(['/company/profile']);
         this.adminform.reset();
-        this.getSubadminListByAdmin();
       },error => {
-        alert(error);
-      });
-  }
-  
-  public editSubadminForm() {
-    this.loading = true;
-    const userValue = this.adminform.value;
-    userValue.id = this.cmpId;
-    this.dataService.updateAccountDet(userValue).subscribe( data => {
-        this.loading = false;
-        this.successMsg = 'Admin edit successfully';
-        //this.adminform.reset();
-        this.getSubadminListByAdmin();
-      },error => {
-        alert(error);
-      });
-  }
-
-  public editAdmin(edit_id) {
-    this.loading = true;
-    this.editSubAdminId=edit_id;
-    const uploadJsonData = {
-      "id": edit_id
-    };
-    //console.log(uploadJsonData);
-    this.dataService.getUserDetById(uploadJsonData).subscribe( data => {
-      //console.log(data);
-        this.loading = false;
-        this.editSubAdmindata=data.UserDetails[0];
-        console.log(this.editSubAdmindata);
-        this.aboutActiveTab = 'edit_subadmin';
-      },
-      error => {
         alert(error);
       });
   }
@@ -601,7 +546,6 @@ export class CmpEditprofileComponent implements OnInit {
     this.successMsg = '';
     this.errorMsg = '';
     this.aboutActiveTab = data;
-    this.adminform.reset();
   }
 
 }
