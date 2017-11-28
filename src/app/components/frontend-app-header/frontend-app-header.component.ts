@@ -142,14 +142,14 @@ export class FrontendAppHeader {
     }
   }
     
-  public searchResult(values) {
+  /*public searchResult(values) {
     //console.log(values);
     this.searchResultStr = values; 
-  }
+  }*/
   
-  public searchDataResult() {
+  public searchDataResult(values) {
     //console.log(values);
-    this.router.navigateByUrl('/home/search/'+this.searchResultStr);
+    this.router.navigateByUrl('/home/search/'+values.skeyword);
   }
 
   public userLogout() {
