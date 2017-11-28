@@ -26,7 +26,6 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.searchKeyword = params['keyword'];
     });
-    //console.log(this.searchKeyword);
     this.getSearchResult();
   }
 
@@ -37,7 +36,7 @@ export class SearchComponent implements OnInit {
       this.dataService.getUserSearchdata(dataUserDet).subscribe(data => {
           if (data.Ack == "1") {
             this.searchData = data.TotalSearch;
-            //console.log(this.searchData);
+            console.log(this.searchData);
           }
         },
         error => {

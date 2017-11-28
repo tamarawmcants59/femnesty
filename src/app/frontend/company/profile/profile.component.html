@@ -1,13 +1,13 @@
 <section class="section about-content-area visitingProfile">
-  <div class="container">
-      <div class="row">
+  <div class="container-fluid">
+      <div class="row flex-profile">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-          <div class="col-md-3">
+          <div class="col-md-3 flex-left">
             <div *ngIf="isloginUser == 1">
                 <user-sidebar></user-sidebar>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 flex-middle">
               <div class="middlePart">
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
                   </div>
@@ -21,8 +21,8 @@
                       <p class="text-center">{{otherProfileDet?.bio}}</p>
                       <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
                       <p class="text-center">
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
                         </p>
                       
                   </div>
@@ -199,7 +199,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3">              
+          <div class="col-md-3 flex-right">              
                 <app-company-rightbar [profileData]="otherProfileDet" [companyID]="otherProfileDet.id"></app-company-rightbar> 
           </div>
       </div>

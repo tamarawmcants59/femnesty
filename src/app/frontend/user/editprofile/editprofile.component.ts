@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
@@ -26,7 +26,6 @@ export class EditprofileComponent implements OnInit {
   public loginUserDet: Object = {};
   public userPostList = [];
   public userFrndList = [];
-  public previousUrl:string;
 
   prfImageData: any;
   coverImageData: any;
@@ -129,18 +128,11 @@ export class EditprofileComponent implements OnInit {
 
     });
     //console.log(this.cropper);
-    
-    /*router.events.filter(event => event instanceof NavigationEnd).subscribe(e => {
-      console.log('prev:', this.previousUrl);
-        //this.previousUrl = e.url;
-    });*/
   }
 
   ngOnInit() {
-    //activeTab: string = 'activity';
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.groupPostDetData = {activitytype:'', activityid:''};
-    //console.log(this.route.snapshot);
     this.getUserDetails();
     this.getUserPostDetails();
     this.getConnectionList();
