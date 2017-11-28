@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
   public successMsg: string ='';
   public errorMsg: string = '';
   public checkIsFriend:boolean = false;
-  public loginUserDet:any;
 
   constructor(
     private dataService: CompanyService,
@@ -32,7 +31,6 @@ export class ProfileComponent implements OnInit {
   ) {
       this.isloginUserId = localStorage.getItem("loginUserId");
       this.isloginUser = localStorage.getItem("isLoggedIn");
-      this.loginUserDet = JSON.parse(localStorage.getItem("currentUser"));
    }
 
   ngOnInit() {
@@ -142,19 +140,19 @@ export class ProfileComponent implements OnInit {
     //console.log(this.otherProfileId);
     if (this.otherProfileId != '') {
       const dataUserDet = {
-        "page_no": '1',
-        "group_id": this.otherProfileId,
-        "type": '3'
+        "user_id": this.otherProfileId
       };
-      this.dataService.getUserPostById(dataUserDet).subscribe(data => {
+      this.dataService.getUserPostById(dataUserDet)
+        .subscribe(data => {
           const details = data;
           if (details.Ack == "1") {
-            this.userPostList = details.AllPost;
+            this.userPostList = details.ActivePostByUser;
           }
         },
         error => {
 
-        });
+        }
+        );
     }
   }
 

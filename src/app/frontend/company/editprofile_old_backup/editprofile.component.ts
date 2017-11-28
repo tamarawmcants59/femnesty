@@ -2,46 +2,36 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyService } from "../company.service";
-//import { UserService } from "../../user/user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
 
 @Component({
-  selector: 'app-cmpeditprofile',
-  templateUrl: './cmpeditprofile.component.html',
-  styleUrls: ['./cmpeditprofile.component.css']
+  selector: 'app-editprofile',
+  templateUrl: './editprofile.component.html',
+  styleUrls: ['./editprofile.component.css']
 })
-export class CmpEditprofileComponent implements OnInit {
+export class EditprofileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   public activeTab: string = 'activity';
   public aboutActiveTab: string = 'overview';
-  public showImgDive: boolean = false;  
+  public showImgDive: boolean = false;
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
   public form: FormGroup;
-  public adminform: FormGroup;
-
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
   public loading = false;
-  public loginUserDet: object = { };
+  public loginUserDet: Object = {};
   public userPostList = [];
   public userFrndList = [];
-  public userRequestList = [];
-  public userEmployeeList = [];
-  public userFollowerList = [];
-  public cmpSubadminList = [];
-  public cmpId ='';
 
   prfImageData: any;
   coverImageData: any;
   postImgData: any;
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
-  public groupPostDetData: object = { };
-  public checkEmailExist:boolean = false;
 
   constructor(
     private builder: FormBuilder,
@@ -89,11 +79,19 @@ export class CmpEditprofileComponent implements OnInit {
     this.coverImageData = {};
 
     this.form = builder.group({
-      company_name: ['', [
+      first_name: ['', [
         Validators.required,
         Validators.minLength(3)
       ]],
-      
+      last_name: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+			/*email: ['', [
+				Validators.required,
+				//BasicValidators.email
+				Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+			]],*/
       mobile_number: ['', [
         Validators.required,
         Validators.minLength(10)
@@ -118,40 +116,16 @@ export class CmpEditprofileComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]],
-      website: ['', [
+      occupation: ['', [
         Validators.required,
-        Validators.minLength(3)
+        //Validators.minLength(3)
       ]],
-      opening_hour: ['', [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
-      
       bio: ['', [
         //Validators.required,
         //Validators.minLength(3)
       ]]
 
     });
-
-    this.adminform = builder.group({
-      email: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.minLength(3)
-      ]],
-      txt_password: ['', [
-        Validators.required
-      ]],
-			name: ['', [
-        Validators.required
-      ]],
-			state: ['', [ ]],
-			city: ['', [ ]],
-			address: ['', [ ]]
-
-    });
-    
     //console.log(this.cropper);
   }
 
@@ -159,25 +133,21 @@ export class CmpEditprofileComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.getUserDetails();
     this.getUserPostDetails();
-    this.getRequestList();
-    this.getEmployeeList();
-    this.getFollowerList();
-    this.getFollowerList();
-    //console.log(this.loginUserDet);
+    this.getConnectionList();
   }
 
-  public getFollowerList() {
+  public getConnectionList() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
       const dataUserDet = {
-        "company_id": loginUserId
+        "user_id": loginUserId
       };
-      this.dataService.getCompanyFollowerList(dataUserDet)
+      this.dataService.getUserFrndListById(dataUserDet)
         .subscribe(data => {
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {
-            this.userFollowerList = details.CompanyFollowers;
+            this.userFrndList = details.FriendListById;
           } else {
 
           }
@@ -189,56 +159,6 @@ export class CmpEditprofileComponent implements OnInit {
     } else {
     }
 
-  }
-
-  public getEmployeeList() {
-    const loginUserId = localStorage.getItem("loginUserId");
-    if (loginUserId != '') {
-      const dataUserDet = {
-        "company_id": loginUserId
-      };
-      this.dataService.getCompanyEmployeetList(dataUserDet)
-        .subscribe(data => {
-          const details = data;
-          //console.log(details);
-          if (details.Ack == "1") {
-            this.userEmployeeList = details.EmployeelistBycompanyID;
-          } else {
-
-          }
-        },
-        error => {
-
-        }
-        );
-    } else {
-    }
-
-  }
-
-
-  public getRequestList() {
-    const loginUserId = localStorage.getItem("loginUserId");
-    if (loginUserId != '') {
-      const dataUserDet = {
-        "company_id": loginUserId
-      };
-      this.dataService.getCompanyRequestList(dataUserDet)
-        .subscribe(data => {
-          const details = data;
-          //console.log(details);
-          if (details.Ack == "1") {
-            this.userRequestList = details.PendingEmployeelistBycompanyID;
-          } else {
-
-          }
-        },
-        error => {
-
-        }
-        );
-    } else {
-    }
   }
 
   public getUserDetails() {
@@ -253,17 +173,6 @@ export class CmpEditprofileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
-            if(details.UserDetails[0].user_type=='CA' || details.UserDetails[0].user_type=='CSA'){
-              if(details.UserDetails[0].user_type=='CA'){
-                this.cmpId = details.UserDetails[0].id;
-                this.getSubadminListByAdmin();
-              }else if(details.UserDetails[0].user_type=='CSA'){
-                this.cmpId = details.UserDetails[0].company_uid;
-              }
-              this.groupPostDetData = {activitytype:'3', activityid:this.cmpId};
-            }else{
-              this.router.navigate(['/user/profile']);
-            }
           } else {
 
           }
@@ -276,21 +185,7 @@ export class CmpEditprofileComponent implements OnInit {
     }
 
   }
-  
-  public getSubadminListByAdmin(){
-    const dataUserDet = {
-      "company_id": this.cmpId
-    };
-    this.dataService.getSubadminListById(dataUserDet).subscribe(data => {
-      const details = data;
-      if (details.Ack == "1") {
-        this.cmpSubadminList = details.subadminlist;
-      } 
-    },
-    error => {
-    });
-    
-  }
+
   public getUserPostDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
@@ -333,32 +228,7 @@ export class CmpEditprofileComponent implements OnInit {
         this.loading = false;
         this.successMsg = 'Data updated successfully';
         //this.router.navigateByUrl('/user/profile');
-        this.router.navigate(['/company/profile']);
-
-      },
-      error => {
-        alert(error);
-      });
-
-  }
-
-  public createEmployee() {
-    this.loading = true;
-    const loginUserId = localStorage.getItem("loginUserId");
-    const result = {},
-    userValue = this.form.value;
-    userValue.id = loginUserId;
-    this.dataService.createEmployeeDet(userValue)
-      .subscribe(
-      data => {
-
-        /*const details = data;
-        localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
-        localStorage.setItem('userName', details.UserDetails.first_name);
-        localStorage.setItem('profile_image', details.UserDetails.image_url);*/
-        this.loading = false;
-        this.successMsg = 'Data updated successfully';
-        this.router.navigate(['/company/profile']);
+        this.router.navigate(['/user/profile']);
 
       },
       error => {
@@ -451,90 +321,11 @@ export class CmpEditprofileComponent implements OnInit {
         alert(error);
       });
   }
-  
-  public deleteAdmin(del_id) {
-    this.loading = true;
-    const loginUserId = localStorage.getItem("loginUserId");
-    const uploadJsonData = {
-      "id": del_id
-    };
-    //console.log(uploadJsonData);
-    this.dataService.deleteSubAdmin(uploadJsonData).subscribe(
-      data => {
-        this.loading = false;
-        window.location.reload();
-      },
-      error => {
-        alert(error);
-      });
-  }
 
-  public RequestAccept(id, request_type){    
-    const loginUserId = localStorage.getItem("loginUserId");
-    const uploadJsonData = {
-      "id": id,
-      "request_type": request_type
-    };
-    //console.log(uploadJsonData);
-    this.dataService.RequestAcceptReject(uploadJsonData)
-      .subscribe(
-      data => {
-        if(data.Ack==1){
-          this.successMsg='Accept successfull';
-        }else{
-          this.errorMsg='Reject';
-        }          
-        window.location.reload();
-        //this.router.navigateByUrl('/user/profile');
-      },
-      error => {
-        alert(error);
-      });
-  }
-
-  public addSubadminForm() {
-    this.loading = true;
-    const loginUserId = localStorage.getItem("loginUserId");
-    const result = {},
-    userValue = this.adminform.value;
-    userValue.company_uid = loginUserId;
-    this.dataService.createCmpSubadmin(userValue).subscribe( data => {
-        this.loading = false;
-        this.successMsg = 'Admin added successfully';
-        //this.router.navigate(['/company/profile']);
-        this.adminform.reset();
-      },error => {
-        alert(error);
-      });
-  }
-
-  public checkEmail(values:Object):void {
-    if(values!=''){
-      let signupCheckEmail={
-        "email": values
-      };
-      this.dataService.userCheckEmail(signupCheckEmail)
-      .subscribe(data => {
-             let details=data;
-             //console.log(details);
-             if (details.Ack=="1") {
-                 this.checkEmailExist = false;
-                 return false;
-             }else{
-               //alert('Invalid login');
-               this.checkEmailExist = true;
-               return false;
-             }
-         },
-         error => {
-           
-         }
-       ); 
-    }else{
-
-    }
-  }
-
+  /*public onReturnData(data: any) {
+      // Do what you want to do
+      console.warn(JSON.parse(data));
+  }*/
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;

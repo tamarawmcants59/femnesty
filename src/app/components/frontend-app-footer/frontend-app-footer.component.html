@@ -80,7 +80,7 @@
                         <h5 *ngIf="!chat.isSelf">{{withUser.first_name}} {{withUser.last_name}}</h5>
                         <h5 *ngIf="chat.isSelf">{{thisUser.first_name}} {{thisUser.last_name}}</h5>
                         <span *ngIf="!chat.isSelf" class="chat-time">{{chat.created | date}}</span>
-                        <img class="img img-responsive" style="border-radius: 3%" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                        <img class="img img-responsive" *ngIf="chat.message.image" src="{{chat.message.image}}" />
                         <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
                         <p *ngIf="chat.message.text">
                             {{chat.message.text}}
