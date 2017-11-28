@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   public successMsg: string ='';
   public errorMsg: string = '';
   public checkIsFriend:boolean = false;
+  public loginUserDet:any;
 
   constructor(
     private dataService: CompanyService,
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   ) {
       this.isloginUserId = localStorage.getItem("loginUserId");
       this.isloginUser = localStorage.getItem("isLoggedIn");
+      this.loginUserDet = JSON.parse(localStorage.getItem("currentUser"));
    }
 
   ngOnInit() {

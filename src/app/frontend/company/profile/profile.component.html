@@ -21,8 +21,8 @@
                       <p class="text-center">{{otherProfileDet?.bio}}</p>
                       <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
                       <p class="text-center">
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
                         </p>
                       
                   </div>
