@@ -65,8 +65,8 @@
                         </li>
                         <li class="form-search search-icon">
                             <div class="form-group">
-                                <!--<input type="text" class="form-control" formControlName="skeyword" (ngModelChange)="searchResult($event)" placeholder="Search" >-->
-                                <input type="text" class="form-control" formControlName="skeyword" placeholder="Search" >
+                                <input type="text" class="form-control" formControlName="skeyword" (ngModelChange)="searchResult($event)" placeholder="Search" >
+                                <!--<input type="text" class="form-control" formControlName="skeyword" [(ngModel)]="searchResultStr" placeholder="Search" >-->
                                 <button type="submit"><i class="icon ion-ios-search"></i></button>
                             </div>
                         </li>
@@ -74,10 +74,10 @@
                     </form>
                     <ul class="nav navbar-nav rightNav rightNavPart">
                         <li><a [routerLink]="['/social_home']">Home</a></li>
-                        <li><a href="#">Activity</a></li>
-                        <li><a href="#">Groups</a></li>
-                        <li><a href="#">Hubs</a></li>
-                        <li><a href="#">Members</a></li>
+                        <li><a [routerLink]="['/user/profile']">Activity</a></li>
+                        <li><a [routerLink]="['/group']">Groups</a></li>
+                        <li><a [routerLink]="['/social_home']">Hubs</a></li>
+                        <li><a [routerLink]="['/user/find_friends']">Members</a></li>
 
                     </ul>
                     <ul class="nav navbar-nav navIcon">

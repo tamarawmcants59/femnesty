@@ -13,7 +13,23 @@
                     </div>
                 </div>
                 <ul class="search-list">
-                  <div *ngIf="searchData.userresult?.length > 0">
+                  <!--<div *ngIf="searchData.userresult?.length > 0">-->
+                      <div>
+                        <li *ngFor="let friendData of searchData.companyresult">
+                          <div class="left-side" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                          <div class="right-side">
+                            <h4>{{friendData.company_name}}</h4>
+                            <a [routerLink]="['/company/profile',friendData.company_slug]" class="more">View Company</a>
+                          </div>
+                        </li>
+                        <li *ngFor="let grpData of searchData.groupresult">
+                            <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.image+')'}"></div>
+                            <div class="right-side">
+                              <h4>{{grpData.group_name}}</h4>
+                              <small class="text">{{grpData.short_desc}}</small>
+                              <a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
+                            </div>
+                          </li>
                       <li *ngFor="let friendData of searchData.userresult">
                           
                             <div class="left-side" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
@@ -32,14 +48,14 @@
                               <a [routerLink]="['/articles/details',friendData.slug]" class="more">View Article</a>
                             </div>
                           </li>
-                          <li *ngFor="let friendData of searchData.companyresult">
-                              
-                                <div class="left-side" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-                              <div class="right-side">
-                                <h4>{{friendData.company_name}}</h4>
-                                <a [routerLink]="['/company/profile',friendData.company_slug]" class="more">View Company</a>
-                              </div>
-                            </li>
+                          <li *ngFor="let eventData of searchData.eventresult">
+                            <div class="left-side" [ngStyle]="{'background-image':'url('+eventData.image+')'}"></div>
+                            <div class="right-side">
+                              <h4>{{eventData.title}}</h4>
+                              <small class="text">By {{eventData.author_name}}</small>
+                              <a [routerLink]="['/enrichment/eventdetails',eventData.slug]" class="more">View Event</a>
+                            </div>
+                          </li>
                           
                   </div>
                 </ul>
@@ -49,12 +65,11 @@
                     <div class="innerRightPart">
                       <h2>FILTER RESULT</h2>
                       <ul class="filter-reslt">
-                        <li><a href="">USERS <span>(12)</span></a></li>
-                        <li><a href="">COMPANYS <span>(12)</span></a></li>
-                        <li><a href="">ARTICLES <span>(12)</span></a></li>
-                        <li><a href="">HUBS  <span>(12)</span></a></li>
-                        <li><a href="">EVENTS <span>(12)</span></a></li>
-                        <li><a href="">OTHER <span>(12)</span></a></li>
+                        <li>USERS <span>({{searchData.userresult?.length}})</span></li>
+                        <li>COMPANYS <span>({{searchData.companyresult?.length}})</span></li>
+                        <li>ARTICLES <span>({{searchData.articleresult?.length}})</span></li>
+                        <li>GROUPS  <span>({{searchData.groupresult?.length}})</span></li>
+                        <li>EVENTS <span>({{searchData.eventresult?.length}})</span></li>
                       </ul>
                     </div>
                     <div class="innerRightPart share-story">
