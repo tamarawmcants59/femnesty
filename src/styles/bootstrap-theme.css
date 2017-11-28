@@ -665,8 +665,7 @@ html,
 body {
     font-family: 'Sanchez', serif;
     font-weight: 400;
-    height: 100%;
-    color:#000;
+    height: 100%
 }
 
 .container-fluid {
@@ -687,9 +686,9 @@ ul {
     text-shadow: none;
     font-weight: 500;
     text-transform: uppercase;
-    font-size: 16px;
-    letter-spacing: 2px;
-    padding: 15px 35px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 13px 35px;
     border-radius: 40px
 }
 
@@ -706,7 +705,8 @@ ul {
 .footer-bottom ul li {
     float: left;
     color: #fff;
-    font-size: 13px
+    margin: 0 7px;
+    font-size: 14px
 }
 
 .header-top ul li i,
@@ -717,9 +717,8 @@ ul {
     width: 20px;
     height: 20px;
     border-radius: 100%;
-    line-height: 22px;
+    line-height: 19px;
     text-align: center;
-      font-size: 14px;
 }
 
 .header-top ul li a,
@@ -748,18 +747,18 @@ ul {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: #000000;
-    font-size: 15px;
+    font-size: 16px;
     text-transform: uppercase;
-    letter-spacing: 2px
+    letter-spacing: 1px
 }
 
 .navbar-right button {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: #fff;
-    font-size: 15px;
+    font-size: 16px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     background: #000000;
     border: 0;
     border-radius: 20px;
@@ -788,7 +787,7 @@ ul {
 
 .banner {
     width: 100%;
-    height: 847px;
+    height: 100%;
     overflow: hidden;
     background: url('../assets/images/banner.jpg');
     background-size: cover;
@@ -799,16 +798,15 @@ ul {
     width: 100%;
     height: auto;
     /*overflow: hidden;*/
-    padding: 110px 0
+    padding: 120px 0
 }
 
 .section h1 {
-    font-size: 58px;
+    font-size: 56px;
     font-weight: 400;
     position: relative;
-    margin-bottom: 35px;
-    padding-bottom: 35px;
-    line-height:66px;
+    margin-bottom: 40px;
+    padding-bottom: 40px
 }
 
 .section h1:after {
@@ -822,13 +820,13 @@ ul {
 }
 
 .what-is-femnesty p {
-    font-size: 18px;
-    line-height: 33px;
-    font-weight: 600;
+    font-size: 17px;
+    line-height: 30px;
+    font-weight: 500
 }
 
 .what-is-femnesty .btn.btn-primary {
-    margin-top: 20px
+    margin-top: 40px
 }
 
 .article {
@@ -837,7 +835,7 @@ ul {
 
 .article h2 {
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 400;
     position: relative;
     margin-bottom: 25px;
     padding-bottom: 25px
@@ -861,13 +859,11 @@ ul {
     margin: 0 auto;
     min-height: 100px;
     font-weight: 500;
-    line-height: 26px;
-    font-weight: 600;
+    line-height: 25px
 }
 
 .article button {
-    margin-top: 35px;
-    padding: 13px 25px !important;
+    margin-top: 25px
 }
 
 .quote {
@@ -885,13 +881,12 @@ blockquote {
 
 blockquote p {
     color: #fff;
-    font-size: 36px;
+    font-size: 35px
 }
 
 blockquote footer {
-    font-size: 20px;
+    font-size: 19px;
     color: #fff;
-    margin-top: 15px;
 }
 
 blockquote i {
@@ -942,15 +937,12 @@ blockquote i {
     display: block;
     color: #646464;
     font-size: 13px;
-    font-weight: 600;
 }
 
 .article-add-holder p {
     display: block;
-    font-weight: 600;
+    font-weight: 500;
     margin: 25px 0;
-    font-size: 15px;
-    line-height: 25px;
 }
 
 .article-add-holder1 {
@@ -967,12 +959,12 @@ blockquote i {
     box-shadow: -1px -3px 7px -1px #000000;
 }
 
-/*.navbar-white .navbar-brand img {
+.navbar-white .navbar-brand img {
     width: 150px;
-}*/
+}
 
 .navbar-white .navbar-right {
-    margin-top: 40px;
+    margin-top: 19px;
 }
 
 .navbar-white .navbar-toggle {
@@ -999,34 +991,31 @@ footer {
 
 .footer-top {
     background: #313131;
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .footer-top h4 {
     color: #fff;
-    font-size: 20px;
-    border-bottom: 2px solid #2d2d2d;
+    font-size: 19px;
+    border-bottom: 3px solid #2d2d2d;
     padding-bottom: 15px;
-    letter-spacing: 1px;
 }
 
 .footer-top h4 i {
     background: #ffffff;
     color: #313131;
     display: inline-block;
-    width: 22px;
-    height: 22px;
+    width: 21px;
+    height: 21px;
     border-radius: 100%;
     font-size: 16px;
     text-align: center;
-    line-height: 23px;
-    margin-right: 10px;
+    line-height: 20px;
 }
 
 .footer-top h5 {
     color: #fff;
     font-size: 16px;
-    letter-spacing: 1px;
 }
 
 .footer-top li a {
@@ -1034,7 +1023,6 @@ footer {
     font-size: 14px;
     line-height: 25px;
     padding-left: 10px;
-    margin-top: 35px;
 }
 
 .footer-top .form-control {
@@ -1059,8 +1047,8 @@ footer {
     background: #5f5f5f;
     color: #292929;
 }
-.footer-top .btn.btn-primary{font-size: 12px;padding: 12px 23px;}
-.footer-top .form-group{margin-bottom: 15px;}
+
+
 /*--------------------------------------------------------------------------------------------------------------*/
 
 
@@ -1225,11 +1213,9 @@ footer {
     background: #f7f7f7;
     border: none;
     box-shadow: none;
-    height: 68px;
-    font-size:17px;
-    padding: 6px 30px;
+    height: 60px;
 }
-.form-area label{font-size: 16px;color: #707070}
+
 .form-area textarea.form-control {
     height: auto;
 }
@@ -1546,7 +1532,7 @@ footer {
 }
 
 .profPhoto {
-    width: 217px;
+    width: 160px;
     height: 78px;
     margin: 0 auto;
 }
@@ -1609,7 +1595,6 @@ footer {
     }
     .section h1 {
         font-size: 35px;
-        line-height: 40px;
     }
     blockquote p,
     .top-articles h1 {
@@ -1624,12 +1609,9 @@ footer {
 }
 
 @media (max-width: 767px) {
-	.footer-top{margin: 50px 0}
-	 .banner{height: auto;}
     .banner h1 {
         font-size: 25px;
         line-height: 35px;
-        position: relative;top:0;transform: none;margin: 200px auto 50px;left:0
     }
     .section h1 {
         font-size: 20px;
@@ -1841,7 +1823,7 @@ footer {
 .sign-up-area {
     background: url(../assets/images/sign-up-bg.jpg) center no-repeat;
     background-size: cover;
-    padding: 200px 0 100px 0;
+    padding: 50px 0;
     background-attachment: fixed;
 }
 
@@ -1858,16 +1840,12 @@ footer {
     background: #fff;
     padding: 50px;
 }
-.sign-form h2{
-    font-size:37px;
-}
-.sign-form .text-danger{position: absolute;bottom:-20px}
-.sign-up-social span{color:#707070;font-size: 19px}
+
 .sign-up-social .social-link {
     display: inline-block;
     margin: 0 20px;
 }
-.sign-up-social .social-link li a i{font-size:25px}
+
 .log-row {
     display: flex;
     align-items: center;
@@ -2004,14 +1982,14 @@ footer {
 .headerTopPart li input[type="text"] {
     width: 257px;
     height: 36px;
-    background: #ac1723;
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 40px;
     padding: 0 20px;
     border: 0px;
     color: #fff;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .headerTopPart .form-group {
@@ -2037,20 +2015,16 @@ footer {
     /* Firefox 18- */
     color: #fff;
 }
-.headerTopPart .navbar-nav > li > a{padding: 12px 15px;font-weight: 500;font-size: 13px;}
-.headerTopPart .navbar-nav.navbar-left > li:first-child > a{padding-left: 0}
-.user-account .dropdown-toggle{margin-top:5px}
-.user-account .dropdown-toggle{font-family: 'Montserrat', sans-serif;}
 
-
-.form-search{position: relative;}
-.search-icon button{position: absolute;
-right: 5px;
-top: 6px;
-cursor: pointer;
-background: none !important;
-border: 0;}
-.search-icon button i{color: #000 !important;font-size: 22px !important;background: none !important;}
+.search-icon i {
+    background: none !important;
+    color: #db9ca2 !important;
+    position: absolute;
+    right: 20px;
+    font-size: 32px;
+    top: 1px;
+    cursor: pointer;
+}
 
 .searchPart {
     position: relative;
@@ -2058,14 +2032,14 @@ border: 0;}
 
 .rightNav {
     margin-top: 0px;
-    padding: 0;
-    border-right: 2px solid #b11824;
+    padding: 0 50px;
+    border-right: 1px solid #a2141f;
     height: 64px;
 }
 
 .search-icon {
-    border-left: 2px solid #b11824;
-    border-right: 2px solid #b11824;
+    border-left: 1px solid #a2141f;
+    border-right: 1px solid #a2141f;
     padding: 14px 18px;
 }
 
@@ -2083,33 +2057,15 @@ border: 0;}
 .rightNavPart li {
     padding-top: 10px;
 }
-.navIcon li{width:60px;height:64px;position: relative;}
-.navIcon li a{padding: 0 !important;display: block;text-align: center;}
+
 .navIcon li a i {
     background: transparent;
-    color: #000;
-    font-size: 26px;
-    text-align: center;
-    line-height: 64px;
+    color: #fff;
+    font-size: 32px;
 }
-.navIcon li .badge{display: inline-block;
-min-width: 10px;
-padding: 2px 5px;
-font-size: 11px;
-font-weight: bold;
-line-height: 1;
-color: #BB1926;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
-border-radius: 10px;
-position: absolute;
-top: 60%;
-right: 6px;
-background: #fff !important;}
 
 .navIcon {
-    border-right: 2px solid #b11824;
+    border-right: 1px solid #a2141f;
 }
 
 .userIcon img {
@@ -2135,9 +2091,9 @@ background: #fff !important;}
     background: none !important;
 }
 
-/*.rightNavBar {
+.rightNavBar {
     margin-right: 160px !important;
-}*/
+}
 
 .visitingProfile {
     background: #f7f7f7;
@@ -2145,45 +2101,40 @@ background: #fff !important;}
 
 .left-list {
     background: #fff;
-    /*margin-top: 150px;*/
-    padding: 20px;
+    margin-top: 150px;
+    padding: 30px;
 }
 
 .middlePart {
     background: #fff;
-    /*margin-top: 150px;*/
+    margin-top: 150px;
 }
-.middlePart .profDes{padding:30px 60px 60px;}
 
-.profImage{margin: 15px auto 35px;}
 .profImage .img {
-    width: 106px;
-    height: 106px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    
 }
 
 .profDetails h2 {
     color: #202020;
-    font-size: 25px;
+    font-size: 28px;
     text-align: center;
     font-family: 'Sanchez', serif;
-    margin:0;
-    font-weight:600;
 }
 
 .profDetails p {
     font-family: 'Sanchez', serif;
     color: #bd1927;
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
-    margin: 8px auto;
-    padding-bottom: 25px;
+    margin-top: 18px;
+    padding-bottom: 26px;
     border-bottom: 2px solid #f0f0f0;
-    font-weight: 600;
+    margin-bottom: 0px;
 }
 
 .messagePart {
@@ -2196,37 +2147,22 @@ background: #fff !important;}
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     color: #202020;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 18px;
 }
 
 .messagePart ul li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .messagePart ul li:last-child {
     margin-bottom: 0px;
 }
-.messagePart ul li .badge{
-	display: inline-block;
-    min-width: 10px;
-    padding: 3px 5px;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    border-radius: 10px;
-    float: right;
-    margin-top: 2px;
-}
+
 .iconWidth {
-    width: 30px;
+    width: 40px;
     display: inline-block;
 }
-.iconWidth img{width:18px;}
+
 .onlineUsers {
     padding: 20px 0;
     border-bottom: 2px solid #f0f0f0;
@@ -2234,22 +2170,21 @@ background: #fff !important;}
 
 .onlineUsers h2 {
     font-family: 'Sanchez', serif;
-    font-size: 14px;
+    font-size: 18px;
     margin: 0px;
-    font-weight: 600;
 }
 
 .onlineList {
-    padding-left: 0px;    
+    padding-left: 0px;
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
-    margin:0 -7px;margin-top: 15px;
 }
 
 .onlineList li {
     display: inline-block;
-    margin: 7px;
+    margin-right: 9px;
+    margin-bottom: 5px;
 }
 
 .onlineList li:last-child {
@@ -2257,8 +2192,8 @@ background: #fff !important;}
 }
 
 .onlineList li .img {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -2293,7 +2228,8 @@ background: #fff !important;}
 }
 
 .upload-btn-wrapper.uploadBut .btn .icon {
-    font-size: 16px;
+    font-size: 35px;
+    margin-top: -7px;
     display: block;
     margin-left: 0;
 }
@@ -2326,11 +2262,10 @@ background: #fff !important;}
 .bottomList ul li a {
     color: #202020;
     font-family: 'Montserrat', sans-serif;
-    font-weight:600;
 }
 
 .topPart img {
-    height: 209px;
+    height: 168px;
 }
 
 .profPhoto {
@@ -2338,8 +2273,8 @@ background: #fff !important;}
 }
 
 .profPhoto .img {
-    width: 217px;
-    height: 217px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     border: 4px solid #fff;
     position: absolute;
@@ -2351,13 +2286,13 @@ background: #fff !important;}
 
 .profPhoto .img .inner-bg {
     position: relative;
-    height: 209px;
+    height: 153px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 .profPhoto .img .inner-bg .icon-change {
-    width: 209px;
+    width: 160px;
     height: 50px;
     display: none;
     position: absolute;
@@ -2377,7 +2312,6 @@ background: #fff !important;}
 
 .profPhoto .img .inner-bg:hover .icon-change {
     display: flex;
-    justify-content:center;
 }
 
 .profPhoto .img {
@@ -2392,35 +2326,31 @@ background: #fff !important;}
 }
 
 .profDes h2 {
-    font-size: 25px;
+    font-size: 24px;
     color: #202020;
     font-family: 'Sanchez', serif;
-    font-weight: 600;
 }
 
 .profDes p {
     margin-bottom: 0px;
     color: #4e4e4e;
-    font-weight: 600;
 }
 
 .profDes .addressP {
-    color: #bb1926;;display: block;margin-top:10px
+    color: #bb1926;
 }
-.tabPart ul{display: flex;flex-wrap:nowrap;}
+
 .tabPart ul li {
     background: #fff;
-    width:auto;
-    text-align: center;
-    margin-right: 10px;
 }
 
 .tabPart .nav-pills {
     background: #f7f7f7;
-    padding: 15px 0;
+    padding: 30px 0;
 }
 
 .tabPart ul li {
+    margin-right: 20px;
     border-radius: 0px;
 }
 
@@ -2431,13 +2361,9 @@ background: #fff !important;}
 .tabPart .nav-pills li a {
     color: #000000;
     text-transform: uppercase;
-    padding: 15px 27px;
+    padding: 10px 27px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
 }
-.tabPart .nav-pills li{width:100%}
 
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:hover,
@@ -2449,12 +2375,10 @@ background: #fff !important;}
 }
 
 .shareYourThought {
-    padding: 20px;
+    padding: 0 20px;
     background: #fff;
 }
-.shareYourThought .btn.btn-primary{padding: 8px 35px;font-size: 15px;}
-.shareYourThought label {font-size: 11px;color: #202020;letter-spacing: 1px;}
-.uploadVideo li p span:before{position: absolute;z-index: 999;background: #fff;font-size: 22px;top: 4px;}
+
 .textarea textarea {
     border-left: 0px;
     border-right: 0px;
@@ -2462,28 +2386,24 @@ background: #fff !important;}
     border-bottom: 1px solid #f0f0f0;
     height: 100px;
     box-shadow: none !important;
-    font-size: 17px;
-    padding: 20px;
+    font-size: 27px;
 }
 
 .upload-btn-wrapper {
     position: relative;
     overflow: hidden;
     display: inline-block;
-    float: left;
 }
 
 .uploadButtonPart .btn {
     border: 2px solid #cc535c;
     color: #cc535c;
     background-color: white;
-    padding: 7px 27px 5px;
+    padding: 8px 5px;
     border-radius: 100px;
-    font-size: 10px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
     text-transform: uppercase;
-    font-weight: 600;
-    line-height: 10px;
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -2527,8 +2447,6 @@ background: #fff !important;}
     margin-top: 30px;
     padding: 20px;
 }
-.likePart .imageParts .profImageP .img{width:56px !important;height:56px !important;}
-
 
 .tabPart .tab-content {
     background: #f7f7f7;
@@ -2553,20 +2471,18 @@ background: #fff !important;}
 .profTextPart h2 {
     margin: 0px 0 0 0;
     padding: 0px;
-    font-size: 16px;
+    font-size: 20px;
     font-family: 'Sanchez', serif;
     color: #202020;
-    FONT-WEIGHT: 600;
 }
 
 .profTextPart p {
     font-family: 'Sanchez', serif;
-    font-size: 11px;
+    font-weight: normal;
+    font-size: 16px;
     color: #7e7e7e;
     margin: 0px;
     padding: 0px;
-    FONT-WEIGHT: 600;
-    margin-top: 3px;
 }
 
 .icondown {
@@ -2583,11 +2499,10 @@ background: #fff !important;}
 .userComment p {
     color: #4e4e4e;
     font-family: 'Sanchez', serif;
-    font-size: 15px;
+    font-weight: normal;
+    font-size: 16px;
     line-height: 22px;
-    margin: 20px 0;
-    font-weight: 600;
-    letter-spacing: 1px;
+    margin-top: 20px;
 }
 
 .userComment ul li {
@@ -2600,9 +2515,7 @@ background: #fff !important;}
 }
 
 .userComment ul li a {
-    color: #7e7e7e;
-    font-size:12px;
-    font-weight: 600;
+    color: #4e4e4e;
 }
 
 .likeComment {
@@ -2615,7 +2528,7 @@ background: #fff !important;}
 }
 
 .likeComment ul li a i {
-    font-size: 20px;
+    font-size: 32px;
     color: #cc535c;
 }
 
@@ -2624,7 +2537,7 @@ background: #fff !important;}
 }
 
 .imageLikeP {
-    margin: 25px 0;
+    margin-bottom: 25px;
 }
 
 .nothing {
@@ -2640,11 +2553,9 @@ background: #fff !important;}
     padding: 20px;
 }
 
-.aboutPart h2,.connectionsPart h2{
-    font-size: 25px;
-    color: #202020;
-    font-family: 'Sanchez', serif;
-    font-weight: 600;
+.aboutPart h2 {
+    padding: 0px;
+    margin: 0px;
 }
 
 .tabs-left {
@@ -2664,9 +2575,9 @@ background: #fff !important;}
     /* border-radius: 4px 4px 0 0; */
 }
 
-/*.rightPart {
+.rightPart {
     margin-top: 150px;
-}*/
+}
 
 .nav-tabs.tabs-left>li.active>a {
     background: none;
@@ -2675,18 +2586,17 @@ background: #fff !important;}
 
 .innerRightPart {
     background: #fff;
-    padding: 30px;
+    padding: 20px;
     margin-bottom: 20px;
 }
 
 .innerRightPart h2 {
-    font-size: 14px;
+    font-size: 18px;
     color: #000000;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    margin: 0 0 25px 0;
+    margin: 0px 0 20px 0;
     padding: 0px;
-    font-weight:600;
 }
 
 .photoImage {
@@ -2703,9 +2613,9 @@ background: #fff !important;}
 }
 
 .photoImage li .img {
-    width: 87px;
-    height: 87px;
-    margin-bottom: 6px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 8px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -2714,10 +2624,8 @@ background: #fff !important;}
 .viewAll {
     color: #707070;
     font-family: 'Sanchez', serif;
-    font-size: 13px;
+    font-size: 18px;
     display: block;
-    font-weight: 600;
-    margin-top: 24px;
 }
 
 .hubMet h2 {
@@ -2775,19 +2683,12 @@ background: #fff !important;}
     padding: 20px 0;
     border-bottom: 1px solid #f0f0f0;
 }
-.sideways{display: block !important;}
-.sideways li{width:100%;}
+
 .sideways li a {
     margin: 10px 0;
     color: #90949c;
     display: block;
-    text-align: left;
-    cursor: pointer;
 }
-.edit-forms{display: block !important;background: #fff;}
-.edit-forms .form-control-plaintext{width: 100%;height: 32px;border-radius: 4px;border: 1px solid #c8c8c8;padding: 0 7px;}
-.edit-forms textarea.form-control-plaintext{height: 90px;overflow: hidden;}
-
 
 .sideways li a:hover {
     color: #000;
@@ -2848,6 +2749,7 @@ background: #fff !important;}
 }
 
 .connectionsPart h2 {
+    margin: 0px;
     padding: 0px;
 }
 
@@ -2880,7 +2782,7 @@ background: #fff !important;}
 }
 
 .connectionList h2 {
-    font-size: 15px;
+    font-size: 18px;
     color: #bb1926;
     margin-bottom: 0px;
 }
@@ -3002,7 +2904,6 @@ background: #fff !important;}
     position: absolute;
     z-index: 999;
     cursor: pointer;
-    width:100%;
 }
 
 
@@ -3247,8 +3148,7 @@ background: #fff !important;}
 .reply-comment-wrapper .right-comment-content .commentee-name {
     margin-top: 0;
     margin-bottom: 2px;
-    font-size: 16px;
-    color:#bb1926;
+    font-size: 16px
 }
 
 .profTextPart p.post-date {
@@ -3691,22 +3591,12 @@ ul.connectionlist li .text-area p {
 .share-story h1 {
     color: #be1620;
     padding-bottom: 0;
-    margin: 20px auto;
-    font-size: 30px;
+    margin-bottom: 20px
 }
 
 .share-story h1:after {
     content: none;
 }
-.share-story p{font-size:18px;font-weight: 600;line-height: 24px;}
-.share-story .btn-primary{padding: 13px 35px;margin-bottom:20px;}
-.group{border-bottom: 2px solid #f0f0f0 !important;}
-
-.innerRightPart .hubMet.hubMet1:first-child{padding-top:0 !important}
-
-.group a div.img{width:87px;height:87px;}
-.group h2{font-size: 16px;font-family: 'Sanchez', serif;margin-top: 15px;}
-.group .btn.btn-primary{font-size: 11px;margin-top:15px}
 
 
 /********* Contact ********/
@@ -3749,45 +3639,7 @@ ul.connectionlist li .text-area p {
 .contact-dtls li .icon {
     margin-right: 15px
 }
-/*********************soutik*******************************/
-.about-content-area{padding: 230px 0;}
-.flex-profile{display: flex;flex-wrap:no-wrap;justify-content:space-between}
-.flex-profile .flex-left{width:285px;}
-.flex-profile .flex-right{width:365px}
-.flex-profile .flex-middle{width:645px}
-.topPart[_ngcontent-c0]{height:195px !important}
-.profPhoto .img{top: -120px !important;}
 
-.abouts .tab-content h3,.group-list .tab-content h3{display: block;width: 100%;margin: 0 0 25px;font-size: 20px;background: #fff;}
-.connection-box{display: flex;flex-wrap:wrap !important;justify-content: space-around;}
-.connection-box li{width:47% !important;margin: 0 0 15px 0}
-.connection-box li .connectionText{float:right;width:calc(100% - 80px);}
-.connection-box li .connectionText h2{margin-top: 5px;font-weight: normal;}
-.group-list .connection-box li{width:100% !important}
-.group-list .connection-box li .btn-primary{margin-top: 2px;}
-.mobile-only{display: none;}
-.mobile-only .rightNavBar{display: flex;flex-wrap:nowrap;overflow: scroll;justify-content:flex-start}
-.mobile-only .rightNavBar li a{white-space: nowrap;}
-
-img-cropper{display:table;margin:0 auto;float:none;width:auto;}
-.find-friend-section h3{font-size:18px;display: block;text-align: center;}
-
-.friend-box{display: flex;flex-wrap:wrap !important;justify-content:space-between}
-.friend-box .friend-box-list{border: 1px solid #ddd;overflow: hidden;height: 90px;width:48%;margin-bottom:10px !important;align-items:center}
-.friend-box .friend-box-list .friend-boxImage{width:90px;height:90px;float:left;}
-.friend-box .friend-box-list .friend-boxText{width:calc(100% - 90px);float:right;}
-
-@media screen and (max-width:1242px) {
-	.flex-profile .flex-left{width:25%}
-	.flex-profile .flex-middle{width:45%}
-	.flex-profile .flex-right{width:30%}
-	.innerRightPart{padding: 20px;}
-}
-
-
-@media screen and (max-width:1024px) {
-	.headerTopPart .navbar-nav > li > a{padding: 12px 6px;}
-}
 @media screen and (max-width:991px) {
     .col-log-in {
         margin-bottom: 15px;
@@ -3795,8 +3647,6 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
     .log-row {
         justify-content: flex-start;
     }
-    .desk-only{display: none;}
-    .mobile-only{display: block;}
 }
 
 @media screen and (max-width:767px) {
@@ -3812,32 +3662,4 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
     .sign-form {
         padding: 20px 20px;
     }
-    .flex-profile{display: block;}
-    .flex-profile .flex-left{width:100% !important}
-	 .flex-profile .flex-middle{width:100% !important}
-	 .flex-profile .flex-right{width:100% !important}
-	 .tabPart .nav-pills{flex-wrap:wrap;}
-    .tabPart .nav-pills li{flex-wrap:wrap;width:50%;margin:0}
-    .icondown{display: none;}
-    .about-content-area {padding: 170px 0;}
-    .headerTopPart li input[type="text"]{width: auto;}
-    .shareYourThought .btn.btn-primary{width:100%;margin-top:10px}
-    .group{text-align: center;}
-    .photoImage{justify-content: center;}
-    .photoImage li{margin: 5px}
-    .group a div.img{margin: 0 auto;}
-    
 }
-@media screen and (max-width:480px) {
-	.headerTopPart li input[type="text"]{width:150px;}
-	.search-icon{padding: 14px 10px}
-}
-
-
-
-
-
-
-
-
-

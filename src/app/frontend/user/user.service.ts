@@ -109,6 +109,10 @@ export class UserService {
     return this.apiService.get(`/enrichment/apparticleWithCat`)
       .map(data => data);
   }
+  
+  getAllGrpList() {
+    return this.apiService.get(`/users/appactivegrouplist`).map(data => data);
+  }
 
   getUserFrndListById(form_data) {
     return this.apiService.post(
@@ -231,7 +235,7 @@ export class UserService {
   
   getGroupPostById(form_data) {
     return this.apiService.post(
-      `/enrichment/appallallpostbygroupid`,
+      `/enrichment/appallpostbygroupid`,
       form_data
     ).map(data => data);
   }
