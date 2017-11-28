@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "../../components/shared.module";
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { UserService } from "../user/user.service";
-import { GrouplistComponent } from './grouplist/grouplist.component';
 
 @NgModule({
   imports: [
@@ -26,7 +25,7 @@ import { GrouplistComponent } from './grouplist/grouplist.component';
       tertiaryColour: '#ffffff'
     })
   ],
-  declarations: [GroupComponent, GrouplistComponent],
+  declarations: [GroupComponent],
   providers: [UserService]
 })
 export class GroupModule { }

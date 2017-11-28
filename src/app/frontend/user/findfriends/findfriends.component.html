@@ -1,19 +1,17 @@
 <section class="section about-content-area visitingProfile">
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row flex-profile">
             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-          <div class="col-md-3">
+          <div class="col-md-3 flex-left">
             <user-sidebar></user-sidebar>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 flex-middle">
             <div class="middlePart">
               <div class="tabPart">
                 <div class="tab-content">
-                  
-                    <div class="col-md-12">
-                        <div class="tab-content">
+                  <div class="tab-content">
                             <div class="tab-pane fade in active">
-                                <div class="connectionsPart">
+                                <div class="connectionsPart find-friend-section">
                                     <div class="row" *ngIf="(successMsg != '')">
                                         <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                              {{successMsg}}
@@ -28,25 +26,25 @@
                                     <form class="" [formGroup]="postform" (ngSubmit)="submitSearchUser(postform.value)" #postForm="ngForm">
                                         <div class="row">&nbsp;</div>  
                                       <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-8 col-sm-6">
                                               <div class="form-group">
                                                   <input type="text" class="form-control-plaintext form-control" style="height: 46px;" placeholder="Search by name" formControlName="suname">
                                               </div>
                                              </div>
-                                             <div class="col-md-3">
+                                             <div class="col-md-4 col-sm-6">
                                                 <button type="submit" class="btn btn-primary">Search</button>
                                               </div>
                                          </div>
                                     </form>
                                     <div class="connections">
-                                        <ul class="uilist" *ngIf="userSearchFrndList?.length > 0">
-                                          <li class="connectionList" *ngFor="let sfriendData of userSearchFrndList">
-                                            <div class="connectionImage">
+                                        <ul class="friend-box" *ngIf="userSearchFrndList?.length > 0">
+                                          <li class="friend-box-list" *ngFor="let sfriendData of userSearchFrndList">
+                                            <div class="friend-boxImage">
                                               <a href="#">
                                                   <div class="img" [ngStyle]="{'background-image':'url('+sfriendData.profile_image+')'}"></div>
                                               </a>
                                             </div>
-                                            <div class="connectionText">
+                                            <div class="friend-boxText">
                                               <h2>{{sfriendData.name}}</h2>
                                               <!--<p>3 mutual friend</p>-->
                                               <button type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Friend</button>											</div>
@@ -54,14 +52,14 @@
                                         </ul>
                                         <div class="likePart" *ngIf="userSearchFrndList?.length == 0">
                                             <div class="row">
-                                                <div class="col-md-10">
-                                                    <div class="nothing">No friend found</div>
+                                                <div class="col-md-12">
+                                                    <div class="nothing"><h3>No friend found</h3></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>  
 
-                                  <h2>Respond to Your Friend Requests</h2>
+                                  <h3>Respond to Your Friend Requests</h3>
                                   <div class="connections">
                                       <ul class="uilist" *ngIf="userRequestFrndList?.length > 0">
                                           <li class="connectionList" *ngFor="let friendData of userRequestFrndList">
@@ -80,8 +78,8 @@
                                         </ul>
                                     <div class="likePart" *ngIf="userRequestFrndList?.length == 0">
                                         <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="nothing">No friend request found</div>
+                                            <div class="col-md-12">
+                                                <div class="nothing"><h3>No friend request found</h3></div>
                                             </div>
                                         </div>
                                     </div>
@@ -90,16 +88,97 @@
                               </div>
                           
                         </div>
-                      </div>
-                  
-                  
                 </div>
               </div>
             </div>
            
           </div>
-          <div class="col-md-3">
-              <app-user-prfrsidebar></app-user-prfrsidebar>
+          <div class="col-md-3 flex-right">
+            <div class="rightPart">
+                
+              <div class="innerRightPart">
+                <h2>Photos & Videos</h2>
+              <ul class="photoImage">
+                <li>
+                  <a href="#">
+                    <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="img" style="background-image: url('assets/images/dog.jpg')"></div>
+                  </a>
+                </li>
+  
+              </ul>
+              <a href="#" class="viewAll text-center">View All</a>
+              </div>
+              <div class="innerRightPart">
+                <h2>ATTENDING HUBS</h2>
+                <div class="hubMet hubMet1">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="img" style="background-image: url('assets/images/dog1.jpg')"></div>
+                    </div>
+                    <div class="col-md-8">
+                      <h2>Femnesty Hub Met</h2>
+              <p>2017-09-04, London</p>
+              <button type="button" class="btn btn-primary">View Hub</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="innerRightPart">
+                <h2>Groups</h2>
+                <div class="hubMet hubMet1">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="img" style="background-image: url('assets/images/dog1.jpg')">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <h2>London Women Group</h2>
+              <button type="button" class="btn btn-primary">View Group</button>
+                    </div>
+                  </div>
+  
+                </div>
+                <div class="hubMet hubMet1">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="img" style="background-image: url('assets/images/dog1.jpg')">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <h2>London Women Group</h2>
+                      <button type="button" class="btn btn-primary">View Group</button>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+            </div>
           </div>
         </div>
     </div>

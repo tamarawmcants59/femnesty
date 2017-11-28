@@ -58,6 +58,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
   }
 
   openChatWindow(chat) {
+    console.log(chat);
     this.fromUserId = chat.from_user_id;
     this.room_id = chat.room_id;
     this.getWithUser(this.fromUserId);
@@ -96,7 +97,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
         const data = action.payload.doc.data();
         const id = action.payload.doc.id;
         if (data.to_user_id == this.loginUserId && this.isComponentActive) {
-          //console.log(id);
+          console.log(id);
           // setTimeout(() => {
           //   this.db.collection('Messages').doc(id).update({ is_read: true }).then(res => {
           //     console.log(res);
@@ -141,13 +142,13 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
       },
       is_read: false
     };
-    //console.log(data);
+    console.log(data);
     this.message = null;
     this.db.collection('Messages').add(data).then(res => {
-      //console.log(res);
+      console.log(res);
       this.message = null;
     }).catch(err => {
-      //console.log('error with fb: ', err);
+      console.log('error with fb: ', err);
     });
   }
 
@@ -162,18 +163,18 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
       },
       is_read: false
     };
-    //console.log(data);
+    console.log(data);
     this.db.collection('Messages').add(data).then(res => {
-      //console.log(res);
+      console.log(res);
       this.message = null;
     }).catch(err => {
-      //console.log('error with fb: ', err);
+      console.log('error with fb: ', err);
     });
   }
 
   public fileChangePost($event) {
     //this.showPostImgDive = true;
-    //console.log($event);
+    console.log($event);
     const image: any = new Image();
     const file: File = $event.target.files[0];
     this.fileData = file;
@@ -193,7 +194,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
     this.userService.uploadFile(formData)
       .subscribe(
       data => {
-        //console.log(data);
+        console.log(data);
         if (data.file_name) {
           this.sendFile(data.file_name);
         }
