@@ -3781,7 +3781,7 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .friend-box .friend-box-list .friend-boxText{width:calc(100% - 90px);float:right;}
 .friend-box .friend-box-list .friend-boxText h2{font-size: 14px;margin:0 5px 5px;}
 .friend-box .friend-box-list .friend-boxText button{padding: 4px 15px;font-size: 11px;}
-.friend-box .friend-box-list:last-child{margin-right: auto;}
+.friend-box .friend-box-list:last-child {margin-right: auto;}
 
 
 @media screen and (max-width:1242px) {
