@@ -1,1 +1,1 @@
-export * from './frontend-layout.component';
+export * from "./frontend-layout.component";
