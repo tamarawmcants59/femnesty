@@ -1,0 +1,85 @@
+<!--<section class="inner-banner" style="background: url(images/inner-bg.jpg) center no-repeat; background-size: cover;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-7">
+              <h1 class="text-white">About Femnesty</h1>
+          </div>
+      </div>
+  </div>
+</section>-->
+
+<section class="section about-content-area" *ngIf="pageSlugName != 'contact-us'">
+    <div class="container">
+        <div class="row">
+          <h1>{{pageDetData.page_heading}}</h1>
+          <div [innerHTML]="pageDetData.content" ></div>
+        </div>
+    </div>
+</section>
+
+<section class="section contact-section" *ngIf="pageSlugName == 'contact-us'">
+    <div class="contact-left">
+        <img src="assets/images/contact-banner.jpg" alt="" class="img-responsive">
+    </div>
+    <div class="contact-right">
+        <h1>Get in Touch.</h1>
+        <h4>If you have any questions about our organisation, have any comment or feedback then please use the contact details below.</h4>
+        <ul class="contact-dtls">
+            <li>
+                <div class="icon"><img src="assets/images/mobile.png" alt=""></div>
+                <div class="number">+{{getPageSiteSetData?.mobile}}</div>
+            </li>
+            <li>
+                <div class="icon"><img src="assets/images/mail.png" alt=""></div>
+                <div class="number">{{getPageSiteSetData?.admin_email}}</div>
+            </li>
+        </ul>
+        <div class="row" *ngIf="(successMsg != '')">
+            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                 {{successMsg}}
+            </div>
+        </div>
+        <form class="form-area" [formGroup]="commentform" (ngSubmit)="submitContactForm()" #postForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name" formControlName="name" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['name'].valid && commentform.controls['name'].touched">Name is required</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" formControlName="email" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['email'].valid && commentform.controls['email'].touched">Please enter the correct email, this email not valid.</div>
+                        <!--<div class="text-danger" *ngIf="(commentform.controls['email'].hasError('email', 'email') && !commentform.controls['email'].valid) && commentform.controls['email'].touched">
+                            Please enter the correct email, this email not valid.
+                          </div>-->
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <input type="text" placeholder="Mobile No" formControlName="mobile_no" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['mobile_no'].valid && commentform.controls['mobile_no'].touched">Mobile no is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" formControlName="subject" class="form-control">
+                        <div class="text-danger" *ngIf="!commentform.controls['subject'].valid && commentform.controls['subject'].touched">Subject is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <textarea rows="6" placeholder="Your Message" formControlName="message" class="form-control"></textarea>
+                        <div class="text-danger" *ngIf="!commentform.controls['message'].valid && commentform.controls['message'].touched">Message is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

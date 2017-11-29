@@ -1,0 +1,487 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container">
+        <div class="row">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <div class="col-md-3">
+                <user-sidebar></user-sidebar>
+            </div>
+            <div class="col-md-6">
+                <div class="middlePart">
+                    <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+publicCmpDet.cover_image_url+')'}">
+                        <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
+                        <div class="change-img">
+                            <i class="fa fa-camera"></i>
+                            <div class="txt">Upload Profile Photo</div>
+                        </div>
+                        <input type="file" class="change-img-input" (change)="fileChangeListenerCover($event)">
+                        <div class="addCoverPhoto">
+                            <span class="coverPhoto">Add Cover Photo</span>
+                        </div>
+                    </div>
+                    <!--<div class="topPart inner-bg" *ngIf="coverImageData.image" [ngStyle]="{'background-image':coverImageData.image}">
+                        <img [src]="coverImageData.image" style="width:100%;height:100%">
+                    </div>-->
+                    <div class="profPhoto">
+                        <div *ngIf="!prfImageData.image" class="img" [ngStyle]="{'background-image':'url('+publicCmpDet.image_url+')'}">
+
+                            <div class="inner-bg">
+                                <div class="icon-change" id="clickableLiElement">
+                                    <i class="fa fa-camera"></i>
+                                    <div class="txt">Update Profile <br> Picture</div>
+                                    <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img result rounded" *ngIf="prfImageData.image">
+                            <img [src]="prfImageData.image" style="width:100%; height:100%">
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="showImgDive">
+                        <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
+                            <div class="col-md-4" style="padding-top: 90px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
+                            </div>
+                        </div>
+                        <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                    </div>
+                    <div class="col-md-12" *ngIf="showCoverImgDive">
+                        <div class="col-md-12" *ngIf="coverImageData.image" style="padding-bottom:10px;">
+
+                            <div class="col-md-4" style="padding-top: 10px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadCoverImg()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <img-cropper #cropper [image]="coverImageData" [settings]="coverCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                        </div>
+                    </div>
+                    <div class="profDes">
+                        <h2 class="text-center">{{publicCmpDet?.name}}</h2>
+                        <p class="text-center">{{publicCmpDet.bio}}</p>
+                        <p class="text-center addressP">{{publicCmpDet.address}}, {{publicCmpDet.city}}</p>
+                    </div>
+                    <div class="tabPart">
+                        <ul class="nav nav-pills">
+                            <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
+                            <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
+                            <li [ngClass]="{'active' : activeTab=='contact'}"><a (click)="toggleTab('contact')">Contact</a></li>
+                            <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
+                                <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+                                <div *ngIf="userPostList?.length > 0">
+                                    <div class="likePart" *ngFor="let postData of userPostList">
+                                        <app-post-card [postData]="postData"></app-post-card>
+                                    </div>
+                                </div>
+                                <div class="likePart" *ngIf="userPostList?.length == 0">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="nothing">Nothing more to show</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
+                                <div class="aboutPart">
+                                    <h2>About</h2>
+                                    <div class="abouts">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <ul class="nav-tabs tabs-left sideways">
+                                                    <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
+                                                    <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
+                                                    <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}"><a (click)="aboutToggleTab('add_subadmin')">Add Subadmin</a></li>
+                                                    <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                        <ul class="ulList">
+                                                            <div class="menu">
+                                                                <h3>About Company</h3>
+                                                                <div class="">
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.company_name}}</span>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Website </label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.website}}</span>
+                                                                        </div>
+                                                                    </div>                                                                  
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.email}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.mobile_number}}</span>
+                                                                        </div>
+                                                                    </div>                                                                    
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.state}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.city}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.address}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Opening Hour</label>
+                                                                            <div class="col-sm-8">
+                                                                                <span>{{publicCmpDet.opening_hour}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.bio}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_details'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Edit Details</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_name" formControlName="company_name">
+                                                                                <div class="text-danger" *ngIf="!form.controls['company_name'].valid && form.controls['company_name'].touched">Company Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.mobile_number" formControlName="mobile_number">
+                                                                                <div class="text-danger" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Website</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.website" formControlName="website">
+                                                                                <div class="text-danger" *ngIf="!form.controls['website'].valid && form.controls['website'].touched">Website Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.state" formControlName="state">
+                                                                                <div class="text-danger" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.city" formControlName="city">
+                                                                                <div class="text-danger" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.address" formControlName="address">
+                                                                                <div class="text-danger" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                                                            </div>
+                                                                        </div> 
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Opening Hour</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.opening_hour" formControlName="opening_hour">
+                                                                                <div class="text-danger" *ngIf="!form.controls['opening_hour'].valid && form.controls['opening_hour'].touched">Opening hour Required</div>
+                                                                            </div>
+                                                                        </div>                                                                     
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">About Company</label>
+                                                                            <div class="col-sm-8">
+                                                                                <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Save Changes</button>
+                                                                            <!--<button type="button" class="btn btn-default">Cancel</button>-->
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_subadmin'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Add Subadmin</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="adminform" (ngSubmit)="addSubadminForm()" #adminForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="name">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="email" class="form-control-plaintext" formControlName="email" (ngModelChange)="checkEmail($event)">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['email'].valid && adminform.controls['email'].touched">Email Required</div>
+                                                                                <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
+                                                                                    This email already exist.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="password" class="form-control-plaintext" formControlName="txt_password">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="state">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="city">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="address">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Create</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_subadmin'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Edit Subadmin</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="adminform" (ngSubmit)="editSubadminForm()" #adminEditForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.name" formControlName="name">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="email" readonly class="form-control-plaintext" [(ngModel)]="editSubAdmindata.email" formControlName="email">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="password" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.txt_password" formControlName="txt_password">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.state" formControlName="state">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.city" formControlName="city">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.address" formControlName="address">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminEditForm.valid">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div *ngIf="loginUserDet.user_type == 'CA'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='list_subadmin'}">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>List Subadmin</h3>
+                                                            <div class="menu" *ngIf="cmpSubadminList?.length > 0">
+                                                                <ul class="ulList">
+                                                                <li class="connectionList" *ngFor="let friendData of cmpSubadminList">
+                                                                    <div class="connectionImage">
+                                                                            <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="connectionText">
+                                                                        <h2>{{friendData.name}}</h2>
+                                                                        <button type="button" class="btn btn-primary" (click)="deleteAdmin(friendData.id)">Delete</button>
+                                                                        <button type="button" class="btn btn-primary" (click)="editAdmin(friendData.id)">Edit</button>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
+                                <div class="connectionsPart">
+                                    
+                                    <h2>Employee List</h2>
+                                    <div class="connections">
+                                        <ul class="uilist" *ngIf="userEmployeeList?.length > 0">
+                                            <li class="connectionList" *ngFor="let userData of userEmployeeList">
+                                                <div class="connectionImage">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="connectionText">
+                                                        <a [routerLink]="['/user/profile',userData.display_name]">
+                                                            <h2>{{userData.name}}</h2>
+                                                        </a>                                                  
+                                                    
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userEmployeeList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h2>Follower List</h2>
+                                    <div class="connections">
+                                        <ul class="uilist" *ngIf="userFollowerList?.length > 0">
+                                            <li class="connectionList" *ngFor="let followData of userFollowerList">
+                                                <div class="connectionImage">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="connectionText">
+                                                        <a [routerLink]="['/user/profile',followData.display_name]">
+                                                            <h2>{{followData.name}}</h2>
+                                                        </a>                                                  
+                                                    
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userFollowerList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
+                                <div class="connectionsPart">
+                                    <h2>Request List</h2>
+                                    <div class="connections">
+                                        <ul class="uilist" *ngIf="userRequestList?.length > 0">
+                                            <li class="connectionList" *ngFor="let userData of userRequestList">
+                                                <div class="connectionImage">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="connectionText">
+                                                        <a [routerLink]="['/user/profile',userData.display_name]">
+                                                            <h2>{{userData.name}}</h2>
+                                                        </a>                                                    
+                                                    <a (click)="RequestAccept(userData.id, 2)" class="btn btn-primary">Accept</a>
+                                                    <a (click)="RequestAccept(userData.id, 3)" class="btn btn-primary">Reject</a> 
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userRequestList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No request found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <app-company-rightbar [profileData]="publicCmpDet" [companyID]="cmpId"></app-company-rightbar>
+            </div>
+        </div>
+    </div>
+</section>

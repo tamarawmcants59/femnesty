@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-md-10">
+        <div class="imageParts">
+            <div class="profImageP">
+                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
+            </div>
+            <div class="profTextPart">
+                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
+                <p>{{postData.created_date_mod}}</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <p class="icondown"><i class="icon ion-chevron-down"></i></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="userComment">
+            <div class="imageLikeP" *ngIf="postData.file_name != ''">
+                <img [src]="postData.file_image_url" class="img-responsive">
+            </div>
+            <p>{{postData.description}}</p>
+            <ul>
+                <li><a href="javascript: void(0);">{{postData.likecount}} Likes</a></li>
+                <li><a href="javascript: void(0);">{{postData.commentcount}} Comments</a></li>
+            </ul>
+        </div>
+        <div class="likeComment">
+            <div class="row">
+                <div class="col-md-10 col-xs-8">
+                    <ul>
+                        <li *ngIf="postData.post_like"><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i></a></li>
+                        <li *ngIf="!postData.post_like"><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
+                        <li><a (click)="userPostComment(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    <ul>
+                        <li class="float-right"><a href="#"><i class="fa fa-share"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="postData.comments?.length > 0">
+            <div class="reply-comment-wrapper" *ngFor="let cmtList of postData.comments">
+                <div class="left-comment-content">
+                    <a [routerLink]="['/user/profile',cmtList.display_name]">
+                        <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                    </a>
+                </div>
+                <div class="right-comment-content">
+                    <div class="profTextPart">
+                        <a [routerLink]="['/user/profile',cmtList.display_name]">
+                            <h4 class="commentee-name">{{cmtList.name}}</h4>
+                        </a>
+                        <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                        <div class="commenteeComment">
+                            <p>{{cmtList.comment}}</p>
+                        </div>
+                    </div>
+                    <!--<div class="sub-reply-comment-wrapper">
+                <div class="left-comment-content">
+                <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
+                </div>
+                <div class="right-comment-content">
+                <div class="profTextPart">
+                    <h4 class="commentee-name">Monalisa Dsouza</h4>
+                    <p class="post-date">19 May 2017</p>
+                    <div class="commenteeComment">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-reply-comment-wrapper">
+                <div class="left-comment-content">
+                <div class="user-image" style="background: url('images/womanImage.png') no-repeat center center;"></div>
+                </div>
+                <div class="right-comment-content">
+                <div class="profTextPart">
+                    <h4 class="commentee-name">Monalisa Dsouza</h4>
+                    <p class="post-date">19 May 2017</p>
+                    <div class="commenteeComment">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                    </div>
+                    </div>
+                </div>
+            </div>-->
+                </div>
+            </div>
+            <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
+        </div>
+        <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
+            <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments, postData)" #commentForm="ngForm">
+                <div class="input-group">
+                    <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
+                    <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" [disabled]="!commentform.valid"><i class="fa fa-send"></i></button>
+                </span>
+                </div>
+                <div class="text-danger" *ngIf="!commentform.controls['comment'].valid && commentform.controls['comment'].touched">Write a comment.</div>
+            </form>
+        </div>
+    </div>
+</div>

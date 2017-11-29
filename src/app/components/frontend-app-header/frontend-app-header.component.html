@@ -1,0 +1,172 @@
+<header class="navbar-fixed-top" *ngIf="userloggedIn != 1">
+    <div class="header-top">
+        <div class="container-fluid">
+            <ul class="pull-left">
+                <li><i class="ion-ios-telephone"></i> +44 20 3290 3312</li>
+                <li><i class="ion-email"></i> info@femnesty.com</li>
+            </ul>
+            <ul class="pull-right">
+                <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                <li><a href=""><i class="ion-social-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--<nav class="navbar" [ngClass]="{'navbar-white':HeaderNavCls === 'navbar-white'}">-->
+    <nav class="navbar navbar-white">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/']"><img src="assets/images/logo.png" alt="" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }}</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                    <li><a href="#">Contribute</a></li>
+                    <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>
+
+
+<header class="navbar-fixed-top header-inner" *ngIf="userloggedIn == 1">
+    <div class="header-top headerTopPart">
+        <nav>
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form [formGroup]="form" (ngSubmit)="searchDataResult(form.value)" #searchForm="ngForm">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#"><img src="assets/images/hamburgIcon.png"></a>
+                        </li>
+                        <li class="form-search search-icon">
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="skeyword" (ngModelChange)="searchResult($event)" placeholder="Search" >
+                                <!--<input type="text" class="form-control" formControlName="skeyword" [(ngModel)]="searchResultStr" placeholder="Search" >-->
+                                <button type="submit"><i class="icon ion-ios-search"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                    </form>
+                    <ul class="nav navbar-nav rightNav rightNavPart">
+                        <li><a [routerLink]="['/social_home']">Home</a></li>
+                        <li><a [routerLink]="['/user/profile']">Activity</a></li>
+                        <li><a [routerLink]="['/group']">Groups</a></li>
+                        <li><a [routerLink]="['/social_home']">Hubs</a></li>
+                        <li><a [routerLink]="['/user/find_friends']">Members</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navIcon">
+                        <li ngbDropdown class="dropdown">
+                            <a ngbDropdownToggle class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon ion-chatboxes"></i>
+                                <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
+                            </a>
+                            <div ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
+                                <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
+                                    <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread" href="javascript:void(0)">
+                                        <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />
+                                        <div *ngIf="chat.userDetails" class="txt">
+                                            <div class="upr">
+                                                <div class="name">{{chat.userDetails.first_name}} {{chat.userDetails.last_name}}</div>
+                                                <div class="time">{{chat.created | date}}</div>
+                                            </div>
+                                            <div class="msg">{{chat.message.text}}</div>
+                                        </div>
+                                    </a>
+
+                                    <!-- <a href="" class="viewall">View all</a> -->
+                                </div>
+                            </div>
+                        </li>
+                        <li><a [routerLink]="['/user/notification']"><i class="icon ion-android-globe"></i> <span *ngIf="userNotiCnt > 0" class="badge" style="background-color:red">{{userNotiCnt}}</span></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="show-on-hover">
+                            <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/profile']" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
+                                <span class="colorWhite">{{currentUserDet.first_name}} <i class="icon ion-chevron-down"></i></span>
+                            </a>
+                            <a *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'" [routerLink]="['/company/profile']" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
+                                <span class="colorWhite">{{currentUserDet.first_name}} <i class="icon ion-chevron-down"></i></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'">
+                                <li class="images">
+                                    <img src="assets/images/down-arrow.png" alt="">
+                                </li>
+                                <li><a [routerLink]="['/user/profile']">My Profile</a></li>
+                                <li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
+                                <li class="divider"></li>
+                                <li><a [routerLink]="['/company']">Create company</a></li>
+                                <!--<li><a [routerLink]="['/user/login']">Company Login</a></li>-->
+                                <li class="divider"></li>
+                                <li><a [routerLink]="['/user/mentor']">Join mentor</a></li>
+                            </ul>
+                            <ul class="dropdown-menu" role="menu" *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'">
+                                <li class="images">
+                                    <img src="assets/images/down-arrow.png" alt="">
+                                </li>
+                                <li><a [routerLink]="['/company/profile']">Company Profile</a></li>
+                                <li><a [routerLink]="['/company/profile',currentUserDet.company_slug]">View Company Profile</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+    <nav class="navbar navbar-white">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a class="navbar-brand" [routerLink]="['/']"><img src="assets/images/logo.png" alt="" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right rightNavBar">
+                    <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }} </a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                    <!--<li><a href="#">Contribute</a></li>-->
+                    <li *ngIf="userloggedIn == 1"><a routerLinkActive="active" href="Javascript: void(0)" (click)="userLogout()" style="padding-top: 0px;"><button>Logout</button></a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>

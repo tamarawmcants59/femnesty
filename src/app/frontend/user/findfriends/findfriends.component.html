@@ -1,0 +1,106 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container">
+        <div class="row">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+          <div class="col-md-3">
+            <user-sidebar></user-sidebar>
+          </div>
+          <div class="col-md-6">
+            <div class="middlePart">
+              <div class="tabPart">
+                <div class="tab-content">
+                  
+                    <div class="col-md-12">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active">
+                                <div class="connectionsPart">
+                                    <div class="row" *ngIf="(successMsg != '')">
+                                        <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                             {{successMsg}}
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="(errorMsg != '')">
+                                        <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                                             {{errorMsg}}
+                                        </div>
+                                    </div>
+                                    <h2>Find Friends</h2>
+                                    <form class="" [formGroup]="postform" (ngSubmit)="submitSearchUser(postform.value)" #postForm="ngForm">
+                                        <div class="row">&nbsp;</div>  
+                                      <div class="row">
+                                            <div class="col-md-9">
+                                              <div class="form-group">
+                                                  <input type="text" class="form-control-plaintext form-control" style="height: 46px;" placeholder="Search by name" formControlName="suname">
+                                              </div>
+                                             </div>
+                                             <div class="col-md-3">
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                              </div>
+                                         </div>
+                                    </form>
+                                    <div class="connections">
+                                        <ul class="uilist" *ngIf="userSearchFrndList?.length > 0">
+                                          <li class="connectionList" *ngFor="let sfriendData of userSearchFrndList">
+                                            <div class="connectionImage">
+                                              <a href="#">
+                                                  <div class="img" [ngStyle]="{'background-image':'url('+sfriendData.profile_image+')'}"></div>
+                                              </a>
+                                            </div>
+                                            <div class="connectionText">
+                                              <h2>{{sfriendData.name}}</h2>
+                                              <!--<p>3 mutual friend</p>-->
+                                              <button type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Friend</button>											</div>
+                                          </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userSearchFrndList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No friend found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                  <h2>Respond to Your Friend Requests</h2>
+                                  <div class="connections">
+                                      <ul class="uilist" *ngIf="userRequestFrndList?.length > 0">
+                                          <li class="connectionList" *ngFor="let friendData of userRequestFrndList">
+                                            <div class="connectionImage">
+                                              <a href="#">
+                                                  <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                              </a>
+                                            </div>
+                                            <div class="connectionText">
+                                              <h2>{{friendData.name}}</h2>
+                                              <!--<p>3 mutual friend</p>-->
+                                              <button type="button" class="btn btn-primary" (click)="acceptFriendRequest(friendData.id)">Confirm</button>
+                                              <button type="button" class="btn btn-primary" (click)="rejectFriendRequest(friendData.id)">Delete Request</button>
+                                            </div>
+                                          </li>
+                                        </ul>
+                                    <div class="likePart" *ngIf="userRequestFrndList?.length == 0">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="nothing">No friend request found</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          
+                        </div>
+                      </div>
+                  
+                  
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <div class="col-md-3">
+              <app-user-prfrsidebar></app-user-prfrsidebar>
+          </div>
+        </div>
+    </div>
+  </section>

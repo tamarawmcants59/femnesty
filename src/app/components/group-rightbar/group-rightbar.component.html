@@ -1,0 +1,36 @@
+<div class="rightPart">
+    <div class="innerRightPart">
+        <h2>Members</h2>
+        <div class="hubMet hubMet1">
+            <div class="row" *ngIf="groupMemberList?.length > 0">
+                <div class="col-md-3" *ngFor="let memdata of groupMemberList">
+                    <a [routerLink]="['/user/profile',memdata.display_name]">
+                        <div class="img" [ngStyle]="{'background-image':'url('+memdata.profile_image+')'}"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="innerRightPart">
+        <h2> Group Details </h2>
+        <div class="hubMet">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>{{groupData.long_desc}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="innerRightPart">
+        <h2>Group Photos</h2>
+        <ul class="photoImage" *ngIf="groupImgList?.length > 0">
+            <li *ngFor="let gimgdata of groupImgList">
+                <a href="Javascript: void(0);">
+                    <div class="img" [ngStyle]="{'background-image':'url('+gimgdata.file_name+')'}"></div>
+                </a>
+            </li>
+        </ul>
+        <!--<a href="#" class="viewAll text-center">View All</a>-->
+    </div>
+    
+</div>

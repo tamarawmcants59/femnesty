@@ -1,0 +1,98 @@
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <h4>Let’s Connect!</h4>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4><i class="ion-email"></i> Email us</h4>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4><i class="ion-ios-telephone"></i> Call Us</h4>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4><i class="ion-log-in"></i> Sign In</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <h5>ABOUT FEMNESTY</h5>
+                    <ul>
+                        <li><a href="">Who are we?</a></li>
+                        <li><a href="">Advisory Team</a></li>
+                        <li><a href="">Partnership</a></li>
+                        <li><a [routerLink]="['/page',pageContactData]">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h5>CONTRIBUTE</h5>
+                    <ul>
+                        <li><a href="">Share Your Story</a></li>
+                        <li><a href="">Become a Mentor</a></li>
+                        <li><a href="">Join the Team</a></li>
+                        <li><a href="">Mentorship</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h5>ARTICLES</h5>
+                    <ul>
+                        <li><a href="">Work and Home Balance</a></li>
+                        <li><a href="">Strategies for Success</a></li>
+                        <li><a href="">Women in 21st Century</a></li>
+                        <li><a href="">Read Stories</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h5>NEWSLETTER</h5>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">SUBSCRIPBE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="pull-left">Copyright © 2017 Femnesty. All rights reserved.</p>
+            <ul class="pull-right">
+                <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                <li><a href=""><i class="ion-social-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="live-chat" class="{{chatClass}}">
+        <div class="clearfix chat-header">
+            <a href="javascript:void(0)" (click)="closeChat()" class="chat-close"><i class="ion-close"></i></a>
+            <h4>{{withUser.first_name}} {{withUser.last_name}}</h4>
+            <span class="chat-message-counter">3</span>
+        </div>
+        <div class="chat">
+            <div class="chat-history" *ngIf="chats">
+                <div class="chat-message clearfix {{chat.cssClass}}" *ngFor="let chat of chats">
+                    <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
+                    <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
+                    <div class="chat-message-content clearfix">
+                        <h5 *ngIf="!chat.isSelf">{{withUser.first_name}} {{withUser.last_name}}</h5>
+                        <h5 *ngIf="chat.isSelf">{{thisUser.first_name}} {{thisUser.last_name}}</h5>
+                        <span *ngIf="!chat.isSelf" class="chat-time">{{chat.created | date}}</span>
+                        <img class="img img-responsive" style="border-radius: 3%" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                        <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                        <p *ngIf="chat.message.text">
+                            {{chat.message.text}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <form (submit)="sendMessage()">
+                <fieldset>
+                    <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</footer>

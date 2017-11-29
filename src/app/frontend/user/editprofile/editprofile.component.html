@@ -1,0 +1,327 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container">
+        <div class="row">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <div class="col-md-3">
+                <user-sidebar></user-sidebar>
+            </div>
+            <div class="col-md-6">
+                <div class="middlePart">
+                    <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+loginUserDet.cover_image_url+')'}">
+                        <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
+                        <div class="change-img">
+                            <i class="fa fa-camera"></i>
+                            <div class="txt">Upload Profile Photo</div>
+                        </div>
+                        <input type="file" class="change-img-input" (change)="fileChangeListenerCover($event)">
+                        <div class="addCoverPhoto">
+                            <span class="coverPhoto">Add Cover Photo</span>
+                        </div>
+                    </div>
+                    <div class="topPart inner-bg" *ngIf="coverImageData.image" [ngStyle]="{'background-image':coverImageData.image}">
+                        <img [src]="coverImageData.image" style="width:100%;height:100%">
+                    </div>
+                    <div class="profPhoto">
+                        <div *ngIf="!prfImageData.image" class="img" [ngStyle]="{'background-image':'url('+loginUserDet.image_url+')'}">
+
+                            <div class="inner-bg">
+                                <div class="icon-change" id="clickableLiElement">
+                                    <i class="fa fa-camera"></i>
+                                    <div class="txt">Update Profile <br> Picture</div>
+                                    <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img result rounded" *ngIf="prfImageData.image">
+                            <img [src]="prfImageData.image" style="width:100%; height:100%">
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="showImgDive">
+                        <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
+                            <div class="col-md-4" style="padding-top: 90px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
+                            </div>
+                        </div>
+                        <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                    </div>
+                    <div class="col-md-12" *ngIf="showCoverImgDive">
+                        <div class="col-md-12" *ngIf="coverImageData.image" style="padding-bottom:10px;">
+
+                            <div class="col-md-4" style="padding-top: 10px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadCoverImg()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <img-cropper #cropper [image]="coverImageData" [settings]="coverCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                        </div>
+                    </div>
+                    <div class="profDes">
+                        <h2 class="text-center">{{loginUserDet.name}}</h2>
+                        <p class="text-center">{{loginUserDet.bio}}</p>
+                        <p class="text-center addressP">{{loginUserDet.address}}, {{loginUserDet.city}}</p>
+                    </div>
+                    <div class="tabPart">
+                        <ul class="nav nav-pills">
+                            <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
+                            <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
+                            <li [ngClass]="{'active' : activeTab=='connections'}"><a (click)="toggleTab('connections')">Connections</a></li>
+                            <li [ngClass]="{'active' : activeTab=='group'}"><a (click)="toggleTab('group')">Group</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
+                                <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+                                <div *ngIf="userPostList?.length > 0">
+                                    <div class="likePart" *ngFor="let postData of userPostList">
+                                        <app-post-card [postData]="postData"></app-post-card>
+                                    </div>
+                                </div>
+                                <div class="likePart" *ngIf="userPostList?.length == 0">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="nothing">Nothing more to show</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
+                                <div class="aboutPart">
+                                    <h2>About</h2>
+                                    <div class="abouts">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <ul class="nav-tabs tabs-left sideways">
+                                                    <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
+                                                    <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                        <ul class="ulList">
+                                                            <div class="menu">
+                                                                <h3>About your self</h3>
+                                                                <div class="">
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.first_name}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.last_name}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.email}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.mobile_number}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.occupation}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.state}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.city}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.address}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{loginUserDet.bio}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_details'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Edit Details</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name">
+                                                                                <div class="text-danger" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name">
+                                                                                <div class="text-danger" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number">
+                                                                                <div class="text-danger" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.state" formControlName="state">
+                                                                                <div class="text-danger" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.city" formControlName="city">
+                                                                                <div class="text-danger" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address">
+                                                                                <div class="text-danger" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation">
+                                                                                <div class="text-danger" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">About yourself</label>
+                                                                            <div class="col-sm-8">
+                                                                                <textarea class="form-control-plaintext" [(ngModel)]="loginUserDet.bio" formControlName="bio"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--<div class="form-group row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Time Period</label>
+                            <div class="col-sm-8">
+                            <div class="form-check">
+                                <p>
+                                    <input id="test1" type="checkbox">
+                                    <label for="test1">I agree to the <a class="text-red" href="#">Terms and Conditions</a></label>
+                                </p>
+                              </div>
+                            </div>
+                          </div>-->
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Save Changes</button>
+                                                                            <!--<button type="button" class="btn btn-default">Cancel</button>-->
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <!--<div id="menu-v" class="tab-pane fade">
+
+
+                    </div>
+                    <div id="profile-v" class="tab-pane fade">
+                      <h3>Menu 2</h3>
+                      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
+                    <div id="message-v" class="tab-pane fade">
+                      <h3>Menu 3</h3>
+                      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    </div>
+                    <div id="message-p" class="tab-pane fade">
+                      <h3>Menu 2</h3>
+                      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    </div>
+                    <div id="message-q" class="tab-pane fade">
+                      <h3>Menu 1</h3>
+                      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    </div>
+                    <div id="message-r" class="tab-pane fade">
+                      <h3>Menu 0</h3>
+                      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
+                                <div class="connectionsPart">
+                                    <h2>Connections</h2>
+                                    <div class="connections">
+                                        <ul class="uilist" *ngIf="userFrndList?.length > 0">
+                                            <li class="connectionList" *ngFor="let friendData of userFrndList">
+                                                <div class="connectionImage">
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="connectionText">
+                                                        <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                            <h2>{{friendData.name}}</h2>
+                                                        </a>
+                                                    <!--<p>3 mutual friend</p>-->
+                                                    <a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a> 
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userFrndList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No connection found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='group'}">
+                                <div class="connectionsPart">
+                                    <h2>Groups</h2>
+                                    <div class="connections">
+                                        <app-group-create></app-group-create>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <app-user-prfrsidebar></app-user-prfrsidebar>
+            </div>
+        </div>
+    </div>
+</section>

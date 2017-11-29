@@ -1,0 +1,6 @@
+.profImageP .img {
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    border-radius: 50%;
+}

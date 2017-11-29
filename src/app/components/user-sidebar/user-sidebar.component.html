@@ -1,0 +1,62 @@
+<div class="left-list">
+    <div class="profImage">
+        <div class="img" [ngStyle]="{'background-image':'url('+currentUserLoginDet.image_url+')'}"></div>
+    </div>
+    <div class="profDetails">
+        <h2>{{currentUserLoginDet.name}}</h2>
+        <p>{{currentUserLoginDet.address}}, {{currentUserLoginDet.city}}<br> {{currentUserLoginDet.state}}
+        </p>
+    </div>
+    <div class="messagePart">
+        <ul>
+            <li>
+                <a [routerLink]="['/user/chat/list']">
+                    <span class="iconWidth">
+                    <img src="assets/images/icon1.png">
+                  </span> MESSAGES <span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
+                </a>
+            </li>
+            <li><a [routerLink]="['/user/connections']"><span class="iconWidth"><img src="assets/images/icon2.png"></span>CONNECTIONS</a></li>
+            <li><a [routerLink]="['/user/group']"><span class="iconWidth"><img src="assets/images/icon3.png"></span>GROUPS</a></li>
+            <!--<li><a href="#"><span class="iconWidth"><img src="assets/images/icon4.png"></span>HUBS</a></li>-->
+        </ul>
+    </div>
+    <div class="onlineUsers">
+        <h2>Online Users</h2>
+        <ul class="onlineList">
+            <li>
+                <div class="img" style="background-image: url('assets/images/img-1.jpg')"></div>
+                <div class="greenIcon"></div>
+            </li>
+            <li>
+                <div class="img" style="background-image: url('assets/images/img-1.jpg')"></div>
+                <div class="greenIcon"></div>
+            </li>
+            <li>
+                <div class="img" style="background-image: url('assets/images/img-1.jpg')"></div>
+                <div class="greenIcon"></div>
+            </li>
+            <li>
+                <div class="img" style="background-image: url('assets/images/img-1.jpg')"></div>
+                <div class="greenIcon"></div>
+            </li>
+            <li>
+                <div class="img" style="background-image: url('assets/images/img-1.jpg')"></div>
+                <div class="greenIcon"></div>
+            </li>
+            <li>
+                <div class="upload-btn-wrapper uploadBut">
+                    <button class="btn"><i class="icon ion-ios-plus-empty"></i></button>
+                    <input type="file" name="myfile" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="bottomList">
+        <ul>
+            <li><a href="Javascript: void(0)" (click)="userLogout()">SIGN OUT</a></li>
+            <li>|</li>
+            <li><a [routerLink]="['/user/profile']">SETTINGS</a></li>
+        </ul>
+    </div>
+</div>

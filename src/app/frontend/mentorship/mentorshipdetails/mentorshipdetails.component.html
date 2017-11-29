@@ -1,0 +1,20 @@
+<section class="section p-16 mt-100 single-article">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <img [src]="mentorshipDet?.image" alt="" class="img-responsive">
+                </div>
+                <div>
+                    <h3 class="text-red">{{mentorshipDet?.name}}</h3>
+                    <p class="text-gray">{{mentorshipDet?.qualification}}</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h1>Mentorship Details</h1>
+                <p class="font-weight-bold mb-30">{{mentorshipDet?.short_desc}}</p>
+                <div [innerHTML]="mentorshipDet?.long_desc" class="mb-30"></div>
+            </div>
+        </div>
+    </div>
+</section>
