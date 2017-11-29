@@ -3321,7 +3321,11 @@ background: #fff !important;}
     background: #fff;
     padding: 20px
 }
-
+.main-chat-wrap h3{font-size: 25px;
+    color: #202020;
+    font-family: 'Sanchez', serif;
+    font-weight: 600;
+    margin: 15px 0;}
 .chat-holder {
     width: 100%;
     height: 400px;
@@ -3627,7 +3631,7 @@ ul.connectionlist li .text-area p {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
-    width: 35%;
+    width: 190px;
     position: relative;
 }
 
@@ -3642,7 +3646,7 @@ ul.connectionlist li .text-area p {
 }
 
 .search-list li .right-side {
-    padding: 10px;
+    padding: 15px;
     flex-grow: 2;
     background: #fff;
     position: relative;
@@ -3658,22 +3662,31 @@ ul.connectionlist li .text-area p {
 
 .search-list li .right-side h4 {
     margin-top: 0;
-    letter-spacing: 1px
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .search-list li .right-side small.text {
     display: block;
-    min-height: 34px
+    min-height: 34px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #535353;
 }
+.search-list li p.font-weight-bold{line-height: 1.6;
+    margin: 5px 0;
+    font-size: 12px;}
 
 .search-list li .right-side a.more {
-    margin-top: 10px;
+    margin-top: 5;
     text-transform: uppercase;
     color: #d23545;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     display: inline-block;
-    letter-spacing: 1px
+    letter-spacing: 1px;
+    font-size: 12px;
 }
 
 .filter-reslt {
