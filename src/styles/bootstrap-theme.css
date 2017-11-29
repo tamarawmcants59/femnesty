@@ -2505,6 +2505,7 @@ background: #fff !important;}
 
 .uploadVideo li i {
     font-size: 32px;
+    line-height: 32px;
 }
 
 .uploadVideo li p {
@@ -3352,7 +3353,9 @@ background: #fff !important;}
 }
 .chat-holder ul li .text-area{position: relative;}
 .chat-holder ul li .text-area a.btn-info{position: absolute;right:10px;z-index: 99;top:10px;display: block;background: #bf1a27;border:1px solid #bf1a27}
-
+ul.uploadVideo {
+    align-items: center;
+}
 .chat-holder ul li .image-area {
     margin-right: 10px
 }
@@ -3824,6 +3827,18 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .friend-box .friend-box-list .friend-boxText button{padding: 4px 15px;font-size: 11px;}
 .friend-box .friend-box-list:last-child {margin-right: auto;}
 
+.latest-article h2{font-size:22px;font-family: 'Sanchez', serif;text-transform: capitalize;border-bottom:3px solid #000000;padding-bottom: 10px;margin-bottom: 15px}
+.latest-article .hubMet.hubMet2 .img {
+    border-radius: 0;
+    width: 100px;
+    height: 80px;
+    float: left;
+}
+.latest-article .hubMet.hubMet2{overflow: hidden;}
+.latest-article .article-text{float:right;width:calc(100% - 120px);}
+.latest-article .article-text p{font-size:14px;font-weight: 600}
+.latest-article .article-text a{font-size:12px;font-weight: 600}
+.ulList .menu{width:100%}
 
 @media screen and (max-width:1242px) {
 	.flex-profile .flex-left{width:25%}

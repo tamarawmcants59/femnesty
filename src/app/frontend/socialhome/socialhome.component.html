@@ -1,12 +1,12 @@
 <section class="section about-content-area visitingProfile">
-  <div class="container">
-      <div class="row">
+  <div class="container-fluid">
+      <div class="row flex-profile">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-        <div class="col-md-3">
+        <div class="col-md-3 flex-left">
             <user-sidebar *ngIf="isLoggedIn == '1'"></user-sidebar>
         </div>
-        <div class="col-md-6">
-          <div class="middlePart">
+        <div class="col-md-6 flex-middle">
+         
             <div class="tabPart">
           <div *ngIf="(isLoggedIn == '1')">
               <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
@@ -24,26 +24,25 @@
                   </div>
               </div>
             </div>
-          </div>
           
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 flex-right">
           <div class="rightPart">
-            <div class="innerRightPart">
-                <h2>LATEST ARTICLES</h2>
+            <div class="innerRightPart latest-article">
+                <h2>Latest Articles</h2>
                 <div *ngIf="latestArticles?.length > 0">
                 <div class="hubMet hubMet2" *ngFor="let articleData of latestArticles">
-                  <div class="row">
-                    <div class="col-md-4">
-                        <a [routerLink]="['/articles/details',articleData.slug]">
+                  
+                    
+                     <a [routerLink]="['/articles/details',articleData.slug]">
                           <div class="img" [ngStyle]="{'background-image':'url('+articleData.image_url+')'}"></div>
-                        </a>
-                    </div>
-                    <div class="col-md-8 txt">
-                      <p>{{articleData.title | limitTo : 20}}</p>
-                      <a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.created_date_mod}}</a>
-                    </div>
-                  </div>
+                     </a>
+                    
+                     <div class="article-text">
+	                      <p>{{articleData.title | limitTo : 20}}</p>
+	                      <a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.created_date_mod}}</a>
+                     </div>
+                    
                 </div>
                 </div>
             </div>
