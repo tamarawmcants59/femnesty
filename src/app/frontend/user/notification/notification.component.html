@@ -6,8 +6,11 @@
             </div>
             <div class="col-md-6 flex-middle">
                 <div class="middlePart">
-                    <div class="notification-wrap">
+                	  <div class="notification-wrap">
                         <h2>Your notification</h2>
+                    </div>
+                </div><br/>
+                <div class="notification-wrap">
                       <ul>
                           <li *ngFor="let notiData of userNotiList">
                               <div class="image-area">
@@ -19,14 +22,13 @@
                                   <a [routerLink]="['/user/profile',notiData.display_name]">
                                     <h4>{{notiData.name}}</h4>
                                   </a>
-                                  <p class="desc">{{notiData.message}}</p>
-                                  <p class="time">{{notiData.created_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                                  <p class="desc">{{notiData.message}}</p>                                  
                               </div>
-                              
+                              <p class="time">{{notiData.created_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                           </li>
                       </ul>
                   </div>
-              </div>
+              
             </div>
             <div class="col-md-3 flex-right">
                 <app-user-prfrsidebar></app-user-prfrsidebar>
