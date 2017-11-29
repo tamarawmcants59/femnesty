@@ -108,8 +108,7 @@ export class GroupComponent implements OnInit {
         },
         error => {
 
-        }
-        );
+        });
     }
   }
 

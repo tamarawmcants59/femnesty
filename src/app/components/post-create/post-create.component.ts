@@ -10,8 +10,8 @@ import { UserService } from "../../frontend/user/user.service";
 })
 export class PostCreateComponent implements OnInit {
   @Input() postType: {
-    //activitytype:'',
-    //activityid:''
+    //activitytype:string,
+    //activityid:string
   };
   
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
@@ -57,16 +57,15 @@ export class PostCreateComponent implements OnInit {
       userValue = this.postform.value;
     userValue.user_id = loginUserId;
     userValue.file_name = this.postImgData;
-
-    this.dataService.postDataSend(userValue)
-      .subscribe(
-      data => {
+    console.log(userValue);
+    this.dataService.postDataSend(userValue).subscribe(data => {
         this.showPostImgDive = false;
         this.loading = false;
         this.successMsg = 'Successfully post data';
-        //this.getUserPostDetails();
+        this.postImgData='';
+        this.postform.controls['description'].setValue('');
         this.getUserPostDetails.emit();
-        this.postform.reset();
+        //this.postform.reset();
       },
       error => {
         alert(error);
