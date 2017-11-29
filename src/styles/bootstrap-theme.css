@@ -3459,7 +3459,8 @@ background: #fff !important;}
     text-transform: uppercase;
     font-size: 13px;
     font-weight: 500;
-    letter-spacing: 1px
+    letter-spacing: 1px;
+    height: 46px;
 }
 
 .inline-search .input-group-btn .btn {
@@ -3471,9 +3472,10 @@ background: #fff !important;}
     box-shadow: none;
     text-shadow: none;
     border-color: #f7f7f7;
-    color: #999
+    color: #999;
+    height:46px;
 }
-
+.inline-search .input-group-btn .btn i{font-size:22px;}
 ul.connectionlist {
     padding: 0;
     margin: 0;
@@ -3482,27 +3484,32 @@ ul.connectionlist {
 
 ul.connectionlist li {
     display: flex;
-    flex-wrap: nowrap
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 8px;
 }
+ul.connectionlist li:hover{background: #f7f7f7}
 
 ul.connectionlist li .image-area {
-    margin-right: 8px
+    margin-right: 15px
 }
 
 ul.connectionlist li .image-area .round-image-holder {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
     border-radius: 100%;
     overflow: hidden;
     background-size: cover !important
 }
 
 ul.connectionlist li .text-area {
-    flex-grow: 2
+    flex-grow: 2;
 }
 
 ul.connectionlist li .text-area h5 {
-    margin-bottom: 1px
+    margin-bottom: 1px;
+    font-size:16px;font-weight: bold;
+    margin: 0px 0 0px 0;
 }
 
 ul.connectionlist li .text-area h5 span {
@@ -3513,7 +3520,8 @@ ul.connectionlist li .text-area h5 span {
 
 ul.connectionlist li .text-area p {
     font-size: 12px;
-    color: #8f8f8f
+    color: #8f8f8f;
+    margin: 0;
 }
 
 
@@ -3526,7 +3534,7 @@ ul.connectionlist li .text-area p {
 .notification-wrap h2{    font-size: 25px;
     color: #202020;
     font-family: 'Sanchez', serif;
-    font-weight: 600;}
+    font-weight: 600;margin: 15px 0;}
 .notification-wrap ul {
     padding: 0;
     margin: 0;
@@ -3538,7 +3546,7 @@ ul.connectionlist li .text-area p {
     flex-wrap: nowrap;
     padding: 10px 5px;
     border-bottom: 2px solid #f0f0f0;
-    margin-bottom: 5px
+    margin-bottom: 5px;position: relative;
 }
 
 .notification-wrap ul li:last-child {
@@ -3567,7 +3575,7 @@ ul.connectionlist li .text-area p {
 .notification-wrap ul li .time {
     font-size: 12px;
     color: #8f8f8f;
-    margin: 0
+    margin: 0;position: absolute;top:8px;right:0;
 }
 
 .notification-wrap ul li .desc {
