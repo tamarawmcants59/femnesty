@@ -34,13 +34,13 @@
                       </div>
                   </div>
                   <div class="tabPart">
-                      <ul class="nav nav-pills">
+                      <ul class="nav nav-pills" *ngIf="isloginUserId !='' && (groupDetailsData.group_type=='1' || !isJoinGroup)">
                           <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Group Activity</a></li>
                           <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">Invite Member</a></li>
                           <li [ngClass]="{'active' : activeTab=='member'}"><a (click)="toggleTab('member')">Members</a></li>
                       </ul>
                       
-                      <div class="tab-content">
+                      <div class="tab-content" *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)">
                           <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                               <div *ngIf="(isUserLogin == '1' && !isJoinGroup)">
                                 <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
@@ -135,7 +135,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3" *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)">
               <app-group-rightbar [groupData]="groupDetailsData" [groupPId]="isGroupId"></app-group-rightbar>
           </div>
       </div>
