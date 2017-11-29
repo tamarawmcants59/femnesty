@@ -46,51 +46,31 @@
                 <div class="rightPart">
                     <div class="innerRightPart">
                         <h2>CONNECTIONS</h2>
-                        <div class="inline-search">
+                        <!--<div class="inline-search">
                             <div class="input-group">
                                 <input placeholder="Search" class="form-control">
                                 <span class="input-group-btn">
                       <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </span>
                             </div>
-                        </div>
-                        <ul class="connectionlist">
-                            <li>
+                        </div>-->
+                        <ul class="connectionlist" *ngIf="userFrndList?.length > 0">
+                            <li *ngFor="let friendData of userFrndList">
                                 <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
+                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                    <div class="round-image-holder" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                    </a>
                                 </div>
                                 <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
+                                    <h5>{{friendData.name}}</h5>
+                                    
+                                    <a [routerLink]="['/user/chat',friendData.friend_id]">
+                                        <p>Chat</p>
+                                    </a>
+                                    <!--<p>You: Stop screming Susan!</p>-->
                                 </div>
                             </li>
-                            <li>
-                                <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
-                                </div>
-                            </li>
+                            
                         </ul>
 
                     </div>

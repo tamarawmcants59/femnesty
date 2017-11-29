@@ -14,6 +14,7 @@ import { Promise } from 'q';
 export class ChatComponent implements OnInit, OnDestroy {
 
   chats: any[];
+  userFrndList=[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
   fromUserId: number;
   withUser = {
@@ -49,11 +50,12 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.getMessages();
     });
     this.isComponentActive = true;
-    console.log(firebase.firestore.FieldValue.serverTimestamp());
+    //console.log(firebase.firestore.FieldValue.serverTimestamp());
+    this.getConnectionList();
   }
 
   ngOnDestroy() {
-    console.log('component destroyed');
+    //console.log('component destroyed');
     this.isComponentActive = false;
   }
 
@@ -182,4 +184,22 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   }
 
+  public getConnectionList() {
+    if (this.loginUserId != 0) {
+      const dataUserDet = {
+        "user_id": this.loginUserId
+      };
+      this.userService.getUserFrndListById(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            this.userFrndList = details.FriendListById;
+            //console.log(this.userFrndList);
+          } 
+        },
+        error => {
+
+        });
+    }
+  }
 }
