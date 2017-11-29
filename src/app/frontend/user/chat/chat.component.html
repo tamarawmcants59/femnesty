@@ -1,12 +1,12 @@
 <section class="section about-content-area visitingProfile">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="container-fluid">
+        <div class="row flex-profile">
+            <div class="col-md-3 flex-left">
                 <user-sidebar></user-sidebar>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 flex-middle">
                 <div class="middlePart">
-                    <div class="main-chat-wrap" *ngIf="withUser.first_name">
+                    <div class="main-chat-wrap chat-section" *ngIf="withUser.first_name">
                         <h4>Your message with : {{withUser.first_name}} {{withUser.last_name}}</h4>
                         <div class="chat-holder" *ngIf="chats">
                             <ul>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 flex-right">
                 <div class="rightPart">
                     <div class="innerRightPart">
                         <h2>CONNECTIONS</h2>
