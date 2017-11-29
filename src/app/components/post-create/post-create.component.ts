@@ -57,7 +57,7 @@ export class PostCreateComponent implements OnInit {
       userValue = this.postform.value;
     userValue.user_id = loginUserId;
     userValue.file_name = this.postImgData;
-    console.log(userValue);
+    //console.log(userValue);
     this.dataService.postDataSend(userValue).subscribe(data => {
         this.showPostImgDive = false;
         this.loading = false;

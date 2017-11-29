@@ -38,7 +38,7 @@
                 </ul>
             </div>
             <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
-                <ul class="ulList">
+                <ul class="ulList edit-forms">
                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                         <strong>Success: </strong> {{successMsg}}
                     </div>
@@ -55,6 +55,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-4 col-form-label">Group Type</label>
+                                    <div class="col-sm-8">
+                                            <input type="radio" class="input_radio" formControlName="group_type" value="1"> Public 
+                                            <input type="radio" class="input_radio" formControlName="group_type" value="2"> Private 
+                                            <div class="text-danger" *ngIf="!postform.controls['group_type'].valid && postform.controls['group_type'].touched">Group Type Required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="staticEmail" class="col-sm-4 col-form-label">Group short description</label>
                                     <div class="col-sm-8">
                                         <textarea class="form-control-plaintext" formControlName="short_desc"></textarea>
@@ -67,6 +75,7 @@
                                         <textarea class="form-control-plaintext" formControlName="long_desc"></textarea>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>
                                     <div class="col-sm-8">
@@ -92,7 +101,7 @@
             </div>
 
             <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_group'}">
-                    <ul class="ulList">
+                    <ul class="ulList edit-forms">
                         <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                             <strong>Success: </strong> {{successMsg}}
                         </div>
@@ -108,6 +117,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-4 col-form-label">Group Type</label>
+                                        <div class="col-sm-8">
+                                                <input type="radio" class="input_radio" [checked]="groupEditDataJson.group_type == 1" formControlName="group_type" value="1"> Public 
+                                                <input type="radio" class="input_radio" [checked]="groupEditDataJson.group_type == 2" formControlName="group_type" value="2"> Private 
+                                                <div class="text-danger" *ngIf="!postform.controls['group_type'].valid && postform.controls['group_type'].touched">Group Type Required</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-4 col-form-label">Group short description</label>
                                         <div class="col-sm-8">
                                             <textarea class="form-control-plaintext" [(ngModel)]="groupEditDataJson.short_desc" formControlName="short_desc"></textarea>
@@ -120,6 +138,7 @@
                                             <textarea class="form-control-plaintext" [(ngModel)]="groupEditDataJson.long_desc" formControlName="long_desc"></textarea>
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>
                                         <div class="col-sm-8">

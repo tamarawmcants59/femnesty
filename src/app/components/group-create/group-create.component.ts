@@ -41,6 +41,9 @@ export class GroupCreateComponent implements OnInit {
       short_desc: ['', [
         Validators.required
       ]],
+      group_type: ['', [
+        Validators.required
+      ]],
       long_desc: ['', [
         
       ]]
