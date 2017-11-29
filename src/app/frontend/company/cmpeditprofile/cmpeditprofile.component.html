@@ -1,13 +1,13 @@
 <section class="section about-content-area visitingProfile">
-    <div class="container-fluid">
-        <div class="row flex-profile">
+    <div class="container">
+        <div class="row">
             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-            <div class="col-md-3 flex-left">
+            <div class="col-md-3">
                 <user-sidebar></user-sidebar>
             </div>
-            <div class="col-md-6 flex-middle">
+            <div class="col-md-6">
                 <div class="middlePart">
-                    <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+loginUserDet.cover_image_url+')'}">
+                    <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+publicCmpDet.cover_image_url+')'}">
                         <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
                         <div class="change-img">
                             <i class="fa fa-camera"></i>
@@ -22,7 +22,7 @@
                         <img [src]="coverImageData.image" style="width:100%;height:100%">
                     </div>-->
                     <div class="profPhoto">
-                        <div *ngIf="!prfImageData.image" class="img" [ngStyle]="{'background-image':'url('+loginUserDet.image_url+')'}">
+                        <div *ngIf="!prfImageData.image" class="img" [ngStyle]="{'background-image':'url('+publicCmpDet.image_url+')'}">
 
                             <div class="inner-bg">
                                 <div class="icon-change" id="clickableLiElement">
@@ -56,9 +56,9 @@
                         </div>
                     </div>
                     <div class="profDes">
-                        <h2 class="text-center">{{loginUserDet.name}}</h2>
-                        <p class="text-center">{{loginUserDet.bio}}</p>
-                        <p class="text-center addressP">{{loginUserDet.address}}, {{loginUserDet.city}}</p>
+                        <h2 class="text-center">{{publicCmpDet?.name}}</h2>
+                        <p class="text-center">{{publicCmpDet.bio}}</p>
+                        <p class="text-center addressP">{{publicCmpDet.address}}, {{publicCmpDet.city}}</p>
                     </div>
                     <div class="tabPart">
                         <ul class="nav nav-pills">
@@ -89,7 +89,7 @@
                                     <h2>About</h2>
                                     <div class="abouts">
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-12">
+                                            <div class="col-md-5">
                                                 <ul class="nav-tabs tabs-left sideways">
                                                     <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
                                                     <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
@@ -97,7 +97,7 @@
                                                     <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-8 col-sm-12">
+                                            <div class="col-md-7">
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
                                                         <ul class="ulList">
@@ -107,55 +107,55 @@
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.company_name}}</span>
+                                                                            <span>{{publicCmpDet.company_name}}</span>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">Website </label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.website}}</span>
+                                                                            <span>{{publicCmpDet.website}}</span>
                                                                         </div>
                                                                     </div>                                                                  
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.email}}</span>
+                                                                            <span>{{publicCmpDet.email}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.mobile_number}}</span>
+                                                                            <span>{{publicCmpDet.mobile_number}}</span>
                                                                         </div>
                                                                     </div>                                                                    
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.state}}</span>
+                                                                            <span>{{publicCmpDet.state}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.city}}</span>
+                                                                            <span>{{publicCmpDet.city}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.address}}</span>
+                                                                            <span>{{publicCmpDet.address}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">Opening Hour</label>
                                                                             <div class="col-sm-8">
-                                                                                <span>{{loginUserDet.opening_hour}}</span>
+                                                                                <span>{{publicCmpDet.opening_hour}}</span>
                                                                             </div>
                                                                         </div>
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.bio}}</span>
+                                                                            <span>{{publicCmpDet.bio}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -163,7 +163,7 @@
                                                         </ul>
                                                     </div>
                                                     <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_details'}">
-                                                        <ul class="ulList edit-forms">
+                                                        <ul class="ulList">
                                                             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                 <strong>Success: </strong> {{successMsg}}
                                                             </div>
@@ -174,56 +174,56 @@
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.company_name" formControlName="company_name">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_name" formControlName="company_name">
                                                                                 <div class="text-danger" *ngIf="!form.controls['company_name'].valid && form.controls['company_name'].touched">Company Name Required</div>
                                                                             </div>
                                                                         </div>                                                                       
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.mobile_number" formControlName="mobile_number">
                                                                                 <div class="text-danger" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">Website</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.website" formControlName="website">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.website" formControlName="website">
                                                                                 <div class="text-danger" *ngIf="!form.controls['website'].valid && form.controls['website'].touched">Website Required</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.state" formControlName="state">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.state" formControlName="state">
                                                                                 <div class="text-danger" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.city" formControlName="city">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.city" formControlName="city">
                                                                                 <div class="text-danger" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.address" formControlName="address">
                                                                                 <div class="text-danger" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
                                                                             </div>
                                                                         </div> 
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">Opening Hour</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.opening_hour" formControlName="opening_hour">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.opening_hour" formControlName="opening_hour">
                                                                                 <div class="text-danger" *ngIf="!form.controls['opening_hour'].valid && form.controls['opening_hour'].touched">Opening hour Required</div>
                                                                             </div>
                                                                         </div>                                                                     
                                                                         <div class="form-group row">
                                                                             <label for="staticEmail" class="col-sm-4 col-form-label">About Company</label>
                                                                             <div class="col-sm-8">
-                                                                                <textarea class="form-control-plaintext" [(ngModel)]="loginUserDet.bio" formControlName="bio"></textarea>
+                                                                                <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"></textarea>
                                                                             </div>
                                                                         </div>
                                                                         
@@ -238,7 +238,7 @@
                                                         </ul>
                                                     </div>
                                                     <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_subadmin'}">
-                                                        <ul class="ulList edit-forms">
+                                                        <ul class="ulList">
                                                             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                 <strong>Success: </strong> {{successMsg}}
                                                             </div>
@@ -299,13 +299,72 @@
                                                             </div>
                                                         </ul>
                                                     </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_subadmin'}">
+                                                        <ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Edit Subadmin</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="adminform" (ngSubmit)="editSubadminForm()" #adminEditForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.name" formControlName="name">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="email" readonly class="form-control-plaintext" [(ngModel)]="editSubAdmindata.email" formControlName="email">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="password" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.txt_password" formControlName="txt_password">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.state" formControlName="state">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.city" formControlName="city">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.address" formControlName="address">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminEditForm.valid">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>
+                                                    </div>
                                                     <div *ngIf="loginUserDet.user_type == 'CA'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='list_subadmin'}">
                                                             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                 <strong>Success: </strong> {{successMsg}}
                                                             </div>
                                                             <h3>List Subadmin</h3>
                                                             <div class="menu" *ngIf="cmpSubadminList?.length > 0">
-                                                                <ul class="ulList connection-box">
+                                                                <ul class="ulList">
                                                                 <li class="connectionList" *ngFor="let friendData of cmpSubadminList">
                                                                     <div class="connectionImage">
                                                                             <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
@@ -314,6 +373,7 @@
                                                                     <div class="connectionText">
                                                                         <h2>{{friendData.name}}</h2>
                                                                         <button type="button" class="btn btn-primary" (click)="deleteAdmin(friendData.id)">Delete</button>
+                                                                        <button type="button" class="btn btn-primary" (click)="editAdmin(friendData.id)">Edit</button>
                                                                     </div>
                                                                 </li>
                                                             </ul>
@@ -419,8 +479,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 flex-right">
-                <app-company-rightbar [profileData]="loginUserDet" [companyID]="loginUserDet.id"></app-company-rightbar>
+            <div class="col-md-3">
+                <app-company-rightbar [profileData]="publicCmpDet" [companyID]="cmpId"></app-company-rightbar>
             </div>
         </div>
     </div>

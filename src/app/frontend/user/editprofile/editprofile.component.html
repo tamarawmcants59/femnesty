@@ -1,11 +1,11 @@
 <section class="section about-content-area visitingProfile">
-    <div class="container-fluid">
-        <div class="row flex-profile">
+    <div class="container">
+        <div class="row">
             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-            <div class="col-md-3 flex-left">
+            <div class="col-md-3">
                 <user-sidebar></user-sidebar>
             </div>
-            <div class="col-md-6 flex-middle">
+            <div class="col-md-6">
                 <div class="middlePart">
                     <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+loginUserDet.cover_image_url+')'}">
                         <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
@@ -89,14 +89,14 @@
                                     <h2>About</h2>
                                     <div class="abouts">
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-12">
+                                            <div class="col-md-5">
                                                 <ul class="nav-tabs tabs-left sideways">
                                                     <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
                                                     <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
                                                     
                                                 </ul>
                                             </div>
-                                            <div class="col-md-8 col-sm-12">
+                                            <div class="col-md-7">
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
                                                         <ul class="ulList">
@@ -162,7 +162,7 @@
                                                         </ul>
                                                     </div>
                                                     <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_details'}">
-                                                        <ul class="ulList edit-forms">
+                                                        <ul class="ulList">
                                                             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                 <strong>Success: </strong> {{successMsg}}
                                                             </div>
@@ -280,7 +280,7 @@
                                 <div class="connectionsPart">
                                     <h2>Connections</h2>
                                     <div class="connections">
-                                        <ul class="uilist connection-box" *ngIf="userFrndList?.length > 0">
+                                        <ul class="uilist" *ngIf="userFrndList?.length > 0">
                                             <li class="connectionList" *ngFor="let friendData of userFrndList">
                                                 <div class="connectionImage">
                                                     <a [routerLink]="['/user/profile',friendData.display_name]">
@@ -319,7 +319,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 flex-right">
+            <div class="col-md-3">
                 <app-user-prfrsidebar></app-user-prfrsidebar>
             </div>
         </div>

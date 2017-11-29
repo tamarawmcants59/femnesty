@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-5">
         <ul class="nav-tabs tabs-left sideways">
             <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Group List</a></li>
             <li [ngClass]="{'active' : aboutActiveTab=='add_group'}"><a (click)="aboutToggleTab('add_group')">Create Group</a></li>
             
         </ul>
     </div>
-    <div class="col-md-8 col-sm-12 group-list">
+    <div class="col-md-7">
         <div class="tab-content">
             <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
                 <ul class="ulList">
@@ -18,7 +18,7 @@
                                     <strong>Success: </strong> {{successMsg}}
                                 </div>
                                 <!--<pre>{{groupList}}</pre>-->
-                                <ul class="uilist connection-box" *ngIf="groupList?.length > 0">
+                                <ul class="uilist" *ngIf="groupList?.length > 0">
                                     <li class="connectionList" *ngFor="let groupData of groupList">
                                         <div class="connectionImage">
                                             <a [routerLink]="['/group/details',groupData.group_uname]">
