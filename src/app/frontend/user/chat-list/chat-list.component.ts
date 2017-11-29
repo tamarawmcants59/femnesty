@@ -11,11 +11,13 @@ import { UserService } from '../../user/user.service';
 
 export class ChatListComponent implements OnInit {
   chatHeads: any[];
+  userFrndList=[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   constructor(private db: AngularFirestore, private userService: UserService) { }
 
   ngOnInit() {
     this.getUnreadMessages();
+    this.getConnectionList();
   }
 
   getUnreadMessages() {
@@ -44,4 +46,22 @@ export class ChatListComponent implements OnInit {
     });
   }
 
+  public getConnectionList() {
+    if (this.loginUserId != 0) {
+      const dataUserDet = {
+        "user_id": this.loginUserId
+      };
+      this.userService.getUserFrndListById(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            this.userFrndList = details.FriendListById;
+            //console.log(this.userFrndList);
+          } 
+        },
+        error => {
+
+        });
+    }
+  }
 }
