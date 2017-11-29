@@ -95,7 +95,7 @@
                             </a>
                             <div ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
                                 <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
-                                    <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread" href="javascript:void(0)">
+                                    <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread notify-box-top" href="javascript:void(0)">
                                         <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />
                                         <div *ngIf="chat.userDetails" class="txt">
                                             <div class="upr">
