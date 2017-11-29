@@ -140,20 +140,21 @@
                               <div class="connectionsPart">
                                   <h2>Connections</h2>
                                   <div class="connections">
-                                        <ul class="uilist connection-box" *ngIf="userFrndList?.length > 0">
-                                          <li class="connectionList" *ngFor="let friendData of userFrndList">
-                                              <div class="connectionImage">
-                                                  <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                      <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-                                                  </a>
-                                              </div>
-                                              <div class="connectionText">
-                                                  <h2>{{friendData.name}}</h2>
-                                                  <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> 
-                                                  <button *ngIf="friendData.friend_id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFriendRequest(friendData.friend_id)">Add Friend</button>
-                                              </div>
-                                          </li>
-                                      </ul>
+                                        <ul class="friend-box" *ngIf="userFrndList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let friendData of userFrndList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <h2>{{friendData.name}}</h2>
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> 
+                                                    <button *ngIf="friendData.friend_id!=isloginUserId" type="button" class="btn btn-primary" (click)="sendFriendRequest(friendData.friend_id)">Add Friend</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+
                                       <div class="likePart" *ngIf="userFrndList?.length == 0">
                                           <div class="row">
                                               <div class="col-md-10">
@@ -168,22 +169,22 @@
                               <div class="connectionsPart">
                                   <h2>Groups</h2>
                                   <div class="connections">
-                                    <ul class="uilist" *ngIf="userGroupList.length > 0">
-                                        <li class="connectionList" *ngFor="let grpData of userGroupList">
-                                            <div class="connectionImage">
-                                                <a [routerLink]="['/group/details',grpData.group_uname]">
+                                        <ul class="friend-box" *ngIf="userGroupList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let grpData of userGroupList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/group/details',grpData.group_uname]">
                                                     <div class="img" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
-                                                </a>
-                                            </div>
-                                            <div class="connectionText">
-                                                <a [routerLink]="['/group/details',grpData.group_uname]">
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/group/details',grpData.group_uname]">
                                                     <h2>{{grpData.group_name}}</h2>
-                                                </a>
-                                                <p>{{grpData.member_count}} members</p>
-                                                <a [routerLink]="['/group/details',grpData.group_uname]" class="btn btn-primary">View Group</a>											
-                                            </div>
-                                        </li>
-                                    </ul>
+                                                    </a>
+                                                    <p>{{grpData.member_count}} members</p>
+                                                    <a [routerLink]="['/group/details',grpData.group_uname]" class="btn btn-primary">View Group</a> 
+                                                </div>
+                                            </li>
+                                        </ul>
                                   </div>
                               </div>
                           </div>
