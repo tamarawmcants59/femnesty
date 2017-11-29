@@ -1,13 +1,13 @@
 <section class="section about-content-area visitingProfile">
-  <div class="container">
-      <div class="row">
-          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-          <div class="col-md-3">
-            <div *ngIf="isloginUser == 1">
-                <user-sidebar></user-sidebar>
+    <div class="container-fluid">
+        <div class="row flex-profile">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <div class="col-md-3 flex-left">
+              <div *ngIf="isloginUser == 1">
+                  <user-sidebar></user-sidebar>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
+            <div class="col-md-6 flex-middle">
               <div class="middlePart">
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
                   </div>
@@ -199,7 +199,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3">              
+          <div class="col-md-3 flex-right">             
                 <app-company-rightbar [profileData]="otherProfileDet" [companyID]="otherProfileDet.id"></app-company-rightbar> 
           </div>
       </div>

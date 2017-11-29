@@ -1,13 +1,13 @@
 <section class="section about-content-area visitingProfile">
-  <div class="container">
-      <div class="row">
+  <div class="container-fluid">
+      <div class="row flex-profile">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-          <div class="col-md-3">
+          <div class="col-md-3 flex-left">
             <div *ngIf="isloginUser == 1">
                 <user-sidebar></user-sidebar>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 flex-middle">
               <div class="middlePart">
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
                   </div>
@@ -63,7 +63,7 @@
                           </div>
                           <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
                               <div class="aboutPart">
-                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h3>
+                                <h2 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h2><br/>
                                   <div class="abouts">
                                       <div class="row">
                                           <div class="col-md-12">
@@ -140,7 +140,7 @@
                               <div class="connectionsPart">
                                   <h2>Connections</h2>
                                   <div class="connections">
-                                      <ul class="uilist" *ngIf="userFrndList?.length > 0">
+                                        <ul class="uilist connection-box" *ngIf="userFrndList?.length > 0">
                                           <li class="connectionList" *ngFor="let friendData of userFrndList">
                                               <div class="connectionImage">
                                                   <a [routerLink]="['/user/profile',friendData.display_name]">
@@ -191,7 +191,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 flex-right">
                 <app-user-prfrsidebar></app-user-prfrsidebar>
           </div>
       </div>

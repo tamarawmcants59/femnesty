@@ -30,48 +30,49 @@
 </section>-->
 
 <section class="sign-up-area">
-  <div class="container">
-      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-      <div class="sign-form" style="margin-top: 110px;">
-          <h2>Login</h2>
-          <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-              <strong>Error!</strong> {{errorMsg}}
-          </div>
-          <div class="sign-up-social">
-              <span>Connect with: </span>
-              <ul class="social-link mt-30 text-center">
-                  <li>
-                      <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
-                  </li>
-                  <li>
-                      <a href="#" class="linked-bg"><i class="fa fa-linkedin"></i></a>
-                  </li>
-                  <li>
-                      <a href="#" class="twitter-bg"><i class="ion-social-twitter"></i></a>
-                  </li>
-              </ul>
-          </div>
-          <form [formGroup]="form" (ngSubmit)="checkLogin(form.value)" class="row form-area" #loginForm="ngForm">    
-              <div class="form-group col-md-6">
-                  <input type="text" placeholder="Email Address" class="form-control" [formControl]="email">
-                  <div class="text-danger" *ngIf="(email.hasError('email', 'email') || !email.valid) && email.touched">
-                    Please enter the correct email, this email not valid.
-                  </div>
-              </div>
-              <div class="form-group col-md-6">
-                  <input type="password" placeholder="Password" class="form-control" [formControl]="password">
-                  <div class="text-danger" *ngIf="!password.valid && password.touched">Password Required</div>
-              </div>
-              <div class="form-group col-md-12">
-                  <button class="btn btn-primary" [disabled]="!loginForm.valid" type="submit">Submit</button>
-              </div>
-              <div class="form-group col-md-12">
-                  <p>
-                      <label>Not a Member <a class="text-red" [routerLink]="['/user/signup']">Sign Up</a></label>
-                  </p>
-              </div>
-          </form>
-      </div>
-  </div>
-</section>
-
+    <div class="container">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+        <div class="sign-form">
+            <h2>Login</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                <strong>Error!</strong> {{errorMsg}}
+            </div>
+            <div class="sign-up-social">
+                <span>Connect with: </span>
+                <ul class="social-link mt-30 text-center">
+                    <li>
+                        <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="linked-bg"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="twitter-bg"><i class="ion-social-twitter"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="checkLogin(form.value)" class="row form-area" #loginForm="ngForm">    
+                <div class="form-group col-md-6">
+                    <input type="text" placeholder="Email Address" class="form-control" [formControl]="email">
+                    <div class="text-danger" *ngIf="(email.hasError('email', 'email') || !email.valid) && email.touched">
+                      Please enter the correct email, this email not valid.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="password" placeholder="Password" class="form-control" [formControl]="password">
+                    <div class="text-danger" *ngIf="!password.valid && password.touched">Password Required</div>
+                </div>
+                <div class="form-group col-md-12">
+                    <button class="btn btn-primary" [disabled]="!loginForm.valid" type="submit">Submit</button>
+                </div>
+                <div class="form-group col-md-12">
+                    <p>
+                        <label>Not a Member <a class="text-red" [routerLink]="['/user/signup']">Sign Up</a></label>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+  </section>
+  
+  
