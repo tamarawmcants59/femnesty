@@ -28,6 +28,8 @@
                                         <div class="connectionText">
                                             <a [routerLink]="['/group/details',groupData.group_uname]"><h2>{{groupData.group_name}}</h2></a>
                                             <p>{{groupData.member_count}} members</p>
+                                            <p *ngIf="groupData.group_type == '1'">Public group</p>
+                                            <p *ngIf="groupData.group_type == '2'">Private group</p>
                                             <button type="button" class="btn btn-primary" (click)="editGroupTab(groupData.id)">Edit Group</button>											
                                         </div>
                                     </li>
@@ -119,8 +121,8 @@
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-4 col-form-label">Group Type</label>
                                         <div class="col-sm-8">
-                                                <input type="radio" class="input_radio" [checked]="groupEditDataJson.group_type == 1" formControlName="group_type" value="1"> Public 
-                                                <input type="radio" class="input_radio" [checked]="groupEditDataJson.group_type == 2" formControlName="group_type" value="2"> Private 
+                                                <input type="radio" class="input_radio" [checked]="groupEditDataJson.group_type == '1'" formControlName="group_type" value="1"> Public 
+                                                <input type="radio" class="input_radio" [checked]="groupEditDataJson.group_type == '2'" formControlName="group_type" value="2"> Private 
                                                 <div class="text-danger" *ngIf="!postform.controls['group_type'].valid && postform.controls['group_type'].touched">Group Type Required</div>
                                         </div>
                                     </div>

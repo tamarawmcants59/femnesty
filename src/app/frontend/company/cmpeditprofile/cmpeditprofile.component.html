@@ -391,18 +391,17 @@
                                     
                                     <h2>Employee List</h2>
                                     <div class="connections">
-                                        <ul class="uilist" *ngIf="userEmployeeList?.length > 0">
-                                            <li class="connectionList" *ngFor="let userData of userEmployeeList">
-                                                <div class="connectionImage">
+                                        <ul class="friend-box" *ngIf="userEmployeeList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
+                                                <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',userData.display_name]">
                                                         <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
                                                     </a>
                                                 </div>
-                                                <div class="connectionText">
-                                                        <a [routerLink]="['/user/profile',userData.display_name]">
-                                                            <h2>{{userData.name}}</h2>
-                                                        </a>                                                  
-                                                    
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <h2>{{userData.name}}</h2>
+                                                    </a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -417,18 +416,17 @@
 
                                     <h2>Follower List</h2>
                                     <div class="connections">
-                                        <ul class="uilist" *ngIf="userFollowerList?.length > 0">
-                                            <li class="connectionList" *ngFor="let followData of userFollowerList">
-                                                <div class="connectionImage">
+                                        <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let followData of userFollowerList">
+                                                <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',followData.display_name]">
                                                         <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
                                                     </a>
                                                 </div>
-                                                <div class="connectionText">
-                                                        <a [routerLink]="['/user/profile',followData.display_name]">
-                                                            <h2>{{followData.name}}</h2>
-                                                        </a>                                                  
-                                                    
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <h2>{{followData.name}}</h2>
+                                                    </a>  
                                                 </div>
                                             </li>
                                         </ul>
@@ -449,17 +447,17 @@
                                 <div class="connectionsPart">
                                     <h2>Request List</h2>
                                     <div class="connections">
-                                        <ul class="uilist" *ngIf="userRequestList?.length > 0">
-                                            <li class="connectionList" *ngFor="let userData of userRequestList">
-                                                <div class="connectionImage">
+                                        <ul class="friend-box" *ngIf="userRequestList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let userData of userRequestList">
+                                                <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',userData.display_name]">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
                                                     </a>
                                                 </div>
-                                                <div class="connectionText">
-                                                        <a [routerLink]="['/user/profile',userData.display_name]">
-                                                            <h2>{{userData.name}}</h2>
-                                                        </a>                                                    
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <h2>{{userData.name}}</h2>
+                                                    </a>   
                                                     <a (click)="RequestAccept(userData.id, 2)" class="btn btn-primary">Accept</a>
                                                     <a (click)="RequestAccept(userData.id, 3)" class="btn btn-primary">Reject</a> 
                                                 </div>
