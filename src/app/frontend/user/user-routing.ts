@@ -11,6 +11,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ShareyourstoryComponent } from "./shareyourstory/shareyourstory.component";
 import { MentorComponent } from "./mentor/mentor.component";
 import { NotificationComponent } from "./notification/notification.component";
+import { GroupChatComponent } from "./group-chat/chat.component";
 const routes: Routes = [
   {
     path: '',
@@ -83,6 +84,14 @@ const routes: Routes = [
     path: 'chat/:userId',
     canActivate: [AuthGuard],
     component: ChatComponent,
+    data: {
+      title: 'Messages'
+    }
+  },
+  {
+    path: 'groupchat/:groupId',
+    canActivate: [AuthGuard],
+    component: GroupChatComponent,
     data: {
       title: 'Messages'
     }

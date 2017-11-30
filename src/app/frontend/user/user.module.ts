@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ShareyourstoryComponent } from './shareyourstory/shareyourstory.component';
 import { MentorComponent } from './mentor/mentor.component';
 import { NotificationComponent } from './notification/notification.component';
+import { GroupChatComponent } from "./group-chat/chat.component";
 //import { DashboardComponent } from './dashboard/dashboard.component';
 //import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 
@@ -45,7 +46,13 @@ import { NotificationComponent } from './notification/notification.component';
     SignupComponent,
     EqualValidator,
     DashboardComponent,
-    ChatComponent, ChatListComponent, ProfileComponent, ShareyourstoryComponent, MentorComponent, NotificationComponent,
+    ChatComponent, 
+    ChatListComponent, 
+    ProfileComponent,
+    ShareyourstoryComponent, 
+    MentorComponent, 
+    NotificationComponent,
+    GroupChatComponent
     //ImageCropperComponent
   ],
   providers: [UserService],
