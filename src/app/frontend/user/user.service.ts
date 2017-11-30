@@ -315,4 +315,8 @@ export class UserService {
   editNotificationById(form_data){
     return this.apiService.post(`/users/appallupdateNotifiisreaded`,form_data ).map(data => data);
   }
+  
+  getUserGrpFrndListById(form_data){
+    return this.apiService.post(`/users/appgrprivatememberlist`,form_data ).map(data => data);
+  }
 }

@@ -111,13 +111,13 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
         const id = action.payload.doc.id;
         if (data.to_user_id == this.loginUserId && this.isComponentActive) {
           //console.log(id);
-          // setTimeout(() => {
-          //   this.db.collection('Messages').doc(id).update({ is_read: true }).then(res => {
-          //     console.log(res);
-          //   }).catch(err => {
-          //     console.log(err);
-          //   });
-          // }, 3000);
+          setTimeout(() => {
+            this.db.collection('Messages').doc(id).update({ is_read: true }).then(res => {
+              console.log(res);
+            }).catch(err => {
+              console.log(err);
+            });
+          }, 3000);
         }
         const liveChat = document.getElementById('chat-container-popup');
         //liveChat.scrollTop = liveChat.scrollHeight;

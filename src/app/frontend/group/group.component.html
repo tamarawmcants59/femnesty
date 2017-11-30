@@ -94,7 +94,7 @@
                                                     <a [routerLink]="['/user/profile',joinFrnd.display_name]">
                                                     <h2>{{joinFrnd.name}}</h2>
                                                     </a>
-                                                    <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !=''" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Add</button>
+                                                    <button *ngIf="joinFrnd.user_id!=isloginUserId && isloginUserId !=''" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.user_id)">Add</button>
                                                 </div>
                                             </li>
                                         </ul>  
