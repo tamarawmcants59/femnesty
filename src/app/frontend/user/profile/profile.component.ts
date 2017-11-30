@@ -130,7 +130,7 @@ export class ProfileComponent implements OnInit {
         const dataUserDet = {
           "user_id": this.otherProfileId
         };
-        this.dataService.getUseGroupListById(dataUserDet).subscribe(data => {
+        this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
             if (data.Ack == "1") {
               //console.log(data);
                 this.userGroupList = data.GroupListByuserID;

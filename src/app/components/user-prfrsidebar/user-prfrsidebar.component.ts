@@ -43,7 +43,7 @@ export class UserPrfrsidebarComponent implements OnInit {
       const dataUserDet = {
         "user_id": this.loginUserId
       };
-      this.dataService.getUseGroupListById(dataUserDet).subscribe(data => {
+      this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
           //console.log(data);
           if (data.Ack == "1") {
               this.userGrpList = data.GroupListByuserID;

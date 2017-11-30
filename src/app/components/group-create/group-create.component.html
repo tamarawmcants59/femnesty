@@ -177,19 +177,20 @@
                                     <strong>Success: </strong> {{successMsg}}
                                 </div>
                                 <!--<pre>{{groupList}}</pre>-->
-                                <ul class="uilist connection-box" *ngIf="groupList?.length > 0">
-                                    <li class="connectionList" *ngFor="let groupData of groupList">
+                                <ul class="uilist connection-box" *ngIf="groupRequestList?.length > 0">
+                                    <li class="connectionList" *ngFor="let groupData of groupRequestList">
                                         <div class="connectionImage">
                                             <a [routerLink]="['/group/details',groupData.group_uname]">
-                                                <div class="img" [ngStyle]="{'background-image':'url('+groupData.group_image+')'}"></div>
+                                                <div class="img" [ngStyle]="{'background-image':'url('+groupData.image+')'}"></div>
                                             </a>
                                         </div>
                                         <div class="connectionText">
                                             <a [routerLink]="['/group/details',groupData.group_uname]"><h2>{{groupData.group_name}}</h2></a>
                                             <p>{{groupData.member_count}} members</p>
-                                            <p *ngIf="groupData.group_type == '1'">Public group</p>
-                                            <p *ngIf="groupData.group_type == '2'">Private group</p>
-                                            <button type="button" class="btn btn-primary" (click)="editGroupTab(groupData.id)">Edit Group</button>											
+                                            <p *ngIf="groupData.request_type == '2'">You accepted</p>
+                                            <p *ngIf="groupData.request_type == '3'">You rejected</p>
+                                            <button *ngIf="groupData.request_type == '0'" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'2')">Accept</button>
+                                            <button *ngIf="groupData.request_type == '0'" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'3')">Reject</button> 
                                         </div>
                                     </li>
                                 </ul>
