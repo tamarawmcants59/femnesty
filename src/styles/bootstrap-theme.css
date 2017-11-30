@@ -3888,8 +3888,11 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .new-single-article h1{margin: 0 0 25px 0;padding:0 0 25px 0}
 
 .motivational h4{font-size:16px}
+.event-img{width:100%;height:250px;overflow: hidden;}
 
-
+.cat-article-img {
+    height: 230px;
+}
 
 
 
