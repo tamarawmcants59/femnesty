@@ -23,6 +23,9 @@ export class ProfileComponent implements OnInit {
   public errorMsg: string = '';
   public checkIsFriend:boolean = false;
   public loginUserDet:any;
+  public loading = false;
+  public isEmpRequest = true;
+  public isFollowRequest = true;
 
   constructor(
     private dataService: CompanyService,
@@ -79,6 +82,10 @@ export class ProfileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.userFollowerList = details.CompanyFollowers;
+            let SuccessPageData = this.userFollowerList.filter(item => item.user_id == this.isloginUserId);
+            if(SuccessPageData.length >0 ){
+              this.isFollowRequest = false;
+            }
           } else {
 
           }
@@ -103,6 +110,11 @@ export class ProfileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.userEmployeeList = details.EmployeelistBycompanyID;
+            let SuccessPageData = this.userEmployeeList.filter(item => item.user_id == this.isloginUserId);
+            if(SuccessPageData.length >0 ){
+              this.isEmpRequest = false;
+              //this.isFollowRequest = false;
+            }
           } else {
 
           }
@@ -191,8 +203,9 @@ export class ProfileComponent implements OnInit {
     }
     
     public sendEmployeeRequest(company_id) {
-      //console.log(friend_id);
+      
       if (this.isloginUserId != '' && company_id != '') {
+        this.loading = true;
         let requestJsonData={"user_id": this.isloginUserId, "company_id": company_id};
         this.dataService.sendEmployeeRequest(requestJsonData)
           .subscribe(
@@ -202,6 +215,7 @@ export class ProfileComponent implements OnInit {
                 }else{
                   this.errorMsg='You have already send the request';
                 }
+                this.loading = false;
             },
           error => {
             alert(error);
@@ -212,6 +226,7 @@ export class ProfileComponent implements OnInit {
     }
 
     public sendFollowRequest(company_id) {
+      this.loading = true;
       //console.log(friend_id);
       if (this.isloginUserId != '' && company_id != '') {
         let requestJsonData={"user_id": this.isloginUserId, "company_id": company_id};
@@ -223,6 +238,7 @@ export class ProfileComponent implements OnInit {
                 }else{
                   this.errorMsg='You have unfollow.';
                 }
+                this.loading = false;
             },
           error => {
             alert(error);
