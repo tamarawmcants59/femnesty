@@ -319,4 +319,16 @@ export class UserService {
   getUserGrpFrndListById(form_data){
     return this.apiService.post(`/users/appgrprivatememberlist`,form_data ).map(data => data);
   }
+  
+  getmyRequestGroupList(form_data){
+    return this.apiService.post(`/users/appusergrprequestlistbyid`,form_data ).map(data => data);
+  }
+  
+  responseGroupRequestByUser(form_data){
+    return this.apiService.post(`/users/acceptorRejectgroupRequestbyuser`,form_data ).map(data => data);
+  }
+  
+  getUseAllGroupListById(form_data){
+    return this.apiService.post(`/users/appusergroupresentlistbyuserid`,form_data ).map(data => data);
+  }
 }

@@ -21,6 +21,7 @@ export class GroupCreateComponent implements OnInit {
   public loginUserId: any;
   public groupList: any;
   public groupEditId: any;
+  public groupRequestList = [];
   public groupEditDataJson={};
 
   constructor(
@@ -71,6 +72,7 @@ export class GroupCreateComponent implements OnInit {
 
   ngOnInit() {
     this.getMyGroupListData();
+    this.getGroupRequestList();
   }
 
   public editGroupTab(groupId){
@@ -136,9 +138,7 @@ export class GroupCreateComponent implements OnInit {
     userValue.id = this.groupEditId;
     userValue.image = this.postImgData;
 
-    this.dataService.editGroupDataSend(userValue)
-      .subscribe(
-      data => {
+    this.dataService.editGroupDataSend(userValue).subscribe(data => {
         this.showPostImgDive = false;
         this.loading = false;
         this.successMsg = 'Successfully edit the group';
@@ -149,6 +149,49 @@ export class GroupCreateComponent implements OnInit {
       error => {
         alert(error);
       });
+  }
+  
+  public getGroupRequestList(){
+    let dataUserDet ={
+      "user_id": this.loginUserId
+    };
+    this.dataService.getmyRequestGroupList(dataUserDet).subscribe(data=>{
+        if (data.Ack=="1") {
+            this.groupRequestList = data.UserGroupRequest;
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      }
+    ); 
+  }
+
+  public requestGroupAction(pid, type) {
+    this.loading = true;
+    if (pid != '') {
+      const dataUserDet = {
+        "id": pid,
+        "request_type": type 
+      };
+      this.dataService.responseGroupRequestByUser(dataUserDet).subscribe(data => {
+          this.successMsg = '';
+          this.errorMsg = '';
+          if (data.Ack == "1") {
+            this.successMsg = data.msg;
+          }else{
+            this.errorMsg = data.msg;
+          } 
+          this.loading = false;
+          //this.router.navigateByUrl('/group/details/'+this.groupNameByUrl);
+          this.router.navigateByUrl('/user/profile');
+          //window.location.reload();
+          //this.getGroupMemberList();
+          //this.successMsg = 'You have successfully send the request.';
+        },
+        error => {
+
+        });
+    }
   }
 
   public fileChangePost($event) {
