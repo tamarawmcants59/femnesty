@@ -9,7 +9,7 @@
     <div class="messagePart">
         <ul>
             <li>
-                <a [routerLink]="['/user/chat/list']">
+                <a [routerLink]="['/user/groupchat', groupData.id]">
                     <span class="iconWidth">
                     <img src="assets/images/icon1.png">
                   </span> MESSAGES <span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>

@@ -14,6 +14,7 @@ import { Promise } from 'q';
 export class GroupChatComponent implements OnInit, OnDestroy {
 
   chats: any[];
+  groupMemberList =[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
   groupId: number;
   room_id: string;
@@ -33,6 +34,7 @@ export class GroupChatComponent implements OnInit, OnDestroy {
       this.groupId = parseInt(params['groupId'], 0);
       this.room_id = '_' + this.groupId;
       this.getMessages();
+      this.getGroupMemberList();
     });
     this.isComponentActive = true;
     console.log(firebase.firestore.FieldValue.serverTimestamp());
@@ -147,6 +149,23 @@ export class GroupChatComponent implements OnInit, OnDestroy {
         alert(error);
       });
 
+  }
+
+  public getGroupMemberList() {
+    if(this.groupId > 0) {
+      const dataUserDet = {
+        "group_id": this.groupId
+      };
+      this.userService.getGroupMemberListById(dataUserDet).subscribe(data => {
+          //console.log(data);
+          if (data.Ack == "1") {
+            this.groupMemberList = data.groupMembers;
+          } 
+        },
+        error => {
+
+        });
+    }
   }
 
 }

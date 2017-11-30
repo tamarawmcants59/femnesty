@@ -6,8 +6,8 @@
             </div>
             <div class="col-md-6">
                 <div class="middlePart">
-                    <div class="main-chat-wrap" *ngIf="withUser.first_name">
-                        <h4>Group: </h4>
+                    <div class="main-chat-wrap">
+                        <h4>Group chat:</h4>
                         <div class="chat-holder" *ngIf="chats">
                             <ul>
                                 <li *ngFor="let chat of chats" class="{{chat.cssClass}}">
@@ -44,50 +44,28 @@
             <div class="col-md-3">
                 <div class="rightPart">
                     <div class="innerRightPart">
-                        <h2>CONNECTIONS</h2>
-                        <div class="inline-search">
+                        <h2>Group member</h2>
+                        <!--<div class="inline-search">
                             <div class="input-group">
                                 <input placeholder="Search" class="form-control">
                                 <span class="input-group-btn">
                       <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </span>
                             </div>
-                        </div>
-                        <ul class="connectionlist">
-                            <li>
+                        </div>-->
+                        <ul class="connectionlist" *ngIf="groupMemberList?.length > 0">
+                            <li *ngFor="let friendData of groupMemberList">
                                 <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
+                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                    <div class="round-image-holder" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                    </a>
                                 </div>
                                 <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="image-area">
-                                    <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;"></div>
-                                </div>
-                                <div class="text-area">
-                                    <h5>Susan Boyle <span>5.43pm</span></h5>
-                                    <p>You: Stop screming Susan!</p>
+                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                        <h5>{{friendData.name}}</h5>
+                                    </a>
+                                    <!--<h5>Susan Boyle <span>5.43pm</span></h5>
+                                    <p>You: Stop screming Susan!</p>-->
                                 </div>
                             </li>
                         </ul>
