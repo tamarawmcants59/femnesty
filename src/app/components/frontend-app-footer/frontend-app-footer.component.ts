@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import { ChatListnerService } from './../../service/chat.listner.service';
-import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewChecked } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../frontend/user/user.service';
 //import { DatePipe } from '@angular/common';
@@ -9,7 +9,11 @@ import { UserService } from '../../frontend/user/user.service';
   selector: 'frontend-app-footer',
   templateUrl: './frontend-app-footer.component.html'
 })
-export class FrontendAppFooter implements OnInit, OnDestroy {
+export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('scrollMe') private myChatContainer: ElementRef;
+
+
+
   current_year = '';
   chatClass = 'live-chat hide';
   chats: any[];
@@ -43,6 +47,12 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
     });
   }
 
+  scrollToBottom(): void {
+    try {
+      this.myChatContainer.nativeElement.scrollTop = this.myChatContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+
   //wait for the component to render completely
   ngOnInit(): void {
     const nativeElement: HTMLElement = this.el.nativeElement,
@@ -57,6 +67,10 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
     this.pageContactData = 'contact-us';
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
   openChatWindow(chat) {
     this.fromUserId = chat.from_user_id;
     this.room_id = chat.room_id;
@@ -67,7 +81,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
     this.chatClass = 'live-chat';
   }
 
-  closeChat(){
+  closeChat() {
     this.chatClass = 'live-chat hide';
     this.isComponentActive = false;
   }
@@ -105,6 +119,9 @@ export class FrontendAppFooter implements OnInit, OnDestroy {
           //   });
           // }, 3000);
         }
+        const liveChat = document.getElementById('chat-container-popup');
+        //liveChat.scrollTop = liveChat.scrollHeight;
+        //console.log(liveChat.scrollHeight);
         return { id, ...data };
       });
     });

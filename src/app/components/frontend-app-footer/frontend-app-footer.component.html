@@ -72,7 +72,7 @@
             <span class="chat-message-counter">3</span>
         </div>
         <div class="chat">
-            <div class="chat-history" *ngIf="chats">
+            <div #scrollMe id="chat-container-popup" class="chat-history" *ngIf="chats">
                 <div class="chat-message clearfix {{chat.cssClass}}" *ngFor="let chat of chats">
                     <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
                     <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
