@@ -1317,7 +1317,7 @@ footer {
 .file-upload__label {
     display: block;
     padding: 1em 3em;
-    color: #fff;
+    color: #fff !important;
     background: #bb1926;
     border-radius: 40px;
     transition: background .3s;
@@ -1534,12 +1534,13 @@ footer {
 
 .enrichment-page p {
     height: auto;
-    font-size: 16px;
+    font-size: 15px;
     color: #000000;
     overflow: visible;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
-
+.enrichment-page h3{font-size:35px;margin: 30px 0 20px}
 .article-page.enrichment-page {
     padding-top: 60px;
     padding-bottom: 120px;
@@ -1548,6 +1549,7 @@ footer {
 .enrichmentText p {
     height: 140px;
     overflow: hidden;
+    font-weight: normal !important;
 }
 
 .profPhoto {
@@ -1637,7 +1639,7 @@ footer {
         position: relative;top:0;transform: none;margin: 200px auto 50px;left:0
     }
     .section h1 {
-        font-size: 20px;
+        font-size: 35px;
     }
     .section {
         padding: 50px 0
@@ -1673,8 +1675,8 @@ footer {
         text-align: center;
     }
     .section h1::after {
-        left: 50%;
-        transform: translateX(-50%)
+        /*left: 50%;
+        transform: translateX(-50%)*/
     }
     .article-page p {
         height: auto;
@@ -1866,7 +1868,11 @@ footer {
 .sign-form h2{
     font-size:37px;
 }
-.sign-form .text-danger{position: absolute;bottom:-20px}
+.sign-form .text-danger,.inner-pages-holder form .text-danger{position: absolute;bottom:-20px}
+.inner-pages-holder{padding: 85px 0;}
+.inner-pages-holder .btn.btn-primary{padding:14px 30px;}
+
+
 .sign-up-social span{color:#707070;font-size: 19px}
 .sign-up-social .social-link {
     display: inline-block;
@@ -3829,7 +3835,7 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 
 .friend-box .friend-box-list .friend-boxText{width:calc(100% - 90px);float:right;}
 .friend-box .friend-box-list .friend-boxText h2{font-size: 14px;margin:0 5px 5px;}
-.friend-box .friend-box-list .friend-boxText button{padding: 4px 15px;font-size: 11px;}
+.friend-box .friend-box-list .friend-boxText button{padding: 4px 15px;font-size: 11px;margin:2px 0}
 .friend-box .friend-box-list:last-child {margin-right: auto;}
 .friend-box .friend-box-list a.btn.btn-primary{height: 25px;font-size: 12px;line-height: 25px;padding: 0 25px;}
 
@@ -3858,6 +3864,18 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
     font-weight: normal;
 }
 .header-top ul li a.notify-box-top .txt .time{color: #8c8b8b;font-size: 9px;}
+
+.inner-pages-holder p{font-size: 17px;font-weight:600;}
+.inner-pages-holder h1{margin-top:0;}
+
+.mentor-partner{padding: 85px 0}
+.mentor-partner h2{font-size: 37px;margin: 0;color: #000;border-bottom: 3px solid #e6e6e6;font-weight: 600}
+.mentor-partner h3{font-weight: 600;font-size: 33px;}
+.mentor-partner p{font-weight: 600;font-size: 16px;}
+.mentor-partner .mentor-img{display: block;width:100%;height:277px;overflow: hidden;}
+.mentor-partner .mentor-img img{width:100%}
+
+
 
 @media screen and (max-width:1242px) {
 	.flex-profile .flex-left{width:25%}
@@ -3908,11 +3926,14 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
     .photoImage{justify-content: center;}
     .photoImage li{margin: 5px}
     .group a div.img{margin: 0 auto;}
+    .mentor-partner h2{font-size: 30px}
+    .mentor-partner h3,.enrichment-page h3{font-size: 20px}
     
 }
 @media screen and (max-width:480px) {
 	.headerTopPart li input[type="text"]{width:150px;}
 	.search-icon{padding: 14px 10px}
+	.btn.btn-primary{font-size: 14px;}
 }
 
 
