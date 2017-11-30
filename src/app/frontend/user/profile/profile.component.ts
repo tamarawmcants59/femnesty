@@ -126,9 +126,9 @@ export class ProfileComponent implements OnInit {
     }
 
     public getUserGroupList() {
-      if (this.isloginUserId != '') {
+      if (this.otherProfileId != '') {
         const dataUserDet = {
-          "user_id": this.isloginUserId
+          "user_id": this.otherProfileId
         };
         this.dataService.getUseGroupListById(dataUserDet).subscribe(data => {
             if (data.Ack == "1") {
