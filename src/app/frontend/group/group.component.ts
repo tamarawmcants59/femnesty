@@ -179,10 +179,11 @@ export class GroupComponent implements OnInit {
         "user_id": this.isloginUserId,
         "group_id": this.isGroupId
       };
+      //console.log(dataUserDet);
       this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
-          //console.log(details);
           if (data.Ack == "1") {
             this.userFrndList = data.groupMembersPrivate;
+            //console.log(this.userFrndList);
           } 
         },error => {
 
@@ -190,6 +191,32 @@ export class GroupComponent implements OnInit {
     }
   }
   
+  public inviteFrndAsGroupMember(join_uid) {
+    this.loading = true;
+    if (join_uid != '') {
+      const dataUserDet = {
+        "group_id": this.isGroupId,
+        "reffer_id": this.isloginUserId,
+        "user_id": join_uid
+      };
+      this.dataService.inviteMemberTojoinGroup(dataUserDet).subscribe(data => {
+          this.successMsg = '';
+          this.errorMsg = '';
+          if (data.Ack == "1") {
+            this.successMsg = data.msg;
+          }else{
+            this.errorMsg = data.msg;
+          } 
+          this.loading = false;
+          this.myFrndListforGrp();
+          //this.successMsg = 'You have successfully send the request.';
+        },
+        error => {
+
+        });
+    }
+  }
+
   public addGroupMember(join_uid) {
     this.loading = true;
     if (join_uid != '') {

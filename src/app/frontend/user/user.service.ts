@@ -331,4 +331,8 @@ export class UserService {
   getUseAllGroupListById(form_data){
     return this.apiService.post(`/users/appusergroupresentlistbyuserid`,form_data ).map(data => data);
   }
+  
+  inviteMemberTojoinGroup(form_data){
+    return this.apiService.post(`/users/apprefferjoinrequesttogrp`,form_data ).map(data => data);
+  }
 }

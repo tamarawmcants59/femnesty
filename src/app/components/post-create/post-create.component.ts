@@ -20,7 +20,7 @@ export class PostCreateComponent implements OnInit {
   loading: boolean;
   showPostImgDive: boolean;
   successMsg= '';
-  postImgData: any;
+  postImgData='';
 
   constructor(
     private builder: FormBuilder,
