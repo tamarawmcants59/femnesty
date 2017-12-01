@@ -23,6 +23,31 @@
                                              {{errorMsg}}
                                         </div>
                                     </div>
+                                    <h3>Respond to Your Friend Requests</h3>
+                                    <div class="connections">
+                                          <ul class="friend-box" *ngIf="userRequestFrndList?.length > 0">
+                                              <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
+                                                  <div class="friend-boxImage">
+                                                          <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                      <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                  </a>
+                                                  </div>
+                                                  <div class="friend-boxText">
+                                                      <h2>{{friendData.name}}</h2>
+                                                      <button type="button" class="btn btn-primary" (click)="acceptFriendRequest(friendData.id)">Confirm</button>
+                                                      <button type="button" class="btn btn-primary" (click)="rejectFriendRequest(friendData.id)">Delete Request</button>
+                                                  </div>
+                                              </li>
+                                          </ul>
+                                        
+                                      <div class="likePart" *ngIf="userRequestFrndList?.length == 0">
+                                          <div class="row">
+                                              <div class="col-md-12">
+                                                  <div class="nothing"><h3>No friend request found</h3></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
                                     <h2>Find Friends</h2>
                                     <form class="" [formGroup]="postform" (ngSubmit)="submitSearchUser(postform.value)" #postForm="ngForm">
                                         <div class="row">&nbsp;</div>  
@@ -74,31 +99,6 @@
                                         </div>
                                     </div>  
 
-                                    <h3>Respond to Your Friend Requests</h3>
-                                  <div class="connections">
-                                        <ul class="friend-box" *ngIf="userRequestFrndList?.length > 0">
-                                            <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
-                                                <div class="friend-boxImage">
-                                                        <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                    <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-                                                </a>
-                                                </div>
-                                                <div class="friend-boxText">
-                                                    <h2>{{friendData.name}}</h2>
-                                                    <button type="button" class="btn btn-primary" (click)="acceptFriendRequest(friendData.id)">Confirm</button>
-                                                    <button type="button" class="btn btn-primary" (click)="rejectFriendRequest(friendData.id)">Delete Request</button>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                      
-                                    <div class="likePart" *ngIf="userRequestFrndList?.length == 0">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="nothing"><h3>No friend request found</h3></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
                                 </div>
                               </div>
                           
