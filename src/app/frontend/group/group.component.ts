@@ -261,6 +261,8 @@ export class GroupComponent implements OnInit {
             this.errorMsg = data.msg;
           } 
           this.loading = false;
+          //this.getGroupMemberList();
+          this.getGroupMemberList();
           this.router.navigateByUrl('/group/details/'+this.groupNameByUrl);
           //this.getGroupMemberList();
           //this.successMsg = 'You have successfully send the request.';

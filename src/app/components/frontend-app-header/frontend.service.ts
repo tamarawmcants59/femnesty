@@ -47,4 +47,8 @@ export class FrontendService {
   getUserSearchdata(form_data){
     return this.apiService.post(`/enrichment/appsearchbykeyword`,form_data ).map(data => data);
   }
+
+  getUserFrndListById(form_data) {
+    return this.apiService.post(`/users/appuserfriendslistbyid`,form_data).map(data => data);
+  }
 }

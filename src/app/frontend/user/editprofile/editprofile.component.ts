@@ -152,8 +152,7 @@ export class EditprofileComponent implements OnInit {
       const dataUserDet = {
         "user_id": loginUserId
       };
-      this.dataService.getUserFrndListById(dataUserDet)
-        .subscribe(data => {
+      this.dataService.getUserFrndListById(dataUserDet).subscribe(data => {
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {
@@ -164,11 +163,9 @@ export class EditprofileComponent implements OnInit {
         },
         error => {
 
-        }
-        );
+        });
     } else {
     }
-
   }
 
   public getUserDetails() {

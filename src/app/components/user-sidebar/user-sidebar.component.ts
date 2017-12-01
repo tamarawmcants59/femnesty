@@ -13,6 +13,7 @@ export class UserSidebar implements OnInit {
   public currentUserDet: Object = {};
   public currentUserLoginDet: Object = {};
   public unreadMessages: number = 0;
+  public userFrndList = [];
   constructor(
     private el: ElementRef,
     lc: NgZone,
@@ -39,6 +40,23 @@ export class UserSidebar implements OnInit {
     // remove the empty element(the host)
     parentElement.removeChild(nativeElement);
     this.getUserDetails();
+    this.getConnectionList();
+
+    //firebase.auth().getOnlineUserCount();
+    /*firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        //console.log(user);
+
+        
+
+
+
+        // User is signed in.
+      } else {
+        // No user is signed in.
+      }
+    });*/
+    
   }
 
   public getUserDetails() {
@@ -48,8 +66,7 @@ export class UserSidebar implements OnInit {
         "id": loginUserId
       };
       this.getUnreadMessageCount(loginUserId);
-      this._service.getUserDetById(dataUserDet)
-        .subscribe(data => {
+      this._service.getUserDetById(dataUserDet).subscribe(data => {
           const details = data;
           if (details.Ack == "1") {
             this.currentUserLoginDet = details.UserDetails[0];
@@ -80,6 +97,28 @@ export class UserSidebar implements OnInit {
     messages.subscribe(message => {
       this.unreadMessages = message.length;
     });
+  }
+
+  public getConnectionList() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "user_id": loginUserId
+      };
+      this._service.getUserFrndListById(dataUserDet).subscribe(data => {
+          const details = data;
+          //console.log(details);
+          // let SuccessPageData = details.ContentAllBySlug;
+          // SuccessPageData = SuccessPageData.filter(item => item.id == 1);
+          if (details.Ack == "1") {
+            this.userFrndList = details.FriendListById;
+          } else {
+          }
+        },
+        error => {
+        });
+    } else {
+    }
   }
 
   public userLogout() {
