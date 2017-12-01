@@ -2,15 +2,30 @@ import { NgModule } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+//import { AngularFireDatabase } from 'angularfire2/database';
+//import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
 import { ApiService } from '../../service/api.service';
 
 @NgModule()
 export class UserService {
+  currentFireUserId:string;
   constructor(
-    private apiService: ApiService
-  ) { }
+    private apiService: ApiService,
+    //private afAuth: AngularFireAuth,
+    //private db: AngularFireDatabase
+  ) { 
+    /// Subscribe to auth state in firebase
+    /*this.afAuth.authState.do(user => {
+      if (user) {
+         this.currentFireUserId = user.uid
+         console.log(this.currentFireUserId);
+         //this.updateOnConnect()
+      }
+    }).subscribe();*/
+
+  }
 
   userLogin(form_data) {
     return this.apiService.post(
@@ -22,7 +37,9 @@ export class UserService {
         const password = data['UserDetails']['email'];
         firebase.auth().signInWithEmailAndPassword(email, password)
           .then(res => {
-            console.log(res);
+            //const fireBaseLogUserId=res.uid;
+            //console.log(fireBaseLogUserId);
+            //console.log(res);
           })
           .catch(err => {
             //console.log(err);
