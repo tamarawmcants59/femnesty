@@ -2,11 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
+//import { ShareButtonModule } from "ngx-sharebuttons";
+//import { CeiboShare } from 'ng2-social-share';
 
 @Component({
   selector: 'app-post-card',
   templateUrl: './post-card.component.html',
-  styleUrls: ['./post-card.component.css']
+  styleUrls: ['./post-card.component.css'],
+  //directives: [CeiboShare]
 })
 export class PostCardComponent implements OnInit {
   public commentform: FormGroup;
@@ -21,6 +24,9 @@ export class PostCardComponent implements OnInit {
   public userNameStr: string = '';
   public getCurrentUser: any;
   public currentDate: Date = new Date();
+  //public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
+  public repoUrl = '';
+  
 
   @Input() postData: {
     id: number;
@@ -52,6 +58,7 @@ export class PostCardComponent implements OnInit {
         //Validators.minLength(3)
       ]]
     });
+    this.repoUrl=this.router.url;
   }
 
   ngOnInit() {
@@ -132,4 +139,29 @@ export class PostCardComponent implements OnInit {
       });
   }
 
+}
+
+export declare class FacebookParams {
+  u: string;
+}
+
+export class GooglePlusParams {
+  url: string
+}
+
+export class LinkedinParams {
+  url:string
+}
+
+export declare class PinterestParams {
+  url: string;
+  media: string;
+  description: string;
+}
+
+export class TwitterParams {
+  text: string;
+  url: string;
+  hashtags: string;
+  via: string;
 }

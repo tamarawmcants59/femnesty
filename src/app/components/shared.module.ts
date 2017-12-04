@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
+//import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 //import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,8 @@ import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
 import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
 import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
 import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+//import { CeiboShare } from 'ng2-social-share';
+import { CeiboShare } from 'ng2-social-share';
 
 @NgModule({
     declarations: [
@@ -28,7 +31,8 @@ import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
         GroupLeftbarComponent,
         GroupRightbarComponent,
         CompanyRightbarComponent,
-        ImageCropperComponent
+        ImageCropperComponent,
+        CeiboShare
     ],
     imports: [
         CommonModule,
@@ -36,6 +40,8 @@ import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
         FormsModule,
         ReactiveFormsModule,
         ApplicationPipes,
+        //ShareButtonModule.forRoot(),
+        //CeiboShare,
         NgbModule
     ],
     exports: [
@@ -47,7 +53,8 @@ import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
         GroupLeftbarComponent,
         GroupRightbarComponent,
         CompanyRightbarComponent,
-        ImageCropperComponent
+        ImageCropperComponent,
+        CeiboShare
     ],
     providers: [
         SocialService
