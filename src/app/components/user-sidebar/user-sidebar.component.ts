@@ -2,8 +2,12 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgZone } from "@angular/core";
 import { FrontendService } from "../frontend-app-header/frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
-import * as firebase from 'firebase';
 import { AngularFirestore } from 'angularfire2/firestore';
+//import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+import { forEach } from '@angular/router/src/utils/collection';
+
 @Component({
   selector: 'user-sidebar',
   templateUrl: './user-sidebar.component.html'
@@ -14,18 +18,28 @@ export class UserSidebar implements OnInit {
   public currentUserLoginDet: Object = {};
   public unreadMessages: number = 0;
   public userFrndList = [];
+  public currentFireUserId: string;
+  public onlineUserList = [];
+  public firebasOnlineUserList: any;
+
   constructor(
     private el: ElementRef,
     lc: NgZone,
     private route: ActivatedRoute,
     private router: Router,
     private _service: FrontendService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private afAuth: AngularFireAuth
   ) {
     this.userloggedIn = localStorage.getItem("isLoggedIn");
     const getUserDet = localStorage.getItem("currentUser");
     this.currentUserDet = JSON.parse(getUserDet);
     //console.log(this.currentUserDet);
+    this.afAuth.authState.do(user => {
+      if (user) {
+        this.currentFireUserId = user.uid;
+      }
+    }).subscribe();
   }
 
   ngOnInit(): void {
@@ -41,22 +55,6 @@ export class UserSidebar implements OnInit {
     parentElement.removeChild(nativeElement);
     this.getUserDetails();
     this.getConnectionList();
-
-    //firebase.auth().getOnlineUserCount();
-    /*firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        //console.log(user);
-
-        
-
-
-
-        // User is signed in.
-      } else {
-        // No user is signed in.
-      }
-    });*/
-    
   }
 
   public getUserDetails() {
@@ -67,18 +65,18 @@ export class UserSidebar implements OnInit {
       };
       this.getUnreadMessageCount(loginUserId);
       this._service.getUserDetById(dataUserDet).subscribe(data => {
-          const details = data;
-          if (details.Ack == "1") {
-            this.currentUserLoginDet = details.UserDetails[0];
-            //console.log(this.currentUserLoginDet);
-          } else {
+        const details = data;
+        if (details.Ack == "1") {
+          this.currentUserLoginDet = details.UserDetails[0];
+          //console.log(this.currentUserLoginDet);
+        } else {
 
-          }
-        },
+        }
+      },
         error => {
 
         }
-        );
+      );
     } else {
     }
 
@@ -102,26 +100,51 @@ export class UserSidebar implements OnInit {
   public getConnectionList() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
+      let onlineUsersRef = firebase.database().ref('presence/');
       const dataUserDet = {
         "user_id": loginUserId
       };
       this._service.getUserFrndListById(dataUserDet).subscribe(data => {
-          const details = data;
-          //console.log(details);
-          // let SuccessPageData = details.ContentAllBySlug;
-          // SuccessPageData = SuccessPageData.filter(item => item.id == 1);
-          if (details.Ack == "1") {
-            this.userFrndList = details.FriendListById;
-          } else {
-          }
-        },
+        const details = data;
+        if (details.Ack == "1") {
+          this.userFrndList = details.FriendListById;
+          onlineUsersRef.on('value', (snapshot)=> {
+            for (let key in snapshot.val()) {
+                if (snapshot.val()[key].online && snapshot.val()[key].userid!=loginUserId) {
+                  let onlineUserDet = details.FriendListById.filter(item => item.friend_id == snapshot.val()[key].userid);
+                  let checkOnlineUserlist = this.onlineUserList.filter(item => item.friend_id == snapshot.val()[key].userid);
+                  if(onlineUserDet.length>0 && checkOnlineUserlist.length==0){
+                    //console.log(onlineUserDet[0]);
+                    this.onlineUserList.push(onlineUserDet[0]);
+                  }
+                }
+            }
+          });
+
+        } else {
+        }
+
+      },
         error => {
         });
     } else {
     }
+    //console.log(this.onlineUserList);
   }
 
   public userLogout() {
+    let usersRef = firebase.database().ref('presence/'+this.currentFireUserId);
+    let connectedRef = firebase.database().ref('.info/connected');
+    let fUserId = parseInt(localStorage.getItem("loginUserId"));
+    connectedRef.on('value', function(snapshot) {
+      usersRef.set({ online: false, userid:fUserId});
+      //usersRef.onDisconnect().remove();
+    });   
+
+    firebase.auth().signOut().then(function() {
+    }, function(error) {
+    });
+
     localStorage.removeItem("currentUser");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");

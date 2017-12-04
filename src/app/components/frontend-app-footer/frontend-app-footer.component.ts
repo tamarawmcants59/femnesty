@@ -1,9 +1,13 @@
+//import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { ChatListnerService } from './../../service/chat.listner.service';
 import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewChecked } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../frontend/user/user.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 //import { DatePipe } from '@angular/common';
+//@Injectable()
 
 @Component({
   selector: 'frontend-app-footer',
@@ -12,7 +16,7 @@ import { UserService } from '../../frontend/user/user.service';
 export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollMe') private myChatContainer: ElementRef;
 
-
+  public currentFireUserId:string;
 
   current_year = '';
   chatClass = 'live-chat hide';
@@ -40,11 +44,21 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     private el: ElementRef,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
-    private userService: UserService
+    private userService: UserService,
+    private afAuth: AngularFireAuth,
+    private firedb: AngularFireDatabase
   ) {
     this._chatListnerService.listen().subscribe((chat: any) => {
       this.openChatWindow(chat);
     });
+
+    this.afAuth.authState.do(user => {
+      if (user) {
+         this.currentFireUserId = user.uid;
+         //console.log(this.currentFireUserId);
+         this.updateOnConnect();
+      }
+    }).subscribe();
   }
 
   scrollToBottom(): void {
@@ -55,6 +69,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
 
   //wait for the component to render completely
   ngOnInit(): void {
+    //console.log(this.currentFireUserId);
     const nativeElement: HTMLElement = this.el.nativeElement,
       parentElement: HTMLElement = nativeElement.parentElement;
     // move all children out of the element
@@ -219,6 +234,27 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
         alert(error);
       });
 
+  }
+
+  /// Updates status when connection to Firebase starts
+  private updateOnConnect() {
+    //console.log('hi');
+    let usersRef = firebase.database().ref('presence/'+this.currentFireUserId);
+    let connectedRef = firebase.database().ref('.info/connected');
+    const fUserId=this.loginUserId;
+    connectedRef.on('value', function(snapshot) {
+      if (snapshot.val()) {
+        // User is online.
+        //usersRef.onDisconnect().remove();
+        usersRef.onDisconnect().set({ online: false, userid:fUserId});
+        usersRef.set({ online: true, userid:fUserId});
+        //console.log('online');
+      } else {
+        // User is offline.
+        // WARNING: This won't work! See an explanation below.
+        usersRef.set({ online: false, userid:fUserId});
+      }
+    });   
   }
 
 
