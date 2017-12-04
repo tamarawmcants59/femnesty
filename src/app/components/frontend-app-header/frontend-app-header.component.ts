@@ -1,10 +1,12 @@
 import { ChatListnerService } from './../../service/chat.listner.service';
 import { Component, ElementRef } from '@angular/core';
 import { NgZone } from "@angular/core";
+import * as firebase from 'firebase';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { FrontendService } from "./frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'frontend-app-header',
@@ -21,6 +23,7 @@ export class FrontendAppHeader {
   public userNotiCnt: number = 0;
   public searchResultStr:string ='';
   public form:FormGroup;
+  public currentFireUserId:string='';
   
   constructor(
     private el: ElementRef,
@@ -30,8 +33,15 @@ export class FrontendAppHeader {
     private _service: FrontendService,
     private builder:FormBuilder,
     private _chatListnerService: ChatListnerService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private afAuth: AngularFireAuth
   ) {
+    this.afAuth.authState.do(user => {
+      if (user) {
+         this.currentFireUserId = user.uid;
+      }
+    }).subscribe();
+
     window.onscroll = () => {
       let st = window.pageYOffset;
       let dir = '';
@@ -156,6 +166,19 @@ export class FrontendAppHeader {
   }
 
   public userLogout() {
+    let usersRef = firebase.database().ref('presence/'+this.currentFireUserId);
+    let connectedRef = firebase.database().ref('.info/connected');
+    let fUserId = parseInt(localStorage.getItem("loginUserId"));
+    connectedRef.on('value', function(snapshot) {
+      usersRef.set({ online: false, userid:fUserId});
+      //usersRef.onDisconnect().remove();
+    });   
+    //this.afAuth.logout();
+    firebase.auth().signOut().then(function() {
+      //console.log('Signed Out');
+    }, function(error) {
+      //console.error('Sign Out Error', error);
+    });
     localStorage.removeItem("currentUser");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
