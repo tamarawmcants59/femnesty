@@ -278,18 +278,24 @@
                             </div>
                             <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
                                 <div class="connectionsPart">
-                                    <h2>Connections</h2>
-                                    <ul class="friend-box" *ngIf="userFrndList?.length > 0">
+                                    <!--<h2>Connections</h2>-->
+                                    
+                                    <ul class="contn-box" *ngIf="userFrndList?.length > 0">
                                         <li class="friend-box-list" *ngFor="let friendData of userFrndList">
                                             <div class="friend-boxImage">
-                                            <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-                                            </a>
+	                                            <a [routerLink]="['/user/profile',friendData.display_name]">
+	                                                <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+	                                            </a>
                                             </div>
                                             <div class="friend-boxText">
-                                                <h2>{{friendData.name}}</h2>
-                                                <a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>
+                                                <h4>{{friendData.name}}</h4>
+                                                <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
+                                                <p>Entrepreneur, hunk and an absolute dog lover</p>
                                             </div>
+                                            <div class="sendmsg">
+                                            	<a href=""><span><img src="assets/images/send-msg.png" alt=""></span> SEND MESSAGE </a>
+                                            </div>
+                                            <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
                                         </li>
                                     </ul>
 
