@@ -15,7 +15,7 @@
           <div class="row" *ngIf="catArticle.all_articlebycat?.length>0">
               <div class="col-md-3 col-sm-6 col-multi-article" *ngFor="let articleData of catArticle.all_articlebycat">
                   <div class="book-pic1">
-                      <a [routerLink]="['/articles/details',articleData.slug]"> <div [ngStyle]="{'background-image':'url('+articleData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}" class="img-responsive article-img"> </div></a>
+                      <a [routerLink]="['/articles/details',articleData.slug]"> <div [ngStyle]="{'background-image':'url('+articleData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"> </div></a>
                   </div>
                   <h3 class="text-red">{{articleData.title | limitTo : 22}}</h3>
                   <h5 class="text-red">By {{articleData.author_name}}</h5>
