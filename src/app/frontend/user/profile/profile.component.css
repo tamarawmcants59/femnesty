@@ -14,3 +14,5 @@
     background-size: cover;
     border-radius: 50%;
 }
+
+.social-link li a{color:#cc535c; border-radius:50%; background:#fff; border:2px solid #cc535c}

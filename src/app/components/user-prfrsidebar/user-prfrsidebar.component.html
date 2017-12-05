@@ -19,7 +19,26 @@
             </div>
         </div>
     </div>
+	
+	 <div class="innerRightPart">
+        <h2 style="margin-bottom: 0">MY ATTENDING HUBS</h2>
+        <div class="hubMet hubMet1 group">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="">
+                        <div class="img" style="background: url('assets/images/img-1.jpg') no-repeat center center; border-radius: 0; background-size: cover"></div>
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <h2 style="margin-top: 8px">Femnesty Hub Met</h2>
+                    <a href="" style="color:#7a7a7a">2017-09-04, London</a>
+                    <a class="btn btn-primary" style="margin-top: 8px">View Hub</a>
+                </div>
+            </div>
 
+        </div>
+    </div>
+	
     <div class="innerRightPart" *ngIf="userGrpList?.length > 0">
         <h2 style="margin-bottom: 0">Groups</h2>
         <div class="hubMet hubMet1 group" *ngFor="let grpData of userGrpList">
