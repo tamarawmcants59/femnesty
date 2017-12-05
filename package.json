@@ -30,6 +30,7 @@
     "lodash": "^4.17.4",
     "ng2-img-cropper": "^0.8.4",
     "ng2-social-share": "0.0.10",
+    "ng4-social-login": "^1.3.5",
     "ngx-cropper": "^1.0.2",
     "ngx-loading": "^1.0.8",
     "ngx-sharebuttons": "^4.1.4",

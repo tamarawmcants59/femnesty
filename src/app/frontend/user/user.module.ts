@@ -19,20 +19,32 @@ import { ShareyourstoryComponent } from './shareyourstory/shareyourstory.compone
 import { MentorComponent } from './mentor/mentor.component';
 import { NotificationComponent } from './notification/notification.component';
 import { GroupChatComponent } from "./group-chat/chat.component";
-//import { CuppaOAuthModule } from '../../cuppaOAuth/cuppaOAuth.module';
+import {
+  SocialLoginModule, 
+  AuthServiceConfig,
+  GoogleLoginProvider, 
+  FacebookLoginProvider, 
+  LinkedinLoginProvider
+} from 'ng4-social-login';
 
-let providers = {
-  /*"google": {
-    "clientId": "GOOGLE_CLIENT_ID"
+const CONFIG = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('AIzaSyBuZJ4SSMACOsfR4GjjOICS2K-zp8nKyI4')
   },
-  "linkedin": {
-    "clientId": "LINKEDIN_CLIENT_ID"
-  },*/
-  "facebook": {
-    "clientId": "150470825593599",
-    "apiVersion": "v2.11" //like v2.4 
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('150470825593599')
+  },
+  {
+    id: LinkedinLoginProvider.PROVIDER_ID,
+    provider: new LinkedinLoginProvider('8102vegvhysdby')
   }
-};
+]);
+
+export function provideConfig() {
+  return CONFIG;
+}
 
 @NgModule({
   imports: [
@@ -42,7 +54,7 @@ let providers = {
     ApplicationPipes,
     ReactiveFormsModule,
     SharedModule,
-    //CuppaOAuthModule,
+    SocialLoginModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.wanderingCubes,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)',
@@ -68,8 +80,14 @@ let providers = {
     GroupChatComponent
     //ImageCropperComponent
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   exports: [CommonModule]
 })
 export class UserModule { }
-//Angular2SocialLoginModule.loadProvidersScripts(providers);
+
