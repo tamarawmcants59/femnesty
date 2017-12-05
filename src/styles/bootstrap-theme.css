@@ -2694,7 +2694,7 @@ background: #fff !important;}
 }
 
 .innerRightPart h2 {
-    font-size: 14px;
+    font-size: 15px;
     color: #000000;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
@@ -3713,7 +3713,7 @@ ul.connectionlist li .text-area p {
     text-transform: uppercase;
     color: #d23545;
     font-family: "Montserrat", sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     display: inline-block;
     letter-spacing: 1px;
     font-size: 12px;
@@ -3727,7 +3727,14 @@ ul.connectionlist li .text-area p {
 
 .filter-reslt li {
     display: block;
-    padding: 10px 0
+    padding: 10px 0;
+    color: #222;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+.filter-reslt li span {
+    color: #666;
 }
 
 .filter-reslt li a {
@@ -3900,12 +3907,11 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .hubMet.hubMet1.group:last-child{border-bottom:0 !important}
 
 .contn-box{width:100%; padding: 0; margin: 0; display: block !important}
-.contn-box li.friend-box-list{width:100%; border: 0; border-bottom:3px solid #f2f2f2; height: auto; min-height:195px; display: flex; position: relative; margin-right: 0; align-items:center; padding: 15px;}
+.contn-box li.friend-box-list{width:100%; border: 0; border-bottom:2px solid #f2f2f2; height: auto; min-height:195px; display: flex; position: relative; margin-right: 0; align-items:center; padding: 15px;}
 .contn-box li.friend-box-list:last-child{border-bottom:0}
 .contn-box li.friend-box-list .dwn-arrow{position: absolute; top:15px; right:0; color:#f0f0f0; font-size:16px}
 .contn-box li.friend-box-list .friend-boxImage{ margin-right: 25px}
-.contn-box li.friend-box-list .friend-boxImage a .img{width:105px; height:105px; border-radius: 100%;}
-.contn-box li.friend-box-list .friend-boxImage a .img{width:105px; height:105px; border-radius: 100%;}
+.contn-box li.friend-box-list .friend-boxImage a .img{width:105px; height:105px; border-radius: 100%; background-size: cover !important; background-repeat: no-repeat !important; background-position: center center !important;}
 .contn-box li.friend-box-list .friend-boxText h4{font-weight: 600}
 .contn-box li.friend-box-list .friend-boxText{text-align:left !important; width:42%; margin-right: 50px}
 .contn-box li.friend-box-list .friend-boxText p{font-size: 16px; color:#585858; margin-bottom: 5px; font-weight: 600}
