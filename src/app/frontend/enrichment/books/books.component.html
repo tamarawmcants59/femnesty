@@ -32,16 +32,30 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="book1">
                     <div class="row p-16">
-                        <div class="col-md-3 col-book mt-50" *ngFor="let catEnrichment of booksCatData">
+                    	<div class="col-md-12">
+                    		<div class="books-wrap">
+                    			<div class="book-item" *ngFor="let catEnrichment of booksCatData">
+                    				<div class="book-pic">
+                                <a [routerLink]="['/enrichment/book_details',catEnrichment.slug]"> <div [ngStyle]="{'background-image':'url('+catEnrichment.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}" class="book-img"> </div></a>
+                            		</div>
+                            		<div class="text-center book-text">
+		                                <p>{{catEnrichment.author}}</p>
+		                                <h5>{{catEnrichment.title}}</h5>
+		                                <h5 class="text-red">Personal Development</h5>
+		                            </div>
+                    			</div>
+                    		</div>
+                    	</div>
+                        <!--<div class="col-md-3 col-book mt-50" *ngFor="let catEnrichment of booksCatData">
                             <div class="book-pic">
-                                <a [routerLink]="['/enrichment/book_details',catEnrichment.slug]"> <div [ngStyle]="{'background-image':'url('+catEnrichment.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}" class="img-responsive book-img"> </div></a>
+                                <a [routerLink]="['/enrichment/book_details',catEnrichment.slug]"> <div [ngStyle]="{'background-image':'url('+catEnrichment.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}" class="book-img"> </div></a>
                             </div>
                             <div class="text-center book-text">
                                 <p>{{catEnrichment.author}}</p>
                                 <h5>{{catEnrichment.title}}</h5>
-                                <!--<h5 class="text-red">Personal Development</h5>-->
+                                <h5 class="text-red">Personal Development</h5>
                             </div>
-                        </div>
+                        </div>-->
                         <!--<div class="col-md-12 col-book mt-50" *ngIf="booksCatData.length == 0">
                             <p>No result found.</p>
                         </div>-->
