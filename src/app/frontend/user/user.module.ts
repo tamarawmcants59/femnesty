@@ -19,8 +19,20 @@ import { ShareyourstoryComponent } from './shareyourstory/shareyourstory.compone
 import { MentorComponent } from './mentor/mentor.component';
 import { NotificationComponent } from './notification/notification.component';
 import { GroupChatComponent } from "./group-chat/chat.component";
-//import { DashboardComponent } from './dashboard/dashboard.component';
-//import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+//import { CuppaOAuthModule } from '../../cuppaOAuth/cuppaOAuth.module';
+
+let providers = {
+  /*"google": {
+    "clientId": "GOOGLE_CLIENT_ID"
+  },
+  "linkedin": {
+    "clientId": "LINKEDIN_CLIENT_ID"
+  },*/
+  "facebook": {
+    "clientId": "150470825593599",
+    "apiVersion": "v2.11" //like v2.4 
+  }
+};
 
 @NgModule({
   imports: [
@@ -30,6 +42,7 @@ import { GroupChatComponent } from "./group-chat/chat.component";
     ApplicationPipes,
     ReactiveFormsModule,
     SharedModule,
+    //CuppaOAuthModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.wanderingCubes,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)',
@@ -59,3 +72,4 @@ import { GroupChatComponent } from "./group-chat/chat.component";
   exports: [CommonModule]
 })
 export class UserModule { }
+//Angular2SocialLoginModule.loadProvidersScripts(providers);

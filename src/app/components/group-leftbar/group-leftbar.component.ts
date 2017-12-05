@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from "../../frontend/user/user.service";
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-group-leftbar',
@@ -24,7 +26,10 @@ export class GroupLeftbarComponent implements OnInit {
   public currentDate: Date = new Date();*/
   public isloginUserId: string = '';
   public isUserLogin: string = '';
-  
+  public userFrndList = [];
+  public currentFireUserId: string;
+  public onlineUserList = [];
+  public firebasOnlineUserList: any;
 
   @Input() groupData: {
     id: number;
@@ -49,17 +54,71 @@ export class GroupLeftbarComponent implements OnInit {
     private builder: FormBuilder,
     private dataService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
+    this.afAuth.authState.do(user => {
+      if (user) {
+        this.currentFireUserId = user.uid;
+      }
+    }).subscribe();
    }
 
   ngOnInit() {
     //console.log(this.groupData);
+    this.getConnectionList();
+  }
+
+  public getConnectionList() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      let onlineUsersRef = firebase.database().ref('presence/');
+      const dataUserDet = {
+        "user_id": loginUserId
+      };
+      this.dataService.getUserFrndListById(dataUserDet).subscribe(data => {
+        const details = data;
+        if (details.Ack == "1") {
+          this.userFrndList = details.FriendListById;
+          onlineUsersRef.on('value', (snapshot)=> {
+            for (let key in snapshot.val()) {
+                if (snapshot.val()[key].online && snapshot.val()[key].userid!=loginUserId) {
+                  let onlineUserDet = details.FriendListById.filter(item => item.friend_id == snapshot.val()[key].userid);
+                  let checkOnlineUserlist = this.onlineUserList.filter(item => item.friend_id == snapshot.val()[key].userid);
+                  if(onlineUserDet.length>0 && checkOnlineUserlist.length==0){
+                    //console.log(onlineUserDet[0]);
+                    this.onlineUserList.push(onlineUserDet[0]);
+                  }
+                }
+            }
+          });
+
+        } else {
+        }
+
+      },
+        error => {
+        });
+    } else {
+    }
+    //console.log(this.onlineUserList);
   }
 
   public userLogout() {
+    let usersRef = firebase.database().ref('presence/'+this.currentFireUserId);
+    let connectedRef = firebase.database().ref('.info/connected');
+    let fUserId = parseInt(localStorage.getItem("loginUserId"));
+    connectedRef.on('value', function(snapshot) {
+      usersRef.set({ online: false, userid:fUserId});
+      //usersRef.onDisconnect().remove();
+    });   
+
+    firebase.auth().signOut().then(function() {
+    }, function(error) {
+    });
+
     localStorage.removeItem("currentUser");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
