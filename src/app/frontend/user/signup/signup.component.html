@@ -39,9 +39,10 @@
             </div>
             <div class="sign-up-social">
                 <span>Connect with: </span>
+                <!--<cuppa-oauth [authConfig]="config"></cuppa-oauth>-->
                 <ul class="social-link mt-30 text-center">
                     <li>
-                        <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
+                        <a (click)="socialSignIn('facebook')" class="fb-bg"><i class="ion-social-facebook"></i></a>
                     </li>
                     <li>
                         <a href="#" class="linked-bg"><i class="fa fa-linkedin"></i></a>

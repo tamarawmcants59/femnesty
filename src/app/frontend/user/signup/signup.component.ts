@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
+//import { AuthService } from "angular2-social-login";
 
 function duplicatePassword(input: FormControl) {
   
@@ -34,11 +35,32 @@ export class SignupComponent implements OnInit {
   public checkEmailExist:boolean = false;
   public isLoggedIn: any;
 
+  /*public authServerBaseUrl = 'https://cuppa-angular2-oauth.herokuapp.com';
+  public config = {
+  "loginRoute":"user/signup",
+  "linkedin":{
+    "authEndpoint": this.authServerBaseUrl+"/auth/linkedin",
+    "clientId":"8176r44lz2ewos",
+    "redirectURI" : "https://cuppa-angular2-oauth.herokuapp.com/admin"
+  },
+  "facebook":{
+    "authEndpoint": this.authServerBaseUrl+"/auth/facebook",
+    "clientId":"150470825593599",
+    "redirectURI" : "https://cuppa-angular2-oauth.herokuapp.com/admin"
+  },
+  "google":{
+    "authEndpoint": this.authServerBaseUrl+"/auth/google",
+    "clientId":"77954512562-eftl8up04q1g3aha2mjg5h6bgel9svkk.apps.googleusercontent.com",
+    "redirectURI" : "https://cuppa-angular2-oauth.herokuapp.com/admin"
+  }
+  };*/
+
   constructor(
     private builder:FormBuilder, 
     private dataService: UserService, 
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    //public _auth: AuthService
   ) { 
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
@@ -132,5 +154,14 @@ export class SignupComponent implements OnInit {
      }
   }
 
+  public socialSignIn(provider){
+    // this._auth.login(provider).subscribe(
+    //   (data) => {
+    //       console.log(data);
+    //       //user data 
+    //       //name, image, uid, provider, uid, email, token (accessToken for Facebook & google, no token for linkedIn), idToken(only for google) 
+    //     }
+    // )
+  }
 
 }
