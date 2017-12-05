@@ -1214,7 +1214,7 @@ footer {
 }
 
 .article-page h3 {
-    font-size: 26px;
+    font-size: 28px;
     margin-bottom: 30px;
 }
 
@@ -1223,7 +1223,7 @@ footer {
 }
 
 .article-page p {
-    height: 250px;
+    height: 250px; font-size:15px;
     overflow: hidden;
 }
 
