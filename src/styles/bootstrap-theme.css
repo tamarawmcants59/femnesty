@@ -3970,11 +3970,14 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
     .mentor-partner h2,.single-article.section h1{font-size: 30px}
     .mentor-partner h3,.enrichment-page h3{font-size: 20px}
     
+    .books-wrap .book-item{width:48%;}
+    
 }
 @media screen and (max-width:480px) {
 	.headerTopPart li input[type="text"]{width:150px;}
 	.search-icon{padding: 14px 10px}
 	.btn.btn-primary{font-size: 14px;}
+
 }
 
 
