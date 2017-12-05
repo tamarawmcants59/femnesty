@@ -1,0 +1,5 @@
+.vid-details-section{margin-top: 190px; height: 313px;}
+.vid-details-section .container{position: relative; height: 100%}
+.vid-details-section .container .video-info{position: absolute; left: 0; top:50%; transform: translateY(-50%);}
+.vid-details-section .container .video-info h1{font-size:43px; margin-top: 0}
+.vid-details-section .container .video-info h3{color:#959595; margin-top: 0}

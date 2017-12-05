@@ -1,10 +1,11 @@
-<section class="inner-banner" [ngStyle]="{'background-image':'url('+videoDetData.banner_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}">
+<section class="inner-banner vid-details-section" [ngStyle]="{'background-image':'url('+videoDetData.banner_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}">
   <div class="container">
-      <div class="row">
-          <div class="col-md-7">
-              <h1 class="text-white">{{videoDetData.title}}</h1>
-          </div>
+      
+      <div class="video-info">
+          <h1 class="text-white">{{videoDetData.title}}</h1>
+          <h3 class="gry-txt">Advice for Entrepreneurs</h3>
       </div>
+      
   </div>
 </section>
 
