@@ -3,3 +3,8 @@
 .vid-details-section .container .video-info{position: absolute; left: 0; top:50%; transform: translateY(-50%);}
 .vid-details-section .container .video-info h1{font-size:43px; margin-top: 0}
 .vid-details-section .container .video-info h3{color:#959595; margin-top: 0}
+
+@media screen and (max-width:767px) {
+	.vid-details-section{margin-top: 170px;}
+	.vid-details-section .container .video-info{left: 15px}
+}
