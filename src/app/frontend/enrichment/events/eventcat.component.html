@@ -1,20 +1,20 @@
  <!-- inner  banner -->
         
- <section class="inner-banner" [ngStyle]="{'background-image':'url('+articleCatData?.banner_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}">
+ <section class="inner-banner inner-banner-section" [ngStyle]="{'background-image':'url('+articleCatData?.banner_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}">
   <div class="container">
-      <div class="row">
-          <div class="col-md-7">
-              <h1 class="text-white">{{articleCatData.name}}</h1>
-          </div>
-      </div>
+      
+	<div class="info">
+		<h1 class="text-white">{{articleCatData.name}}</h1>
+	</div>
+      
   </div>
 </section>
 
-<section class="section p-16 single-article new-article">
+<section class="section p-16 " style="padding-top: 94px">
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1>{{articleCatData.name}}</h1>
+            <h1 style="margin-top: 0">{{articleCatData.name}}</h1>
             <p class="font-weight-bold mb-30">{{articleCatData.short_description}}</p>
             <div [innerHTML]="articleCatData.description" class="mb-30"></div>
             <a [routerLink]="['/enrichment/list',articleCatData.slug]" class="btn btn-primary">Read more</a>
@@ -24,9 +24,9 @@
                 <a [routerLink]="['/enrichment/eventdetails',articleListData[0].slug]"><img [src]="articleListData[0].image_url" alt="" class="img-responsive"></a>
             </div>
             <div class="right-text-hold">
-                <h3 class="text-red">{{articleListData[0].title}}</h3>
-                <p class="font-weight-bold">By {{articleListData[0].author_name}}</p>
-                <p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>
+                <h3 style="margin-bottom: 30px">{{articleListData[0].title}}</h3>
+                <!--<p class="font-weight-bold">By {{articleListData[0].author_name}}</p>-->
+                <!--<p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>-->
                 <!--<ul class="social-link mt-30">
                     <li>
                         <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
