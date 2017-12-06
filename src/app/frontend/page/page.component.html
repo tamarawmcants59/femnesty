@@ -1,4 +1,4 @@
-<!--<section class="inner-banner" style="background: url(images/inner-bg.jpg) center no-repeat; background-size: cover;">
+<section class="inner-banner" style="background: url(assets/images/about-bg.jpg) center no-repeat; background-size: cover;">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
@@ -6,16 +6,98 @@
           </div>
       </div>
   </div>
-</section>-->
+</section>
 
-<section class="section about-content-area" *ngIf="pageSlugName != 'contact-us'">
+<section class="section about-content-area new-about-content-area" *ngIf="pageSlugName != 'contact-us'">
     <div class="container">
         <div class="row">
-        	<div class="col-md-12">
+        	<!--<div class="col-md-12">
 	          	<h1>{{pageDetData.page_heading}}</h1>
 	          	
+			</div>-->
+			<!--<div [innerHTML]="pageDetData.content" ></div>-->
+			<div class="col-md-8">
+				<h1>Woman was taken out of man; not out of his head to top him, nor out of his feet to be trampled underfoot, but out of his side to be equal to him.</h1>
+
+				<p class="text-italic font-15">Femnesty is a network that connects women from all around the world. It exists to help women recognise and unleash the potential in their own personal and professional lives, and to promote the positive roles we play as parents, professionals, family members and friends.</p>
+
+				<p class="font-15">We’re not a feminist organisation, but we do believe that men and women are born with equal values and status, that same equality should continue into our personal and professional adult lives.</p>
+
+				<p class="font-15">Our logo illustrates our ethos: strength through unity. It also emphasises equality - the male and female deer stand strong by standing together, and though the male deer has horns and may be seen as a protector, the two are rooted together for stability and support. The heart-shaped roots represent friendship, harmony, love and respect; qualities that enrich all human relationships, regardless of sex or situation.</p>
+
+				<p class="font-15">Women can face different challenges to men as we strive to be great mothers, loving partners and achieve financial independence. We often have to make sacrifices, personally and professionally, to achieve the things we set out to achieve. But while our nurturing instinct can get in the way of our ambition to succeed, it can also be used to great effect.</p>
+
+				<p class="font-15">Whether we want to discuss our role in society, debate professional issues, seek personal advice or simply share our coping strategies for being a wife, mother, single mother, student – or all of the above – in the 21st century, Femnesty gives us a space to do just that.</p>
+
+				<p class="font-15"><a href="#">Sign up</a> to Femnesty to share the strength, encouragement and wisdom of women around the world today.</p>
 			</div>
-			<div [innerHTML]="pageDetData.content" ></div>
+			<div class="col-md-4">
+				<div class="pic-icon"><img alt="" class="img-responsive" src="http://192.168.1.118/team2/Femnesty/images/pic-1.jpg">
+					<div class="pic-logo-icon"><img alt="" src="http://192.168.1.118/team2/Femnesty/images/logo-icon.png"></div>
+				</div>
+
+				<div class="text-center gray pic-icon-content">
+					<h2 class="text-red">Our Logo</h2>
+					<p class="font-15">Our logo illustrates our ethos: strength through unity. It also emphasises equality - the male and female deer stand strong by standing together, and though the male deer has horns and may be seen as a protector, the two are rooted together for stability and support. The heart-shaped roots represent friendship, harmony, love and respect; qualities that enrich all human relationships, regardless of sex or situation.</p>
+				</div>
+			</div>
+        </div>
+    </div>
+</section>
+
+<section class="founder gray font-15">
+	<div class="container">
+	    <h2 class="text-red mt-0">Femnesty Founder</h2>
+	    <div class="row">
+	        <div class="col-md-4">
+	            <img src="assets/images/founder.jpg" class="img-responsive">
+	        </div>
+	        <div class="col-md-8">
+	            <h3 class="text-red">Farah Brown</h3>
+	            <p>The idea for Femnesty came to her in 2012 when she noticed a lack of self-belief in many of the women working around her. She began to coach and mentor some of them, and found she got huge satisfaction from their success. More than that she realised that she herself, as well as the women she mentored, had learnt and grown from the experience; and the idea for Femnesty was born.</p>
+	            <p>Some years later and now married with two daughters, Farah has experienced for herself the challenges and emotional demands of combining career, relationship and motherhood, and she is passionate about empowering women to lead happier, more fulfilled lives.</p>
+	        </div>
+	    </div>
+	</div>
+</section>
+
+
+<section class="section team">
+    <div class="container">
+        <h2 class="text-red mt-0">Femnesty Team</h2>
+        <div class="row mt-50">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="assets/images/team-1.jpg" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8">
+                        <h3 class="text-red font-26 mb-2">Erik Sandberg</h3>
+                        <h5 class="text-gray mt-0 font-15">Graphic & Web Designer</h5>
+                        <p class="font-15">Graphic and Web designer with more than 5 year’s experience and an eye for creative and user friendly design. Specialised within e-coommerce and front end design.</p>
+                    </div>
+                </div>
+                <div class="row mt-50">
+                    <div class="col-sm-4">
+                        <img src="assets/images/team-2.jpg" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8">
+                        <h3 class="text-red font-26 mb-2">Gloria Hewett</h3>
+                        <h5 class="text-gray mt-0 font-15">Senior Event Director</h5>
+                        <p class="font-15">Hospitality and Events professional with 10 years’ experience working in leading hotels and corporations, on world class events and with high ends clients and guests.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="gray text-center team-right">
+                    <h3 class="text-red mt-0">Get Involved</h3>
+                    <p>Femnesty is always looking for strong
+positive contributors to join our team. 
+If you would like to get involved, 
+please contact us.</p>
+                    <button class="btn btn-primary btn-lg">Contact us</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
