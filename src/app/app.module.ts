@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 // import { TruncatePipe ,SafePipe} from './exponential-strength.pipe';
 import { FrontendService } from './components/frontend-app-header/frontend.service';
@@ -88,3 +89,5 @@ import { AppRoutingModule } from './app.routing';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+//platformBrowserDynamic().bootstrapModule(AppModule);
