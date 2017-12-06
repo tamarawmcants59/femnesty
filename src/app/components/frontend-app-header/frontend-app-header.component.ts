@@ -20,6 +20,7 @@ export class FrontendAppHeader {
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   public userloggedIn: string = '';
   public currentUserDet: Object = {};
+  public siteSettingsDet: Object = {};
   public userNotiCnt: number = 0;
   public searchResultStr:string ='';
   public form:FormGroup;
@@ -99,6 +100,17 @@ export class FrontendAppHeader {
         console.log('Something went wrong!');
       }
     );
+
+    this._service.getSiteSettings().subscribe(data => {
+      if (data.Ack == "1") {
+        this.siteSettingsDet = data.SiteSettings[0];
+      } 
+    },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
+
 
     if (this.userloggedIn == '1') {
       this.userNotiCountList();

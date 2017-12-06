@@ -2,8 +2,8 @@
     <div class="header-top">
         <div class="container-fluid">
             <ul class="pull-left">
-                <li><i class="ion-ios-telephone"></i> +44 20 3290 3312</li>
-                <li><i class="ion-email"></i> info@femnesty.com</li>
+                <li><i class="ion-ios-telephone"></i> +{{siteSettingsDet.phone}}</li>
+                <li><i class="ion-email"></i> {{siteSettingsDet.admin_email}}</li>
             </ul>
             <ul class="pull-right">
                 <li><a href=""><i class="ion-social-facebook"></i></a></li>
@@ -22,7 +22,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-                <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/']"><img src="assets/images/logo.png" alt="" /></a>
+                <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/']"><img [src]="siteSettingsDet.site_logo_url" alt="" /></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,7 +57,7 @@
 				        <form class="pull-left" [formGroup]="form" (ngSubmit)="searchDataResult(form.value)" #searchForm="ngForm">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#"><img src="assets/images/logo-small.png"></a>
+                            <a [routerLink]="['/']"><img src="assets/images/logo-small.png"></a>
                         </li>
                         <li class="form-search search-icon">
                             <div class="form-group">
@@ -68,12 +68,6 @@
                     </ul>
                	  </form>
                 </div>    
-
-
-
-
-
-
 
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -159,7 +153,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-                <a class="navbar-brand" [routerLink]="['/']"><img src="assets/images/logo.png" alt="" /></a>
+                <a class="navbar-brand" [routerLink]="['/']"><img [src]="siteSettingsDet.site_logo_url" alt="" /></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
