@@ -10,6 +10,9 @@ export class GrouplistComponent implements OnInit {
   public isloginUserId:any;
   public isUserLogin:any;
   public groupList = [];
+  public myGrpList =[];
+  public latestArticles =[];
+
   constructor(private dataService: UserService) { 
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
@@ -17,6 +20,8 @@ export class GrouplistComponent implements OnInit {
 
   ngOnInit() {
     this.getAllGroupList();
+    this.getUserGroupList();
+    this.getLastFourArticle();
   }
 
   public getAllGroupList() {
@@ -28,5 +33,34 @@ export class GrouplistComponent implements OnInit {
     error => {
 
     });
+  }
+
+  public getUserGroupList() {
+    if (this.isloginUserId != '') {
+      const dataUserDet = {
+        "user_id": this.isloginUserId
+      };
+      this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
+          //console.log(data);
+          if (data.Ack == "1") {
+              this.myGrpList = data.GroupListByuserID;
+              //console.log(this.groupMemberList);
+          } 
+      },error => {
+
+      });
+    }
+  }
+
+  public getLastFourArticle(){
+    this.dataService.getFourArticleList().subscribe(data => {
+          let details=data;
+          if (details.Ack=="1") {
+            this.latestArticles = details.LastArticleList;
+          }
+      },
+      error => {
+      }
+    );
   }
 }

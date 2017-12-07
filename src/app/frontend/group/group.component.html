@@ -14,7 +14,11 @@
                   </div>
                   <div class="profDes">
                       <h2 class="text-center">{{groupDetailsData.group_name}}</h2>
-                      <p class="text-center">{{groupDetailsData.short_desc}}</p>
+                      <p class="text-center">
+                          {{groupDetailsData.short_desc}} 
+                          <span *ngIf="groupDetailsData.group_type=='1'"> (Public)</span>
+                          <span *ngIf="groupDetailsData.group_type=='2'"> (Private)</span>
+                        </p>
                       <p class="text-center addressP">{{groupDetailsData.member_count}} Members</p>
                       <p class="text-center">
                           <br />
@@ -141,7 +145,7 @@
                                             <div class="friend-boxText">
                                                 <h4>{{friendData.name}}</h4>
                                                 <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
-                                                <p>Entrepreneur, hunk and an absolute dog lover</p>
+                                                <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p>
                                             </div>
                                             <div class="sendmsg">
                                             	<a [routerLink]="['/user/profile',friendData.display_name]"><span style="color:#bb1926; font-size:16px;"><i class="ion-eye"></i></span> View</a>

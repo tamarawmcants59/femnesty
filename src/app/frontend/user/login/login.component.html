@@ -1,34 +1,3 @@
-<!--<section class="login-area">
-  <div class="container">
-      <div class="row log-row">
-          <div class="col-lg-1 col-md-2 col-log-in">
-              <div class="login-logo"><img src="assets/images/logo-icon.png" alt=""></div>
-          </div>
-          <div class="col-lg-8 col-md-10 col-log-in">
-              <form class="login-form">
-                  <div class="form-group">
-                      <label class="text-white">Login</label>
-                      <input type="text" placeholder="USERNAME" class="form-control">
-                      <input type="password" placeholder="PASSWORD" class="form-control">
-                      <button class="btn btn-white-border">Log in</button>
-                      <a href="#">Forgot Password ?</a>
-                  </div>
-              </form>
-          </div>
-          <div class="col-lg-3 col-md-4 col-log-in">
-              <div class="form-group log-social">
-                  <label class="text-white">LOGIN USING</label>
-                  <ul>
-                      <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                      <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                      <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>-->
-
 <section class="sign-up-area">
     <div class="container">
         <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
@@ -41,13 +10,13 @@
                 <span>Connect with: </span>
                 <ul class="social-link mt-30 text-center">
                     <li>
-                        <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
+                        <a (click)="signInWithFB()" class="fb-bg"><i class="ion-social-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#" class="linked-bg"><i class="fa fa-linkedin"></i></a>
+                        <a (click)="signInWithLinkedIN()" class="linked-bg"><i class="fa fa-linkedin"></i></a>
                     </li>
                     <li>
-                        <a href="#" class="twitter-bg"><i class="ion-social-twitter"></i></a>
+                        <a (click)="signInWithGoogle()" class="google-bg"><i class="fa fa-google"></i></a>
                     </li>
                 </ul>
             </div>

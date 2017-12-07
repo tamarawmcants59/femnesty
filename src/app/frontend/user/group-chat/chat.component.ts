@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewChecked} from '@angular/core';
 import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -11,8 +11,10 @@ import { Promise } from 'q';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class GroupChatComponent implements OnInit, OnDestroy {
+export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
+  @ViewChild('scrollMe') private myChatContainer: ElementRef;
+  
   chats: any[];
   groupMemberList =[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
@@ -23,6 +25,8 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   fileData: any;
   dbRef: any;
   isComponentActive: boolean;
+  public groupDetailsData: object = { };
+
   constructor(
     private db: AngularFirestore,
     private userService: UserService,
@@ -35,9 +39,27 @@ export class GroupChatComponent implements OnInit, OnDestroy {
       this.room_id = '_' + this.groupId;
       this.getMessages();
       this.getGroupMemberList();
+      this.getGroupDetailsByName();
     });
     this.isComponentActive = true;
-    console.log(firebase.firestore.FieldValue.serverTimestamp());
+    //console.log(firebase.firestore.FieldValue.serverTimestamp());
+  }
+
+  public getGroupDetailsByName() {
+    if (this.groupId > 0) {
+      const dataUserDet = {
+        "group_id": this.groupId
+      };
+      this.userService.getGrpDetById(dataUserDet).subscribe(data => {
+         //console.log(data);
+          if (data.Ack == "1") {
+            this.groupDetailsData = data.GroupDetails[0];
+          }
+        },
+        error => {
+
+        });
+    }
   }
 
   ngOnDestroy() {
@@ -45,6 +67,15 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     this.isComponentActive = false;
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myChatContainer.nativeElement.scrollTop = this.myChatContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
 
   getMessages() {
     this.dbRef = this.db.collection('Messages', ref => {

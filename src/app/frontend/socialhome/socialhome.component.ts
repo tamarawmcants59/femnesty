@@ -61,7 +61,7 @@ export class SocialhomeComponent implements OnInit {
     this.getLastFourArticle();
     //console.log(this.IsloginUserId);
   }
-  ;
+
   public getLastFourArticle(){
     this.dataService.getFourArticleList()
     .subscribe(data => {

@@ -1,4 +1,4 @@
-<section class="inner-banner" style="background: url(assets/images/about-bg.jpg) center no-repeat; background-size: cover;">
+<section *ngIf="pageSlugName != 'contact-us'" class="inner-banner" style="background: url(assets/images/about-bg.jpg) center no-repeat; background-size: cover;">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
@@ -29,7 +29,7 @@
 
 				<p class="font-15">Whether we want to discuss our role in society, debate professional issues, seek personal advice or simply share our coping strategies for being a wife, mother, single mother, student – or all of the above – in the 21st century, Femnesty gives us a space to do just that.</p>
 
-				<p class="font-15"><a href="#">Sign up</a> to Femnesty to share the strength, encouragement and wisdom of women around the world today.</p>
+				<p class="font-15"><a [routerLink]="['/user/signup']">Sign up</a> to Femnesty to share the strength, encouragement and wisdom of women around the world today.</p>
 			</div>
 			<div class="col-md-4">
 				<div class="pic-icon"><img alt="" class="img-responsive" src="http://192.168.1.118/team2/Femnesty/images/pic-1.jpg">
@@ -45,7 +45,7 @@
     </div>
 </section>
 
-<section class="founder gray font-15">
+<section class="founder gray font-15" *ngIf="pageSlugName == 'about-us'">
 	<div class="container">
 	    <h2 class="text-red mt-0">Femnesty Founder</h2>
 	    <div class="row">
@@ -62,7 +62,7 @@
 </section>
 
 
-<section class="section team">
+<section class="section team" *ngIf="pageSlugName == 'about-us'">
     <div class="container">
         <h2 class="text-red mt-0">Femnesty Team</h2>
         <div class="row mt-50">
@@ -95,7 +95,7 @@
 positive contributors to join our team. 
 If you would like to get involved, 
 please contact us.</p>
-                    <button class="btn btn-primary btn-lg">Contact us</button>
+                    <a [routerLink]="['/page/contact-us']" class="btn btn-primary btn-lg">Contact us</a>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@ please contact us.</p>
     <div class="contact-left">
         <img src="assets/images/contact-banner.jpg" alt="" class="img-responsive">
     </div>
-    <div class="contact-right">
+    <div class="contact-right" style="padding-bottom:0px;">
         <h1>Get in Touch.</h1>
         <h4>If you have any questions about our organisation, have any comment or feedback then please use the contact details below.</h4>
         <ul class="contact-dtls">

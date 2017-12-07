@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
-import { 
-  AuthService, 
-  FacebookLoginProvider, 
-  GoogleLoginProvider,
-  LinkedinLoginProvider,
-  SocialUser
-} from 'ng4-social-login';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider, SocialUser} from 'ng4-social-login';
 
 function duplicatePassword(input: FormControl) {
   

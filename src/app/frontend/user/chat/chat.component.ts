@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -11,7 +11,8 @@ import { Promise } from 'q';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('scrollMe') private myChatContainer: ElementRef;
 
   chats: any[];
   userFrndList=[];
@@ -59,6 +60,16 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.isComponentActive = false;
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myChatContainer.nativeElement.scrollTop = this.myChatContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+  
   getWithUser(user_id) {
     return this.userService.getUserDetById({ id: user_id }).subscribe(res => {
       this.withUser = res.UserDetails[0];
