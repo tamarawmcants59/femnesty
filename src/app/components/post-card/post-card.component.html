@@ -37,12 +37,23 @@
                     </ul>
                 </div>
                 <div class="col-md-2 col-xs-4">
+                        <!--<a onClick="window.open('http://www.facebook.com/dialog/feed?app_id=150470825593599&link=http://111.93.169.90/team2/femnesty_web/#/home&picture=http://111.93.169.90/team2/Femnesty/all_images/103_25014750.jpeg&name=nm nmnbc bncbn c&description=n bkjcbkjcvbc cbn&message= nvn vbn vbn vnfg cbncvbvcbc','sharer','toolbar=0,status=0,width=548,height=325');" href="javascript: void(0)">Insert text or an image here.</a>-->
+                        
                         <ul class="social-link mb-30 pull-right">
-                            <li>
-                                <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl}">
+                            <!--<li *ngIf="postData.file_image_url != ''">
+                                <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl, summary:postData.description, images:postData.file_image_url}">
                                     <i class="ion-social-facebook" style="font-size:16px"></i>
                                 </a>
-                                    <!--<span>5</span>-->
+                            </li>    
+                            <li *ngIf="postData.file_image_url == ''">
+                                <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl, summary:postData.description}">
+                                    <i class="ion-social-facebook" style="font-size:16px"></i>
+                                </a>
+                            </li>-->
+                            <li>
+                                <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" (click)="shareOnFacebook(repoUrl, postData.description, postData.file_image_url)">
+                                    <i class="ion-social-facebook" style="font-size:16px"></i>
+                                </a>
                             </li>
                             <li>
                                 <a style="width: 25px; height: 25px; border-radius:50%; color:#bb1926; border:1px solid #bb1926; background: #fff" ceiboShare  [linkedIn]="{url:repoUrl, text:postData.description}">
@@ -50,7 +61,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" style="width: 25px; height: 25px; color:#bb1926; border-radius:50%; border:1px solid #bb1926; background: #fff" ceiboShare  [twitter]="{url:repoUrl, text:postData.description}"><i class="ion-social-twitter" style="font-size:16px"></i></a>
+                                <a style="width: 25px; height: 25px; color:#bb1926; border-radius:50%; border:1px solid #bb1926; background: #fff" ceiboShare  [twitter]="{url:repoUrl, text:postData.description}"><i class="ion-social-twitter" style="font-size:16px"></i></a>
                             </li>
                         </ul>
                         <!--<button ceiboShare  [facebook]="{u: repoUrl, picture: postData.file_image_url, name: postData.description, description:postData.description}">Facebook</button>

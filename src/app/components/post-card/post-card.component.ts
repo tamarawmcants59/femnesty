@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
+import { environment } from '../../../environments/environment';
 //import { ShareButtonModule } from "ngx-sharebuttons";
 //import { CeiboShare } from 'ng2-social-share';
 
@@ -58,11 +59,11 @@ export class PostCardComponent implements OnInit {
         //Validators.minLength(3)
       ]]
     });
-    this.repoUrl=this.router.url;
+    this.repoUrl=environment.website_url+this.router.url;
   }
 
   ngOnInit() {
-
+    //console.log(this.repoUrl);
   }
 
   public userPostComment(post_id, postdata) {
@@ -139,10 +140,47 @@ export class PostCardComponent implements OnInit {
       });
   }
 
+  public shareOnFacebook(url, description, images){
+    console.log(url);
+    console.log(description);
+    //let titleMeta = document.createElement('meta');
+    let descMeta = document.createElement('meta');
+    let imageMeta = document.createElement('meta');
+
+    descMeta.setAttribute('property', 'og:description');
+    descMeta.setAttribute('content', description);
+    
+    imageMeta.setAttribute('property', 'og:image');
+    imageMeta.setAttribute('content', images);
+
+    document.getElementsByTagName('head')[0].appendChild(descMeta);
+    if(images!=''){
+      document.getElementsByTagName('head')[0].appendChild(imageMeta);
+    }
+    
+    /*let link;
+    //this.siteSettingsDet = data.SiteSettings[0];
+    link = document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    //link.href = 'http://www.stackoverflow.com/favicon.ico';
+    document.getElementsByTagName('head')[0].appendChild(link);*/
+
+    if (window.open) {
+        let poppedWindow = window.open('http://www.facebook.com/sharer.php?u='+url,'sharer','toolbar=0,status=0,width=548,height=325');
+    }else {
+        alert('Your security settings are not allowing our popup windows to function. Please make sure your security software allows popup windows to be opened by this web application.');
+    }
+
+  }
+
 }
 
 export declare class FacebookParams {
   u: string;
+  /*title:string;
+  summary: string;
+  images: string;*/
 }
 
 export class GooglePlusParams {
