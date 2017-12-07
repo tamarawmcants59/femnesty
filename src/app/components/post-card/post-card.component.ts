@@ -141,10 +141,8 @@ export class PostCardComponent implements OnInit {
   }
 
   public shareOnFacebook(url, description, images){
-    console.log(url);
-    console.log(description);
     //let titleMeta = document.createElement('meta');
-    let descMeta = document.createElement('meta');
+    /*let descMeta = document.createElement('meta');
     let imageMeta = document.createElement('meta');
 
     descMeta.setAttribute('property', 'og:description');
@@ -156,7 +154,7 @@ export class PostCardComponent implements OnInit {
     document.getElementsByTagName('head')[0].appendChild(descMeta);
     if(images!=''){
       document.getElementsByTagName('head')[0].appendChild(imageMeta);
-    }
+    }*/
     
     /*let link;
     //this.siteSettingsDet = data.SiteSettings[0];
@@ -166,11 +164,11 @@ export class PostCardComponent implements OnInit {
     //link.href = 'http://www.stackoverflow.com/favicon.ico';
     document.getElementsByTagName('head')[0].appendChild(link);*/
 
-    if (window.open) {
+    /*if (window.open) {
         let poppedWindow = window.open('http://www.facebook.com/sharer.php?u='+url,'sharer','toolbar=0,status=0,width=548,height=325');
     }else {
         alert('Your security settings are not allowing our popup windows to function. Please make sure your security software allows popup windows to be opened by this web application.');
-    }
+    }*/
 
   }
 
