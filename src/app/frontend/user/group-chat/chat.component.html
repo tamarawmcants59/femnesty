@@ -7,13 +7,13 @@
             <div class="col-md-6">
                 <div class="middlePart">
                     <div class="main-chat-wrap">
-                        <h4>Group chat:</h4>
-                        <div class="chat-holder" *ngIf="chats">
+                        <h4>Group chat with: "{{groupDetailsData.group_name}}"</h4>
+                        <div #scrollMe class="chat-holder" *ngIf="chats">
                             <ul>
                                 <li *ngFor="let chat of chats" class="{{chat.cssClass}}">
                                     <div class="image-area">
                                         <div class="round-image-holder">
-                                            <img src="{{chat.userDetail.image_url}}" style="width:70px;margin-top:0px" alt="" />
+                                            <img [src]="chat.userDetail?.image_url" style="width:70px;margin-top:0px" alt="" />
                                         </div>
                                     </div>
                                     <div class="text-area">

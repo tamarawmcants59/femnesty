@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditprofileRouting } from "./editprofile-routing";
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../../components/shared.module";
-//import { NgxCropperModule } from 'ngx-cropper';
+import { ApplicationPipes } from "../../../application-pipe.module";
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { SharedModule } from "../../../components/shared.module";
     ReactiveFormsModule,
     EditprofileRouting,
     SharedModule,
-    //NgxCropperModule,
+    ApplicationPipes,
     LoadingModule.forRoot({
         animationType: ANIMATION_TYPES.wanderingCubes,
         backdropBackgroundColour: 'rgba(0,0,0,0.1)', 

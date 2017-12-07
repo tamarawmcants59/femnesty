@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider, SocialUser} from 'ng4-social-login';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,12 +18,16 @@ export class LoginComponent implements OnInit {
   errorMsg: string = '';
   public loading = false;
   public isLoggedIn: any;
+  private socialUser: SocialUser;
+  private loggedIn: boolean;
+
 
   constructor(
     private builder: FormBuilder,
     private loginService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
@@ -34,10 +40,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
+    this.authService.authState.subscribe((user) => {
+      this.socialUser = user;
+      //console.log(user);
+      this.loggedIn = (user != null);
+    });
+
     if (this.isLoggedIn == 1) {
       //this.router.navigateByUrl(this.returnUrl);
       this.router.navigateByUrl('/user/profile');
-
     }
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -76,4 +87,19 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+ 
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+ 
+  signInWithLinkedIN(): void {
+    this.authService.signIn(LinkedinLoginProvider.PROVIDER_ID);
+  }
+ 
+  signOut(): void {
+    this.authService.signOut();
+  }
 }

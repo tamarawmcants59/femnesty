@@ -240,6 +240,10 @@ export class UserService {
     ).map(data => data);
   }
   
+  getGrpDetById(form_data) {
+    return this.apiService.post(`/users/appgroupdetailsbygroupid`,form_data).map(data => data);
+  }
+  
   getGroupPostById(form_data) {
     return this.apiService.post(
       `/enrichment/appallpostbygroupid`,
@@ -341,5 +345,10 @@ export class UserService {
   
   inviteMemberTojoinGroup(form_data){
     return this.apiService.post(`/users/apprefferjoinrequesttogrp`,form_data ).map(data => data);
+  }
+
+  getFourArticleList(){
+    return this.apiService.get(`/enrichment/apparticlelistlast`)
+      .map(data => data);
   }
 }
