@@ -3654,7 +3654,7 @@ ul.connectionlist li .text-area p {
     display: flex;
     flex-wrap: no-wrap;
     margin-bottom: 15px;
-    min-height: 140px
+    min-height: 100px
 }
 
 .search-list li .left-side {
@@ -3663,6 +3663,7 @@ ul.connectionlist li .text-area p {
     background-position: center center !important;
     width: 190px;
     position: relative;
+    height: 100px;
 }
 
 .search-list li .left-side .image-title {
@@ -3676,7 +3677,7 @@ ul.connectionlist li .text-area p {
 }
 
 .search-list li .right-side {
-    padding: 15px;
+    padding: 10px 15px;
     flex-grow: 2;
     background: #fff;
     position: relative;
@@ -3899,6 +3900,22 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 
 .cat-article-img {height: 230px;}
 
+.btn.btn-back{ 
+background: none;
+color: #fff;
+font-family: 'Montserrat', sans-serif;
+border: 2px solid #fff;
+text-shadow: none;
+font-weight: 500;
+text-transform: uppercase;
+font-size: 16px;
+letter-spacing: 2px;
+padding: 15px 35px;
+border-radius: 40px;
+margin: 0 auto;
+display: block;
+margin-top:30px;
+}
 
 /*============== Added by Soumen ============ */
 
@@ -3915,7 +3932,7 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .contn-box li.friend-box-list .friend-boxText h4{font-weight: 600}
 .contn-box li.friend-box-list .friend-boxText{text-align:left !important; width:42%; margin-right: 50px}
 .contn-box li.friend-box-list .friend-boxText p{font-size: 16px; color:#585858; margin-bottom: 5px; font-weight: 600}
-.contn-box li.friend-box-list .sendmsg a{font-size: 13px; color:#000; text-transform: uppercase; white-space: nowrap; font-family: 'Montserrat', sans-serif; font-weight: 600}
+.contn-box li.friend-box-list .sendmsg a{font-size: 13px; color:#000; text-transform: uppercase; white-space: nowrap; font-family: 'Montserrat', sans-serif; font-weight: 600;margin: 7px 0;display: inline-block;}
 
 textarea{resize: none}
 
