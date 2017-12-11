@@ -1,4 +1,4 @@
-<div class="left-list fix-to-top">
+<div class="left-list" [ngClass]="{'fix-to-top':HeaderNavCls === 'fix-to-top'}">
     <div class="profImage">
         <div class="img" [ngStyle]="{'background-image':'url('+currentUserLoginDet.image_url+')'}"></div>
     </div>

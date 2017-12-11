@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NgZone } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from "../../frontend/user/user.service";
@@ -30,6 +31,7 @@ export class GroupLeftbarComponent implements OnInit {
   public currentFireUserId: string;
   public onlineUserList = [];
   public firebasOnlineUserList: any;
+  public HeaderNavCls: string = '';
 
   @Input() groupData: {
     id: number;
@@ -55,6 +57,7 @@ export class GroupLeftbarComponent implements OnInit {
     private dataService: UserService,
     private route: ActivatedRoute,
     private router: Router,
+    lc: NgZone,
     private afAuth: AngularFireAuth
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
@@ -64,6 +67,23 @@ export class GroupLeftbarComponent implements OnInit {
         this.currentFireUserId = user.uid;
       }
     }).subscribe();
+
+    window.onscroll = () => {
+      //let st = window.pageYOffset;
+      let st = (window.innerHeight + window.scrollY);
+      let dir = '';
+      if (st < document.body.scrollHeight-400) {
+        dir = "fix-to-top";
+      } else {
+        dir = "";
+      }
+      //let mobHeight = (window.screen.height) + "px";
+     
+      lc.run(() => {
+        this.HeaderNavCls = dir;
+      });
+
+    };
    }
 
   ngOnInit() {
