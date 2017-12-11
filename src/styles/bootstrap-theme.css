@@ -2884,8 +2884,8 @@ background: #fff !important;}
 }
 
 .connectionImage .img {
-    width: 89px;
-    height: 89px;
+    width: 80px;
+    height: 80px;
     float: left;
     background-size: cover;
     background-position: center;
@@ -3133,6 +3133,7 @@ background: #fff !important;}
     font-weight: bold;
     margin-bottom: 0;
     margin-top: 0;
+    background: #f8e8e9;
 }
 
 .live-chat form {
@@ -3347,6 +3348,7 @@ background: #fff !important;}
     font-family: 'Sanchez', serif;
     font-weight: 600;
     margin: 15px 0;font-size:16px}
+    
 .chat-holder {
     width: 100%;
     height: 400px;
@@ -4054,10 +4056,97 @@ section.team h2.text-red {font-size: 28px;}
 
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
-width: 19px; height: 25px;}
+width: 19px; height: 25px; background-repeat:  no-repeat;}
+.new-tabs .tab-content .check{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/check-n.png');
+width: 24px; height: 23px; background-repeat:  no-repeat;}
 
 
+/*----------------------------- Chat Window 2 ---------------*/
 
+.chat-holder2 {
+    width: 100%;
+    background: #fff;
+}
+
+.chat-holder2 ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0
+}
+
+.chat-holder2 ul li {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+    padding: 5px;
+    position: relative;
+}
+.chat-holder2 ul li .text-area{position: relative;}
+.chat-holder2 ul li .text-area a.btn-info{position: absolute;right:10px;z-index: 99;top:10px;display: block;background: #bf1a27;border:1px solid #bf1a27}
+ul.uploadVideo {
+    align-items: center;
+}
+.chat-holder2 ul li .image-area {
+    margin-right: 10px
+}
+
+.chat-holder2 ul li .image-area .round-image-holder {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+    background-size: cover !important
+}
+
+.chat-holder2 ul li .text-area h5 {
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 11px;
+    line-height: 20px;
+    margin: 0 0 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.chat-holder2 ul li .text-area p {
+    color: #8f8f8f;
+    margin: 0;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chat-holder2 ul li.odd .text-area h5 {
+    background: #f8e8e9;
+}
+
+.chat-holder2 ul li.even .text-area h5 {
+    background: #f7f7f7;
+}
+
+.chat-holder2 ul li.odd .text-area p {
+    text-align: right
+}
+
+.chat-holder2 ul li.even .text-area p {
+    text-align: left
+}
+
+.chat-holder2 ul li.even {
+    flex-direction: row-reverse
+}
+
+.chat-holder2 ul li.even .image-area {
+    margin-right: 0px;
+    margin-left: 10px
+}
+
+.new-tabs input{
+	width: 100%;
+	border: none !important;
+}
 
 
 
