@@ -62,7 +62,50 @@
 
                           </div>
                           <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
-                              <div class="aboutPart">
+                            <div class="new-tabs">
+                            <div class="tab-content">
+                                  <div class="tab-pane fade in active">
+                                    <ul>
+                                        <li>
+                                            <h5>FULL NAME</h5>
+                                            <p>{{otherProfileDet?.first_name}} {{otherProfileDet?.last_name}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>EMAIL</h5>
+                                            <p>{{otherProfileDet?.email}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>MOBILE NO</h5>
+                                            <p>{{otherProfileDet?.mobile_number}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>OCCUPATION</h5>
+                                            <p>{{otherProfileDet?.occupation}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>STATE</h5>
+                                            <p>{{otherProfileDet?.state}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>CITY</h5>
+                                            <p>{{otherProfileDet?.city}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>ADDRESS</h5>
+                                            <p>{{otherProfileDet?.address}}</p>
+                                        </li>
+                                        <li>
+                                            <h5>BIO</h5>
+                                            <p>{{otherProfileDet?.bio}}</p>
+                                        </li>
+                                    </ul>
+                                  </div>
+                            </div>
+                        </div> 
+                            
+                            
+                            
+                            <!--<div class="aboutPart">
                                 <h2 style="margin-top: 0px;">About {{otherProfileDet?.first_name}}</h2><br/>
                                   <div class="abouts">
                                       <div class="row">
@@ -72,30 +115,7 @@
                                                       <ul class="ulList">
                                                           <div class="menu">
                                                               <div class="">
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.first_name}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.last_name}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.email}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.mobile_number}}</span>
-                                                                      </div>
-                                                                  </div>
+                                                                  
                                                                   <div class="form-group row">
                                                                       <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
                                                                       <div class="col-sm-8">
@@ -134,7 +154,7 @@
                                           </div>
                                       </div>
                                   </div>
-                              </div>
+                              </div>-->
                           </div>
                           <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
                               <div class="connectionsPart">
