@@ -58,6 +58,7 @@ export class FrontendAppHeader {
 
     };
 
+
     this.userloggedIn = localStorage.getItem("isLoggedIn");
     let getUserDet = localStorage.getItem("currentUser");
     this.currentUserDet = JSON.parse(getUserDet);
@@ -202,3 +203,5 @@ export class FrontendAppHeader {
   }
 
 }
+
+

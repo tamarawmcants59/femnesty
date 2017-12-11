@@ -3979,6 +3979,12 @@ section.team h2.text-red {font-size: 28px;}
 .MyGroups-list .search-list li .right-side h4{font-size:17px; color:#000}
 .MyGroups-list .search-list li .s-desc{font-size:14px; color:#5b5b5b; margin-bottom: 20px}
 
+/*----------------------- 11-12-2017 -------------*/
+.fix-to-top{
+	position: fixed;
+	top: 50px;
+}
+
 
 /******************** Responsive Style **********************/
 
