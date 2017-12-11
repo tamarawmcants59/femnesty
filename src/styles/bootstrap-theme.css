@@ -2168,7 +2168,7 @@ background: #fff !important;}
 }
 .middlePart .profDes{padding:30px 60px 60px;}
 
-.profImage{margin: 15px auto 35px;}
+.profImage{margin: 0 auto 10px;}
 .profImage .img {
     width: 106px;
     height: 106px;
@@ -2194,14 +2194,14 @@ background: #fff !important;}
     font-size: 16px;
     text-align: center;
     margin: 8px auto;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
     border-bottom: 2px solid #f0f0f0;
     font-weight: 600;
 }
 
 .messagePart {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 15px;
     border-bottom: 2px solid #f0f0f0;
 }
 
@@ -2243,8 +2243,8 @@ background: #fff !important;}
 .onlineUsers {
     padding: 20px 0;
     border-bottom: 2px solid #f0f0f0;
-    height: 130px;
-    overflow-y: scroll;
+    /*height: 130px;
+    overflow-y: scroll;*/
 }
 
 .onlineUsers h2 {

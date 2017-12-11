@@ -51,8 +51,8 @@
 .new-tabs .tab-content{
 	background: #fff;
 }
-.new-tabs .tab-content ul{ padding:20px; margin:0;}
-.new-tabs .tab-content ul li{ padding:15px; margin-bottom: 10px; border-bottom: solid 1px #f0f0f0; background: none !important; display: block; float: none; width: 100%; position: relative;}
+.new-tabs .tab-content ul{ padding:20px; margin:0; display: block;}
+.new-tabs .tab-content ul li{ padding:15px; margin-bottom: 10px; border-bottom: solid 1px #f0f0f0; background: none !important; width: 100% !important; position: relative; display: block !important; float: none !important;}
 .new-tabs .tab-content ul li h5{
 	font-size: 14px; color: #000; font-weight: bold; padding-right: 25px; text-align: left; border:none; 
 }
