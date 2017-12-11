@@ -21,7 +21,8 @@ export class UserSidebar implements OnInit {
   public currentFireUserId: string;
   public onlineUserList = [];
   public firebasOnlineUserList: any;
-
+  public HeaderNavCls: string = '';
+  
   constructor(
     private el: ElementRef,
     lc: NgZone,
@@ -40,6 +41,24 @@ export class UserSidebar implements OnInit {
         this.currentFireUserId = user.uid;
       }
     }).subscribe();
+
+    window.onscroll = () => {
+      //let st = window.pageYOffset;
+      let st = (window.innerHeight + window.scrollY);
+      let dir = '';
+      if (st < document.body.scrollHeight-400) {
+        dir = "fix-to-top";
+      } else {
+        dir = "";
+      }
+      //let mobHeight = (window.screen.height) + "px";
+     
+      lc.run(() => {
+        this.HeaderNavCls = dir;
+      });
+
+    };
+    
   }
 
   ngOnInit(): void {
