@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "../../../components/shared.module";
 import { FindfriendRouting } from "./findfriend-routing";
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { ApplicationPipes } from "../../../application-pipe.module";
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
     FormsModule,
     ReactiveFormsModule,
     FindfriendRouting,
+    ApplicationPipes,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.wanderingCubes,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)', 

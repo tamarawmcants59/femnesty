@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
             if(details.UserDetails.user_type == 'CA' || details.UserDetails.user_type == 'CSA'){
               this.router.navigateByUrl('/company/profile');
             }else{
-              this.router.navigateByUrl(this.returnUrl);
+              //this.router.navigateByUrl(this.returnUrl);
+              this.router.navigateByUrl('/social_home');
             }
             this.loading = false;
           } else {
