@@ -32,7 +32,7 @@
                     <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                    <li><a href="#">Contribute</a></li>
+                    <!--<li><a href="#">Contribute</a></li>-->
                     <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
 				        <form class="pull-left" [formGroup]="form" (ngSubmit)="searchDataResult(form.value)" #searchForm="ngForm">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a [routerLink]="['/']"><img src="assets/images/logo-small.png"></a>
+                            <a [routerLink]="['/social_home']"><img src="assets/images/logo-small.png"></a>
                         </li>
                         <li class="form-search search-icon">
                             <div class="form-group">
@@ -74,12 +74,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <div class="pull-right">
                     <ul class="nav navbar-nav rightNav rightNavPart">
-                        <li><a [routerLink]="['/social_home']">Home</a></li>
-                        <li><a [routerLink]="['/user/profile']">Activity</a></li>
-                        <li><a [routerLink]="['/group']">Groups</a></li>
-                        <li><a [routerLink]="['/social_home']">Hubs</a></li>
-                        <li><a [routerLink]="['/user/find_friends']">Members</a></li>
-
+                        <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
+                        <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                        <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
+                        
                     </ul>
                     <ul class="nav navbar-nav navIcon">
                         <li ngbDropdown class="dropdown">
@@ -127,6 +125,7 @@
                                 <!--<li><a [routerLink]="['/user/login']">Company Login</a></li>-->
                                 <li class="divider"></li>
                                 <li><a [routerLink]="['/user/mentor']">Join mentor</a></li>
+                                <li *ngIf="userloggedIn == 1"><a href="Javascript: void(0)" (click)="userLogout()">Logout</a></li>
                             </ul>
                             <ul class="dropdown-menu" role="menu" *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'">
                                 <li class="images">
@@ -134,6 +133,7 @@
                                 </li>
                                 <li><a [routerLink]="['/company/profile']">Company Profile</a></li>
                                 <li><a [routerLink]="['/company/profile',currentUserDet.company_slug]">View Company Profile</a></li>
+                                <li *ngIf="userloggedIn == 1"><a href="Javascript: void(0)" (click)="userLogout()">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -144,9 +144,8 @@
             <!-- /.container-fluid -->
         </nav>
     </div>
-    <nav class="navbar navbar-white desk-only">
+    <!--<nav class="navbar navbar-white desk-only">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-bar"></span>
@@ -156,21 +155,19 @@
                 <a class="navbar-brand" [routerLink]="['/']"><img [src]="siteSettingsDet.site_logo_url" alt="" /></a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right rightNavBar">
                     <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }} </a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                    <!--<li><a href="#">Contribute</a></li>-->
                     <li *ngIf="userloggedIn == 1"><a routerLinkActive="active" href="Javascript: void(0)" (click)="userLogout()" style="padding-top: 0px;"><button>Logout</button></a></li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
+            
         </div>
-        <!-- /.container-fluid -->
-    </nav>
+        
+    </nav>-->
     <nav class="navbar navbar-white mobile-only">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right rightNavBar">
