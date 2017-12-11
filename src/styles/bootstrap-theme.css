@@ -2727,6 +2727,7 @@ background: #fff !important;}
     background-position: center center;
 }
 
+
 .viewAll {
     color: #707070;
     font-family: 'Sanchez', serif;
@@ -4071,7 +4072,9 @@ width: 24px; height: 23px; background-repeat:  no-repeat;}
 .chat-holder2 ul {
     list-style-type: none;
     padding: 0;
-    margin: 0
+    margin: 0;
+    display: block;
+    
 }
 
 .chat-holder2 ul li {
@@ -4148,7 +4151,22 @@ ul.uploadVideo {
 	border: none !important;
 }
 
+.photoImage2 {
+   
+}
 
+.photoImage2 li {
+    width: 32% !important;
+}
+
+.img {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 25px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 
 
 
