@@ -27,6 +27,7 @@ import {
   FacebookLoginProvider, 
   LinkedinLoginProvider
 } from 'ng4-social-login';
+import { AllphotoComponent } from './allphoto/allphoto.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -78,7 +79,8 @@ export function provideConfig() {
     ShareyourstoryComponent, 
     MentorComponent, 
     NotificationComponent,
-    GroupChatComponent
+    GroupChatComponent,
+    AllphotoComponent
     //ImageCropperComponent
   ],
   providers: [

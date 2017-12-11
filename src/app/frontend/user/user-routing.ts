@@ -12,6 +12,7 @@ import { ShareyourstoryComponent } from "./shareyourstory/shareyourstory.compone
 import { MentorComponent } from "./mentor/mentor.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { GroupChatComponent } from "./group-chat/chat.component";
+import { AllphotoComponent } from "./allphoto/allphoto.component";
 const routes: Routes = [
   {
     path: '',
@@ -86,6 +87,14 @@ const routes: Routes = [
     component: ChatComponent,
     data: {
       title: 'Messages'
+    }
+  },
+  {
+    path: 'all_photo',
+    canActivate: [AuthGuard],
+    component: AllphotoComponent,
+    data: {
+      title: 'All Photo'
     }
   },
   {
