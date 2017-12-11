@@ -71,7 +71,36 @@
             <h4>{{withUser.first_name}} {{withUser.last_name}}</h4>
             <span class="chat-message-counter">3</span>
         </div>
-        <div class="chat">
+        <div class="chat-holder2">
+            <ul #scrollMe id="chat-container-popup" class="chat-history" *ngIf="chats">
+                <li *ngFor="let chat of chats" class="{{chat.cssClass}}">
+                	<div class="image-area">
+                		<div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;">
+                    	 	<img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
+                   		 	<img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
+                   		</div>
+                   	</div>
+                    <div class="text-area">
+                        <h5 *ngIf="!chat.isSelf">{{withUser.first_name}} {{withUser.last_name}}</h5>
+                        <h5 *ngIf="chat.isSelf">{{thisUser.first_name}} {{thisUser.last_name}}</h5>
+                        <!--<span *ngIf="!chat.isSelf" class="chat-time">{{chat.created | date}}</span>-->
+                        <img class="img img-responsive" style="border-radius: 3%" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                        <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                        <p *ngIf="chat.message.text">
+                            {{chat.message.text}}
+                        </p>
+                        <div class="clearfix"></div>
+                         <p class="date">11-12-2017</p>
+                    </div>
+                </li>
+            </ul>
+            <form (submit)="sendMessage()">
+                <fieldset>
+                    <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
+                </fieldset>
+            </form>
+        </div>
+        <!--<div class="chat">
             <div #scrollMe id="chat-container-popup" class="chat-history" *ngIf="chats">
                 <div class="chat-message clearfix {{chat.cssClass}}" *ngFor="let chat of chats">
                     <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
@@ -93,6 +122,6 @@
                     <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
                 </fieldset>
             </form>
-        </div>
+        </div>-->
     </div>
 </footer>
