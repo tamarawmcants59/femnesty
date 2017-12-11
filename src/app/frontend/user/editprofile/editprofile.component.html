@@ -85,8 +85,33 @@
 
                             </div>
                             <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
-                                <div class="aboutPart">
-                                    <h2>About</h2>
+                            <div class="new-tabs">
+                           	 	<ul class="nav nav-tabs">
+  									<li class="active"><a data-toggle="tab" href="#details">PROFILE DETAILS</a></li>
+  									<li><a data-toggle="tab" href="#settings">PRIVACY SETTINGS</a></li>
+  									<li><a data-toggle="tab" href="#contact">CONTACT DETAILS</a></li>
+								</ul>
+                                                              
+								<div class="tab-content">
+  									<div id="details" class="tab-pane fade in active">
+    									<ul>
+    										<li>
+    										<div class="edit"></div>
+    											<h5>INFO/QUESTION</h5>
+    											<p>Answer of this information</p>
+    										</li>
+    									</ul>
+  									</div>
+									 <div id="settings" class="tab-pane fade">
+									    <h3>Menu 1</h3>
+									    <p>Some content in menu 1.</p>
+									 </div>
+								  	<div id="contact" class="tab-pane fade">
+								   		<h3>Menu 2</h3>
+								    	<p>Some content in menu 2.</p>
+								  	</div>
+								</div>
+                                    <!--<h2>About</h2>
                                     <div class="abouts">
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12">
@@ -227,7 +252,7 @@
                                                                         </div>
                                                                         <div class="saveChanges">
                                                                             <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Save Changes</button>
-                                                                            <!--<button type="button" class="btn btn-default">Cancel</button>-->
+                                                                           
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -237,8 +262,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>-->
+                                
+							</div>
                             </div>
                             <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
                                 <div class="connectionsPart">

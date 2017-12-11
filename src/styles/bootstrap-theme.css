@@ -2243,6 +2243,8 @@ background: #fff !important;}
 .onlineUsers {
     padding: 20px 0;
     border-bottom: 2px solid #f0f0f0;
+    height: 130px;
+    overflow-y: scroll;
 }
 
 .onlineUsers h2 {
@@ -3815,7 +3817,7 @@ ul.connectionlist li .text-area p {
     margin-right: 15px
 }
 /*********************soutik*******************************/
-.about-content-area{padding: 230px 0;}
+.about-content-area{padding: 80px 0;}
 .flex-profile{display: flex;flex-wrap:no-wrap;justify-content:space-between}
 .flex-profile .flex-left{width:285px;}
 .flex-profile .flex-right{width:365px}
@@ -3982,7 +3984,7 @@ section.team h2.text-red {font-size: 28px;}
 /*----------------------- 11-12-2017 -------------*/
 .fix-to-top{
 	position: fixed;
-	top: 50px;
+	top: 80px;
 }
 
 
@@ -4051,6 +4053,8 @@ section.team h2.text-red {font-size: 28px;}
 	.btn.btn-primary{font-size: 14px;}
 
 }
+.new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
+width: 19px; height: 25px;}
 
 
 
