@@ -36,6 +36,14 @@ export class FrontendService {
       .map(data => data);
   }
   
+  getHomePageData(){
+    return this.apiService.get(`/enrichment/apphomepagecontent`).map(data => data);
+  }
+  
+  getHomePageTopArtData(){
+    return this.apiService.get(`/enrichment/appisfeaturedarticlelist`).map(data => data);
+  }
+
   userContactDataSend(form_data){
     return this.apiService.post(`/users/appusercontactus`, form_data).map(data => data);
   }
