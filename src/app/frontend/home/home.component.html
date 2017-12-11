@@ -1,16 +1,16 @@
 <section class="banner">
-  <div class="container"><h1>Femnesty connects women from all walks of life and all around the world.</h1></div>
+  <div class="container"><h1>{{homepageData?.top_banner_main_text}}</h1></div>
 </section>
 <section class="section what-is-femnesty">
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-sm-8">
-        <h1>What is <br/>Femnesty?</h1>
-        <p>Femnesty is a network that connects women from all around the world. It exists to help women recognise and unleash the potential in their own personal and professional lives, and to promote the positive roles we play as parents, professionals, family members and friends.</p>
-        <button class="btn btn-primary">About us</button>
+        <h1>{{homepageData?.below_top_header}}</h1>
+        <p>{{homepageData?.below_top_text}}</p>
+        <a class="btn btn-primary" [routerLink]="['/page/about-us']">About us</a>
       </div>
       <div class="col-md-6 col-sm-4">
-        <img src="assets/images/what-is.jpg" alt="" class="img-responsive"/>
+        <img [src]="homepageData?.below_top_side_image" alt="" class="img-responsive"/>
       </div>
     </div>
   </div>
@@ -19,21 +19,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h2>Articles</h2>
-        <p>Read inspirational stories from women about the challenges of working, raising families and balancing personal fulfilment with professional success.</p>
-        <button class="btn btn-primary">READ MORE</button>
+        <h2>{{homepageData?.below_second_list_heading1}}</h2>
+        <p>{{homepageData?.below_second_list_text1}}</p><br>
+        <a href="{{homepageData?.below_second_list_link1}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
-        <h2>Safe Place</h2>
-        <p>Femnesty provides a dedicated Space where you can talk to, learn from and debate with women around the world on the issues that matter to you. </p>
-        <button class="btn btn-primary">READ MORE</button>
+        <h2>{{homepageData?.below_second_list_heading2}}</h2>
+        <p>{{homepageData?.below_second_list_text2}}</p><br>
+        <a href="{{homepageData?.below_second_list_link2}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
-        <h2>Mentorship</h2>
-        <p>Our mentoring scheme enables women to find, work with, learn from and even become the best mentors in their industry.
-
-</p>
-        <button class="btn btn-primary">READ MORE</button>
+        <h2>{{homepageData?.below_second_list_heading3}}</h2>
+        <p>{{homepageData?.below_second_list_text3}}</p><br>
+        <a href="{{homepageData?.below_second_list_link3}}" class="btn btn-primary">READ MORE</a>
       </div>
     </div>
   </div>
@@ -42,8 +40,7 @@
   <div class="container">
     <blockquote>
        <i class="ion-quote"></i>
-        <p>The difference between average people and achieving people
-is their perceptionof and response to failure.</p>
+        <p>{{homepageData?.below_list_maintext}}</p>
         <footer>John C. Maxwell</footer>
     </blockquote>
   </div>
@@ -52,51 +49,14 @@ is their perceptionof and response to failure.</p>
   <div class="container">
     <h1>Top Articles</h1>
     <div class="row">
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-4 col-sm-6" *ngFor="let artData of homepageArtData">
         <div class="gray">
-          <div class="article-image-holder"><img src="assets/images/article.jpg" alt="" /></div>
+          <div class="article-image-holder"><img [src]="artData.image_url" alt="" /></div>
           <div class="article-add-holder">
-            <h3>Why be a Mentor? </h3>
-            <span>Article by Author, June 14, 2017</span>
-            <p>
-            Tips and advice for mentors and mentees.
-            Adam Williams has over 17 years of global 
-            sales and marketing experience. He is a 
-            passionate believer in servant leadership 
-            and has found his niche...</p>
-            <button  class="btn btn-primary">Read Article</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="gray">
-          <div class="article-image-holder"><img src="assets/images/article.jpg" alt="" /></div>
-          <div class="article-add-holder">
-            <h3>Why be a Mentor? </h3>
-            <span>Article by Author, June 14, 2017</span>
-            <p>
-            Tips and advice for mentors and mentees.
-            Adam Williams has over 17 years of global 
-            sales and marketing experience. He is a 
-            passionate believer in servant leadership 
-            and has found his niche...</p>
-            <button  class="btn btn-primary">Read Article</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="gray">
-          <div class="article-image-holder"><img src="assets/images/article.jpg" alt="" /></div>
-          <div class="article-add-holder">
-            <h3>Why be a Mentor? </h3>
-            <span>Article by Author, June 14, 2017</span>
-            <p>
-            Tips and advice for mentors and mentees.
-            Adam Williams has over 17 years of global 
-            sales and marketing experience. He is a 
-            passionate believer in servant leadership 
-            and has found his niche...</p>
-            <button  class="btn btn-primary">Read Article</button>
+            <h3>{{artData.title | limitTo : 20}} </h3>
+            <span>Article by {{artData.author_name}}</span>
+            <p>{{artData.short_desc | limitTo : 200}}</p><br>
+            <a [routerLink]="['/articles/details',artData.slug]" class="btn btn-primary">Read Article</a>
           </div>
         </div>
       </div>
@@ -107,19 +67,19 @@ is their perceptionof and response to failure.</p>
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h2>Share your story</h2>
-        <p>Together we’re wiser and stronger. Tell us your story, so others can learn and grow from your experiences.</p>
-        <button class="btn btn-primary">READ MORE</button>
+        <h2>{{homepageData?.last_list_heading1}}</h2>
+        <p>{{homepageData?.last_list_text1}}</p><br>
+        <a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
-        <h2>Join the team</h2>
-        <p>Femnesty is always looking for strong contributors to join our team. If you would like to get involved, contact us.</p>
-        <button class="btn btn-primary">READ MORE</button>
+        <h2>{{homepageData?.last_list_heading2}}</h2>
+        <p>{{homepageData?.last_list_text2}}</p><br>
+        <a [routerLink]="['/']" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
-        <h2>Become a mentor</h2>
-        <p>Women can be brilliant advocates. Become a mentor and help another woman achieve her dreams today.</p>
-        <button class="btn btn-primary">READ MORE</button>
+        <h2>{{homepageData?.last_list_heading3}}</h2>
+        <p>{{homepageData?.last_list_text3}}</p><br>
+        <a [routerLink]="['/user/mentor']" class="btn btn-primary">READ MORE</a>
       </div>
     </div>
   </div>
