@@ -225,10 +225,10 @@ export class EditprofileComponent implements OnInit {
     const result = {},
       userValue = this.form.value;
     userValue.id = loginUserId;
+    //console.log(userValue);
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
-
         const details = data;
         localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
         localStorage.setItem('userName', details.UserDetails.first_name);
@@ -237,7 +237,6 @@ export class EditprofileComponent implements OnInit {
         this.successMsg = 'Data updated successfully';
         //this.router.navigateByUrl('/user/profile');
         this.router.navigate(['/user/profile']);
-
       },
       error => {
         alert(error);
@@ -351,6 +350,13 @@ export class EditprofileComponent implements OnInit {
     this.editAbtActiveTab = data;
     this.successMsg = '';
     this.errorMsg = '';
-    console.log(this.editAbtActiveTab);
+    //console.log(data);
   }
+
+  /*public checkInputValue(values:Object,inputname):void {
+    if(values!=''){
+      console.log(values);
+      console.log(inputname);
+    }
+  }*/
 }
