@@ -707,7 +707,7 @@ ul {
     float: left;
     color: #fff;
     font-size: 13px;
-    margin: 0 7px 0 0;
+    margin: 0 15px 0 0;
 }
 
 .header-top ul li i,
@@ -715,12 +715,12 @@ ul {
     color: #000;
     background: #fff;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 100%;
-    line-height: 22px;
+    line-height: 23px;
     text-align: center;
-      font-size: 14px;
+      font-size: 17px;
 }
 
 .header-top ul li a,
@@ -754,7 +754,7 @@ ul {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: #000000;
-    font-size: 15px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px
 }
@@ -4048,12 +4048,18 @@ section.team h2.text-red {font-size: 28px;}
     .books-wrap .book-item{width:48%;}
     
     .new-about-content-area, .founder.gray, section.team {padding:50px 0}
+    .advisory-board{
+		margin: 15px 0 !important;
+	}
     
 }
 @media screen and (max-width:480px) {
 	.headerTopPart li input[type="text"]{width:150px;}
 	.search-icon{padding: 14px 10px}
 	.btn.btn-primary{font-size: 14px;}
+	.advisory-board{
+		padding: 0 !important;
+	}
 
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
@@ -4168,10 +4174,26 @@ ul.uploadVideo {
     background-position: center center;
 }
 
+/*------------------------------- 12-12-2017 --------------------------*/
+.advisory-board{padding: 77px 0; overflow: hidden;}
+.advisory-board h2{font-size: 37px;margin: 0;color: #000;border-bottom: 3px solid #e6e6e6;font-weight: 600}
+.advisory-board h3{font-weight: 600;font-size: 25px; color: #be1620;}
+.advisory-board p{font-weight: normal;font-size: 14px; line-height: 30px;}
+.advisory.gray{padding-bottom: 0}
+.advisory.gray h2{font-size:28px}
+.advisory.gray h3.text-red{font-size:26px}
 
+.advisory {
+    padding: 0;
+}
 
+.advisory h2 {
+    border-bottom: #dedede 2px solid;
+    padding-bottom: 20px;
+}
 
-
-
+.advisory .row {
+    margin-top: 50px;
+}
 
 
