@@ -15,7 +15,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class FrontendAppHeader {
   pageConData = [];
   HeaderNavCls: string = '';
-  lastScrollTop: number = 200;
+  lastScrollTop: number = 400;
   chatHeads: any[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   public userloggedIn: string = '';
@@ -49,7 +49,7 @@ export class FrontendAppHeader {
       if (st > this.lastScrollTop) {
         dir = "navbar-white";
       } else {
-        dir = "navbar-white";
+        dir = "navbar-trans";
       }
       //this.lastScrollTop = st;
       lc.run(() => {
