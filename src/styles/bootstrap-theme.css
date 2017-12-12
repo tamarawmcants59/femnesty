@@ -785,7 +785,7 @@ ul {
     ;
     display: block;
     position: absolute;
-    top: 46%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
@@ -794,11 +794,11 @@ ul {
 
 .banner {
     width: 100%;
-    height: 847px;
     overflow: hidden;
     /*background: url('../assets/images/banner.jpg');*/
     background-size: cover;
     position: relative;
+    height: 100vh;
 }
 
 .section {
@@ -809,7 +809,7 @@ ul {
 }
 
 .section h1 {
-    font-size: 58px;
+    font-size: 52px;
     font-weight: 400;
     position: relative;
     margin-bottom: 35px;
@@ -878,11 +878,11 @@ ul {
 
 .quote {
     width: 100%;
-    height: auto;
+    height: 60vh;
     overflow: hidden;
     background: url('../assets/images/quote-bg.jpg');
     background-size: cover;
-    background-attachment: fixed;
+    /*background-attachment: fixed;*/
 }
 
 blockquote {
@@ -940,22 +940,22 @@ blockquote i {
 .article-add-holder h3 {
     display: block;
     color: #be1620;
-    font-size: 25px;
+    font-size: 23px;
     margin-bottom: 5px;
 }
 
 .article-add-holder span {
     display: block;
     color: #646464;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 300;
 }
 
 .article-add-holder p {
     display: block;
-    font-weight: 600;
+    font-weight: normal;
     margin: 25px 0;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 25px;
 }
 
