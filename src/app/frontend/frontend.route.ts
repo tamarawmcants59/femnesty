@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { SearchComponent } from "./search/search.component";
+import { AdvisoryComponent } from "./advisory/advisory.component";
+import { CorporateComponent } from "./corporate/corporate.component";
 const frontendRoute: Routes = [
     {
         path: '',
@@ -23,6 +25,20 @@ const frontendRoute: Routes = [
       data: {
         title: 'Search'
       }
+    },
+    {
+        path: 'corporate',
+        component: CorporateComponent,
+        data: {
+          title: 'Corporate'
+        }
+    },
+    {
+        path: 'advisory',
+        component: AdvisoryComponent,
+        data: {
+          title: 'Advisory'
+        }
     }
 ];
 @NgModule({

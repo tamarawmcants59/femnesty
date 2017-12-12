@@ -15,6 +15,7 @@ export class EditprofileComponent implements OnInit {
   cropper: ImageCropperComponent;
   public activeTab: string = 'activity';
   public aboutActiveTab: string = 'overview';
+  public editAbtActiveTab: string = '';
   public showImgDive: boolean = false;
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
@@ -345,5 +346,11 @@ export class EditprofileComponent implements OnInit {
     this.errorMsg = '';
     this.aboutActiveTab = data;
   }
-
+  
+  public editAboutToggleTab(data: any) {
+    this.editAbtActiveTab = data;
+    this.successMsg = '';
+    this.errorMsg = '';
+    console.log(this.editAbtActiveTab);
+  }
 }
