@@ -25,6 +25,7 @@ export class FrontendAppHeader {
   public searchResultStr:string ='';
   public form:FormGroup;
   public currentFireUserId:string='';
+  public getCurrentPageName:string='';
   
   constructor(
     private el: ElementRef,
@@ -42,22 +43,31 @@ export class FrontendAppHeader {
          this.currentFireUserId = user.uid;
       }
     }).subscribe();
+    //console.log(this.router.url);
+    this.getCurrentPageName = this.router.url;
+    //let returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    /*this.route.params.subscribe((params: Params) => {
 
-    window.onscroll = () => {
-      let st = window.pageYOffset;
-      let dir = '';
-      if (st > this.lastScrollTop) {
-        dir = "navbar-white";
-      } else {
-        dir = "navbar-trans";
-      }
-      //this.lastScrollTop = st;
-      lc.run(() => {
-        this.HeaderNavCls = dir;
-      });
+        //this.getCurrentPageName = params['slug'];
+    });*/
+    if(this.getCurrentPageName=='/home'){
+      window.onscroll = () => {
+        let st = window.pageYOffset;
+        let dir = '';
+        if (st > this.lastScrollTop) {
+          dir = "navbar-white";
+        } else {
+          dir = "navbar-trans";
+        }
+        //this.lastScrollTop = st;
+        lc.run(() => {
+          this.HeaderNavCls = dir;
+        });
 
-    };
-
+      };
+    }else{
+      this.HeaderNavCls = 'navbar-white';
+    }
 
     this.userloggedIn = localStorage.getItem("isLoggedIn");
     let getUserDet = localStorage.getItem("currentUser");
