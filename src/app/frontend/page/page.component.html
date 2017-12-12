@@ -2,13 +2,25 @@
   <div class="container">
       <div class="row">
           <div class="col-md-7">
-              <h1 class="text-white">About Femnesty</h1>
+              <h1 class="text-white">{{pageDetData.page_heading}}</h1>
           </div>
       </div>
   </div>
 </section>
 
-<section class="section about-content-area new-about-content-area" *ngIf="pageSlugName != 'contact-us'">
+<section class="section about-content-area new-about-content-area" *ngIf="pageSlugName != 'contact-us' && pageSlugName != 'about-us'">
+        <div class="container">
+            <div class="row">
+                <!--<div class="col-md-12">
+                      <h1>{{pageDetData.page_heading}}</h1>
+                      
+                </div>-->
+                <div [innerHTML]="pageDetData.content" ></div>
+                
+            </div>
+        </div>
+    </section>
+<section class="section about-content-area new-about-content-area" *ngIf="pageSlugName == 'about-us'">
     <div class="container">
         <div class="row">
         	<!--<div class="col-md-12">
