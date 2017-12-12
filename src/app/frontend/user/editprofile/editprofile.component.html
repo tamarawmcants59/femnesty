@@ -87,18 +87,31 @@
                             <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
                             <div class="new-tabs">
                            	 	<ul class="nav nav-tabs">
-  									<li class="active"><a data-toggle="tab" href="#details">PROFILE DETAILS</a></li>
-  									<li><a data-toggle="tab" href="#settings">PRIVACY SETTINGS</a></li>
-  									<li><a data-toggle="tab" href="#contact">CONTACT DETAILS</a></li>
+  									<li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                                          <a (click)="aboutToggleTab('overview')">PROFILE DETAILS</a>
+                                    </li>
+  									<li [ngClass]="{'active' : aboutActiveTab=='privacy_setting'}">
+                                          <a (click)="aboutToggleTab('privacy_setting')">PRIVACY SETTINGS</a>
+                                    </li>
+  									<li [ngClass]="{'active' : aboutActiveTab=='contact_details'}">
+                                          <a (click)="aboutToggleTab('contact_details')">CONTACT DETAILS</a>
+                                    </li>
 								</ul>
                                                               
 								<div class="tab-content">
-  									<div id="details" class="tab-pane fade in active">
+  									<div id="details" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
     									<ul>
     										<li>
-    										<div class="edit"></div>
-    											<h5>INFO/QUESTION</h5>
-    											<p>Answer of this information</p>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='first_name'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('first_name')"></div>
+                                                    <h5>FIRST NAME</h5>
+                                                    <p>{{loginUserDet.first_name}}</p>
+                                                </div>
+    										    <div class="text_hide_div" [ngClass]="{'show_div' : editAbtActiveTab=='first_name'}">
+                                                    <div class="check"></div>
+                                                    <h5>FIRST NAME</h5>
+                                                    <P><input type="text" placeholder="Answer of this information"/></P>
+                                                </div>
     										</li>
 											<li>
     										<div class="check"></div>
@@ -123,7 +136,7 @@
 								  	</div>
                                 </div>
                                 
-                                    <h2>About</h2>
+                                    <!--<h2>About</h2>
                                     <div class="abouts">
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12">
@@ -274,7 +287,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 
 							</div>
                             </div>

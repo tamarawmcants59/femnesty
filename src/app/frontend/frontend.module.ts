@@ -6,6 +6,8 @@ import { HomeComponent } from "./home/home.component";
 import { FrontendComponent } from "./frontend.component";
 import { SearchComponent } from './search/search.component';
 import { SharedModule } from "../components/shared.module";
+import { CorporateComponent } from './corporate/corporate.component';
+import { AdvisoryComponent } from './advisory/advisory.component';
 @NgModule({
   imports: [
     FrontendRoute,
@@ -17,7 +19,7 @@ import { SharedModule } from "../components/shared.module";
   declarations: [
     HomeComponent, 
     FrontendComponent, 
-    SearchComponent, 
+    SearchComponent, CorporateComponent, AdvisoryComponent, 
     //TruncatePipe, 
     //SafePipe
   ],providers:[]

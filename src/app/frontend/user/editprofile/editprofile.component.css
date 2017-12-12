@@ -57,4 +57,8 @@
 	font-size: 18px; color: #7b7b7b; padding: 0 25px; text-align: left; margin-bottom: 10px;
 }
 
+.hide_div{ display: none;}
+.show_div{ display: block;}
+.text_hide_div{ display: none;}
+
 
