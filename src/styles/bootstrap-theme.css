@@ -809,12 +809,12 @@ ul {
 }
 
 .section h1 {
-    font-size: 52px;
+    font-size: 42px;
     font-weight: 400;
     position: relative;
     margin-bottom: 35px;
     padding-bottom: 35px;
-    line-height:66px;
+    line-height:46px;
 }
 
 .section h1:after {
@@ -1086,7 +1086,9 @@ footer {
 .text-white {
     color: #fff;
 }
-
+.text-black{
+	color: #000;
+}
 .inner-banner .row {
     display: -ms-flexbox;
     display: flex;
@@ -4211,4 +4213,33 @@ ul.uploadVideo {
 
 .navbar-trans .navbar-toggle {
     margin-top: 26px;
+}
+.corpo-partener{
+	margin: 10% 0;
+}
+
+.corpo-partener h2 {
+    font-size: 42px;
+    font-weight: 400;
+    position: relative;
+    margin-bottom: 35px;
+    padding-bottom: 35px;
+    line-height:66px;
+}
+
+.corpo-partener h2:after {
+    content: "";
+    width: 53px;
+    height: 10px;
+    background: #be1620;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.pt-150{
+	margin-top: 150px !important;
+}
+
+.corpo-partener p{
+	font-size: 16px; line-break: 24px; color:#000; text-align: left; 
 }
