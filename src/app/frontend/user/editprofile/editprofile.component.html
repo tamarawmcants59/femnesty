@@ -85,6 +85,9 @@
 
                             </div>
                             <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
+                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                    <strong>Success: </strong> {{successMsg}}
+                                </div>
                             <div class="new-tabs">
                            	 	<ul class="nav nav-tabs">
   									<li [ngClass]="{'active' : aboutActiveTab=='overview'}">
@@ -99,197 +102,133 @@
 								</ul>
                                                               
 								<div class="tab-content">
-  									<div id="details" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
-    									<ul>
+                                    <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
+                                    <div *ngIf="aboutActiveTab=='overview'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                        <ul>
     										<li>
                                                 <div [ngClass]="{'hide_div' : editAbtActiveTab=='first_name'}">
                                                     <div class="edit" (click)="editAboutToggleTab('first_name')"></div>
                                                     <h5>FIRST NAME</h5>
                                                     <p>{{loginUserDet.first_name}}</p>
                                                 </div>
-    										    <div class="text_hide_div" [ngClass]="{'show_div' : editAbtActiveTab=='first_name'}">
-                                                    <div class="check"></div>
+    										    <div *ngIf="editAbtActiveTab=='first_name'">
+                                                    <button class="check" type="submit"></button>
                                                     <h5>FIRST NAME</h5>
-                                                    <P><input type="text" placeholder="Answer of this information"/></P>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name" placeholder="Enter your first name"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
                                                 </div>
     										</li>
 											<li>
-    										<div class="check"></div>
-    											<h5>INFO/QUESTION</h5>
-    											
-    											<P><input type="ext" placeholder="Answer of this information"/></P>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='last_name'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('last_name')"></div>
+                                                    <h5>LAST NAME</h5>
+                                                    <p>{{loginUserDet.last_name}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='last_name'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>LAST NAME</h5>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name" placeholder="Enter your last name"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
+                                                </div>
     										</li>
     										<li>
-    										<div class="edit"></div>
-    											<h5>INFO/QUESTION</h5>
-    											<p>Answer of this information</p>
-    										</li>
-    									</ul>
-  									</div>
-									 <div id="settings" class="tab-pane fade">
-									    <h3>Menu 1</h3>
-									    <p>Some content in menu 1.</p>
-									 </div>
-								  	<div id="contact" class="tab-pane fade">
-								   		<h3>Menu 2</h3>
-								    	<p>Some content in menu 2.</p>
-								  	</div>
-                                </div>
-                                
-                                    <!--<h2>About</h2>
-                                    <div class="abouts">
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12">
-                                                <ul class="nav-tabs tabs-left sideways">
-                                                    <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
-                                                    <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
-                                                    
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-8 col-sm-12">
-                                                <div class="tab-content">
-                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
-                                                        <ul class="ulList">
-                                                            <div class="menu">
-                                                                <h3>About your self</h3>
-                                                                <div class="">
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.first_name}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.last_name}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.email}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.mobile_number}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.occupation}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.state}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.city}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.address}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
-                                                                        <div class="col-sm-8">
-                                                                            <span>{{loginUserDet.bio}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_details'}">
-                                                        <ul class="ulList edit-forms">
-                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                                <strong>Success: </strong> {{successMsg}}
-                                                            </div>
-                                                            <h3>Edit Details</h3>
-                                                            <div class="menu">
-                                                                <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
-                                                                    <div class="">
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">First Name</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name">
-                                                                                <div class="text-danger" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Last Name</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name">
-                                                                                <div class="text-danger" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number">
-                                                                                <div class="text-danger" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.state" formControlName="state">
-                                                                                <div class="text-danger" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.city" formControlName="city">
-                                                                                <div class="text-danger" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address">
-                                                                                <div class="text-danger" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Occupation</label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation">
-                                                                                <div class="text-danger" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">About yourself</label>
-                                                                            <div class="col-sm-8">
-                                                                                <textarea class="form-control-plaintext" [(ngModel)]="loginUserDet.bio" formControlName="bio"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="saveChanges">
-                                                                            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Save Changes</button>
-                                                                           
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </ul>
-                                                    </div>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='occupation'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('occupation')"></div>
+                                                    <h5>OCCUPATION</h5>
+                                                    <p>{{loginUserDet.occupation}}</p>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
-                                
-							</div>
+                                                <div *ngIf="editAbtActiveTab=='occupation'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>OCCUPATION</h5>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation" placeholder="Enter your occupation"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='bio'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('bio')"></div>
+                                                    <h5>ABOUT YOURSELF</h5>
+                                                    <p>{{loginUserDet.bio}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='bio'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>ABOUT YOURSELF</h5>
+                                                    <P>
+                                                        <textarea class="form-control-plaintext" [(ngModel)]="loginUserDet.bio" formControlName="bio" style="width: 90%;" placeholder="Enter about yourself"></textarea>
+                                                    </P>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+									 <div *ngIf="aboutActiveTab=='privacy_setting'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='privacy_setting'}">
+									    <ul>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='email'}">
+                                                    <h5>EMAIL</h5>
+                                                    <p>{{loginUserDet.email}}</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='mobile_number'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('mobile_number')"></div>
+                                                    <h5>MOBILE NUMBER</h5>
+                                                    <p>{{loginUserDet.mobile_number}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='mobile_number'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>MOBILE NUMBER</h5>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+									 </div>
+								  	<div *ngIf="aboutActiveTab=='contact_details'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='contact_details'}">
+								   		<ul>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='state'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('state')"></div>
+                                                    <h5>STATE NAME</h5>
+                                                    <p>{{loginUserDet.state}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='state'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>STATE NAME</h5>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.state" formControlName="state" placeholder="Enter your state name"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='city'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('city')"></div>
+                                                    <h5>CITY NAME</h5>
+                                                    <p>{{loginUserDet.city}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='city'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>CITY NAME</h5>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.city" formControlName="city" placeholder="Enter your city name"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='address'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('address')"></div>
+                                                    <h5>ADDRESS</h5>
+                                                    <p>{{loginUserDet.address}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='address'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>ADDRESS</h5>
+                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address" placeholder="Enter your address"></P>
+                                                    <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    </form>  
+                                </div>
+                            </div>
                             </div>
                             <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
                                 <div class="connectionsPart">
