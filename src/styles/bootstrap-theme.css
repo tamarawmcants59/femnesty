@@ -408,7 +408,7 @@ fieldset[disabled] .btn-danger.active {
 
 .navbar-brand,
 .navbar-nav>li>a {
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+    /*text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);*/
 }
 
 .navbar-inverse {
@@ -780,12 +780,12 @@ ul {
 .banner h1 {
     position: absolute;
     color: #b82020;
-    font-size: 54px;
+    font-size: 48px;
     text-align: center;
     ;
     display: block;
     position: absolute;
-    top: 50%;
+    top: 46%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
@@ -842,7 +842,7 @@ ul {
 }
 
 .article h2 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     position: relative;
     margin-bottom: 25px;
@@ -861,12 +861,12 @@ ul {
 }
 
 .article p {
-    font-size: 16px;
+    font-size: 14px;
     display: block;
     width: 90%;
     margin: 0 auto;
     min-height: 100px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 26px;
     font-weight: 600;
 }
@@ -4196,4 +4196,19 @@ ul.uploadVideo {
     margin-top: 50px;
 }
 
+.navbar-trans {
+    background: transparent;
+    
+}
 
+/*.navbar-white .navbar-brand img {
+    width: 150px;
+}*/
+
+.navbar-trans .navbar-right {
+    margin-top: 40px;
+}
+
+.navbar-trans .navbar-toggle {
+    margin-top: 26px;
+}
