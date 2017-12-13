@@ -9,10 +9,17 @@ import { FrontendService } from "../../components/frontend-app-header/frontend.s
 export class HomeComponent implements OnInit {
   public homepageData:any;
   public homepageArtData =[];
+  public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
+  public homepageCls='';
   constructor(
     private dataService: FrontendService
   ) { 
-    //alert('home');
+    if(this.loginUserId>0){
+      this.homepageCls='pt-64';
+    }else{
+      this.homepageCls='pt-150';
+    }
+    console.log(this.homepageCls);
   }
 
   ngOnInit() {

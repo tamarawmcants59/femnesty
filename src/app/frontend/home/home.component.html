@@ -1,4 +1,4 @@
-<section class="banner pt-150 pt-64" [ngStyle]="{'background-image':'url('+homepageData?.top_banner_image+')'}">
+<section class="banner" [ngClass]="{'pt-64':homepageCls === 'pt-64','pt-150':homepageCls === 'pt-150'}" [ngStyle]="{'background-image':'url('+homepageData?.top_banner_image+')'}">
   <div class="container"><h1>{{homepageData?.top_banner_main_text}}</h1></div>
 </section>
 <section class="section what-is-femnesty">
