@@ -1,4 +1,4 @@
-<section class="section p-16 mt-100 single-article new-single-article">
+<section class="section single-article new-single-article">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -8,11 +8,25 @@
                 <div>
                     <h3 class="text-red">{{mentorshipDet?.name}}</h3>
                     <p class="text-gray">{{mentorshipDet?.qualification}}</p>
+                    <ul class="n-social">
+                    	<li>
+                    		<div class="point">5</div>
+                    		<img src="assets/images/facebook.png" />
+                    	</li>
+                    	<li>
+                    		<div class="point">5</div>
+                    		<img src="assets/images/linkedin.png" />
+                    	</li>
+                    	<li>
+                    		<div class="point">5</div>
+                    		<img src="assets/images/twitter.png" />
+                    	</li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-8">
-                <h1>Mentorship Details</h1>
-                <p class="font-weight-bold mb-30">{{mentorshipDet?.short_desc}}</p>
+                <!--<h1>Mentorship Details</h1>-->
+                <p class="font-weight-bold mb-30 p-16">{{mentorshipDet?.short_desc}}</p>
                 <div [innerHTML]="mentorshipDet?.long_desc" class="mb-30"></div>
             </div>
         </div>

@@ -16,7 +16,7 @@
 	                            <div class="right-side">
 	                              <h4>{{grpData.group_name}}</h4>
 	                              <!--<small class="text">{{grpData.short_desc}}</small>-->
-	                              <p class="s-desc">{{grpData.short_desc | limitTo : 100}}</p>
+	                              <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
 	                              <p class="font-weight-bold">By {{grpData.name}}</p>
 	                              <a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
 	                            </div>
@@ -31,7 +31,7 @@
 	                            <div class="right-side">
 	                              <h4>{{grpData.group_name}}</h4>
 	                              <!--<small class="text">{{grpData.short_desc}}</small>-->
-	                              <p class="s-desc">{{grpData.short_desc | limitTo : 100}}</p>
+	                              <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
 	                              <p class="font-weight-bold">By {{grpData.name}}</p>
 	                              <a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
 	                            </div>
