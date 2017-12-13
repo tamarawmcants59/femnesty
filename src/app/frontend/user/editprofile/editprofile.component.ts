@@ -229,6 +229,7 @@ export class EditprofileComponent implements OnInit {
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
+        this.editAbtActiveTab = '';
         const details = data;
         localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
         localStorage.setItem('userName', details.UserDetails.first_name);

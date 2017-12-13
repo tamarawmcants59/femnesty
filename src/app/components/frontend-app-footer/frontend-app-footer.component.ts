@@ -7,6 +7,7 @@ import { UserService } from '../../frontend/user/user.service';
 import { FrontendService } from "../frontend-app-header/frontend.service";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+//import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 //import { DatePipe } from '@angular/common';
 //@Injectable()
 
@@ -37,14 +38,18 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   room_id: string;
   users = [];
   message: string;
-  newsletteremail:string;
+  public newsletteremail:string = '';
   fileData: any;
   dbRef: any;
   isComponentActive: boolean;
+  errorMsg: string='';
+  successMsg: string='';
   public pageContactData: string = '';
   public siteSettingsDet: Object = {};
+  //public subsform: FormGroup;
 
   constructor(
+    //private builder: FormBuilder,
     private el: ElementRef,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
@@ -64,6 +69,13 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
          this.updateOnConnect();
       }
     }).subscribe();
+
+    /*this.subsform = builder.group({
+      email: ['', [
+        Validators.required,
+        //Validators.minLength(3)
+      ]]
+    });*/
   }
 
   scrollToBottom(): void {
@@ -199,16 +211,21 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   }
   
   sendNewsletter() {
+    this.errorMsg='';
+    this.successMsg='';
     if(this.newsletteremail!=''){
-      this.userService.submitNewsLetter({ email: this.newsletteremail }).subscribe(res => {
-        console.log(res);
-        //this.thisUser = res.UserDetails[0];
+      this.userService.submitNewsLetter({email: this.newsletteremail}).subscribe(res => {
+        //console.log(res);
+        if(res.Ack==1){
+          this.successMsg=res.msg;
+          this.newsletteremail='';
+        }else{
+          this.errorMsg=res.msg;
+        }
       });
+    }else{
+      this.errorMsg='Please provide your email.';
     }
-    
-    
-    this.newsletteremail = null;
-    
   }
 
   sendFile(file_name) {
