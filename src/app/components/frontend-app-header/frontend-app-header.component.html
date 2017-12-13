@@ -41,8 +41,9 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    
 </header>
-
+<div class="mb-150" *ngIf="userloggedIn != 1"></div>
 
 <header class="navbar-fixed-top header-inner" *ngIf="userloggedIn == 1">
     <div class="header-top headerTopPart">
@@ -181,4 +182,6 @@
          </ul>
         </div>
     </nav>
+    
 </header>
+<div class="mb-64" *ngIf="userloggedIn == 1"></div>
