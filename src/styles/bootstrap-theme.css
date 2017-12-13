@@ -810,7 +810,7 @@ ul {
 }
 
 .section h1 {
-    font-size: 42px;
+    font-size: 52px;
     font-weight: 400;
     position: relative;
     margin-bottom: 35px;
@@ -829,7 +829,7 @@ ul {
 }
 
 .what-is-femnesty p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 33px;
     font-weight: 600;
 }
@@ -4055,6 +4055,9 @@ section.team h2.text-red {font-size: 28px;}
     .advisory-board{
 		margin: 15px 0 !important;
 	}
+.pr-50{
+	padding-right: 0;
+}
     
 }
 @media screen and (max-width:480px) {
@@ -4064,6 +4067,9 @@ section.team h2.text-red {font-size: 28px;}
 	.advisory-board{
 		padding: 0 !important;
 	}
+.pr-50{
+	padding-right: 0;
+}
 
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
@@ -4257,4 +4263,8 @@ ul.uploadVideo {
 	height: 64px !important;
 	width: 100%;
 	clear: both;
+}
+
+.pr-50{
+	padding-right: 50px;
 }
