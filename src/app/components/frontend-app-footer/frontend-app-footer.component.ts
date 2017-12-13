@@ -4,6 +4,7 @@ import { ChatListnerService } from './../../service/chat.listner.service';
 import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewChecked } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../frontend/user/user.service';
+import { FrontendService } from "../frontend-app-header/frontend.service";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 //import { DatePipe } from '@angular/common';
@@ -36,15 +37,19 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   room_id: string;
   users = [];
   message: string;
+  newsletteremail:string;
   fileData: any;
   dbRef: any;
   isComponentActive: boolean;
   public pageContactData: string = '';
+  public siteSettingsDet: Object = {};
+
   constructor(
     private el: ElementRef,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
     private userService: UserService,
+    private _service: FrontendService,
     private afAuth: AngularFireAuth,
     private firedb: AngularFireDatabase
   ) {
@@ -78,8 +83,18 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     }
     // remove the empty element(the host)
     parentElement.removeChild(nativeElement);
-    //this.current_year=Date();
+    this.current_year=Date();
     this.pageContactData = 'contact-us';
+
+    this._service.getSiteSettings().subscribe(data => {
+      if (data.Ack == "1") {
+        this.siteSettingsDet = data.SiteSettings[0];
+      } 
+    },
+    error => {
+      console.log('Something went wrong!');
+    });
+
   }
 
   ngAfterViewChecked() {
@@ -181,6 +196,19 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     }).catch(err => {
       //console.log('error with fb: ', err);
     });
+  }
+  
+  sendNewsletter() {
+    if(this.newsletteremail!=''){
+      this.userService.submitNewsLetter({ email: this.newsletteremail }).subscribe(res => {
+        console.log(res);
+        //this.thisUser = res.UserDetails[0];
+      });
+    }
+    
+    
+    this.newsletteremail = null;
+    
   }
 
   sendFile(file_name) {
