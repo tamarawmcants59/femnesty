@@ -799,6 +799,7 @@ ul {
     background-size: cover;
     position: relative;
     height: 100vh;
+    
 }
 
 .section {
@@ -1081,6 +1082,7 @@ footer {
     /*background: url(../images/inner-bg.jpg) center no-repeat;
     background-size: cover;*/
     height: 500px;
+    
 }
 
 .text-white {
@@ -1852,7 +1854,7 @@ footer {
 .sign-up-area {
     background: url(../assets/images/sign-up-bg.jpg) center no-repeat;
     background-size: cover;
-    padding: 200px 0 100px 0;
+    padding: 100px 0 100px 0;
     background-attachment: fixed;
 }
 
@@ -3822,7 +3824,7 @@ ul.connectionlist li .text-area p {
     margin-right: 15px
 }
 /*********************soutik*******************************/
-.about-content-area{padding: 80px 0;}
+.about-content-area{padding: 20px 0 80px;}
 .flex-profile{display: flex;flex-wrap:no-wrap;justify-content:space-between}
 .flex-profile .flex-left{width:285px;}
 .flex-profile .flex-right{width:365px}
@@ -4237,9 +4239,22 @@ ul.uploadVideo {
     left: 0;
 }
 .pt-150{
-	margin-top: 150px !important;
+	margin-top: -150px !important;
+}
+.pt-64{
+	margin-top: -64px !important;
 }
 
 .corpo-partener p{
 	font-size: 16px; line-break: 24px; color:#000; text-align: left; 
+}
+.mb-150{
+	height: 150px !important;
+	width: 100%;
+	clear: both;
+}
+.mb-64{
+	height: 64px !important;
+	width: 100%;
+	clear: both;
 }
