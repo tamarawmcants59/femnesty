@@ -43,12 +43,19 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6">
+                    <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                        <strong>Success!</strong> {{successMsg}}
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                        <strong>Error!</strong> {{errorMsg}}
+                    </div>
                     <h5>NEWSLETTER</h5>
-                    <form (submit)="sendNewsletter()">
+                    <form (ngSubmit)="sendNewsletter()">
                         <div class="form-group">
-                            <input type="email" class="form-control" [(ngModel)]="newsletteremail" placeholder="Your Email">
+                            <input type="email" class="form-control" [(ngModel)]="newsletteremail" name="newsletteremail" placeholder="Your Email">
+                            <!--<div class="text-danger" *ngIf="!subsform.controls['email'].valid && subsform.controls['email'].touched">Email Required</div>-->
                         </div>
-                        <button type="submit" class="btn btn-primary">SUBSCRIPBE</button>
+                        <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
                     </form>
                 </div>
             </div>
