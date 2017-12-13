@@ -351,4 +351,8 @@ export class UserService {
     return this.apiService.get(`/enrichment/apparticlelistlast`)
       .map(data => data);
   }
+  
+  submitNewsLetter(form_data){
+    return this.apiService.post(`/users/appusernewsletter`,form_data ).map(data => data);
+  }
 }
