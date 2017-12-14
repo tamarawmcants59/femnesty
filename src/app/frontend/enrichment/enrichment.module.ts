@@ -17,6 +17,7 @@ import { ApplicationPipes } from "../../application-pipe.module";
 import { EventcatComponent } from './events/eventcat.component';
 import { EventcatlistComponent } from './events/eventcatlist.component';
 import { EventdetailsComponent } from './events/eventdetails.component';
+import { BookcatComponent } from './books/bookcat.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { EventdetailsComponent } from './events/eventdetails.component';
     VideodetailsComponent, 
     EventcatComponent, 
     EventcatlistComponent, 
-    EventdetailsComponent
+    EventdetailsComponent, 
+    BookcatComponent
   ],
   //declarations: [EnrichmentComponent, BooksComponent, VideosComponent, EventsComponent, BookdetailsComponent, VideodetailsComponent],
   //providers: [ApiService,EnrichmentService,JwtService]
