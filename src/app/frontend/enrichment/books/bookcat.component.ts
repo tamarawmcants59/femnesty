@@ -14,24 +14,40 @@ export class BookcatComponent implements OnInit {
   bookSlugName='';
   booksCatListData=[];
   enrichmentBookData =[];
+  allBooks =[];
   constructor(
     private _book_service: EnrichmentService,
     private activatedRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.bookSlugName = params['slug'];
+        this.getBookDetails();
+        this.getCatBookList();
+        this.getCatWiseBookList();
+        this.getAllBookList();
     });
-    this.getBookDetails();
-    this.getCatBookList();
-    this.getCatWiseBookList();
+    
+   }
+
+  ngOnInit() {
+    
+  }
+
+  public getAllBookList() {
+    this._book_service.getAllBookListData().subscribe(data=>{
+        let details=data;
+        if (details.Ack=="1") {
+            this.allBooks = details.BooksAll;
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+    });
   }
 
   public getCatWiseBookList() {
     this._book_service.getCatWiseBookListData(this.bookSlugName).subscribe(data=>{
       let details=data;
-      console.log(details);
       if (details.Ack=="1") {
           //this.bookBnrImgLink = details.BooksCat[0].image_url;
           this.booksCatData = details.BooksCat[0];

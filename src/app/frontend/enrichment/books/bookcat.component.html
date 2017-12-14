@@ -14,9 +14,9 @@
       <div class="books-tab">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-              <!--<li class="active">
-                  <a [routerLink]="['/enrichment/books']" >All <span>({{booksCatData.length}})</span></a>
-              </li>-->
+              <li class="active">
+                  <a [routerLink]="['/enrichment/books']" >All <span>({{allBooks.length}})</span></a>
+              </li>
               <li *ngFor="let catBook of booksCatListData">
                   <a [routerLink]="['/enrichment/book_cat',catBook.slug]" > {{catBook.name}} <span>({{catBook.bookscount}})</span></a>
               </li>
