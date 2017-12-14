@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FrontendService } from "./components/frontend-app-header/frontend.service";
+import { Router, NavigationEnd } from '@angular/router';
 
 /*@Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { FrontendService } from "./components/frontend-app-header/frontend.servi
 export class AppComponent {
   title = 'app';
   constructor(
-    private _service: FrontendService
+    private _service: FrontendService,
+    private router: Router
   ) {
     this._service.getSiteSettings().subscribe(data => {
       if (data.Ack == "1") {
@@ -33,6 +35,10 @@ export class AppComponent {
         console.log('Something went wrong!');
       }
     );
+    
+    router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+      window.scroll(0, 0);
+    });
   }
   /*public setAppFavicon(id: string, icon: string){
       $("#"+id).attr("href", icon);
