@@ -1425,7 +1425,7 @@ footer {
 }
 
 .mt-100 {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .social-link li {
@@ -1687,6 +1687,9 @@ footer {
     .article-page p {
         height: auto;
     }
+    .mt-100{
+		margin-top: 35px;
+	}
 }
 
 
@@ -3903,7 +3906,7 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .right-gray-box .right-text-hold p.font-weight-bold{font-size:13px;display: block;color:#646464;font-weight: normal;}
 .right-gray-box .right-text-hold p.text-gray{font-size:15px;display: block;color:#000;font-weight: normal;margin: 20px 0}
 
-.new-single-article{padding-top:80px}
+.new-single-article{padding-top:0px}
 .new-single-article h1{margin: 0 0 25px 0;padding:0 0 25px 0}
 
 .motivational h4{font-size:16px}
@@ -4083,6 +4086,9 @@ section h1{
 .mentor-partner{
 	padding: 45px 0 !important;
 }
+ .mt-100{
+		margin-top: 35px;
+	}
 }
 @media screen and (max-width:480px) {
 	.headerTopPart li input[type="text"]{width:150px;}
@@ -4112,6 +4118,9 @@ section h1{
 .mentor-partner{
 	padding: 45px 0 !important;
 }
+ .mt-100{
+		margin-top: 35px;
+	}
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
 width: 19px; height: 25px; background-repeat:  no-repeat;}
