@@ -32,6 +32,9 @@
                     <div class="text-danger" *ngIf="!password.valid && password.touched">Password Required</div>
                 </div>
                 <div class="form-group col-md-12">
+                	<p><label><a class="text-red" href="">Forgot Your Password?</a></label></p>
+                </div>
+                <div class="form-group col-md-12">
                     <button class="btn btn-primary" [disabled]="!loginForm.valid" type="submit">Submit</button>
                 </div>
                 <div class="form-group col-md-12">

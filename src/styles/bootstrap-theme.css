@@ -1235,7 +1235,7 @@ footer {
     background: #f7f7f7;
     border: none;
     box-shadow: none;
-    height: 68px;
+    height: 64px;
     font-size:17px;
     padding: 6px 30px;
 }
@@ -1870,6 +1870,8 @@ footer {
 .sign-form {
     background: #fff;
     padding: 50px;
+    width: 74%;
+    margin: 0 auto;
 }
 .sign-form h2{
     font-size:37px;
@@ -4031,6 +4033,7 @@ section.team h2.text-red {font-size: 28px;}
     }
     .sign-form {
         padding: 20px 20px;
+        width: 80%;
     }
     .flex-profile{display: block;}
     .flex-profile .flex-left{width:100% !important}
@@ -4058,7 +4061,16 @@ section.team h2.text-red {font-size: 28px;}
 .pr-50{
 	padding-right: 0;
 }
-    
+.sign-form {
+        padding: 20px 20px;
+        width: 98%;
+    }
+    .footer-top{
+		margin:0;
+	}
+	.mb-150{
+	height: 134px !important;
+}
 }
 @media screen and (max-width:480px) {
 	.headerTopPart li input[type="text"]{width:150px;}
@@ -4070,7 +4082,12 @@ section.team h2.text-red {font-size: 28px;}
 .pr-50{
 	padding-right: 0;
 }
-
+ .footer-top{
+		margin:0;
+	}
+.mb-150{
+	height: 134px !important;
+}
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
 width: 19px; height: 25px; background-repeat:  no-repeat;}
@@ -4255,12 +4272,12 @@ ul.uploadVideo {
 	font-size: 16px; line-break: 24px; color:#000; text-align: left; 
 }
 .mb-150{
-	height: 150px !important;
+	height: 150px;
 	width: 100%;
 	clear: both;
 }
 .mb-64{
-	height: 64px !important;
+	height: 64px;
 	width: 100%;
 	clear: both;
 }
