@@ -37,5 +37,4 @@ export class ArticlecatComponent implements OnInit {
       console.log('Something went wrong!');
     });
   }
-
 }
