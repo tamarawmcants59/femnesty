@@ -806,7 +806,7 @@ ul {
     width: 100%;
     height: auto;
     /*overflow: hidden;*/
-    padding: 80px 0
+    padding: 70px 0
 }
 
 .section h1 {
@@ -1081,7 +1081,7 @@ footer {
 .inner-banner {
     /*background: url(../images/inner-bg.jpg) center no-repeat;
     background-size: cover;*/
-    height: 500px;
+    height: 40vh;
     
 }
 
@@ -1098,7 +1098,7 @@ footer {
     flex-wrap: wrap;
     -ms-flex-align: center!important;
     align-items: center!important;
-    height: 650px;
+    height: 40vh;
 }
 
 .inner-banner .row h1 {
@@ -1877,7 +1877,7 @@ footer {
     font-size:37px;
 }
 .sign-form .text-danger,.inner-pages-holder form .text-danger{position: absolute;bottom:-20px}
-.inner-pages-holder{padding: 85px 0;}
+.inner-pages-holder{padding: 70px 0 !important;}
 .inner-pages-holder .btn.btn-primary{padding:12px 29px;}
 
 
@@ -3963,7 +3963,7 @@ textarea{resize: none}
 
 /**************** About us ****************/
 
-.new-about-content-area{padding: 100px 0}
+.new-about-content-area{padding: 70px 0}
 .font-15{font-size:15px !important}
 .font-26{font-size:26px !important}
 .mt-0{margin-top:0 !important}
@@ -4348,4 +4348,8 @@ ul.uploadVideo {
 .n-social .point{
 	width: 21px; height: 21px; position: relative; border-radius:100%; background: #f7f7f7; top: 45px; right: -30px;
 	color: #000; font-size: 10px; font-weight: 600; z-index: 100; text-align: center; line-height: 24px;
+}
+
+.article-page{
+	padding: 40px 0;
 }
