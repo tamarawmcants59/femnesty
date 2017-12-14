@@ -96,18 +96,19 @@ export class FindfriendsComponent implements OnInit {
       //console.log(friend_id);
       let requestJsonData={"user_id": this.loginUserId, "friend_id": friend_id};
       this.dataService.sendFrndRequest(requestJsonData).subscribe(data => {
-                  this.loading = false;
-                  if(data.Ack == '1'){
-                    this.successMsg='You have successfully send the friend request';
-                    this.submitSearchUser();
-                  }else{
-                    this.errorMsg='You have already send the friend request';
-                  }
-                  //console.log(data);
-                  //this.postform.reset();
+          this.loading = false;
+          //console.log(data);
+          if(data.Ack == '1'){
+            this.successMsg='You have successfully send the friend request';
+            this.submitSearchUser();
+          }else{
+            this.errorMsg='You have already send the friend request';
+          }
+          //console.log(data);
+          //this.postform.reset();
         },
         error => {
-          alert(error);
+          //alert(error);
         });
   }
   
