@@ -3668,7 +3668,7 @@ ul.connectionlist li .text-area p {
     display: flex;
     flex-wrap: no-wrap;
     margin-bottom: 15px;
-    min-height: 100px
+    min-height: 80px;
 }
 
 .search-list li .left-side {
@@ -3677,7 +3677,7 @@ ul.connectionlist li .text-area p {
     background-position: center center !important;
     width: 190px;
     position: relative;
-    height: 100px;
+    height: 82px;
 }
 
 .search-list li .left-side .image-title {
@@ -3691,7 +3691,7 @@ ul.connectionlist li .text-area p {
 }
 
 .search-list li .right-side {
-    padding: 10px 15px;
+    padding: 5px 15px 10px;
     flex-grow: 2;
     background: #fff;
     position: relative;
@@ -3710,6 +3710,7 @@ ul.connectionlist li .text-area p {
     letter-spacing: 1px;
     font-weight: 600;
     font-size: 14px;
+    margin-bottom: 3px !important;
 }
 
 .search-list li .right-side small.text {
@@ -3794,7 +3795,7 @@ ul.connectionlist li .text-area p {
     display: flex;
     width: 100%;
     padding-bottom: 0;
-    padding-top: 150px
+   
 }
 
 .contact-left {
@@ -3989,10 +3990,22 @@ section.team h2.text-red {font-size: 28px;}
 .MyGroups-list{padding:35px 40px; margin-bottom: 20px; background: #fff}
 .MyGroups-list h5{font-family: 'Montserrat', sans-serif; font-size:14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px}
 
-.MyGroups-list .search-list li .left-side{width:120px}
-.MyGroups-list .search-list li .right-side h4{font-size:17px; color:#000}
-.MyGroups-list .search-list li .s-desc{font-size:14px; color:#5b5b5b; margin-bottom: 20px}
-
+.MyGroups-list .search-list li .left-side{width:105px}
+.MyGroups-list .search-list li .right-side h4{font-size:16px; color:#000}
+.MyGroups-list .search-list li .s-desc{font-size:12px; color:#5b5b5b; margin-bottom: 3px}
+.MyGroups-list .search-list li .s-desc a.more{
+	font-size: 11px !important;
+}
+.MyGroups-list .search-list li .s-desc a.more {
+    margin-top: 5;
+    text-transform: inherit !important;
+    color: #d23545;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    letter-spacing: 1px;
+    font-size: 11px !important;
+}
 /*----------------------- 11-12-2017 -------------*/
 .fix-to-top{
 	position: fixed;
