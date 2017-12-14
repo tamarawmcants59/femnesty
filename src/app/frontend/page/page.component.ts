@@ -38,19 +38,21 @@ export class PageComponent implements OnInit {
         Validators.required
       ]]
     });
+
+    this.activatedRoute.params.subscribe((params: Params) => {
+        this.pageSlugName = params['slug'];
+        if(this.pageSlugName == 'contact-us'){
+        }else{
+          this.getPageDetails();
+        }
+        this.getSiteSettingData();
+    });
+      
   }
 
   ngOnInit() {
     //alert('hi');
-    this.activatedRoute.params.subscribe((params: Params) => {
-        this.pageSlugName = params['slug'];
-    });
-    if(this.pageSlugName == 'contact-us'){
-
-    }else{
-      this.getPageDetails();
-    }
-    this.getSiteSettingData();
+    
   }
   
   public getPageDetails(){

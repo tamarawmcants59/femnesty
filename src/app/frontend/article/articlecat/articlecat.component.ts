@@ -14,30 +14,28 @@ export class ArticlecatComponent implements OnInit {
   constructor(
     private _artcat_service:ArticleService,
     private activatedRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
+  ) { 
     this.activatedRoute.params.subscribe((params: Params) => {
         this.SlugName = params['slug'];
+        this.getCatwiseArticle();
     });
+  }
 
+  ngOnInit() {
+    
+  }
+
+  getCatwiseArticle(){
     this._artcat_service.getCatDetBySlug(this.SlugName).subscribe(data=>{
-        let details=data;
-        if (details.Ack=="1") {
-            this.articleCatData = details.ArticleCatBySlug[0];
-            this.articleListData = details.TopArticleByCat;
-            //console.log(this.articleListData)
-            return false;
-        }else{
-            return false;
-        }
-        
-      },
-      error => {
-        console.log('Something went wrong!');
+      let details=data;
+      if (details.Ack=="1") {
+          this.articleCatData = details.ArticleCatBySlug[0];
+          this.articleListData = details.TopArticleByCat;
       }
-    );
-
+    },
+    error => {
+      console.log('Something went wrong!');
+    });
   }
 
 }
