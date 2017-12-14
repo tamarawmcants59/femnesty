@@ -1,5 +1,5 @@
 .section h1 {
-    font-size: 54px;
+    font-size: 52px;
 }
 .mentor-partner h2{
     font-size: 34px;
@@ -7,3 +7,12 @@
 .mentor-partner h3 {
     font-size: 30px;
 }
+.bcome-mntr{
+	height: 40vh;
+	background-size: cover;
+	background-position: center;
+}
+.inner-banner .row{
+	height:40vh !important;
+}
+.mentor-partner{padding: 85px 0;}
