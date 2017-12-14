@@ -14,17 +14,11 @@
         <div class="books-tab">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#book1" data-toggle="tab" >All <span>(22)</span></a>
+                <li class="active">
+                    <a [routerLink]="['/enrichment/books']" >All <span>({{booksCatData.length}})</span></a>
                 </li>
-                <li><a href="#book2" data-toggle="tab" rel="popover"  id="popup1" data-placement="top">Professional Development <span>(10)</span></a>
-                </li>
-                <li><a href="#book3" role="tab" data-toggle="tab">Personal Development <span>(7)</span></a>
-                </li>
-                <li role="presentation"><a href="#book4" role="tab" data-toggle="tab">Leadership <span>(5)</span></a>
-                </li>
-                <li><a href="#book5" role="tab" data-toggle="tab">Relationships <span>(5)</span></a>
-                </li>
-                <li><a href="#book6" role="tab" data-toggle="tab">Motivational <span>(5)</span></a>
+                <li *ngFor="let catBook of booksCatListData">
+                    <a [routerLink]="['/enrichment/book_cat',catBook.slug]" > {{catBook.name}} <span>({{catBook.bookscount}})</span></a>
                 </li>
             </ul>
 
@@ -41,7 +35,7 @@
                             		<div class="text-center book-text">
 		                                <p>{{catEnrichment.author}}</p>
 		                                <h5>{{catEnrichment.title}}</h5>
-		                                <h5 class="text-red">Personal Development</h5>
+		                                <h5 class="text-red">{{catEnrichment.book_cat_name}}</h5>
 		                            </div>
                     			</div>
                     		</div>
@@ -61,7 +55,6 @@
                         </div>-->
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="book2">...</div>
             </div>
 
         </div>

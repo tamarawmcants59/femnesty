@@ -21,6 +21,11 @@ export class EnrichmentService {
     return this.apiService.get(`/enrichment/appbooksall`)
       .map(data => data);
   }
+
+  getBookCatList(){
+    return this.apiService.get(`/enrichment/appbookallcategory`).map(data => data);
+  }
+  
   getArticalListData(){
     return this.apiService.get(`/enrichment/appeventlist`)
       .map(data => data);
@@ -39,6 +44,10 @@ export class EnrichmentService {
       .map(data => data);
   }
   
+  getCatWiseBookListData(slug){
+    return this.apiService.get(`/enrichment/appbookslistorbyslug/${slug}`).map(data => data);
+  }
+
   getVideoDetBySlug(slug){
     return this.apiService.get(`/enrichment/appvideodetailsbyslug/${slug}`)
       .map(data => data);

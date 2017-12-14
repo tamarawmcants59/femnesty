@@ -13,6 +13,7 @@ export class BooksComponent implements OnInit {
   booksCatData=[];
   bookBnrImgLink='';
   enrichmentBookData=[];
+  booksCatListData=[];
   constructor( 
       private _book_service: EnrichmentService, 
       private sanitizer: DomSanitizer
@@ -59,7 +60,23 @@ export class BooksComponent implements OnInit {
         console.log('Something went wrong!');
       }
     );
-
+    this.getCatBookList();
 
   }
+
+  public getCatBookList() {
+    this._book_service.getBookCatList().subscribe(data => {
+      const details = data;
+      //console.log(details);
+      if (details.Ack == "1") {
+        this.booksCatListData = details.BooksAllCategory;
+      } else {
+
+      }
+    },
+    error => {
+
+    });
+  }
+
 }

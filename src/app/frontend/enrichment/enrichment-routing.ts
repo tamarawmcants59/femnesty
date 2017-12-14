@@ -9,6 +9,7 @@ import { VideodetailsComponent } from "./videos/videodetails.component";
 import { EventcatComponent } from "./events/eventcat.component";
 import { EventcatlistComponent } from "./events/eventcatlist.component";
 import { EventdetailsComponent } from "./events/eventdetails.component";
+import { BookcatComponent } from './books/bookcat.component';
 const routes: Routes = [
   {
     path: '',
@@ -39,13 +40,14 @@ const routes: Routes = [
     component: BookdetailsComponent,
     data: {
       title: 'Book Details'
-    }/*,
-    children: [
-      {
-        path: '',
-        loadChildren: './views/pages/pages.module#PagesModule',
-      }
-    ]*/
+    }
+  },
+  {
+    path: 'book_cat/:slug',
+    component: BookcatComponent,
+    data: {
+      title: 'Book Category'
+    }
   },
   {
     path: 'video_details/:slug',
