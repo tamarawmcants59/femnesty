@@ -83,7 +83,11 @@
                     </ul>
                     <ul class="nav navbar-nav navIcon">
                         <li ngbDropdown class="dropdown">
-                            <a ngbDropdownToggle class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a *ngIf="chatHeads && chatHeads.length == 0" class="dropdown-toggle">
+                                <i class="icon ion-chatboxes"></i>
+                                <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
+                            </a>
+                            <a *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownToggle class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon ion-chatboxes"></i>
                                 <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                             </a>
