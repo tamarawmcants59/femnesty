@@ -12,13 +12,13 @@
                 		  <h5 class="mt-0">MY GROUPS</h5>
                 		  <ul class="search-list">
 	                        <li *ngFor="let grpData of myGrpList">
-	                            <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
+	                            <a [routerLink]="['/group/details',grpData.group_uname]"><div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div></a>
 	                            <div class="right-side">
-	                              <h4>{{grpData.group_name}}</h4>
+	                              <h4><a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a></h4>
 	                              <!--<small class="text">{{grpData.short_desc}}</small>-->
 	                              <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-	                              <p class="font-weight-bold">By {{grpData.name}}</p>
-	                              <a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
+	                              <p class="txt-red">By {{grpData.name}}</p>
+	                              <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
 	                            </div>
 	                        </li>
 						        </ul>
@@ -27,13 +27,13 @@
                 		<h5 class="mt-0">TOP GROUPS</h5>
                 		<ul class="search-list">
 	                        <li *ngFor="let grpData of groupList">
-	                            <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
+	                            <a [routerLink]="['/group/details',grpData.group_uname]"><div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div></a>
 	                            <div class="right-side">
-	                              <h4>{{grpData.group_name}}</h4>
+	                              <h4><a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a></h4>
 	                              <!--<small class="text">{{grpData.short_desc}}</small>-->
 	                              <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-	                              <p class="font-weight-bold">By {{grpData.name}}</p>
-	                              <a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
+	                              <p class="txt-red">By {{grpData.name}}</p>
+	                              <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
 	                            </div>
 	                        </li>
 						</ul>
@@ -58,8 +58,14 @@
                     <div class="innerRightPart">
                       <h2>BROWSE GROUPS</h2>
                       <ul class="filter-reslt">
-                        <li>MY GROUPS  <span>({{myGrpList?.length}})</span></li>
-                        <li>TOP GROUPS  <span>({{groupList?.length}})</span></li>
+                      <li style="position: relative;">
+                      	<div class="form-group">
+                                <input class="form-control" placeholder="Search" type="text">
+                                <button type="submit"><i class="icon ion-ios-search"></i></button>
+                            </div>
+                      </li>
+                        <li>My Groups  <span>({{myGrpList?.length}})</span></li>
+                        <li>Top Groups  <span>({{groupList?.length}})</span></li>
                       </ul>
                     </div>
                     <div class="innerRightPart latest-article">

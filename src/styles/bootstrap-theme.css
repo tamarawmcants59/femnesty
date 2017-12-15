@@ -689,7 +689,7 @@ ul {
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 2px;
-    padding: 15px 35px;
+    padding: 12px 28px;
     border-radius: 40px
 }
 
@@ -1102,7 +1102,7 @@ footer {
 }
 
 .inner-banner .row h1 {
-    font-size: 46px;
+    font-size: 42px;
 }
 
 .about-content-area h1 {
@@ -1219,7 +1219,7 @@ footer {
 
 .article-page h3 {
     font-size: 28px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .form-area {
@@ -1227,7 +1227,7 @@ footer {
 }
 
 .article-page p {
-    height: 250px; font-size:15px;
+    height: 250px; font-size:14px;
     overflow: hidden;
 }
 
@@ -2190,7 +2190,7 @@ background: #fff !important;}
 
 .profDetails h2 {
     color: #202020;
-    font-size: 25px;
+    font-size: 22px;
     text-align: center;
     font-family: 'Sanchez', serif;
     margin:0;
@@ -2200,7 +2200,7 @@ background: #fff !important;}
 .profDetails p {
     font-family: 'Sanchez', serif;
     color: #bd1927;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     margin: 8px auto;
     padding-bottom: 15px;
@@ -2218,7 +2218,7 @@ background: #fff !important;}
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     color: #202020;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
 }
 
@@ -2700,16 +2700,16 @@ background: #fff !important;}
 
 .innerRightPart {
     background: #fff;
-    padding: 30px;
+    padding: 23px;
     margin-bottom: 20px;
 }
 
 .innerRightPart h2 {
-    font-size: 15px;
+    font-size: 12px;
     color: #000000;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    margin: 0 0 25px 0;
+    margin: 0 0 15px 0;
     padding: 0px;
     font-weight:600;
 }
@@ -3667,7 +3667,7 @@ ul.connectionlist li .text-area p {
 .search-list li {
     display: flex;
     flex-wrap: no-wrap;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     min-height: 80px;
 }
 
@@ -3745,9 +3745,9 @@ ul.connectionlist li .text-area p {
     display: block;
     padding: 10px 0;
     color: #222;
-    text-transform: uppercase;
-    font-family: "Montserrat", sans-serif;
     font-weight: 600;
+    font-size: 14px;
+    text-transform: inherit !important;
 }
 .filter-reslt li span {
     color: #666;
@@ -3764,6 +3764,33 @@ ul.connectionlist li .text-area p {
     color: #666;
 }
 
+
+.filter-reslt li input[type="text"] {
+    width: 257px;
+    height: 36px;
+    background: #f7f7f7;
+    border-radius: 40px;
+    padding: 0 20px;
+    border: 0px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.filter-reslt button {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    cursor: pointer;
+    background: none !important;
+    border: 0;
+    font-size: 24px;
+    color: #ccc;
+}
+.filter-resl .form-group{
+	margin-bottom: 10px !important;
+}
 .share-story {
     text-align: center;
 }
@@ -3772,13 +3799,13 @@ ul.connectionlist li .text-area p {
     color: #be1620;
     padding-bottom: 0;
     margin: 20px auto;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .share-story h1:after {
     content: none;
 }
-.share-story p{font-size:18px;font-weight: 600;line-height: 24px;}
+.share-story p{font-size:16px;font-weight: normal;line-height: 24px;}
 .share-story .btn-primary{padding: 13px 35px;margin-bottom:20px;}
 .group{border-bottom: 2px solid #f0f0f0 !important;}
 
@@ -3865,17 +3892,22 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .friend-box .friend-box-list a.btn.btn-primary{height: 25px;font-size: 12px;line-height: 25px;padding: 0 25px;}
 
 
-.latest-article h2{font-size:22px;font-family: 'Sanchez', serif;text-transform: capitalize;border-bottom:3px solid #000000;padding-bottom: 10px;margin-bottom: 15px}
+.latest-article h2{font-size:20px;font-family: 'Sanchez', serif;text-transform: capitalize;border-bottom:3px solid #000000;padding-bottom: 10px;margin-bottom: 15px;
+font-weight: normal;}
 .latest-article .hubMet.hubMet2 .img {
     border-radius: 0;
-    width: 100px;
-    height: 80px;
+    width: 103px;
+    height: 82px;
     float: left;
+    margin-bottom: 5px !important;
+}
+.latest-article .hubMet.hubMet2 .img:last-child{
+	margin-bottom: 0px !important;
 }
 .latest-article .hubMet.hubMet2{overflow: hidden;}
 .latest-article .article-text{float:right;width:calc(100% - 120px);}
-.latest-article .article-text p{font-size:14px;font-weight: 600}
-.latest-article .article-text a{font-size:12px;font-weight: 600}
+.latest-article .article-text p{font-size:13px;font-weight: 600}
+.latest-article .article-text a{font-size:11px;font-weight: normal}
 
 
 .ulList .menu{width:100%}
@@ -3988,10 +4020,16 @@ section.team h2.text-red {font-size: 28px;}
 /**************** Groups ****************/
 
 .MyGroups-list{padding:35px 40px; margin-bottom: 20px; background: #fff}
-.MyGroups-list h5{font-family: 'Montserrat', sans-serif; font-size:14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px}
+.MyGroups-list h5{font-family: 'Montserrat', sans-serif; font-size:12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px}
 
 .MyGroups-list .search-list li .left-side{width:105px}
-.MyGroups-list .search-list li .right-side h4{font-size:16px; color:#000}
+.MyGroups-list .search-list li .right-side h4{font-size:16px; color:#000; font-weight:  normal;}
+.MyGroups-list .search-list li .right-side h4 a{
+	color: #000;
+}
+.txt-red{
+	color:red; font-size: 11px !important; margin-bottom: 0 !important;
+}
 .MyGroups-list .search-list li .s-desc{font-size:12px; color:#5b5b5b; margin-bottom: 3px}
 .MyGroups-list .search-list li .s-desc a.more{
 	font-size: 11px !important;
@@ -4010,6 +4048,8 @@ section.team h2.text-red {font-size: 28px;}
 .fix-to-top{
 	position: fixed;
 	top: 80px;
+	padding: 20px !important;
+	width:255px !important;
 }
 
 
