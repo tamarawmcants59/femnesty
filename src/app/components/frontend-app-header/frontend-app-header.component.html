@@ -108,7 +108,7 @@
                     </ul>
                     <ul class="nav navbar-nav user-account">
                         <li class="show-on-hover">
-                            <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/profile']" class="dropdown-toggle" data-toggle="dropdown">
+                            <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
                                 <span class="colorWhite">{{currentUserDet.first_name}} <i class="icon ion-chevron-down"></i></span>
                             </a>
@@ -120,7 +120,7 @@
                                 <li class="images">
                                     <img src="assets/images/down-arrow.png" alt="">
                                 </li>
-                                <li><a [routerLink]="['/user/profile']">My Profile</a></li>
+                                <li><a [routerLink]="['/user/edit_profile/activity']">My Profile</a></li>
                                 <li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
                                 <li class="divider"></li>
                                 <li><a [routerLink]="['/company']">Create company</a></li>

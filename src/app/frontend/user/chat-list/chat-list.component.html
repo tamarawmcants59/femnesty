@@ -36,9 +36,9 @@
                                     <p class="time">{{chatHead.created | timeAgo}}</p>
                                 </div>
                             </li>
-                            <!-- <li>
-                                <p class="see-all"><a href="">See All</a></p>
-                            </li> -->
+                            <li *ngIf="chatHeads.length==0">
+                                <p>No message found</p>
+                            </li> 
                         </ul>
                     </div>
                 </div>

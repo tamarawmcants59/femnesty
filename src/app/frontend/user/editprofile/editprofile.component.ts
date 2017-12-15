@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
 import { UserService } from "../user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
@@ -23,6 +23,7 @@ export class EditprofileComponent implements OnInit {
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
+  userTabActiveStr: string = '';
   public loading = false;
   public loginUserDet: Object = {};
   public userPostList = [];
@@ -139,6 +140,14 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit() {
     //activeTab: string = 'activity';
+    this.route.params.subscribe((params: Params) => {
+        this.userTabActiveStr = params['type'];
+        if(this.userTabActiveStr != ''){
+          this.activeTab=this.userTabActiveStr;
+        }else{
+          this.activeTab='activity';
+        }
+    });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.groupPostDetData = {activitytype:'', activityid:''};
     //console.log(this.route.snapshot);
