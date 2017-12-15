@@ -59,4 +59,8 @@ export class FrontendService {
   getUserFrndListById(form_data) {
     return this.apiService.post(`/users/appuserfriendslistbyid`,form_data).map(data => data);
   }
+
+  getallTeamList(){
+    return this.apiService.get(`/enrichment/appallteamlist`).map(data => data);
+  }
 }

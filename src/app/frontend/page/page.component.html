@@ -79,14 +79,15 @@
         <h2 class="text-red mt-0">Femnesty Team</h2>
         <div class="row mt-50">
             <div class="col-md-7">
-                <div class="row">
+                    
+                <div class="row" *ngFor="let teamData of teamListData">
                     <div class="col-sm-4">
-                        <img src="assets/images/team-1.jpg" alt="" class="img-responsive">
+                        <img [src]="teamData.image" alt="" class="img-responsive">
                     </div>
                     <div class="col-sm-8">
-                        <h3 class="text-red font-26 mb-2">Erik Sandberg</h3>
-                        <h5 class="text-gray mt-0 font-15">Graphic & Web Designer</h5>
-                        <p class="font-15">Graphic and Web designer with more than 5 year’s experience and an eye for creative and user friendly design. Specialised within e-coommerce and front end design.</p>
+                        <h3 class="text-red font-26 mb-2">{{teamData.name}}</h3>
+                        <h5 class="text-gray mt-0 font-15">{{teamData.qualification}}</h5>
+                        <p class="font-15">{{teamData.message}}</p>
                     </div>
                 </div>
                 <div class="row mt-50">

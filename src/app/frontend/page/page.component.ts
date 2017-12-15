@@ -14,6 +14,8 @@ export class PageComponent implements OnInit {
   public getPageSiteSetData:any;
   public successMsg:string= '';
   public errorMsg:string= '';
+  public teamListData=[];
+
   constructor(
     private _page_service: FrontendService,
     private activatedRoute: ActivatedRoute,
@@ -46,6 +48,7 @@ export class PageComponent implements OnInit {
           this.getPageDetails();
         }
         this.getSiteSettingData();
+        this.getAllTeamListData();
     });
       
   }
@@ -79,6 +82,19 @@ export class PageComponent implements OnInit {
         //console.log(data);
         if (data.Ack=="1") {
             this.getPageSiteSetData = data.SiteSettings[0];
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      }
+    ); 
+  }
+  
+  public getAllTeamListData(){
+    this._page_service.getallTeamList().subscribe(data=>{
+        //console.log(data);
+        if (data.Ack=="1") {
+            this.teamListData = data.AllmentorList;
         }
       },
       error => {

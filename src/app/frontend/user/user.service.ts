@@ -355,4 +355,8 @@ export class UserService {
   submitNewsLetter(form_data){
     return this.apiService.post(`/users/appusernewsletter`,form_data ).map(data => data);
   }
+
+  teampostData(form_data) {
+    return this.apiService.post(`/enrichment/appaddteam`,form_data).map(data => data);
+  }
 }
