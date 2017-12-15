@@ -60,7 +60,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'profile',
+    path: 'edit_profile/:type',
     //canActivate: [AuthGuard],
     //component: DashboardComponent,
     data: {
