@@ -13,6 +13,8 @@ import { MentorComponent } from "./mentor/mentor.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { GroupChatComponent } from "./group-chat/chat.component";
 import { AllphotoComponent } from "./allphoto/allphoto.component";
+import { TeamComponent } from './team/team.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -33,6 +35,13 @@ const routes: Routes = [
     component: SignupComponent,
     data: {
       title: 'Signup'
+    }
+  },
+  {
+    path: 'team',
+    component: TeamComponent,
+    data: {
+      title: 'Team'
     }
   },
   {

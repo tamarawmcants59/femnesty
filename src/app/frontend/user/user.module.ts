@@ -28,6 +28,7 @@ import {
   LinkedinLoginProvider
 } from 'ng4-social-login';
 import { AllphotoComponent } from './allphoto/allphoto.component';
+import { TeamComponent } from './team/team.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -80,7 +81,8 @@ export function provideConfig() {
     MentorComponent, 
     NotificationComponent,
     GroupChatComponent,
-    AllphotoComponent
+    AllphotoComponent,
+    TeamComponent
     //ImageCropperComponent
   ],
   providers: [
