@@ -19,7 +19,7 @@
                   <div class="profDes">
                       <h2 class="text-center">{{otherProfileDet?.name}}</h2>
                       <p class="text-center">{{otherProfileDet?.bio}}</p>
-                      <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
+                      <p class="text-center addressP" *ngIf="otherProfileDet?.address">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
                       <p class="text-center">
                             <a *ngIf="checkIsFriend" [routerLink]="['/user/chat',otherProfileDet?.id]" class="btn btn-primary">Chat With {{otherProfileDet?.first_name}}</a>  
                             <button *ngIf="otherProfileDet?.id!=isloginUserId && !checkIsFriend" type="button" class="btn btn-primary" (click)="sendFriendRequest(otherProfileDet?.id)">Add Friend</button>

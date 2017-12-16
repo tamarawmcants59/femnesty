@@ -4,7 +4,7 @@
     </div>
     <div class="profDetails">
         <h2>{{currentUserLoginDet.name}}</h2>
-        <p>{{currentUserLoginDet.address}}, {{currentUserLoginDet.city}}<br> {{currentUserLoginDet.state}}
+        <p *ngIf="currentUserLoginDet.address">{{currentUserLoginDet.address}}, {{currentUserLoginDet.city}}<br> {{currentUserLoginDet.state}}
         </p>
     </div>
     <div class="messagePart">

@@ -18,8 +18,7 @@ import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
 import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
 import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
 import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
-//import { CeiboShare } from 'ng2-social-share';
-import { CeiboShare } from 'ng2-social-share';
+import { EmojiPickerModule } from 'angular2-emoji-picker';
 
 @NgModule({
     declarations: [
@@ -32,7 +31,6 @@ import { CeiboShare } from 'ng2-social-share';
         GroupRightbarComponent,
         CompanyRightbarComponent,
         ImageCropperComponent,
-        CeiboShare
     ],
     imports: [
         CommonModule,
@@ -40,8 +38,7 @@ import { CeiboShare } from 'ng2-social-share';
         FormsModule,
         ReactiveFormsModule,
         ApplicationPipes,
-        //ShareButtonModule.forRoot(),
-        //CeiboShare,
+        EmojiPickerModule.forRoot(),
         NgbModule
     ],
     exports: [
@@ -54,7 +51,6 @@ import { CeiboShare } from 'ng2-social-share';
         GroupRightbarComponent,
         CompanyRightbarComponent,
         ImageCropperComponent,
-        CeiboShare
     ],
     providers: [
         SocialService

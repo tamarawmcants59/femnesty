@@ -11,7 +11,7 @@
                         <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
                         <div class="change-img">
                             <i class="fa fa-camera"></i>
-                            <div class="txt">Upload Profile Photo</div>
+                            <div class="txt">Upload Banner Photo</div>
                         </div>
                         <input type="file" class="change-img-input" (change)="fileChangeListenerCover($event)">
                         <div class="addCoverPhoto">
@@ -58,7 +58,7 @@
                     <div class="profDes">
                         <h2 class="text-center">{{loginUserDet.name}}</h2>
                         <p class="text-center">{{loginUserDet.bio}}</p>
-                        <p class="text-center addressP">{{loginUserDet.address}}, {{loginUserDet.city}}</p>
+                        <p class="text-center addressP" *ngIf="loginUserDet.address">{{loginUserDet.address}}, {{loginUserDet.city}}</p>
                     </div>
                     <div class="tabPart">
                         <ul class="nav nav-pills">
