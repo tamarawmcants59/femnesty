@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
+import { EmojiPickerOptions } from 'angular2-emoji-picker';
+import { EmojiPickerAppleSheetLocator } from '../../../sheets';
 
 @Component({
   selector: 'app-post-create',
@@ -26,7 +28,9 @@ export class PostCreateComponent implements OnInit {
     private builder: FormBuilder,
     private dataService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private emojiPickerOptions: EmojiPickerOptions, 
+    private _el: ElementRef
   ) {
     this.postform = builder.group({
       description: ['', [
@@ -44,17 +48,36 @@ export class PostCreateComponent implements OnInit {
       group_type: ['', [ ]],
       group_id: ['', [ ]]
     });
+
+    this.emojiPickerOptions.setEmojiSheet({
+      url: 'assets/images/sheet_apple_32.png',
+      locator: EmojiPickerAppleSheetLocator
+    });
   }
 
   ngOnInit() {
     //console.log(this.postType.activitytype);
   }
 
+  handleSelection($event){
+    //console.log($event.char);
+    this.postform.controls['description'].setValue(this.postform.controls['description'].value+$event.char);
+    //console.log('selection handle log:',this.postform.controls['description'].value+$event.char);
+    //console.log($event);
+  }
+  
+  /*handleCaretChange($event){
+    console.log($event);
+    //this.postform.controls['description'].setValue(this.postform.controls['description'].value+$event.char);
+    //console.log(this.postform.controls['description'].value+$event.char);
+    //return false;
+  }*/
+
   public submitPost() {
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const result = {},
-      userValue = this.postform.value;
+    userValue = this.postform.value;
     userValue.user_id = loginUserId;
     userValue.file_name = this.postImgData;
     //console.log(userValue);

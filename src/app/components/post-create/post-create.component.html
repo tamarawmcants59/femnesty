@@ -4,7 +4,7 @@
             <!--<strong>Success: </strong>-->{{successMsg}}
         </div>
     </div>
-    <form class="" [formGroup]="postform" (ngSubmit)="submitPost(postform.value)" #postForm="ngForm">
+    <form class="" [formGroup]="postform" #postForm="ngForm">
         <input type="hidden" formControlName="group_type" [(ngModel)]="postType.activitytype">
         <input type="hidden" formControlName="group_id" [(ngModel)]="postType.activityid">
         <div class="col-md-12" *ngIf="showPostImgDive">
@@ -14,7 +14,28 @@
         </div>
         <div class="textarea">
             <div class="form-group">
+                <!--<emoji-input
+                    [(model)]="description"
+                    [textArea]="{cols: 40, rows: 5}"
+                    [onEnter]="onEnterFunction"
+                    [popupAnchor]="'bottom'"
+                    (setPopupAction)="setPopupAction($event)">
+                </emoji-input>
+                <emoji-input
+                  [(model)]="description"
+                  [textArea]="{cols: 40, rows: 5}"
+                  [popupAnchor]="'bottom'"
+                  (setPopupAction)="setPopupAction($event)">
+                </emoji-input>-->
+                
                 <textarea class="form-control" rows="5" id="comment" formControlName="description" placeholder="Share your thoughts..."></textarea>
+                <i
+                (click)="toggled = !toggled"
+                [(emojiPickerIf)]="toggled"
+                [emojiPickerDirection]="'bottom'"
+                [emojiPickerPreserveSelection]="true || false"
+                [emojiPickerAutofocus]="true || false"
+                (emojiPickerSelect)="handleSelection($event)" class="fa fa-smile-o" style="font-size: 26px;"></i>
                 <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Thoughts Required</div>
             </div>
         </div>
@@ -39,7 +60,7 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid">Post</button>
+                <button type="submit"(click)="submitPost(postform.value)" class="btn btn-primary" [disabled]="!postForm.valid">Post</button>
             </div>
         </div>
     </form>

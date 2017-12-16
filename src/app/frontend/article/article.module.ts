@@ -11,6 +11,7 @@ import { ArticlecatComponent } from './articlecat/articlecat.component';
 import { ArticlecatwiselistComponent } from './articlecat/articlecatwiselist.component';
 import { ArticledetailsComponent } from './articlecat/articledetails.component';
 import { ApplicationPipes } from "../../application-pipe.module";
+//import { CeiboShare } from 'ng2-social-share';
 
 @NgModule({
   imports: [
@@ -20,7 +21,9 @@ import { ApplicationPipes } from "../../application-pipe.module";
     ApplicationPipes
   ],
   //declarations: [ArticleComponent, TruncatePipe, SafePipe], 
-  declarations: [ArticleComponent, ArticlecatComponent, ArticlecatwiselistComponent, ArticledetailsComponent], 
+  declarations: [ArticleComponent,
+    //CeiboShare, 
+    ArticlecatComponent, ArticlecatwiselistComponent, ArticledetailsComponent], 
   //providers: [ApiService,ArticleService,JwtService]
   providers: [ArticleService]
 })

@@ -4,6 +4,7 @@ import { MentorshipRouting } from "./mentorship-routing";
 import { MentorshipComponent } from './mentorship.component';
 import { MentorshipdetailsComponent } from './mentorshipdetails/mentorshipdetails.component';
 import { UserService } from "../user/user.service";
+import { CeiboShare } from 'ng2-social-share';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { UserService } from "../user/user.service";
   ],
   declarations: [
     MentorshipComponent, 
-    MentorshipdetailsComponent
+    MentorshipdetailsComponent,
+    CeiboShare
   ],
   providers: [UserService]
 })

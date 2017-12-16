@@ -8,20 +8,18 @@
                 <div>
                     <h3 class="text-red">{{articleData.title}}</h3>
                     <p class="text-gray">Article by {{articleData.author_name}}</p>
-                    <!--<ul class="social-link mb-30">
-                        <li>
-                            <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
-                             <span>5</span>
-                        </li>
-                        <li>
-                            <a href="#" class="linked-bg"><i class="fa fa-linkedin"></i></a>
-                            <span>5</span>
-                        </li>
-                        <li>
-                            <a href="#" class="twitter-bg"><i class="ion-social-twitter"></i></a>
-                            <span>5</span>
-                        </li>
-                    </ul>-->
+                    <ul class="n-social mb-30">
+                    	<li ceiboShare  [facebook]="{u: repoUrl}">
+                    		<!--<div class="point">5</div>-->
+                    		<img src="assets/images/facebook.png" />
+                    	</li>
+                    	<li ceiboShare  [linkedIn]="{url:repoUrl, text:articleData.short_desc}">
+                    		<img src="assets/images/linkedin.png" />
+                    	</li>
+                    	<li ceiboShare  [twitter]="{url:repoUrl, text:articleData.short_desc}">
+                    		<img src="assets/images/twitter.png" />
+                    	</li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-8">
