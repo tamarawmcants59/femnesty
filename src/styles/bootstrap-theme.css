@@ -663,7 +663,7 @@ fieldset[disabled] .btn-danger.active {
 
 html,
 body {
-    font-family: 'Sanchez', serif;
+    font-family: 'Sanchez' !important;
     font-weight: 400;
     height: 100%;
     color:#000;
@@ -1252,9 +1252,10 @@ footer {
 }
 
 .books-tab .nav-tabs>li a {
-    font-size: 17px;
+    font-size: 16px;
     color: #202020;
     position: relative;
+    font-weight: 500;
 }
 
 .books-tab .nav-tabs>li a:after {
@@ -1284,7 +1285,7 @@ footer {
 }
 
 .book-text {
-    padding: 15px 7px;
+    padding: 15px 7px 0;
 }
 
 
@@ -1619,6 +1620,7 @@ footer {
     .banner h1 {
         font-size: 35px;
         line-height: 47px;
+        font-family: 'Sanchez' !important;
     }
     .section h1 {
         font-size: 35px;
@@ -2109,7 +2111,7 @@ border: 0;}
 .navIcon li a{padding: 0 !important;display: block;text-align: center;}
 .navIcon li a i {
     background: transparent;
-    color: #000;
+    color: #fff;
     font-size: 26px;
     text-align: center;
     line-height: 64px;
