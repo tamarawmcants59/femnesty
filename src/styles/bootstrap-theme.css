@@ -1107,16 +1107,18 @@ footer {
 
 .about-content-area h1 {
     line-height: 1.3; margin-top: 0;
-    font-size: 24px;
+    font-size: 25px;
     color: #000;
 }
 
 .about-content-area p {
     line-height: 1.6;
     margin-bottom: 30px;
-    font-size: 16px;
+    font-size: 14px;
 }
-
+.f-w-600{
+	font-weight: 600;
+}
 .about-content-area p a {
     color: #000;
     font-weight: 700;
@@ -1129,7 +1131,9 @@ footer {
 .pic-icon {
     position: relative;
 }
-
+.pic-icon img{
+	width: 100%;
+}
 .pic-logo-icon {
     position: absolute;
     top: 0;
@@ -3437,7 +3441,12 @@ ul.uploadVideo {
 .chat-holder ul li.even {
     flex-direction: row-reverse
 }
-
+.right-section{
+	flex-direction: row-reverse;
+}
+.right-section .text-area h5 {
+    background: #f7f7f7;
+}
 .chat-holder ul li.even .image-area {
     margin-right: 0px;
     margin-left: 10px
@@ -4004,6 +4013,7 @@ textarea{resize: none}
 
 .new-about-content-area{padding: 70px 0}
 .font-15{font-size:15px !important}
+.font-15{font-size:14px !important}
 .font-26{font-size:26px !important}
 .mt-0{margin-top:0 !important}
 .mb-0{margin-bottom:0 !important}
@@ -4377,6 +4387,7 @@ ul.uploadVideo {
 .d-reviews{
 	margin: 10px 0; overflow: hidden; padding: 25px; border-bottom: solid 2px #f7f7f7; border-top: solid 2px #f7f7f7;
 }
+.d-reviews p span i{ font-size: 24px !important;}
 .d-reviews h4{
 	font-size: 16px; font-weight: 600; color: #000; margin: 5px 0 !important;
 }
@@ -4417,4 +4428,12 @@ ul.uploadVideo {
 
 .article-page{
 	padding: 40px 0;
+}
+
+.star-icon{
+	font-size:29px !important;
+}
+
+.f-founder img{
+	width: 100%;
 }
