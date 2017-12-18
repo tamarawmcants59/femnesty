@@ -11,16 +11,19 @@ import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginP
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
+  public forgotForm: FormGroup;
   public email: AbstractControl;
   public password: AbstractControl;
+  public forgotemail: AbstractControl;
   public submitted: boolean = false;
   public returnUrl: string;
   public errorMsg: string = '';
+  public successMsg: string = '';
   public loading = false;
   public isLoggedIn: any;
   private socialUser: SocialUser;
   private loggedIn: boolean;
-
+  public pageHeading: string = 'Login';
 
   constructor(
     private builder: FormBuilder,
@@ -32,6 +35,10 @@ export class LoginComponent implements OnInit {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(3)])]
+    });
+    
+    this.forgotForm = builder.group({
+      'email': ['', Validators.compose([Validators.required, Validators.email])],
     });
 
     this.email = this.form.controls['email'];
@@ -87,7 +94,35 @@ export class LoginComponent implements OnInit {
       alert('INVALID FORM');
     }
   }
+  
+  public checkForgotPws(values: Object): void {
+    this.submitted = true;
+    this.loading = true;
+    if (this.forgotForm.valid) {
+      this.loginService.userForgotPwsLink(values).subscribe(data => {
+          //console.log(data);
+          this.errorMsg = '';
+          this.successMsg = '';
+          if (data.Ack == 1) {
+            this.successMsg = data.msg;
+            this.loading = false;
+          } else {
+            this.errorMsg = data.msg;
+            this.loading = false;
+          }
+        },
+        error => {
+          this.loading = false;
+        });
+    } else {
+      alert('INVALID FORM');
+    }
+  }
 
+  userForgotPws(){
+    this.pageHeading='Forgot Password';
+  }
+  
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }

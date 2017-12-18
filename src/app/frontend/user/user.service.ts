@@ -359,4 +359,8 @@ export class UserService {
   teampostData(form_data) {
     return this.apiService.post(`/enrichment/appaddteam`,form_data).map(data => data);
   }
+  
+  userForgotPwsLink(form_data) {
+    return this.apiService.post(`/users/appforgotpassword`,form_data).map(data => data);
+  }
 }
