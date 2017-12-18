@@ -14,6 +14,7 @@ import { NotificationComponent } from "./notification/notification.component";
 import { GroupChatComponent } from "./group-chat/chat.component";
 import { AllphotoComponent } from "./allphoto/allphoto.component";
 import { TeamComponent } from './team/team.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,13 @@ const routes: Routes = [
     component: SignupComponent,
     data: {
       title: 'Signup'
+    }
+  },
+  {
+    path: 'forgot_password/:uid',
+    component: ForgotpasswordComponent,
+    data: {
+      title: 'Forgot Password'
     }
   },
   {

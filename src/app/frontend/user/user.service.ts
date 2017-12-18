@@ -363,4 +363,8 @@ export class UserService {
   userForgotPwsLink(form_data) {
     return this.apiService.post(`/users/appforgotpassword`,form_data).map(data => data);
   }
+  
+  userChangePassword(form_data) {
+    return this.apiService.post(`/users/appupdatepassword`,form_data).map(data => data);
+  }
 }

@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit {
     this.isLoggedIn=localStorage.getItem("isLoggedIn");
     if(this.isLoggedIn == 1){
       //this.router.navigateByUrl(this.returnUrl);
-      this.router.navigateByUrl('/user/profile');
+      this.router.navigateByUrl('/user/edit_profile/activity');
     }
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.authService.authState.subscribe((user) => {
