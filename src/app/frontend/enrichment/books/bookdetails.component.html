@@ -3,7 +3,8 @@
       <div class="row">
           <div class="col-md-4 col-book-pic">
                 <img [src]="bookDetData.image_url" alt="" class="img-responsive" style="max-width:100%">
-                <!--<ul class="social-link mt-30 text-center">
+				
+				<!--<ul class="social-link mt-30 text-center">
                     <li>
                         <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
                     </li>
@@ -14,11 +15,25 @@
                         <a href="#" class="twitter-bg"><i class="ion-social-twitter"></i></a>
                         <span>5</span>
                     </li>
-                </ul>-->
-                <div class="book-rating">
-                	<span><i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i></span>
-                </div>
-          </div>
+				</ul>-->
+				<div class="book-rating" style="clear: both;">
+					<rating [(ngModel)]="bookDetData.avg_rating" [readonly]="true"></rating>
+                	<!--<span><i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i></span>-->
+				</div>
+				<!--<div class="row" style="text-align: center;">
+					<ul class="n-social mt-30">
+						<li ceiboShare  [facebook]="{u: repoUrl}">
+							<img src="assets/images/facebook.png" />
+						</li>
+						<li ceiboShare  [linkedIn]="{url:repoUrl, text:bookDetData.description}">
+							<img src="assets/images/linkedin.png" />
+						</li>
+						<li ceiboShare  [twitter]="{url:repoUrl, text:bookDetData.description}">
+							<img src="assets/images/twitter.png" />
+						</li>
+					</ul>
+				</div>-->
+		  </div>
           <div class="col-md-8">
               <div class="extra-left-pad">
               	<h2 class="text-red">{{bookDetData.title}}</h2>
@@ -27,38 +42,43 @@
 	              <div class="row">
 	              	<div class="col-md-12 mt-30" [innerHTML]="bookDetData.description"></div>
 	              </div>
-	              <div class="d-reviews">
-	              	<div class="row">
+	              <div class="d-reviews" *ngIf="ratListData.length > 0">
+	              	<div class="row" *ngFor="let cmtList of ratListData">
 	              		<div class="col-md-3 pml-0">
 	              			<p>
-	              				<i _ngcontent-c0="" class="ion-ios-star"></i>
-	              				<i _ngcontent-c0="" class="ion-ios-star"></i>
-	              				<i _ngcontent-c0="" class="ion-ios-star"></i>
-	              				<i _ngcontent-c0="" class="ion-ios-star"></i>
-	              				<i _ngcontent-c0="" class="ion-ios-star"></i>
+								<rating [(ngModel)]="cmtList.rating" [readonly]="true"></rating>	
 	              			</p>
-	              			<h4>Erik Sandberg</h4>
-	              			<p><span>14 August 2017</span></p>
+	              			<h4>{{cmtList.name}}</h4>
+	              			<p><span>{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy'}}</span></p>
 	              		</div>
 	              		<div class="col-md-9 pml-0">
-	              			<p class="mt-15">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
-eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	              			<p class="mt-15">{{cmtList.comment}}</p>
 	              		</div>
 	              	</div>
 	              </div>
 	              <div class="leave-rvw mt-30">
-	              	<h4 class="mb-30">Leave a review</h4>
-	              	<form class="form-area">
+					  <h4 class="mb-30">Leave a review</h4>
+					  <div class="row" *ngIf="(successMsg != '')">
+							<div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+								{{successMsg}}
+							</div>
+						</div>
+	              	<form class="form-area" [formGroup]="postform" (ngSubmit)="submitPost()" #postForm="ngForm">
 	              		<div class="form-group" style="margin-bottom: 15px">
-	              			<input type="text" class="form-control" placeholder="Name"/>
+							<input type="text" class="form-control" placeholder="Name" formControlName="name"/>
+							<div class="text-danger" *ngIf="!postform.controls['name'].valid && postform.controls['name'].touched">Name Required</div>  
 	              		</div>
 	              		<div class="form-group">
-	              			<textarea class="form-control" placeholder="Review" rows="5" style="padding-top: 15px; padding-bottom: 15px; resize: none"></textarea>
+							  <textarea class="form-control" formControlName="comment" placeholder="Review" rows="5" style="padding-top: 15px; padding-bottom: 15px; resize: none"></textarea>
+							  <div class="text-danger" *ngIf="!postform.controls['comment'].valid && postform.controls['comment'].touched">Review Required</div>
 	              		</div>
 	              		<div class="form-group">
-	              			<p class="mb-0 ur-rating">Your Rating: <span><i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i></span></p>
+	              			<p class="mb-0 ur-rating">Your Rating:
+								<rating formControlName="rating" [required]="true" [float]="true"></rating>
+							</p>
+							<div class="text-danger" *ngIf="!postform.controls['rating'].valid && postform.controls['rating'].touched">Rating Required</div>
 	              		</div>
-	              		<input type="submit" class="btn btn-primary btn-blank" value="send review"/>
+	              		<input type="submit" [disabled]="!postForm.valid" class="btn btn-primary btn-blank" value="Send review"/>
 	              	</form>
 	              </div>
               </div>

@@ -71,7 +71,14 @@ export class EnrichmentService {
     return this.apiService.get(`/enrichment/eventDetailsBySlug/${slug}`)
       .map(data => data);
   }
+  
+  postRatingData(form_data){
+    return this.apiService.post(`/enrichment/appbookaddrating`,form_data ).map(data => data);
+  }
 
+  getRatingData(form_data){
+    return this.apiService.post(`/enrichment/appbookratinglist`,form_data ).map(data => data);
+  }
   /*add(slug, payload): Observable<Enrichment> {
     return this.apiService
     .post(
