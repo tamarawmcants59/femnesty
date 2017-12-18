@@ -2,10 +2,14 @@
     <div class="container">
         <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
         <div class="sign-form">
-            <h2>Login</h2>
+            <h2>{{pageHeading}}</h2>
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-                <strong>Error!</strong> {{errorMsg}}
+                <strong>Error!</strong> {{errorMsg}}.
             </div>
+            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                <strong>Success!</strong> {{successMsg}}.
+            </div>
+            <div *ngIf="pageHeading == 'Login'">
             <div class="sign-up-social">
                 <span>Connect with: </span>
                 <ul class="social-link mt-30 text-center">
@@ -32,7 +36,7 @@
                     <div class="text-danger" *ngIf="!password.valid && password.touched">Password Required</div>
                 </div>
                 <div class="form-group col-md-12">
-                	<p><label><a class="text-red" href="">Forgot Your Password?</a></label></p>
+                	<p><label><a class="text-red" (click)="userForgotPws()">Forgot Your Password?</a></label></p>
                 </div>
                 <div class="form-group col-md-12">
                     <button class="btn btn-primary" [disabled]="!loginForm.valid" type="submit">Submit</button>
@@ -43,6 +47,25 @@
                     </p>
                 </div>
             </form>
+            </div>
+            <div *ngIf="pageHeading != 'Login'">
+                <form [formGroup]="forgotForm" (ngSubmit)="checkForgotPws(forgotForm.value)" class="row form-area" #forgotPwsForm="ngForm">    
+                    <div class="form-group col-md-6">
+                        <input type="text" placeholder="Email Address" class="form-control" formControlName="email">
+                        <div class="text-danger" *ngIf="(!forgotForm.controls['email'].valid) && forgotForm.controls['email'].touched">
+                            Please enter the correct email, this email not valid.
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary" [disabled]="!forgotPwsForm.valid" type="submit">Submit</button>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <p>
+                            <label>Not a Member <a class="text-red" [routerLink]="['/user/signup']">Sign Up</a></label>
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
 		  <a [routerLink]="['/']" style="width: 220px;" class="btn btn-back">BACK TO HOME</a>
     </div>
