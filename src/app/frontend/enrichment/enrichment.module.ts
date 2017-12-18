@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EnrichmentComponent } from './enrichment.component';
 import { EnrichmentRouting } from './enrichment-routing';
 import { BooksComponent } from './books/books.component';
@@ -18,13 +19,15 @@ import { EventcatComponent } from './events/eventcat.component';
 import { EventcatlistComponent } from './events/eventcatlist.component';
 import { EventdetailsComponent } from './events/eventdetails.component';
 import { BookcatComponent } from './books/bookcat.component';
-
+import {RatingModule} from "ng2-rating";
 @NgModule({
   imports: [
     CommonModule,
-    //HttpModule,
+    RatingModule,
     EnrichmentRouting,
-    ApplicationPipes
+    ApplicationPipes,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     EnrichmentComponent, 
