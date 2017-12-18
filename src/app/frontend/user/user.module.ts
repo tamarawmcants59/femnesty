@@ -29,6 +29,7 @@ import {
 } from 'ng4-social-login';
 import { AllphotoComponent } from './allphoto/allphoto.component';
 import { TeamComponent } from './team/team.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -83,7 +84,8 @@ export function provideConfig() {
     NotificationComponent,
     GroupChatComponent,
     AllphotoComponent,
-    TeamComponent
+    TeamComponent,
+    ForgotpasswordComponent
     //ImageCropperComponent
   ],
   providers: [
