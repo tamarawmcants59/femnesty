@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   public email: AbstractControl;
   public password: AbstractControl;
   public submitted: boolean = false;
-  returnUrl: string;
-  errorMsg: string = '';
+  public returnUrl: string;
+  public errorMsg: string = '';
   public loading = false;
   public isLoggedIn: any;
   private socialUser: SocialUser;

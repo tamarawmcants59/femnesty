@@ -19,7 +19,6 @@ export class MentorshipComponent implements OnInit {
 
   public getMentorshipList() {
     this.dataService.getAllMentorshipList().subscribe(data => {
-        console.log(data);
         if (data.Ack == "1") {
             this.mentorshipList = data.AllmentorList;
         } 

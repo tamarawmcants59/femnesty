@@ -44,10 +44,7 @@ export class MentorshipdetailsComponent implements OnInit {
 }
 
 export declare class FacebookParams {
-  u: string;
-  /*title:string;
-  summary: string;
-  images: string;*/
+  u: string;  
 }
 
 export class GooglePlusParams {

@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     }else{
       this.homepageCls='pt-150';
     }
-    console.log(this.homepageCls);
+    //console.log(this.homepageCls);
   }
 
   ngOnInit() {
