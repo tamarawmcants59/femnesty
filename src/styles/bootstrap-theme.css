@@ -4445,5 +4445,8 @@ ul.uploadVideo {
 	display:  none !important;
 }
 .display-on{
-	display:  block !important;
+    display:  block !important;
+    height: 100vh;
+    background: #fff;
 }
+.display-on li{ float:  none !important;} 
