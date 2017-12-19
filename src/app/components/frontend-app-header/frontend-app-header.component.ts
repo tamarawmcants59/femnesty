@@ -26,6 +26,7 @@ export class FrontendAppHeader {
   public form:FormGroup;
   public currentFireUserId:string='';
   public getCurrentPageName:string='';
+  public show:boolean = false;
   
   constructor(
     private el: ElementRef,
@@ -212,6 +213,9 @@ export class FrontendAppHeader {
     //return false;
   }
 
+  toggleCollapse() {
+    this.show = !this.show
+  }
 }
 
 
