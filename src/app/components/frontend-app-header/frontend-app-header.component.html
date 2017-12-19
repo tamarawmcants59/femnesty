@@ -33,7 +33,7 @@
                     <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                    <!--<li><a href="#">Contribute</a></li>-->
+                    <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
                     <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
                 </ul>
             </div>
@@ -79,6 +79,7 @@
                         <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                         <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                         <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
+                        <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
                         
                     </ul>
                     <ul class="nav navbar-nav navIcon">
@@ -181,7 +182,7 @@
              <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
              <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
              <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-             <!--<li><a href="#">Contribute</a></li>-->
+             <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
              <li *ngIf="userloggedIn == 1"><a routerLinkActive="active" href="Javascript: void(0)" (click)="userLogout()" style="padding-top: 0px;"><button>Logout</button></a></li>
          </ul>
         </div>
