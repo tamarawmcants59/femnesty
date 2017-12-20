@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../user/user.service';
 import { Promise } from 'q';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-chat',
@@ -31,6 +32,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   room_id: string;
   users = [];
   message: string;
+  search_con: string;
   fileData: any;
   dbRef: any;
   isComponentActive: boolean;
@@ -89,10 +91,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         const data = action.payload.doc.data();
         const id = action.payload.doc.id;
         if (data.to_user_id == this.loginUserId && this.isComponentActive) {
-          console.log(id);
+          //console.log(id);
           setTimeout(() => {
             this.db.collection('Messages').doc(id).update({ is_read: true }).then(res => {
-              console.log(res);
+              
             }).catch(err => {
               console.log(err);
             });
@@ -133,9 +135,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       },
       is_read: false
     };
-    console.log(data);
     this.db.collection('Messages').add(data).then(res => {
-      console.log(res);
       this.message = null;
     }).catch(err => {
       console.log('error with fb: ', err);
@@ -153,9 +153,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       },
       is_read: false
     };
-    console.log(data);
     this.db.collection('Messages').add(data).then(res => {
-      console.log(res);
       this.message = null;
     }).catch(err => {
       console.log('error with fb: ', err);
@@ -213,4 +211,20 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         });
     }
   }
+
+  public searchConnection() {
+    console.log(this.search_con);
+    if (this.loginUserId != 0 && this.search_con!='') {
+      //this.getConnectionList();
+      let goodFriends = this.userFrndList.filter(item => {
+        if(item.name.search(this.search_con)!==-1){
+          return item;
+        }
+      });
+      this.userFrndList = goodFriends;
+    }else{
+      this.getConnectionList();
+    }
+  }
+  
 }
