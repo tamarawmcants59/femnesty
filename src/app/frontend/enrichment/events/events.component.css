@@ -1,4 +1,4 @@
-.inner-banner-section{margin-top: 180px; height: 320px;}
+.inner-banner-section{/*margin-top: 180px;*/ height: 320px;}
 .inner-banner-section .container{position: relative; height: 100%}
 .inner-banner-section .container .info{position: absolute; left: 0; top:50%; transform: translateY(-50%);}
 .inner-banner-section .container .info h1{font-size:43px; margin-top: 0}
@@ -10,6 +10,6 @@
 .enrichment-dtls p{width:100%; text-align: center; display: block;}
 
 @media screen and (max-width:767px) {
-	.inner-banner-section{margin-top: 170px;}
+	.inner-banner-section{/*margin-top: 170px;*/}
 	.inner-banner-section .container .video-info{left: 15px}
 }
