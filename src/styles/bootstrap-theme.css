@@ -2388,7 +2388,7 @@ background: #fff !important;}
 }
 
 .messagePart ul li a {
-    
+    font-family: 'montserratmedium';
     text-transform: uppercase;
     color: #202020;
     font-size: 11px;
@@ -2627,11 +2627,12 @@ background: #fff !important;}
 }
 
 .tabPart .nav-pills li a {
+	font-family: 'montserratmedium';
     color: #000000;
     text-transform: uppercase;
     padding: 15px 27px;
     
-    font-size: 12px;
+    font-size: 10px;
     
     cursor: pointer;
 }
@@ -2874,7 +2875,7 @@ background: #fff !important;}
 .innerRightPart {
     background: #fff;
     padding: 23px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .innerRightPart h2 {
@@ -2951,7 +2952,7 @@ background: #fff !important;}
 }
 
 .hubMet .btn-primary {
-    padding: 6px 10px;
+    padding: 6px 13px;
 }
 
 .hubMet1 .img,
@@ -3068,7 +3069,7 @@ background: #fff !important;}
 
 .connectionImage .img {
     width: 80px;
-    height: 80px;
+    height: 101px;
     float: left;
     background-size: cover;
     background-position: center;
@@ -3086,7 +3087,7 @@ background: #fff !important;}
 
 .connectionText .btn-primary {
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 11px !important;
     margin-top: 10px;
 }
 
@@ -3981,7 +3982,7 @@ ul.connectionlist li .text-area p {
 
 .group a div.img{width:87px;height:87px;}
 .group h2{font-size: 16px;margin-top: 15px;}
-.group .btn.btn-primary{font-size: 11px;margin-top:14px}
+.group .btn.btn-primary{font-size: 11px !important;margin-top:14px}
 
 
 /********* Contact ********/
@@ -4036,7 +4037,7 @@ ul.connectionlist li .text-area p {
 .abouts .tab-content h3,.group-list .tab-content h3{display: block;width: 100%;margin: 0 0 25px;font-size: 20px;background: #fff;}
 .connection-box{display: flex;flex-wrap:wrap !important;justify-content: space-around;}
 .connection-box li{width:47% !important;margin: 0 0 15px 0}
-.connection-box li .connectionText{float:right;width:calc(100% - 80px);}
+.connection-box li .connectionText{float:right;width:calc(100% - 80px); padding-bottom: 10px;}
 .connection-box li .connectionText h2{margin-top: 5px;}
 .group-list .connection-box li{width:100% !important}
 .group-list .connection-box li .btn-primary{margin-top: 2px;}
@@ -4606,4 +4607,8 @@ emoji-categories{
 }
 .f-style-italic{
 	font-family: 'sanchez_regular_italic' !important;
+}
+
+.innerRightPart .col-md-8 h2{
+	font-family: 'sanchezregular';
 }
