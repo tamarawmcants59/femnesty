@@ -367,4 +367,8 @@ export class UserService {
   userChangePassword(form_data) {
     return this.apiService.post(`/users/appupdatepassword`,form_data).map(data => data);
   }
+  
+  userActivationLink(form_data) {
+    return this.apiService.post(`/users/appactivateaccount`,form_data).map(data => data);
+  }
 }

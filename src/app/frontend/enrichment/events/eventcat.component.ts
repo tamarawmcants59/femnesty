@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnrichmentService } from "../enrichment.service";
 import { Router, ActivatedRoute, Params} from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-eventcat',
@@ -11,16 +12,19 @@ export class EventcatComponent implements OnInit {
   articleCatData=[];
   articleListData=[];
   SlugName='';
+  public repoUrl = '';
 
   constructor(
     private serviceData: EnrichmentService, 
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.SlugName = params['slug'];
     });
+    this.repoUrl=environment.website_url+this.router.url;
 
     this.serviceData.getCatDetBySlug(this.SlugName).subscribe(data=>{
         let details=data;
@@ -38,8 +42,30 @@ export class EventcatComponent implements OnInit {
         console.log('Something went wrong!');
       }
     );
-
-
   }
+}
 
+export declare class FacebookParams {
+  u: string;
+}
+
+export class GooglePlusParams {
+  url: string
+}
+
+export class LinkedinParams {
+  url:string
+}
+
+export declare class PinterestParams {
+  url: string;
+  media: string;
+  description: string;
+}
+
+export class TwitterParams {
+  text: string;
+  url: string;
+  hashtags: string;
+  via: string;
 }

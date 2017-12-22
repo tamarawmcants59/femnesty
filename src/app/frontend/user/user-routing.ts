@@ -15,6 +15,7 @@ import { GroupChatComponent } from "./group-chat/chat.component";
 import { AllphotoComponent } from "./allphoto/allphoto.component";
 import { TeamComponent } from './team/team.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ActivationlinkComponent } from './activationlink/activationlink.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,13 @@ const routes: Routes = [
     component: ForgotpasswordComponent,
     data: {
       title: 'Forgot Password'
+    }
+  },
+  {
+    path: 'account_verification/:uid',
+    component: ActivationlinkComponent,
+    data: {
+      title: 'Account Verification'
     }
   },
   {
