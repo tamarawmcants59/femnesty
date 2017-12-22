@@ -12,9 +12,9 @@
                             <ul>
                                 <li *ngFor="let chat of chats" class="{{chat.cssClass}}">
                                     <div class="image-area">
-                                        <div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;">
+                                        <div class="round-image-holder">
                                             <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" style="width:70px;margin-top:0px" alt="" />
-                                            <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" style="width:70px;margin-top:-20px" alt="" />
+                                            <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" style="width:70px;" alt="" />
                                         </div>
                                     </div>
                                     <div class="text-area">
