@@ -1,5 +1,5 @@
 import { ChatListnerService } from './../../service/chat.listner.service';
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef,ChangeDetectorRef } from '@angular/core';
 import { NgZone } from "@angular/core";
 import * as firebase from 'firebase';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
@@ -7,6 +7,7 @@ import { FrontendService } from "./frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
+//import { ChangeDetectorRef } from '@angular/core/src/change_detection/change_detector_ref';
 
 @Component({
   selector: 'frontend-app-header',
@@ -37,7 +38,8 @@ export class FrontendAppHeader {
     private builder:FormBuilder,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private cd:ChangeDetectorRef
   ) {
     this.afAuth.authState.do(user => {
       if (user) {
@@ -51,6 +53,10 @@ export class FrontendAppHeader {
 
         //this.getCurrentPageName = params['slug'];
     });*/
+
+
+
+
     if(this.getCurrentPageName=='/home'){
       window.onscroll = () => {
         let st = window.pageYOffset;
@@ -85,6 +91,7 @@ export class FrontendAppHeader {
   ngOnInit(): void {
     //console.log(this.currentUserDet);
     //localStorage.removeItem("isLoggedIn");
+    
     var nativeElement: HTMLElement = this.el.nativeElement,
       parentElement: HTMLElement = nativeElement.parentElement;
     // move all children out of the element
@@ -128,7 +135,14 @@ export class FrontendAppHeader {
       this.userNotiCountList();
     }
 
+    
+
+
     this.getUnreadMessages();
+  }
+
+  ngOnChanges(): void {
+  this.show=false;
   }
 
   getUnreadMessages() {
@@ -214,7 +228,10 @@ export class FrontendAppHeader {
   }
 
   toggleCollapse() {
-    this.show = !this.show
+   this.show = !this.show;
+
+   
+    
   }
 }
 
