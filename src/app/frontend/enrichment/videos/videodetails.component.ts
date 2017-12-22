@@ -1,6 +1,7 @@
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EnrichmentService } from "../enrichment.service";
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-videodetails',
@@ -12,10 +13,15 @@ export class VideodetailsComponent implements OnInit {
   videoDetData=[];
   SlugName='';
   safeyoutube_link='';
+  public repoUrl = '';
+
   constructor(
     private _video_details: EnrichmentService,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    this.repoUrl=environment.website_url+this.router.url;
+   }
 
   ngOnInit() {
 
@@ -41,10 +47,32 @@ export class VideodetailsComponent implements OnInit {
       },
       error => {
         console.log('Something went wrong!');
-      }
-      );   
-
-
+      });  
   }
+}
 
+
+export declare class FacebookParams {
+  u: string;
+}
+
+export class GooglePlusParams {
+  url: string
+}
+
+export class LinkedinParams {
+  url:string
+}
+
+export declare class PinterestParams {
+  url: string;
+  media: string;
+  description: string;
+}
+
+export class TwitterParams {
+  text: string;
+  url: string;
+  hashtags: string;
+  via: string;
 }

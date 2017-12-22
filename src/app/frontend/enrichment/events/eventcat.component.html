@@ -18,6 +18,17 @@
             <p class="font-weight-bold mb-30">{{articleCatData.short_description}}</p>
             <div [innerHTML]="articleCatData.description" class="mb-30"></div>
             <a [routerLink]="['/enrichment/list',articleCatData.slug]" class="btn btn-primary">Read more</a>
+            <ul class="n-social mt-30">
+                <li ceiboShare  [facebook]="{u: repoUrl}">
+                    <img src="assets/images/facebook.png" />
+                </li>
+                <li ceiboShare  [linkedIn]="{url:repoUrl, text:articleCatData.short_description}">
+                    <img src="assets/images/linkedin.png" />
+                </li>
+                <li ceiboShare  [twitter]="{url:repoUrl, text:articleCatData.short_description}">
+                    <img src="assets/images/twitter.png" />
+                </li>
+            </ul>
         </div>
         <div class="col-md-4 right-gray-box">
             <div class="right-img-hold">
