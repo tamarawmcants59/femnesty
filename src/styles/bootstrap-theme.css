@@ -1805,12 +1805,13 @@ footer {
 
 @media (max-width: 767px) {
 	.footer-top{margin: 50px 0}
-	 .banner{height: auto;}
+	 
     .banner h1 {
         font-size: 25px;
         line-height: 35px;
         position: relative;top:0;transform: none;margin: 200px auto 50px;left:0
     }
+    .banner{background-size: cover;background-position: right center;}
     .section h1 {
         font-size: 35px;
     }
@@ -2396,7 +2397,7 @@ background: #fff !important;}
 }
 
 .messagePart ul li {
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 .messagePart ul li:last-child {
@@ -2522,9 +2523,8 @@ background: #fff !important;}
 
 .bottomList ul li a {
     color: #202020;
-    
-    
     font-size: 10px;
+    font-family: 'montserratmedium';
 }
 
 .topPart img {
@@ -3907,12 +3907,12 @@ ul.connectionlist li .text-area p {
 .filter-reslt {
     margin: 0;
     list-style-type: none;
-    padding-left: 15px
+    padding-left: 8px
 }
 
 .filter-reslt li {
     display: block;
-    padding: 10px 0;
+    padding: 5px 0;
     color: #222;
     
     font-size: 14px;
@@ -3941,21 +3941,25 @@ ul.connectionlist li .text-area p {
     border-radius: 40px;
     padding: 0 20px;
     border: 0px;
-    color: #fff;
+    color: #2b2b2b;
     text-transform: uppercase;
-    
-    font-size: 12px;
+    font-size: 13px;
+    font-family: 'montserratmedium';
+    text-shadow: none;
+    font-weight: normal;
+    box-shadow: none;
 }
+.filter-reslt li .form-group{margin:10px 0 !important;position: relative;}
 
 .filter-reslt button {
     position: absolute;
-    right: 20px;
-    top: 12px;
+    right: 27px;
+    top: 2px;
     cursor: pointer;
     background: none !important;
     border: 0;
-    font-size: 24px;
-    color: #ccc;
+    font-size: 24px !important;
+    color: #acacac;
 }
 .filter-resl .form-group{
 	margin-bottom: 10px !important;
@@ -4190,7 +4194,7 @@ section.team h2.text-red {font-size: 28px;}
 /**************** Groups ****************/
 
 .MyGroups-list{padding:35px 40px; margin-bottom: 20px; background: #fff}
-.MyGroups-list h5{ font-size:12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px}
+.MyGroups-list h5{ font-size:12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;font-family: 'montserratmedium';}
 
 .MyGroups-list .search-list li .left-side{width:105px}
 .MyGroups-list .search-list li .right-side h4{font-size:16px; color:#000;}
@@ -4230,6 +4234,8 @@ section.team h2.text-red {font-size: 28px;}
 	.flex-profile .flex-middle{width:45%}
 	.flex-profile .flex-right{width:30%}
 	.innerRightPart{padding: 20px;}
+	.headerTopPart li input[type="text"]{width: auto;}
+	.header-top ul li{margin: 0 6px 0 0;}
 }
 
 
@@ -4248,6 +4254,9 @@ section.team h2.text-red {font-size: 28px;}
 }
 
 @media screen and (max-width:767px) {
+	.visitingProfile{padding: 25px 0 !important}
+	.flex-profile .fix-to-top{position: relative;width:100% !important;top:0}
+	.banner{height: auto;}
     .log-row {
         display: block;
     }
@@ -4269,7 +4278,7 @@ section.team h2.text-red {font-size: 28px;}
     .tabPart .nav-pills li{flex-wrap:wrap;width:50%;margin:0}
     .icondown{display: none;}
     .about-content-area {padding: 170px 0;}
-    .headerTopPart li input[type="text"]{width: auto;}
+    
     .shareYourThought .btn.btn-primary{width:100%;margin-top:10px}
     .group{text-align: center;}
     .photoImage{justify-content: center;}
@@ -4302,6 +4311,11 @@ section.team h2.text-red {font-size: 28px;}
 }
 section h1{
 	font-size: 36px !important;
+	width:100% !important;text-align: center;
+}
+section h1:after{
+	left: 50% !important;
+   transform: translateX(-50%);
 }
 .mentor-partner h2{
     font-size: 30px !important;
@@ -4312,14 +4326,20 @@ section h1{
  .mt-100{
 		margin-top: 35px;
 	}
+.what-is-femnesty p{
+	padding-right: 0 !important;
+}
 }
 @media screen and (max-width:480px) {
+	.MyGroups-list{padding: 15px;margin: 15px 0}
+	.latest-article .hubMet.hubMet2 .img{width: 82px;}
+	.MyGroups-list .search-list li .left-side {width: 82px;}
+	.top-articles .article-image-holder{height: auto;}
 	.headerTopPart li input[type="text"]{width:150px;}
 	.search-icon{padding: 14px 10px}
 	.btn.btn-primary{font-size: 14px;}
-	.advisory-board{
-		padding: 0 !important;
-	}
+	.advisory-board{padding: 0 !important;}
+	.latest-article .article-text{width: calc(100% - 95px);}
 .pr-50{
 	padding-right: 0;
 }
@@ -4333,7 +4353,7 @@ section h1{
 	padding: 45px 0 !important;
 }
 section h1{
-	font-size: 36px !important;
+	font-size: 30px !important;
 }
 .mentor-partner h2{
     font-size: 30px !important;
@@ -4344,6 +4364,9 @@ section h1{
  .mt-100{
 		margin-top: 35px;
 	}
+	.banner h1{margin: 200px auto 100px;}
+	.header-top{padding: 7px 0;}
+	
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
 width: 19px; height: 25px; background-repeat:  no-repeat;}
