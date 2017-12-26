@@ -15,6 +15,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class FrontendAppHeader {
   pageConData = [];
+
   HeaderNavCls: string = '';
   lastScrollTop: number = 400;
   chatHeads: any[];
@@ -229,10 +230,8 @@ export class FrontendAppHeader {
 
   toggleCollapse() {
    this.show = !this.show;
-
-   
-    
   }
+
+  
+
 }
-
-

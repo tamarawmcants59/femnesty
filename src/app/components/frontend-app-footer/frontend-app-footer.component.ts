@@ -7,6 +7,7 @@ import { UserService } from '../../frontend/user/user.service';
 import { FrontendService } from "../frontend-app-header/frontend.service";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { forEach } from '@angular/router/src/utils/collection';
 //import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 //import { DatePipe } from '@angular/common';
 //@Injectable()
@@ -19,7 +20,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollMe') private myChatContainer: ElementRef;
 
   public currentFireUserId:string;
-
+  cms: any[];
   current_year = '';
   chatClass = 'live-chat hide';
   chats: any[];
@@ -106,6 +107,8 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     error => {
       console.log('Something went wrong!');
     });
+
+    this.cmsAll();
 
   }
 
@@ -301,6 +304,20 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
       }
     });   
   }
+  public cmsAll(){
+    this._service.getAllPageData().subscribe(data => {
+      this.cms=data;
+      console.log(this.cms);
+    if(data.Ack==1){
+// for(let i=0;i<data;i++){
+//   //this.cms=;
+// }
+      
+      
+    }
 
+  }
+    );
+}
 
 }

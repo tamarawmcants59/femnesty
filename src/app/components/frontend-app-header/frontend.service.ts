@@ -63,4 +63,10 @@ export class FrontendService {
   getallTeamList(){
     return this.apiService.get(`/enrichment/appallteamlist`).map(data => data);
   }
+
+  getAllCmsList() {
+    return this.apiService.get(`enrichment/appcontentallbyslug/all`)
+      .map(data => data);
+  }
+
 }

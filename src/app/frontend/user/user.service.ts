@@ -371,4 +371,6 @@ export class UserService {
   userActivationLink(form_data) {
     return this.apiService.post(`/users/appactivateaccount`,form_data).map(data => data);
   }
+
+ 
 }
