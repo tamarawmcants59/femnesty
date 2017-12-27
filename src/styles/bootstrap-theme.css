@@ -1135,7 +1135,10 @@ blockquote i {
 
 .navbar-white {
     background: #fff;
-    box-shadow: -1px -3px 7px -1px #000000;
+    /*-moz-box-shadow: -1px -3px 5px -1px #000000;
+    -webkit-box-shadow: -1px -3px 7px -1px #000000;
+   /* box-shadow: -1px -3px 7px -1px #000000;*/
+   border-bottom: 1px solid #f3f3f3;
 }
 
 /*.navbar-white .navbar-brand img {
@@ -1807,7 +1810,10 @@ footer {
 }
 
 @media (max-width: 767px) {
-	.footer-top{margin: 50px 0}
+	 
+	 .tabPart ul.uploadVideo{display: flex;justify-content: center;flex-wrap:wrap;}
+	
+	 .footer-top{margin: 50px 0}
 	 
     .banner h1 {
         font-size: 25px;
@@ -4258,6 +4264,7 @@ section.team h2.text-red {font-size: 28px;}
 }
 
 @media screen and (max-width:767px) {
+	.n-social{margin-bottom: 15px}
 	 .article p{height: auto;}
 	.visitingProfile{padding: 25px 0 !important}
 	.flex-profile .fix-to-top{position: relative;width:100% !important;top:0}
@@ -4334,6 +4341,11 @@ section h1:after{
 .what-is-femnesty p{
 	padding-right: 0 !important;
 }
+.new-tabs .nav-tabs li a:hover{background: #fff !important;color:#000 !important}
+.new-tabs .nav-tabs li a{padding: 10px 5px !important;font-size: 10px !important;}
+.notification-wrap ul li{flex-wrap:wrap;}
+.notification-wrap ul li .time{width:100%;text-align: right;position: relative;}
+.header-top ul li{margin: 0 3px 0 0;}
 }
 @media screen and (max-width:480px) {
 	.MyGroups-list{padding: 15px;margin: 15px 0}
@@ -4590,7 +4602,7 @@ ul.uploadVideo {
 	line-height: 24px;
 }
 .n-social{
-	width: 100%; height: auto; padding: 0;
+	width: 100%; height: auto; padding: 0;overflow: hidden;
 }
 .n-social li{ 
 	list-style-type:none;
@@ -4599,6 +4611,7 @@ ul.uploadVideo {
 	width: 43px;
 	height: 43px;
 	position: relative;
+	cursor: pointer;
 	
 }
 .n-social li img{
