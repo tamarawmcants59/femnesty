@@ -4008,7 +4008,7 @@ ul.connectionlist li .text-area p {
     display: flex;
     width: 100%;
     padding-bottom: 0;
-   
+    padding-top: 0;
 }
 
 .contact-left {
@@ -4249,6 +4249,18 @@ top: -3px;
 right: -2px;
 font-size: 11px;
 font-weight: normal;padding: 2px 5px;}
+.connectionsonly-check{position: relative;color: #6d6d6d}
+.connectionsonly-check i{margin-right:5px;}
+.connectionsonly-check label{color:#6d6d6d;font-weight: normal;}
+.connectionsonly-check input[type="checkbox"]{left: 0;width: 100%;height: 100%;opacity: 0;cursor: pointer;}
+.connectionsonly-check input[type="checkbox"]:checked + i{color: #BB1926 !important}
+
+.single-article.section.women-21 h1{font-size: 32px}
+.inner-pages-holder.women-21 p{font-size: 14px;}
+.women-21 .right-gray-box .right-text-hold h3{font-size: 22px}
+.women-21 .right-gray-box .right-text-hold p.font-weight-bold{font-size: 12px}
+.women-21 .right-gray-box .right-text-hold p.text-gray{font-size: 14px} 
+
 
 /******************** Responsive Style **********************/
 
@@ -4277,6 +4289,9 @@ font-weight: normal;padding: 2px 5px;}
 }
 
 @media screen and (max-width:767px) {
+	.sign-up-social .social-link{margin: 0 0px;}
+	.social-link li{margin-right: 5px}
+	
 	.topPart[_ngcontent-c0]{background-position: center center !important;}
 	.navbar-toggle{margin-right: 10px;}
 	.contn-box li.friend-box-list{flex-wrap:wrap;}
