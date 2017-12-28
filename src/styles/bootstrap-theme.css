@@ -1156,7 +1156,9 @@ blockquote i {
 .navbar-toggle .icon-bar {
     background: #000;
 }
-
+.header-inner .navbar-toggle .icon-bar {
+    background: #fff;
+}
 .navbar-collapse.collapse {
     display: block;
 }
@@ -2256,6 +2258,8 @@ cursor: pointer;
 background: none !important;
 border: 0;}
 .search-icon button i{color: #000 !important;font-size: 22px !important;background: none !important;}
+.navbar-left .search-icon button i{color:#fff !important}
+
 
 .searchPart {
     position: relative;
@@ -4236,6 +4240,15 @@ section.team h2.text-red {font-size: 28px;}
 	width:255px !important;
 }
 
+.mobile-notification{display: none;}
+.mobile-notification{position: absolute;right: 37px;top: 20px;width: 60px;}
+.mobile-notification a{color: #fff;display: inline-block;width:50%;float: left;line-height: 30px;position: relative;}
+.mobile-notification a i{font-size: 20px;line-height: 30px;display: block;text-align: center;}
+.mobile-notification a span{position: absolute;
+top: -3px;
+right: -2px;
+font-size: 11px;
+font-weight: normal;padding: 2px 5px;}
 
 /******************** Responsive Style **********************/
 
@@ -4264,6 +4277,17 @@ section.team h2.text-red {font-size: 28px;}
 }
 
 @media screen and (max-width:767px) {
+	.topPart[_ngcontent-c0]{background-position: center center !important;}
+	.navbar-toggle{margin-right: 10px;}
+	.contn-box li.friend-box-list{flex-wrap:wrap;}
+	
+	.chat-holder ul li img{height: auto;}
+	
+	.contn-box li.friend-box-list .friend-boxImage,.contn-box li.friend-box-list .friend-boxText{margin: 0 auto;width:100%}
+	.contn-box li.friend-box-list .friend-boxImage a{margin: 0 auto;display: table;}
+	
+	.mobile-notification{display: block;}
+	.search-icon{padding: 14px 5px}
 	.n-social{margin-bottom: 15px}
 	 .article p{height: auto;}
 	.visitingProfile{padding: 25px 0 !important}
@@ -4348,12 +4372,13 @@ section h1:after{
 .header-top ul li{margin: 0 3px 0 0;}
 }
 @media screen and (max-width:480px) {
+	
 	.MyGroups-list{padding: 15px;margin: 15px 0}
 	.latest-article .hubMet.hubMet2 .img{width: 82px;}
-	.MyGroups-list .search-list li .left-side {width: 82px;}
+	.MyGroups-list .search-list li .left-side {width: 70px;height:70px}
 	.top-articles .article-image-holder{height: auto;}
 	.headerTopPart li input[type="text"]{width:150px;}
-	.search-icon{padding: 14px 10px}
+	
 	.btn.btn-primary{font-size: 14px;}
 	.advisory-board{padding: 0 !important;}
 	.latest-article .article-text{width: calc(100% - 95px);}
