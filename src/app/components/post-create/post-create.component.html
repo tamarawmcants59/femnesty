@@ -59,12 +59,10 @@
                         </div>
                     </li>
                     <li *ngIf="postType.activitytype==''">
-                        <p>
-                            <i class="icon ion-ios-people-outline"></i>
-                            <span>
-                        <input class="styled-checkbox" formControlName="is_connection" id="ConnectionsOnly" value="1" type="checkbox">
-                        <label for="ConnectionsOnly"> Connections Only </label>
-                    </span>
+                        <p class="connectionsonly-check">
+                        		<input class="" formControlName="is_connection" id="ConnectionsOnly" value="1" type="checkbox">
+	                        	<i class="icon ion-ios-people-outline"></i>
+	                        	<label for="ConnectionsOnly"> Connections Only </label>                    			
                         </p>
                     </li>
                 </ul>
