@@ -162,7 +162,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   public fileChangePost($event) {
     //this.showPostImgDive = true;
-    console.log($event);
+    //console.log($event);
     const image: any = new Image();
     const file: File = $event.target.files[0];
     this.fileData = file;
@@ -182,7 +182,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.userService.uploadFile(formData)
       .subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         if (data.file_name) {
           this.sendFile(data.file_name);
         }
