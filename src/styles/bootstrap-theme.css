@@ -628,6 +628,8 @@ fieldset[disabled] .btn-danger.active {
         background-repeat: repeat-x;
         filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff2e6da4', GradientType=0);
     }
+    .enrichmentText p{height: auto !important}
+    
 }
 
 .alert {
@@ -4397,6 +4399,16 @@ section h1:after{
 .notification-wrap ul li{flex-wrap:wrap;}
 .notification-wrap ul li .time{width:100%;text-align: right;position: relative;}
 .header-top ul li{margin: 0 3px 0 0;}
+
+    
+	
+	.flex-profile {display: block;}
+	.flex-profile .flex-left {width: 100% !important;}
+    .fix-to-top {position: relative !important; width: 100% !important; top: 0 !important;}
+    .left-list.fix-to-top {width:100% !important;}
+
+
+
 }
 @media screen and (max-width:480px) {
 		.header-top ul li {
