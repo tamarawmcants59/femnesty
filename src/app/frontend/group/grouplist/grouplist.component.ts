@@ -12,6 +12,7 @@ export class GrouplistComponent implements OnInit {
   public groupList = [];
   public myGrpList =[];
   public latestArticles =[];
+  search_group: string;
 
   constructor(private dataService: UserService) { 
     this.isloginUserId = localStorage.getItem("loginUserId");
@@ -62,5 +63,27 @@ export class GrouplistComponent implements OnInit {
       error => {
       }
     );
+  }
+
+  public searchGroup() {
+    console.log(this.search_group);
+    if (this.search_group!='') {
+      //this.getConnectionList();
+      let goodFriends = this.groupList.filter(item => {
+        if(item.group_name.search(this.search_group)!==-1){
+          return item;
+        }
+      });
+      this.groupList = goodFriends;
+      let myGrplistData = this.myGrpList.filter(item1 => {
+        if(item1.group_name.search(this.search_group)!==-1){
+          return item1;
+        }
+      });
+      this.myGrpList = myGrplistData;
+    }else{
+      this.getAllGroupList();
+      this.getUserGroupList();
+    }
   }
 }

@@ -60,8 +60,8 @@
                       <ul class="filter-reslt">
                       <li style="position: relative;">
                       	<div class="form-group">
-                                <input class="form-control" placeholder="Search" type="text">
-                                <button type="submit"><i class="icon ion-ios-search"></i></button>
+                                <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
+                                <button type="button" (click)="searchGroup()"><i class="icon ion-ios-search"></i></button>
                             </div>
                       </li>
                         <li>My Groups  <span>({{myGrpList?.length}})</span></li>
