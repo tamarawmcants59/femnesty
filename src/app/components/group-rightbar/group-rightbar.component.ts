@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,SimpleChanges,SimpleChange } from '@angular/core';
+import { Component, OnInit, Input,SimpleChanges,SimpleChange, ElementRef } from '@angular/core';
 import { UserService } from "../../frontend/user/user.service";
 //import 'rxjs/add/operator/map';
 
@@ -15,6 +15,10 @@ export class GroupRightbarComponent implements OnInit {
   public groupMemberList = [];
   public groupImgList = [];
   private _name: string;
+  public memberViewAll:boolean = false;
+  public showMemberDiv:boolean = false;
+  //public myStyle={};
+  //public memberHideClass:string='isHideDiv';
 
   @Input() groupData: {
     id: number;
@@ -36,7 +40,8 @@ export class GroupRightbarComponent implements OnInit {
   };
 
   constructor(
-    private dataService: UserService
+    private dataService: UserService,
+    public elementRef: ElementRef
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
@@ -96,6 +101,10 @@ export class GroupRightbarComponent implements OnInit {
           //console.log(data);
           if (data.Ack == "1") {
               this.groupMemberList = data.groupMembers;
+              if(data.groupMembers.length > 12){
+              //if(data.groupMembers.length > 2){  
+                this.memberViewAll=true;
+              }
               //console.log(this.groupMemberList);
           } 
       },error => {
@@ -103,6 +112,11 @@ export class GroupRightbarComponent implements OnInit {
       });
     }
   }
-
+  
+  public showAllMember() {
+    this.memberViewAll=false;
+    this.showMemberDiv=true;
+    
+  }
 }
 
