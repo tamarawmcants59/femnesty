@@ -31,6 +31,8 @@ import { AllphotoComponent } from './allphoto/allphoto.component';
 import { TeamComponent } from './team/team.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ActivationlinkComponent } from './activationlink/activationlink.component';
+import { BrowsehubComponent } from './browsehub/browsehub.component';
+import { HubsComponent } from './hubs/hubs.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -87,7 +89,9 @@ export function provideConfig() {
     AllphotoComponent,
     TeamComponent,
     ForgotpasswordComponent,
-    ActivationlinkComponent
+    ActivationlinkComponent,
+    BrowsehubComponent,
+    HubsComponent
     //ImageCropperComponent
   ],
   providers: [

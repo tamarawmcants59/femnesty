@@ -16,6 +16,8 @@ import { AllphotoComponent } from "./allphoto/allphoto.component";
 import { TeamComponent } from './team/team.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ActivationlinkComponent } from './activationlink/activationlink.component';
+import { BrowsehubComponent } from './browsehub/browsehub.component';
+import { HubsComponent } from './hubs/hubs.component';
 
 const routes: Routes = [
   {
@@ -58,6 +60,22 @@ const routes: Routes = [
     component: TeamComponent,
     data: {
       title: 'Team'
+    }
+  },
+  {
+    path: 'hub_details',
+    canActivate: [AuthGuard],
+    component: HubsComponent,
+    data: {
+      title: 'Hub Details'
+    }
+  },
+  {
+    path: 'hubs',
+    canActivate: [AuthGuard],
+    component: BrowsehubComponent,
+    data: {
+      title: 'Hubs'
     }
   },
   {

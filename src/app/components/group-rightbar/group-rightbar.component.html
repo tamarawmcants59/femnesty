@@ -4,10 +4,11 @@
         <div class="hubMet hubMet1">
             <div class="row" *ngIf="groupMemberList?.length > 0">
                 <div class="col-md-3" *ngFor="let memdata of groupMemberList">
-                    <a [routerLink]="['/user/profile',memdata.display_name]">
+                    <a [routerLink]="['/user/profile',memdata.display_name]" title="{{memdata.name}}">
                         <div class="img" [ngStyle]="{'background-image':'url('+memdata.profile_image+')'}"></div>
                     </a>
                 </div>
+                <a href="#" class="viewAll text-center">View All ({{groupMemberList?.length}}) </a>
             </div>
         </div>
     </div>
