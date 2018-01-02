@@ -1,0 +1,32 @@
+.middlePart .hubDes {padding: 30px 30px 43px; text-align: center;}
+.middlePart .hubDes h2{font-size:35px; margin-bottom: 15px; line-height: 1}
+.middlePart .hubDes .shortP{font-size:15px; color:#555; margin-bottom: 15px; line-height: 1}
+.middlePart .hubDes .attendingP{font-size:12px; color:#ce2126; margin-bottom: 23px; line-height: 1}
+.middlePart .hubDes .btn.btn-default{background: #fff;color: #bc1926; border: 2px solid #bc1926; text-shadow: none;text-transform: uppercase;letter-spacing: 2px; padding: 12px 20px; border-radius: 50px;font-family: 'montserratmedium'; font-size: 13px !important; box-shadow:none}
+.HUB-likePart{margin-top:15px}
+.HUB-likePart .imageParts .profImageP .img{width:46px !important; height:46px !important; margin-bottom:2px; border-radius:100%}
+.HUB-likePart .profTextPart h2{font-size:14px}
+.HUB-likePart .profTextPart p{font-size:9px; color:#7e7e7e; margin-top: 4px}
+
+.HUB-userComment p{font-size:14px; color: #4e4e4e}
+.HUB-userComment ul li a {font-size: 10px;}
+.nothing-more{margin: 30px 0; color:#c0c0c0; line-height: 1}
+
+.innerRightPart{padding:30px;}
+.HUB-Dtls{margin-bottom: 15px}
+.HUB-Dtls h2{font-size:12px}
+.HUB-Dtls .HUB-Dtls-txt{font-size:14px; color:#4e4e4e; margin-bottom: 20px}
+.HUB-Dtls .info{font-size:14px; color:#4e4e4e; margin-bottom: 0px; line-height: 1.42}
+.HUB-Dtls .info span{color:#000000;}
+.HUB-Dtls .right-map{margin-bottom: 20px}
+
+.attending h2{margin-bottom: 36px;}
+.attending ul{list-style: none;padding: 0;display: flex;flex-wrap:wrap;justify-content:flex-start;margin-bottom:30px; margin-left: -3px; margin-right: -3px}
+.attending ul li{margin: 6px 3px;}
+.attending ul li a{width:63px;height:63px;display: block;border-radius: 100%;overflow: hidden;border:none;}
+.attending ul li a img{width:100%}
+.attending .viewAll{font-size:11px; color:#a3a3a3; font-family: 'montserratmedium'; text-transform: uppercase;}
+
+.right-sharing ul{display: flex; margin-left: -5px}
+.right-sharing li{margin:0 5px}
+.right-sharing li a{display: block;width:42px;height:42px;line-height:40px;border-radius:100%;overflow: hidden;color:#fff;text-decoration: none;font-size:24px;text-align: center;}
