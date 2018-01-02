@@ -18,6 +18,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ActivationlinkComponent } from './activationlink/activationlink.component';
 import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
+import { CreatehubComponent } from "./createhub/createhub.component";
 
 const routes: Routes = [
   {
@@ -68,6 +69,14 @@ const routes: Routes = [
     component: HubsComponent,
     data: {
       title: 'Hub Details'
+    }
+  },
+  {
+    path: 'create_hub',
+    canActivate: [AuthGuard],
+    component: CreatehubComponent,
+    data: {
+      title: 'Create Hub'
     }
   },
   {

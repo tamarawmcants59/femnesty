@@ -33,6 +33,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ActivationlinkComponent } from './activationlink/activationlink.component';
 import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
+import { CreatehubComponent } from './createhub/createhub.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -91,7 +92,8 @@ export function provideConfig() {
     ForgotpasswordComponent,
     ActivationlinkComponent,
     BrowsehubComponent,
-    HubsComponent
+    HubsComponent,
+    CreatehubComponent
     //ImageCropperComponent
   ],
   providers: [
