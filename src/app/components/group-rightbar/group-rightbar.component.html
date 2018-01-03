@@ -1,5 +1,15 @@
 <div class="rightPart">
     <div class="innerRightPart">
+        <h2> Group Details </h2>
+        <div class="hubMet">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>{{groupData.long_desc}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="innerRightPart">
         <h2>Members</h2>
         <div class="hubMet hubMet1">
             <div class="row" *ngIf="groupMemberList?.length > 0">
@@ -12,16 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="innerRightPart">
-        <h2> Group Details </h2>
-        <div class="hubMet">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>{{groupData.long_desc}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="innerRightPart">
         <h2>Group Photos</h2>
         <ul class="photoImage" *ngIf="groupImgList?.length > 0">
@@ -31,7 +32,7 @@
                 </a>
             </li>
         </ul>
-        <!--<a href="#" class="viewAll text-center">View All</a>-->
+        <a *ngIf="groupImgList?.length > 5" [routerLink]="['/user/group_all_photo',groupData.group_uname]" class="viewAll text-center">View All</a>
     </div>
     
 </div>

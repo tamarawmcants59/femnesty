@@ -40,9 +40,10 @@
                   <div class="tabPart">
                       <ul class="nav nav-pills" *ngIf="isloginUserId !='' && (groupDetailsData.group_type=='1' || !isJoinGroup)">
                           <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Group Activity</a></li>
-                          <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">Invite Member</a></li>
                           <li [ngClass]="{'active' : activeTab=='member'}"><a (click)="toggleTab('member')">Members</a></li>
-                          <li *ngIf="groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='2'" [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>
+                          <li *ngIf="groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='2'" [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite Friend</a></li>
+                          <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">Invite Member</a></li>
+                          
                       </ul>
                       
                       <div class="tab-content" *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)">
@@ -86,7 +87,7 @@
                                     </ul>
                                   </div>
 
-                                  <div class="connections" *ngIf="userFrndList?.length > 0">
+                                  <div class="connections">
                                       <h3 style="margin-top: 0px;">Join member to group</h3>
                                       <ul class="friend-box" *ngIf="userFrndList?.length > 0">
                                             <li class="friend-box-list" *ngFor="let joinFrnd of userFrndList">
@@ -103,6 +104,9 @@
                                                 </div>
                                             </li>
                                         </ul>  
+                                        <div *ngIf="userFrndList?.length == 0">
+                                            <p>No member found.</p>
+                                        </div>
                                   </div>
                               </div>
                           </div>
