@@ -4270,6 +4270,8 @@ font-weight: normal;padding: 2px 5px;}
 /******************** Responsive Style **********************/
 
 .section.about-content-area{min-height: 700px;}
+.profPhoto .img{background: #fff;}
+
 
 
 @media screen and (max-width:1242px) {
@@ -4299,6 +4301,13 @@ font-weight: normal;padding: 2px 5px;}
 }
 
 @media screen and (max-width:767px) {
+	.profPhoto .img{width: 180px;height: 180px;background-size: cover !important}
+	.profPhoto .img {top: -82px !important;}
+	.profPhoto .img .inner-bg{height: 170px;}
+	.profPhoto .img .inner-bg .icon-change{width: 180px;}
+	
+	.friend-box .friend-box-list{width:100%;margin-right: 0px;}
+	.connections{margin-top: 15px;}
 	.new-chat-section ul li .text-area{width:72%}
 	.sign-up-social .social-link{margin: 0 0px;}
 	.social-link li{margin-right: 5px}
@@ -4414,6 +4423,7 @@ section h1:after{
 		.header-top ul li {
     margin: 4px 3px;
 }
+	.sign-up-social span{margin-bottom: 10px;display: inline-block;}
 	.MyGroups-list{padding: 15px;margin: 15px 0}
 	.latest-article .hubMet.hubMet2 .img{width: 82px;}
 	.MyGroups-list .search-list li .left-side {width: 70px;height:70px}

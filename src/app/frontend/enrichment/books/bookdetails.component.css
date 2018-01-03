@@ -9,3 +9,19 @@ h2.text-red{
 h4{
 	font-size: 16px !important;
 }
+h3{
+	font-size: 18px !important;
+}
+.d-reviews h4{margin: 5px 0 0 !important;}
+.d-reviews p span i{font-size: 22px !important;}
+.n-social{display: table;margin: 0 auto;width: auto;}
+.d-reviews{padding: 0 15px;}
+.d-reviews .row{margin: 30px 0}
+
+@media screen and (max-width:767px) {
+	.extra-left-pad{padding-left: 0}
+}
+
+
+
+
