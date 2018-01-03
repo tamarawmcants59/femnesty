@@ -1,3 +1,38 @@
-<p>
-  createhub works!
-</p>
+<section class="section about-content-area visitingProfile">
+  <div class="container-fluid">
+    <div class="row flex-profile">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+      <div class="col-md-3 flex-left">
+        <user-sidebar></user-sidebar>
+      </div>
+      <div class="col-md-6 flex-middle">
+        <div class="middlePart">
+
+
+
+
+
+          <div class="tabPart">
+
+            <div class="tab-content">
+
+
+
+              <div id="menu3" class="tab-pane fade in active">
+                <div class="connectionsPart">
+                  <h2>Hubs</h2>
+                  <div class="connections">
+                    <app-hub-create></app-hub-create>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 flex-right">
+        <app-user-prfrsidebar></app-user-prfrsidebar>
+      </div>
+    </div>
+  </div>
+</section>
