@@ -20,6 +20,8 @@ import { EventcatlistComponent } from './events/eventcatlist.component';
 import { EventdetailsComponent } from './events/eventdetails.component';
 import { BookcatComponent } from './books/bookcat.component';
 import {RatingModule} from "ng2-rating";
+import {TooltipModule} from "ng2-tooltip";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {RatingModule} from "ng2-rating";
     EnrichmentRouting,
     ApplicationPipes,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TooltipModule
   ],
   declarations: [
     EnrichmentComponent, 

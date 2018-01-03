@@ -16,3 +16,20 @@
 	.books-wrap{margin-right:0; margin-left: 0}
 	.books-wrap .book-item{width:100%; margin-right:0; margin-left: 0}
 }
+
+/*tooltip-content{
+	border-top-color: #be1620;
+}
+
+.popover.top > .arrow:after{
+	
+}
+
+.popover{
+background: #be1620;
+color: #fff;
+text-align: center;
+box-shadow: none;
+border: none;
+border-radius: 0;
+}*/
