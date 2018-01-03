@@ -19,6 +19,7 @@ import { ActivationlinkComponent } from './activationlink/activationlink.compone
 import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from "./createhub/createhub.component";
+import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,13 @@ const routes: Routes = [
     component: ForgotpasswordComponent,
     data: {
       title: 'Forgot Password'
+    }
+  },
+  {
+    path: 'group_all_photo/:gid',
+    component: GroupphotoComponent,
+    data: {
+      title: 'Group All Photos'
     }
   },
   {
