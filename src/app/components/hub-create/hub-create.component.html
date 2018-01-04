@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-md-4 col-sm-12">
+<div class="col-md-4 col-sm-12" *ngIf="aboutActiveTab!='add_group'">
+
+
+
     <ul class="nav-tabs tabs-left sideways">
       <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
         <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
@@ -12,7 +15,11 @@
       </li>
     </ul>
   </div>
-  <div class="col-md-8 col-sm-12 group-list">
+<div class="col-md-8 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
+
+
+
+
     <div class="tab-content">
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
         <ul class="ulList">
@@ -50,6 +57,13 @@
           </div>
         </ul>
       </div>
+    </div>
+  </div>
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='add_group'">
+
+
+  <div class="tab-content">
+
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
         <ul class="ulList edit-forms">
           <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
@@ -60,118 +74,133 @@
             <form class="login-form" [formGroup]="postform" (ngSubmit)="createHub()" #createGroupForm="ngForm">
               <div class="">
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label>
-                  <div class="col-sm-8">
+                  <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
+                  <div class="col-sm-12">
                     <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
-                    <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title">
+                    <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title">
                     <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub Title Required</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Short Description</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.short_desc" required formControlName="short_desc">
-                    <div class="text-danger" *ngIf="!postform.controls['short_desc'].valid && postform.controls['short_desc'].touched">Short Description Required</div>
+                  <div class="col-sm-12">
+                    <select class="form-control-plaintext" [(ngModel)]="addForm.category_id" required formControlName="category_id">
+                        <option value='' selected>Category</option>
+                        <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.name }}</option>
+                    </select>
+
+                    <!-- <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category Required</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Description</label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description"></textarea>
-                    <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description Required</div>
+                  <div class="col-sm-12">
+                    <div class="col-sm-3">
+                      <input type="radio" checked class="input_radio" [checked]="addForm.type == 'O'" formControlName="type" value="'O'"> One Time
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="radio" class="input_radio" [checked]="addForm.type == 'R'" formControlName="type" value="'R'"> Recursive
+                    </div>
+                    <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
                   </div>
                 </div>
+                
+                
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" ng2-google-place-autocomplete (lat)='addForm.lat=$event' (lng)='addForm.lng=$event' [(ngModel)]="addForm.address" required formControlName="address">
-                    <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Address Required</div>
-                  </div>{{addForm.address}}
-                </div>
-
-                <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Organizer</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer">
                     <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer Required</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" 
+                      [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue">
+                    <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
+                    <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="number" class="form-control-plaintext" [(ngModel)]="addForm.cost" formControlName="cost" placeholder="Cost">
+                    <div class="text-danger" *ngIf="!postform.controls['cost'].valid && postform.controls['cost'].touched">Please enter cost</div>
+                  </div>
+                </div> -->
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail">
                     <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Email Required</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Website</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website">
-                    <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone">
+                    <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone Required</div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description"></textarea>
+                    <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description Required</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date">
-                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
+                    <div class="col-sm-12">
+                      <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date">
+                      <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Start Time</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
+                  <div class="col-sm-12">
+                    <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">End Time</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
+                  <div class="col-sm-12">
+                    <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
                     <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Hub Type</label>
-                  <div class="col-sm-8">
-                    <input type="radio" checked class="input_radio" [checked]="addForm.type == 'O'" formControlName="type" value="O"> One Time
-                    <input type="radio" class="input_radio" [checked]="addForm.type == 'R'" formControlName="type" value="R"> Recursive
-                    <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Privacy</label>
-                  <div class="col-sm-8">
-                    <input type="radio" checked class="input_radio" [checked]="addForm.privacy == 'O'" formControlName="privacy" value="O"> Private
-                    <input type="radio" class="input_radio" [checked]="addForm.privacy == 'P'" formControlName="privacy" value="P"> Public
+                  <div class="col-sm-12">
+                    <div class="col-sm-3">
+                      <input type="radio" [(ngModel)]="addForm.privacy" checked class="input_radio" [checked]="addForm.privacy == 'O'" formControlName="privacy" value="O"> Public
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="radio" [(ngModel)]="addForm.privacy" class="input_radio" [checked]="addForm.privacy == 'P'" formControlName="privacy" value="P"> Private
+                    </div>
                     <div class="text-danger" *ngIf="!postform.controls['privacy'].valid && postform.controls['privacy'].touched">Privacy Required</div>
                   </div>
                 </div>
-               
-               
-                <!-- <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Group short description</label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control-plaintext" formControlName="short_desc"></textarea>
-                    <div class="text-danger" *ngIf="!postform.controls['short_desc'].valid && postform.controls['short_desc'].touched">Short description Required</div>
+                <div class="form-group row" *ngIf="addForm.privacy=='P'">
+                  <div class="col-sm-12">
+                    <!-- <select class="form-control-plaintext" multiple>
+                      <option value="{{ user.id }}" *ngFor="let user of userSearchFrndList">{{ user?.name }}</option>
+                    </select> -->
+                    <ng-select [multiple]="true" [(ngModel)]="addForm.friends" formControlName="friends" [items]="items" placeholder="No city selected"></ng-select>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Group long description</label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control-plaintext" formControlName="long_desc"></textarea>
-                  </div>
-                </div>-->
+                
+               
 
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>

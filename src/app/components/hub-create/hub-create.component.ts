@@ -3,6 +3,7 @@ import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
+import { SelectModule } from "../../../../node_modules/ng2-select";
 
 @Component({
   selector: 'app-hub-create',
@@ -25,6 +26,9 @@ export class HubCreateComponent implements OnInit {
   public hubList = [];
   public groupEditDataJson = {};
   public addForm = {};
+  public catList=[];
+  public userSearchFrndList=[];
+  public items=[];
 
   constructor(
     private builder: FormBuilder,
@@ -38,9 +42,6 @@ export class HubCreateComponent implements OnInit {
       title: ['', [
         Validators.required,
         Validators.minLength(3)
-      ]],
-      short_desc: ['', [
-        Validators.required
       ]],
       description: ['', [
         Validators.required
@@ -71,7 +72,17 @@ export class HubCreateComponent implements OnInit {
       ]],
       privacy: ['', [
         Validators.required
-      ]]
+      ]],
+      category_id: ['', [
+        Validators.required
+      ]],
+      // cost: ['', [
+      //   Validators.required
+      // ]],
+      phone: ['', [
+        Validators.required
+      ]],
+      friends: ['', []]
     });
 
     /*this.editPostform = builder.group({
@@ -98,6 +109,8 @@ export class HubCreateComponent implements OnInit {
     this.getMyGroupListData();
     // this.getGroupRequestList();
     this.getHubList();
+    this.getHubCategories();
+    this.getFriendList();
   }
   
   public getHubList(){
@@ -161,6 +174,43 @@ export class HubCreateComponent implements OnInit {
     this.aboutActiveTab = 'edit_group';
     this.successMsg = '';
     this.postImgData = '';
+  }
+
+  public getHubCategories(){
+    this.dataService.apparticleWithCat().subscribe(data => {
+      console.log('category details ', data);
+      if (data.Ack == "1") {
+        this.catList = data.ArticleCatList;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      })
+  }
+
+  public getFriendList(){
+    this.dataService.searchFrndListByName({suname:"", user_id: this.loginUserId})
+      .subscribe(
+      data => {
+        this.loading = false;
+        console.log(data);
+        if (data.Ack == '1') {
+          this.userSearchFrndList = data.FriendListById;
+          this.userSearchFrndList.forEach((color: { name: string, id: string }) => {
+            this.items.push({
+              id: color.id,
+              text: color.name
+            });
+          });
+        } else {
+          this.userSearchFrndList =[];
+        }
+        //console.log(data);
+        //this.postform.reset();
+      },
+      error => {
+        alert(error);
+      });
   }
 
   // public createGroupPost() {
