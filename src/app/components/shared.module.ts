@@ -21,6 +21,7 @@ import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 import { EmojiPickerModule } from 'angular2-emoji-picker';
 import { HubCreateComponent } from './hub-create/hub-create.component';
 import { HubService } from "./hub-create/hub.service";
+import { SelectModule } from "../../../node_modules/ng2-select";
 
 @NgModule({ 
     declarations: [
@@ -42,7 +43,8 @@ import { HubService } from "./hub-create/hub.service";
         ReactiveFormsModule,
         ApplicationPipes,
         EmojiPickerModule.forRoot(),
-        NgbModule
+        NgbModule,
+        SelectModule
     ],
     exports: [
         UserSidebar,
