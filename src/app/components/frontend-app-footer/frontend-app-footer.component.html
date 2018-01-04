@@ -19,9 +19,9 @@
                 <div  class="col-md-3 col-sm-6">
                     <h5>ABOUT FEMNESTY</h5>
                    
-                    <ul *ngFor="let cmslist of cms.ContentAllBySlug">
+                    <ul *ngFor="let cmslist of cms">
 
-                        <li ><a [routerLink]="['/page/',cmslist.slug]" >{{cmslist.page_heading}}</a></li>
+                        <li ><a [routerLink]="['/page/',cmslist?.slug]" >{{cmslist?.page_heading}}</a></li>
                         <!-- <li><a [routerLink]="['/page/who-are-we']">Who are we?</a></li>
                         <li><a [routerLink]="['/page/advisory-team']">Advisory Team</a></li>
                         <li><a [routerLink]="['/page/partnership']">Partnership</a></li>
