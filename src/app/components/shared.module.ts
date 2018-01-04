@@ -22,7 +22,7 @@ import { EmojiPickerModule } from 'angular2-emoji-picker';
 import { HubCreateComponent } from './hub-create/hub-create.component';
 import { HubService } from "./hub-create/hub.service";
 
-@NgModule({
+@NgModule({ 
     declarations: [
         UserSidebar,
         PostCardComponent,
