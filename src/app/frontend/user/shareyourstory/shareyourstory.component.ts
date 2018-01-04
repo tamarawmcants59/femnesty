@@ -43,6 +43,10 @@ export class ShareyourstoryComponent implements OnInit {
       image: ['', [
         //Validators.required,
         //Validators.minLength(3)
+      ]],
+      agreetab: ['', [
+        Validators.required,
+        //Validators.minLength(3)
       ]]
     }); 
   }
@@ -71,9 +75,9 @@ export class ShareyourstoryComponent implements OnInit {
       const userValue = this.form.value;
       userValue.user_id = this.loginUserId;
       userValue.image = this.postImgData;
-      console.log(userValue);
+      //console.log(userValue.agreetab);
       this.dataService.appsharestory(userValue).subscribe(data => {
-        console.log(data);
+        //console.log(data);
         if (data.Ack == "1") {
           this.showPostImgDive = false;
           this.postImgData='';

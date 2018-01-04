@@ -4,3 +4,15 @@
 .inner-banner .row{
 	height:40vh !important;
 }
+.bcome-mntr .row h1{
+	font-size: 42px;
+}
+.btn.btn-primary{
+    font-weight: bold;
+    padding: 1em 2em;
+	font-size: 16px !important;
+	font-family: 'sanchezregular';
+}
+.form-area .form-control{
+	font-size: 16px;
+}
