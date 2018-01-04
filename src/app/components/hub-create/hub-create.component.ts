@@ -47,6 +47,30 @@ export class HubCreateComponent implements OnInit {
       ]],
       address: ['', [
         Validators.required
+      ]],
+      organizer: ['', [
+        Validators.required
+      ]],
+      email: ['', [
+        Validators.required
+      ]],
+      website: ['', [
+        //Validators.required
+      ]],
+      date: ['', [
+        Validators.required
+      ]],
+      start_time: ['', [
+        Validators.required
+      ]],
+      end_time: ['', [
+        Validators.required
+      ]],
+      type: ['', [
+        Validators.required
+      ]],
+      privacy: ['', [
+        Validators.required
       ]]
     });
 
@@ -99,8 +123,9 @@ export class HubCreateComponent implements OnInit {
       data => {
         this.showPostImgDive = false;
         this.loading = false;
-        this.successMsg = 'Successfully create the group';
+        this.successMsg = 'Hub Created Successfully';
         this.postform.reset();
+        this.aboutActiveTab = 'overview';
         this.getHubList();
       },
       error => {
