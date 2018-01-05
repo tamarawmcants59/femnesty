@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { EnrichmentService } from "../enrichment.service";
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
+import { Meta } from '@angular/platform-browser';
+//import { ShareButtons } from '@ngx-share/core';
 
 @Component({
   selector: 'app-bookdetails',
   templateUrl: './bookdetails.component.html',
-  styleUrls: ['./bookdetails.component.css']
+  styleUrls: ['./bookdetails.component.css'],
 })
 export class BookdetailsComponent implements OnInit {
   bookDetData=[];
@@ -17,12 +19,16 @@ export class BookdetailsComponent implements OnInit {
   successMsg='';
   public ratListData=[];
   public repoUrl = '';
+  public isloginUser ='';
+  public loginUserDetails:any;
 
   constructor(
     private builder: FormBuilder,
     private _book_details: EnrichmentService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private metaService: Meta,
+    //public sosShare: ShareButtons
   ) { 
     this.postform = builder.group({
       name: ['', [
@@ -44,12 +50,23 @@ export class BookdetailsComponent implements OnInit {
         //console.log(this.bookSlugName);
     });
 
+    this.isloginUser = localStorage.getItem("isLoggedIn");
+    let logUserDet=localStorage.getItem("currentUser");
+    this.loginUserDetails = JSON.parse(logUserDet);
+    //console.log(this.loginUserDetails);
     this._book_details.getBookDetBySlug(this.bookSlugName).subscribe(data=>{
       let details=data;
       if (details.Ack=="1") {
         //console.log(data);
           this.bookDetData = details.BooksDetailsBySlug[0];
           this.bookId=details.BooksDetailsBySlug[0].id;
+          this.metaService.updateTag({ name: 'title', content: details.BooksDetailsBySlug[0].title});
+          this.metaService.updateTag({ property: 'og:title', content: details.BooksDetailsBySlug[0].title});
+          this.metaService.updateTag({ name: 'description', content: details.BooksDetailsBySlug[0].description});
+          this.metaService.updateTag({ property: 'og:description', content: details.BooksDetailsBySlug[0].description});
+          this.metaService.updateTag({ property: 'og:image', content: details.BooksDetailsBySlug[0].image_url});
+          //this.metaService.updateTag({ property: 'og:url', content: this.repoUrl});
+         
           this.getRatingList();
           return false;
       }else{
