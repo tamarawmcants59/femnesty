@@ -31,11 +31,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   };
   room_id: string;
   users = [];
-  message: string;
+  public message: string ='';
   search_con: string;
-  fileData: any;
+  public fileData: any ='';
   dbRef: any;
   isComponentActive: boolean;
+  errorMsg='';
   constructor(
     private db: AngularFirestore,
     private userService: UserService,
@@ -125,21 +126,31 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   sendMessage() {
-    const data = {
-      room_id: this.room_id,
-      to_user_id: this.fromUserId,
-      from_user_id: this.loginUserId,
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-      message: {
-        text: this.message
-      },
-      is_read: false
-    };
-    this.db.collection('Messages').add(data).then(res => {
-      this.message = null;
-    }).catch(err => {
-      console.log('error with fb: ', err);
-    });
+    this.errorMsg='';
+    //console.log(this.fileData);
+    //console.log(this.message);
+    if(this.fileData=='' && this.message==''){
+      this.errorMsg='Please type your message.';
+    }else{
+      if(this.fileData!=''){
+        this.submitPost();
+      }
+      const data = {
+        room_id: this.room_id,
+        to_user_id: this.fromUserId,
+        from_user_id: this.loginUserId,
+        created: firebase.firestore.FieldValue.serverTimestamp(),
+        message: {
+          text: this.message
+        },
+        is_read: false
+      };
+      this.db.collection('Messages').add(data).then(res => {
+        this.message = null;
+      }).catch(err => {
+        //console.log('error with fb: ', err);
+      });
+    }
   }
 
   sendFile(file_name) {
@@ -158,6 +169,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }).catch(err => {
       console.log('error with fb: ', err);
     });
+    this.fileData='';
   }
 
   public fileChangePost($event) {
@@ -170,7 +182,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
       this.fileData = image.src;
-      this.submitPost();
+      //this.submitPost();
     };
     myReader.readAsDataURL(file);
   }
