@@ -70,6 +70,8 @@
             <strong>Success: </strong> {{successMsg}}
           </div>
           <h3>Create Hub</h3>
+          <p>Short description on what a hub is and what is required to make<br> a hub
+and also what they are used for.</p>
           <div class="menu">
             <form class="login-form" [formGroup]="postform" (ngSubmit)="createHub()" #createGroupForm="ngForm">
               <div class="">
@@ -222,7 +224,7 @@
                   </div>
                 </div> 
                 <div class="saveChanges">
-                  <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">Create</button>
+                  <button type="submit" class="btn btn-primary">Create Hub</button>
                 </div>
               </div>
             </form>
