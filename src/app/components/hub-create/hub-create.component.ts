@@ -28,7 +28,8 @@ export class HubCreateComponent implements OnInit {
   public addForm = {};
   public catList=[];
   public userSearchFrndList=[];
-  public items=[];
+  public items = [];
+  public hubRequestList = [];
 
   constructor(
     private builder: FormBuilder,
@@ -177,15 +178,14 @@ export class HubCreateComponent implements OnInit {
   }
 
   public getHubCategories(){
-    this.dataService.apparticleWithCat().subscribe(data => {
-      console.log('category details ', data);
+    this.hubService.getHubCategories().subscribe(data => {
       if (data.Ack == "1") {
-        this.catList = data.ArticleCatList;
+        this.catList = data.details;
       }
     },
       error => {
         console.log('Something went wrong!');
-      })
+      });
   }
 
   public getFriendList(){
@@ -210,6 +210,18 @@ export class HubCreateComponent implements OnInit {
       },
       error => {
         alert(error);
+      });
+  }
+
+  public getMyHubRequest(){
+    this.hubService.getMyHubRequest(this.loginUserId).subscribe(data => {
+      console.log('category details ', data);
+      if (data.Ack == "1") {
+        this.hubRequestList = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
       });
   }
 

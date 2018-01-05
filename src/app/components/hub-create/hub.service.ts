@@ -21,11 +21,20 @@ export class HubService {
     }
 
     createNewHub(form_data){
-        console.log(form_data)
         return this.apiService.post(
             `/hub/add`,
             form_data
         ).map(data => data);
+    }
+
+    getMyHubRequest(user_id)
+    {
+        return this.apiService.get(`/hub/invites/` + user_id).map(data => data);
+    }
+
+    getHubCategories()
+    {
+        return this.apiService.get(`/hub/categories`).map(data => data);
     }
 
 
