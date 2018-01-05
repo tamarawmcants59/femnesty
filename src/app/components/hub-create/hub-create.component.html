@@ -34,12 +34,12 @@
                 <ul class="uilist connection-box" *ngIf="hubList?.length > 0">
                   <li class="connectionList" *ngFor="let groupData of hubList">
                     <div class="connectionImage">
-                      <a [routerLink]="['/group/details',groupData.group_uname]">
+                      <a [routerLink]="['/user/hub_details/',groupData.slug]">
                         <div class="img" [ngStyle]="{'background-image':'url('+groupData.image+')'}"></div>
                       </a>
                     </div>
                     <div class="connectionText">
-                      <a [routerLink]="['/group/details',groupData.group_uname]">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]">
                         <h2>{{groupData.title}}</h2>
                       </a>
                       <!-- <p>{{groupData.title}} members</p> -->
@@ -262,12 +262,12 @@ and also what they are used for.</p>
 <li class="connectionList" *ngFor="let groupData of hubRequestList">
 
                     <div class="connectionImage">
-                      <a [routerLink]="['/group/details',groupData.group_uname]">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]">
                         <div class="img" [ngStyle]="{'background-image':'url('+groupData.profile_image+')'}"></div>
                       </a>
                     </div>
                     <div class="connectionText">
-                      <a [routerLink]="['/group/details',groupData.group_uname]">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]">
                         <h2>{{groupData.title}}</h2>
                       </a>
                       <p>{{groupData.member_count}} members</p>
