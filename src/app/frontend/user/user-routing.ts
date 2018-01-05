@@ -72,7 +72,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'hub_details',
+    path: 'hub_details/:slug',
     canActivate: [AuthGuard],
     component: HubsComponent,
     data: {

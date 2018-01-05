@@ -37,5 +37,18 @@ export class HubService {
         return this.apiService.get(`/hub/categories`).map(data => data);
     }
 
+    getHubDetails(slug)
+    {
+        return this.apiService.get(`/hub/details/` + slug).map(data => data);
+    }
+
+    attendHub(data)
+    {
+        return this.apiService.post(
+            `/hub/attend`,
+            data
+        ).map(data => data);
+    }
+
 
 }
