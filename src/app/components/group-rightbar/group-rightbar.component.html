@@ -11,16 +11,16 @@
     </div>
     <div class="innerRightPart">
         <h2>Members</h2>
-        <div class="hubMet hubMet1">
-            <div class="row" *ngIf="groupMemberList?.length > 0">
-                <div class="col-md-3" *ngFor="let memdata of groupMemberList; index as i" [ngClass]="{'isHideDiv': i>11, 'isShowDiv': showMemberDiv}">
+        
+            <div class="row member" *ngIf="groupMemberList?.length > 0">
+                <div class="col-md-3 col-xs-3" *ngFor="let memdata of groupMemberList; index as i" [ngClass]="{'isHideDiv': i>11, 'isShowDiv': showMemberDiv}">
                     <a [routerLink]="['/user/profile',memdata.display_name]" title="{{memdata.name}}">
                         <div class="img" [ngStyle]="{'background-image':'url('+memdata.profile_image+')'}"></div>
                     </a>
                 </div>
                 <a *ngIf="memberViewAll" (click)="showAllMember()" class="viewAll text-center col-md-12">View All ({{groupMemberList?.length}}) </a>
             </div>
-        </div>
+        
     </div>
     
     <div class="innerRightPart">
