@@ -158,6 +158,7 @@
 
 
 
+
 @font-face {
     font-family: 'montserratsemibold';
     src: url('../fonts/montserrat-semibold-webfont.eot');
@@ -4728,4 +4729,31 @@ emoji-categories{
 
 .innerRightPart .col-md-8 h2{
 	font-family: 'sanchezregular';
+}
+.edit-forms select{
+	background-image: url('../assets/images/down-arrow_n.png') !important;
+	width: 100%;
+	height: 64px;
+	border: none;
+	padding: 0 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-position: 96% center !important;
+	background-size: 15px auto;
+	background-repeat:  no-repeat !important;
+	margin-bottom: 15px !important;
+
+}
+
+.edit-forms .form-group .form-control{
+	background: #f7f7f7 !important;
+    border: none !importan;
+    box-shadow: none;
+    height: auto !important;
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'sanchezregular';
+    color: #707070;
+    border-radius: 3px !important;
 }
