@@ -22,21 +22,30 @@
                                         <img class="img img-responsive" *ngIf="chat.message.image" src="{{chat.message.image}}" />
                                         <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
                                         <div class="clearfix"></div>
-                                        <p class="date">{{chat.created | timeAgo}}</p>
+                                        <!--<p class="date">{{chat.created | timeAgo}}</p>-->
+                                        <p class="date">{{chat.created | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="message-writing-wrap">
+                            <div class="row" *ngIf="(errorMsg != '')">
+                                <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                                    {{errorMsg}}
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <textarea [(ngModel)]="message" class="form-control" placeholder="Type a message.."></textarea>
                             </div>
                             <div class="text-right">
+                                <span class="result" *ngIf="fileData" style="width:30%; float:left">
+                                    <img [src]="fileData" [height]="150">
+                                </span>
                                 <div class="attach-file">
                                     <input type="file" name="myfile" (change)="fileChangePost($event)" />
                                     <span>Attach File</span>
                                 </div>
-                                <button type="button" (click)="sendMessage()" [disabled]="!message" class="btn btn-primary pull-right">Send</button>
+                                <button type="button" (click)="sendMessage()" class="btn btn-primary pull-right">Send</button>
                             </div>
                         </div>
                     </div>
