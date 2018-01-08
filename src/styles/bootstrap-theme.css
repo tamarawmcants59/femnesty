@@ -4392,18 +4392,10 @@ section h1:after{
 	left: 50% !important;
    transform: translateX(-50%);
 }
-.mentor-partner h2{
-    font-size: 30px !important;
-}
-.mentor-partner{
-	padding: 45px 0 !important;
-}
- .mt-100{
-		margin-top: 35px;
-	}
-.what-is-femnesty p{
-	padding-right: 0 !important;
-}
+.mentor-partner h2{font-size: 30px !important;}
+.mentor-partner{padding: 45px 0 !important;}
+ .mt-100{margin-top: 35px;}
+.what-is-femnesty p{padding-right: 0 !important;}
 .new-tabs .nav-tabs li a:hover{background: #fff !important;color:#000 !important}
 .new-tabs .nav-tabs li a{padding: 10px 5px !important;font-size: 10px !important;}
 .notification-wrap ul li{flex-wrap:wrap;}
@@ -4411,13 +4403,12 @@ section h1:after{
 .header-top ul li{margin: 0 3px 0 0;}
 
     
-	
 	.flex-profile {display: block;}
 	.flex-profile .flex-left {width: 100% !important;}
     .fix-to-top {position: relative !important; width: 100% !important; top: 0 !important;}
     .left-list.fix-to-top {width:100% !important;}
 
-
+	header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu{position: relative; float:none}
 
 }
 @media screen and (max-width:480px) {
@@ -4734,8 +4725,8 @@ header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding
 /*------------------------------- 08-01-2018 soumen --------------------------*/
 
 .articl, .enrich{position:relative}
-header .nav.navbar-nav li ul.submenu{position: absolute; top:44px; left: 0; background:#fff; border:2px solid #f7f7f7; min-width: 180px;}
-header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#666666}
+header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:11px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#666666}
+header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu{top:63px;}
 
 .shareYourThought form .result, .message-writing-wrap .result{position: relative; display: inline-block;}
 .shareYourThought form .result .del-btn, .message-writing-wrap .result .del-btn{position: absolute; right:-10px; width:22px; height:22px; background: #bb1926; line-height: 23px; color:#fff; text-align: center; top: -11px; border-radius: 100%; cursor: pointer;}
