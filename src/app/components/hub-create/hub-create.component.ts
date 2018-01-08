@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
+import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 
 @Component({
   selector: 'app-hub-create',
@@ -30,6 +31,7 @@ export class HubCreateComponent implements OnInit {
   public userSearchFrndList=[];
   public items = [];
   public hubRequestList = [];
+  public searchData = {address:'',lat:'',lng:''}
 
   constructor(
     private builder: FormBuilder,
@@ -47,9 +49,9 @@ export class HubCreateComponent implements OnInit {
       description: ['', [
         Validators.required
       ]],
-      address: ['', [
-        Validators.required
-      ]],
+      // address: ['', [
+      //   Validators.required
+      // ]],
       organizer: ['', [
         Validators.required
       ]],
@@ -127,12 +129,23 @@ export class HubCreateComponent implements OnInit {
     );
   }
 
+  autoCompleteCallback1(data: any): any {
+    console.log(data);
+    this.searchData = {address:data.data.description,lat:data.data.geometry.location.lat,lng:data.data.geometry.location.lng};
+  }
+
   public createHub() {
     this.loading = true;
     const userValue = this.postform.value;
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
     console.log(userValue);
+    if (this.searchData.address)
+    {
+      userValue.address = this.searchData.address;
+      userValue.lat = this.searchData.lat;
+      userValue.lng = this.searchData.lng;
+    }
     this.hubService.createNewHub(userValue).subscribe(
       data => {
         this.showPostImgDive = false;

@@ -19,6 +19,7 @@ import { ShareyourstoryComponent } from './shareyourstory/shareyourstory.compone
 import { MentorComponent } from './mentor/mentor.component';
 import { NotificationComponent } from './notification/notification.component';
 import { GroupChatComponent } from "./group-chat/chat.component";
+import { AgmCoreModule } from '@agm/core';
 
 import {
   SocialLoginModule, 
@@ -72,6 +73,9 @@ export function provideConfig() {
       primaryColour: '#bb1926',
       secondaryColour: '#bb1926',
       tertiaryColour: '#ffffff'
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
     })
   ],
   declarations: [
