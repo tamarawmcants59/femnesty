@@ -4,12 +4,18 @@
             <!--<strong>Success: </strong>-->{{successMsg}}
         </div>
     </div>
+    <div class="row" *ngIf="(errorMsg != '')">
+        <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+            <!--<strong>Success: </strong>-->{{errorMsg}}
+        </div>
+    </div>
     <form class="" [formGroup]="postform" #postForm="ngForm">
         <input type="hidden" formControlName="group_type" [(ngModel)]="postType.activitytype">
         <input type="hidden" formControlName="group_id" [(ngModel)]="postType.activityid">
         <div class="col-md-12" *ngIf="showPostImgDive">
             <span class="result" *ngIf="postImgData">
                 <img [src]="postImgData" [height]="200" >
+                <a (click)="deleteImg()" class="btn btn-primary pull-right"> <i class="icon ion-android-delete"></i> Delete</a>
             </span>
         </div>
         <div class="textarea">

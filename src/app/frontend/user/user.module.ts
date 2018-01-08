@@ -34,6 +34,7 @@ import { ActivationlinkComponent } from './activationlink/activationlink.compone
 import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from './createhub/createhub.component';
+import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -93,7 +94,8 @@ export function provideConfig() {
     ActivationlinkComponent,
     BrowsehubComponent,
     HubsComponent,
-    CreatehubComponent
+    CreatehubComponent,
+    GroupphotoComponent
     //ImageCropperComponent
   ],
   providers: [

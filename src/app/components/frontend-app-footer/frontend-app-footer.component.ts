@@ -304,20 +304,11 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
       }
     });   
   }
+  
   public cmsAll(){
     this._service.getAllPageData().subscribe(data => {
-      this.cms=data;
-      console.log(this.cms);
-    if(data.Ack==1){
-// for(let i=0;i<data;i++){
-//   //this.cms=;
-// }
-      
-      
-    }
-
+        this.cms=data.ContentAllBySlug;     
+    });
   }
-    );
-}
 
 }

@@ -9,155 +9,45 @@
 			</div>
 			<div class="col-md-6 flex-middle">
 				<div class="middlePart">
-					<div class="topPart" style="background: url('assets/images/join-team-bg.jpg') no-repeat center center;"></div>
+					<div class="topPart" [ngStyle]="{'background-image':'url('+hubDetails.image+')'}"></div>
 					<div class="hubDes">
-						<h2>Hub Name</h2>
-						<p class="shortP">Hub Short Description</p>
-						<p class="attendingP">202 people are attending this hub</p>
+						<h2>{{hubDetails.title}}</h2>
+						<!-- <p class="shortP">Hub Short Description</p> -->
+						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0">
-							<button type="button" class="btn btn-primary">Attend</button>
+							<button type="button" class="btn btn-primary" (click)="attendHub()">Attend</button>
 							<button type="button" class="btn btn-default">Add to calendar</button>
 						</p>
 					</div>
 					<div class="tabPart">
 						<ul class="nav nav-pills">
-							<li class="active"><a href="">Hub Activity</a></li>
-							<li><a href="">Hub Details</a></li>
-							<li><a href="">Invite Member</a></li>
+							<li [ngClass]="{'active':activeTab=='posts'}"><a (click)="activeTab='posts'">Hub Activity</a></li>
+							<li [ngClass]="{'active':activeTab=='details'}"><a (click)="activeTab='details'">Hub Details</a></li>
+							<li [ngClass]="{'active':activeTab=='invite'}"><a (click)="activeTab='invite'">Invite Member</a></li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane fade in active">
-								<div class="shareYourThought">
-									<div class="textarea">
-										<div class="form-group">
-											<textarea class="form-control" placeholder="Share your thoughts..."></textarea>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-9">
-											<ul class="uploadVideo">
-												<li>
-							                        <div class="upload-btn-wrapper uploadButtonPart">
-							                            <button class="btn">Upload video/Image</button>
-							                            <input  name="myfile" type="file">
-							                        </div>
-	                    						</li>
-	                    						<li>
-	                    							<p class="connectionsonly-check">
-                        							<input type="checkbox" class="ng-untouched ng-pristine ng-valid" id="ConnectionsOnly" value="1" ng-reflect-name="is_connection">
-	                        						<i class="icon ion-ios-people-outline"></i>
-	                        						<label  for="ConnectionsOnly"> Connections Only</label>                    			
-													</p>
-												</li>
-											</ul>
-										</div>
-										<div class="col-md-3">
-											<button class="btn btn-primary" type="submit" disabled="">Post</button>
-										</div>
+							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
+								<div >
+									<app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+								</div>
+								<div *ngIf="groupPostList?.length > 0">
+									<div class="likePart" *ngFor="let postData of groupPostList">
+										<app-post-card [postData]="postData"></app-post-card>
 									</div>
 								</div>
-								<div class="likePart HUB-likePart">
+								<div class="likePart" *ngIf="groupPostList?.length == 0">
 									<div class="row">
 										<div class="col-md-10">
-											<div class="imageParts">
-												<div class="profImageP">
-                									<a href="">
-                										<div class="img" style="background:url('assets/images/adam.jpg') no-repeat center center; background-size: cover"></div>
-                									</a>
-            									</div>
-            									<div class="profTextPart">
-													<a href=""><h2>Lotta Engberg</h2></a>
-                									<p>30th Nov 2017</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-2">
-											<p class="icondown"><i class="icon ion-chevron-down"></i></p>
-										</div>
-									</div>
-									<div class="row">
-									    <div class="col-md-12">
-									        <div class="userComment HUB-userComment">
-									            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-									            <ul>
-									                <li><a href="javascript: void(0);">0 Likes</a></li>
-									                <li><a href="javascript: void(0);">0 Comments</a></li>
-									            </ul>
-											</div>
-        								<div class="likeComment">
-            								<div class="row">
-								                <div class="col-md-10 col-xs-8">
-								                    <ul>
-														<li><a href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
-                        								<li><a href="Javascript:void(0);"><i _ngcontent-c4="" class="fa fa-commenting-o"></i></a></li>
-													</ul>
-												</div>
-												<div class="col-md-2 col-xs-4">
-													<ul class="social-link pull-right">
-														<li>
-                                							<a href="" _ngcontent-c4="" ceiboshare="" style="width: 25px; height: 25px; color:#cc535c; background: #fff" ng-reflect-facebook="[object Object]">
-                                    							<i class="ion-forward" style="font-size:22px"></i>
-															</a>
-														</li>
-													</ul>
-												</div>
-								            </div>
-								        </div>
-									</div>
-								</div>
-								</div>
-								<div class="likePart HUB-likePart">
-									<div class="row">
-										<div class="col-md-10">
-											<div class="imageParts">
-												<div class="profImageP">
-                									<a href="">
-                										<div class="img" style="background:url('assets/images/catherine.jpg') no-repeat center center; background-size: cover"></div>
-                									</a>
-            									</div>
-            									<div class="profTextPart">
-													<a href=""><h2>Lotta Engberg</h2></a>
-                									<p>30th Nov 2017</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-2">
-											<p class="icondown"><i class="icon ion-chevron-down"></i></p>
-										</div>
-									</div>
-									<div class="row">
-									    <div class="col-md-12">
-									        <div class="userComment HUB-userComment">
-									            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-									            <p><img class="img-responsive" src="assets/images/menotor-bg.jpg"></p>
-									            <ul>
-									                <li><a href="javascript: void(0);">0 Likes</a></li>
-									                <li><a href="javascript: void(0);">0 Comments</a></li>
-									            </ul>
-											</div>
-	        								<div class="likeComment">
-	            								<div class="row">
-									                <div class="col-md-10 col-xs-8">
-									                    <ul>
-															<li><a href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
-	                        								<li><a href="Javascript:void(0);"><i _ngcontent-c4="" class="fa fa-commenting-o"></i></a></li>
-														</ul>
-													</div>
-													<div class="col-md-2 col-xs-4">
-														<ul class="social-link pull-right">
-															<li>
-	                                							<a href="" _ngcontent-c4="" ceiboshare="" style="width: 25px; height: 25px; color:#cc535c; background: #fff" ng-reflect-facebook="[object Object]">
-	                                    							<i class="ion-forward" style="font-size:22px"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-									            </div>
-									        </div>
+											<div class="nothing">Nothing more to show</div>
 										</div>
 									</div>
 								</div>
-								<p class="nothing-more text-center">Nothing more to show</p>
+							</div>
+							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='details'}">
+								Details
+							</div>
+							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
+								
 							</div>
 						</div>
 					</div>
@@ -166,12 +56,14 @@
 			<div class="col-md-3 flex-right">
 				<div class="rightPart">                			
 					<div class="innerRightPart right-map-details HUB-Dtls">
-      					<h2>Hub DETAILS</h2>
-      					<p class="HUB-Dtls-txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-      					<p class="info"><span>Organizer:</span> Erik</p>
-      					<p class="info"><span>Email:</span> hej@eriksandberg.se</p>
-      					<p class="info"><span>Website:</span> www.eriksandberg.se</p>
-      					<p class="info"><span>Privacy:</span> Invite Only</p>
+      					<h2>{{hubDetails.title}}</h2>
+      					<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
+      					<p class="info"><span>Organizer:</span> {{hubDetails.Organizer}}</p>
+						  <p class="info"><span>Email:</span> {{hubDetails.email}}</p>
+						<p class="info">
+							<span>Phone:</span> {{hubDetails.phone}}</p>
+      					<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
+      					<p class="info"><span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
 					</div>
 					
 					<div class="innerRightPart right-map-details HUB-Dtls">
@@ -187,41 +79,8 @@
 					<div class="innerRightPart right-map-details attending HUB-Dtls">
 						<h2>Attending</h2>
 						<ul>         
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
-							</li>
-							<li>               
-								<a href=""><img src="assets/images/catherine.jpg" alt="" /></a>
+							<li *ngFor="let user of hubDetails.attenders">               
+								<a [routerLink]="['/user/profile',user.display_name]"><img src="{{user.profile_image}}" alt="" /></a>
 							</li>
 						</ul>
 						<a href="#" class="viewAll text-center">View All (200)</a>

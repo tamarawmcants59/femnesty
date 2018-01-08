@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+//import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
@@ -24,13 +25,17 @@ export class LoginComponent implements OnInit {
   private socialUser: SocialUser;
   private loggedIn: boolean;
   public pageHeading: string = 'Login';
+  //public myFocusDivEmitter = new EventEmitter<boolean>();
+  //@ViewChild('scrollMeDiv') private myChatContainer: ElementRef;
+  //@Inject(Window) private window: Window;
 
   constructor(
     private builder: FormBuilder,
     private loginService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+   
   ) {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
@@ -58,6 +63,12 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/user/edit_profile/activity');
     }
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    //console.log(localStorage.getItem("signupSuccessMsg"));
+    if(localStorage.getItem("signupSuccessMsg")){
+      this.successMsg=localStorage.getItem("signupSuccessMsg");
+      localStorage.removeItem("signupSuccessMsg");
+    }
+    
   }
 
   public checkLogin(values: Object): void {
@@ -83,7 +94,10 @@ export class LoginComponent implements OnInit {
           } else {
             this.errorMsg = details.msg;
             this.loading = false;
-            return false;
+            window.scrollTo(0,0);
+            //this.window.document.getElementById('errorMsgDiv').scrollIntoView();
+            //this.myFocusDivEmitter.emit(true);
+            //return false;
           }
         },
         error => {
@@ -110,6 +124,7 @@ export class LoginComponent implements OnInit {
             this.errorMsg = data.msg;
             this.loading = false;
           }
+          window.scrollTo(0,0);
         },
         error => {
           this.loading = false;
@@ -121,6 +136,8 @@ export class LoginComponent implements OnInit {
 
   userForgotPws(){
     this.pageHeading='Forgot Password';
+    this.errorMsg = '';
+    this.successMsg = '';
   }
   
   signInWithGoogle(): void {
@@ -138,4 +155,10 @@ export class LoginComponent implements OnInit {
   signOut(): void {
     this.authService.signOut();
   }
+
+  /*scrollToBottom(): void {
+    try {
+      this.myChatContainer.nativeElement.scrollTop = this.myChatContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }*/
 }
