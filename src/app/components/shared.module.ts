@@ -19,8 +19,11 @@ import { GroupRightbarComponent } from './group-rightbar/group-rightbar.componen
 import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
 import { ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 import { EmojiPickerModule } from 'angular2-emoji-picker';
+import { HubCreateComponent } from './hub-create/hub-create.component';
+import { HubService } from "./hub-create/hub.service";
+import { SelectModule } from "../../../node_modules/ng2-select";
 
-@NgModule({
+@NgModule({ 
     declarations: [
         UserSidebar,
         PostCardComponent,
@@ -31,6 +34,7 @@ import { EmojiPickerModule } from 'angular2-emoji-picker';
         GroupRightbarComponent,
         CompanyRightbarComponent,
         ImageCropperComponent,
+        HubCreateComponent,
     ],
     imports: [
         CommonModule,
@@ -39,7 +43,8 @@ import { EmojiPickerModule } from 'angular2-emoji-picker';
         ReactiveFormsModule,
         ApplicationPipes,
         EmojiPickerModule.forRoot(),
-        NgbModule
+        NgbModule,
+        SelectModule
     ],
     exports: [
         UserSidebar,
@@ -51,8 +56,10 @@ import { EmojiPickerModule } from 'angular2-emoji-picker';
         GroupRightbarComponent,
         CompanyRightbarComponent,
         ImageCropperComponent,
+        HubCreateComponent
     ],
     providers: [
+        HubService,
         SocialService
     ]
 })

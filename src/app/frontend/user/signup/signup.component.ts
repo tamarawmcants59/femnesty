@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
-      console.log(user);
+      //console.log(user);
       this.loggedIn = (user != null);
     });
     
@@ -122,12 +122,14 @@ export class SignupComponent implements OnInit {
             let details=data;
             if (details.Ack=="1") {
                 this.loading = false;
+                localStorage.setItem('signupSuccessMsg', 'You have successfully signup.Please check your email to activate your account.');
                 this.router.navigate(['/user/login']);
                 return false;
             }else{
               //alert('Invalid login');
               this.errorMsg=details.msg;
               this.loading = false;
+              window.scrollTo(0,0);
               return false;
             }
         },

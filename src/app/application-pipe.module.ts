@@ -10,7 +10,8 @@ import { CeiboShare } from 'ng2-social-share';
     SafePipe,
     DateFormatPipe,
     DateTimeFormatPipe,
-    CeiboShare
+    CeiboShare,
+    //ShareModule
   ],
   imports: [
     CommonModule
@@ -20,7 +21,8 @@ import { CeiboShare } from 'ng2-social-share';
     SafePipe,
     DateFormatPipe,
     DateTimeFormatPipe,
-    CeiboShare
+    CeiboShare,
+    //ShareModule
   ]
 })
 export class ApplicationPipes { }

@@ -158,6 +158,7 @@
 
 
 
+
 @font-face {
     font-family: 'montserratsemibold';
     src: url('../fonts/montserrat-semibold-webfont.eot');
@@ -4082,7 +4083,7 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 
 .latest-article h2{font-size:20px;text-transform: capitalize;border-bottom:3px solid #000000;padding-bottom: 10px;margin-bottom: 15px;
 }
-.latest-article .hubMet.hubMet2 .img {
+.latest-article .hubMet.hubMet2 .img { 
     border-radius: 0;
     width: 103px;
     height: 82px;
@@ -4270,6 +4271,8 @@ font-weight: normal;padding: 2px 5px;}
 /******************** Responsive Style **********************/
 
 .section.about-content-area{min-height: 700px;}
+.profPhoto .img{background: #fff;}
+
 
 
 @media screen and (max-width:1242px) {
@@ -4299,6 +4302,13 @@ font-weight: normal;padding: 2px 5px;}
 }
 
 @media screen and (max-width:767px) {
+	.profPhoto .img{width: 180px;height: 180px;background-size: cover !important}
+	.profPhoto .img {top: -82px !important;}
+	.profPhoto .img .inner-bg{height: 170px;}
+	.profPhoto .img .inner-bg .icon-change{width: 180px;}
+	
+	.friend-box .friend-box-list{width:100%;margin-right: 0px;}
+	.connections{margin-top: 15px;}
 	.new-chat-section ul li .text-area{width:72%}
 	.sign-up-social .social-link{margin: 0 0px;}
 	.social-link li{margin-right: 5px}
@@ -4414,6 +4424,7 @@ section h1:after{
 		.header-top ul li {
     margin: 4px 3px;
 }
+	.sign-up-social span{margin-bottom: 10px;display: inline-block;}
 	.MyGroups-list{padding: 15px;margin: 15px 0}
 	.latest-article .hubMet.hubMet2 .img{width: 82px;}
 	.MyGroups-list .search-list li .left-side {width: 70px;height:70px}
@@ -4680,6 +4691,38 @@ emoji-categories{display: none !important;}
 
 /*------------------------------- 08-01-2018 --------------------------*/
 
+
 .articl, .enrich{position:relative}
 header .nav.navbar-nav li ul.submenu{position: absolute; top:44px; left: 0; background:#fff; border:2px solid #f7f7f7; min-width: 180px;}
 header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#666666}
+
+.innerRightPart .col-md-8 h2{
+	font-family: 'sanchezregular';
+}
+.edit-forms select{
+	background-image: url('../assets/images/down-arrow_n.png') !important;
+	width: 100%;
+	height: 64px;
+	border: none;
+	padding: 0 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-position: 96% center !important;
+	background-size: 15px auto;
+	background-repeat:  no-repeat !important;
+	margin-bottom: 15px !important;
+
+}
+
+.edit-forms .form-group .form-control{
+	background: #f7f7f7 !important;
+    border: none !importan;
+    box-shadow: none;
+    height: auto !important;
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'sanchezregular';
+    color: #707070;
+    border-radius: 3px !important;
+}

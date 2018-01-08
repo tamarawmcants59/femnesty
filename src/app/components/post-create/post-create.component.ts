@@ -22,6 +22,7 @@ export class PostCreateComponent implements OnInit {
   loading: boolean;
   showPostImgDive: boolean;
   successMsg= '';
+  errorMsg= '';
   postImgData='';
 
   constructor(
@@ -34,8 +35,8 @@ export class PostCreateComponent implements OnInit {
   ) {
     this.postform = builder.group({
       description: ['', [
-        Validators.required,
-        Validators.minLength(3)
+        //Validators.required,
+        //Validators.minLength(3)
       ]],
       file_name: ['', [
         //Validators.required,
@@ -74,6 +75,8 @@ export class PostCreateComponent implements OnInit {
   }*/
 
   public submitPost() {
+    this.successMsg= '';
+    this.errorMsg= '';
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const result = {},
@@ -81,19 +84,22 @@ export class PostCreateComponent implements OnInit {
     userValue.user_id = loginUserId;
     userValue.file_name = this.postImgData;
     //console.log(userValue);
-    this.dataService.postDataSend(userValue).subscribe(data => {
-        this.showPostImgDive = false;
-        this.loading = false;
-        this.successMsg = 'Successfully post data';
-        this.postImgData='';
-        this.postform.controls['description'].setValue('');
-        this.getUserPostDetails.emit();
-        //this.postform.reset();
-      },
-      error => {
-        alert(error);
-      });
-
+    if(userValue.description!='' || userValue.file_name!=''){
+      this.dataService.postDataSend(userValue).subscribe(data => {
+          this.showPostImgDive = false;
+          this.loading = false;
+          this.successMsg = 'Successfully post data';
+          this.postImgData='';
+          this.postform.controls['description'].setValue('');
+          this.getUserPostDetails.emit();
+          //this.postform.reset();
+        },
+        error => {
+          alert(error);
+        });
+    }else{
+      this.errorMsg= 'Please share your thoughts or upload image.';
+    }
   }
 
   public fileChangePost($event) {
@@ -109,6 +115,11 @@ export class PostCreateComponent implements OnInit {
       //console.log(image.src);
     };
     myReader.readAsDataURL(file);
+  }
+  
+  public deleteImg() {
+    this.postImgData='';
+    this.showPostImgDive = false;
   }
 
 }

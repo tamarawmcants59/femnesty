@@ -31,11 +31,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   };
   room_id: string;
   users = [];
-  message: string;
+  public message: string ='';
   search_con: string;
-  fileData: any;
+  public fileData: any ='';
   dbRef: any;
   isComponentActive: boolean;
+  errorMsg='';
   constructor(
     private db: AngularFirestore,
     private userService: UserService,
@@ -125,21 +126,34 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   sendMessage() {
-    const data = {
-      room_id: this.room_id,
-      to_user_id: this.fromUserId,
-      from_user_id: this.loginUserId,
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-      message: {
-        text: this.message
-      },
-      is_read: false
-    };
-    this.db.collection('Messages').add(data).then(res => {
-      this.message = null;
-    }).catch(err => {
-      console.log('error with fb: ', err);
-    });
+    this.errorMsg='';
+    //console.log(this.fileData);
+    //console.log('bdvcvb '+this.message);
+    if(this.fileData=='' && this.message==''){
+      this.errorMsg='Please type your message.';
+    }else{
+      if(this.fileData!=''){
+        this.submitPost();
+      }
+      const data = {
+        room_id: this.room_id,
+        to_user_id: this.fromUserId,
+        from_user_id: this.loginUserId,
+        created: firebase.firestore.FieldValue.serverTimestamp(),
+        message: {
+          text: this.message
+        },
+        is_read: false
+      };
+      this.db.collection('Messages').add(data).then(res => {
+        //this.message = null;
+        this.message = '';
+      }).catch(err => {
+        //console.log('error with fb: ', err);
+      });
+      this.message = '';
+      //console.log(this.message);
+    }
   }
 
   sendFile(file_name) {
@@ -158,11 +172,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }).catch(err => {
       console.log('error with fb: ', err);
     });
+    this.fileData='';
   }
 
   public fileChangePost($event) {
     //this.showPostImgDive = true;
-    console.log($event);
+    //console.log($event);
     const image: any = new Image();
     const file: File = $event.target.files[0];
     this.fileData = file;
@@ -170,7 +185,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
       this.fileData = image.src;
-      this.submitPost();
+      //this.submitPost();
     };
     myReader.readAsDataURL(file);
   }
@@ -182,7 +197,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.userService.uploadFile(formData)
       .subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         if (data.file_name) {
           this.sendFile(data.file_name);
         }
@@ -213,7 +228,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   public searchConnection() {
-    console.log(this.search_con);
+    //console.log(this.search_con);
     if (this.loginUserId != 0 && this.search_con!='') {
       //this.getConnectionList();
       let goodFriends = this.userFrndList.filter(item => {
@@ -227,4 +242,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
   
+  public deleteImg() {
+    this.fileData='';
+  }
 }

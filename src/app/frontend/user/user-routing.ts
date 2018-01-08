@@ -19,6 +19,7 @@ import { ActivationlinkComponent } from './activationlink/activationlink.compone
 import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from "./createhub/createhub.component";
+import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'group_all_photo/:gid',
+    component: GroupphotoComponent,
+    data: {
+      title: 'Group All Photos'
+    }
+  },
+  {
     path: 'account_verification/:uid',
     component: ActivationlinkComponent,
     data: {
@@ -64,7 +72,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'hub_details',
+    path: 'hub_details/:slug',
     canActivate: [AuthGuard],
     component: HubsComponent,
     data: {
