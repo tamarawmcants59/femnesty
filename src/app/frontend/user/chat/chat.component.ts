@@ -128,7 +128,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   sendMessage() {
     this.errorMsg='';
     //console.log(this.fileData);
-    console.log('bdvcvb '+this.message);
+    //console.log('bdvcvb '+this.message);
     if(this.fileData=='' && this.message==''){
       this.errorMsg='Please type your message.';
     }else{
