@@ -29,8 +29,23 @@
             <div class="collapse navbar-collapse" [ngClass]="{'in':show}">
                 <ul class="nav navbar-nav navbar-right">
                     <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }}</a></li>
-                    <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
-                    <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
+                    <li class="articl">
+                    	<a routerLinkActive="active" [routerLink]="['/articles']">Articles</a>
+                    	<ul class="submenu">
+                    		<li><a href="">Work & Home Balance</a></li>
+                    		<li><a href="">Women in 21st Century</a></li>
+                    		<li><a href="">Strategies for success</a></li>
+                    		<li><a href="">All Articles</a></li>
+                    	</ul>
+                    </li>
+                    <li class="enrich">
+                    	<a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a>
+                    	<ul class="submenu">
+                    		<li><a href="">Books</a></li>
+                    		<li><a href="">Videos</a></li>
+                    		<li><a href="">Femnesty Events</a></li>
+                    	</ul>
+                    </li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
                     <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
