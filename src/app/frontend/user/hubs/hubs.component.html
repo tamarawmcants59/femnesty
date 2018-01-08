@@ -69,11 +69,13 @@
 					<div class="innerRightPart right-map-details HUB-Dtls">
       					<h2>ADDRESS</h2>
       					<div class="right-map">
-					        <iframe width="100%" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+							<agm-map style="height:300px" [latitude]="hubDetails.lat" [longitude]="hubDetails.lng">
+								<agm-marker [latitude]="hubDetails.lat" [longitude]="hubDetails.lng"></agm-marker>
+							</agm-map>
+							
+					        <!-- <iframe width="100%" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll={{hubDetails.lat}},{{hubDetails.lng}}&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
 						</div>
-      					<p class="info"><span>The Avenu Bar</span></p>
-      					<p class="info">Bergsbovägen 14</p>
-      					<p class="info">191 48 Sollentuna</p>
+      					<p class="info">{{hubDetails.address}}</p>
 					</div>
 					
 					<div class="innerRightPart right-map-details attending HUB-Dtls">

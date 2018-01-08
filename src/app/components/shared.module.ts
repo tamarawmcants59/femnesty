@@ -22,7 +22,7 @@ import { EmojiPickerModule } from 'angular2-emoji-picker';
 import { HubCreateComponent } from './hub-create/hub-create.component';
 import { HubService } from "./hub-create/hub.service";
 import { SelectModule } from "../../../node_modules/ng2-select";
-
+import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocomplete";
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -44,7 +44,8 @@ import { SelectModule } from "../../../node_modules/ng2-select";
         ApplicationPipes,
         EmojiPickerModule.forRoot(),
         NgbModule,
-        SelectModule
+        SelectModule,
+        Ng4GeoautocompleteModule.forRoot()
     ],
     exports: [
         UserSidebar,
