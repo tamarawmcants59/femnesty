@@ -14,3 +14,7 @@
 .enrichmentText p{
 	height:130px;
 }
+
+@media screen and (max-width: 667px){
+	.inner-pages-holder {padding-bottom:5px !important;}
+}
