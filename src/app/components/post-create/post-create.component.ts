@@ -116,5 +116,10 @@ export class PostCreateComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+  
+  public deleteImg() {
+    this.postImgData='';
+    this.showPostImgDive = false;
+  }
 
 }
