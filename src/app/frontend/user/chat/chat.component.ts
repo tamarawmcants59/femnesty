@@ -128,7 +128,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   sendMessage() {
     this.errorMsg='';
     //console.log(this.fileData);
-    //console.log(this.message);
+    console.log('bdvcvb '+this.message);
     if(this.fileData=='' && this.message==''){
       this.errorMsg='Please type your message.';
     }else{
@@ -146,10 +146,13 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         is_read: false
       };
       this.db.collection('Messages').add(data).then(res => {
-        this.message = null;
+        //this.message = null;
+        this.message = '';
       }).catch(err => {
         //console.log('error with fb: ', err);
       });
+      this.message = '';
+      //console.log(this.message);
     }
   }
 
@@ -225,7 +228,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   public searchConnection() {
-    console.log(this.search_con);
+    //console.log(this.search_con);
     if (this.loginUserId != 0 && this.search_con!='') {
       //this.getConnectionList();
       let goodFriends = this.userFrndList.filter(item => {
@@ -239,4 +242,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
   
+  public deleteImg() {
+    this.fileData='';
+  }
 }

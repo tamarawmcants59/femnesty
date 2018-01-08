@@ -41,6 +41,9 @@
                                 <span class="result" *ngIf="fileData" style="width:30%; float:left">
                                     <img [src]="fileData" [height]="150">
                                 </span>
+                                <span class="result" *ngIf="fileData" style="width:25%; float:left">
+                                    <a (click)="deleteImg()" class="btn btn-primary pull-right"> <i class="icon ion-android-delete"></i> </a>
+                                </span>
                                 <div class="attach-file">
                                     <input type="file" name="myfile" (change)="fileChangePost($event)" />
                                     <span>Attach File</span>
