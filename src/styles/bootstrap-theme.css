@@ -4727,7 +4727,10 @@ header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding
     border-radius: 3px !important;
 }
 
-
+/*-------------------- Suman --------------------------*/
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
 /*------------------------------- 08-01-2018 soumen --------------------------*/
 
 .articl, .enrich{position:relative}

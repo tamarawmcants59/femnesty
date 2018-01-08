@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" [ngClass]="{'in':show}">
                 <ul class="nav navbar-nav navbar-right">
                     <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }}</a></li>
-                    <li class="articl">
+                    <!--<li class="articl">
                     	<a routerLinkActive="active" [routerLink]="['/articles']">Articles</a>
                     	<ul class="submenu">
                     		<li><a href="">Work & Home Balance</a></li>
@@ -37,14 +37,27 @@
                     		<li><a href="">Strategies for success</a></li>
                     		<li><a href="">All Articles</a></li>
                     	</ul>
+                    </li>-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Articles
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
+                            <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
+                            <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>
+                            <a class="dropdown-item" [routerLink]="['/articles']">All Articles</a>
+                        </div>
                     </li>
-                    <li class="enrich">
-                    	<a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a>
-                    	<ul class="submenu">
-                    		<li><a href="">Books</a></li>
-                    		<li><a href="">Videos</a></li>
-                    		<li><a href="">Femnesty Events</a></li>
-                    	</ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Enrichment
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                            <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
+                            <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
+                            <a class="dropdown-item" [routerLink]="['/enrichment/events']">Femnesty Events</a>
+                        </div>
                     </li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                     <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
@@ -101,9 +114,30 @@
                 <div class="collapse navbar-collapse">
                     <div class="pull-right">
                     <ul class="nav navbar-nav rightNav rightNavPart">
-                        <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Articles
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
+                                <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
+                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>
+                                <a class="dropdown-item" [routerLink]="['/articles']">All Articles</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Enrichment
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/events']">Femnesty Events</a>
+                            </div>
+                        </li>
+                        <!--<li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
+                        <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>-->
                         <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                        <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
                         <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
                         
                     </ul>
