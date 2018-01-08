@@ -4733,3 +4733,6 @@ header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding
 .articl, .enrich{position:relative}
 header .nav.navbar-nav li ul.submenu{position: absolute; top:44px; left: 0; background:#fff; border:2px solid #f7f7f7; min-width: 180px;}
 header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#666666}
+
+.shareYourThought form .result, .message-writing-wrap .result{position: relative; display: inline-block;}
+.shareYourThought form .result .del-btn, .message-writing-wrap .result .del-btn{position: absolute; right:-10px; width:22px; height:22px; background: #bb1926; line-height: 23px; color:#fff; text-align: center; top: -11px; border-radius: 100%; cursor: pointer;}
