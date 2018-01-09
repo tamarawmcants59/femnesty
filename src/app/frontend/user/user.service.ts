@@ -372,5 +372,7 @@ export class UserService {
     return this.apiService.post(`/users/appactivateaccount`,form_data).map(data => data);
   }
 
- 
+  getCountryList(){
+    return this.apiService.get(`/users/appcountrylist`).map(data => data);
+  }
 }
