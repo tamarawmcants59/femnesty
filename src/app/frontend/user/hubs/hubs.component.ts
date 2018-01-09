@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HubService } from "../../../components/hub-create/hub.service";
 import { UserService } from "../user.service";
 import { AgmCoreModule } from '@agm/core';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-hubs',
@@ -11,17 +13,26 @@ import { AgmCoreModule } from '@agm/core';
 })
 export class HubsComponent implements OnInit {
   public isloginUser =1;
+  public postform: FormGroup;
   public loginUserId: any;
   public hubSlug = '';
   public hubDetails = {id:''};
   public groupPostDetData: object = {};
   public groupPostList = {};
+  public uninvitedUsers = [];
   public activeTab = 'posts';
+  public successMsg = '';
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private hubService: HubService) { 
+    private hubService: HubService,
+    private builder: FormBuilder) {
+    this.postform = builder.group({
+      user_ids: ['', [
+        Validators.required
+      ]]
+    }); 
       this.activatedRoute.params.subscribe((params: Params) => {
         this.hubSlug = params['slug'];
         if (this.hubSlug == '') {
@@ -33,7 +44,7 @@ export class HubsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getHubDetails();
+    this.getHubDetails();    
   }
 
   public getHubDetails()
@@ -44,6 +55,7 @@ export class HubsComponent implements OnInit {
         this.hubDetails = data.details;
         this.groupPostDetData = { activitytype: '4', activityid: this.hubDetails.id };
         this.getUserPostDetails();
+        this.getUnivitedUsers();
       }
     },
       error => {
@@ -78,6 +90,35 @@ export class HubsComponent implements OnInit {
     this.hubService.attendHub(attendData).subscribe(data => {
       if (data.Ack == 1) {
         //this.hubDetails = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+
+  public getUnivitedUsers(){
+    const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId };
+    this.hubService.uninvitedUsers(attendData).subscribe(data => {
+      if (data.Ack == 1) {
+        console.log('uninvited',data.details);
+        this.uninvitedUsers = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+
+  public sendInvites(){
+    const userValue = this.postform.value;
+    userValue.hub_id = this.hubDetails.id;
+    console.log(userValue);
+    this.hubService.sendInvites(userValue).subscribe(data => {
+      if (data.Ack == 1) {
+        this.successMsg = 'Request Sent Successfully';
+        this.postform.reset();
+        this.getUnivitedUsers();
       }
     },
       error => {

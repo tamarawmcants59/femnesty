@@ -254,32 +254,34 @@ and also what they are used for.</p>
           <div class="menu">
             <h3>Hub Request</h3>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 grp-rqsts" *ngIf="hubRequestList?.length > 0">
                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                   <strong>Success: </strong> {{successMsg}}
                 </div>
                 <!--<pre>{{groupList}}</pre>-->
-<ul class="uilist connection-box" *ngIf="hubRequestList?.length > 0">
-
-<li class="connectionList" *ngFor="let groupData of hubRequestList">
-
-                    <div class="connectionImage">
-                      <a [routerLink]="['/user/hub_details',groupData.slug]">
-                        <div class="img" [ngStyle]="{'background-image':'url('+groupData.profile_image+')'}"></div>
-                      </a>
+                <ul>
+                  <li *ngFor="let groupData of hubRequestList">
+                    <div class="left-area">
+                      <div class="round-image">
+                        <a [routerLink]="['/user/hub_details',groupData.slug]">
+                          <img src="{{groupData.profile_image}}" alt="">
+                        </a>
+                      </div>
+                      <div class="content-part">
+                        <p>{{groupData.title}}</p>
+                        <small>{{groupData.hub_date}}</small>
+                      </div>
                     </div>
-                    <div class="connectionText">
-                      <a [routerLink]="['/user/hub_details',groupData.slug]">
-                        <h2>{{groupData.title}}</h2>
-                      </a>
-                      <p>{{groupData.member_count}} members</p>
+                    <div class="right-area">
                       <p *ngIf="groupData.status == '1'">You accepted</p>
                       <p *ngIf="groupData.status == '2'">You rejected</p>
-                      <button *ngIf="groupData.status == '0'" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'2')">Accept</button>
-                      <button *ngIf="groupData.status == '0'" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'3')">Reject</button>
-
+                      <p>
+                        <button *ngIf="groupData.status == '0'" type="button" class="btn btn-primary" (click)="acceptHubRequest(groupData)">Accept</button>
+                        <button *ngIf="groupData.status == '0'" type="button" class="btn btn-black btn-default" (click)="rejectHubRequest(groupData)">Decline</button>
+                      </p>
                     </div>
                   </li>
+                  
                 </ul>
                 <div *ngIf="groupRequestList?.length == 0">
                   <p>No group request found.</p>

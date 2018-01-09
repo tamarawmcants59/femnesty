@@ -50,5 +50,33 @@ export class HubService {
         ).map(data => data);
     }
 
+    acceptHubRequest(data) {
+        return this.apiService.post(
+            `/hub/accept`,
+            data
+        ).map(data => data);
+    }
+
+    rejectHubRequest(data) {
+        return this.apiService.post(
+            `/hub/reject`,
+            data
+        ).map(data => data);
+    }
+
+    uninvitedUsers(data){
+        return this.apiService.post(
+            `/hub/uninvited`,
+            data
+        ).map(data => data);
+    }
+
+    sendInvites(data){
+        return this.apiService.post(
+            `/hub/send_invites`,
+            data
+        ).map(data => data);
+    }
+
 
 }

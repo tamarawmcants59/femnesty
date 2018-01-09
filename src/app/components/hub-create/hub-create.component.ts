@@ -238,6 +238,26 @@ export class HubCreateComponent implements OnInit {
       });
   }
 
+  public acceptHubRequest(hub){
+    
+    this.hubService.acceptHubRequest({hub_id:hub.id,user_id:this.loginUserId}).subscribe(data=>{
+      console.log(data);
+      this.getMyHubRequest();
+    }, error => {
+      console.log('Something went wrong!');
+    });
+  }
+
+  public rejectHubRequest(hub) {
+
+    this.hubService.rejectHubRequest({ hub_id: hub.id, user_id: this.loginUserId }).subscribe(data => {
+      console.log(data);
+      this.getMyHubRequest();
+    }, error => {
+      console.log('Something went wrong!');
+    });
+  }
+
   // public createGroupPost() {
   //   this.loading = true;
   //   const userValue = this.postform.value;
