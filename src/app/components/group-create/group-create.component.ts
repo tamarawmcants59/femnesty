@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
+import { HubService } from "../hub-create/hub.service";
+import { SelectModule } from "../../../../node_modules/ng2-select";
+import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 
 @Component({
   selector: 'app-group-create',
@@ -23,10 +26,14 @@ export class GroupCreateComponent implements OnInit {
   public groupEditId: any;
   public groupRequestList = [];
   public groupEditDataJson={};
+  public searchData = {address:'',lat:'',lng:''}
+  public catList=[];
+  public countryList=[];
 
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
+    private hubService: HubService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -44,6 +51,29 @@ export class GroupCreateComponent implements OnInit {
       ]],
       group_type: ['', [
         Validators.required
+      ]],
+      cat_id: ['', [
+        Validators.required
+      ]],
+      year_est: ['', [
+        Validators.required
+      ]],
+      country: ['', [
+        Validators.required
+      ]],
+      city: ['', [
+        Validators.required
+      ]],
+      address: ['', [
+        //Validators.required
+      ]],
+      postal_code: ['', [
+        Validators.required
+      ]],
+      cemail: ['', [
+        Validators.required
+      ]],
+      phone: ['', [
       ]],
       long_desc: ['', [
         
@@ -73,6 +103,35 @@ export class GroupCreateComponent implements OnInit {
   ngOnInit() {
     this.getMyGroupListData();
     this.getGroupRequestList();
+    this.getHubCategories();
+    this.getTotCounteyList();
+  }
+
+  
+  autoCompleteCallback1(data: any): any {
+    this.searchData = {address:data.data.description,lat:data.data.geometry.location.lat,lng:data.data.geometry.location.lng};
+  }
+
+  public getTotCounteyList(){
+    this.dataService.getCountryList().subscribe(data => {
+      if (data.Ack == 1) {
+        this.countryList = data.country_list;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+
+  public getHubCategories(){
+    this.hubService.getHubCategories().subscribe(data => {
+      if (data.Ack == "1") {
+        this.catList = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
   }
 
   public editGroupTab(groupId){
@@ -117,6 +176,11 @@ export class GroupCreateComponent implements OnInit {
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
 
+    if (this.searchData.address){
+      userValue.address = this.searchData.address;
+      //userValue.lat = this.searchData.lat;
+      //userValue.lng = this.searchData.lng;
+    }
     this.dataService.createGroupDataSend(userValue)
       .subscribe(
       data => {
@@ -125,6 +189,7 @@ export class GroupCreateComponent implements OnInit {
         this.successMsg = 'Successfully create the group';
         this.postform.reset();
         this.getMyGroupListData();
+        this.searchData.address='';
       },
       error => {
         alert(error);
@@ -137,7 +202,9 @@ export class GroupCreateComponent implements OnInit {
     const userValue = this.postform.value;
     userValue.id = this.groupEditId;
     userValue.image = this.postImgData;
-
+    if (this.searchData.address){
+      userValue.address = this.searchData.address;
+    }
     this.dataService.editGroupDataSend(userValue).subscribe(data => {
         this.showPostImgDive = false;
         this.loading = false;
