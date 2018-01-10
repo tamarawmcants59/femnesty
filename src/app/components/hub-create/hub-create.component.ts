@@ -240,7 +240,7 @@ export class HubCreateComponent implements OnInit {
 
   public acceptHubRequest(hub){
     
-    this.hubService.acceptHubRequest({hub_id:hub.id,user_id:this.loginUserId}).subscribe(data=>{
+    this.hubService.acceptHubRequest({hub_id:hub.hub_id,user_id:this.loginUserId}).subscribe(data=>{
       console.log(data);
       this.getMyHubRequest();
     }, error => {
@@ -250,7 +250,7 @@ export class HubCreateComponent implements OnInit {
 
   public rejectHubRequest(hub) {
 
-    this.hubService.rejectHubRequest({ hub_id: hub.id, user_id: this.loginUserId }).subscribe(data => {
+    this.hubService.rejectHubRequest({ hub_id: hub.hub_id, user_id: this.loginUserId }).subscribe(data => {
       console.log(data);
       this.getMyHubRequest();
     }, error => {
