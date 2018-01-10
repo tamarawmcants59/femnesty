@@ -1,3 +1,18 @@
+
+<div class="likePop">
+<div class="item">
+<div class="row">
+    <div class="col-md-10">
+        fdfdsfdsfdsf
+    </div>
+    <div class="col-md-2">
+        <p class="icondown"><i class="icon ion-chevron-down"></i></p>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="likePart">
 <div class="row">
     <div class="col-md-10">
         <div class="imageParts">
@@ -25,10 +40,17 @@
             <ul>
                 <li><a href="javascript: void(0);">{{postData.likecount}} Likes</a></li>
                 <li><a href="javascript: void(0);">{{postData.commentcount}} Comments</a></li>
-                <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2"><a href="javascript: void(0);">Connection</a></li>
-                <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1"><a href="javascript: void(0);">Public</a></li>
+                <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2"><a href="javascript: void(0);"><i style="font-size: 16px;" class="ion-ios-people"></i> Connection</a></li>
+                <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1"><a href="javascript: void(0);"><i class="ion-android-globe"></i> Public</a></li>
             </ul>
         </div>
+        </div>
+        
+</div>
+</div>
+<div class="commentPart">
+<div class="row">
+	<div class="col-md-12">
         <div class="likeComment">
             <div class="row">
                 <div class="col-md-10 col-xs-8">
@@ -41,7 +63,7 @@
                 <div class="col-md-2 col-xs-4">
                         <!--<a onClick="window.open('http://www.facebook.com/dialog/feed?app_id=150470825593599&link=http://111.93.169.90/team2/femnesty_web/#/home&picture=http://111.93.169.90/team2/Femnesty/all_images/103_25014750.jpeg&name=nm nmnbc bncbn c&description=n bkjcbkjcvbc cbn&message= nvn vbn vbn vnfg cbncvbvcbc','sharer','toolbar=0,status=0,width=548,height=325');" href="javascript: void(0)">Insert text or an image here.</a>-->
                         
-                        <ul class="social-link mb-30 pull-right">
+                        <ul class="social-link pull-right">
                             <li *ngIf="postData.file_image_url != ''">
                                 <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl, summary:postData.description, images:postData.file_image_url}">
                                     <i class="ion-social-facebook" style="font-size:16px"></i>
@@ -139,3 +161,5 @@
         </div>
     </div>
 </div>
+</div>
+

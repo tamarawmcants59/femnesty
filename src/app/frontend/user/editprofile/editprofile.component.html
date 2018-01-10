@@ -71,9 +71,10 @@
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                                 <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
                                 <div *ngIf="userPostList?.length > 0">
-                                    <div class="likePart" *ngFor="let postData of userPostList">
+                                    <div *ngFor="let postData of userPostList">
                                         <app-post-card [postData]="postData"></app-post-card>
                                     </div>
+                                    
                                 </div>
                                 <div class="likePart" *ngIf="userPostList?.length == 0">
                                     <div class="row">
