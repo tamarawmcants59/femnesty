@@ -78,5 +78,8 @@ export class HubService {
         ).map(data => data);
     }
 
+    getAllHubs(user_id,data) {
+        return this.apiService.put(`/hub/all_hubs/` + user_id, data).map(data => data);
+    } 
 
 }

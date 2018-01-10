@@ -1,6 +1,6 @@
 .browse-hub-map{background:#fff; padding: 14px; margin-bottom: 15px}
 .browse-hub-map .map-holder{height: 284px; position: relative;}
-.browse-hub-map .map-holder .popup{position: absolute; background: #fff; padding:15px; z-index: 9; bottom:30px; left: 100px}
+.browse-hub-map .map-holder .popup{ background: #fff; padding:15px; z-index: 9; }
 .browse-hub-map .map-holder .popup ul{display:flex; align-items:center; position: relative; padding: 0; margin: 0; list-style-type: none}
 .browse-hub-map .map-holder .popup ul:before{content:'\f35f'; position: absolute; left:17px; bottom:-50px; font-family: 'Ionicons'; font-size:42px; color:#fff}
 .browse-hub-map .map-holder .popup ul li .round-image{width:70px; height:70px; margin-right: 11px; overflow: hidden; background-size: cover !important; background-position: center center !important; border-radius:100%}
@@ -32,3 +32,4 @@
 .article-add-holder1 h3 {font-size: 27px;}
 .about-content-area .article-add-holder1 p {line-height: 1.2 !important;font-size: 16px !important;}
 .article-add-holder1 .btn.btn-primary {padding: 19px 38px;font-size: 18px !important; line-height: 1;}
+
