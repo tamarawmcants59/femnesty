@@ -4,3 +4,10 @@
     background-size: cover;
     border-radius: 50%;
 }
+.profTextPart{
+	border-radius: 10px;
+	background: #fff;
+	padding: 10px;
+	/*display: inline-block !important;
+	width: auto !important;*/
+}
