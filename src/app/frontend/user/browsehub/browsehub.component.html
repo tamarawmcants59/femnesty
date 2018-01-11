@@ -11,47 +11,48 @@
 				<div class="middlePart" style="background: transparent">
 					<div class="browse-hub-map">
 						<div class="map-holder">
-							<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
-							<div class="popup">
-								<ul>
-									<li>
-										<div class="round-image" style="background: url('assets/images/sir-ronald.jpg')"></div>
-									</li>
-									<li>
-										<h2>Home & Work Balance Hub</h2>
-										<p class="black-text">The Bear, 71 High St, Esher, Surrey KT10 9RQ, UK</p>
-										<p class="red-text">August 4 @ 6:30 pm - 8:30 pm</p>
-										<button class="btn btn-primary">Read More</button>
-									</li>
-								</ul>
-							</div>
+							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="16">
+								<agm-marker  *ngFor="let hub of allHubs" [latitude]="hub.lat" [longitude]="hub.lng" >
+									<agm-info-window>
+											<div class="popup" style="width:250px">
+												<ul>
+													<li>
+														<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
+													</li>
+													<li>
+														<h2>{{hub.title}}</h2>
+														<p class="black-text">{{hub.address}}</p>
+														<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+														<a [routerLink]="['/user/hub_details/',hub.slug]" target="_blank">
+															<button class="btn btn-primary">Read More</button>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</agm-info-window>
+								</agm-marker>
+							</agm-map>
+							<!-- <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
+							
 						</div>
 					</div>
                  
 					<div class="profDes All-hub-list">
 						<p class="all-hb">ALL HUBS</p>
 						<ul>
-							<li>
-								<div class="round-image" style="background: url('assets/images/sir-ronald.jpg')"></div>
+							<li *ngFor="let hub of allHubs">
+								<a [routerLink]="['/user/hub_details/',hub.slug]">
+									<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
+								</a>
 								<aside>
-									<h2>Home & Work Balance Hub</h2>
-									<p class="black-text">The Bear, 71 High St, Esher, Surrey KT10 9RQ, UK</p>
-									<p class="red-text">August 4 @ 6:30 pm - 8:30 pm</p>
+									<a [routerLink]="['/user/hub_details/',hub.slug]">
+										<h2>{{hub.title}}</h2>
+									</a>
+									<p class="black-text">{{hub.address}}</p>
+									<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
 									<div class="bottom-links-wrap">
-										<a href=""><i class="ion-ios-information-outline"></i> READ MORE</a>
-										<a href=""><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
-									</div>
-								</aside>
-							</li>
-							<li>
-								<div class="round-image" style="background: url('assets/images/sir-ronald.jpg')"></div>
-								<aside>
-									<h2>Home & Work Balance Hub</h2>
-									<p class="black-text">The Bear, 71 High St, Esher, Surrey KT10 9RQ, UK</p>
-									<p class="red-text">August 4 @ 6:30 pm - 8:30 pm</p>
-									<div class="bottom-links-wrap">
-										<a href=""><i class="ion-ios-information-outline"></i> READ MORE</a>
-										<a href=""><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
+										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
+										<a href="javscript:void(0);"><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
 									</div>
 								</aside>
 							</li>
@@ -67,17 +68,12 @@
                             <div class="input-group">
                                 <input placeholder="Search" [(ngModel)]="search_con" class="form-control">
                                 <span class="input-group-btn">
-                                    <button type="button" (click)="searchConnection()"  class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    <button type="button" (click)="searchByKeyword()"  class="btn btn-default"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
                         <ul class="filter-reslt">
-	                        <li>Enrichment <span>(5)</span></li>
-	                        <li>Women at Work <span>(7)</span></li>
-	                        <li>Category 1 <span>(1)</span></li>
-	                        <li>Category 2  <span>(19)</span></li>
-	                        <li>Category 3 <span>(7)</span></li>
-	                        <li>Category 4 <span>(9)</span></li>
+	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
 						</ul>
 					</div>
 					

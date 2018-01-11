@@ -12,7 +12,7 @@
               <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
           </div>
           <div *ngIf="userPostList?.length > 0">
-              <div class="likePart" *ngFor="let postData of userPostList">
+              <div *ngFor="let postData of userPostList">
                   <app-post-card [postData]="postData"></app-post-card>                
               </div>
               </div>
@@ -55,7 +55,7 @@
               <div class="article-add-holder article-add-holder1">
                 <h3>START A HUB</h3>
                 <p> Make a difference where you are, start a Hub today. </p>
-                <button class="btn btn-primary">SHARE</button>
+                <a [routerLink]="['/user/create_hub']" class="btn btn-primary">SHARE</a>
               </div>
             </div>
           </div>

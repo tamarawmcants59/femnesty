@@ -1,5 +1,25 @@
 
 <div class="likePop">
+<div class="item">
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="imageParts">
+            <div class="profImageP">
+                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
+            </div>
+            <div class="profTextPart">
+                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
+                <p>{{postData.created_date_mod}}</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <p style="text-align: right;"><button _ngcontent-c2="" class="btn btn-primary" type="submit">View Profile</button></p>
+    </div>
+</div>
+</div>
 	<div class="item">
 <div class="row">
     <div class="col-md-8">
@@ -15,31 +35,11 @@
         </div>
     </div>
     <div class="col-md-4">
-        <p style="text-align: right;"><button _ngcontent-c2="" class="btn btn-primary" type="submit">Vive Profile</button></p>
-    </div>
-</div>
-</div>
-	<div class="item">
-<div class="row">
-    <div class="col-md-8">
-        <div class="imageParts">
-            <div class="profImageP">
-                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
-            </div>
-            <div class="profTextPart">
-                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
-                <p>{{postData.created_date_mod}}</p>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <p style="text-align: right;"><button _ngcontent-c2="" class="btn btn-primary" type="submit">Vive Profile</button></p>
+        <p style="text-align: right;"><button _ngcontent-c2="" class="btn btn-primary" type="submit">View Profile</button></p>
     </div>
 </div>
 </div>
 </div>
-
 <div class="likePart">
 <div class="row">
     <div class="col-md-10">
