@@ -11,3 +11,8 @@
 	/*display: inline-block !important;
 	width: auto !important;*/
 }
+
+.likePop .btn.btn-primary {
+    padding: 8px 15px;
+    font-size: 14px;
+}
