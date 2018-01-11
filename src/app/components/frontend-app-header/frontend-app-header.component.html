@@ -39,7 +39,7 @@
                     	</ul>
                     </li>-->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Articles
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -50,13 +50,14 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Enrichment
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                             <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
                             <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
                             <a class="dropdown-item" [routerLink]="['/enrichment/events']">Femnesty Events</a>
+                            <a class="dropdown-item" [routerLink]="['/enrichment']">All</a>
                         </div>
                     </li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
@@ -115,7 +116,7 @@
                     <div class="pull-right">
                     <ul class="nav navbar-nav rightNav rightNavPart">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Articles
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -126,13 +127,14 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Enrichment
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                 <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
                                 <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
                                 <a class="dropdown-item" [routerLink]="['/enrichment/events']">Femnesty Events</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment']">All</a>
                             </div>
                         </li>
                         <!--<li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
@@ -186,6 +188,7 @@
                                 </li>
                                 <li><a [routerLink]="['/user/edit_profile/activity']">My Profile</a></li>
                                 <li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
+                                <li><a [routerLink]="['/user/hubs']">Find hubs</a></li>
                                 <li class="divider"></li>
                                 <li><a [routerLink]="['/company']">Create company</a></li>
                                 <!--<li><a [routerLink]="['/user/login']">Company Login</a></li>-->
