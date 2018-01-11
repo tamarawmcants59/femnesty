@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
   public agreetab:AbstractControl;
   public cpassword:AbstractControl;
   public checkEmailExist:boolean = false;
+  public checkCompanynameExist = false;
   public submitted:boolean = false;
   returnUrl: string;
   errorMsg: string='';
@@ -55,7 +56,7 @@ export class SignupComponent implements OnInit {
 
   }
 
-  public checkEmail(values:Object):void {
+  public checkEmail(values:Object):void { 
     if(values!=''){
       let signupCheckEmail={
         "email": values
@@ -81,6 +82,33 @@ export class SignupComponent implements OnInit {
 
     }
   }
+
+public checkCompanyname(values:Object){
+  //alert(this.email.value);
+  if(values!=''){
+    
+    let signupCheckcompanyname={"company_name": values,"email":this.email.value};
+//console.log(signupCheckcompanyname);
+    this.dataService.userCheckCompanyname(signupCheckcompanyname).subscribe(data => {
+           let details=data;
+           console.log(data);
+           if (details.Ack=="1") {
+               this.checkCompanynameExist = false;
+               return false;
+           }else{
+             //alert('Invalid login');
+             this.checkCompanynameExist = true;
+             return false;
+           }
+       },
+       error => {
+        console.log('details');
+       }
+     ); 
+  }else{
+
+  }
+}
 
   public checkSignup(values:Object):void {
     this.submitted = true;

@@ -9,9 +9,12 @@
            
             <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">    
                <div class="form-group col-md-6">
-                    <input type="text" placeholder="Company Name" class="form-control" [formControl]="company_name">
+                    <input type="text" placeholder="Company Name" class="form-control" [formControl]="company_name" (ngModelChange)="checkCompanyname($event)">
                     <div class="text-danger" *ngIf="!company_name.valid && company_name.touched">
                       Please enter your company name.
+                    </div>
+                    <div class="text-danger" *ngIf="!checkCompanynameExist && company_name.valid">
+                        This company already exist.
                     </div>
                 </div>                
                  <div class="form-group col-md-6">
@@ -45,7 +48,7 @@
                     <div class="text-danger" *ngIf="!agreetab.valid">Please check terms and conditions.</div>
                 </div>
                 <div class="form-group col-md-12">
-                    <button class="btn btn-primary" [disabled]="!signupForm.valid || !checkEmailExist" type="submit">Submit</button>
+                    <button class="btn btn-primary" [disabled]="!signupForm.valid || !checkEmailExist || !checkCompanynameExist" type="submit">Submit</button>
                 </div>
                
             </form>

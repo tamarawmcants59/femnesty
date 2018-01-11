@@ -46,7 +46,13 @@ export class CompanyService {
       form_data
     ).map(data => data);
   }
-
+  userCheckCompanyname(form_data) {
+    //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
+    return this.apiService.post(
+      `/users/appsearchbycompanyname`,
+      form_data
+    ).map(data => data);
+  }
   companySignup(form_data) {
     return this.apiService.post(
       `/users/appaddcomadmin`,
