@@ -4763,12 +4763,44 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:11px; dis
     background: #fff;
     padding: 20px;
     border-radius: 3px;
-    margin-top: 30px;
+    margin-top: 0;
+   box-shadow: 10px 10px 8px #ccc;
+   margin-top: 20px;
    
 }
 .likePop .item{
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	overflow: hidden;
-	border-bottom: solid 1px #ccc;
+	border-bottom: solid 1px #eaeaea;
+	padding-bottom: 10px;
 }
-.likePop .imageParts .profImageP .img{width:56px !important;height:56px !important;}
+.likePop .item .imageParts .profImageP .img{width:56px !important;height:56px !important; float: left; margin-bottom: 0 !important}
+
+
+
+.likePop .item .profTextPart{
+	padding: 0 10px !important;
+	vertical-align: top;
+	float: right;
+	margin-top: 0 !important;
+}
+.likePop .item .profTextPart h2 {
+    margin: 0px 0 0 0;
+    padding: 0px;
+    font-size: 16px;    
+    color: #202020;   
+}
+
+.likePop .item .profTextPart p {    
+    font-size: 11px;
+    color: #7e7e7e;
+    margin: 0px;
+    padding: 0px;  
+    margin-top: 3px;
+}
+.likePop .item .imageParts {
+    display: flex;
+    
+    align-items: top !important;
+}
+
