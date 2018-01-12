@@ -40,6 +40,9 @@
 </div>
 </div>
 </div>-->
+<!--<button mat-button (click)="openDialog()">Open dialog</button>
+<button mat-raised-button (click)="openDialog()">Pick one</button>-->
+
 <div class="likePart">
 <div class="row">
     <div class="col-md-10">
@@ -66,7 +69,7 @@
             </div>
             <p>{{postData.description}}</p>
             <ul>
-                <li><a href="javascript: void(0);">{{postData.likecount}} Likes</a></li>
+                <li><a href="javascript: void(0);" (click)="userPostLikeListPopup(postData.id)">{{postData.likecount}} Likes</a></li>
                 <li><a href="javascript: void(0);">{{postData.commentcount}} Comments</a></li>
                 <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2"><a href="javascript: void(0);"><i style="font-size: 16px;" class="ion-ios-people"></i> Connection</a></li>
                 <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1"><a href="javascript: void(0);"><i class="ion-android-globe"></i> Public</a></li>
@@ -116,6 +119,7 @@
                                 <a style="width: 25px; height: 25px; color:#bb1926; border-radius:50%; border:1px solid #bb1926; background: #fff" ceiboShare  [twitter]="{url:repoUrl, text:postData.description}"><i class="ion-social-twitter" style="font-size:16px"></i></a>
                             </li>
                         </ul>
+
                         <!--<button ceiboShare  [facebook]="{u: repoUrl, picture: postData.file_image_url, name: postData.description, description:postData.description}">Facebook</button>
                         <button ceiboShare  [linkedIn]="{url:repoUrl, media: postData.file_image_url, description: postData.description}">Linkedin</button>
                         <button ceiboShare  [googlePlus]="{url:repoUrl, media: postData.file_image_url, description: postData.description}">Google Plus</button>
@@ -143,8 +147,10 @@
                         <div class="commenteeComment">
                             <p>{{cmtList.comment}}</p>
                             <ul>
-                                <li *ngIf="cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i></a></li>
-                                <li *ngIf="!cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
+                                <li *ngIf="cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i> </a>
+                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id)">{{cmtList.likecount}} likes</a></li>
+                                <li *ngIf="!cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a>
+                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id)">{{cmtList.likecount}} likes</a></li>
                                 <li><a (click)="userSubPostComment(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
                             </ul>
                         </div>
@@ -161,8 +167,10 @@
                                     <div class="commenteeComment">
                                         <p>{{cmtReply.comment}}</p>
                                         <ul>
-                                            <li *ngIf="cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i></a></li>
-                                            <li *ngIf="!cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
+                                            <li *ngIf="cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i> </a> 
+                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id)">{{cmtReply.likecount}} likes</a></li>
+                                            <li *ngIf="!cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a>
+                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id)">{{cmtReply.likecount}} likes</a></li>
 			                            </ul>
                                     </div>
                                 </div>

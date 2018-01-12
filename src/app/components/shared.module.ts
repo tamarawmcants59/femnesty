@@ -23,6 +23,11 @@ import { HubCreateComponent } from './hub-create/hub-create.component';
 import { HubService } from "./hub-create/hub.service";
 import { SelectModule } from "../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocomplete";
+//import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { PopupmodalComponent } from './post-card/popupmodal.component';
+import {MatDialogModule} from '@angular/material/dialog';
+//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -35,6 +40,7 @@ import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocompl
         CompanyRightbarComponent,
         ImageCropperComponent,
         HubCreateComponent,
+       PopupmodalComponent,
     ],
     imports: [
         CommonModule,
@@ -45,6 +51,10 @@ import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocompl
         EmojiPickerModule.forRoot(),
         NgbModule,
         SelectModule,
+        //MatButtonModule,
+        //MatCheckboxModule,
+        MatDialogModule,
+        //BrowserAnimationsModule,
         Ng4GeoautocompleteModule.forRoot()
     ],
     exports: [
@@ -57,11 +67,15 @@ import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocompl
         GroupRightbarComponent,
         CompanyRightbarComponent,
         ImageCropperComponent,
-        HubCreateComponent
+        //MatButtonModule,
+        //MatCheckboxModule,
+        HubCreateComponent,
+        //PopupmodalComponent
     ],
     providers: [
         HubService,
         SocialService
-    ]
+    ],
+    entryComponents: [PopupmodalComponent]
 })
 export class SharedModule { }

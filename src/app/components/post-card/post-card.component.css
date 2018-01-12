@@ -21,3 +21,11 @@
 .commenteeComment ul{margin-top: 10px; border-top:1px solid #f1f1f1; padding-top:5px}
 .sub-reply-comment-wrapper{margin-top:10px;}
 .new-comment-text-box{padding-left:40px;}
+.backdrop{ 
+    background-color:rgba(0,0,0,0.6);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+}
