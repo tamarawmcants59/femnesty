@@ -47,16 +47,11 @@
 								<div class="innerRightPart right-map-details HUB-Dtls">
 									<h2>{{hubDetails.title}}</h2>
 									<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
-									<p class="info">
-										<span>Organizer:</span> {{hubDetails.Organizer}}</p>
-									<p class="info">
-										<span>Email:</span> {{hubDetails.email}}</p>
-									<p class="info">
-										<span>Phone:</span> {{hubDetails.phone}}</p>
-									<p class="info">
-										<span>Website:</span> {{hubDetails.website}}</p>
-									<p class="info">
-										<span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+									<p class="info"><span>Organizer:</span> {{hubDetails.Organizer}}</p>
+									<p class="info"><span>Email:</span> {{hubDetails.email}}</p>
+									<p class="info"><span>Phone:</span> {{hubDetails.phone}}</p>
+									<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
+									<p class="info"><span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
 								</div>
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
@@ -66,12 +61,14 @@
 								<div class="form-group row">
 									<div class="col-sm-12">
 										<form method="post" [formGroup]="postform" (ngSubmit)="sendInvites()" #createGroupForm="ngForm">
-											<select class="form-control-plaintext" multiple required formControlName="user_ids">
-												<option value="{{ user.id }}" *ngFor="let user of uninvitedUsers">{{ user?.first_name }}</option>
-											</select>
+											<div class="form-group">
+												<select class="form-control" multiple required formControlName="user_ids">
+													<option value="{{ user.id }}" *ngFor="let user of uninvitedUsers">{{ user?.first_name }}</option>
+												</select>
+											</div>
 											<!-- <ng-select [multiple]="true" [(ngModel)]="friends" formControlName="user_ids" [items]="items" placeholder="No city selected"></ng-select> -->
 											
-											<input type="submit" value="Send">
+											<input type="submit" value="Send" class="btn btn-primary">
 										</form>
 									</div>
 								</div>
