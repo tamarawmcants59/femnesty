@@ -16,3 +16,8 @@
     padding: 8px 15px;
     font-size: 14px;
 }
+
+.commenteeComment{margin-bottom: 0}
+.commenteeComment ul{margin-top: 10px; border-top:1px solid #f1f1f1; padding-top:5px}
+.sub-reply-comment-wrapper{margin-top:10px;}
+.new-comment-text-box{padding-left:40px;}
