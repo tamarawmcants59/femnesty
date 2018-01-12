@@ -161,7 +161,8 @@
                                     <div class="commenteeComment">
                                         <p>{{cmtReply.comment}}</p>
                                         <ul>
-			                                <li><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
+                                            <li *ngIf="cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i></a></li>
+                                            <li *ngIf="!cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
 			                            </ul>
                                     </div>
                                 </div>
