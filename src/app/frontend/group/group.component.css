@@ -27,3 +27,32 @@
 .grp-rqsts ul li .btn{font-size:10px !important; padding:9px 22px; text-transform:uppercase; margin: 3px 0}
 .grp-rqsts ul li .btn.btn-default{background: #373737; box-shadow:none; text-shadow:none; color:#fff; border-radius:50px; border: 0}
 .grp-rqsts ul li .btn.btn-default:hover{background: #000; transition: ease all 0.2s}
+
+
+.hub-listing{list-style-type:none; padding:0; margin: 0; border: 1px solid #e1e1e1; display: flex; flex-wrap:wrap; margin-bottom: 20px}
+.hub-listing li{display: flex; margin:0; width:100%; font-size:12px; align-items:center}
+.hub-listing li .date, .hub-listing li .title, .hub-listing li .action{padding:6px 8px;}
+.hub-listing li .date{width:30%; text-align: left;}
+.hub-listing li .title{width:30%; text-align: left;}
+.hub-listing li .action{width:40%; text-align:right}
+.hub-listing li .caption{background:#e7e7e7}
+.hub-listing li.action.caption{text-align:center}
+
+.hub-listing li .btn.btn-primary, .hub-listing li .btn.btn-info, .hub-listing li .btn.btn-danger, .hub-listing li .btn.btn-success{border: 0;text-shadow: none;text-transform: uppercase;letter-spacing: 1px;padding: 5px 10px; border-radius: 50px; font-family: 'montserratmedium'; font-size: 11px !important; background-image: none; height: 24px;}
+
+.new-tabs .nav-tabs > li > a {text-transform: uppercase;
+    margin-right: 0 !important;
+    line-height: 1.42857143;
+    border: none;
+    border-radius: 0;
+    padding: 15px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #222;
+    letter-spacing: 2px;
+}
+.new-tabs ul {border-bottom:0}
+.new-tabs ul li{ background: #b8b8b8 !important;}
+.new-tabs .tab-content{background: none !important; padding:10px}
