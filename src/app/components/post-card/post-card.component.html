@@ -148,7 +148,6 @@
                                 <li><a (click)="userSubPostComment(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
                             </ul>
                         </div>
-                        
                     </div>
                     <div *ngIf="cmtList.reply?.length > 0">
                         <div class="sub-reply-comment-wrapper" *ngFor="let cmtReply of cmtList.reply">
@@ -161,13 +160,16 @@
                                     <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                     <div class="commenteeComment">
                                         <p>{{cmtReply.comment}}</p>
+                                        <ul>
+			                                <li><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
+			                            </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="comment-text-box" *ngIf="postSubCmtDiv[cmtList.id]">
+                    <div class="comment-text-box new-comment-text-box" *ngIf="postSubCmtDiv[cmtList.id]">
                         <form class="" [formGroup]="commentform" (ngSubmit)="submitSubPostComment(cmtList.reply, postData,cmtList.id)" #commentForm="ngForm">
                             <div class="input-group">
                                 <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
