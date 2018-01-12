@@ -437,3 +437,8 @@ body>.ui-select-bootstrap.open {
 .saveChanges[_ngcontent-c2] .btn-primary[_ngcontent-c2]{
 	margin-right: 15px !important;
 }
+:host ::ng-deep .custom-autocomplete__dropdown
+{
+  display: block !important;
+}
+

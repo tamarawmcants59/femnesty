@@ -26,7 +26,7 @@ export class HubCreateComponent implements OnInit {
   public groupEditId: any;
   public hubList = [];
   public groupEditDataJson = {};
-  public addForm = {};
+  public addForm = { type: 'O', category_id:'',privacy:'O'};
   public catList=[];
   public userSearchFrndList=[];
   public items = [];
