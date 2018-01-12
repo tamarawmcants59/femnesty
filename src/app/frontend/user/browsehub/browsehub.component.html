@@ -66,47 +66,28 @@
 						<h2>BROWSE HUBS</h2>
                         <div class="inline-search">
                             <div class="input-group">
-                                <input placeholder="Search" [(ngModel)]="search_con" class="form-control">
+                                <input placeholder="Search By Keyword" [(ngModel)]="search_con" class="form-control">
                                 <span class="input-group-btn">
                                     <button type="button" (click)="searchByKeyword()"  class="btn btn-default"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
-                        </div>
+						</div>
+						<div class="inline-search">
+							<div class="input-group">
+								<input type="date" placeholder="Search By Date" [(ngModel)]="search_date" class="form-control">
+								<span class="input-group-btn">
+									<button type="button" (click)="searchByDate()" class="btn btn-default">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
+						</div>
                         <ul class="filter-reslt">
 	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
 						</ul>
 					</div>
 					
-					<div class="innerRightPart latest-article">
-					    <h2>Latest Articles</h2>
-					    <div class="hubMet hubMet2">
-					         <a href="">
-					              <div class="img" style="background: url('assets/images/catherine.jpg')"></div>
-					         </a>
-					         <div class="article-text">
-					              <p>It’s hard work, but I wouldn’t change a thing.</p>
-					              <a class="downtxt">By Author on July 13, 2017</a>
-					         </div>
-					    </div>
-						<div class="hubMet hubMet2">
-					         <a href="">
-					              <div class="img" style="background: url('assets/images/catherine.jpg')"></div>
-					         </a>
-					         <div class="article-text">
-					              <p>It’s hard work, but I wouldn’t change a thing.</p>
-					              <a class="downtxt">By Author on July 13, 2017</a>
-					         </div>
-					    </div>
-					    <div class="hubMet hubMet2">
-					         <a href="">
-					              <div class="img" style="background: url('assets/images/catherine.jpg')"></div>
-					         </a>
-					         <div class="article-text">
-					              <p>It’s hard work, but I wouldn’t change a thing.</p>
-					              <a class="downtxt">By Author on July 13, 2017</a>
-					         </div>
-					    </div>
-					</div>
+					
 					<div class="innerRightPart" style="padding-top: 56px; padding-bottom: 56px">
 					  <div class="article-add-holder article-add-holder1">
 					    <h3>SHARE YOUR STORY</h3>
@@ -119,7 +100,7 @@
 					  <div class="article-add-holder article-add-holder1">
 					    <h3>START A HUB</h3>
 					    <p> Make a difference where you are, start a Hub today. </p>
-					    <button class="btn btn-primary">Start</button>
+					    <a [routerLink]="['/user/create_hub']" class="btn btn-primary">Start</a>
 					  </div>
 					</div>
 				</div>

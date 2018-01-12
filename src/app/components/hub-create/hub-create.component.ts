@@ -31,7 +31,12 @@ export class HubCreateComponent implements OnInit {
   public userSearchFrndList=[];
   public items = [];
   public hubRequestList = [];
-  public searchData = {address:'',lat:'',lng:''}
+  public searchData = {address:'',lat:'',lng:''};
+  public today = new Date().toJSON().split('T')[0];
+  public autocompleteSettings: any = {
+    showCurrentLocation: false,
+    inputPlaceholderText: 'Type anything and you will get a location',
+  };
 
   constructor(
     private builder: FormBuilder,
@@ -115,6 +120,12 @@ export class HubCreateComponent implements OnInit {
     this.getHubCategories();
     this.getFriendList();
   }
+
+  public resetAddPage(){
+    this.addForm = { type: 'O', category_id: '', privacy: 'O' };
+    this.searchData = { address: '', lat: '', lng: '' };
+    this.autocompleteSettings['inputString'] = '';
+  }
   
   public getHubList(){
     this.hubService.getmyRequestGroupList(this.loginUserId).subscribe(data => {
@@ -140,7 +151,7 @@ export class HubCreateComponent implements OnInit {
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
     console.log(userValue);
-    if (this.searchData.address)
+    if (this.searchData.address && this.searchData.lat)
     {
       userValue.address = this.searchData.address;
       userValue.lat = this.searchData.lat;
@@ -164,6 +175,7 @@ export class HubCreateComponent implements OnInit {
     // this.postform = hub;
     console.log(hub);
     this.addForm = hub;
+    this.autocompleteSettings['inputString'] = hub.address;
     this.aboutActiveTab = 'add_group';
     this.successMsg = '';
     this.postImgData = '';

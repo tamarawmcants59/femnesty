@@ -20,6 +20,7 @@ import { MentorComponent } from './mentor/mentor.component';
 import { NotificationComponent } from './notification/notification.component';
 import { GroupChatComponent } from "./group-chat/chat.component";
 import { AgmCoreModule } from '@agm/core';
+import { SelectModule } from "../../../../node_modules/ng2-select";
 
 import {
   SocialLoginModule, 
@@ -76,7 +77,8 @@ export function provideConfig() {
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
-    })
+    }),
+    SelectModule
   ],
   declarations: [
     TimeAgoPipe,
