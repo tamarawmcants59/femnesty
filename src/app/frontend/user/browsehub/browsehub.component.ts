@@ -14,7 +14,8 @@ export class BrowsehubComponent implements OnInit {
   public lat;
   public lng;
   private search_con;
-  public search_data = {keyword:'',cat_id:''};
+  public search_date;
+  public search_data = { keyword: '', cat_id: '', search_date:''};
   constructor(private hubService: HubService) {
     this.loginUserId = localStorage.getItem("loginUserId");
   }
@@ -42,6 +43,11 @@ export class BrowsehubComponent implements OnInit {
 
   public searchByKeyword(){
     this.search_data.keyword = this.search_con;
+    this.getAllHubs();
+  }
+
+  public searchByDate() {
+    this.search_data.search_date = this.search_date;
     this.getAllHubs();
   }
 

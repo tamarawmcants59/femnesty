@@ -8,7 +8,7 @@
         <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
       </li>
       <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
-        <a (click)="aboutToggleTab('add_group')">Create Hub</a>
+        <a (click)="aboutToggleTab('add_group');resetAddPage();">Create Hub</a>
       </li>
       <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
         <a (click)="aboutToggleTab('group_request');getMyHubRequest()">Hub Request</a>
@@ -119,7 +119,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-<ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
 
                     <!-- <input type="text" class="form-control-plaintext" 
                       [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
@@ -129,7 +129,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <input type="url" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
                     <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
                   </div>
                 </div>
@@ -143,8 +143,8 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail">
-                    <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Email Required</div>
+                    <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail" email>
+                    <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Please enter valid email.</div>                    
                   </div>
                 </div>
 
@@ -165,7 +165,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                     <div class="col-sm-12">
-                      <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date">
+                      <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today">
                       <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
                   </div>
                 </div>
@@ -232,7 +232,7 @@ and also what they are used for.</p>
 
 
 
-                  <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid || createGroupForm.dirty">Create Hub</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">{{addForm.id?'Update':'Create'}} Hub</button>
                   <button type="button" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel
 </button>
 
@@ -271,13 +271,15 @@ and also what they are used for.</p>
                         </a>
                       </div>
                       <div class="content-part">
-                        <p>{{groupData.title}}</p>
-                        <small>{{groupData.hub_date}}</small>
+                        <a [routerLink]="['/user/hub_details',groupData.slug]">
+                          <p>{{groupData.title}}</p>
+                          <small>{{groupData.hub_date}}</small>
+                        </a>
                       </div>
                     </div>
                     <div class="right-area">
-                      <p *ngIf="groupData.status == '1'">You accepted</p>
-                      <p *ngIf="groupData.status == '2'">You rejected</p>
+                      <p *ngIf="groupData.status == '1'">Attending</p>
+                      <p *ngIf="groupData.status == '2'">Rejected</p>
                       <p>
                         <button *ngIf="groupData.status == '0'" type="button" class="btn btn-primary" (click)="acceptHubRequest(groupData)">Accept</button>
                         <button *ngIf="groupData.status == '0'" type="button" class="btn btn-black btn-default" (click)="rejectHubRequest(groupData)">Decline</button>

@@ -4,7 +4,7 @@ import { HubService } from "../../../components/hub-create/hub.service";
 import { UserService } from "../user.service";
 import { AgmCoreModule } from '@agm/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-
+import { SelectModule } from "../../../../../node_modules/ng2-select";
 
 @Component({
   selector: 'app-hubs',
@@ -22,6 +22,8 @@ export class HubsComponent implements OnInit {
   public uninvitedUsers = [];
   public activeTab = 'posts';
   public successMsg = '';
+  public items = [];
+  public friends = [];
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -103,6 +105,14 @@ export class HubsComponent implements OnInit {
       if (data.Ack == 1) {
         console.log('uninvited',data.details);
         this.uninvitedUsers = data.details;
+        this.uninvitedUsers.forEach((color: { first_name: string,id: string }) => {
+          console.log(color);
+          this.items.push({
+            id: color.id,
+            text: color.first_name 
+          });
+        });
+        console.log('items',this.items);
       }
     },
       error => {
