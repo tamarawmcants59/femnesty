@@ -17,7 +17,7 @@
 .HUB-Dtls h2{font-size:12px}
 .HUB-Dtls .HUB-Dtls-txt{font-size:14px; color:#4e4e4e; margin-bottom: 20px}
 .HUB-Dtls .info{font-size:14px; color:#4e4e4e; margin-bottom: 0px; line-height: 1.42}
-.HUB-Dtls .info span{color:#000000;}
+.HUB-Dtls .info span{color:#000000; display: inline-block; min-width:120px;}
 .HUB-Dtls .right-map{margin-bottom: 20px}
 
 .attending h2{margin-bottom: 36px;}
@@ -30,3 +30,5 @@
 .right-sharing ul{display: flex; margin-left: -5px}
 .right-sharing li{margin:0 5px}
 .right-sharing li a{display: block;width:42px;height:42px;line-height:40px;border-radius:100%;overflow: hidden;color:#fff;text-decoration: none;font-size:24px;text-align: center;}
+
+.form-control:focus{border-color:transparent !important}
