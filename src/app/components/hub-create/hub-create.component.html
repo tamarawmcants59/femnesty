@@ -102,7 +102,7 @@ and also what they are used for.</p>
                       <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="O"> One Time 
                     </div>
                     <div class="col-sm-3">
-                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="R"> Recursive
+                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="R"> Recurring
                     </div>
                     <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
                   </div>
