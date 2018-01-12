@@ -2477,6 +2477,7 @@ background: #fff !important;}
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    margin-bottom: 0;
 }
 
 .upload-btn-wrapper.uploadBut {
@@ -4730,12 +4731,19 @@ header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding
 /*------------------------------- 08-01-2018 soumen --------------------------*/
 
 .articl, .enrich{position:relative}
-header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:11px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#666666}
+header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:12px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#444; font-weight: 600}
 
 .shareYourThought form .result, .message-writing-wrap .result{position: relative; display: inline-block;}
 .shareYourThought form .result .del-btn, .message-writing-wrap .result .del-btn{position: absolute; right:-10px; width:22px; height:22px; background: #bb1926; line-height: 23px; color:#fff; text-align: center; top: -11px; border-radius: 100%; cursor: pointer;}
 
-.form-control:focus{box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 6px rgb(104, 9, 9) !important; -webkit-box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 6px rgb(104, 9, 9) !important; -moz-box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 6px rgb(104, 9, 9) !important;}
+.form-control:focus{
+	box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 3px rgb(104, 9, 9) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 3px rgb(104, 9, 9) !important;
+	-moz-box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 3px rgb(104, 9, 9) !important;}
+
+.form-control:focus{border-color:transparent !important}
+
+
 
 
 .custom-autocomplete{
@@ -4983,3 +4991,5 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:11px; dis
 	display: block;
 	border-radius: 0 !important;
 }
+
+.gm-style-iw > div{overflow: hidden !important;}
