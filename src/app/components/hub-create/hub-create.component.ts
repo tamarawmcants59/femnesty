@@ -34,6 +34,7 @@ export class HubCreateComponent implements OnInit {
   public searchData = {address:'',lat:'',lng:''};
   public today = new Date().toJSON().split('T')[0];
   public autocompleteSettings: any = {
+    showSearchButton: false,
     showCurrentLocation: false,
     inputPlaceholderText: 'Type anything and you will get a location',
   };
