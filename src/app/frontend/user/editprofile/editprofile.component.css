@@ -60,5 +60,9 @@
 .hide_div{ display: none;}
 .show_div{ display: block;}
 .text_hide_div{ display: none;}
+.imgp1{
+    background-position: center center;
+    background-size: cover;
+    }
 
 
