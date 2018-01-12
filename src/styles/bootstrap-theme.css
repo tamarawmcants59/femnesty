@@ -4413,7 +4413,7 @@ section h1:after{
     .fix-to-top {position: relative !important; width: 100% !important; top: 0 !important;}
     .left-list.fix-to-top {width:100% !important;}
 
-	header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu{position: relative; float:none}
+	header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu{position: relative; float:none; border:0; box-shadow:none; padding-top:0; padding-bottom:0; margin-left: 10px; transition: ease all 0.3s}
 
 }
 @media screen and (max-width:480px) {
