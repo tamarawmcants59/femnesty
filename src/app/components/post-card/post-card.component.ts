@@ -17,8 +17,10 @@ export class PostCardComponent implements OnInit {
   public IsloginUserId: any;
   public isLoggedIn: any;
   public postCmtId: any;
+  public subPostCmtId: any;
   //public postCmtDiv:boolean = false;
   public postCmtDiv: any = {};
+  public postSubCmtDiv: any = {};
   public postCmtLike: any = {};
   public postCmtHtml: string = '';
   public userPrfImgStr: string = '';
@@ -63,7 +65,7 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.repoUrl);
+    console.log(this.postData);
   }
 
   public userPostComment(post_id, postdata) {
@@ -76,10 +78,23 @@ export class PostCardComponent implements OnInit {
       this.postCmtDiv[h] = false;
     });
     this.postCmtDiv[postdata.id] = true;
-
-    this.postCmtHtml = '';
+    //this.postCmtHtml = '';
   }
   
+  public userSubPostComment(post_id, postdata) {
+    if (this.isLoggedIn == 1) {
+      this.postCmtId = postdata.post_id;
+      this.subPostCmtId = post_id;
+    } else {
+      this.router.navigateByUrl('/user/login');
+    }
+    Object.keys(this.postSubCmtDiv).forEach(h => {
+      this.postSubCmtDiv[h] = false;
+    });
+    this.postSubCmtDiv[postdata.id] = true;
+
+  }
+
   public userPostLike(post_id, postdata) {
     if (this.isLoggedIn == 1) {
       //this.postCmtId = post_id;
@@ -122,7 +137,34 @@ export class PostCardComponent implements OnInit {
     let userValue = this.commentform.value;
     userValue.user_id = this.IsloginUserId;
     userValue.post_id = this.postCmtId;
+    //comment_id
+    this.dataService.userPostDataSend(userValue)
+      .subscribe( data => {
+        userValue.profile_image_url=this.userPrfImgStr;
+        userValue.name=this.userNameStr;
+        userValue.first_name=this.getCurrentUser.first_name;
+        userValue.last_name=this.getCurrentUser.last_name;
+        userValue.c_date=this.currentDate;
+        userValue.display_name=this.getCurrentUser.display_name;
+        comments.push(userValue); 
+        this.commentform.reset();
+        postList.commentcount=parseInt(postList.commentcount)+1;
+      },
+      error => {
+        alert(error);
+      });
+  }
 
+  public submitSubPostComment(comments, postList,postSubId) {
+    if (this.isLoggedIn == 1) {
+
+    } else {
+      this.router.navigateByUrl('/user/login');
+    }
+    let userValue = this.commentform.value;
+    userValue.user_id = this.IsloginUserId;
+    userValue.post_id = this.postCmtId;
+    userValue.comment_id = this.subPostCmtId;
     this.dataService.userPostDataSend(userValue)
       .subscribe( data => {
         userValue.profile_image_url=this.userPrfImgStr;
