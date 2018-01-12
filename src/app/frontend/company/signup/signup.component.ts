@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
   public cpassword:AbstractControl;
   public checkEmailExist:boolean = false;
   public checkCompanynameExist = false;
+  public domainmatch = false;
   public submitted:boolean = false;
   returnUrl: string;
   errorMsg: string='';
@@ -59,20 +60,42 @@ export class SignupComponent implements OnInit {
   public checkEmail(values:Object):void { 
     if(values!=''){
       let signupCheckEmail={
-        "email": values
+        "email": values,
+        "company_name": this.company_name.value
       };
+      console.log(signupCheckEmail);
       this.dataService.userCheckEmail(signupCheckEmail)
       .subscribe(data => {
              let details=data;
-             //console.log(details);
+             console.log(details);
+             if(details.domain_match == "1")
+             {
+              this.domainmatch = false;
+               //return false;
+             }
+             else {
+              this.domainmatch = true;
+               //return false;
+             }
+
              if (details.Ack=="1") {
                  this.checkEmailExist = false;
-                 return false;
+                 //return false;
              }else{
                //alert('Invalid login');
                this.checkEmailExist = true;
-               return false;
+               //return false;
              }
+
+          //    if (details.domain_match=="1") {
+          //     this.domainmatch = false;
+          //     return false;
+          // }else{
+          //   //alert('Invalid login');
+          //   this.domainmatch = true;
+          //   return false;
+          // }
+             
          },
          error => {
            
@@ -92,13 +115,23 @@ public checkCompanyname(values:Object){
     this.dataService.userCheckCompanyname(signupCheckcompanyname).subscribe(data => {
            let details=data;
            console.log(data);
-           if (details.Ack=="1") {
+           if(details.domain_match == "1")
+           {
+            this.domainmatch = false;
+            //return false;
+           }
+           else{
+            this.domainmatch = true;
+             //return false;
+           }
+
+           if(details.Ack=="1") {
                this.checkCompanynameExist = false;
-               return false;
+               //return false;
            }else{
              //alert('Invalid login');
              this.checkCompanynameExist = true;
-             return false;
+            // return false;
            }
        },
        error => {
