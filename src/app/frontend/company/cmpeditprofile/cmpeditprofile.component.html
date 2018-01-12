@@ -88,21 +88,31 @@
                                 <div class="aboutPart">
                                     <h2>About</h2>
                                     <div class="abouts">
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12">
+                                        <div class="row tabPart1">
+                                            <!-- <div class="col-md-4 col-sm-12">
                                                 <ul class="nav-tabs tabs-left sideways">
                                                     <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
                                                     <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
                                                     <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}"><a (click)="aboutToggleTab('add_subadmin')">Add Subadmin</a></li>
                                                     <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
+                                            <ul class="nav nav-tabs ">
+                                                <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                                                <a (click)="aboutToggleTab('overview')">Overview</a></li>
+                                                <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}">
+                                                <a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
+                                                <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}">
+                                                <a (click)="aboutToggleTab('add_subadmin')">Add Subadmin</a></li>
+                                                <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}">
+                                                <a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
+                                            </ul>                            
                                             <div class="col-md-8 col-sm-12">
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
                                                         <ul class="ulList">
                                                             <div class="menu">
-                                                                <h3>About Company</h3>
+                                                                <!-- <h3>About Company</h3> -->
                                                                 <div class="">
                                                                     <div class="form-group row">
                                                                         <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>

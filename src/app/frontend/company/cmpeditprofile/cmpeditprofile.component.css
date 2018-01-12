@@ -33,3 +33,11 @@
     vertical-align: top;
     width: 80%;
 }
+.tabPart1 ul li {
+    border-radius: 0px;
+    border-radius: 0;
+    border: none;
+    background: #b8b8b8 !important;
+    font-weight: 500;
+    font-size: 12px;
+}
