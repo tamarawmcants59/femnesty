@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
 import { environment } from '../../../environments/environment';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 //import { CeiboShare } from 'ng2-social-share';
 
@@ -49,7 +49,7 @@ export class PostCardComponent implements OnInit {
     private dataService: SocialService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    //public dialog: MatDialog
   ) {
     this.getCurrentUser = localStorage.getItem("currentUser");
     this.getCurrentUser = JSON.parse(this.getCurrentUser);
@@ -193,7 +193,7 @@ export class PostCardComponent implements OnInit {
     
   }
 
-  public openDialog(): void {
+  /*public openDialog(): void {
     let dialogRef = this.dialog.open(PopupmodalComponent, {
       width: '250px',
       data: { namePid: this.likeListPostId }
@@ -203,7 +203,7 @@ export class PostCardComponent implements OnInit {
       console.log('The dialog was closed');
       //this.likeListPostId = result;
     });
-  }
+  }*/
 
   public shareOnFacebook(url, description, images){
     //let titleMeta = document.createElement('meta');
@@ -238,7 +238,7 @@ export class PostCardComponent implements OnInit {
   }
 }
 
-@Component({
+/*@Component({
   selector: 'app-popupmodal',
   templateUrl: './popupmodal.component.html',
   styleUrls: ['./popupmodal.component.css']
@@ -253,7 +253,7 @@ export class PopupmodalComponent {
     this.dialogRef.close();
   }
 
-}
+}*/
 
 export declare class FacebookParams {
   u: string;
