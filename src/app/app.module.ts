@@ -13,7 +13,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+//import { PopupmodalComponent } from './components/post-card/popupmodal.component';
 
 // import { TruncatePipe ,SafePipe} from './exponential-strength.pipe';
 import { FrontendService } from './components/frontend-app-header/frontend.service';
@@ -22,6 +24,8 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './service/auth.service';
 // import { UserSidebar } from "./components/user-sidebar";
 // Import containers
+//import {MatDialogModule} from '@angular/material/dialog';
+
 import {
   FrontendLayout
 } from './containers';
@@ -58,7 +62,8 @@ import { AppRoutingModule } from './app.routing';
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    ...APP_COMPONENTS
+    ...APP_COMPONENTS,
+    
   ],
   imports: [
     CommonModule,
@@ -71,7 +76,10 @@ import { AppRoutingModule } from './app.routing';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     NgbModule.forRoot(),
     FormsModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    BrowserAnimationsModule,
+    //MatDialogModule
+    
   ],
   exports: [],
   providers: [
@@ -86,7 +94,8 @@ import { AppRoutingModule } from './app.routing';
     ChatListnerService,
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  //entryComponents: [PopupmodalComponent]
 })
 export class AppModule { }
 

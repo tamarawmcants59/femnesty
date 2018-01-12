@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
 import { environment } from '../../../environments/environment';
-//import { ShareButtonModule } from "ngx-sharebuttons";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 //import { CeiboShare } from 'ng2-social-share';
 
 @Component({
@@ -29,7 +30,7 @@ export class PostCardComponent implements OnInit {
   public currentDate: Date = new Date();
   //public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
   public repoUrl = '';
-  
+  public likeListPostId = '';
 
   @Input() postData: {
     id: number;
@@ -47,7 +48,8 @@ export class PostCardComponent implements OnInit {
     private builder: FormBuilder,
     private dataService: SocialService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.getCurrentUser = localStorage.getItem("currentUser");
     this.getCurrentUser = JSON.parse(this.getCurrentUser);
@@ -65,7 +67,7 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.postData);
+    
   }
 
   public userPostComment(post_id, postdata) {
@@ -182,6 +184,27 @@ export class PostCardComponent implements OnInit {
       });
   }
 
+  public userPostLikeListPopup(postId){
+    this.likeListPostId=postId;
+    /*let dialogRef = this.dialog.open(UserProfileComponent, {
+      height: '400px',
+      width: '600px',
+    });*/
+    
+  }
+
+  public openDialog(): void {
+    let dialogRef = this.dialog.open(PopupmodalComponent, {
+      width: '250px',
+      data: { namePid: this.likeListPostId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.likeListPostId = result;
+    });
+  }
+
   public shareOnFacebook(url, description, images){
     //let titleMeta = document.createElement('meta');
     /*let descMeta = document.createElement('meta');
@@ -212,6 +235,22 @@ export class PostCardComponent implements OnInit {
         alert('Your security settings are not allowing our popup windows to function. Please make sure your security software allows popup windows to be opened by this web application.');
     }*/
 
+  }
+}
+
+@Component({
+  selector: 'app-popupmodal',
+  templateUrl: './popupmodal.component.html',
+  styleUrls: ['./popupmodal.component.css']
+})
+export class PopupmodalComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<PopupmodalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
