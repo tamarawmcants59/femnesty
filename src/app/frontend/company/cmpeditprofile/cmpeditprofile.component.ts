@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyService } from "../company.service";
+// import { SelectModule } from "../../../../node_modules/ng2-select";
+//import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { UserService } from "../../user/user.service";
+//import {  SelectModule } from "../../../../../node_modules/ng2-select";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
 
@@ -28,7 +31,9 @@ export class CmpEditprofileComponent implements OnInit {
     name: '',
     state: '',
     city: '',
-    address: ''
+    address: '',
+    company_mission:'',
+    company_vission:''
   };
 
   returnUrl: string;
@@ -43,6 +48,7 @@ export class CmpEditprofileComponent implements OnInit {
   public userFollowerList = [];
   public cmpSubadminList = [];
   public cmpId ='';
+  public editAbtActiveTab: string = '';
   public publicCmpDet: object = { };
 
   prfImageData: any;
@@ -136,6 +142,14 @@ export class CmpEditprofileComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]],
+      company_mission: ['', [
+        Validators.required,
+        
+      ]],
+      company_vission: ['', [
+        Validators.required,
+        
+      ]],
       
       bio: ['', [
         //Validators.required,
@@ -158,7 +172,9 @@ export class CmpEditprofileComponent implements OnInit {
       ]],
 			state: ['', [ ]],
 			city: ['', [ ]],
-			address: ['', [ ]]
+      address: ['', [ ]],
+      company_mission: ['', [ ]],
+      company_vission: ['', [ ]]
 
     });
     
@@ -346,7 +362,7 @@ export class CmpEditprofileComponent implements OnInit {
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
-
+        this.editAbtActiveTab = '';
         const details = data;
         localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
         localStorage.setItem('userName', details.UserDetails.first_name);
@@ -519,6 +535,7 @@ export class CmpEditprofileComponent implements OnInit {
     const result = {},
     userValue = this.adminform.value;
     userValue.company_uid = loginUserId;
+    console.log(userValue)
     this.dataService.createCmpSubadmin(userValue).subscribe( data => {
         this.loading = false;
         this.successMsg = 'Admin added successfully';
@@ -568,6 +585,7 @@ export class CmpEditprofileComponent implements OnInit {
       let signupCheckEmail={
         "email": values
       };
+      console.log(signupCheckEmail)
       this.dataService.userCheckEmail(signupCheckEmail)
       .subscribe(data => {
              let details=data;
@@ -603,5 +621,10 @@ export class CmpEditprofileComponent implements OnInit {
     this.aboutActiveTab = data;
     this.adminform.reset();
   }
-
+  public editAboutToggleTab(data: any) {
+    this.editAbtActiveTab = data;
+    this.successMsg = '';
+    this.errorMsg = '';
+    //console.log(data);
+  }
 }

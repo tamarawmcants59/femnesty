@@ -98,7 +98,7 @@ export class SignupComponent implements OnInit {
              
          },
          error => {
-           
+           console.log('err');
          }
        ); 
     }else{
