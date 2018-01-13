@@ -87,6 +87,16 @@
 	  padding: 0 !important;
 	  margin: 0 !important;
   }
-/*.hide_div{ display: none;}
-.show_div{ display: block;}
-.text_hide_div{ display: none;}*/
+  :host ::ng-deep .custom-autocomplete__dropdown{display: block !important;}
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .heading[_ngcontent-c4] .line-location[_ngcontent-c4], :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .heading[_ngcontent-c4] .line-recent[_ngcontent-c4] {
+	  left: 0;
+	  top: 16px;
+	  width: calc(100% - 0px);
+  }
+  
+  :host ::ng-deep .heading.heading-recent span:first-child{background: #fff !important; z-index: 1;position: relative; padding: 0 20px;}
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] a[_ngcontent-c4]{float: none !important; text-align: left !important; display: block !important;}
+  
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .currentlocation[_ngcontent-c4] a[_ngcontent-c4] {position: relative !important; padding-left: 30px !important}
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .currentlocation[_ngcontent-c4] .location-icon[_ngcontent-c4] {position: absolute; left:9px; top:10px;}
+  
