@@ -5,7 +5,8 @@ import { UserService } from "../user.service";
 import { AgmCoreModule } from '@agm/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SelectModule } from "../../../../../node_modules/ng2-select";
-import { ShareButtons } from "@ngx-share/core";
+// import { ShareButtons } from "@ngx-share/core";
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-hubs',
@@ -25,13 +26,15 @@ export class HubsComponent implements OnInit {
   public successMsg = '';
   public items = [];
   public friends = [];
+  public repoUrl = '';
+  public latestArticles = [];
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private hubService: HubService,
     private builder: FormBuilder,
-    public share: ShareButtons) {
+    ) {
     this.postform = builder.group({
       user_ids: ['', [
         Validators.required
@@ -45,10 +48,12 @@ export class HubsComponent implements OnInit {
       });
 
       this.loginUserId = localStorage.getItem("loginUserId");
+      this.repoUrl = environment.website_url + this.router.url;
   }
 
   ngOnInit() {
-    this.getHubDetails();    
+    this.getHubDetails();
+    this.getLastFourArticle();
   }
 
   public getHubDetails()
@@ -100,6 +105,17 @@ export class HubsComponent implements OnInit {
         console.log('Something went wrong!');
       });
   }
+  public getLastFourArticle() {
+    this.dataService.getFourArticleList().subscribe(data => {
+      let details = data;
+      if (details.Ack == "1") {
+        this.latestArticles = details.LastArticleList;
+      }
+    },
+      error => {
+      }
+    );
+  }
 
   public getUnivitedUsers(){
     const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId };
@@ -138,4 +154,28 @@ export class HubsComponent implements OnInit {
       });
   }
 
+}
+export declare class FacebookParams {
+  u: string;
+}
+
+export class GooglePlusParams {
+  url: string
+}
+
+export class LinkedinParams {
+  url: string
+}
+
+export declare class PinterestParams {
+  url: string;
+  media: string;
+  description: string;
+}
+
+export class TwitterParams {
+  text: string;
+  url: string;
+  hashtags: string;
+  via: string;
 }
