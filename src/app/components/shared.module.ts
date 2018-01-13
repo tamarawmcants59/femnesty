@@ -53,9 +53,9 @@ import {MatDialogModule} from '@angular/material/dialog';
         SelectModule,
         //MatButtonModule,
         //MatCheckboxModule,
-        MatDialogModule,
         //BrowserAnimationsModule,
-        Ng4GeoautocompleteModule.forRoot()
+        Ng4GeoautocompleteModule.forRoot(),
+        MatDialogModule,
     ],
     exports: [
         UserSidebar,
@@ -67,8 +67,6 @@ import {MatDialogModule} from '@angular/material/dialog';
         GroupRightbarComponent,
         CompanyRightbarComponent,
         ImageCropperComponent,
-        //MatButtonModule,
-        //MatCheckboxModule,
         HubCreateComponent,
         PopupmodalComponent
     ],
