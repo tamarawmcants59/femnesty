@@ -22,8 +22,7 @@ import { SharedModule } from "../../components/shared.module";
       secondaryColour: '#bb1926',
       tertiaryColour: '#ffffff'
     }),
-    SharedModule,
-    
+    SharedModule,  
   ],
   declarations: [SignupComponent, ProfileComponent],
   providers: [CompanyService]
