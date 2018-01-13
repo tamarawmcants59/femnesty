@@ -363,6 +363,7 @@ export class CmpEditprofileComponent implements OnInit {
     const loginUserId = localStorage.getItem("loginUserId");
     const result = {},
       userValue = this.form.value;
+      console.log(userValue)
     userValue.id = loginUserId;
     this.dataService.updateAccountDet(userValue)
       .subscribe(

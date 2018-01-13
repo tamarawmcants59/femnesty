@@ -169,7 +169,13 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-
+  getcompanylist(form_data) {
+    return this.apiService.post(
+      `/users/ComapnyListByemployeeId`,
+      form_data
+    ).map(data => data);
+  }
+  
   getUserIsMyFrnd(form_data) {
     return this.apiService.post(
       `/users/appsearchexistfriendornot`,

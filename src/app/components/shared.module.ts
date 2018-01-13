@@ -55,7 +55,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         //MatCheckboxModule,
         //BrowserAnimationsModule,
         Ng4GeoautocompleteModule.forRoot(),
-        MatDialogModule,
+        MatDialogModule
+        
     ],
     exports: [
         UserSidebar,
