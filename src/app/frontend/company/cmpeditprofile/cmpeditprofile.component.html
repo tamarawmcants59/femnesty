@@ -536,9 +536,9 @@
                                                                                         
                                                                                  </div>
                                                                                  <div class="text-danger" *ngIf="!adminform.controls['email'].valid && adminform.controls['email'].touched">Email Required</div>
-                                                                                        <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
+                                                                                        <!-- <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
                                                                                             This email already exist.
-                                                                                        </div>
+                                                                                        </div> -->
                                                                             </div>
                                                                             <div class="">
                                                                                     <div class="form-group row">
@@ -590,7 +590,7 @@
                                                                                                          
                                                                                                     </div>
                                                                                                     <div class="saveChanges">
-                                                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Update</button>
+                                                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid ">Update</button>
                                                                                                         </div>
                                                                         </form>
                                                                     </div>
