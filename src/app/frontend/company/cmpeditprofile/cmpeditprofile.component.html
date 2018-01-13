@@ -696,8 +696,38 @@
                                     <h2>Employee List</h2>
                                     <div class="connections">
 
+                                        <div class="grp-rqsts" *ngIf="userEmployeeList?.length > 0">
+                                            <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
+                                            <ul >
+                                                <li *ngFor="let userData of userEmployeeList">
+                                                    <div class="left-area">
+                                                        <div class="round-image">
+                                                            <a [routerLink]="['/user/profile',userData.display_name]">
+                                                                <img [src]="userData.profile_image" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="content-part">
+                                                            <p>{{userData.name}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="right-area">
+                                                        <p>
+                                                            <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button>
+                                                            <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button>
+                                                        </p>
+                                                    </div> -->
+                                                </li>
+                                                
+                                            </ul>
+                                    </div>
+
+
+
+
+
+
                                         
-                                            <ul class="contn-box" *ngIf="userEmployeeList?.length > 0">
+                                            <!-- <ul class="contn-box" *ngIf="userEmployeeList?.length > 0">
                                                     <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
                                                             <div class="friend-boxImage">
                                                                     <a [routerLink]="['/user/profile',userData.display_name]">
@@ -708,11 +738,11 @@
                                                                     <h4>{{userData.name}}</h4>
                                                                     <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
                                                                     <!-- <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p> -->
-                                                                </div>
+                                                               <!-- </div>
                                                             
                                                             
                                                         </li>
-                                                </ul>
+                                                </ul> -->
 
 
 
@@ -772,7 +802,7 @@
                                 <div class="connectionsPart">
                                     <h2>Request List</h2>
                                     <div class="connections">
-
+                                        
                                             <div class="grp-rqsts" *ngIf="userRequestList?.length > 0">
                                                     <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
                                                     <ul >
