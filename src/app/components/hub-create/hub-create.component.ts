@@ -165,6 +165,7 @@ export class HubCreateComponent implements OnInit {
         this.successMsg = 'Hub Created Successfully';
         this.postform.reset();
         this.aboutActiveTab = 'overview';
+        window.scrollTo(0, 0);
         this.getHubList();
       },
       error => {
