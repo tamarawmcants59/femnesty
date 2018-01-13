@@ -7,8 +7,6 @@ import { CompanyService } from "../company.service";
 //import { UserService } from "../../user/user.service";
 import {  SelectModule } from "../../../../../node_modules/ng2-select";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
-
-
 @Component({
   selector: 'app-cmpeditprofile',
   templateUrl: './cmpeditprofile.component.html',
