@@ -196,7 +196,7 @@ export class PostCardComponent implements OnInit {
 
   public openDialog(): void {
     let dialogRef = this.dialog.open(PopupmodalComponent, {
-      width: '60%',
+      width: '100%',
       data: { namePid: this.likeListPostId }
     });
 

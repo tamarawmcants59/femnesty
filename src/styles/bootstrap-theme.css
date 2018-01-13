@@ -5001,15 +5001,30 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:12px; dis
 /*ngx-loading{position: fixed;top:0;left:0;z-index: 99999;width:100%;height:100%}*/
 
 
+mat-dialog-container{max-width: 500px;margin: 0 auto;}
+mat-dialog-title{font-family: 'montserratmedium';font-size: 20px;}
+
+.frind-modal .media-left img{width:55px;height:55px;border-radius: 100%;overflow: hidden;border:1px solid #ddd}
+.frind-modal .media-body h4{color: #4e4e4e;font-size: 14px;margin: 0;}
+.frind-modal .media-right a.btn.btn-primary{border: 2px solid #cc535c;
+color: #cc535c;
+background-color: white;
+padding: 7px 15px 5px;
+border-radius: 100px;}
+
+.frind-modal{border:1px solid #ddd;border-left:0;border-right:0;padding-top: 15px !important;padding-bottom: 15px !important;}
+.frind-modal .media{border-bottom:1px solid #ddd;padding: 8px 0 !important;margin: 0;}
+.frind-modal .media:last-child{border-bottom:0}
+.mat-dialog-actions button.btn.btn-primary{
+padding: 9px 15px;
+}
 
 
-
-
-
-
-
-
-
+@media screen and (max-width:480px) {
+	/*.frind-modal .media-left,.frind-modal .media-body{display: block;}*/
+	
+	.frind-modal .media-right{display: block;padding: 10px 0 0 0 !important}
+}
 
 
 
