@@ -5,6 +5,7 @@ import { UserService } from "../user.service";
 import { AgmCoreModule } from '@agm/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SelectModule } from "../../../../../node_modules/ng2-select";
+import { ShareButtons } from "@ngx-share/core";
 
 @Component({
   selector: 'app-hubs',
@@ -29,7 +30,8 @@ export class HubsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private hubService: HubService,
-    private builder: FormBuilder) {
+    private builder: FormBuilder,
+    public share: ShareButtons) {
     this.postform = builder.group({
       user_ids: ['', [
         Validators.required

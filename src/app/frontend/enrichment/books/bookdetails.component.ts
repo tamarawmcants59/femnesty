@@ -65,8 +65,12 @@ export class BookdetailsComponent implements OnInit {
           this.metaService.updateTag({ name: 'description', content: details.BooksDetailsBySlug[0].description});
           this.metaService.updateTag({ property: 'og:description', content: details.BooksDetailsBySlug[0].description});
           this.metaService.updateTag({ property: 'og:image', content: details.BooksDetailsBySlug[0].image_url});
-          //this.metaService.updateTag({ property: 'og:url', content: this.repoUrl});
-         
+          this.metaService.updateTag({ property: 'og:url', content: this.repoUrl});
+        this.metaService.updateTag({ property: 'twitter:card', content: details.BooksDetailsBySlug[0].image_url });
+          this.metaService.updateTag({ property: 'twitter:site', content: this.repoUrl });
+        this.metaService.updateTag({ property: 'twitter:creator', content: details.BooksDetailsBySlug[0].title });
+        
+      
           this.getRatingList();
           return false;
       }else{
