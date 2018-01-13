@@ -5,7 +5,7 @@ import { CompanyService } from "../company.service";
 // import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { UserService } from "../../user/user.service";
-//import {  SelectModule } from "../../../../../node_modules/ng2-select";
+import {  SelectModule } from "../../../../../node_modules/ng2-select";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
 
