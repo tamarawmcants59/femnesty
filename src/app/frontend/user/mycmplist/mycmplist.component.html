@@ -1,3 +1,101 @@
-<p>
-  mycmplist works!
-</p>
+<section class="section about-content-area visitingProfile">
+  <div class="container-fluid">
+      <div class="row flex-profile">
+          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+          <div class="col-md-3 flex-left">
+              <user-sidebar></user-sidebar>
+          </div>
+          <div class="col-md-6 flex-middle">
+              <div class="middlePart">
+                  <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+loginUserDet.cover_image_url+')'}">
+                      <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
+                      <!-- <div class="change-img">
+                          <i class="fa fa-camera"></i>
+                          <div class="txt">Upload Banner Photo</div>
+                      </div> -->
+                      <input type="file" class="change-img-input" (change)="fileChangeListenerCover($event)">
+                      <!-- <div class="addCoverPhoto">
+                          <span class="coverPhoto">Add Cover Photo</span>
+                      </div> -->
+                  </div>
+                  <div class="topPart inner-bg" *ngIf="coverImageData.image" [ngStyle]="{'background-image':coverImageData.image}">
+                      <img [src]="coverImageData.image" style="width:100%;height:100%">
+                  </div>
+                  <div class="profPhoto">
+                      <div *ngIf="!prfImageData.image" class="img imgp1" [ngStyle]="{'background-image':'url('+loginUserDet.image_url+')'}">
+
+                          <!-- <div class="inner-bg">
+                              <div class="icon-change" id="clickableLiElement">
+                                  <i class="fa fa-camera"></i>
+                                  <div class="txt">Update Profile <br> Picture</div>
+                                  <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
+                              </div>
+                          </div> -->
+                      </div>
+                      <div class="img result rounded" *ngIf="prfImageData.image">
+                          <img [src]="prfImageData.image" style="width:100%; height:100%">
+                      </div>
+                  </div>
+                  <div class="col-md-12" *ngIf="showImgDive">
+                      <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
+                          <div class="col-md-4" style="padding-top: 90px;">
+                              <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
+                          </div>
+                      </div>
+                      <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                  </div>
+                  <div class="col-md-12" *ngIf="showCoverImgDive">
+                      <div class="col-md-12" *ngIf="coverImageData.image" style="padding-bottom:10px;">
+
+                          <div class="col-md-4" style="padding-top: 10px;">
+                              <button type="button" class="btn btn-primary" (click)="UploadCoverImg()">Upload</button>
+                          </div>
+                      </div>
+                      <div class="col-md-12 text-center">
+                          <img-cropper #cropper [image]="coverImageData" [settings]="coverCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                      </div>
+                  </div>
+                  <div class="profDes">
+                      <h2 class="text-center">{{loginUserDet.name}}</h2>
+                      <p class="text-center">{{loginUserDet.bio}}</p>
+                      <p class="text-center addressP" *ngIf="loginUserDet.address">{{loginUserDet.address}}, {{loginUserDet.city}}</p>
+                  </div>
+                  <div class="connectionsPart">
+                    <!--<h2>Connections</h2>-->
+                    <ul class="contn-box" *ngIf="userFrndList?.length > 0">
+                        <li class="friend-box-list" *ngFor="let friendData of userFrndList">
+                            <div class="friend-boxImage">
+                              <a [routerLink]="['/user/profile',friendData.display_name]">
+                                  <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                              </a>
+                            </div>
+                            <div class="friend-boxText">
+                                <h4>{{friendData.name}}</h4>
+                                <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
+                                <!-- <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p> -->
+                            </div>
+                            <div class="sendmsg">
+                              <a class="btn btn-primary" [routerLink]="['/user/profile',friendData.display_name]"> VIEW PROFILE </a>
+                            </div>
+                            
+                        </li>
+                    </ul>
+
+                    <div class="connections">
+                        <div class="likePart" *ngIf="userFrndList?.length == 0">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="nothing">No connection found</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-3 flex-right">
+              <app-user-prfrsidebar></app-user-prfrsidebar>
+          </div>
+      </div>
+  </div>
+</section>
