@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component,NgModule, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyService } from "../company.service";
 // import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { UserService } from "../../user/user.service";
-import {  SelectModule } from "../../../../../node_modules/ng2-select";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
 
@@ -24,6 +23,7 @@ export class CmpEditprofileComponent implements OnInit {
   public showPostImgDive: boolean = false;
   public form: FormGroup;
   public adminform: FormGroup;
+  public postform: FormGroup;
   public editSubAdminId: string = '';
   public editSubAdmindata:object= { 
     email: '',
@@ -47,6 +47,8 @@ export class CmpEditprofileComponent implements OnInit {
   public userEmployeeList = [];
   public userFollowerList = [];
   public cmpSubadminList = [];
+  public userSearchFrndList=[];
+  public items=[];
   public cmpId ='';
   public editAbtActiveTab: string = '';
   public publicCmpDet: object = { };
@@ -103,7 +105,11 @@ export class CmpEditprofileComponent implements OnInit {
     //this.coverCropperSettings.minWidth = 250;
     //this.coverCropperSettings.minHeight = 100;
     this.coverImageData = {};
-
+    this.postform = builder.group({
+      user_ids: ['', [
+        Validators.required
+      ]]
+    }); 
     this.form = builder.group({
       company_name: ['', [
         Validators.required,
@@ -188,6 +194,7 @@ export class CmpEditprofileComponent implements OnInit {
     this.getEmployeeList();
     this.getFollowerList();
     this.getFollowerList();
+    this.getFriendList();
     //console.log(this.loginUserDet);
   }
 
@@ -608,6 +615,50 @@ export class CmpEditprofileComponent implements OnInit {
     }
   }
 
+  public getFriendList(){
+    const loginUserId = localStorage.getItem("loginUserId");
+    this.dataService.searchFrndListByName({suname:"", user_id: loginUserId})
+      .subscribe(
+      data => {
+        this.loading = false;
+        console.log(data);
+        if (data.Ack == '1') {
+          this.userSearchFrndList = data.FriendListById;
+          console.log(this.userSearchFrndList);
+          this.userSearchFrndList.forEach((color: { name: string, id: string }) => {
+            this.items.push({
+              id: color.id,
+              text: color.name
+            });
+            // this.items = [{id:'1',text:'Amsterdam'},{id:'2',text: null}];
+          });
+        } else {
+          this.userSearchFrndList =[];
+        }
+        console.log( this.items);
+        //this.postform.reset();
+      },
+      error => {
+        alert(error);
+      });
+  }
+  public sendInvites(){ 
+     const userValue = this.postform.value;
+     //console.log(userValue)
+     userValue.company_id = localStorage.getItem("loginUserId");
+     //console.log(userValue);
+    this.dataService.sendInvites(userValue).subscribe(data => {
+     // console.log(data);
+      if (data.Ack == 1) {
+        this.successMsg = 'Employee Added Successfully';
+        this.postform.reset();
+        //this.getUnivitedUsers();
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;

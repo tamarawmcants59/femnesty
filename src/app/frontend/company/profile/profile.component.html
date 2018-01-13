@@ -120,6 +120,18 @@
                                                                           <span>{{otherProfileDet?.bio}}</span>
                                                                       </div>
                                                                   </div>
+                                                                  <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Mission</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{otherProfileDet?.company_mission}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Company Vission</label>
+                                                                            <div class="col-sm-8">
+                                                                                <span>{{otherProfileDet?.company_vission}}</span>
+                                                                            </div>
+                                                                        </div>
                                                               </div>
                                                           </div>
                                                       </ul>
@@ -135,7 +147,43 @@
                                 
                                 <h2>Employee List</h2>
                                 <div class="connections">
-                                    <ul class="friend-box" *ngIf="userEmployeeList?.length > 0">
+                                    
+                                        <div class="grp-rqsts" *ngIf="userEmployeeList?.length > 0">
+                                                <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
+                                                <ul >
+                                                    <li *ngFor="let userData of userEmployeeList">
+                                                        <div class="left-area">
+                                                            <div class="round-image">
+                                                                <a [routerLink]="['/user/profile',userData.display_name]">
+                                                                    <img [src]="userData.profile_image" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <div class="content-part">
+                                                                <p>{{userData.name}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right-area">
+                                                            <p>
+                                                                    <a class="btn btn-primary" [routerLink]="['/user/profile',userData.display_name]">
+                                                                       <b>View Profile</b>
+                                                                    </a>
+                                                                <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button> -->
+                                                                <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button> -->
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    
+                                                </ul>
+                                        </div>
+     
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <!-- <ul class="friend-box" *ngIf="userEmployeeList?.length > 0">
                                         <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
                                             <div class="friend-boxImage">
                                                 <a [routerLink]="['/user/profile',userData.display_name]">
@@ -149,7 +197,7 @@
                                                 <a [routerLink]="['/user/profile',userData.display_name]" class="btn btn-primary">View Profile</a> 
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> -->
 
                                     <div class="likePart" *ngIf="userEmployeeList?.length == 0">
                                         <div class="row">

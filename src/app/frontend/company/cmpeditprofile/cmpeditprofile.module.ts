@@ -10,6 +10,7 @@ import { SharedModule } from "../../../components/shared.module";
 import { UserService } from "../../user/user.service";
 //import { ApplicationPipes } from "../../../application-pipe.module";
 //import { NgxCropperModule } from 'ngx-cropper';
+import {  SelectModule } from "../../../../../node_modules/ng2-select";
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { UserService } from "../../user/user.service";
     ReactiveFormsModule,
     CmpeditprofileRouting,
     SharedModule,
-    //ApplicationPipes,
+    SelectModule,
     //NgxCropperModule,
     LoadingModule.forRoot({
         animationType: ANIMATION_TYPES.wanderingCubes,

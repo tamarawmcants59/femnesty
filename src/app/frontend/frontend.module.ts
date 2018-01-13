@@ -8,12 +8,14 @@ import { SearchComponent } from './search/search.component';
 import { SharedModule } from "../components/shared.module";
 import { CorporateComponent } from './corporate/corporate.component';
 import { AdvisoryComponent } from './advisory/advisory.component';
+
 @NgModule({
   imports: [
     FrontendRoute,
     SharedModule,
     CommonModule,
-    ApplicationPipes
+    ApplicationPipes,
+    //SelectModule
   ],
   //exports:[TruncatePipe, SafePipe],
   declarations: [

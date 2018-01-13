@@ -168,6 +168,18 @@
                                                                             <span>{{publicCmpDet.bio}}</span>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Company Mission</label>
+                                                                            <div class="col-sm-8">
+                                                                                <span>{{publicCmpDet.company_mission}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                                <label for="staticEmail" class="col-sm-4 col-form-label">Company Vission</label>
+                                                                                <div class="col-sm-8">
+                                                                                    <span>{{publicCmpDet.company-vission}}</span>
+                                                                                </div>
+                                                                            </div>
                                                                 </div>
                                                             </div>
                                                         </ul>
@@ -296,13 +308,43 @@
                                                                                                     </div>
                                                                                                     <div *ngIf="editAbtActiveTab=='bio'">
                                                                                                         <button class="check" type="submit"></button>
-                                                                                                        <h5>COMPANY NAME</h5>
+                                                                                                        <h5>ABOUT COMPANY</h5>
                                                                                                         <!-- <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"> -->
                                                                                                             <P>
                                                                                                                     <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio" style="width: 90%;"></textarea>
                                                                                                                 </P>
                                                                                                     </div>
                                                                                                 </li>
+                                                                                                <li>
+                                                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='company_mission'}">
+                                                                                                            <div class="edit" (click)="editAboutToggleTab('company_mission')"></div>
+                                                                                                            <h5>COMPANY MISSION</h5>
+                                                                                                            <p>{{publicCmpDet.company_mission}}</p>
+                                                                                                        </div>
+                                                                                                        <div *ngIf="editAbtActiveTab=='company_mission'">
+                                                                                                            <button class="check" type="submit"></button>
+                                                                                                            <h5>COMPANY Mission</h5>
+                                                                                                            <!-- <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"> -->
+                                                                                                                <P>
+                                                                                                                        <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_mission" formControlName="company_mission" style="width: 90%;"></textarea>
+                                                                                                                    </P>
+                                                                                                        </div>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='company_vission'}">
+                                                                                                                <div class="edit" (click)="editAboutToggleTab('company_vission')"></div>
+                                                                                                                <h5>COMPANY VISSION</h5>
+                                                                                                                <p>{{publicCmpDet.company_vission}}</p>
+                                                                                                            </div>
+                                                                                                            <div *ngIf="editAbtActiveTab=='company_vission'">
+                                                                                                                <button class="check" type="submit"></button>
+                                                                                                                <h5>COMPANY VISSION</h5>
+                                                                                                                <!-- <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"> -->
+                                                                                                                    <P>
+                                                                                                                            <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_vission" formControlName="company_vission" style="width: 90%;"></textarea>
+                                                                                                                        </P>
+                                                                                                            </div>
+                                                                                                        </li>
                                                                 </ul>
                                                        </form>
                                                        
@@ -710,12 +752,15 @@
                                                             <p>{{userData.name}}</p>
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="right-area">
+                                                    <div class="right-area">
                                                         <p>
-                                                            <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button>
-                                                            <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button>
+                                                                <a class="btn btn-primary" [routerLink]="['/user/profile',userData.display_name]">
+                                                                   <b>View</b>
+                                                                </a>
+                                                            <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button> -->
+                                                            <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button> -->
                                                         </p>
-                                                    </div> -->
+                                                    </div>
                                                 </li>
                                                 
                                             </ul>
@@ -799,7 +844,43 @@
                             </div>
 
                             <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
-                                <div class="connectionsPart">
+                                    <!-- <h3>Select multiple cities</h3>
+                                    <ng-select  [multiple]="true"
+                                                [items]="items"
+                                                [disabled]="disabled"
+                                                (selected)="selected($event)"
+                                                (removed)="removed($event)"
+                                                placeholder="No city selected"></ng-select> -->
+                                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                        <strong>Success: </strong> {{successMsg}}
+                                                    </div>
+                                                <h2>Add Employee</h2>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <form method="post" [formGroup]="postform" (ngSubmit)="sendInvites()" #createGroupForm="ngForm">
+                                                                <div class="form-group">
+                                                                    <select class="form-control" multiple required formControlName="user_ids">
+                                                                        <option value="{{ itm.id }}" *ngFor="let itm of items">{{ itm ?.text }}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <!-- <ng-select [multiple]="true" [(ngModel)]="friends" formControlName="user_ids" [items]="items" placeholder="No city selected"></ng-select> -->
+                                                                
+                                                                <input type="submit" value="Send" class="btn btn-primary">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                               
+                                                <div class="connectionsPart">
+                                    
+                                        
+                                        <!-- <div class="form-group row" >
+                                                <div class="col-sm-12">
+                                                  <!-- <select class="form-control-plaintext" multiple>
+                                                    <option value="{{ user.id }}" *ngFor="let user of userSearchFrndList">{{ user?.name }}</option>
+                                                  </select> -->
+                                                  <!--<ng-select [multiple]="true"  [items]="items" placeholder="No friend selected"></ng-select>
+                                                </div>
+                                              </div> -->
                                     <h2>Request List</h2>
                                     <div class="connections">
                                         
