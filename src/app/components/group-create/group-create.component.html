@@ -102,6 +102,10 @@
                                     <option value="{{ cdata.id }}" *ngFor="let cdata of countryList">{{ cdata.countries_name }}</option>
                                 </select>
                                 <div class="text-danger" *ngIf="!postform.controls['country'].valid && postform.controls['country'].touched">Country Required</div>
+                                <!--<select class="form-control-plaintext">
+                                	<option>dsfdsfds</option>
+                                	<option>dsfdsfds</option>
+                                </select>-->
                             </div>
                         </div>
                         <div class="form-group row">

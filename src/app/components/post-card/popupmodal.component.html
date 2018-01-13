@@ -1,6 +1,7 @@
-<h1 mat-dialog-title>Like User list</h1>
-<div mat-dialog-content>
-    <div class="likePop">
+
+<h1 mat-dialog-title>Like User List</h1>
+<div mat-dialog-content class="frind-modal">
+    <!---<div class="likePop">
         <div class="item" *ngIf="userList.length > 0">
           <div class="row" *ngFor="let postData of userList">
               <div class="col-md-8">
@@ -10,7 +11,7 @@
                       </div>
                       <div class="profTextPart">
                           <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
-                          <!--<p>{{postData.created_date_mod}}</p>-->
+                          
                       </div>
                   </div>
               </div>
@@ -26,9 +27,32 @@
             </div>
         </div>
         </div>
+    </div>-->
+    <div *ngIf="userList.length > 0">
+    <div class="media" *ngFor="let postData of userList">
+        <div class="media-left">
+            <a href="#">
+                <img [src]="postData.profile_image" alt="">
+            </a>
+        </div>
+        <div class="media-body media-middle">
+            <h4 class="media-heading">{{postData.name}}</h4>
+        </div>
+        <div class="media-right media-middle">
+            <a [routerLink]="['/user/profile',postData.display_name]" class="btn btn-primary">View Profile</a>
+        </div>
+    </div>
+    
+    </div>
+    <div class="media" *ngIf="userList.length == 0">
+       
+        <div class="media-body media-middle">
+            <h4 class="media-heading">No user found.</h4>
+        </div>
+        
     </div>
 </div>
+<div mat-dialog-actions>
+  <button class="btn btn-primary" mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Close</button>
+</div>
 
-<!--<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="" cdkFocusInitial>Close</button>
-</div>-->
