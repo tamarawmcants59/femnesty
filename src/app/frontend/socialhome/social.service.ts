@@ -50,6 +50,10 @@ export class SocialService {
         form_data
     ).map(data => data);
   }
+  
+  likePostUserList(form_data){
+    return this.apiService.post(`/users/apppostlike`,form_data).map(data => data);
+  }
   /*getArticleBySlug(slug){
     return this.apiService.get(`/enrichment/apparticledetailsbyslug/${slug}`)
       .map(data => data);
