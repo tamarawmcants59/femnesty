@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../components/shared.module";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +22,7 @@ import { SharedModule } from "../../components/shared.module";
       secondaryColour: '#bb1926',
       tertiaryColour: '#ffffff'
     }),
-    SharedModule
+    SharedModule,  
   ],
   declarations: [SignupComponent, ProfileComponent],
   providers: [CompanyService]

@@ -29,6 +29,11 @@ export class GroupCreateComponent implements OnInit {
   public searchData = {address:'',lat:'',lng:''}
   public catList=[];
   public countryList=[];
+  public autocompleteSettings: any = {
+    showSearchButton: false,
+    showCurrentLocation: false,
+    inputPlaceholderText: 'Type anything and you will get a location',
+  };
 
   constructor(
     private builder: FormBuilder,
@@ -188,6 +193,7 @@ export class GroupCreateComponent implements OnInit {
         this.loading = false;
         this.successMsg = 'Successfully create the group';
         this.postform.reset();
+        window.scrollTo(0, 0);
         this.getMyGroupListData();
         this.searchData.address='';
       },
@@ -210,7 +216,8 @@ export class GroupCreateComponent implements OnInit {
         this.loading = false;
         this.successMsg = 'Successfully edit the group';
         this.postform.reset();
-        this.getMyGroupListData();
+        window.scrollTo(0, 0);
+        //this.getMyGroupListData();
         this.aboutActiveTab='overview';
       },
       error => {

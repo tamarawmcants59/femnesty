@@ -21,6 +21,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { GroupChatComponent } from "./group-chat/chat.component";
 import { AgmCoreModule } from '@agm/core';
 import { SelectModule } from "../../../../node_modules/ng2-select";
+import { ShareModule } from "@ngx-share/core";
 
 import {
   SocialLoginModule, 
@@ -37,6 +38,7 @@ import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from './createhub/createhub.component';
 import { GroupphotoComponent } from './groupphoto/groupphoto.component';
+import { MycmplistComponent } from './mycmplist/mycmplist.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -78,7 +80,8 @@ export function provideConfig() {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
     }),
-    SelectModule
+    SelectModule,
+    ShareModule.forRoot()
   ],
   declarations: [
     TimeAgoPipe,
@@ -101,7 +104,8 @@ export function provideConfig() {
     BrowsehubComponent,
     HubsComponent,
     CreatehubComponent,
-    GroupphotoComponent
+    GroupphotoComponent,
+    MycmplistComponent
     //ImageCropperComponent
   ],
   providers: [

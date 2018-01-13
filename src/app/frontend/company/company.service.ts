@@ -183,4 +183,16 @@ export class CompanyService {
   deleteSubAdmin(form_data) {
     return this.apiService.post(`/users/appdeleteaccount`,form_data ).map(data => data);
   }
+  searchFrndListByName(form_data) {
+    return this.apiService.post(
+      `/users/appsearchfriend1`,
+      form_data
+    ).map(data => data);
+  }
+  sendInvites(data){
+    return this.apiService.post(
+        `/users/sendemployeeInvites`,
+        data
+    ).map(data => data);
+}
 }

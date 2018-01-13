@@ -21,6 +21,7 @@ import { EventdetailsComponent } from './events/eventdetails.component';
 import { BookcatComponent } from './books/bookcat.component';
 import {RatingModule} from "ng2-rating";
 import {TooltipModule} from "ng2-tooltip";
+import { ShareModule } from "@ngx-share/core";
 //import { ShareModule } from '@ngx-share/core';
 
 @NgModule({
@@ -32,7 +33,7 @@ import {TooltipModule} from "ng2-tooltip";
     FormsModule,
     ReactiveFormsModule,
     TooltipModule,
-    //ShareModule
+    ShareModule.forRoot()
   ],
   declarations: [
     EnrichmentComponent, 

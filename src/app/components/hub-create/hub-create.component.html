@@ -1,21 +1,21 @@
 <div class="row">
-<div class="col-md-4 col-sm-12" *ngIf="aboutActiveTab!='add_group'">
-
-
-
-    <ul class="nav-tabs tabs-left sideways">
-      <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
-        <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
-      </li>
-      <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
-        <a (click)="aboutToggleTab('add_group');resetAddPage();">Create Hub</a>
-      </li>
-      <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
-        <a (click)="aboutToggleTab('group_request');getMyHubRequest()">Hub Request</a>
-      </li>
-    </ul>
+  <div class="col-md-12 col-sm-12">
+    <div class="new-tabs">
+      <ul class="nav nav-tabs">
+        <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+          <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
+        </li>
+        <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
+          <a (click)="aboutToggleTab('add_group');resetAddPage();">Create Hub</a>
+        </li>
+        <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
+          <a (click)="aboutToggleTab('group_request');getMyHubRequest()">Hub Request</a>
+        </li>
+      </ul>
+    </div>
   </div>
-<div class="col-md-8 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
+
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
 
 
 
@@ -24,7 +24,7 @@
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
         <ul class="ulList">
           <div class="menu">
-            <h3>Hub List</h3>
+            <!-- <h3>Hub List</h3> -->
             <div class="row">
               <div class="col-md-12">
                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
@@ -69,7 +69,8 @@
           <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
             <strong>Success: </strong> {{successMsg}}
           </div>
-          <h3>Create Hub</h3>
+          <!-- <h3>Create Hub</h3> -->
+          <h3>&nbsp;</h3>
           <p>Short description on what a hub is and what is required to make<br> a hub
 and also what they are used for.</p>
           <div class="menu">
@@ -246,7 +247,7 @@ and also what they are used for.</p>
       </div>
       </div>
       </div>
-<div class="col-md-8 col-sm-8 group-list" *ngIf="aboutActiveTab=='group_request'">
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='group_request'">
 
 
 
@@ -255,44 +256,84 @@ and also what they are used for.</p>
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='group_request'}">
         <ul class="ulList">
           <div class="menu">
-            <h3>Hub Request</h3>
-            <div class="row">
-              <div class="col-md-12 grp-rqsts" *ngIf="hubRequestList?.length > 0">
+            <!-- <h3>Hub Request</h3> -->
+            
+              <div class="grp-rqsts" *ngIf="hubRequestList?.length > 0">
                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                   <strong>Success: </strong> {{successMsg}}
                 </div>
                 <!--<pre>{{groupList}}</pre>-->
-                <ul>
-                  <li *ngFor="let groupData of hubRequestList">
-                    <div class="left-area">
-                      <div class="round-image">
-                        <a [routerLink]="['/user/hub_details',groupData.slug]">
-                          <img src="{{groupData.profile_image}}" alt="">
-                        </a>
-                      </div>
-                      <div class="content-part">
-                        <a [routerLink]="['/user/hub_details',groupData.slug]">
-                          <p>{{groupData.title}}</p>
-                          <small>{{groupData.hub_date}}</small>
-                        </a>
-                      </div>
+                <div class="connectionsPart">
+                <ul class="hub-listing">
+                  <li>
+                    <div class="date caption">Date</div>
+                    <div class="title caption">Title</div>
+                    <div class="action caption">Action</div>
+                  </li>
+                  <li  *ngFor="let groupData of hubRequestList">
+                    <div class="date">{{groupData.hub_date}}</div>
+                    <div class="title">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]">
+                        {{groupData.title}}
+                      </a>
                     </div>
-                    <div class="right-area">
-                      <p *ngIf="groupData.status == '1'">Attending</p>
-                      <p *ngIf="groupData.status == '2'">Rejected</p>
-                      <p>
-                        <button *ngIf="groupData.status == '0'" type="button" class="btn btn-primary" (click)="acceptHubRequest(groupData)">Accept</button>
-                        <button *ngIf="groupData.status == '0'" type="button" class="btn btn-black btn-default" (click)="rejectHubRequest(groupData)">Decline</button>
-                      </p>
+                    <div class="action">
+                      <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
+                      <a *ngIf="groupData.status == '1'" class="btn btn-primary">Rejected</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
                     </div>
                   </li>
-                  
                 </ul>
+                
+                <div class="new-tabs">
+                  <ul class="nav nav-tabs">
+                    <li [ngClass]="{'active' : hubReqTab==1}">
+                      <a (click)="hubReqTab=1" role="tab" data-toggle="tab">Attending</a>
+                    </li>
+                    <li [ngClass]="{'active' : hubReqTab==0}">
+                      <a (click)="hubReqTab=0"role="tab" data-toggle="tab">Not Responded yet</a>
+                    </li>
+                    <li [ngClass]="{'active' : hubReqTab==2}">
+                      <a (click)="hubReqTab=2" role="tab" data-toggle="tab">Rejected</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="attend">
+                      <ul class="hub-listing subcontent">
+                        <li>
+                          <div class="date caption labc">Date</div>
+                          <div class="title caption labc">Title</div>
+                          <div class="action caption labc">Action</div>
+                        </li>
+                        <li *ngFor="let groupData of hubRequestList">
+                          <div *ngIf="groupData.status==hubReqTab">
+                          <div class="date labc">{{groupData.hub_date}}</div>
+                          <div class="title labc">
+                            <a [routerLink]="['/user/hub_details',groupData.slug]">
+                              {{groupData.title}}
+                            </a>
+                          </div>
+                          <div class="action labc">
+                            <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
+                            <a *ngIf="groupData.status == '1'" class="btn btn-primary">Rejected</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+                          </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                  </div>
+                </div>
+                </div>
+                
                 <div *ngIf="groupRequestList?.length == 0">
                   <p>No group request found.</p>
                 </div>
               </div>
-            </div>
+           
           </div>
         </ul>
       </div>
