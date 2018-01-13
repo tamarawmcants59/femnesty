@@ -38,6 +38,7 @@ export class HubCreateComponent implements OnInit {
     showCurrentLocation: false,
     inputPlaceholderText: 'Type anything and you will get a location',
   };
+  public hubReqTab = 1;
 
   constructor(
     private builder: FormBuilder,

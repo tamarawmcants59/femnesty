@@ -22,6 +22,8 @@ import { FrontendService } from './components/frontend-app-header/frontend.servi
 import { UserService } from './frontend/user/user.service';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './service/auth.service';
+// import { ShareModule } from "@ngx-share/core";
+import { HttpClientModule } from '@angular/common/http';
 // import { UserSidebar } from "./components/user-sidebar";
 // Import containers
 //import {MatDialogModule} from '@angular/material/dialog';
@@ -78,6 +80,8 @@ import { AppRoutingModule } from './app.routing';
     FormsModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    // ShareModule.forRoot()
     //MatDialogModule
     
   ],
