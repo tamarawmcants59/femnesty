@@ -16,7 +16,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 //import { PopupmodalComponent } from './components/post-card/popupmodal.component';
-
 // import { TruncatePipe ,SafePipe} from './exponential-strength.pipe';
 import { FrontendService } from './components/frontend-app-header/frontend.service';
 import { UserService } from './frontend/user/user.service';
