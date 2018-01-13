@@ -25,7 +25,7 @@ import { SelectModule } from "../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocomplete";
 //import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { PopupmodalComponent } from './post-card/popupmodal.component';
-//import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @NgModule({ 
@@ -53,7 +53,7 @@ import { PopupmodalComponent } from './post-card/popupmodal.component';
         SelectModule,
         //MatButtonModule,
         //MatCheckboxModule,
-        //MatDialogModule,
+        MatDialogModule,
         //BrowserAnimationsModule,
         Ng4GeoautocompleteModule.forRoot()
     ],
@@ -70,7 +70,7 @@ import { PopupmodalComponent } from './post-card/popupmodal.component';
         //MatButtonModule,
         //MatCheckboxModule,
         HubCreateComponent,
-        //PopupmodalComponent
+        PopupmodalComponent
     ],
     providers: [
         HubService,
