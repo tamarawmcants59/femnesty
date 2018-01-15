@@ -75,14 +75,15 @@
                                 <!-- <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p> -->
                             </div>
                             <div class="sendmsg">
-                              <a class="btn btn-primary" [routerLink]="['/user/profile',friendData.display_name]"> VIEW PROFILE </a>
+                              <a class="btn btn-primary sendnsg_a" [routerLink]="['/user/profile',friendData.display_name]"> VIEW PROFILE </a>
+                              <a class="btn btn-primary sendnsg_a" (click)="unflow_company(friendData.id,friendData.company_id)"> UNFLOW </a>
                             </div>
                             
                         </li>
                     </ul>
 
                     <div class="connections">
-                        <div class="likePart" *ngIf="userFrndList?.length == 0">
+                        <div class="likePart" *ngIf="!userFrndList">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="nothing">No connection found</div>

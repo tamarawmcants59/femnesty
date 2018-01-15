@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
@@ -123,11 +123,19 @@ export class HubCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+        this.aboutActiveTab = params['slug'];
+    });
     this.getMyGroupListData();
     // this.getGroupRequestList();
     this.getHubList();
     this.getHubCategories();
     this.getFriendList();
+    if(this.aboutActiveTab=='create'){
+      this.resetAddPage();
+    }else if(this.aboutActiveTab=='request'){
+      this.getMyHubRequest();
+    }
   }
 
   public resetAddPage(){
@@ -186,7 +194,7 @@ export class HubCreateComponent implements OnInit {
     console.log(hub);
     this.addForm = hub;
     this.autocompleteSettings['inputString'] = hub.address;
-    this.aboutActiveTab = 'add_group';
+    this.aboutActiveTab = 'create';
     this.successMsg = '';
     this.postImgData = '';
   }
@@ -344,7 +352,7 @@ export class HubCreateComponent implements OnInit {
     this.dataService.editGroupDataSend(userValue).subscribe(data => {
       this.showPostImgDive = false;
       this.loading = false;
-      this.successMsg = 'Successfully edit the group';
+      this.successMsg = 'Successfully edit the hub';
       this.postform.reset();
       this.getMyGroupListData();
       this.aboutActiveTab = 'overview';

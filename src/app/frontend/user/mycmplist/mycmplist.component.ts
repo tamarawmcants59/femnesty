@@ -143,4 +143,31 @@ export class MycmplistComponent implements OnInit {
     }
 
   }
+
+  public unflow_company(emp_id,company_id)
+  {
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "user_id": loginUserId,
+        "company_id": company_id,
+        "id": emp_id
+      };
+      this.dataService.unflowcompany(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            //this.userPostList = details.ActivePostByUser;
+            //console.log(this.userPostList);
+          } else {
+
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
+  }
 }

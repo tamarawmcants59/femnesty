@@ -80,7 +80,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'create_hub',
+    path: 'create_hub/:slug',
     canActivate: [AuthGuard],
     component: CreatehubComponent,
     data: {

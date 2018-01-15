@@ -175,7 +175,12 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-  
+  unflowcompany(form_data){
+    return this.apiService.post(
+      `/users/appUnflowCompany`,
+      form_data
+    ).map(data => data);
+  }
   getUserIsMyFrnd(form_data) {
     return this.apiService.post(
       `/users/appsearchexistfriendornot`,

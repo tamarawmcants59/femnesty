@@ -2,24 +2,23 @@
   <div class="col-md-12 col-sm-12">
     <div class="new-tabs">
       <ul class="nav nav-tabs">
+        <li>
+            <a [routerLink]="['/user/hubs']">All Hubs</a>
+        </li>
         <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
           <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
         </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
-          <a (click)="aboutToggleTab('add_group');resetAddPage();">Create Hub</a>
+        <li [ngClass]="{'active' : aboutActiveTab=='create'}">
+          <a (click)="aboutToggleTab('create');resetAddPage();">Create Hub</a>
         </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
-          <a (click)="aboutToggleTab('group_request');getMyHubRequest()">Hub Request</a>
+        <li [ngClass]="{'active' : aboutActiveTab=='request'}">
+          <a (click)="aboutToggleTab('request');getMyHubRequest()">Hub Request</a>
         </li>
       </ul>
     </div>
   </div>
 
 <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
-
-
-
-
     <div class="tab-content">
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
         <ul class="ulList">
@@ -59,12 +58,12 @@
       </div>
     </div>
   </div>
-<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='add_group'">
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='create'">
 
 
   <div class="tab-content">
 
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='create'}">
         <ul class="ulList edit-forms">
           <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
             <strong>Success: </strong> {{successMsg}}
@@ -262,13 +261,13 @@ and also what they are used for.</p>
       </div>
       </div>
       </div>
-<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='group_request'">
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='request'">
 
 
 
   <div class="tab-content">
 
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='group_request'}">
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='request'}">
         <ul class="ulList">
           <div class="menu">
             <!-- <h3>Hub Request</h3> -->
@@ -293,11 +292,13 @@ and also what they are used for.</p>
                       </a>
                     </div>
                     <div class="action">
-                      <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
-                      <a *ngIf="groupData.status == '1'" class="btn btn-success">Accepted</a>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Leave</a>                      
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+
+                      <a *ngIf="groupData.status == '2'" class="btn btn-black btn-default">Rejected</a>
+                      <a *ngIf="groupData.status == '1'" class="btn btn-primary1">Accepted</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Leave</a>                      
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
+
                     </div>
                   </li>
                 </ul>

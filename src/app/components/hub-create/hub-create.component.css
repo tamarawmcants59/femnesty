@@ -622,5 +622,28 @@ body>.ui-select-bootstrap.open {
 {
   clear:both;
 }
+.btn-black{
+  background: #373737;
+  box-shadow: none;
+  text-shadow: none;
+  color: #fff;
+  border-radius: 50px;
+  border: 0;
+  font-size: 10px !important;
+  text-transform: uppercase;
+  font-family: 'montserratmedium';
+  margin: 3px 0;
+}
 
-
+.btn.btn-primary1 {
+  background: #bb1926;
+  color: #fff;
+  border: 0;
+  text-shadow: none;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  font-family: 'montserratmedium';
+  font-size: 10px !important;
+  text-transform: uppercase;
+  margin: 3px 0;
+}

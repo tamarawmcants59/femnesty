@@ -9,6 +9,28 @@
 			</div>
 			<div class="col-md-6 flex-middle">
 				<div class="middlePart" style="background: transparent">
+						<div class="tabPart">
+								<div class="tab-content">
+					<div class="col-md-12 col-sm-12 hub_top_tab">
+						<div class="new-tabs">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a [routerLink]="['/user/hubs']">All Hubs</a>
+								</li>
+								<li>
+									<a [routerLink]="['/user/create_hub/overview']">Hub List</a>
+								</li>
+								<li>
+									<a [routerLink]="['/user/create_hub/create']">Create Hub</a>
+								</li>
+								<li>
+									<a [routerLink]="['/user/create_hub/request']">Hub Request</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</div>
 					<div class="browse-hub-map">
 						<div class="map-holder">
 							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="16">
@@ -103,9 +125,20 @@
 						</div>
 					</div>
 					
-					<div class="innerRightPart" style="padding-top: 56px; padding-bottom: 56px">
+					<div class="innerRightPart share-story">
+						<h1>Share your Story</h1>
+						<p>Femnesty is always looking for strong, positive contributors to join our team.</p>
+						<p><a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">Share</a></p>
+					  </div>
+					  <div class="innerRightPart share-story">
+						<h1>Start a Hub</h1>
+						<p>Make a difference where you are, start a Hub today.</p>
+						<p><a [routerLink]="['/user/create_hub/create']" class="btn btn-primary">Start</a></p>
+					  </div>
+
+					<!--<div class="innerRightPart" style="padding-top: 56px; padding-bottom: 56px">
 					  <div class="article-add-holder article-add-holder1">
-					    <h3>SHARE YOUR STORY</h3>
+					    <h1>Share your Story</h1>
 					    <p>Femnesty is always looking for strong, positive contributors to join our team.</p>
 					    <a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">SHARE</a>
 					  </div>
@@ -117,7 +150,7 @@
 					    <p> Make a difference where you are, start a Hub today. </p>
 					    <a [routerLink]="['/user/create_hub']" class="btn btn-primary">Start</a>
 					  </div>
-					</div>
+					</div>-->
 				</div>
         </div>
 		</div>
