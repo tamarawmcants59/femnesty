@@ -217,7 +217,7 @@ export class GroupCreateComponent implements OnInit {
         this.successMsg = 'Successfully edit the group';
         this.postform.reset();
         window.scrollTo(0, 0);
-        //this.getMyGroupListData();
+        this.getMyGroupListData();
         this.aboutActiveTab='overview';
       },
       error => {
