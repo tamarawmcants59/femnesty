@@ -4,7 +4,7 @@ import { EnrichmentService } from "../enrichment.service";
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { Meta } from '@angular/platform-browser';
-import { ShareButtons } from '@ngx-share/core';
+//import { ShareButtons } from '@ngx-share/core';
 
 //import { ShareButtons } from '@ngx-share/core';
 
