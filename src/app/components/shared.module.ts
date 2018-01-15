@@ -27,7 +27,7 @@ import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocompl
 import { PopupmodalComponent } from './post-card/popupmodal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -51,6 +51,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         EmojiPickerModule.forRoot(),
         NgbModule,
         SelectModule,
+        AmazingTimePickerModule,
         //MatButtonModule,
         //MatCheckboxModule,
         //BrowserAnimationsModule,
