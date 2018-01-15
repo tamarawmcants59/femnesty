@@ -187,14 +187,14 @@
                                     <img src="assets/images/down-arrow.png" alt="">
                                 </li>
                                 <li><a [routerLink]="['/user/edit_profile/activity']">My Profile</a></li>
-                                <li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
-                                <li><a [routerLink]="['/user/hubs']">Find hubs</a></li>
+                                <!--<li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
+                                <li><a [routerLink]="['/user/hubs']">Find hubs</a></li>-->
                                 <li class="divider"></li>
                                 <li><a [routerLink]="['/company']">Create company</a></li>
-                                <li><a [routerLink]="['/user/mycmplist']">List company</a></li>
-                                <!--<li><a [routerLink]="['/user/login']">Company Login</a></li>-->
+                                <!--<li><a [routerLink]="['/user/mycmplist']">List company</a></li>
+                                <li><a [routerLink]="['/user/login']">Company Login</a></li>-->
                                 <li class="divider"></li>
-                                <li><a [routerLink]="['/user/mentor']">Join mentor</a></li>
+                                <!--<li><a [routerLink]="['/user/mentor']">Join mentor</a></li>-->
                                 <li *ngIf="userloggedIn == 1"><a href="Javascript: void(0)" (click)="userLogout()">Logout</a></li>
                             </ul>
                             <ul class="dropdown-menu" role="menu" *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'">

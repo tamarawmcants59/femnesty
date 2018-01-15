@@ -31,3 +31,12 @@
 .right-sharing li{margin:0 5px}
 .right-sharing li a{display: block;width:42px;height:42px;line-height:40px;border-radius:100%;overflow: hidden;color:#fff;text-decoration: none;font-size:24px;text-align: center;}
 
+:host ::ng-deep .profTextPart .fa {
+  color: #bb1926
+}
+
+
+:host ::ng-deep li a{
+    color: #bb1926
+
+}
