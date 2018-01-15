@@ -18,7 +18,7 @@
       <h2>Followers</h2>
       <ul *ngIf="userFollowerList?.length > 0">         
         <li *ngFor="let followData of userFollowerList">               
-          <a [routerLink]="['/user/profile',followData.display_name]"><img src="{{followData.profile_image}}" alt="{{followData.first_name}} {{followData.last_name}}" /></a>
+          <a [routerLink]="['/user/profile',followData.display_name]"><img src="{{followData.profile_image}}" alt="{{followData.first_name}} {{followData.last_name}}" title="{{followData.first_name}} {{followData.last_name}}" /></a>
         </li>
        
       </ul>
