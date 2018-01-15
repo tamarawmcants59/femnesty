@@ -381,4 +381,12 @@ export class UserService {
   getCountryList(){
     return this.apiService.get(`/users/appcountrylist`).map(data => data);
   }
+
+  
+  getCategoryListWithCount(){
+    return this.apiService.post(`/users/appcategorylistBygroupcount`).map(data => data);
+  }
+  getGroupListByCategoryId(data){
+    return this.apiService.post(`/users/appgrouplistbycategory`,data).map(data => data);
+  }
 }
