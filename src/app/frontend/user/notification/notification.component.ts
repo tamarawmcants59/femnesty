@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-notification',
@@ -8,11 +9,13 @@ import { UserService } from "../user.service";
 })
 export class NotificationComponent implements OnInit {
   public userNotiList = [];
+  public repoUrl='';
   constructor(
     private dataService: UserService
   ) { }
 
   ngOnInit() {
+    this.repoUrl=environment.website_url;
     this.getAllNotificationList();
   }
 
@@ -37,6 +40,7 @@ export class NotificationComponent implements OnInit {
                 });
               }
             }
+            //console.log(this.userNotiList);
           }
         },
         error => {
