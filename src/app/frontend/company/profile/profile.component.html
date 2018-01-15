@@ -24,7 +24,11 @@
                         </p>
                         <p class="text-center" style="padding-top: 10px;" *ngIf="isEmpRequest">
                         <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
-                        </p>    
+                        </p> 
+                        
+                        <p class="text-center" style="padding-top: 10px;" *ngIf="!isEmpRequest">
+                                <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="unflow_company()">Unfollow</button>
+                                </p> 
                   </div>
                   <div class="row" *ngIf="(successMsg != '')">
                       <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
