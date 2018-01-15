@@ -3,7 +3,7 @@
     <div class="new-tabs">
       <ul class="nav nav-tabs">
         <li>
-            <a [routerLink]="['/user/hubs']">All Hubs</a>
+            <a [routerLink]="['/user/hubs']">Find Hubs</a>
         </li>
         <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
           <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>

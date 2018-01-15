@@ -14,12 +14,15 @@
                       <ul>
                           <li *ngFor="let notiData of userNotiList">
                               <div class="image-area">
-                                  <a [routerLink]="['/user/profile',notiData.display_name]">
+                                  <!--<a [routerLink]="['/user/profile',notiData.display_name]">
+                                    <div class="noti-image" [ngStyle]="{'background-image':'url('+notiData.profile_image+')'}"></div>
+                                  </a>-->
+                                  <a href="{{repoUrl+'/'+notiData.link}}">
                                     <div class="noti-image" [ngStyle]="{'background-image':'url('+notiData.profile_image+')'}"></div>
                                   </a>
                               </div>
                               <div class="text-area">
-                                  <a [routerLink]="['/user/profile',notiData.display_name]">
+                                  <a href="{{repoUrl+'/'+notiData.link}}">
                                     <h4>{{notiData.name}}</h4>
                                   </a>
                                   <p class="desc">{{notiData.message}}</p>                                  
