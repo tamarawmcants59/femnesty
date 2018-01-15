@@ -332,11 +332,12 @@ and also what they are used for.</p>
                             </a>
                           </div>
                           <div class="action labc">
-                            <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
-                            <a *ngIf="groupData.status == '1'" class="btn btn-success">Accepted</a>
-                            <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Leave</a>
-                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
-                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+                            <a *ngIf="groupData.status == '2'" class="btn btn-black btn-default">Rejected</a>
+                            <a *ngIf="groupData.status == '1'" class="btn btn-primary1">Accepted</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Leave</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
+
                           </div>
                           </div>
                         </li>

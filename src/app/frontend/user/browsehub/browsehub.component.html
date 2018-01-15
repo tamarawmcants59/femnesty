@@ -107,7 +107,8 @@
 							</div>
 						</div>
                         <ul class="filter-reslt">
-	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
+							<li (click)="searchByCategory('')" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==''?'800':'200'}">All Hubs</li>
+	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
 						</ul>
 					</div>
 					<div class="innerRightPart latest-article">
