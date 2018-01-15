@@ -616,7 +616,9 @@ body>.ui-select-bootstrap.open {
 {
   float:left;
 }
-.subcontent
+.subcontent,
+.hub-listing li
+
 {
   clear:both;
 }

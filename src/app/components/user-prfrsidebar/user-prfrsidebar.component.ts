@@ -10,7 +10,7 @@ export class UserPrfrsidebarComponent implements OnInit {
   public loginUserId = "";
   public userImgList =[];
   public userGrpList =[];
-
+  public latestHubList = [];
   constructor(
     private dataService: UserService
   ) { 
@@ -18,6 +18,7 @@ export class UserPrfrsidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getLatestHub();
     this.getUserPhotoList();
     this.getUserGroupList();
   }
@@ -53,6 +54,19 @@ export class UserPrfrsidebarComponent implements OnInit {
 
       });
     }
+  }
+
+  public getLatestHub()
+  {
+    this.dataService.getLatestHubs(this.loginUserId).subscribe(data => {
+      //console.log(data);
+      if (data.Ack == "1") {
+        this.latestHubList = data.details;
+        //console.log(this.groupMemberList);
+      }
+    }, error => {
+
+    });
   }
 
 }

@@ -23,8 +23,9 @@
 														<h2>{{hub.title}}</h2>
 														<p class="black-text">{{hub.address}}</p>
 														<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+														<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
 														<a [routerLink]="['/user/hub_details/',hub.slug]" target="_blank">
-															<button class="btn btn-primary">Read More</button>
+															<button class="btn btn-primary">Read More </button>
 														</a>
 													</li>
 												</ul>
@@ -50,6 +51,7 @@
 									</a>
 									<p class="black-text">{{hub.address}}</p>
 									<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+									<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
 									<div class="bottom-links-wrap">
 										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
 										<a href="javscript:void(0);"><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
