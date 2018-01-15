@@ -7,14 +7,15 @@ import { UserService } from "../../user/user.service";
   styleUrls: ['./grouplist.component.css']
 })
 export class GrouplistComponent implements OnInit {
-  public isloginUserId:any;
-  public isUserLogin:any;
+  public isloginUserId: any;
+  public isUserLogin: any;
   public groupList = [];
-  public myGrpList =[];
-  public latestArticles =[];
+  public myGrpList = [];
+  public latestArticles = [];
   search_group: string;
-
-  constructor(private dataService: UserService) { 
+  private errorMsg:string;
+  private categoryListWithCount: any = [];
+  constructor(private dataService: UserService) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
   }
@@ -23,6 +24,36 @@ export class GrouplistComponent implements OnInit {
     this.getAllGroupList();
     this.getUserGroupList();
     this.getLastFourArticle();
+    this.getcategoryListWithCount();
+  }
+  private getcategoryListWithCount() {
+    this.dataService.getCategoryListWithCount().subscribe(data => {
+      if (data.Ack == "1") {
+        this.categoryListWithCount = data.ActiveGroupList;
+      }
+    },
+      error => {
+        console.log("Error");
+      });
+  }
+
+
+  private getCatDetails(id) {
+    let data={"category_id":id}
+    this.dataService.getGroupListByCategoryId(data).subscribe(data => {
+    if(data.Ack=="1")
+    {
+      this.myGrpList=data.ActiveGroupList
+      this.errorMsg="";
+    }
+    else if(data.Ack=="0")
+    {
+      this.myGrpList=[];
+      this.errorMsg='No record found.';
+    }
+    }, error => {
+      console.log("Error");
+    });
   }
 
   public getAllGroupList() {
@@ -31,9 +62,9 @@ export class GrouplistComponent implements OnInit {
         this.groupList = data.ActiveGroupList;
       }
     },
-    error => {
+      error => {
 
-    });
+      });
   }
 
   public getUserGroupList() {
@@ -42,24 +73,24 @@ export class GrouplistComponent implements OnInit {
         "user_id": this.isloginUserId
       };
       this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
-          //console.log(data);
-          if (data.Ack == "1") {
-              this.myGrpList = data.GroupListByuserID;
-              //console.log(this.groupMemberList);
-          } 
-      },error => {
+        //console.log(data);
+        if (data.Ack == "1") {
+          this.myGrpList = data.GroupListByuserID;
+          //console.log(this.groupMemberList);
+        }
+      }, error => {
 
       });
     }
   }
 
-  public getLastFourArticle(){
+  public getLastFourArticle() {
     this.dataService.getFourArticleList().subscribe(data => {
-          let details=data;
-          if (details.Ack=="1") {
-            this.latestArticles = details.LastArticleList;
-          }
-      },
+      let details = data;
+      if (details.Ack == "1") {
+        this.latestArticles = details.LastArticleList;
+      }
+    },
       error => {
       }
     );
@@ -67,21 +98,21 @@ export class GrouplistComponent implements OnInit {
 
   public searchGroup() {
     console.log(this.search_group);
-    if (this.search_group!='') {
+    if (this.search_group != '') {
       //this.getConnectionList();
       let goodFriends = this.groupList.filter(item => {
-        if(item.group_name.search(this.search_group)!==-1){
+        if (item.group_name.search(this.search_group) !== -1) {
           return item;
         }
       });
       this.groupList = goodFriends;
       let myGrplistData = this.myGrpList.filter(item1 => {
-        if(item1.group_name.search(this.search_group)!==-1){
+        if (item1.group_name.search(this.search_group) !== -1) {
           return item1;
         }
       });
       this.myGrpList = myGrplistData;
-    }else{
+    } else {
       this.getAllGroupList();
       this.getUserGroupList();
     }

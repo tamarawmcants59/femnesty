@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { TruncatePipe,SafePipe,DateFormatPipe,DateTimeFormatPipe } from "./exponential-strength.pipe";
 import { CeiboShare } from 'ng2-social-share';
 
+
 // import { ShareModule } from '@ngx-share/core';
 
 
