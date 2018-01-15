@@ -386,4 +386,8 @@ export class UserService {
   getCountryList(){
     return this.apiService.get(`/users/appcountrylist`).map(data => data);
   }
+
+  getLatestHubs(user_id) {
+    return this.apiService.put(`/hub/latest_hubs/` + user_id + '/4').map(data => data);
+  } 
 }

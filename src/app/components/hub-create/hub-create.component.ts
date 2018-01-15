@@ -5,6 +5,7 @@ import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
 @Component({
   selector: 'app-hub-create',
@@ -78,6 +79,12 @@ export class HubCreateComponent implements OnInit {
         Validators.required
       ]],
       type: ['', [
+        Validators.required
+      ]],
+      recurring_start: ['', [
+        Validators.required
+      ]],
+      recurring_end: ['', [
         Validators.required
       ]],
       privacy: ['', [

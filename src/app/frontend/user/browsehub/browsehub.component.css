@@ -19,7 +19,7 @@
 .All-hub-list ul li aside{flex:1 1 auto}
 .All-hub-list ul li aside h2{font-size:18px; margin:0; margin-bottom: 2px}
 .All-hub-list ul li aside .black-text{color: #303030; margin-bottom: 0px; font-size:12px;}
-.All-hub-list ul li aside .red-text{color: #ca0d17; margin-bottom: 9px; font-size:12px;}
+.All-hub-list ul li aside .red-text{color: #ca0d17;  font-size:12px;}
 .All-hub-list ul li aside .bottom-links-wrap{line-height: 1 !important}
 .All-hub-list ul li aside .bottom-links-wrap a{color: #000; font-size:10px; font-family: 'montserratmedium'; margin-right: 15px; text-transform: uppercase;}
 .All-hub-list ul li aside .bottom-links-wrap i{color: #ca0d17;}
