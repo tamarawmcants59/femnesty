@@ -78,7 +78,7 @@ import { AppRoutingModule } from './app.routing';
     NgbModule.forRoot(),
     FormsModule,
     AngularFireDatabaseModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     //HttpClientModule,
     // ShareModule.forRoot()
     //MatDialogModule
