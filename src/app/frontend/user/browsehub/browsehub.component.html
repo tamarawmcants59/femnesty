@@ -33,7 +33,7 @@
 				</div>
 					<div class="browse-hub-map">
 						<div class="map-holder">
-							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="16">
+							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="9">
 								<agm-marker  *ngFor="let hub of allHubs" [latitude]="hub.lat" [longitude]="hub.lng" >
 									<agm-info-window>
 											<div class="popup" style="width:250px">
@@ -73,7 +73,7 @@
 									</a>
 									<p class="black-text">{{hub.address}}</p>
 									<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
-									<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
+									<p class="red-text" *ngIf="hub.type=='R'">Recurring @ {{hub.recurring_start}} - {{hub.recurring_end}}</p>
 									<div class="bottom-links-wrap">
 										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
 										<a href="javscript:void(0);"><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
@@ -90,15 +90,15 @@
 						<h2>BROWSE HUBS</h2>
                         <div class="inline-search">
                             <div class="input-group">
-                                <input placeholder="Search By Keyword" [(ngModel)]="search_con" class="form-control">
+                                <input placeholder="Search By Keyword" [(ngModel)]="search_con" (keypress)="handleKeyDown($event)" class="form-control">
                                 <span class="input-group-btn">
-                                    <button type="button" (click)="searchByKeyword()"  class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    <button type="button" (click)="searchByKeyword()" class="btn btn-default"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
 						</div>
 						<div class="inline-search">
 							<div class="input-group">
-								<input type="date" placeholder="Search By Date" [(ngModel)]="search_date" class="form-control">
+								<input type="date" placeholder="Search By Date" [(ngModel)]="search_date" (keypress)="handleKeyDown1($event)" class="form-control">
 								<span class="input-group-btn">
 									<button type="button" (click)="searchByDate()" class="btn btn-default">
 										<i class="fa fa-search"></i>

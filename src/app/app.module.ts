@@ -13,7 +13,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 //import { PopupmodalComponent } from './components/post-card/popupmodal.component';
 // import { TruncatePipe ,SafePipe} from './exponential-strength.pipe';
@@ -78,7 +78,7 @@ import { AppRoutingModule } from './app.routing';
     NgbModule.forRoot(),
     FormsModule,
     AngularFireDatabaseModule,
-    //BrowserAnimationsModule,
+    BrowserAnimationsModule,
     //HttpClientModule,
     // ShareModule.forRoot()
     //MatDialogModule

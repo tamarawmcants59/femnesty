@@ -71,4 +71,33 @@ export class BrowsehubComponent implements OnInit {
       }
     );
   }
+
+  private handleKeyDown(event: any) {
+    //alert(event.keyCode)
+    if (event.keyCode == 13) {
+      // action
+      this.searchByKeyword();
+    }
+    // else if (event.keyCode == 40) {
+    //   // action
+    // }
+    // else if (event.keyCode == 38) {
+    //   // action
+    // }
+  }
+
+  private handleKeyDown1(event: any) {
+    //alert(event.keyCode)
+    if (event.keyCode == 13) {
+      // action
+      this.searchByDate();
+    }
+    // else if (event.keyCode == 40) {
+    //   // action
+    // }
+    // else if (event.keyCode == 38) {
+    //   // action
+    // }
+  }
+
 }
