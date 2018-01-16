@@ -135,7 +135,7 @@ and also what they are used for.</p>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-6">  
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
                     <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
                   </div>
