@@ -9,6 +9,28 @@
 			</div>
 			<div class="col-md-6 flex-middle">
 				<div class="middlePart" style="background: transparent">
+						<div class="tabPart">
+								<div class="tab-content">
+					<div class="col-md-12 col-sm-12 hub_top_tab">
+						<div class="new-tabs">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a [routerLink]="['/user/hubs']">Find Hubs</a>
+								</li>
+								<li>
+									<a [routerLink]="['/user/create_hub/overview']">Hub List</a>
+								</li>
+								<li>
+									<a [routerLink]="['/user/create_hub/create']">Create Hub</a>
+								</li>
+								<li>
+									<a [routerLink]="['/user/create_hub/request']">Hub Request</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</div>
 					<div class="browse-hub-map">
 						<div class="map-holder">
 							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="16">
@@ -23,8 +45,9 @@
 														<h2>{{hub.title}}</h2>
 														<p class="black-text">{{hub.address}}</p>
 														<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+														<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
 														<a [routerLink]="['/user/hub_details/',hub.slug]" target="_blank">
-															<button class="btn btn-primary">Read More</button>
+															<button class="btn btn-primary">Read More </button>
 														</a>
 													</li>
 												</ul>
@@ -50,6 +73,7 @@
 									</a>
 									<p class="black-text">{{hub.address}}</p>
 									<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+									<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
 									<div class="bottom-links-wrap">
 										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
 										<a href="javscript:void(0);"><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
@@ -83,14 +107,39 @@
 							</div>
 						</div>
                         <ul class="filter-reslt">
-	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
+							<li (click)="searchByCategory('')" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==''?'800':'200'}">All Hubs</li>
+	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
 						</ul>
 					</div>
+					<div class="innerRightPart latest-article">
+						<h2>Latest Articles</h2>
+						<div *ngIf="latestArticles?.length > 0">
+							<div class="hubMet hubMet2" *ngFor="let articleData of latestArticles">
+								<a [routerLink]="['/articles/details',articleData.slug]">
+									<div class="img" [ngStyle]="{'background-image':'url('+articleData.image_url+')'}"></div>
+								</a>
+								<div class="article-text">
+									<p>{{articleData.title | limitTo : 20}}</p>
+									<a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.created_date_mod}}</a>
+								</div>
+							</div>
+						</div>
+					</div>
 					
-					
-					<div class="innerRightPart" style="padding-top: 56px; padding-bottom: 56px">
+					<div class="innerRightPart share-story">
+						<h1>Share your Story</h1>
+						<p>Femnesty is always looking for strong, positive contributors to join our team.</p>
+						<p><a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">Share</a></p>
+					  </div>
+					  <div class="innerRightPart share-story">
+						<h1>Start a Hub</h1>
+						<p>Make a difference where you are, start a Hub today.</p>
+						<p><a [routerLink]="['/user/create_hub/create']" class="btn btn-primary">Start</a></p>
+					  </div>
+
+					<!--<div class="innerRightPart" style="padding-top: 56px; padding-bottom: 56px">
 					  <div class="article-add-holder article-add-holder1">
-					    <h3>SHARE YOUR STORY</h3>
+					    <h1>Share your Story</h1>
 					    <p>Femnesty is always looking for strong, positive contributors to join our team.</p>
 					    <a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">SHARE</a>
 					  </div>
@@ -102,7 +151,7 @@
 					    <p> Make a difference where you are, start a Hub today. </p>
 					    <a [routerLink]="['/user/create_hub']" class="btn btn-primary">Start</a>
 					  </div>
-					</div>
+					</div>-->
 				</div>
         </div>
 		</div>

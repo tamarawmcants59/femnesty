@@ -47,7 +47,11 @@
 								<div class="innerRightPart right-map-details HUB-Dtls">
 									<h2>{{hubDetails.title}}</h2>
 									<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
-									<p class="info"><span>Organizer:</span> {{hubDetails.Organizer}}</p>
+									<p class="info">
+										<span>Date:</span> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
+									<p class="info"><span>Organizer:</span> {{hubDetails.organizer}}</p>
+									<p class="info" *ngIf="hubDetails.type=='R'">
+										<span>Recurring:</span> {{hubDetails.recurring_start}} to {{hubDetails.recurring_start}}</p>
 									<p class="info"><span>Email:</span> {{hubDetails.email}}</p>
 									<p class="info"><span>Phone:</span> {{hubDetails.phone}}</p>
 									<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
@@ -80,9 +84,14 @@
 			<div class="col-md-3 flex-right">
 				<div class="rightPart">                			
 					<div class="innerRightPart right-map-details HUB-Dtls">
-      					<h2>{{hubDetails.title}}</h2>
-      					<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
-      					<p class="info"><span>Organizer:</span> {{hubDetails.Organizer}}</p>
+						  <h2>{{hubDetails.title}}</h2>	
+						<p class="info"> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
+						  <p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
+						
+						
+						  <p class="info"><span>Organizer:</span> {{hubDetails.organizer}}</p>
+						
+							
 						  <p class="info"><span>Email:</span> {{hubDetails.email}}</p>
 						<p class="info">
 							<span>Phone:</span> {{hubDetails.phone}}</p>
@@ -93,7 +102,7 @@
 					<div class="innerRightPart right-map-details HUB-Dtls">
       					<h2>ADDRESS</h2>
       					<div class="right-map">
-							<agm-map style="height:300px" [latitude]="hubDetails.lat" [longitude]="hubDetails.lng">
+							<agm-map style="height:133px" [latitude]="hubDetails.lat" [longitude]="hubDetails.lng">
 								<agm-marker [latitude]="hubDetails.lat" [longitude]="hubDetails.lng"></agm-marker>
 							</agm-map>
 							
@@ -111,13 +120,27 @@
 						</ul>
 						<a href="#" class="viewAll text-center">View All (200)</a>
 					</div>
+					<!-- <div class="innerRightPart latest-article">
+						<h2>Latest Articles</h2>
+						<div *ngIf="latestArticles?.length > 0">
+							<div class="hubMet hubMet2" *ngFor="let articleData of latestArticles">
+								<a [routerLink]="['/articles/details',articleData.slug]">
+									<div class="img" [ngStyle]="{'background-image':'url('+articleData.image_url+')'}"></div>
+								</a>
+								<div class="article-text">
+									<p>{{articleData.title | limitTo : 20}}</p>
+									<a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.created_date_mod}}</a>
+								</div>
+							</div>
+						</div>
+					</div> -->
     
 					<div class="innerRightPart right-map-details right-sharing">
 						<h2>Share</h2>
 						<!-- Go to www.addthis.com/dashboard to customize your tools -->
 						
 
-<button mat-button shareButton="facebook">
+<!--<button mat-button shareButton="facebook">
 
 	<i class="fa fa-facebook"></i>
 </button>
@@ -126,11 +149,17 @@
 </button>
 <button mat-icon-button shareButton="linkedin">
 	<i class="fa fa-linkedin"></i>
-</button>
+</button>-->
 						<ul>
-							<li><a href="" class="fa fa-facebook" style="background: #395899"></a></li>
-							<li><a href="" class="fa fa-linkedin" style="background: #19699c"></a></li>
-							<li><a href="" class="fa fa-twitter" style="background: #499bcd"></a></li>
+							<!-- <li ceiboShare [facebook]="{u: repoUrl}">
+								<img src="assets/images/facebook.png" />
+							</li>
+							<li ceiboShare [linkedIn]="{url:repoUrl, text:bookDetData.description}">
+								<img src="assets/images/linkedin.png" />
+							</li>
+							<li ceiboShare [twitter]="{url:repoUrl, text:bookDetData.description}">
+								<img src="assets/images/twitter.png" />
+							</li>							 -->
 						</ul>
 					</div>
 				</div>

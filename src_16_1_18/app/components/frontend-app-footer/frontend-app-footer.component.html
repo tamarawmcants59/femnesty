@@ -1,0 +1,132 @@
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <h4>Let’s Connect!</h4>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4><i class="ion-email"></i> Email us</h4>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4><i class="ion-ios-telephone"></i> Call Us</h4>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4><i class="ion-log-in"></i> Sign In</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div  class="col-md-3 col-sm-6">
+                    <h5>ABOUT FEMNESTY</h5>
+                    <ul *ngFor="let cmslist of cms">
+                        <li ><a [routerLink]="['/page/',cmslist.slug]" >{{cmslist.page_heading}}</a></li>
+                        <!-- <li><a [routerLink]="['/page/who-are-we']">Who are we?</a></li>
+                        <li><a [routerLink]="['/page/advisory-team']">Advisory Team</a></li>
+                        <li><a [routerLink]="['/page/partnership']">Partnership</a></li>
+                        <li><a [routerLink]="['/page',pageContactData]">Contact Us</a></li> -->
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h5>CONTRIBUTE</h5>
+                    <ul>
+                        <li><a [routerLink]="['/user/shareyourstory']">Share Your Story</a></li>
+                        <li><a [routerLink]="['/user/mentor']">Become a Mentor</a></li>
+                        <li><a [routerLink]="['/user/team']">Join the Team</a></li>
+                        <li><a [routerLink]="['/mentorship']">Mentorship</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <h5>ARTICLES</h5>
+                    <ul>
+                        <li><a [routerLink]="['/articles/work-and-home-balance']">Work and Home Balance</a></li>
+                        <li><a [routerLink]="['/articles/strategies-for-success']">Strategies for Success</a></li>
+                        <li><a [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                        <strong>Success!</strong> {{successMsg}}
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                        <strong>Error!</strong> {{errorMsg}}
+                    </div>
+                    <h5>NEWSLETTER</h5>
+                    <form (ngSubmit)="sendNewsletter()">
+                        <div class="form-group">
+                            <input type="email" class="form-control" [(ngModel)]="newsletteremail" name="newsletteremail" placeholder="Your Email">
+                            <!--<div class="text-danger" *ngIf="!subsform.controls['email'].valid && subsform.controls['email'].touched">Email Required</div>-->
+                        </div>
+                        <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="pull-left">Copyright © {{current_year | date:'y'}} {{siteSettingsDet.website}}. All rights reserved.</p>
+            <ul class="pull-right">
+                <li><a target="_blank" href="{{siteSettingsDet.facebook_url}}"><i class="ion-social-facebook"></i></a></li>
+                <li><a target="_blank" href="{{siteSettingsDet.twitter_url}}"><i class="ion-social-twitter"></i></a></li>
+                <li><a target="_blank" href="{{siteSettingsDet.linkedIn_url}}"><i class="ion-social-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="live-chat" class="{{chatClass}}">
+        <div class="clearfix chat-header">
+            <a href="javascript:void(0)" (click)="closeChat()" class="chat-close"><i class="ion-close"></i></a>
+            <h4>{{withUser.first_name}} {{withUser.last_name}}</h4>
+            <span class="chat-message-counter">3</span>
+        </div>
+        <div class="chat-holder2">
+            <ul #scrollMe id="chat-container-popup" class="chat-history" *ngIf="chats">
+                <li class="clearfix21 {{chat.cssClass}}" *ngFor="let chat of chats">
+                	<div class="image-area">
+                		<div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;">
+                    	 	<img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
+                   		 	<img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
+                   		</div>
+                   	</div>
+                    <div class="text-area">
+                        <h5 *ngIf="chat.message.text">{{chat.message.text}}</h5>
+                        <!--<h5 *ngIf="!chat.isSelf">{{withUser.first_name}} {{withUser.last_name}}</h5>
+                        <h5 *ngIf="chat.isSelf">{{thisUser.first_name}} {{thisUser.last_name}}</h5>-->
+                        <img class="img img-responsive" style="border-radius: 3%" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                        <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                        <div class="clearfix"></div>
+                         <p class="date">{{chat.created | date}}</p>
+                    </div>
+                </li>
+            </ul>
+            <form (submit)="sendMessage()">
+                <fieldset>
+                    <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
+                </fieldset>
+            </form>
+        </div>
+        <!--<div class="chat">
+            <div #scrollMe id="chat-container-popup" class="chat-history" *ngIf="chats">
+                <div class="chat-message clearfix {{chat.cssClass}}" *ngFor="let chat of chats">
+                    <img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
+                    <img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
+                    <div class="chat-message-content clearfix">
+                        <h5 *ngIf="!chat.isSelf">{{withUser.first_name}} {{withUser.last_name}}</h5>
+                        <h5 *ngIf="chat.isSelf">{{thisUser.first_name}} {{thisUser.last_name}}</h5>
+                        <span *ngIf="!chat.isSelf" class="chat-time">{{chat.created | date}}</span>
+                        <img class="img img-responsive" style="border-radius: 3%" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                        <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                        <p *ngIf="chat.message.text">
+                            {{chat.message.text}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <form (submit)="sendMessage()">
+                <fieldset>
+                    <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
+                </fieldset>
+            </form>
+        </div>-->
+    </div>
+</footer>

@@ -1,9 +1,11 @@
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EnrichmentService } from "../enrichment.service";
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { Meta } from '@angular/platform-browser';
+//import { ShareButtons } from '@ngx-share/core';
+
 //import { ShareButtons } from '@ngx-share/core';
 
 @Component({
@@ -12,15 +14,15 @@ import { Meta } from '@angular/platform-browser';
   styleUrls: ['./bookdetails.component.css'],
 })
 export class BookdetailsComponent implements OnInit {
-  bookDetData=[];
-  bookSlugName='';
+  bookDetData = [];
+  bookSlugName = '';
   public postform: FormGroup;
-  public bookId='';
-  successMsg='';
-  public ratListData=[];
+  public bookId = '';
+  successMsg = '';
+  public ratListData = [];
   public repoUrl = '';
-  public isloginUser ='';
-  public loginUserDetails:any;
+  public isloginUser = '';
+  public loginUserDetails: any;
 
   constructor(
     private builder: FormBuilder,
@@ -29,7 +31,7 @@ export class BookdetailsComponent implements OnInit {
     private router: Router,
     private metaService: Meta,
     //public sosShare: ShareButtons
-  ) { 
+  ) {
     this.postform = builder.group({
       name: ['', [
         Validators.required
@@ -41,58 +43,57 @@ export class BookdetailsComponent implements OnInit {
         Validators.required
       ]]
     });
-    this.repoUrl=environment.website_url+this.router.url;
+    this.repoUrl = environment.website_url + this.router.url;
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-        this.bookSlugName = params['slug'];
-        //console.log(this.bookSlugName);
+      this.bookSlugName = params['slug'];
+      //console.log(this.bookSlugName);
     });
 
     this.isloginUser = localStorage.getItem("isLoggedIn");
-    let logUserDet=localStorage.getItem("currentUser");
+    let logUserDet = localStorage.getItem("currentUser");
     this.loginUserDetails = JSON.parse(logUserDet);
     //console.log(this.loginUserDetails);
-    this._book_details.getBookDetBySlug(this.bookSlugName).subscribe(data=>{
-      let details=data;
-      if (details.Ack=="1") {
+    this._book_details.getBookDetBySlug(this.bookSlugName).subscribe(data => {
+      let details = data;
+      if (details.Ack == "1") {
         //console.log(data);
-          this.bookDetData = details.BooksDetailsBySlug[0];
-          this.bookId=details.BooksDetailsBySlug[0].id;
-          this.metaService.updateTag({ name: 'title', content: details.BooksDetailsBySlug[0].title});
-          this.metaService.updateTag({ property: 'og:title', content: details.BooksDetailsBySlug[0].title});
-          this.metaService.updateTag({ name: 'description', content: details.BooksDetailsBySlug[0].description});
-          this.metaService.updateTag({ property: 'og:description', content: details.BooksDetailsBySlug[0].description});
-          this.metaService.updateTag({ property: 'og:image', content: details.BooksDetailsBySlug[0].image_url});
-          this.metaService.updateTag({ property: 'og:url', content: this.repoUrl});
+        this.bookDetData = details.BooksDetailsBySlug[0];
+        this.bookId = details.BooksDetailsBySlug[0].id;
+        this.repoUrl = this.repoUrl + details.BooksDetailsBySlug[0].image_url + details.BooksDetailsBySlug[0].title
+        this.metaService.updateTag({ name: 'title', content: details.BooksDetailsBySlug[0].title });
+        this.metaService.updateTag({ property: 'og:title', content: details.BooksDetailsBySlug[0].title });
+        //this.metaService.updateTag({ name: 'description', content: 'pragati' });
+        this.metaService.updateTag({ property: 'og:description', content: details.BooksDetailsBySlug[0].description });
+        this.metaService.updateTag({ property: 'og:image', content: details.BooksDetailsBySlug[0].image_url });
+        this.metaService.updateTag({ property: 'og:url', content: this.repoUrl });
         this.metaService.updateTag({ property: 'twitter:card', content: details.BooksDetailsBySlug[0].image_url });
-          this.metaService.updateTag({ property: 'twitter:site', content: this.repoUrl });
+        this.metaService.updateTag({ property: 'twitter:site', content: this.repoUrl });
         this.metaService.updateTag({ property: 'twitter:creator', content: details.BooksDetailsBySlug[0].title });
-        
-      
-          this.getRatingList();
-          return false;
-      }else{
-          return false;
+        this.getRatingList();
+        return false;
+      } else {
+        return false;
       }
-      
+
     },
-    error => {
-      console.log('Something went wrong!');
-    }
-    );   
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
   }
 
   public submitPost() {
-   const userValue = this.postform.value;
+    const userValue = this.postform.value;
     userValue.book_id = this.bookId;
     //console.log(userValue);
     this._book_details.postRatingData(userValue).subscribe(data => {
-        this.successMsg = 'You have successfully post the review';
-        this.getRatingList();
-        this.postform.reset();
-      },
+      this.successMsg = 'You have successfully post the review';
+      this.getRatingList();
+      this.postform.reset();
+    },
       error => {
         alert(error);
       });
@@ -101,19 +102,19 @@ export class BookdetailsComponent implements OnInit {
 
   public getRatingList() {
     const book_id = this.bookId;
-    if(book_id!=''){
-      this._book_details.getRatingData({"book_id":this.bookId}).subscribe(data => {
-        if(data.Ack==1){
+    if (book_id != '') {
+      this._book_details.getRatingData({ "book_id": this.bookId }).subscribe(data => {
+        if (data.Ack == 1) {
           //console.log(data);
           this.ratListData = data.BookRatingList;
         }
-       },
-       error => {
-         alert(error);
-       });
-      }
-   }
-  
+      },
+        error => {
+          alert(error);
+        });
+    }
+  }
+
 }
 
 
@@ -126,7 +127,7 @@ export class GooglePlusParams {
 }
 
 export class LinkedinParams {
-  url:string
+  url: string
 }
 
 export declare class PinterestParams {

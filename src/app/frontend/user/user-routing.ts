@@ -20,7 +20,7 @@ import { BrowsehubComponent } from './browsehub/browsehub.component';
 import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from "./createhub/createhub.component";
 import { GroupphotoComponent } from './groupphoto/groupphoto.component';
-
+import { MycmplistComponent } from "./mycmplist/mycmplist.component";
 const routes: Routes = [
   {
     path: '',
@@ -80,7 +80,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'create_hub',
+    path: 'create_hub/:slug',
     canActivate: [AuthGuard],
     component: CreatehubComponent,
     data: {
@@ -210,6 +210,13 @@ const routes: Routes = [
     component: MentorComponent,
     data: {
       title: 'Mentor'
+    }
+  },
+  {
+    path: 'mycmplist',
+    component: MycmplistComponent,
+    data: {
+      title: 'mycmplist'
     }
   }
 ];

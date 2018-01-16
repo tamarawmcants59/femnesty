@@ -1,0 +1,140 @@
+<section class="section  visitingProfile">
+	<div class="container-fluid">
+		<div class="row flex-profile">
+          <!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
+			<div class="col-md-3 flex-left">
+				<div *ngIf="isloginUser == 1">
+				<user-sidebar></user-sidebar>
+				</div>
+			</div>
+			<div class="col-md-6 flex-middle">
+				<div class="middlePart">
+					<div class="topPart" style="height:195px;" [ngStyle]="{'background-image':'url('+hubDetails.image+')'}"></div>
+					<div class="hubDes">
+						<h2>{{hubDetails.title}}</h2>
+						<!-- <p class="shortP">Hub Short Description</p> -->
+						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
+						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
+							<button type="button" class="btn btn-primary" (click)="attendHub()">Attend</button>
+							<button type="button" class="btn btn-default">Add to calendar</button>
+						</p>
+					</div>
+					<div class="tabPart">
+						<ul class="nav nav-pills">
+							<li [ngClass]="{'active':activeTab=='posts'}"><a (click)="activeTab='posts'">Hub Activity</a></li>
+							<li [ngClass]="{'active':activeTab=='details'}"><a (click)="activeTab='details'">Hub Details</a></li>
+							<li [ngClass]="{'active':activeTab=='invite'}"><a (click)="activeTab='invite'">Invite Member</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
+								<div >
+									<app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+								</div>
+								<div *ngIf="groupPostList?.length > 0">
+									<div *ngFor="let postData of groupPostList">
+										<app-post-card [postData]="postData"></app-post-card>
+									</div>
+								</div>
+								<div class="likePart" *ngIf="groupPostList?.length == 0">
+									<div class="row">
+										<div class="col-md-10">
+											<div class="nothing">Nothing more to show</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='details'}">
+								<div class="innerRightPart right-map-details HUB-Dtls">
+									<h2>{{hubDetails.title}}</h2>
+									<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
+									<p class="info"><span>Organizer:</span> {{hubDetails.Organizer}}</p>
+									<p class="info"><span>Email:</span> {{hubDetails.email}}</p>
+									<p class="info"><span>Phone:</span> {{hubDetails.phone}}</p>
+									<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
+									<p class="info"><span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+								</div>
+							</div>
+							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
+								<div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+									<strong>Success: </strong> {{successMsg}}
+								</div>
+								<div class="form-group row">
+									<div class="col-sm-12">
+										<form method="post" [formGroup]="postform" (ngSubmit)="sendInvites()" #createGroupForm="ngForm">
+											<div class="form-group">
+												<select class="form-control" multiple required formControlName="user_ids">
+													<option value="{{ user.id }}" *ngFor="let user of uninvitedUsers">{{ user?.first_name }}</option>
+												</select>
+											</div>
+											<!-- <ng-select [multiple]="true" [(ngModel)]="friends" formControlName="user_ids" [items]="items" placeholder="No city selected"></ng-select> -->
+											
+											<input type="submit" value="Send" class="btn btn-primary">
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 flex-right">
+				<div class="rightPart">                			
+					<div class="innerRightPart right-map-details HUB-Dtls">
+      					<h2>{{hubDetails.title}}</h2>
+      					<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
+      					<p class="info"><span>Organizer:</span> {{hubDetails.Organizer}}</p>
+						  <p class="info"><span>Email:</span> {{hubDetails.email}}</p>
+						<p class="info">
+							<span>Phone:</span> {{hubDetails.phone}}</p>
+      					<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
+      					<p class="info"><span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+					</div>
+					
+					<div class="innerRightPart right-map-details HUB-Dtls">
+      					<h2>ADDRESS</h2>
+      					<div class="right-map">
+							<agm-map style="height:300px" [latitude]="hubDetails.lat" [longitude]="hubDetails.lng">
+								<agm-marker [latitude]="hubDetails.lat" [longitude]="hubDetails.lng"></agm-marker>
+							</agm-map>
+							
+					        <!-- <iframe width="100%" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll={{hubDetails.lat}},{{hubDetails.lng}}&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
+						</div>
+      					<p class="info">{{hubDetails.address}}</p>
+					</div>
+					
+					<div class="innerRightPart right-map-details attending HUB-Dtls">
+						<h2>Attending</h2>
+						<ul>         
+							<li *ngFor="let user of hubDetails.attenders">               
+								<a [routerLink]="['/user/profile',user.display_name]"><img src="{{user.profile_image}}" alt="" /></a>
+							</li>
+						</ul>
+						<a href="#" class="viewAll text-center">View All (200)</a>
+					</div>
+    
+					<div class="innerRightPart right-map-details right-sharing">
+						<h2>Share</h2>
+						<!-- Go to www.addthis.com/dashboard to customize your tools -->
+						
+
+<button mat-button shareButton="facebook">
+
+	<i class="fa fa-facebook"></i>
+</button>
+<button mat-raised-button shareButton="twitter">
+	<i class="fa fa-twitter"></i>
+</button>
+<button mat-icon-button shareButton="linkedin">
+	<i class="fa fa-linkedin"></i>
+</button>
+						<ul>
+							<li><a href="" class="fa fa-facebook" style="background: #395899"></a></li>
+							<li><a href="" class="fa fa-linkedin" style="background: #19699c"></a></li>
+							<li><a href="" class="fa fa-twitter" style="background: #499bcd"></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

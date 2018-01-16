@@ -169,7 +169,18 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-
+  getcompanylist(form_data) {
+    return this.apiService.post(
+      `/users/ComapnyListByemployeeId`,
+      form_data
+    ).map(data => data);
+  }
+  unflowcompany(form_data){
+    return this.apiService.post(
+      `/users/appUnflowCompany`,
+      form_data
+    ).map(data => data);
+  }
   getUserIsMyFrnd(form_data) {
     return this.apiService.post(
       `/users/appsearchexistfriendornot`,
@@ -375,4 +386,15 @@ export class UserService {
   getCountryList(){
     return this.apiService.get(`/users/appcountrylist`).map(data => data);
   }
+ 
+  getCategoryListWithCount(){
+    return this.apiService.post(`/users/appcategorylistBygroupcount`).map(data => data);
+  }
+  getGroupListByCategoryId(data){
+    return this.apiService.post(`/users/appgrouplistbycategory`,data).map(data => data);
+  }
+
+  getLatestHubs(user_id) {
+    return this.apiService.put(`/hub/latest_hubs/` + user_id + '/4').map(data => data);
+  } 
 }

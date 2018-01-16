@@ -8,7 +8,7 @@
                 <app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 flex-middle">
               <div class="middlePart">
                   <div class="topPart" [ngStyle]="{'background-image':'url('+groupDetailsData.group_image+')'}">
                   </div>
@@ -249,8 +249,8 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3" *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)">
-              <app-group-rightbar [groupData]="groupDetailsData" [groupPId]="isGroupId"></app-group-rightbar>
+          <div class="col-md-3">
+              <div *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)"><app-group-rightbar [groupData]="groupDetailsData" [groupPId]="isGroupId"></app-group-rightbar></div>
           </div>
       </div>
   </div>

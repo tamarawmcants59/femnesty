@@ -1,0 +1,35 @@
+.browse-hub-map{background:#fff; padding: 14px; margin-bottom: 15px}
+.browse-hub-map .map-holder{height: 284px; position: relative;}
+.browse-hub-map .map-holder .popup{ background: #fff; padding:15px; z-index: 9; }
+.browse-hub-map .map-holder .popup ul{display:flex; align-items:center; position: relative; padding: 0; margin: 0; list-style-type: none}
+.browse-hub-map .map-holder .popup ul:before{content:'\f35f'; position: absolute; left:17px; bottom:-50px; font-family: 'Ionicons'; font-size:42px; color:#fff}
+.browse-hub-map .map-holder .popup ul li .round-image{width:70px; height:70px; margin-right: 11px; overflow: hidden; background-size: cover !important; background-position: center center !important; border-radius:100%}
+.browse-hub-map .map-holder .popup ul li h2{font-size:13px; margin-bottom: 5px; margin-top: 0}
+.browse-hub-map .map-holder .popup ul li p{font-size:6px}
+.browse-hub-map .map-holder .popup ul li p.black-text{color: #303030; margin-bottom: 0px}
+.browse-hub-map .map-holder .popup ul li p.red-text{color: #ca0d17; margin-bottom: 6px}
+.browse-hub-map .map-holder .popup ul li .btn.btn-primary {padding: 7px 14px;font-family: 'montserratmedium'; font-size: 7px !important; line-height: 1;}
+
+.All-hub-list{padding:28px; background: #fff}
+.All-hub-list .all-hb{font-family: 'montserratmedium'; font-size:14px}
+.All-hub-list ul{padding: 0; margin: 0; list-style-type: none;}
+.All-hub-list ul li{border-bottom:2px solid #f0f0f0; padding: 30px 0; display:flex; align-items:center;}
+.All-hub-list ul li:last-child{border-bottom:0}
+.All-hub-list ul li .round-image{width:130px; height:130px; margin-right: 20px; overflow: hidden; background-size: cover !important; background-position: center center !important; border-radius:100%;}
+.All-hub-list ul li aside{flex:1 1 auto}
+.All-hub-list ul li aside h2{font-size:18px; margin:0; margin-bottom: 2px}
+.All-hub-list ul li aside .black-text{color: #303030; margin-bottom: 0px; font-size:12px;}
+.All-hub-list ul li aside .red-text{color: #ca0d17; margin-bottom: 9px; font-size:12px;}
+.All-hub-list ul li aside .bottom-links-wrap{line-height: 1 !important}
+.All-hub-list ul li aside .bottom-links-wrap a{color: #000; font-size:10px; font-family: 'montserratmedium'; margin-right: 15px; text-transform: uppercase;}
+.All-hub-list ul li aside .bottom-links-wrap i{color: #ca0d17;}
+
+.innerRightPart{margin-bottom:15px}
+.latest-article h2{margin-bottom: 20px; font-family: 'sanchezregular';}
+.latest-article .hubMet.hubMet2 .img{background-size:cover!important; background-position: center center !important}
+.latest-article .article-text p {margin-bottom: 10px; margin-top: 5px}
+.hubMet.hubMet2{margin-bottom:14px}
+.article-add-holder1 h3 {font-size: 27px;}
+.about-content-area .article-add-holder1 p {line-height: 1.2 !important;font-size: 16px !important;}
+.article-add-holder1 .btn.btn-primary {padding: 19px 38px;font-size: 18px !important; line-height: 1;}
+

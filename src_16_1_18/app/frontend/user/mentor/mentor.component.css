@@ -1,0 +1,9 @@
+.bcome-mntr{
+	height: 40vh;
+}
+.inner-banner .row{
+	height:40vh !important;
+}
+
+.form-area .form-control{font-size:16px}
+.form-area label{font-family: 'montserratmedium'; font-size:12px; letter-spacing: 1.5px}

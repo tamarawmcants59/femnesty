@@ -1,0 +1,26 @@
+<!-- inner  banner -->
+        
+<section class="inner-banner" [ngStyle]="{'background-image':'url('+articleConData[0]?.banner_image_url+')', 'background-position': 'top center', 'background-repeat': 'no-repeat','background-size': 'cover'}">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-7">
+              <h1 class="text-white">{{articleConData[0]?.title}}</h1>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!--   -->
+
+<section class="section p-16 article-page">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4 col-sm-6 mt-30" *ngFor="let catData of articleCatConData">
+              <a [routerLink]="['/articles',catData.slug]" ><div class="cat-article-img" [ngStyle]="{'background-image':'url('+catData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"></div> </a>
+              <h3 class="text-red">{{catData.name | limitTo : 20}}</h3>
+              <p>{{catData.short_description | limitTo : 320}}</p>
+              <a [routerLink]="['/articles',catData.slug]" class="btn btn-primary"> Read more</a>
+          </div>
+      </div>
+  </div>
+</section>

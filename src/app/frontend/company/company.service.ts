@@ -38,7 +38,12 @@ export class CompanyService {
       return data;
     });
   }
-
+  unflowcompany(form_data){
+    return this.apiService.post(
+      `/users/appUnflowCompany`,
+      form_data
+    ).map(data => data);
+  }
   userCheckEmail(form_data) {
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
     return this.apiService.post(

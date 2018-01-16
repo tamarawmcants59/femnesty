@@ -1,0 +1,136 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container-fluid">
+        <div class="row flex-profile">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+          <div class="col-md-3 flex-left">
+            <user-sidebar></user-sidebar>
+          </div>
+          <div class="col-md-6 flex-middle">
+            <div class="middlePart">
+              <div class="tabPart">
+                <div class="tab-content">
+                       <div class="tab-content">
+                            <div class="tab-pane fade in active">
+                                <div class="connectionsPart find-friend-section">
+                                    <div class="row" *ngIf="(successMsg != '')">
+                                        <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                             {{successMsg}}
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="(errorMsg != '')">
+                                        <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                                             {{errorMsg}}
+                                        </div>
+                                    </div>
+                                    <ul class="contn-box" *ngIf="userRequestFrndList?.length > 0">
+                                        <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
+	                                         <div class="friend-boxImage">
+	                                            <a [routerLink]="['/user/profile',friendData.display_name]">
+	                                                <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+	                                            </a>
+	                                         </div>
+	                                         <div class="friend-boxText">
+	                                             <h4>{{friendData.name}}</h4>
+	                                             <p>{{friendData.bio | limitTo : 30}}</p>
+	                                         </div>
+	                                         <div class="sendmsg">
+	                                         	<a (click)="acceptFriendRequest(friendData.id)"><span><img alt="" src="assets/images/check.png"></span>&nbsp;&nbsp;ACCEPT</a>
+	                                         	<a (click)="rejectFriendRequest(friendData.id)"><span><img alt="" src="assets/images/cancel.png"></span>&nbsp;&nbsp;IGNORE</a>
+	                                         </div>
+	                                         <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
+	                                     </li>
+	                                 </ul>
+                                    <!--<h3>Respond to Your Friend Requests</h3>-->
+                                    <!--<div class="connections">
+                                          <ul class="friend-box" *ngIf="userRequestFrndList?.length > 0">
+                                              <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
+                                                  <div class="friend-boxImage">
+                                                          <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                      <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                  </a>
+                                                  </div>
+                                                  <div class="friend-boxText">
+                                                      <h2>{{friendData.name}}</h2>
+                                                      <button type="button" class="btn btn-primary" (click)="acceptFriendRequest(friendData.id)">Confirm</button>
+                                                      <button type="button" class="btn btn-primary" (click)="rejectFriendRequest(friendData.id)">Delete Request</button>
+                                                  </div>
+                                              </li>
+                                          </ul>
+                                        
+                                      <div class="likePart" *ngIf="userRequestFrndList?.length == 0">
+                                          <div class="row">
+                                              <div class="col-md-12">
+                                                  <div class="nothing"><h3>No friend request found</h3></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>-->
+                                    <h2>Find Friends</h2>
+                                    <form class="" [formGroup]="postform" (ngSubmit)="submitSearchUser(postform.value)" #postForm="ngForm">
+                                        <div class="row">&nbsp;</div>  
+                                      <div class="row">
+                                            <div class="col-md-8 col-sm-6">
+                                              <div class="form-group">
+                                                  <input type="text" class="form-control-plaintext form-control" style="height: 46px;" placeholder="Search by name" formControlName="suname">
+                                              </div>
+                                             </div>
+                                             <div class="col-md-4 col-sm-6">
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                              </div>
+                                         </div>
+                                    </form>
+                                    <div class="connections">
+                                            <ul class="friend-box" *ngIf="userSearchFrndList?.length > 0">
+                                                <li class="friend-box-list" *ngFor="let sfriendData of userSearchFrndList">
+                                                    <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',sfriendData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+sfriendData.profile_image+')'}"></div>
+                                                    </a>
+                                                    </div>
+                                                    <div class="friend-boxText">
+                                                        <h2>{{sfriendData.name}}</h2>
+                                                        <!--<p>3 mutual friend</p>-->
+                                                        <button type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Friend</button>	
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        <!--<ul class="uilist" *ngIf="userSearchFrndList?.length > 0">
+                                          <li class="connectionList" *ngFor="let sfriendData of userSearchFrndList">
+                                            <div class="connectionImage">
+                                              <a href="#">
+                                                  <div class="img" [ngStyle]="{'background-image':'url('+sfriendData.profile_image+')'}"></div>
+                                              </a>
+                                            </div>
+                                            <div class="connectionText">
+                                              <h2>{{sfriendData.name}}</h2>
+                                              <button type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Friend</button>											</div>
+                                          </li>
+                                        </ul>-->
+                                        <div class="likePart" *ngIf="userSearchFrndList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="nothing"><h3>No friend found</h3></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                </div>
+                              </div>
+                          
+                        </div>
+                     
+                  
+                  
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <div class="col-md-3 flex-right">
+              <app-user-prfrsidebar></app-user-prfrsidebar>
+          </div>
+        </div>
+    </div>
+  </section>

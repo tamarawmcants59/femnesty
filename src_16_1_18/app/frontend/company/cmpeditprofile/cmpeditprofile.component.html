@@ -1,0 +1,950 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container-fluid">
+        <div class="row flex-profile">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <div class="col-md-3 flex-left">
+                <user-sidebar></user-sidebar>
+            </div>
+            <div class="col-md-6 flex-middle">
+                <div class="middlePart">
+                    <div class="topPart" *ngIf="!coverImageData.image" [ngStyle]="{'background-image':'url('+publicCmpDet.cover_image_url+')'}">
+                        <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
+                        <div class="change-img">
+                            <i class="fa fa-camera"></i>
+                            <div class="txt">Upload Banner Photo</div>
+                        </div>
+                        <input type="file" class="change-img-input" (change)="fileChangeListenerCover($event)">
+                        <div class="addCoverPhoto">
+                            <span class="coverPhoto">Add Cover Photo</span>
+                        </div>
+                    </div>
+                    <!--<div class="topPart inner-bg" *ngIf="coverImageData.image" [ngStyle]="{'background-image':coverImageData.image}">
+                        <img [src]="coverImageData.image" style="width:100%;height:100%">
+                    </div>-->
+                    <div class="profPhoto">
+                        <div *ngIf="!prfImageData.image" class="img imgp1" [ngStyle]="{'background-image':'url('+publicCmpDet.image_url+')'}">
+
+                            <div class="inner-bg">
+                                <div class="icon-change" id="clickableLiElement">
+                                    <i class="fa fa-camera"></i>
+                                    <div class="txt">Update Profile <br> Picture</div>
+                                    <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img result rounded" *ngIf="prfImageData.image">
+                            <img [src]="prfImageData.image" style="width:100%; height:100%">
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="showImgDive">
+                        <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
+                            <div class="col-md-4" style="padding-top: 90px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
+                            </div>
+                        </div>
+                        <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                    </div>
+                    <div class="col-md-12" *ngIf="showCoverImgDive">
+                        <div class="col-md-12" *ngIf="coverImageData.image" style="padding-bottom:10px;">
+
+                            <div class="col-md-4" style="padding-top: 10px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadCoverImg()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <img-cropper #cropper [image]="coverImageData" [settings]="coverCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                        </div>
+                    </div>
+                    <div class="profDes">
+                        <h2 class="text-center">{{publicCmpDet?.name}}</h2>
+                        <p class="text-center">{{publicCmpDet.bio}}</p>
+                        <p class="text-center addressP">{{publicCmpDet.address}}, {{publicCmpDet.city}}</p>
+                    </div>
+                    <div class="tabPart">
+                        <ul class="nav nav-pills">
+                            <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
+                            <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
+                            <li [ngClass]="{'active' : activeTab=='contact'}"><a (click)="toggleTab('contact')">Contact</a></li>
+                            <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
+                                <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+                                <div *ngIf="userPostList?.length > 0">
+                                    <div *ngFor="let postData of userPostList">
+                                        <app-post-card [postData]="postData"></app-post-card>
+                                    </div>
+                                </div>
+                                <div class="likePart" *ngIf="userPostList?.length == 0">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="nothing">Nothing more to show</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
+                                <div class="aboutPart">
+                                    <h2>About</h2>
+                                    <div class="abouts">
+                                        <div class="row tabPart1">
+                                            <!-- <div class="col-md-4 col-sm-12">
+                                                <ul class="nav-tabs tabs-left sideways">
+                                                    <li [ngClass]="{'active' : aboutActiveTab=='overview'}"><a (click)="aboutToggleTab('overview')">Overview</a></li>
+                                                    <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}"><a (click)="aboutToggleTab('edit_details')">Edit Details</a></li>
+                                                    <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}"><a (click)="aboutToggleTab('add_subadmin')">Add Subadmin</a></li>
+                                                    <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
+                                                </ul>
+                                            </div> -->
+                                            <ul class="nav nav-tabs ">
+                                                <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                                                <a (click)="aboutToggleTab('overview')">OVERVIEW</a></li>
+                                                <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}">
+                                                <a (click)="aboutToggleTab('edit_details')">EDIT DETAILS</a></li>
+                                                <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}">
+                                                <a (click)="aboutToggleTab('add_subadmin')">ADD SUBADMIN</a></li>
+                                                <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}">
+                                                <a (click)="aboutToggleTab('list_subadmin')">SUBADMIN LIST</a></li>
+                                            </ul>                            
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                        <ul class="ulList">
+                                                            <div class="menu">
+                                                                <!-- <h3>About Company</h3> -->
+                                                                <div class="">
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.company_name}}</span>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Website </label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.website}}</span>
+                                                                        </div>
+                                                                    </div>                                                                  
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.email}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.mobile_number}}</span>
+                                                                        </div>
+                                                                    </div>                                                                    
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.state}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.city}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.address}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Opening Hour</label>
+                                                                            <div class="col-sm-8">
+                                                                                <span>{{publicCmpDet.opening_hour}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
+                                                                        <div class="col-sm-8">
+                                                                            <span>{{publicCmpDet.bio}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Company Mission</label>
+                                                                            <div class="col-sm-8">
+                                                                                <span>{{publicCmpDet.company_mission}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                                <label for="staticEmail" class="col-sm-4 col-form-label">Company Vission</label>
+                                                                                <div class="col-sm-8">
+                                                                                    <span>{{publicCmpDet.company-vission}}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_details'}">
+                                                            <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm"> 
+                                                        <ul>
+                                                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                        <strong>Success: </strong> {{successMsg}}
+                                                                    </div>
+                                                                    <li>
+                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='company_name'}">
+                                                                            <div class="edit" (click)="editAboutToggleTab('company_name')"></div>
+                                                                            <h5>COMPANY NAME</h5>
+                                                                            <p>{{publicCmpDet.company_name}}</p>
+                                                                        </div>
+                                                                        <div *ngIf="editAbtActiveTab=='company_name'">
+                                                                            <button class="check" type="submit"></button>
+                                                                            <h5>COMPANY NAME</h5>
+                                                                            <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_name" formControlName="company_name">
+                                                                                <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                            <div class="text-danger pull-left" *ngIf="form.controls['company_name'].touched">Company Name Required</div>
+                                                                        </div>
+                                                                    </li>
+
+
+                                                                    <li>
+                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='mobile_number'}">
+                                                                                <div class="edit" (click)="editAboutToggleTab('mobile_number')"></div>
+                                                                                <h5>MOBILE NUMBER</h5>
+                                                                                <p>{{publicCmpDet.mobile_number}}</p>
+                                                                            </div>
+                                                                            <div *ngIf="editAbtActiveTab=='mobile_number'">
+                                                                                <button class="check" type="submit"></button>
+                                                                                <h5>MOBILE NUMBER</h5>
+                                                                                <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.mobile_number" formControlName="mobile_number">
+                                                                                    <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                                <div class="text-danger pull-left" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile Number Required</div>
+                                                                            </div>
+                                                                        </li>
+
+                                                                        <li>
+                                                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='website'}">
+                                                                                    <div class="edit" (click)="editAboutToggleTab('website')"></div>
+                                                                                    <h5>WEBSITE</h5>
+                                                                                    <p>{{publicCmpDet.website}}</p>
+                                                                                </div>
+                                                                                <div *ngIf="editAbtActiveTab=='website'">
+                                                                                    <button class="check" type="submit"></button>
+                                                                                    <h5>WEBSITE</h5>
+                                                                                    <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.website" formControlName="website">
+                                                                                        <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['website'].valid && form.controls['website'].touched">Website Required</div>
+                                                                                </div>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                    <div [ngClass]="{'hide_div' : editAbtActiveTab=='state'}">
+                                                                                        <div class="edit" (click)="editAboutToggleTab('state')"></div>
+                                                                                        <h5>STATE</h5>
+                                                                                        <p>{{publicCmpDet.state}}</p>
+                                                                                    </div>
+                                                                                    <div *ngIf="editAbtActiveTab=='state'">
+                                                                                        <button class="check" type="submit"></button>
+                                                                                        <h5>STATE</h5>
+                                                                                        <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.state" formControlName="state">
+                                                                                            <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                                        <div class="text-danger pull-left" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Required</div>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='city'}">
+                                                                                            <div class="edit" (click)="editAboutToggleTab('city')"></div>
+                                                                                            <h5>CITY</h5>
+                                                                                            <p>{{publicCmpDet.city}}</p>
+                                                                                        </div>
+                                                                                        <div *ngIf="editAbtActiveTab=='city'">
+                                                                                            <button class="check" type="submit"></button>
+                                                                                            <h5>CITY</h5>
+                                                                                            <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.city" formControlName="city">
+                                                                                                <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                                            <div class="text-danger pull-left" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Required</div>
+                                                                                        </div>
+                                                                                    </li>
+
+
+                                                                                    <li>
+                                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='address'}">
+                                                                                                <div class="edit" (click)="editAboutToggleTab('address')"></div>
+                                                                                                <h5>ADDRESS</h5>
+                                                                                                <p>{{publicCmpDet.address}}</p>
+                                                                                            </div>
+                                                                                            <div *ngIf="editAbtActiveTab=='address'">
+                                                                                                <button class="check" type="submit"></button>
+                                                                                                <h5>ADDRESS</h5>
+                                                                                                <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.address" formControlName="address">
+                                                                                                    <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                                                <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                                                                            </div>
+                                                                                        </li>
+
+
+                                                                                        <li>
+                                                                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='opening_hour'}">
+                                                                                                    <div class="edit" (click)="editAboutToggleTab('opening_hour')"></div>
+                                                                                                    <h5>OPENING HOUR</h5>
+                                                                                                    <p>{{publicCmpDet.opening_hour}}</p>
+                                                                                                </div>
+                                                                                                <div *ngIf="editAbtActiveTab=='opening_hour'">
+                                                                                                    <button class="check" type="submit"></button>
+                                                                                                    <h5>OPENING HOUR</h5>
+                                                                                                    <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.opening_hour" formControlName="opening_hour">
+                                                                                                        <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
+                                                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['opening_hour'].valid && form.controls['opening_hour'].touched">Opening Hour Required</div>
+                                                                                                </div>
+                                                                                            </li>
+
+
+
+                                                                                            <li>
+                                                                                                    <div [ngClass]="{'hide_div' : editAbtActiveTab=='bio'}">
+                                                                                                        <div class="edit" (click)="editAboutToggleTab('bio')"></div>
+                                                                                                        <h5>ABOUT COMPANY</h5>
+                                                                                                        <p>{{publicCmpDet.bio}}</p>
+                                                                                                    </div>
+                                                                                                    <div *ngIf="editAbtActiveTab=='bio'">
+                                                                                                        <button class="check" type="submit"></button>
+                                                                                                        <h5>ABOUT COMPANY</h5>
+                                                                                                        <!-- <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"> -->
+                                                                                                            <P>
+                                                                                                                    <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio" style="width: 90%;"></textarea>
+                                                                                                                </P>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='company_mission'}">
+                                                                                                            <div class="edit" (click)="editAboutToggleTab('company_mission')"></div>
+                                                                                                            <h5>COMPANY MISSION</h5>
+                                                                                                            <p>{{publicCmpDet.company_mission}}</p>
+                                                                                                        </div>
+                                                                                                        <div *ngIf="editAbtActiveTab=='company_mission'">
+                                                                                                            <button class="check" type="submit"></button>
+                                                                                                            <h5>COMPANY Mission</h5>
+                                                                                                            <!-- <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"> -->
+                                                                                                                <P>
+                                                                                                                        <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_mission" formControlName="company_mission" style="width: 90%;"></textarea>
+                                                                                                                    </P>
+                                                                                                        </div>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='company_vission'}">
+                                                                                                                <div class="edit" (click)="editAboutToggleTab('company_vission')"></div>
+                                                                                                                <h5>COMPANY VISSION</h5>
+                                                                                                                <p>{{publicCmpDet.company_vission}}</p>
+                                                                                                            </div>
+                                                                                                            <div *ngIf="editAbtActiveTab=='company_vission'">
+                                                                                                                <button class="check" type="submit"></button>
+                                                                                                                <h5>COMPANY VISSION</h5>
+                                                                                                                <!-- <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.bio" formControlName="bio"> -->
+                                                                                                                    <P>
+                                                                                                                            <textarea class="form-control-plaintext" [(ngModel)]="publicCmpDet.company_vission" formControlName="company_vission" style="width: 90%;"></textarea>
+                                                                                                                        </P>
+                                                                                                            </div>
+                                                                                                        </li>
+                                                                </ul>
+                                                       </form>
+                                                       
+                                                       
+                                                       
+                                                        
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_subadmin'}">
+                                                        
+                                                            <ul class="ulList edit-forms1">
+                                                                    <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                            <strong>Success: </strong> {{successMsg}}
+                                                                        </div>
+                                                                    <h3>Add Subadmin</h3>
+                                                                    
+                                                                    <div class="menu">
+                                                                        <form  class="login-form" [formGroup]="adminform" (ngSubmit)="addSubadminForm()" #adminForm="ngForm">
+                                                                        <div class="">
+                                                                            <div class="form-group row">
+                                                                                
+                                                                                    <input type="text" class="form-control-plaintext" formControlName="name" placeholder="Name">
+                                                                                    
+                                                                             </div>
+                                                                             <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                        </div>
+                                                                        <div class="">
+                                                                                <div class="form-group row">
+                                                                                    
+                                                                                        <input type="email" class="form-control-plaintext" formControlName="email" (ngModelChange)="checkEmail($event)" placeholder="Email">
+                                                                                        
+                                                                                        
+                                                                                 </div>
+                                                                                 <div class="text-danger" *ngIf="!adminform.controls['email'].valid && adminform.controls['email'].touched">Email Required</div>
+                                                                                        <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
+                                                                                            This email already exist.
+                                                                                        </div>
+                                                                            </div>
+                                                                            <div class="">
+                                                                                    <div class="form-group row">
+                                                                                        
+                                                                                            <input type="password" class="form-control-plaintext" formControlName="txt_password" placeholder="Password">
+                                                                                            
+                                                                                            
+                                                                                     </div>
+                                                                                     <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                        <div class="form-group row">
+                                                                                            
+                                                                                                <input type="text" class="form-control-plaintext" formControlName="state" placeholder="State">
+                                                                                                
+                                                                                         </div>
+                                                                                         
+                                                                                    </div>
+                                                                                    <div class="">
+                                                                                            <div class="form-group row">
+                                                                                                
+                                                                                                    <input type="text" class="form-control-plaintext" formControlName="city" placeholder="City">
+                                                                                                    
+                                                                                             </div>
+                                                                                             
+                                                                                        </div>
+                                                                                        <div class="">
+                                                                                                <div class="form-group row">
+                                                                                                    
+                                                                                                        <input type="text" class="form-control-plaintext" formControlName="address" placeholder="Address">
+                                                                                                        
+                                                                                                 </div>
+                                                                                                 
+                                                                                            </div>
+                                                                                            <div class="">
+                                                                                                    <div class="form-group row">
+                                                                                                        
+                                                                                                           
+                                                                                                            <textarea class="form-control-plaintext" formControlName="company_mission" placeholder="Company Mission"></textarea>
+                                                                                                     </div>
+                                                                                                     
+                                                                                                </div>
+                                                                                                <div class="">
+                                                                                                        <div class="form-group row">
+                                                                                                            
+                                                                                                               
+                                                                                                                <textarea class="form-control-plaintext" formControlName="company_vission" placeholder="Company Vission"></textarea>
+                                                                                                         </div>
+                                                                                                         
+                                                                                                    </div>
+                                                                                                    <div class="saveChanges">
+                                                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Create</button>
+                                                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                        </ul>
+
+
+
+
+
+
+
+
+
+
+
+                                                        <!-- <ul class="ulList edit-forms">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Add Subadmin</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="adminform" (ngSubmit)="addSubadminForm()" #adminForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="name">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="email" class="form-control-plaintext" formControlName="email" (ngModelChange)="checkEmail($event)">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['email'].valid && adminform.controls['email'].touched">Email Required</div>
+                                                                                <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
+                                                                                    This email already exist.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="password" class="form-control-plaintext" formControlName="txt_password">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="state">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="city">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" formControlName="address">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Create</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul> -->
+                                                    </div>
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_subadmin'}">
+
+
+                                                            <ul class="ulList edit-forms1">
+                                                                    <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                            <strong>Success: </strong> {{successMsg}}
+                                                                        </div>
+                                                                    <h3>Edit Subadmin</h3>
+                                                                    
+                                                                    <div class="menu">
+                                                                        <form  class="login-form" [formGroup]="adminform" (ngSubmit)="editSubadminForm()" #adminEditForm="ngForm">
+                                                                        <div class="">
+                                                                            <div class="form-group row">
+                                                                                
+                                                                                    <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.name" formControlName="name">
+                                                                                    
+                                                                             </div>
+                                                                             <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                        </div>
+                                                                        <div class="">
+                                                                                <div class="form-group row">
+                                                                                    
+                                                                                        <input type="email" readonly class="form-control-plaintext" [(ngModel)]="editSubAdmindata.email" formControlName="email">
+                                                                                        
+                                                                                        
+                                                                                 </div>
+                                                                                 <div class="text-danger" *ngIf="!adminform.controls['email'].valid && adminform.controls['email'].touched">Email Required</div>
+                                                                                        <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
+                                                                                            This email already exist.
+                                                                                        </div>
+                                                                            </div>
+                                                                            <div class="">
+                                                                                    <div class="form-group row">
+                                                                                        
+                                                                                            <input type="password" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.txt_password" formControlName="txt_password">
+                                                                                            
+                                                                                            
+                                                                                     </div>
+                                                                                     <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                        <div class="form-group row">
+                                                                                            
+                                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.state" formControlName="state">
+                                                                                                
+                                                                                         </div>
+                                                                                         
+                                                                                    </div>
+                                                                                    <div class="">
+                                                                                            <div class="form-group row">
+                                                                                                
+                                                                                                    <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.city" formControlName="city">
+                                                                                                    
+                                                                                             </div>
+                                                                                             
+                                                                                        </div>
+                                                                                        <div class="">
+                                                                                                <div class="form-group row">
+                                                                                                    
+                                                                                                        <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.address" formControlName="address">
+                                                                                                        
+                                                                                                 </div>
+                                                                                                 
+                                                                                            </div>
+                                                                                            <div class="">
+                                                                                                    <div class="form-group row">
+                                                                                                        
+                                                                                                           
+                                                                                                            <textarea class="form-control-plaintext" [(ngModel)]="editSubAdmindata.company_mission"  formControlName="company_mission" placeholder="Company Mission"></textarea>
+                                                                                                     </div>
+                                                                                                     
+                                                                                                </div>
+                                                                                                <div class="">
+                                                                                                        <div class="form-group row">
+                                                                                                            
+                                                                                                               
+                                                                                                                <textarea class="form-control-plaintext" [(ngModel)]="editSubAdmindata.company_vission" formControlName="company_vission" placeholder="Company Vission"></textarea>
+                                                                                                         </div>
+                                                                                                         
+                                                                                                    </div>
+                                                                                                    <div class="saveChanges">
+                                                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Update</button>
+                                                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </ul>
+
+
+
+
+
+
+
+
+
+
+
+                                                        <!--<ul class="ulList">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3>Edit Subadmin</h3>
+                                                            <div class="menu">
+                                                                <form class="login-form" [formGroup]="adminform" (ngSubmit)="editSubadminForm()" #adminEditForm="ngForm">
+                                                                    <div class="">
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Name</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.name" formControlName="name">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['name'].valid && adminform.controls['name'].touched">Name Required</div>
+                                                                            </div>
+                                                                        </div>                                                                       
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="email" readonly class="form-control-plaintext" [(ngModel)]="editSubAdmindata.email" formControlName="email">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="password" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.txt_password" formControlName="txt_password">
+                                                                                <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.state" formControlName="state">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.city" formControlName="city">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.address" formControlName="address">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                        
+                                                                        <div class="saveChanges">
+                                                                            <button type="submit" class="btn btn-primary" [disabled]="!adminEditForm.valid">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </ul>-->
+                                                    </div>
+                                                    <div *ngIf="loginUserDet.user_type == 'CA'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='list_subadmin'}">
+                                                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                                <strong>Success: </strong> {{successMsg}}
+                                                            </div>
+                                                            <h3> </h3>
+
+
+                                                            <div class="grp-rqsts" *ngIf="cmpSubadminList?.length > 0">
+                                                                    <h3 style="margin-top: 0px;">LIST SUBADMIN</h3>
+                                                                    <ul>
+                                                                        <li *ngFor="let friendData of cmpSubadminList">
+                                                                            <div class="left-area">
+                                                                                <div class="round-image">
+                                                                                    <a>
+                                                                                        <img [src]="friendData.profile_image" alt="">
+                                                                                        
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="content-part">
+                                                                                    <p>{{friendData.name}}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="right-area">
+                                                                                <p>
+                                                                                    <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="deleteAdmin(friendData.id)">Delete</button>
+                                                                                    <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="editAdmin(friendData.id)">Edit</button>
+                                                                                </p>
+                                                                            </div>
+                                                                        </li>
+                                                                        
+                                                                    </ul>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            <!-- <div class="menu" *ngIf="cmpSubadminList?.length > 0">
+                                                                <ul class="ulList connection-box">
+                                                                <li class="connectionList" *ngFor="let friendData of cmpSubadminList">
+                                                                    <div class="connectionImage">
+                                                                            <div class="img " [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="connectionText">
+                                                                        <h2>{{friendData.name}}</h2>
+                                                                        <button type="button" class="btn btn-primary" (click)="deleteAdmin(friendData.id)">Delete</button>
+                                                                        <button type="button" class="btn btn-primary" (click)="editAdmin(friendData.id)">Edit</button>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            </div> -->
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
+                                <div class="connectionsPart">
+                                    
+                                    <h2>Employee List</h2>
+                                    <div class="connections">
+
+                                        <div class="grp-rqsts" *ngIf="userEmployeeList?.length > 0">
+                                            <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
+                                            <ul >
+                                                <li *ngFor="let userData of userEmployeeList">
+                                                    <div class="left-area">
+                                                        <div class="round-image">
+                                                            <a [routerLink]="['/user/profile',userData.display_name]">
+                                                                <img [src]="userData.profile_image" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="content-part">
+                                                            <p>{{userData.name}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="right-area">
+                                                        <p>
+                                                                <a class="btn btn-primary" [routerLink]="['/user/profile',userData.display_name]">
+                                                                   <b>View</b>
+                                                                </a>
+                                                            <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button> -->
+                                                            <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button> -->
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                
+                                            </ul>
+                                    </div>
+
+
+
+
+
+
+                                        
+                                            <!-- <ul class="contn-box" *ngIf="userEmployeeList?.length > 0">
+                                                    <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
+                                                            <div class="friend-boxImage">
+                                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="friend-boxText">
+                                                                    <h4>{{userData.name}}</h4>
+                                                                    <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
+                                                                    <!-- <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p> -->
+                                                               <!-- </div>
+                                                            
+                                                            
+                                                        </li>
+                                                </ul> -->
+
+
+
+                                        <!-- <ul class="friend-box" *ngIf="userEmployeeList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <h2>{{userData.name}}</h2>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul> -->
+                                        <div class="likePart" *ngIf="userEmployeeList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h2>Follower List</h2>
+                                    <div class="connections">
+                                        <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let followData of userFollowerList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <h2>{{followData.name}}</h2>
+                                                    </a>  
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="userFollowerList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
+                                    <!-- <h3>Select multiple cities</h3>
+                                    <ng-select  [multiple]="true"
+                                                [items]="items"
+                                                [disabled]="disabled"
+                                                (selected)="selected($event)"
+                                                (removed)="removed($event)"
+                                                placeholder="No city selected"></ng-select> -->
+                                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                                        <strong>Success: </strong> {{successMsg}}
+                                                    </div>
+                                                <h2>Add Employee</h2>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <form method="post" [formGroup]="postform" (ngSubmit)="sendInvites()" #createGroupForm="ngForm">
+                                                                <div class="form-group">
+                                                                    <select class="form-control" multiple required formControlName="user_ids">
+                                                                        <option value="{{ itm.id }}" *ngFor="let itm of items">{{ itm ?.text }}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <!-- <ng-select [multiple]="true" [(ngModel)]="friends" formControlName="user_ids" [items]="items" placeholder="No city selected"></ng-select> -->
+                                                                
+                                                                <input type="submit" value="Send" class="btn btn-primary">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                               
+                                                <div class="connectionsPart">
+                                    
+                                        
+                                        <!-- <div class="form-group row" >
+                                                <div class="col-sm-12">
+                                                  <!-- <select class="form-control-plaintext" multiple>
+                                                    <option value="{{ user.id }}" *ngFor="let user of userSearchFrndList">{{ user?.name }}</option>
+                                                  </select> -->
+                                                  <!--<ng-select [multiple]="true"  [items]="items" placeholder="No friend selected"></ng-select>
+                                                </div>
+                                              </div> -->
+                                    <h2>Request List</h2>
+                                    <div class="connections">
+                                        
+                                            <div class="grp-rqsts" *ngIf="userRequestList?.length > 0">
+                                                    <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
+                                                    <ul >
+                                                        <li *ngFor="let userData of userRequestList">
+                                                            <div class="left-area">
+                                                                <div class="round-image">
+                                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                                        <img [src]="userData.profile_image" alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="content-part">
+                                                                    <p>{{userData.name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="right-area">
+                                                                <p>
+                                                                    <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button>
+                                                                    <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                            </div>
+                                        
+
+
+
+                                        <!-- <ul class="friend-box" *ngIf="userRequestList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let userData of userRequestList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                        <h2>{{userData.name}}</h2>
+                                                    </a>   
+                                                    <a (click)="RequestAccept(userData.id, 2)" class="btn btn-primary">Accept</a>
+                                                    <a (click)="RequestAccept(userData.id, 3)" class="btn btn-primary">Reject</a> 
+                                                </div>
+                                            </li>
+                                        </ul> -->
+                                        <div class="likePart" *ngIf="userRequestList?.length == 0">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No request found</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 flex-right">
+                <app-company-rightbar [profileData]="publicCmpDet" [companyID]="cmpId"></app-company-rightbar>
+            </div>
+        </div>
+    </div>
+</section>

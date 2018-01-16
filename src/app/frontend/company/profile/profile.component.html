@@ -24,7 +24,11 @@
                         </p>
                         <p class="text-center" style="padding-top: 10px;" *ngIf="isEmpRequest">
                         <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
-                        </p>    
+                        </p> 
+                        
+                        <p class="text-center" style="padding-top: 10px;" *ngIf="!isEmpRequest">
+                                <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="unflow_company()">Unfollow</button>
+                                </p> 
                   </div>
                   <div class="row" *ngIf="(successMsg != '')">
                       <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
@@ -176,7 +180,13 @@
                                                 </ul>
                                         </div>
      
-                                    
+                                        <div class="likePart" *ngIf="!userEmployeeList">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     
                                     
                                     
@@ -199,13 +209,7 @@
                                         </li>
                                     </ul> -->
 
-                                    <div class="likePart" *ngIf="userEmployeeList?.length == 0">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="nothing">No employee found</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 
                                 <h2>Follower List</h2>
@@ -225,7 +229,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="likePart" *ngIf="userFollowerList?.length == 0">
+                                    <div class="likePart" *ngIf="!userFollowerList">
                                         <div class="row">
                                             <div class="col-md-10">
                                                 <div class="nothing">No employee found</div>

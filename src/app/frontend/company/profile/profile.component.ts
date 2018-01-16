@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CompanyService } from "../company.service";
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public companyNameByUrl: string='';
-  public isloginUserId:any;
-  public otherProfileDet:any;
-  public otherProfileId:any;
-  public isloginUser:any;
+  public companyNameByUrl: string = '';
+  public isloginUserId: any;
+  public otherProfileDet: any;
+  public otherProfileId: any;
+  public isloginUser: any;
   public userPostList = [];
   public userFrndList = [];
   public userFollowerList = [];
   public userEmployeeList = [];
   public activeTab: string = 'activity';
   public aboutActiveTab: string = 'overview';
-  public successMsg: string ='';
+  public successMsg: string = '';
   public errorMsg: string = '';
-  public checkIsFriend:boolean = false;
-  public loginUserDet:any;
+  public checkIsFriend: boolean = false;
+  public loginUserDet: any;
   public loading = false;
   public isEmpRequest = true;
   public isFollowRequest = true;
@@ -33,26 +32,26 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-      this.isloginUserId = localStorage.getItem("loginUserId");
-      this.isloginUser = localStorage.getItem("isLoggedIn");
-      this.loginUserDet = JSON.parse(localStorage.getItem("currentUser"));
-   }
+    this.isloginUserId = localStorage.getItem("loginUserId");
+    this.isloginUser = localStorage.getItem("isLoggedIn");
+    this.loginUserDet = JSON.parse(localStorage.getItem("currentUser"));
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-        this.companyNameByUrl = params['uname'];
+      this.companyNameByUrl = params['uname'];
     });
     this.getCompanyDetailsByname();
   }
 
-  public getCompanyDetailsByname() {   
+  public getCompanyDetailsByname() {
     if (this.companyNameByUrl != '') {
       const dataUserDet = {
         "company_slug": this.companyNameByUrl
       };
       this.dataService.getCompanyDetByname(dataUserDet)
         .subscribe(data => {
-         //console.log(data);
+          //console.log(data);
           if (data.Ack == "1") {
             this.otherProfileDet = data.CompanyDetails[0];
             //console.log(this.otherProfileDet.id);
@@ -70,8 +69,8 @@ export class ProfileComponent implements OnInit {
         });
     }
   }
-  
-  public getFollowerList() {    
+
+  public getFollowerList() {
     if (this.otherProfileId != '') {
       const dataUserDet = {
         "company_id": this.otherProfileId
@@ -83,7 +82,7 @@ export class ProfileComponent implements OnInit {
           if (details.Ack == "1") {
             this.userFollowerList = details.CompanyFollowers;
             let SuccessPageData = this.userFollowerList.filter(item => item.user_id == this.isloginUserId);
-            if(SuccessPageData.length >0 ){
+            if (SuccessPageData.length > 0) {
               this.isFollowRequest = false;
             }
           } else {
@@ -99,7 +98,7 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  public getEmployeeList() {   
+  public getEmployeeList() {
     if (this.otherProfileId != '') {
       const dataUserDet = {
         "company_id": this.otherProfileId
@@ -111,7 +110,7 @@ export class ProfileComponent implements OnInit {
           if (details.Ack == "1") {
             this.userEmployeeList = details.EmployeelistBycompanyID;
             let SuccessPageData = this.userEmployeeList.filter(item => item.user_id == this.isloginUserId);
-            if(SuccessPageData.length >0 ){
+            if (SuccessPageData.length > 0) {
               this.isEmpRequest = false;
               //this.isFollowRequest = false;
             }
@@ -128,6 +127,32 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  public unflow_company() {
+    debugger;
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "user_id": loginUserId,
+        "company_id": this.otherProfileId,
+        "id": ""
+      };
+      this.dataService.unflowcompany(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            this.successMsg = "You have successfully unfollowed.";
+          } else {
+
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
+  }
+
   public checkMyFrndData() {
     //console.log(this.otherProfileId);
     if (this.otherProfileId != '' && this.isloginUserId != '') {
@@ -139,7 +164,7 @@ export class ProfileComponent implements OnInit {
           const details = data;
           if (details.msg == "Friend" && details.Ack == "1") {
             this.checkIsFriend = true;
-          }else{
+          } else {
             this.checkIsFriend = false;
           }
         },
@@ -159,11 +184,11 @@ export class ProfileComponent implements OnInit {
         "type": '3'
       };
       this.dataService.getUserPostById(dataUserDet).subscribe(data => {
-          const details = data;
-          if (details.Ack == "1") {
-            this.userPostList = details.AllPost;
-          }
-        },
+        const details = data;
+        if (details.Ack == "1") {
+          this.userPostList = details.AllPost;
+        }
+      },
         error => {
 
         });
@@ -171,80 +196,80 @@ export class ProfileComponent implements OnInit {
   }
 
   public getConnectionList() {
-      if (this.otherProfileId != '') {
-        const dataUserDet = {
-          "user_id": this.otherProfileId
-        };
-        this.dataService.getUserFrndListById(dataUserDet)
-          .subscribe(data => {
-            const details = data;
-            if (details.Ack == "1") {
-              this.userFrndList = details.FriendListById;
-            } 
-            //console.log(this.userFrndList);
-          },
-          error => {
+    if (this.otherProfileId != '') {
+      const dataUserDet = {
+        "user_id": this.otherProfileId
+      };
+      this.dataService.getUserFrndListById(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            this.userFrndList = details.FriendListById;
+          }
+          //console.log(this.userFrndList);
+        },
+        error => {
 
-          });
-      }
+        });
     }
+  }
 
-    public toggleTab(data: any) {
-      //console.log(data);
-      this.activeTab = data;
-      this.successMsg = '';
-      this.errorMsg = '';
-    }
-  
-    public aboutToggleTab(data: any) {
-      this.successMsg = '';
-      this.errorMsg = '';
-      this.aboutActiveTab = data;
-    }
-    
-    public sendEmployeeRequest(company_id) {
-      
-      if (this.isloginUserId != '' && company_id != '') {
-        this.loading = true;
-        let requestJsonData={"user_id": this.isloginUserId, "company_id": company_id};
-        this.dataService.sendEmployeeRequest(requestJsonData)
-          .subscribe(
-            data => {
-                if(data.Ack==1){
-                  this.successMsg='You have successfully send the request';
-                }else{
-                  this.errorMsg='You have already send the request';
-                }
-                this.loading = false;
-            },
-          error => {
-            alert(error);
-          });
-      }else{
-        this.router.navigateByUrl('/user/login');
-      }
-    }
+  public toggleTab(data: any) {
+    //console.log(data);
+    this.activeTab = data;
+    this.successMsg = '';
+    this.errorMsg = '';
+  }
 
-    public sendFollowRequest(company_id) {
+  public aboutToggleTab(data: any) {
+    this.successMsg = '';
+    this.errorMsg = '';
+    this.aboutActiveTab = data;
+  }
+
+  public sendEmployeeRequest(company_id) {
+
+    if (this.isloginUserId != '' && company_id != '') {
       this.loading = true;
-      //console.log(friend_id);
-      if (this.isloginUserId != '' && company_id != '') {
-        let requestJsonData={"user_id": this.isloginUserId, "company_id": company_id};
-        this.dataService.sendFollowRequest(requestJsonData)
-          .subscribe(
-            data => {
-                if(data.Ack==1){
-                  this.successMsg='You have successfully Follow.';
-                }else{
-                  this.errorMsg='You have unfollow.';
-                }
-                this.loading = false;
-            },
-          error => {
-            alert(error);
-          });
-      }else{
-        this.router.navigateByUrl('/user/login');
-      }
+      let requestJsonData = { "user_id": this.isloginUserId, "company_id": company_id };
+      this.dataService.sendEmployeeRequest(requestJsonData)
+        .subscribe(
+        data => {
+          if (data.Ack == 1) {
+            this.successMsg = 'You have successfully sent the request';
+          } else {
+            this.errorMsg = 'You have already sent the request';
+          }
+          this.loading = false;
+        },
+        error => {
+          alert(error);
+        });
+    } else {
+      this.router.navigateByUrl('/user/login');
     }
+  }
+
+  public sendFollowRequest(company_id) {
+    this.loading = true;
+    //console.log(friend_id);
+    if (this.isloginUserId != '' && company_id != '') {
+      let requestJsonData = { "user_id": this.isloginUserId, "company_id": company_id };
+      this.dataService.sendFollowRequest(requestJsonData)
+        .subscribe(
+        data => {
+          if (data.Ack == 1) {
+            this.successMsg = 'You have successfully Follow.';
+          } else {
+            this.errorMsg = 'You have unfollow.';
+          }
+          this.loading = false;
+        },
+        error => {
+          alert(error);
+        });
+    } else {
+      this.router.navigateByUrl('/user/login');
+    }
+  }
 }

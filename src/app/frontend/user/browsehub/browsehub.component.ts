@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HubService } from "../../../components/hub-create/hub.service";
 import { AgmCoreModule } from '@agm/core';
+import { UserService } from "../user.service";
 @Component({
   selector: 'app-browsehub',
   templateUrl: './browsehub.component.html',
@@ -15,13 +16,15 @@ export class BrowsehubComponent implements OnInit {
   public lng;
   private search_con;
   public search_date;
+  public latestArticles = [];
   public search_data = { keyword: '', cat_id: '', search_date:''};
-  constructor(private hubService: HubService) {
+  constructor(private hubService: HubService, private dataService: UserService,) {
     this.loginUserId = localStorage.getItem("loginUserId");
   }
 
   ngOnInit() {
     this.getAllHubs();
+    this.getLastFourArticle();
   }
 
   public getAllHubs(){
@@ -55,5 +58,17 @@ export class BrowsehubComponent implements OnInit {
   {
     this.search_data.cat_id = id;
     this.getAllHubs();
+  }
+
+  public getLastFourArticle() {
+    this.dataService.getFourArticleList().subscribe(data => {
+      let details = data;
+      if (details.Ack == "1") {
+        this.latestArticles = details.LastArticleList;
+      }
+    },
+      error => {
+      }
+    );
   }
 }

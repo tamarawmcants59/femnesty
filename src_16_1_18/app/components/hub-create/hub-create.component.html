@@ -1,0 +1,342 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="new-tabs">
+      <ul class="nav nav-tabs">
+        <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+          <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
+        </li>
+        <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
+          <a (click)="aboutToggleTab('add_group');resetAddPage();">Create Hub</a>
+        </li>
+        <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
+          <a (click)="aboutToggleTab('group_request');getMyHubRequest()">Hub Request</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
+
+
+
+
+    <div class="tab-content">
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+        <ul class="ulList">
+          <div class="menu">
+            <!-- <h3>Hub List</h3> -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                  <strong>Success: </strong> {{successMsg}}
+                </div>
+                <!--<pre>{{groupList}}</pre>-->
+                <ul class="uilist connection-box" *ngIf="hubList?.length > 0">
+                  <li class="connectionList" *ngFor="let groupData of hubList">
+                    <div class="connectionImage">
+                      <a [routerLink]="['/user/hub_details/',groupData.slug]">
+                        <div class="img" [ngStyle]="{'background-image':'url('+groupData.image+')'}"></div>
+                      </a>
+                    </div>
+                    <div class="connectionText">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]">
+                        <h2>{{groupData.title}}</h2>
+                      </a>
+                      <!-- <p>{{groupData.title}} members</p> -->
+                      <p *ngIf="groupData.privacy == 'O'">Public group</p>
+                      <p *ngIf="groupData.privacy == 'P'">Private group</p>
+                      <button type="button" class="btn btn-primary" (click)="editHubTab(groupData)">Edit Hub</button>
+                    </div>
+                  </li>
+                </ul>
+                <div *ngIf="hubList?.length == 0">
+                  <p>No hub found.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='add_group'">
+
+
+  <div class="tab-content">
+
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
+        <ul class="ulList edit-forms">
+          <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+            <strong>Success: </strong> {{successMsg}}
+          </div>
+          <!-- <h3>Create Hub</h3> -->
+          <h3>&nbsp;</h3>
+          <p>Short description on what a hub is and what is required to make<br> a hub
+and also what they are used for.</p>
+          <div class="menu">
+            <form class="login-form" [formGroup]="postform" (ngSubmit)="createHub()" #createGroupForm="ngForm">
+              <div class="">
+                <div class="form-group row">
+                  <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
+                  <div class="col-sm-12">
+                    <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
+                    <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title">
+                    <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub Title Required</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <select class="form-control-plaintext" [(ngModel)]="addForm.category_id" required formControlName="category_id">
+                        <option value='' selected>Select Category</option>
+                        <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
+                    </select>
+
+                    <!-- <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category Required</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <div class="col-sm-3">
+                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="O"> One Time 
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="R"> Recurring
+                    </div>
+                    <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
+                  </div>
+                </div>
+                
+                
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer">
+                    <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer Required</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+
+                    <!-- <input type="text" class="form-control-plaintext" 
+                      [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
+                    <!-- <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div> -->
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
+                    <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="number" class="form-control-plaintext" [(ngModel)]="addForm.cost" formControlName="cost" placeholder="Cost">
+                    <div class="text-danger" *ngIf="!postform.controls['cost'].valid && postform.controls['cost'].touched">Please enter cost</div>
+                  </div>
+                </div> -->
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail" email>
+                    <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Please enter valid email.</div>                    
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone">
+                    <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone Required</div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description"></textarea>
+                    <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description Required</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                      <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today">
+                      <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
+                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
+                    <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <div class="col-sm-3">
+                      <input type="radio" [(ngModel)]="addForm.privacy" checked class="input_radio" formControlName="privacy" value="O"> Public
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="radio" [(ngModel)]="addForm.privacy" class="input_radio" formControlName="privacy" value="P"> Private
+                    </div>
+                    <div class="text-danger" *ngIf="!postform.controls['privacy'].valid && postform.controls['privacy'].touched">Privacy Required</div>
+                  </div>
+                </div>
+                <div class="form-group row" *ngIf="addForm.privacy=='P'">
+                  <div class="col-sm-12">
+                    <!-- <select class="form-control-plaintext" multiple>
+                      <option value="{{ user.id }}" *ngFor="let user of userSearchFrndList">{{ user?.name }}</option>
+                    </select> -->
+                    <ng-select [multiple]="true" [(ngModel)]="addForm.friends" formControlName="friends" [items]="items" placeholder="No city selected"></ng-select>
+                  </div>
+                </div>
+                
+               
+
+                <div class="form-group row">
+                  <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>
+                  <div class="col-sm-8">
+                    <div class="upload-btn-wrapper uploadButtonPart">
+                      <button class="btn">Upload Image</button>
+                      <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                    </div>
+                    <div class="" *ngIf="showPostImgDive">
+                      <span class="result" *ngIf="postImgData">
+                        <img [src]="postImgData" [height]="100">
+                      </span>
+                    </div>
+                    <div class="" *ngIf="!showPostImgDive && addForm.image">
+                      <span class="result" *ngIf="addForm.image">
+                        <img [src]="addForm.image" [height]="100">
+                      </span>
+                    </div>
+                  </div>
+                </div> 
+                <div class="saveChanges">
+
+                  <!--<button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">Create</button>
+                  <button type="submit" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel</button>-->
+
+
+
+                  <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">{{addForm.id?'Update':'Create'}} Hub</button>
+                  <button type="button" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel
+</button>
+
+
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </ul>
+      </div>
+      </div>
+      </div>
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='group_request'">
+
+
+
+  <div class="tab-content">
+
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='group_request'}">
+        <ul class="ulList">
+          <div class="menu">
+            <!-- <h3>Hub Request</h3> -->
+            
+              <div class="grp-rqsts" *ngIf="hubRequestList?.length > 0">
+                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                  <strong>Success: </strong> {{successMsg}}
+                </div>
+                <!--<pre>{{groupList}}</pre>-->
+                <div class="connectionsPart">
+                <ul class="hub-listing">
+                  <li>
+                    <div class="date caption">Date</div>
+                    <div class="title caption">Title</div>
+                    <div class="action caption">Action</div>
+                  </li>
+                  <li  *ngFor="let groupData of hubRequestList">
+                    <div class="date">{{groupData.hub_date}}</div>
+                    <div class="title">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]">
+                        {{groupData.title}}
+                      </a>
+                    </div>
+                    <div class="action">
+                      <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
+                      <a *ngIf="groupData.status == '1'" class="btn btn-primary">Rejected</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+                    </div>
+                  </li>
+                </ul>
+                
+                <div class="new-tabs">
+                  <ul class="nav nav-tabs">
+                    <li [ngClass]="{'active' : hubReqTab==1}">
+                      <a (click)="hubReqTab=1" role="tab" data-toggle="tab">Attending</a>
+                    </li>
+                    <li [ngClass]="{'active' : hubReqTab==0}">
+                      <a (click)="hubReqTab=0"role="tab" data-toggle="tab">Not Responded yet</a>
+                    </li>
+                    <li [ngClass]="{'active' : hubReqTab==2}">
+                      <a (click)="hubReqTab=2" role="tab" data-toggle="tab">Rejected</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="attend">
+                      <ul class="hub-listing subcontent">
+                        <li>
+                          <div class="date caption labc">Date</div>
+                          <div class="title caption labc">Title</div>
+                          <div class="action caption labc">Action</div>
+                        </li>
+                        <li *ngFor="let groupData of hubRequestList">
+                          <div *ngIf="groupData.status==hubReqTab">
+                          <div class="date labc">{{groupData.hub_date}}</div>
+                          <div class="title labc">
+                            <a [routerLink]="['/user/hub_details',groupData.slug]">
+                              {{groupData.title}}
+                            </a>
+                          </div>
+                          <div class="action labc">
+                            <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
+                            <a *ngIf="groupData.status == '1'" class="btn btn-primary">Rejected</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+                          </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                  </div>
+                </div>
+                </div>
+                
+                <div *ngIf="groupRequestList?.length == 0">
+                  <p>No group request found.</p>
+                </div>
+              </div>
+           
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

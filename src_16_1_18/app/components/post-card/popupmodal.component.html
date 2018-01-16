@@ -1,0 +1,58 @@
+
+<h1 mat-dialog-title>Like User List</h1>
+<div mat-dialog-content class="frind-modal">
+    <!---<div class="likePop">
+        <div class="item" *ngIf="userList.length > 0">
+          <div class="row" *ngFor="let postData of userList">
+              <div class="col-md-8">
+                  <div class="imageParts">
+                      <div class="profImageP">
+                          <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
+                      </div>
+                      <div class="profTextPart">
+                          <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
+                          
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <p style="text-align: right;"><a [routerLink]="['/user/profile',postData.display_name]" class="btn btn-primary">View Profile</a></p>
+              </div>
+          </div>
+        </div>
+        <div class="item" *ngIf="userList.length == 0">
+        <div class="row">
+            <div class="col-md-12">
+                <p>No user found.</p>
+            </div>
+        </div>
+        </div>
+    </div>-->
+    <div *ngIf="userList.length > 0">
+    <div class="media" *ngFor="let postData of userList">
+        <div class="media-left">
+            <a href="#">
+                <img [src]="postData.profile_image" alt="">
+            </a>
+        </div>
+        <div class="media-body media-middle">
+            <h4 class="media-heading">{{postData.name}}</h4>
+        </div>
+        <div class="media-right media-middle">
+            <a [routerLink]="['/user/profile',postData.display_name]" class="btn btn-primary">View Profile</a>
+        </div>
+    </div>
+    
+    </div>
+    <div class="media" *ngIf="userList.length == 0">
+       
+        <div class="media-body media-middle">
+            <h4 class="media-heading">No user found.</h4>
+        </div>
+        
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-primary" mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Close</button>
+</div>
+

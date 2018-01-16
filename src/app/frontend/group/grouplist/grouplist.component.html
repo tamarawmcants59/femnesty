@@ -9,7 +9,10 @@
             <div class="col-md-6 flex-middle">
                 <div class="middlePart" style="background: transparent">
                 	<div class="MyGroups-list">
-                		  <h5 class="mt-0">MY GROUPS</h5>
+                      <h5 class="mt-0">MY GROUPS</h5>
+                      <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
+                          <strong>Error: </strong> {{errorMsg}}
+                      </div>
                 		  <ul class="search-list">
 	                        <li *ngFor="let grpData of myGrpList">
 	                            <a [routerLink]="['/group/details',grpData.group_uname]"><div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div></a>
@@ -66,6 +69,7 @@
                       </li>
                         <li>My Groups  <span>({{myGrpList?.length}})</span></li>
                         <li>Top Groups  <span>({{groupList?.length}})</span></li>
+                        <li *ngFor="let item of categoryListWithCount"><a style="cursor:pointer;" (click)="getCatDetails(item.id)">{{item.title}}<span>({{item.group_count}})</span></a> </li>
                       </ul>
                     </div>
                     <div class="innerRightPart latest-article">
@@ -90,7 +94,7 @@
                     <div class="innerRightPart share-story">
                       <h1>Start a Hub</h1>
                       <p>Make a difference where you are, start a Hub today.</p>
-                      <p><a [routerLink]="['/user/create_hub']" class="btn btn-primary">Start</a></p>
+                      <p><a [routerLink]="['/user/create_hub/create']" class="btn btn-primary">Start</a></p>
                     </div>
                   </div>
             </div>

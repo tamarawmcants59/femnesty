@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../user/user.service";
 import * as _ from "lodash";
 
@@ -9,39 +9,40 @@ import * as _ from "lodash";
   styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
-  public groupNameByUrl: string='';
-  public isloginUserId:any;
-  public isUserLogin:any;
-  public isGroupId="";
-  public groupDetailsData: object = { };
+  public groupNameByUrl: string = '';
+  public isloginUserId: any;
+  public isUserLogin: any;
+  public isGroupId = "";
+  public groupDetailsData: object = {};
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
-  public userFrndList =[];
-  public requestGrpJoinList =[];
-  
+  public userFrndList = [];
+  public requestGrpJoinList = [];
+
   //public userPostList =[];
   public activeTab: string = 'activity';
   //public aboutActiveTab: string = 'overview';
-  public successMsg: string ='';
+  public successMsg: string = '';
   public errorMsg: string = '';
-  public isJoinGroup:boolean = true;
+  public isJoinGroup: boolean = true;
   public loading = false;
-  public groupPostDetData: object = { };
-  
+  public groupPostDetData: object = {};
+ 
+
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
     private router: Router
-  ) { 
+  ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-        this.groupNameByUrl = params['gname'];
+      this.groupNameByUrl = params['gname'];
     });
     this.getGroupDetailsByName();
   }
@@ -53,19 +54,19 @@ export class GroupComponent implements OnInit {
       };
       this.dataService.getGrpDetBySlug(dataUserDet)
         .subscribe(data => {
-         //console.log(data);
+          //console.log(data);
           if (data.Ack == "1") {
             this.groupDetailsData = data.GroupDetails[0];
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
-            this.groupPostDetData = { activitytype:'2', activityid:this.isGroupId };
+            this.groupPostDetData = { activitytype: '2', activityid: this.isGroupId };
             //this.groupPidData = { 'groupId': this.isGroupId};
             //console.log(this.groupPidData);
             //this.getUserPostDetails();
             this.getUserPostDetails();
             this.getGroupMemberList();
             this.myFrndListforGrp();
-            
+
           }
         },
         error => {
@@ -73,6 +74,8 @@ export class GroupComponent implements OnInit {
         });
     }
   }
+
+ 
 
   /*public getUserPostDetails(){
     if(this.isGroupId!=''){
@@ -122,28 +125,28 @@ export class GroupComponent implements OnInit {
           //console.log(data);
           if (data.Ack == "1") {
             this.groupMemberList = data.groupMembers;
-            if(this.isUserLogin=='1'){
-              let joinItemData=this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
+            if (this.isUserLogin == '1') {
+              let joinItemData = this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
               //console.log(this.isloginUserId);
-              if(joinItemData.length>0){
-                this.isJoinGroup=false;
+              if (joinItemData.length > 0) {
+                this.isJoinGroup = false;
               }
             }
-          } 
+          }
           //console.log(this.userFrndList);
         },
         error => {
 
         });
 
-        this.dataService.getGroupRequestMemberListById(dataUserDet).subscribe(data => {
-          //console.log(data);
-          if (data.Ack == "1") {
-            this.requestGrpJoinList = data.AllPendingGrouprequest;
-          } 
-        },
+      this.dataService.getGroupRequestMemberListById(dataUserDet).subscribe(data => {
+        //console.log(data);
+        if (data.Ack == "1") {
+          this.requestGrpJoinList = data.AllPendingGrouprequest;
+        }
+      },
         error => { });
-        
+
     }
   }
 
@@ -152,7 +155,7 @@ export class GroupComponent implements OnInit {
     if (join_uid != '') {
       const dataUserDet = {
         "group_id": this.isGroupId,
-        "user_id": join_uid 
+        "user_id": join_uid
       };
       this.dataService.joinGroupRequestByUser(dataUserDet)
         .subscribe(data => {
@@ -161,9 +164,9 @@ export class GroupComponent implements OnInit {
           this.errorMsg = '';
           if (data.Ack == "1") {
             this.successMsg = data.msg;
-          }else{
+          } else {
             this.errorMsg = data.msg;
-          } 
+          }
           this.loading = false;
           //this.successMsg = 'You have successfully send the request.';
         },
@@ -181,16 +184,16 @@ export class GroupComponent implements OnInit {
       };
       //console.log(dataUserDet);
       this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
-          if (data.Ack == "1") {
-            this.userFrndList = data.groupMembersPrivate;
-            //console.log(this.userFrndList);
-          } 
-        },error => {
+        if (data.Ack == "1") {
+          this.userFrndList = data.groupMembersPrivate;
+          //console.log(this.userFrndList);
+        }
+      }, error => {
 
-        });
+      });
     }
   }
-  
+
   public inviteFrndAsGroupMember(join_uid) {
     this.loading = true;
     if (join_uid != '') {
@@ -200,17 +203,17 @@ export class GroupComponent implements OnInit {
         "user_id": join_uid
       };
       this.dataService.inviteMemberTojoinGroup(dataUserDet).subscribe(data => {
-          this.successMsg = '';
-          this.errorMsg = '';
-          if (data.Ack == "1") {
-            this.successMsg = data.msg;
-          }else{
-            this.errorMsg = data.msg;
-          } 
-          this.loading = false;
-          this.myFrndListforGrp();
-          //this.successMsg = 'You have successfully send the request.';
-        },
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          this.successMsg = data.msg;
+        } else {
+          this.errorMsg = data.msg;
+        }
+        this.loading = false;
+        this.myFrndListforGrp();
+        //this.successMsg = 'You have successfully send the request.';
+      },
         error => {
 
         });
@@ -222,62 +225,62 @@ export class GroupComponent implements OnInit {
     if (join_uid != '') {
       const dataUserDet = {
         "group_id": this.isGroupId,
-        "user_id": join_uid 
+        "user_id": join_uid
       };
       this.dataService.joinGroupMemberByAdmin(dataUserDet).subscribe(data => {
-          //console.log(data);
-          this.successMsg = '';
-          this.errorMsg = '';
-          if (data.Ack == "1") {
-            this.successMsg = data.msg;
-          }else{
-            this.errorMsg = data.msg;
-          } 
-          this.loading = false;
-          this.getGroupMemberList();
-          this.myFrndListforGrp();
-          //this.successMsg = 'You have successfully send the request.';
-        },
+        //console.log(data);
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          this.successMsg = data.msg;
+        } else {
+          this.errorMsg = data.msg;
+        }
+        this.loading = false;
+        this.getGroupMemberList();
+        this.myFrndListforGrp();
+        //this.successMsg = 'You have successfully send the request.';
+      },
         error => {
 
         });
     }
   }
-  
+
   public requestGroupAction(pid, type) {
     this.loading = true;
     if (pid != '') {
       const dataUserDet = {
         "id": pid,
-        "request_type": type 
+        "request_type": type
       };
       this.dataService.responseGroupRequestByAdmin(dataUserDet).subscribe(data => {
-          //console.log(data);
-          this.successMsg = '';
-          this.errorMsg = '';
-          if (data.Ack == "1") {
-            this.successMsg = data.msg;
-          }else{
-            this.errorMsg = data.msg;
-          } 
-          this.loading = false;
-          //this.getGroupMemberList();
-          this.getGroupMemberList();
-          this.router.navigateByUrl('/group/details/'+this.groupNameByUrl);
-          //this.getGroupMemberList();
-          //this.successMsg = 'You have successfully send the request.';
-        },
+        //console.log(data);
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          this.successMsg = data.msg;
+        } else {
+          this.errorMsg = data.msg;
+        }
+        this.loading = false;
+        //this.getGroupMemberList();
+        this.getGroupMemberList();
+        this.router.navigateByUrl('/group/details/' + this.groupNameByUrl);
+        //this.getGroupMemberList();
+        //this.successMsg = 'You have successfully send the request.';
+      },
         error => {
 
         });
     }
   }
-  
+
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;
     this.successMsg = '';
     this.errorMsg = '';
   }
-  
+
 }

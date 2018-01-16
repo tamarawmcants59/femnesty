@@ -1,0 +1,81 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container-fluid">
+        <div class="row flex-profile">
+            <div class="col-md-3 flex-left">
+                <user-sidebar></user-sidebar>
+            </div>
+            <div class="col-md-6 flex-middle">
+            	<div class="middlePart">
+                	  <div class="notification-wrap">
+                        <h2>Chat list</h2>
+                    </div>
+                </div><br/>
+                <div class="middlePart">
+                    <div class="notification-wrap new-chat-section">
+                        <ul>
+                            <li *ngFor="let chatHead of chatHeads" style="cursor:pointer">
+                                <div class="image-area">
+                                    <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
+                                        <img src="{{chatHead.userDetails.image_url}}" style="width:50px" alt="" />
+                                    </div>
+                                </div>
+                                <div class="text-area">
+                                    <a [routerLink]="['/user/chat',chatHead.from_user_id]">
+                                        <h4>{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
+                                    </a>
+                                    <p class="desc">{{chatHead.message.text}}</p>
+                                    <p class="desc" *ngIf="chatHead.message.file">
+                                        Sent you a file
+                                    </p>
+                                    <div style="display:block">
+                                        <a *ngIf="chatHead.message.file" download href="{{chatHead.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <p class="time">{{chatHead.created | timeAgo}}</p>
+                                </div>
+                            </li>
+                            <li *ngIf="chatHeads.length==0">
+                                <p>No message found</p>
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 flex-right">
+                <div class="rightPart">
+                    <div class="innerRightPart">
+                        <h2>CONNECTIONS</h2>
+                        <!--<div class="inline-search">
+                            <div class="input-group">
+                                <input placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+	                						<button type="button" class="btn btn-default"><i class="ion-android-search"></i></button>
+	                					</span>
+                            </div>
+                        </div>-->
+                        <ul class="connectionlist" *ngIf="userFrndList?.length > 0">
+                            <li *ngFor="let friendData of userFrndList">
+                                <div class="image-area">
+                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                    <div class="round-image-holder" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                    </a>
+                                </div>
+                                <div class="text-area">
+                                    <h5>{{friendData.name}}</h5>
+                                    
+                                    <a [routerLink]="['/user/chat',friendData.friend_id]">
+                                        <p>Chat</p>
+                                    </a>
+                                    <!--<p>You: Stop screming Susan!</p>-->
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

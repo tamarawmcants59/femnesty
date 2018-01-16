@@ -1,0 +1,78 @@
+<section class="section about-content-area visitingProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <user-sidebar></user-sidebar>
+            </div>
+            <div class="col-md-6">
+                <div class="middlePart">
+                    <div class="main-chat-wrap">
+                        <h4>Group chat with: "{{groupDetailsData.group_name}}"</h4>
+                        <div #scrollMe class="chat-holder" *ngIf="chats">
+                            <ul>
+                                <li *ngFor="let chat of chats" class="{{chat.cssClass}}">
+                                    <div class="image-area">
+                                        <div class="round-image-holder">
+                                            <img [src]="chat.userDetail?.image_url" style="width:70px;margin-top:0px" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="text-area">
+                                        <h5 *ngIf="chat.message.text">{{chat.message.text}}</h5>
+                                        <img class="img img-responsive" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                                        <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
+                                        <div class="clearfix"></div>
+                                        <p class="date">{{chat.created | timeAgo}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="message-writing-wrap">
+                            <div class="form-group">
+                                <textarea [(ngModel)]="message" class="form-control" placeholder="Type a message.."></textarea>
+                            </div>
+                            <div class="text-right">
+                                <div class="attach-file">
+                                    <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                                    <span>Attach File</span>
+                                </div>
+                                <button type="button" (click)="sendMessage()" [disabled]="!message" class="btn btn-primary pull-right">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="rightPart">
+                    <div class="innerRightPart">
+                        <h2>Group member</h2>
+                        <!--<div class="inline-search">
+                            <div class="input-group">
+                                <input placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+                      <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </span>
+                            </div>
+                        </div>-->
+                        <ul class="connectionlist" *ngIf="groupMemberList?.length > 0">
+                            <li *ngFor="let friendData of groupMemberList">
+                                <div class="image-area">
+                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                    <div class="round-image-holder" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                    </a>
+                                </div>
+                                <div class="text-area">
+                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                        <h5>{{friendData.name}}</h5>
+                                    </a>
+                                    <!--<h5>Susan Boyle <span>5.43pm</span></h5>
+                                    <p>You: Stop screming Susan!</p>-->
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

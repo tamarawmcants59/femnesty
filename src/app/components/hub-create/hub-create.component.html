@@ -2,24 +2,23 @@
   <div class="col-md-12 col-sm-12">
     <div class="new-tabs">
       <ul class="nav nav-tabs">
+        <li>
+            <a [routerLink]="['/user/hubs']">Find Hubs</a>
+        </li>
         <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
           <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
         </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
-          <a (click)="aboutToggleTab('add_group');resetAddPage();">Create Hub</a>
+        <li [ngClass]="{'active' : aboutActiveTab=='create'}">
+          <a (click)="aboutToggleTab('create');resetAddPage();">Create Hub</a>
         </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
-          <a (click)="aboutToggleTab('group_request');getMyHubRequest()">Hub Request</a>
+        <li [ngClass]="{'active' : aboutActiveTab=='request'}">
+          <a (click)="aboutToggleTab('request');getMyHubRequest()">Hub Request</a>
         </li>
       </ul>
     </div>
   </div>
 
 <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
-
-
-
-
     <div class="tab-content">
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
         <ul class="ulList">
@@ -59,12 +58,12 @@
       </div>
     </div>
   </div>
-<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='add_group'">
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='create'">
 
 
   <div class="tab-content">
 
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='create'}">
         <ul class="ulList edit-forms">
           <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
             <strong>Success: </strong> {{successMsg}}
@@ -108,6 +107,22 @@ and also what they are used for.</p>
                     <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
                   </div>
                 </div>
+
+                <div class="form-group row" *ngIf="addForm.type=='R'">
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
+                    <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_start" formControlName="recurring_start" [min]="today">
+                    <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter Recurring Start date</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
+                    <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
+                      [min]="today">
+                    <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
+                  </div>
+                </div>
+
+                
                 
                 
 
@@ -120,7 +135,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>
 
                     <!-- <input type="text" class="form-control-plaintext" 
                       [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
@@ -172,19 +187,17 @@ and also what they are used for.</p>
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
                     <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
                   </div>
                 </div>
-
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <div class="col-sm-3">
@@ -208,7 +221,7 @@ and also what they are used for.</p>
                
 
                 <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>
+                  <label for="staticEmail" class="col-sm-4 col-form-label">Hub Image</label>
                   <div class="col-sm-8">
                     <div class="upload-btn-wrapper uploadButtonPart">
                       <button class="btn">Upload Image</button>
@@ -247,13 +260,13 @@ and also what they are used for.</p>
       </div>
       </div>
       </div>
-<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='group_request'">
+<div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='request'">
 
 
 
   <div class="tab-content">
 
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='group_request'}">
+      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='request'}">
         <ul class="ulList">
           <div class="menu">
             <!-- <h3>Hub Request</h3> -->
@@ -271,17 +284,20 @@ and also what they are used for.</p>
                     <div class="action caption">Action</div>
                   </li>
                   <li  *ngFor="let groupData of hubRequestList">
-                    <div class="date">{{groupData.hub_date}}</div>
+                    <div class="date">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}</div>
                     <div class="title">
-                      <a [routerLink]="['/user/hub_details',groupData.slug]">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
                         {{groupData.title}}
                       </a>
                     </div>
                     <div class="action">
-                      <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
-                      <a *ngIf="groupData.status == '1'" class="btn btn-primary">Rejected</a>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+
+                      <a *ngIf="groupData.status == '2'" class="btn btn-black btn-default">Rejected</a>
+                      <a *ngIf="groupData.status == '1'" class="btn btn-primary1">Accepted</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Leave</a>                      
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
+                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
+
                     </div>
                   </li>
                 </ul>
@@ -308,17 +324,19 @@ and also what they are used for.</p>
                         </li>
                         <li *ngFor="let groupData of hubRequestList">
                           <div *ngIf="groupData.status==hubReqTab">
-                          <div class="date labc">{{groupData.hub_date}}</div>
+                          <div class="date labc">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}</div>
                           <div class="title labc">
                             <a [routerLink]="['/user/hub_details',groupData.slug]">
                               {{groupData.title}}
                             </a>
                           </div>
                           <div class="action labc">
-                            <a *ngIf="groupData.status == '2'" class="btn btn-danger">Rejected</a>
-                            <a *ngIf="groupData.status == '1'" class="btn btn-primary">Rejected</a>
-                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-success">Accept</a>
-                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-info">Reject</a>
+                            <a *ngIf="groupData.status == '2'" class="btn btn-black btn-default">Rejected</a>
+                            <a *ngIf="groupData.status == '1'" class="btn btn-primary1">Accepted</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Leave</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
+                            <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
+
                           </div>
                           </div>
                         </li>
@@ -330,7 +348,7 @@ and also what they are used for.</p>
                 </div>
                 
                 <div *ngIf="groupRequestList?.length == 0">
-                  <p>No group request found.</p>
+                  <p>No Hub request found.</p>
                 </div>
               </div>
            

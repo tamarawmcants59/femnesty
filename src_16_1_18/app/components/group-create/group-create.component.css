@@ -1,0 +1,102 @@
+
+.grp-rqsts h4{font-family: 'montserratmedium';color: #000000;text-transform: uppercase;font-size: 12px; letter-spacing: 1px; margin-bottom: 20px}
+.grp-rqsts ul{padding:0; margin: 0; list-style-type: none; display: block !important;}
+.grp-rqsts ul li{display: flex; flex-wrap:wrap; padding: 20px 0; text-align: left; width:100%; justify-content: space-between; align-items:center; border-bottom:3px solid #f0f0f0; margin-right: 0; margin-bottom: 0}
+.grp-rqsts ul li:last-child{border-bottom:0}
+.grp-rqsts ul li .left-area{display: flex; align-items:center}
+.grp-rqsts ul li .right-area p{margin-bottom: 0}
+.grp-rqsts ul li .round-image{margin-right: 10px}
+.grp-rqsts ul li .round-image img{width:46px; height:46px; border-radius:100%}
+.grp-rqsts ul li .content-part{flex:1 1 auto}
+.grp-rqsts ul li .content-part p{margin-bottom:0;line-height:1.1}
+.grp-rqsts ul li .content-part small{color:#7e7e7e;line-height:1; font-size:9px}
+.grp-rqsts ul li .btn{font-size:10px !important; padding:9px 22px; text-transform:uppercase; margin: 3px 0}
+.grp-rqsts ul li .btn.btn-default{background: #373737; box-shadow:none; text-shadow:none; color:#fff; border-radius:50px; border: 0}
+.grp-rqsts ul li .btn.btn-default:hover{background: #000; transition: ease all 0.2s}
+
+.grp-rqsts1 h4{font-family: 'montserratmedium';color: #000000;text-transform: uppercase;font-size: 12px; letter-spacing: 1px; margin-bottom: 20px}
+.new-tabs .nav-tabs{
+	border-bottom:  none !important;
+}
+.new-tabs ul li{ border-radius:  0; border: none; background: #b8b8b8 !important; font-weight:500; font-size: 12px;}
+.new-tabs .nav-tabs > li > a {
+    margin-right:0 !important;
+    line-height: 1.42857143;
+    border: none;
+    border-radius:0;
+    padding: 15px 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #fff;
+	letter-spacing: 2px;
+}
+.new-tabs .nav-tabs > li.active > a{
+	color: #000;
+}
+.new-tabs .nav-tabs > li.active > a:hover{ background: none;}
+.new-tabs .tab-content{
+	background: #fff;
+}
+.new-tabs .tab-content ul{ padding:20px; margin:0; display: block;}
+.new-tabs .tab-content ul li{ padding:15px; margin-bottom: 10px; border-bottom: solid 1px #f0f0f0; background: none !important; width: 100% !important; position: relative; display: block !important; float: none !important;}
+.new-tabs .tab-content ul li h5{
+	font-size: 14px; color: #000; font-weight: bold; padding-right: 25px; text-align: left; border:none; 
+}
+.new-tabs .tab-content ul li p{
+	font-size: 18px; color: #7b7b7b; padding: 0 25px; text-align: left; margin-bottom: 10px;
+}
+
+
+.ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
+	box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .form-control-plaintext {
+	  background: #f7f7f7;
+	  border: none;
+	  box-shadow: none;
+	  height: 64px;
+	  font-size: 14px;
+	  padding: 6px 30px;
+	  font-family: 'sanchezregular';
+	  color: #707070;
+  }
+  .edit-forms h3{
+	  font-size: 11px;
+	  text-transform: uppercase;
+	  color: #202020;
+	  font-family: 'montserratregular';
+	  margin-bottom: 10px;
+  }
+  .edit-forms p{
+	  font-size: 12px;	
+	  color: #414141;
+	  font-family: 'sanchezregular';
+  }
+  
+  .edit-forms textarea.form-control-plaintext{
+	  height: 144px !important; padding-top: 15px;
+  }
+  .saveChanges .btn-primary{
+	  width:143px !important;
+	  height: 41px !important;
+	  font-emphasize: 11px !important;
+	  display:  block !important;
+	  padding: 0 !important;
+	  margin: 0 !important;
+  }
+  :host ::ng-deep .custom-autocomplete__dropdown{display: block !important;}
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .heading[_ngcontent-c4] .line-location[_ngcontent-c4], :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .heading[_ngcontent-c4] .line-recent[_ngcontent-c4] {
+	  left: 0;
+	  top: 16px;
+	  width: calc(100% - 0px);
+  }
+  
+  :host ::ng-deep .heading.heading-recent span:first-child{background: #fff !important; z-index: 1;position: relative; padding: 0 20px;}
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] a[_ngcontent-c4]{float: none !important; text-align: left !important; display: block !important;}
+  
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .currentlocation[_ngcontent-c4] a[_ngcontent-c4] {position: relative !important; padding-left: 30px !important}
+  :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .currentlocation[_ngcontent-c4] .location-icon[_ngcontent-c4] {position: absolute; left:9px; top:10px;}
+  

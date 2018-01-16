@@ -1,0 +1,334 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="new-tabs">
+            <ul class="nav nav-tabs">
+                <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                        <a (click)="aboutToggleTab('overview')">GROUP LIST</a>
+                </li>
+                <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
+                        <a (click)="aboutToggleTab('add_group')">CREATE GROUP</a>
+                </li>
+                <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
+                        <a (click)="aboutToggleTab('group_request')">GROUP REQUEST</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="col-md-12 col-sm-12 group-list">-->
+    <div class="col-md-12 col-sm-12">
+        <div class="tab-content">
+            <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                <ul class="ulList">
+                    <div class="menu grp-rqsts1">
+                        <h4>Group List</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                    <strong>Success: </strong> {{successMsg}}
+                                </div>
+                                <!--<pre>{{groupList}}</pre>-->
+                                <ul class="uilist connection-box" *ngIf="groupList?.length > 0">
+                                    <li class="connectionList" *ngFor="let groupData of groupList">
+                                        <div class="connectionImage">
+                                            <a [routerLink]="['/group/details',groupData.group_uname]">
+                                                <div class="img" [ngStyle]="{'background-image':'url('+groupData.group_image+')'}"></div>
+                                            </a>
+                                        </div>
+                                        <div class="connectionText">
+                                            <a [routerLink]="['/group/details',groupData.group_uname]"><h2>{{groupData.group_name}}</h2></a>
+                                            <p>{{groupData.member_count}} members</p>
+                                            <p *ngIf="groupData.group_type == '1'">Public group</p>
+                                            <p *ngIf="groupData.group_type == '2'">Private group</p>
+                                            <button type="button" class="btn btn-primary" (click)="editGroupTab(groupData.id)">Edit Group</button>											
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div *ngIf="groupList?.length == 0">
+                                    <p>No group found.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
+            <ul class="ulList edit-forms">
+                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                    <strong>Success: </strong> {{successMsg}}
+                </div>
+                <h3>Create Group</h3>
+                <p>Short description on what a group is and what is required to make<br> a group
+        and also what they are used for.</p>
+                <div class="menu">
+                    <form class="login-form" [formGroup]="postform" (ngSubmit)="createGroupPost()" #createGroupForm="ngForm">
+                    <div class="">
+                        <div class="form-group row">
+                        <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control-plaintext" formControlName="group_name" placeholder="Group Name/Title">
+                            <div class="text-danger" *ngIf="!postform.controls['group_name'].valid && postform.controls['group_name'].touched">Group Name Required</div>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control-plaintext" formControlName="year_est" placeholder="Year of Establishment">
+                            <div class="text-danger" *ngIf="!postform.controls['year_est'].valid && postform.controls['year_est'].touched">Year of Establishment Required</div>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-3">
+                                <input type="radio" class="input_radio" formControlName="group_type" value="1"> Public
+                                </div>
+                                <div class="col-sm-3">
+                                <input type="radio" class="input_radio" formControlName="group_type" value="2"> Private
+                                </div>
+                                <div class="text-danger" *ngIf="!postform.controls['group_type'].valid && postform.controls['group_type'].touched">Group Type Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <select class="form-control-plaintext" required formControlName="cat_id">
+                                    <option value='' selected>Category</option>
+                                    <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
+                                </select>
+                                <div class="text-danger" *ngIf="!postform.controls['cat_id'].valid && postform.controls['cat_id'].touched">Category Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <select class="form-control-plaintext" required formControlName="country">
+                                    <option value='' selected>Country</option>
+                                    <option value="{{ cdata.id }}" *ngFor="let cdata of countryList">{{ cdata.countries_name }}</option>
+                                </select>
+                                <div class="text-danger" *ngIf="!postform.controls['country'].valid && postform.controls['country'].touched">Country Required</div>
+                                <!--<select class="form-control-plaintext">
+                                	<option>dsfdsfds</option>
+                                	<option>dsfdsfds</option>
+                                </select>-->
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control-plaintext" formControlName="city" placeholder="City">
+                                <div class="text-danger" *ngIf="!postform.controls['city'].valid && postform.controls['city'].touched">City Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control-plaintext" formControlName="postal_code" placeholder="Postal Code">
+                                <div class="text-danger" *ngIf="!postform.controls['postal_code'].valid && postform.controls['postal_code'].touched">Postal Code Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control-plaintext" formControlName="cemail" placeholder="Contact E-mail">
+                                <div class="text-danger" *ngIf="!postform.controls['cemail'].valid && postform.controls['cemail'].touched">Contact E-mail Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control-plaintext" formControlName="phone" placeholder="Contact Phone">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <textarea class="form-control-plaintext" formControlName="short_desc" placeholder="Short Description"></textarea>
+                                <div class="text-danger" *ngIf="!postform.controls['short_desc'].valid && postform.controls['short_desc'].touched">Short Description Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <textarea class="form-control-plaintext" formControlName="long_desc" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>
+                        <div class="col-sm-8">
+                            <div class="upload-btn-wrapper uploadButtonPart">
+                            <button class="btn">Upload Image</button>
+                            <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                            </div>
+                            <div class="" *ngIf="showPostImgDive">
+                            <span class="result" *ngIf="postImgData">
+                                <img [src]="postImgData" [height]="100">
+                            </span>
+                            </div>
+                            
+                        </div>
+                        </div> 
+                        <div class="saveChanges">
+        
+                        <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">Create Group</button>
+        
+                        </div>
+                    </div>
+                    </form>
+        
+                </div>
+            </ul>
+            </div>
+
+            <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_group'}">
+                    <ul class="ulList edit-forms">
+                        <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                            <strong>Success: </strong> {{successMsg}}
+                        </div>
+                        <h3>Edit Group</h3>
+                        <p>Short description on what a group is and what is required to make<br> a group
+                            and also what they are used for.</p>
+                        <div class="menu">
+                            <form class="login-form" [formGroup]="postform" (ngSubmit)="editGroupPost()" #editGroupForm="ngForm">
+                                <div class="">
+                                    <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control-plaintext" formControlName="group_name" [(ngModel)]="groupEditDataJson.group_name" placeholder="Group Name/Title">
+                                        <div class="text-danger" *ngIf="!postform.controls['group_name'].valid && postform.controls['group_name'].touched">Group Name Required</div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control-plaintext" formControlName="year_est" [(ngModel)]="groupEditDataJson.year_est" placeholder="Year of Establishment">
+                                        <div class="text-danger" *ngIf="!postform.controls['year_est'].valid && postform.controls['year_est'].touched">Year of Establishment Required</div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-3">
+                                            <input type="radio" class="input_radio" formControlName="group_type" [checked]="groupEditDataJson.group_type == '1'" value="1"> Public
+                                            </div>
+                                            <div class="col-sm-3">
+                                            <input type="radio" class="input_radio" formControlName="group_type" [checked]="groupEditDataJson.group_type == '2'" value="2"> Private
+                                            </div>
+                                            <div class="text-danger" *ngIf="!postform.controls['group_type'].valid && postform.controls['group_type'].touched">Group Type Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <select class="form-control-plaintext" required formControlName="cat_id">
+                                                <option value='' selected>Category</option>
+                                                <option value="{{ catlist.id }}" *ngFor="let catlist of catList" [selected]="groupEditDataJson.cat_id==catlist.id">{{ catlist?.title }}</option>
+                                            </select>
+                                            <div class="text-danger" *ngIf="!postform.controls['cat_id'].valid && postform.controls['cat_id'].touched">Category Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <select class="form-control-plaintext" required formControlName="country">
+                                                <option value='' selected>Country</option>
+                                                <option value="{{ cdata.id }}" *ngFor="let cdata of countryList" [selected]="groupEditDataJson.country==cdata.id">{{ cdata.countries_name }}</option>
+                                            </select>
+                                            <div class="text-danger" *ngIf="!postform.controls['country'].valid && postform.controls['country'].touched">Country Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control-plaintext" formControlName="city" [(ngModel)]="groupEditDataJson.city" placeholder="City">
+                                            <div class="text-danger" *ngIf="!postform.controls['city'].valid && postform.controls['city'].touched">City Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control-plaintext" formControlName="postal_code" [(ngModel)]="groupEditDataJson.postal_code" placeholder="Postal Code">
+                                            <div class="text-danger" *ngIf="!postform.controls['postal_code'].valid && postform.controls['postal_code'].touched">Postal Code Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control-plaintext" formControlName="cemail" [(ngModel)]="groupEditDataJson.cemail" placeholder="Contact E-mail">
+                                            <div class="text-danger" *ngIf="!postform.controls['cemail'].valid && postform.controls['cemail'].touched">Contact E-mail Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control-plaintext" formControlName="phone" [(ngModel)]="groupEditDataJson.phone" placeholder="Contact Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control-plaintext" formControlName="short_desc" [(ngModel)]="groupEditDataJson.short_desc" placeholder="Short Description"></textarea>
+                                            <div class="text-danger" *ngIf="!postform.controls['short_desc'].valid && postform.controls['short_desc'].touched">Short Description Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control-plaintext" formControlName="long_desc" [(ngModel)]="groupEditDataJson.long_desc" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-4 col-form-label">Group Image</label>
+                                    <div class="col-sm-8">
+                                        <div class="upload-btn-wrapper uploadButtonPart">
+                                        <button class="btn">Upload Image</button>
+                                        <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                                        </div>
+                                        <div class="" *ngIf="showPostImgDive">
+                                        <span class="result" *ngIf="postImgData">
+                                            <img [src]="postImgData" [height]="100">
+                                        </span>
+                                        <span class="result" *ngIf="groupEditDataJson.group_image">
+                                            <img [src]="groupEditDataJson.group_image" [height]="100" >
+                                        </span>
+                                        </div>
+                                        
+                                    </div>
+                                    </div> 
+                                    <div class="saveChanges">
+                    
+                                    <button type="submit" class="btn btn-primary" [disabled]="!editGroupForm.valid">Submit</button>
+                    
+                                    </div>
+                                </div>
+                            </form>
+    
+                        </div>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='group_request'}">
+                    
+                    <div class="grp-rqsts">
+                            <h4>Group REQUESTS</h4>
+                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                <strong>Success: </strong> {{successMsg}}
+                            </div>
+                            <ul *ngIf="groupRequestList?.length > 0">
+                                <li *ngFor="let groupData of groupRequestList">
+                                    <div class="left-area">
+                                        <div class="round-image">
+                                            <a [routerLink]="['/group/details',groupData.group_uname]">
+                                                <img [src]="groupData.image" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="content-part">
+                                            <p>{{groupData.group_name}} ({{groupData.member_count}} members)</p>
+                                            <small>{{groupData.cdate | dateTimeFormat: 'dd MMM yyyy'}}</small>
+                                        </div>
+                                    </div>
+                                    <div class="right-area">
+                                        <p *ngIf="groupData.request_type == '2'">You accepted</p>
+                                        <p *ngIf="groupData.request_type == '3'">You rejected</p>
+                                        <p *ngIf="groupData.request_type == '0'">
+                                            <button *ngIf="groupData.request_type == '0'" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'2')">Accept</button>
+                                            <button *ngIf="groupData.request_type == '0'" type="button" class="btn btn-black btn-default" (click)="requestGroupAction(groupData.id,'3')">Decline</button> 
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        <div *ngIf="groupRequestList?.length == 0">
+                            <p>No group request found.</p>
+                        </div>    
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -33,15 +33,4 @@ export class PopupmodalComponent implements OnInit {
       }
     );
   }
-  /*openDialog(): void {
-    let dialogRef = this.dialog.open(PopupmodalComponent, {
-      width: '250px',
-      data: {  }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
-     
-    });
-  }*/
 }
