@@ -1,8 +1,8 @@
 import { ChatListnerService } from './../../service/chat.listner.service';
-import { Component, ElementRef,ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { NgZone } from "@angular/core";
 import * as firebase from 'firebase';
-import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FrontendService } from "./frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -24,27 +24,35 @@ export class FrontendAppHeader {
   public currentUserDet: Object = {};
   public siteSettingsDet: Object = {};
   public userNotiCnt: number = 0;
-  public searchResultStr:string ='';
-  public form:FormGroup;
-  public currentFireUserId:string='';
-  public getCurrentPageName:string='';
-  public show:boolean = false;
-  
+  public searchResultStr: string = '';
+  public form: FormGroup;
+  public currentFireUserId: string = '';
+  public getCurrentPageName: string = '';
+  public show: boolean = false;
+
   constructor(
     private el: ElementRef,
     lc: NgZone,
     private route: ActivatedRoute,
     private router: Router,
     private _service: FrontendService,
-    private builder:FormBuilder,
+    private builder: FormBuilder,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private cd:ChangeDetectorRef
+    private cd: ChangeDetectorRef
   ) {
+    if(this.userloggedIn == '1')
+    {
+      let self=this;
+      setInterval(function () {
+        self.userNotiCountList();
+      }, 5000)
+    }
+
     this.afAuth.authState.do(user => {
       if (user) {
-         this.currentFireUserId = user.uid;
+        this.currentFireUserId = user.uid;
       }
     }).subscribe();
     //console.log(this.router.url);
@@ -58,7 +66,7 @@ export class FrontendAppHeader {
 
 
 
-    if(this.getCurrentPageName=='/home'){
+    if (this.getCurrentPageName == '/home') {
       window.onscroll = () => {
         let st = window.pageYOffset;
         let dir = '';
@@ -73,7 +81,7 @@ export class FrontendAppHeader {
         });
 
       };
-    }else{
+    } else {
       this.HeaderNavCls = 'navbar-white';
     }
 
@@ -83,7 +91,7 @@ export class FrontendAppHeader {
 
     this.form = builder.group({
       skeyword: ['', [
-        
+
       ]]
     });
   }
@@ -92,7 +100,7 @@ export class FrontendAppHeader {
   ngOnInit(): void {
     //console.log(this.currentUserDet);
     //localStorage.removeItem("isLoggedIn");
-    
+
     var nativeElement: HTMLElement = this.el.nativeElement,
       parentElement: HTMLElement = nativeElement.parentElement;
     // move all children out of the element
@@ -124,7 +132,7 @@ export class FrontendAppHeader {
     this._service.getSiteSettings().subscribe(data => {
       if (data.Ack == "1") {
         this.siteSettingsDet = data.SiteSettings[0];
-      } 
+      }
     },
       error => {
         console.log('Something went wrong!');
@@ -136,14 +144,14 @@ export class FrontendAppHeader {
       this.userNotiCountList();
     }
 
-    
+
 
 
     this.getUnreadMessages();
   }
 
   ngOnChanges(): void {
-  this.show=false;
+    this.show = false;
   }
 
   getUnreadMessages() {
@@ -170,7 +178,7 @@ export class FrontendAppHeader {
     });
   }
 
-  public openChat(chat){
+  public openChat(chat) {
     this._chatListnerService.onChatHeadClick(chat);
   }
 
@@ -190,32 +198,33 @@ export class FrontendAppHeader {
       });
     }
   }
-    
+
   public searchResult(values) {
     //console.log(values);
-    this.searchResultStr = values; 
+    this.searchResultStr = values;
   }
-  
+
   public searchDataResult() {
+
     //console.log(this.searchResultStr);
     //this.searchResultStr =values.skeyword;
     //this.router.navigateByUrl('/home/search/'+values.skeyword);
-    this.router.navigateByUrl('/home/search/'+this.searchResultStr);
-    
+    this.router.navigateByUrl('/home/search/' + this.searchResultStr);
+
   }
 
   public userLogout() {
-    let usersRef = firebase.database().ref('presence/'+this.currentFireUserId);
+    let usersRef = firebase.database().ref('presence/' + this.currentFireUserId);
     let connectedRef = firebase.database().ref('.info/connected');
     let fUserId = parseInt(localStorage.getItem("loginUserId"));
-    connectedRef.on('value', function(snapshot) {
-      usersRef.set({ online: false, userid:fUserId});
+    connectedRef.on('value', function (snapshot) {
+      usersRef.set({ online: false, userid: fUserId });
       //usersRef.onDisconnect().remove();
-    });   
+    });
     //this.afAuth.logout();
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(function () {
       //console.log('Signed Out');
-    }, function(error) {
+    }, function (error) {
       //console.error('Sign Out Error', error);
     });
     localStorage.removeItem("currentUser");
@@ -229,9 +238,9 @@ export class FrontendAppHeader {
   }
 
   toggleCollapse() {
-   this.show = !this.show;
+    this.show = !this.show;
   }
 
-  
+
 
 }
