@@ -94,7 +94,7 @@
                             <div class="connections">
                                       <h3 style="margin-top: 0px;">Join member to group</h3>
                                       <ul class="friend-box" *ngIf="userFrndList?.length > 0">
-                                            <li class="friend-box-list" *ngFor="let joinFrnd of userFrndList">
+                                            <li class="friend-box-list" *ngFor="let joinFrnd of userFrndList;let i=index">
                                                 <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',joinFrnd.display_name]">
                                                     <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd.profile_image+')'}"></div>
@@ -104,7 +104,8 @@
                                                     <a [routerLink]="['/user/profile',joinFrnd.display_name]">
                                                     <h2>{{joinFrnd.name}}</h2>
                                                     </a>
-                                                    <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !=''" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Add</button>
+                                                    <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Add</button>
+                                                    <button  *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
                                                 </div>
                                             </li>
                                         </ul>  
@@ -163,7 +164,7 @@
                                         </li>
                                     </ul>
                               </div>
-							<div class="connectionsPart">
+							<!-- <div class="connectionsPart">
 								<ul class="hub-listing">
 									<li>
 										<div class="date caption">Date</div>
@@ -213,7 +214,7 @@
 									</div>
 								</div>
 								
-							</div>
+							</div> -->
                           </div>
                           <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
                             <div class="connectionsPart">

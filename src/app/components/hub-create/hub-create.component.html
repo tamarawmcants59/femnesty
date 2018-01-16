@@ -108,8 +108,9 @@ and also what they are used for.</p>
                   </div>
                 </div>
 
+
                 <div class="form-group row" *ngIf="addForm.type=='R'">
-                  <div class="col-sm-6">
+                    <div class="col-sm-6">
                     <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_start" formControlName="recurring_start" [min]="today">
                     <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter Recurring Start date</div>
@@ -121,10 +122,6 @@ and also what they are used for.</p>
                     <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
                   </div>
                 </div>
-
-                
-                
-                
 
                 <div class="form-group row">
                   <div class="col-sm-12">

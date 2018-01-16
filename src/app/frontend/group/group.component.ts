@@ -13,13 +13,16 @@ export class GroupComponent implements OnInit {
   public isloginUserId: any;
   public isUserLogin: any;
   public isGroupId = "";
-  public groupDetailsData: object = {};
+  public groupDetailsData: any;
+
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
   public userFrndList = [];
   public requestGrpJoinList = [];
 
+   qtd= {};  
+  private IsShow: boolean = false;
   //public userPostList =[];
   public activeTab: string = 'activity';
   //public aboutActiveTab: string = 'overview';
@@ -28,7 +31,6 @@ export class GroupComponent implements OnInit {
   public isJoinGroup: boolean = true;
   public loading = false;
   public groupPostDetData: object = {};
- 
 
   constructor(
     private dataService: UserService,
@@ -48,6 +50,7 @@ export class GroupComponent implements OnInit {
   }
 
   public getGroupDetailsByName() {
+    debugger;
     if (this.groupNameByUrl != '') {
       const dataUserDet = {
         "group_slug": this.groupNameByUrl
@@ -68,6 +71,11 @@ export class GroupComponent implements OnInit {
             this.myFrndListforGrp();
 
           }
+          else
+          {
+            this.router.navigateByUrl('/user/edit_profile/activity');
+
+          }
         },
         error => {
 
@@ -75,7 +83,6 @@ export class GroupComponent implements OnInit {
     }
   }
 
- 
 
   /*public getUserPostDetails(){
     if(this.isGroupId!=''){
@@ -220,7 +227,9 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  public addGroupMember(join_uid) {
+  public addGroupMember(join_uid,index) {
+
+   
     this.loading = true;
     if (join_uid != '') {
       const dataUserDet = {
@@ -237,8 +246,16 @@ export class GroupComponent implements OnInit {
           this.errorMsg = data.msg;
         }
         this.loading = false;
-        this.getGroupMemberList();
-        this.myFrndListforGrp();
+
+        if (this.groupDetailsData.group_type == "2") {
+           this.qtd[join_uid]=true;
+        }
+        else
+        {
+          this.getGroupMemberList();
+          this.myFrndListforGrp();
+        }
+        
         //this.successMsg = 'You have successfully send the request.';
       },
         error => {

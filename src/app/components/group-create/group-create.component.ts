@@ -25,10 +25,10 @@ export class GroupCreateComponent implements OnInit {
   public groupList: any;
   public groupEditId: any;
   public groupRequestList = [];
-  public groupEditDataJson={};
-  public searchData = {address:'',lat:'',lng:''}
-  public catList=[];
-  public countryList=[];
+  public groupEditDataJson = {};
+  public searchData = { address: '', lat: '', lng: '' }
+  public catList = [];
+  public countryList = [];
   public autocompleteSettings: any = {
     showSearchButton: false,
     showCurrentLocation: false,
@@ -81,7 +81,7 @@ export class GroupCreateComponent implements OnInit {
       phone: ['', [
       ]],
       long_desc: ['', [
-        
+
       ]]
     });
 
@@ -103,7 +103,7 @@ export class GroupCreateComponent implements OnInit {
     });*/
     this.loginUserId = localStorage.getItem("loginUserId");
 
-   }
+  }
 
   ngOnInit() {
     this.getMyGroupListData();
@@ -112,12 +112,12 @@ export class GroupCreateComponent implements OnInit {
     this.getTotCounteyList();
   }
 
-  
+
   autoCompleteCallback1(data: any): any {
-    this.searchData = {address:data.data.description,lat:data.data.geometry.location.lat,lng:data.data.geometry.location.lng};
+    this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
   }
 
-  public getTotCounteyList(){
+  public getTotCounteyList() {
     this.dataService.getCountryList().subscribe(data => {
       if (data.Ack == 1) {
         this.countryList = data.country_list;
@@ -128,7 +128,7 @@ export class GroupCreateComponent implements OnInit {
       });
   }
 
-  public getHubCategories(){
+  public getHubCategories() {
     this.hubService.getHubCategories().subscribe(data => {
       if (data.Ack == "1") {
         this.catList = data.details;
@@ -139,40 +139,40 @@ export class GroupCreateComponent implements OnInit {
       });
   }
 
-  public editGroupTab(groupId){
-    
-    this.groupEditId=groupId;
-    let dataUserDet ={
+  public editGroupTab(groupId) {
+
+    this.groupEditId = groupId;
+    let dataUserDet = {
       "group_id": this.groupEditId
     };
-    this.dataService.getGroupDetById(dataUserDet).subscribe(data=>{
-        if (data.Ack=="1") {
-            this.groupEditDataJson = data.GroupDetails[0];
-            this.showPostImgDive=true;
-            //this.postImgData=this.groupEditDataJson.group_image;
-        }
-      },
+    this.dataService.getGroupDetById(dataUserDet).subscribe(data => {
+      if (data.Ack == "1") {
+        this.groupEditDataJson = data.GroupDetails[0];
+        this.showPostImgDive = true;
+        //this.postImgData=this.groupEditDataJson.group_image;
+      }
+    },
       error => {
         console.log('Something went wrong!');
-      }); 
-    this.aboutActiveTab='edit_group';
+      });
+    this.aboutActiveTab = 'edit_group';
     this.successMsg = '';
     this.postImgData = '';
   }
-  
-  public getMyGroupListData(){
-    let dataUserDet ={
+
+  public getMyGroupListData() {
+    let dataUserDet = {
       "user_id": this.loginUserId
     };
-    this.dataService.getmyGroupList(dataUserDet).subscribe(data=>{
-        if (data.Ack=="1") {
-            this.groupList = data.GroupListByuserID;
-        }
-      },
+    this.dataService.getmyGroupList(dataUserDet).subscribe(data => {
+      if (data.Ack == "1") {
+        this.groupList = data.GroupListByuserID;
+      }
+    },
       error => {
         console.log('Something went wrong!');
       }
-    ); 
+    );
   }
 
   public createGroupPost() {
@@ -181,7 +181,7 @@ export class GroupCreateComponent implements OnInit {
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
 
-    if (this.searchData.address){
+    if (this.searchData.address) {
       userValue.address = this.searchData.address;
       //userValue.lat = this.searchData.lat;
       //userValue.lng = this.searchData.lng;
@@ -195,23 +195,24 @@ export class GroupCreateComponent implements OnInit {
         this.postform.reset();
         window.scrollTo(0, 0);
         this.getMyGroupListData();
-        this.searchData.address='';
+        this.searchData.address = '';
       },
       error => {
         alert(error);
       });
 
   }
-  
+
   public editGroupPost() {
     this.loading = true;
     const userValue = this.postform.value;
     userValue.id = this.groupEditId;
     userValue.image = this.postImgData;
-    if (this.searchData.address){
+    if (this.searchData.address) {
       userValue.address = this.searchData.address;
     }
     this.dataService.editGroupDataSend(userValue).subscribe(data => {
+
         this.showPostImgDive = false;
         this.loading = false;
         this.successMsg = 'Successfully edit the group';
@@ -219,25 +220,34 @@ export class GroupCreateComponent implements OnInit {
         window.scrollTo(0, 0);
         this.getMyGroupListData();
         this.aboutActiveTab='overview';
-      },
+    },
       error => {
         alert(error);
       });
   }
-  
-  public getGroupRequestList(){
-    let dataUserDet ={
+  leaveGroup(groupId) {
+    let data = { user_id: this.loginUserId, group_id: groupId };
+    this.dataService.leaveGroup(data).subscribe(data => {
+      if (data.Ack == 1) {
+        this.successMsg = "You have successfully unfollowed this group.";
+      }
+    }, error => {
+      console.log("Error");
+    })
+  }
+  public getGroupRequestList() {
+    let dataUserDet = {
       "user_id": this.loginUserId
     };
-    this.dataService.getmyRequestGroupList(dataUserDet).subscribe(data=>{
-        if (data.Ack=="1") {
-            this.groupRequestList = data.UserGroupRequest;
-        }
-      },
+    this.dataService.getmyRequestGroupList(dataUserDet).subscribe(data => {
+      if (data.Ack == "1") {
+        this.groupRequestList = data.UserGroupRequest;
+      }
+    },
       error => {
         console.log('Something went wrong!');
       }
-    ); 
+    );
   }
 
   public requestGroupAction(pid, type) {
@@ -245,23 +255,23 @@ export class GroupCreateComponent implements OnInit {
     if (pid != '') {
       const dataUserDet = {
         "id": pid,
-        "request_type": type 
+        "request_type": type
       };
       this.dataService.responseGroupRequestByUser(dataUserDet).subscribe(data => {
-          this.successMsg = '';
-          this.errorMsg = '';
-          if (data.Ack == "1") {
-            this.successMsg = data.msg;
-          }else{
-            this.errorMsg = data.msg;
-          } 
-          this.loading = false;
-          //this.router.navigateByUrl('/group/details/'+this.groupNameByUrl);
-          this.router.navigateByUrl('/user/profile');
-          //window.location.reload();
-          //this.getGroupMemberList();
-          //this.successMsg = 'You have successfully send the request.';
-        },
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          this.successMsg = data.msg;
+        } else {
+          this.errorMsg = data.msg;
+        }
+        this.loading = false;
+        //this.router.navigateByUrl('/group/details/'+this.groupNameByUrl);
+        this.router.navigateByUrl('/user/profile');
+        //window.location.reload();
+        //this.getGroupMemberList();
+        //this.successMsg = 'You have successfully send the request.';
+      },
         error => {
 
         });
@@ -288,7 +298,7 @@ export class GroupCreateComponent implements OnInit {
     this.errorMsg = '';
     this.postImgData = '';
     this.aboutActiveTab = data;
-    this.showPostImgDive=false;
+    this.showPostImgDive = false;
     this.postform.reset();
   }
 }

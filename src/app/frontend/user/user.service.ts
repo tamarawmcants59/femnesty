@@ -397,4 +397,9 @@ export class UserService {
   getLatestHubs(user_id) {
     return this.apiService.put(`/hub/latest_hubs/` + user_id + '/4').map(data => data);
   } 
+
+  leaveGroup(data)
+  {
+    return this.apiService.post(`/users/appLeaveGroup`,data).map(data => data);
+  }
 }
