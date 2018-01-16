@@ -26,7 +26,6 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
-    "amazing-time-picker": "^1.1.8",
     "angular2-emoji-picker": "^1.4.6",
     "angularfire2": "^5.0.0-rc.3",
     "bootstrap": "^3.3.7",
