@@ -58,6 +58,20 @@ export class CompanyService {
       form_data
     ).map(data => data);
   }
+  block_flower(form_data)
+  {
+    return this.apiService.post(
+      `/users/appblock_follower`,
+      form_data
+    ).map(data => data);
+  }
+  userCheckCompanyurl(form_data) {
+    //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
+    return this.apiService.post(
+      `/users/appsearchbycompanyurl`,
+      form_data
+    ).map(data => data);
+  }
   companySignup(form_data) {
     return this.apiService.post(
       `/users/appaddcomadmin`,

@@ -14,12 +14,14 @@ export class SignupComponent implements OnInit {
   public password:AbstractControl;
   public mobile_number:AbstractControl;
   public company_name:AbstractControl;
+  public website:AbstractControl;
  // public company_type:AbstractControl;
   public agreetab:AbstractControl;
   public cpassword:AbstractControl;
   public checkEmailExist:boolean = false;
   public checkCompanynameExist = false;
   public domainmatch = false;
+  public domainmatch1 = false;
   public submitted:boolean = false;
   returnUrl: string;
   errorMsg: string='';
@@ -38,6 +40,8 @@ export class SignupComponent implements OnInit {
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
       'company_name': ['', Validators.compose([Validators.required])],
+      'website': ['', Validators.compose([Validators.required,Validators.pattern('https?://.+')])],
+      
       //'company_type': ['', Validators.compose([Validators.required])],
       'agreetab': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -48,6 +52,8 @@ export class SignupComponent implements OnInit {
     this.password = this.form.controls['password'];
     this.mobile_number = this.form.controls['mobile_number'];
     this.company_name = this.form.controls['company_name'];
+    this.website = this.form.controls['website'];
+    
     //this.company_type = this.form.controls['compant_type'];
     this.agreetab = this.form.controls['agreetab'];
     this.cpassword = this.form.controls['cpassword'];
@@ -61,7 +67,8 @@ export class SignupComponent implements OnInit {
     if(values!=''){
       let signupCheckEmail={
         "email": values,
-        "company_name": this.company_name.value
+        "company_name": this.company_name.value,
+        "website" : this.website.value
       };
       console.log(signupCheckEmail);
       this.dataService.userCheckEmail(signupCheckEmail)
@@ -110,20 +117,20 @@ public checkCompanyname(values:Object){
   //alert(this.email.value);
   if(values!=''){
     
-    let signupCheckcompanyname={"company_name": values,"email":this.email.value};
+    let signupCheckcompanyname={"company_name": values,"email":this.email.value,"website":this.website.value};
 //console.log(signupCheckcompanyname);
     this.dataService.userCheckCompanyname(signupCheckcompanyname).subscribe(data => {
            let details=data;
            console.log(data);
-           if(details.domain_match == "1")
-           {
-            this.domainmatch = false;
-            //return false;
-           }
-           else{
-            this.domainmatch = true;
-             //return false;
-           }
+          //  if(details.domain_match == "1")
+          //  {
+          //   this.domainmatch = false;
+          //   //return false;
+          //  }
+          //  else{
+          //   this.domainmatch = true;
+          //    //return false;
+          //  }
 
            if(details.Ack=="1") {
                this.checkCompanynameExist = false;
@@ -143,6 +150,44 @@ public checkCompanyname(values:Object){
   }
 }
 
+public checkCompanyurl(values:Object){
+  //alert(this.email.value);
+  if(values!=''){
+    
+    let signupCheckcompanyurl={"company_name": this.company_name.value,"email":this.email.value,"website":values};
+//console.log(signupCheckcompanyname);
+    this.dataService.userCheckCompanyurl(signupCheckcompanyurl).subscribe(data => {
+           let details=data;
+           console.log(data);
+           if(details.domain_match == "1")
+           {
+            this.domainmatch1 = false;
+            //return false;
+           }
+           else{
+            this.domainmatch1 = true;
+             //return false;
+           }
+
+          //  if(details.Ack=="1") {
+          //      this.checkCompanynameExist = false;
+          //      //return false;
+          //  }else{
+          //    //alert('Invalid login');
+          //    this.checkCompanynameExist = true;
+          //   // return false;
+          //  }
+       },
+       error => {
+        console.log('details');
+       }
+     ); 
+  }else{
+
+  }
+}
+
+
   public checkSignup(values:Object):void {
     this.submitted = true;
     this.loading = true;
@@ -153,6 +198,7 @@ public checkCompanyname(values:Object){
        "email": this.email.value.toString(), 
        "txt_password": this.password.value.toString(),
        "company_name": this.company_name.value.toString(),
+       "website": this.website.value.toString(),
        "mobile_number": this.mobile_number.value.toString(),
        "company_uid": this.user_id       
       };
