@@ -97,11 +97,11 @@
                                                     <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
                                                 </ul>
                                             </div> -->
-                                            <ul class="nav nav-tabs ">
+                                            <ul class="nav nav-tabs " style="border-bottom: 1px solid #fff !important;">
                                                 <!-- <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
                                                 <a (click)="aboutToggleTab('overview')">OVERVIEW</a></li> -->
                                                 <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}">
-                                                <a (click)="aboutToggleTab('edit_details')">EDIT DETAILS</a></li>
+                                                <a (click)="aboutToggleTab('edit_details')">OVERVIEW</a></li>
                                                 <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}">
                                                 <a (click)="aboutToggleTab('add_subadmin')">ADD SUB ADMIN</a></li>
                                                 <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}">
