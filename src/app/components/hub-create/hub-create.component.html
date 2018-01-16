@@ -108,22 +108,20 @@ and also what they are used for.</p>
                   </div>
                 </div>
 
+
                 <div class="form-group row" *ngIf="addForm.type=='R'">
-                  <div class="col-sm-12">
+                    <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_start" formControlName="recurring_start" [min]="today">
                     <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter Recurring Start date</div>
                   </div>
-                </div>
-
-                <div class="form-group row" *ngIf="addForm.type=='R'">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
                       [min]="today">
                     <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
                   </div>
                 </div>
-                
-                
 
                 <div class="form-group row">
                   <div class="col-sm-12">
@@ -134,7 +132,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>
 
                     <!-- <input type="text" class="form-control-plaintext" 
                       [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
@@ -186,19 +184,17 @@ and also what they are used for.</p>
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
                     <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
                   </div>
                 </div>
-
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <div class="col-sm-3">
@@ -287,7 +283,7 @@ and also what they are used for.</p>
                   <li  *ngFor="let groupData of hubRequestList">
                     <div class="date">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}</div>
                     <div class="title">
-                      <a [routerLink]="['/user/hub_details',groupData.slug]">
+                      <a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
                         {{groupData.title}}
                       </a>
                     </div>
