@@ -1,9 +1,9 @@
 <section class="section">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-4 col-book-pic">
-                <img [src]="bookDetData.image_url" alt="" class="img-responsive" style="max-width:100%">
-				
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-book-pic">
+				<img [src]="bookDetData.image_url" alt="" class="img-responsive" style="max-width:100%">
+
 				<!--<ul class="social-link mt-30 text-center">
                     <li>
                         <a href="#" class="fb-bg"><i class="ion-social-facebook"></i></a>
@@ -18,7 +18,7 @@
 				</ul>-->
 				<div class="book-rating" style="clear: both;">
 					<rating [(ngModel)]="bookDetData.avg_rating" [readonly]="true"></rating>
-                	<!--<span><i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i></span>-->
+					<!--<span><i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i class="ion-ios-star"></i></span>-->
 				</div>
 				<!--<button shareButton="facebook">Share</button>-->
 				<!--<button mat-button shareButton="facebook">
@@ -33,68 +33,91 @@
 				</button>-->
 				<div class="row" style="text-align: center;">
 					<ul class="n-social">
-						<li ceiboShare  [facebook]="{u: repoUrl}">
+						<li ceiboShare [facebook]="{u: repoUrl}">
 							<img src="assets/images/facebook.png" />
 						</li>
-						<!-- <a class="fb-share-button"  data-href="https://pickuup-1512990637705.firebaseapp.com/#/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://pickuup-1512990637705.firebaseapp.com/#/">Share</a></a> -->
-						<li ceiboShare  [linkedIn]="{url:repoUrl, text:bookDetData.description}">
+						<!-- <div class="fb-share-button" 
+						data-href="http://111.93.169.90/team2/Femnesty_test/#/enrichment/book_details/the-three-signs-of-a-miserable-job" 
+						data-layout="button_count">
+					  </div> -->
+
+
+						<li ceiboShare [linkedIn]="{url:repoUrl, text:bookDetData.description}">
 							<img src="assets/images/linkedin.png" />
 						</li>
-						<li ceiboShare  [twitter]="{url:repoUrl, text:bookDetData.description}">
+						<li ceiboShare [twitter]="{url:repoUrl, text:bookDetData.description}">
 							<img src="assets/images/twitter.png" />
 						</li>
 					</ul>
 				</div>
-		  </div>
-          <div class="col-md-8">
-              <div class="extra-left-pad">
-              	<h2 class="text-red">{{bookDetData.title}}</h2>
-              	<h4 class="mt-20">By {{bookDetData.author}} – <!--<span class="text-grey-light">-->Books | {{bookDetData.bookcatname}}<!--</span>--></h4>
-              	<a href="{{bookDetData.link}}" class="btn btn-primary mt-30">Find At Amazon <!--<i class="ion-ios-arrow-forward"></i>--></a>
-	              <div class="row">
-	              	<div class="col-md-12 mt-30" [innerHTML]="bookDetData.description"></div>
-	              </div>
-	              <div class="d-reviews" *ngIf="ratListData.length > 0">
-	              	<div class="row" *ngFor="let cmtList of ratListData">
-	              		<div class="col-md-3 pml-0">
-	              			<p>
-								<rating [(ngModel)]="cmtList.rating" [readonly]="true"></rating>	
-	              			</p>
-	              			<h4>{{cmtList.name}}</h4>
-	              			<p><span>{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy'}}</span></p>
-	              		</div>
-	              		<div class="col-md-9 pml-0">
-	              			<p class="mt-15">{{cmtList.comment}}</p>
-	              		</div>
-	              	</div>
-	              </div>
-	              <div class="leave-rvw mt-30" *ngIf="isloginUser==1">
-					  <h3 class="mb-30">Leave a review</h3>
-					  <div class="row" *ngIf="(successMsg != '')">
+			</div>
+			<div class="col-md-8">
+				<div class="extra-left-pad">
+					<h2 class="text-red">{{bookDetData.title}}</h2>
+					<h4 class="mt-20">By {{bookDetData.author}} –
+						<!--<span class="text-grey-light">-->Books | {{bookDetData.bookcatname}}
+						<!--</span>-->
+					</h4>
+					<a href="{{bookDetData.link}}" class="btn btn-primary mt-30">Find At Amazon
+						<!--<i class="ion-ios-arrow-forward"></i>-->
+					</a>
+					<div class="row">
+						<div class="col-md-12 mt-30" [innerHTML]="bookDetData.description"></div>
+					</div>
+					<div class="d-reviews" *ngIf="ratListData.length > 0">
+						<div class="row" *ngFor="let cmtList of ratListData">
+							<div class="col-md-3 pml-0">
+								<p>
+									<rating [(ngModel)]="cmtList.rating" [readonly]="true"></rating>
+								</p>
+								<h4>{{cmtList.name}}</h4>
+								<p>
+									<span>{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy'}}</span>
+								</p>
+							</div>
+							<div class="col-md-9 pml-0">
+								<p class="mt-15">{{cmtList.comment}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="leave-rvw mt-30" *ngIf="isloginUser==1">
+						<h3 class="mb-30">Leave a review</h3>
+						<div class="row" *ngIf="(successMsg != '')">
 							<div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
 								{{successMsg}}
 							</div>
 						</div>
-	              	<form class="form-area" [formGroup]="postform" (ngSubmit)="submitPost()" #postForm="ngForm">
-	              		<div class="form-group" style="margin-bottom: 15px">
-							<input type="text" class="form-control" placeholder="Name" formControlName="name" [(ngModel)]="loginUserDetails.name" readonly />
-							<div class="text-danger" *ngIf="!postform.controls['name'].valid && postform.controls['name'].touched">Name Required</div>  
-	              		</div>
-	              		<div class="form-group">
-							  <textarea class="form-control" formControlName="comment" placeholder="Review" rows="5" style="padding-top: 15px; padding-bottom: 15px; resize: none"></textarea>
-							  <div class="text-danger" *ngIf="!postform.controls['comment'].valid && postform.controls['comment'].touched">Review Required</div>
-	              		</div>
-	              		<div class="form-group">
-	              			<p class="mb-0 ur-rating">Your Rating:
-								<rating formControlName="rating" [required]="true" [float]="true"></rating>
-							</p>
-							<div class="text-danger" *ngIf="!postform.controls['rating'].valid && postform.controls['rating'].touched">Rating Required</div>
-	              		</div>
-	              		<input type="submit" [disabled]="!postForm.valid" class="btn btn-primary btn-blank" value="Send review"/>
-	              	</form>
-	              </div>
-              </div>
-          </div>
-      </div>
-  </div>
+						<form class="form-area" [formGroup]="postform" (ngSubmit)="submitPost()" #postForm="ngForm">
+							<div class="form-group" style="margin-bottom: 15px">
+								<input type="text" class="form-control" placeholder="Name" formControlName="name" [(ngModel)]="loginUserDetails.name" readonly
+								/>
+								<div class="text-danger" *ngIf="!postform.controls['name'].valid && postform.controls['name'].touched">Name Required</div>
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" formControlName="comment" placeholder="Review" rows="5" style="padding-top: 15px; padding-bottom: 15px; resize: none"></textarea>
+								<div class="text-danger" *ngIf="!postform.controls['comment'].valid && postform.controls['comment'].touched">Review Required</div>
+							</div>
+							<div class="form-group">
+								<p class="mb-0 ur-rating">Your Rating:
+									<rating formControlName="rating" [required]="true" [float]="true"></rating>
+								</p>
+								<div class="text-danger" *ngIf="!postform.controls['rating'].valid && postform.controls['rating'].touched">Rating Required</div>
+							</div>
+							<input type="submit" [disabled]="!postForm.valid" class="btn btn-primary btn-blank" value="Send review" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
+<script>
+	document.getElementById('shareBtn').onclick = function () {
+		alert();
+		FB.ui({
+			method: 'share',
+			display: 'popup',
+			href: 'https://developers.facebook.com/docs/',
+		}, function (response) { });
+	}
+</script>

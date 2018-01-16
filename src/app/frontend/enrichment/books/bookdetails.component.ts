@@ -85,6 +85,7 @@ export class BookdetailsComponent implements OnInit {
     );
   }
 
+  
   public submitPost() {
     const userValue = this.postform.value;
     userValue.book_id = this.bookId;
