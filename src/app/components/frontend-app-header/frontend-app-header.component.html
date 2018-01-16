@@ -210,11 +210,25 @@
                     </div>
                 </div>
                 <!-- /.navbar-collapse -->
-                <div *ngIf="show" class="collapse navbar-collapse" style="display: block;">
+                <div *ngIf="show" class="collapse navbar-collapse mobile-navs" style="display: block;">
                     <ul class="nav navbar-nav navbar-right display-on">
-                        <li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
+                        <li class="nav-item dropdown"><a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Articles</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5">
+                                <a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
+                                <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
+                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>
+                                <a class="dropdown-item" [routerLink]="['/articles']">All Articles</a>
+                            </div>
+                        </li>
                         <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                        <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>
+                        <li class="nav-item dropdown"><a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrichment</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink6">
+                                <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/events']">Femnesty Events</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment']">All</a>
+                            </div>
+                        </li>
                         <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
                         <li ngbDropdown class="dropdown">
                                 <!--<a *ngIf="chatHeads && chatHeads.length == 0" class="dropdown-toggle" [routerLink]="['/user/chat/list']">

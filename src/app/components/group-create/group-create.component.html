@@ -317,10 +317,12 @@
                                     <div class="right-area">
                                         <p *ngIf="groupData.request_type == '2'">You accepted</p>
                                         <p *ngIf="groupData.request_type == '3'">You rejected</p>
+                                        <p *ngIf="groupData.request_type == '4'">You unfollowed</p>
                                         <p *ngIf="groupData.request_type == '0'">
                                             <button *ngIf="groupData.request_type == '0'" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'2')">Accept</button>
                                             <button *ngIf="groupData.request_type == '0'" type="button" class="btn btn-black btn-default" (click)="requestGroupAction(groupData.id,'3')">Decline</button> 
                                         </p>
+                                        <button class="btn btn-primary" *ngIf="groupData.request_type == '2'"  (click)="leaveGroup(groupData.group_id)">Unfollow Group</button>
                                     </div>
                                 </li>
                             </ul>
