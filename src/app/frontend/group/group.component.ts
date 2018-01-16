@@ -14,11 +14,13 @@ export class GroupComponent implements OnInit {
   public isUserLogin: any;
   public isGroupId = "";
   public groupDetailsData: any;
+
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
   public userFrndList = [];
   public requestGrpJoinList = [];
+
    qtd= {};  
   private IsShow: boolean = false;
   //public userPostList =[];
@@ -29,6 +31,7 @@ export class GroupComponent implements OnInit {
   public isJoinGroup: boolean = true;
   public loading = false;
   public groupPostDetData: object = {};
+
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -71,7 +74,7 @@ export class GroupComponent implements OnInit {
           else
           {
             this.router.navigateByUrl('/user/edit_profile/activity');
-            
+
           }
         },
         error => {
@@ -79,7 +82,6 @@ export class GroupComponent implements OnInit {
         });
     }
   }
-
 
 
   /*public getUserPostDetails(){
@@ -245,6 +247,7 @@ export class GroupComponent implements OnInit {
           this.errorMsg = data.msg;
         }
         this.loading = false;
+
         if (this.groupDetailsData.group_type == "2") {
            this.qtd[join_uid]=true;
         }
@@ -260,7 +263,6 @@ export class GroupComponent implements OnInit {
 
         });
     }
-  
   }
 
   public requestGroupAction(pid, type) {

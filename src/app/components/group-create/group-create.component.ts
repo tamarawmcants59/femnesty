@@ -212,13 +212,14 @@ export class GroupCreateComponent implements OnInit {
       userValue.address = this.searchData.address;
     }
     this.dataService.editGroupDataSend(userValue).subscribe(data => {
-      this.showPostImgDive = false;
-      this.loading = false;
-      this.successMsg = 'Successfully edit the group';
-      this.postform.reset();
-      window.scrollTo(0, 0);
-      this.getMyGroupListData();
-      this.aboutActiveTab = 'overview';
+
+        this.showPostImgDive = false;
+        this.loading = false;
+        this.successMsg = 'Successfully edit the group';
+        this.postform.reset();
+        window.scrollTo(0, 0);
+        this.getMyGroupListData();
+        this.aboutActiveTab='overview';
     },
       error => {
         alert(error);
