@@ -4442,9 +4442,8 @@ section h1:after{
 
 }
 @media screen and (max-width:480px) {
-
-    .hubDes button.btn.btn-primary{margin-bottom:15px;}
     
+    .hubDes button.btn.btn-primary{margin-bottom:15px;}
 		.header-top ul li {
     margin: 4px 3px;
 }
