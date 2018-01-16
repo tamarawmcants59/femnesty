@@ -15,7 +15,7 @@ export class CmpEditprofileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   public activeTab: string = 'activity';
-  public aboutActiveTab: string = 'overview';
+  public aboutActiveTab: string = 'edit_details';
   public showImgDive: boolean = false;  
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
