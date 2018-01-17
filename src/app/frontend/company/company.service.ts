@@ -157,7 +157,7 @@ export class CompanyService {
   }
   sendFollowRequest(form_data) {
     return this.apiService.post(
-      `/users/appusercompanyfollowunfollow`,
+      `/enrichment/appusercompanyfollowunfollow`,
       form_data
     ).map(data => data);
   }

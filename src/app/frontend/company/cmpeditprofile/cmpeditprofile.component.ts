@@ -2,6 +2,8 @@ import { Component,NgModule, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyService } from "../company.service";
+//import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
+//import { Ng4GeoautocompleteModule } from "../../../../../node_modules/ng4-geoautocomplete";
 // import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { UserService } from "../../user/user.service";
@@ -51,6 +53,13 @@ export class CmpEditprofileComponent implements OnInit {
   public editAbtActiveTab: string = '';
   public publicCmpDet: object = { };
   public Getwebsite: object = { };
+  public searchData = {address:'',lat:'',lng:''};
+
+  public autocompleteSettings: any = {
+    showSearchButton: false,
+    showCurrentLocation: false,
+    inputPlaceholderText: 'Type anything and you will get a location',
+  };
   // public Getwebsite: {website:string };
 public com_website :any;
 
@@ -291,6 +300,7 @@ public com_website :any;
             if(details.UserDetails[0].user_type=='CA' || details.UserDetails[0].user_type=='CSA'){
               if(details.UserDetails[0].user_type=='CA'){
                 this.publicCmpDet=details.UserDetails[0];
+                this.autocompleteSettings['inputString'] = details.UserDetails[0].address;
                 this.com_website = details.UserDetails[0].website;
                 //alert(this.com_website);
                 this.cmpId = details.UserDetails[0].id;
@@ -373,6 +383,12 @@ public com_website :any;
       userValue = this.form.value;
       console.log(userValue)
     userValue.id = loginUserId;
+    // if (this.searchData.address && this.searchData.lat)
+    // {
+    //   userValue.address = this.searchData.address;
+    //   userValue.lat = this.searchData.lat;
+    //   userValue.lng = this.searchData.lng;
+    // }
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
@@ -385,7 +401,8 @@ public com_website :any;
         this.successMsg = 'Data updated successfully';
         //this.router.navigateByUrl('/user/profile');
         this.router.navigate(['/company/profile']);
-
+        this.searchData = { address: '', lat: '', lng: '' };
+        this.autocompleteSettings['inputString'] = '';
       },
       error => {
         alert(error);
@@ -593,7 +610,11 @@ public com_website :any;
         alert(error);
       });
   }
-
+  autoCompleteCallback1(data: any): any {
+    console.log(data);
+    this.searchData = {address:data.data.description,lat:data.data.geometry.location.lat,lng:data.data.geometry.location.lng};
+  //console.log(Ng4GeoautocompleteModule)
+  }
   public checkCompanyurl(values:Object,email){
     //alert(email);
     if(values!=''){

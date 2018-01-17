@@ -256,9 +256,11 @@ export class ProfileComponent implements OnInit {
     //console.log(friend_id);
     if (this.isloginUserId != '' && company_id != '') {
       let requestJsonData = { "user_id": this.isloginUserId, "company_id": company_id };
+      
       this.dataService.sendFollowRequest(requestJsonData)
         .subscribe(
         data => {
+          console.log(data);
           if (data.Ack == 1) {
             this.successMsg = 'You have successfully Follow.';
           } else {
