@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject ,Output,EventEmitter} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
 import { environment } from '../../../environments/environment';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { PopupmodalComponent } from './popupmodal.component';
+import { window } from 'rxjs/operators/window';
 //import { CeiboShare } from 'ng2-social-share';
 
 @Component({
@@ -28,10 +29,11 @@ export class PostCardComponent implements OnInit {
   public userNameStr: string = '';
   public getCurrentUser: any;
   public currentDate: Date = new Date();
+  private IsGroupAdmin: boolean = false;
   //public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
   public repoUrl = '';
   public likeListPostId = '';
-
+  @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   @Input() postData: {
     id: number;
     name: string;
@@ -51,9 +53,16 @@ export class PostCardComponent implements OnInit {
     private router: Router,
     //public dialog: MatDialog
   ) {
+
+
     this.getCurrentUser = localStorage.getItem("currentUser");
     this.getCurrentUser = JSON.parse(this.getCurrentUser);
     this.IsloginUserId = localStorage.getItem("loginUserId");
+    if (localStorage.getItem("groupAdmin")) {
+      if (localStorage.getItem("groupAdmin") == this.IsloginUserId) {
+        this.IsGroupAdmin = true;
+      }
+    }
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
     this.userPrfImgStr = this.getCurrentUser.image_url;
     this.userNameStr = this.getCurrentUser.name;
@@ -63,13 +72,40 @@ export class PostCardComponent implements OnInit {
         //Validators.minLength(3)
       ]]
     });
-    this.repoUrl=environment.website_url+this.router.url;
+    this.repoUrl = environment.website_url + this.router.url;
   }
 
   ngOnInit() {
-    
-  }
 
+  }
+  deletePost(post_id, type, comments) {
+
+    let data = { "post_id": post_id, "post_type": type };
+    this.dataService.deletePost(data).subscribe(data => {
+      if (data.Ack == "1") {
+        if (comments != undefined && type == "C") {
+          let index;
+          for (var i = 0; i < comments.length; i++) {
+            if (comments[i].id == post_id) {
+              index = i;
+              break;
+            }
+          }
+          if (index != undefined) {
+            comments.splice(index, 1);
+          }
+        }
+        else
+        {
+          location.reload();
+        }
+      }
+    }, error => {
+      console.log(error);
+    })
+
+
+  }
   public userPostComment(post_id, postdata) {
     if (this.isLoggedIn == 1) {
       this.postCmtId = post_id;
@@ -82,7 +118,7 @@ export class PostCardComponent implements OnInit {
     this.postCmtDiv[postdata.id] = true;
     //this.postCmtHtml = '';
   }
-  
+
   public userSubPostComment(post_id, postdata) {
     if (this.isLoggedIn == 1) {
       this.postCmtId = postdata.post_id;
@@ -103,30 +139,30 @@ export class PostCardComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/user/login');
     }
-    
 
-    let dataUserDet ={
+
+    let dataUserDet = {
       "user_id": this.IsloginUserId,
       "post_id": post_id
     };
     //console.log(dataUserDet);
     this.dataService.likePostUser(dataUserDet)
-    .subscribe(data => {
-          let details=data;
-          if (details.Ack=="1") {
-            if(postdata.post_like){
-              postdata.post_like=false;
-              postdata.likecount = parseInt(postdata.likecount)-1
-            }else{
-              postdata.post_like=true;
-              postdata.likecount = parseInt(postdata.likecount)+1
-            }
+      .subscribe(data => {
+        let details = data;
+        if (details.Ack == "1") {
+          if (postdata.post_like) {
+            postdata.post_like = false;
+            postdata.likecount = parseInt(postdata.likecount) - 1
+          } else {
+            postdata.post_like = true;
+            postdata.likecount = parseInt(postdata.likecount) + 1
           }
+        }
       },
       error => {
-        
+
       }
-    );
+      );
     //this.postCmtLike[postdata.id] = true;
   }
 
@@ -141,23 +177,23 @@ export class PostCardComponent implements OnInit {
     userValue.post_id = this.postCmtId;
     //comment_id
     this.dataService.userPostDataSend(userValue)
-      .subscribe( data => {
-        userValue.profile_image_url=this.userPrfImgStr;
-        userValue.name=this.userNameStr;
-        userValue.first_name=this.getCurrentUser.first_name;
-        userValue.last_name=this.getCurrentUser.last_name;
-        userValue.c_date=this.currentDate;
-        userValue.display_name=this.getCurrentUser.display_name;
-        comments.push(userValue); 
+      .subscribe(data => {
+        userValue.profile_image_url = this.userPrfImgStr;
+        userValue.name = this.userNameStr;
+        userValue.first_name = this.getCurrentUser.first_name;
+        userValue.last_name = this.getCurrentUser.last_name;
+        userValue.c_date = this.currentDate;
+        userValue.display_name = this.getCurrentUser.display_name;
+        comments.push(userValue);
         this.commentform.reset();
-        postList.commentcount=parseInt(postList.commentcount)+1;
+        postList.commentcount = parseInt(postList.commentcount) + 1;
       },
       error => {
         alert(error);
       });
   }
 
-  public submitSubPostComment(comments, postList,postSubId) {
+  public submitSubPostComment(comments, postList, postSubId) {
     if (this.isLoggedIn == 1) {
 
     } else {
@@ -168,26 +204,26 @@ export class PostCardComponent implements OnInit {
     userValue.post_id = this.postCmtId;
     userValue.comment_id = this.subPostCmtId;
     this.dataService.userPostDataSend(userValue)
-      .subscribe( data => {
-        userValue.profile_image_url=this.userPrfImgStr;
-        userValue.name=this.userNameStr;
-        userValue.first_name=this.getCurrentUser.first_name;
-        userValue.last_name=this.getCurrentUser.last_name;
-        userValue.c_date=this.currentDate;
-        userValue.display_name=this.getCurrentUser.display_name;
-        comments.push(userValue); 
+      .subscribe(data => {
+        userValue.profile_image_url = this.userPrfImgStr;
+        userValue.name = this.userNameStr;
+        userValue.first_name = this.getCurrentUser.first_name;
+        userValue.last_name = this.getCurrentUser.last_name;
+        userValue.c_date = this.currentDate;
+        userValue.display_name = this.getCurrentUser.display_name;
+        comments.push(userValue);
         this.commentform.reset();
-        postList.commentcount=parseInt(postList.commentcount)+1;
+        postList.commentcount = parseInt(postList.commentcount) + 1;
       },
       error => {
         alert(error);
       });
   }
 
-  public userPostLikeListPopup(postId){
-    this.likeListPostId=postId;
+  public userPostLikeListPopup(postId) {
+    this.likeListPostId = postId;
     //this.openDialog();
-    
+
   }
 
   /*public openDialog(): void {
@@ -202,7 +238,7 @@ export class PostCardComponent implements OnInit {
     });
   }*/
 
-  public shareOnFacebook(url, description, images){
+  public shareOnFacebook(url, description, images) {
     //let titleMeta = document.createElement('meta');
     /*let descMeta = document.createElement('meta');
     let imageMeta = document.createElement('meta');
@@ -217,7 +253,7 @@ export class PostCardComponent implements OnInit {
     if(images!=''){
       document.getElementsByTagName('head')[0].appendChild(imageMeta);
     }*/
-    
+
     /*let link;
     //this.siteSettingsDet = data.SiteSettings[0];
     link = document.createElement('link');
@@ -264,7 +300,7 @@ export class GooglePlusParams {
 }
 
 export class LinkedinParams {
-  url:string
+  url: string
 }
 
 export declare class PinterestParams {
