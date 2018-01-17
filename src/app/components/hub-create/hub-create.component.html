@@ -286,8 +286,8 @@ and also what they are used for.</p>
                     <div class="action caption">Action</div>
                   </li>
                   <li  *ngFor="let groupData of hubRequestList">
-                    <div class="date">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}
-                    <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span></div>
+                    <div class="date"> <span *ngIf="groupData.type!='R'">{{groupData.hub_date}}</span> <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span><br />{{groupData.start_time}} - {{groupData.end_time}}
+                    <!--<span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>--></div>
                     <div class="title">
                       <a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
                         {{groupData.title}}
@@ -328,9 +328,11 @@ and also what they are used for.</p>
                         <li *ngFor="let groupData of hubRequestList" style="margin-bottom:0px;border-bottom:0px;">
                         
                           <div *ngIf="groupData.status==hubReqTab">
-                          <div class="date labc">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}
-                          <span  *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>
-                          </div>
+                              <div class="date labc"> 
+                                <span *ngIf="groupData.type!='R'">{{groupData.hub_date}}</span> <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span><br />{{groupData.start_time}} - {{groupData.end_time}}
+                                <!--<span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>-->
+                              </div>
+                          
                           <div class="title labc">
                             <a [routerLink]="['/user/hub_details',groupData.slug]">
                               {{groupData.title}}
