@@ -43,18 +43,17 @@
 <!--<button mat-button (click)="openDialog()">Open dialog</button>
 <button mat-raised-button (click)="openDialog()">Pick one</button>-->
 
-<div class="likePart">
+<div class="likePart" *ngIf="!postData.hide_post_div">
 <div class="row">
     <div class="col-md-10">
         <div class="imageParts">
             <div class="profImageP">
                 <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
-                <a *ngIf="IsGroupAdmin" style="position: absolute;right: -10px;width: 22px;height: 22px; background: #bb1926;line-height: 23px;color: #fff;  text-align: center; top: -11px; border-radius: 100%;cursor: pointer;" (click)="deletePost(postData.id,'P')"> <i  class="fa fa-trash"></i></a>
+                <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
             </div>
             <div class="profTextPart">
                 <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
                 <p>{{postData.created_date_mod}}</p>
-
             </div>
         </div>
     </div>
@@ -67,6 +66,9 @@
         <div class="userComment">
             <div class="imageLikeP" *ngIf="postData.file_name != ''">
                 <img [src]="postData.file_image_url" class="img-responsive">
+                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btn" (click)="deletePost(postData.id,'P',postData)">
+                    <i class="icon ion-android-close"></i>
+                </a>
             </div>
             <p>{{postData.description}}</p>
             <ul>
@@ -80,7 +82,7 @@
         
 </div>
 </div>
-<div class="commentPart">
+<div class="commentPart" *ngIf="!postData.hide_post_div">
 <div class="row">
 	<div class="col-md-12">
         <div class="likeComment">
@@ -133,7 +135,8 @@
             </div>
         </div>
         <div *ngIf="postData.comments?.length > 0">
-            <div class="reply-comment-wrapper" *ngFor="let cmtList of postData.comments">
+            <div *ngFor="let cmtList of postData.comments; let key = index">
+            <div class="reply-comment-wrapper" *ngIf="!cmtList.hide_div">
                 <div class="left-comment-content">
                     <a [routerLink]="['/user/profile',cmtList.display_name]">
                         <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
@@ -144,7 +147,7 @@
                         <a [routerLink]="['/user/profile',cmtList.display_name]">
                             <h4 class="commentee-name">{{cmtList.name}}</h4>
                         </a>
-                        <a *ngIf="IsGroupAdmin" style="position: absolute;right: 17px;width: 22px;height: 22px; background: #bb1926;line-height: 23px;color: #fff;  text-align: center; border-radius: 100%;cursor: pointer;" (click)="deletePost(cmtList.id,'C',postData.comments)"> <i  class="icon ion-android-close"></i></a>
+                        <a *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtList.id,'C',postData.comments,key)"> <i  class="fa fa-trash"></i></a>
                         <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                         <div class="commenteeComment">
                             <p>{{cmtList.comment}}</p>
@@ -158,13 +161,17 @@
                         </div>
                     </div>
                     <div *ngIf="cmtList.reply?.length > 0">
-                        <div class="sub-reply-comment-wrapper" *ngFor="let cmtReply of cmtList.reply">
+                        <div  *ngFor="let cmtReply of cmtList.reply; let subkey = index">
+                            <div *ngIf="!cmtReply.hide_div" class="sub-reply-comment-wrapper">
                             <div class="left-comment-content">
-                                <div class="user-image" [ngStyle]="{'background-image':'url('+cmtReply.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                                <a [routerLink]="['/user/profile',cmtReply.display_name]">
+                                    <div class="user-image" [ngStyle]="{'background-image':'url('+cmtReply.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                                </a>
                             </div>
                             <div class="right-comment-content">
                                 <div class="profTextPart">
                                     <h4 class="commentee-name">{{cmtReply.name}}</h4>
+                                    <a *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash"></i></a>
                                     <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                     <div class="commenteeComment">
                                         <p>{{cmtReply.comment}}</p>
@@ -177,6 +184,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
                         </div>
                     </div>
 
@@ -222,6 +231,7 @@
             </div>-->
                 </div>
             </div>
+        </div>
             <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
         </div>
         <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">

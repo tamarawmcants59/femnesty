@@ -153,7 +153,7 @@
                                 <i class="icon ion-ios-filing-outline" style="font-size: 32px;"></i>
                                 <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                             </a>
-                            <div ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
+                            <div *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
                                 <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
                                     <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread notify-box-top" href="javascript:void(0)">
                                         <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />

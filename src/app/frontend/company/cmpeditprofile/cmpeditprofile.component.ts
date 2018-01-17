@@ -278,6 +278,7 @@ public com_website :any;
 
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
+    localStorage.setItem("groupAdmin",loginUserId);
     if (loginUserId != '') {
       const dataUserDet = {
         "id": parseInt(loginUserId)

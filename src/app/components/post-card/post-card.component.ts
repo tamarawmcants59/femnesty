@@ -78,27 +78,20 @@ export class PostCardComponent implements OnInit {
   ngOnInit() {
 
   }
-  deletePost(post_id, type, comments) {
 
+  deletePost(post_id, type, comments=null,delkey=null) {
     let data = { "post_id": post_id, "post_type": type };
+     //console.log(comments);
+     //console.log(post_id);
+     //console.log(delkey);
+    
     this.dataService.deletePost(data).subscribe(data => {
       if (data.Ack == "1") {
-        if (comments != undefined && type == "C") {
-          let index;
-          for (var i = 0; i < comments.length; i++) {
-            if (comments[i].id == post_id) {
-              index = i;
-              break;
-            }
+          if(delkey!=null){
+            comments[delkey].hide_div=true;
+          }else{
+            comments.hide_post_div=true;
           }
-          if (index != undefined) {
-            comments.splice(index, 1);
-          }
-        }
-        else
-        {
-          location.reload();
-        }
       }
     }, error => {
       console.log(error);
@@ -120,6 +113,7 @@ export class PostCardComponent implements OnInit {
   }
 
   public userSubPostComment(post_id, postdata) {
+    
     if (this.isLoggedIn == 1) {
       this.postCmtId = postdata.post_id;
       this.subPostCmtId = post_id;
@@ -176,14 +170,15 @@ export class PostCardComponent implements OnInit {
     userValue.user_id = this.IsloginUserId;
     userValue.post_id = this.postCmtId;
     //comment_id
-    this.dataService.userPostDataSend(userValue)
-      .subscribe(data => {
+    this.dataService.userPostDataSend(userValue).subscribe(data => {
+        userValue.id = data.last_id;
         userValue.profile_image_url = this.userPrfImgStr;
         userValue.name = this.userNameStr;
         userValue.first_name = this.getCurrentUser.first_name;
         userValue.last_name = this.getCurrentUser.last_name;
         userValue.c_date = this.currentDate;
         userValue.display_name = this.getCurrentUser.display_name;
+        userValue.reply =[];
         comments.push(userValue);
         this.commentform.reset();
         postList.commentcount = parseInt(postList.commentcount) + 1;
@@ -203,14 +198,16 @@ export class PostCardComponent implements OnInit {
     userValue.user_id = this.IsloginUserId;
     userValue.post_id = this.postCmtId;
     userValue.comment_id = this.subPostCmtId;
-    this.dataService.userPostDataSend(userValue)
-      .subscribe(data => {
+    this.dataService.userPostDataSend(userValue).subscribe(data => {
+        userValue.id = data.last_id;
         userValue.profile_image_url = this.userPrfImgStr;
         userValue.name = this.userNameStr;
         userValue.first_name = this.getCurrentUser.first_name;
         userValue.last_name = this.getCurrentUser.last_name;
         userValue.c_date = this.currentDate;
         userValue.display_name = this.getCurrentUser.display_name;
+        userValue.likecount = 0;
+        //userValue.reply =[];
         comments.push(userValue);
         this.commentform.reset();
         postList.commentcount = parseInt(postList.commentcount) + 1;
