@@ -150,7 +150,7 @@ export class EditprofileComponent implements OnInit {
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.groupPostDetData = {activitytype:'', activityid:''};
-    //console.log(this.route.snapshot);
+    
     this.getUserDetails();
     this.getUserPostDetails();
     this.getConnectionList();
@@ -180,6 +180,7 @@ export class EditprofileComponent implements OnInit {
 
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
+    localStorage.setItem("groupAdmin",loginUserId);
     if (loginUserId != '') {
       const dataUserDet = {
         "id": parseInt(loginUserId)

@@ -61,7 +61,7 @@ export class GroupComponent implements OnInit {
             this.groupDetailsData = data.GroupDetails[0];
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
-           localStorage.setItem("groupAdmin",data.GroupDetails[0].user_id);
+            localStorage.setItem("groupAdmin",data.GroupDetails[0].user_id);
             this.groupPostDetData = { activitytype: '2', activityid: this.isGroupId };
             //this.groupPidData = { 'groupId': this.isGroupId};
             //console.log(this.groupPidData);
@@ -69,7 +69,6 @@ export class GroupComponent implements OnInit {
             this.getUserPostDetails();
             this.getGroupMemberList();
             this.myFrndListforGrp();
-
           }
           else
           {
@@ -103,7 +102,6 @@ export class GroupComponent implements OnInit {
   }*/
 
   public getUserPostDetails() {
-    alert();
     if (this.isGroupId != '') {
       const dataUserDet = {
         "page_no": 1,

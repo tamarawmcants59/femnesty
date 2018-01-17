@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
         error => {
 
         });
+        localStorage.setItem("groupAdmin",this.otherProfileId);
     }
   }
 

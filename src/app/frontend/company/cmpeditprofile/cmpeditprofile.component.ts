@@ -273,6 +273,7 @@ export class CmpEditprofileComponent implements OnInit {
 
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
+    localStorage.setItem("groupAdmin",loginUserId);
     if (loginUserId != '') {
       const dataUserDet = {
         "id": parseInt(loginUserId)

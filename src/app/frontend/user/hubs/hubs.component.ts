@@ -59,8 +59,9 @@ export class HubsComponent implements OnInit {
   public getHubDetails()
   {
     this.hubService.getHubDetails(this.hubSlug).subscribe(data => {
-      if(data.Ack == 1)
-      {
+      if(data.Ack == 1){
+        //console.log(data);
+        localStorage.setItem("groupAdmin",data.details.user_id);
         this.hubDetails = data.details;
         this.groupPostDetData = { activitytype: '4', activityid: this.hubDetails.id };
         this.getUserPostDetails();
