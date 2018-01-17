@@ -5,7 +5,7 @@ import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
-import { AmazingTimePickerService } from 'amazing-time-picker';
+// import { AmazingTimePickerService } from 'amazing-time-picker';
 
 @Component({
   selector: 'app-hub-create',
@@ -81,11 +81,11 @@ export class HubCreateComponent implements OnInit {
       type: ['', [
         Validators.required
       ]],
-      recurring_start: ['', [
-        Validators.required
-      ]],
+      // recurring_start: ['', [
+      //   // Validators.required
+      // ]],
       recurring_end: ['', [
-        Validators.required
+        // Validators.required
       ]],
       privacy: ['', [
         Validators.required
@@ -142,6 +142,23 @@ export class HubCreateComponent implements OnInit {
     this.addForm = { type: 'O', category_id: '', privacy: 'O' };
     this.searchData = { address: '', lat: '', lng: '' };
     this.autocompleteSettings['inputString'] = '';
+  }
+
+  public checkValidation()
+  {
+    //alert(this.postform.get('type').value)
+    if(this.postform.get('type').value=='R')
+    {
+      //this.postform.get('recurring_start').setValidators([Validators.required]);
+      this.postform.get('recurring_end').setValidators([Validators.required]);
+    }
+    else
+    {
+      //this.postform.get('recurring_start').setValidators([]);
+      this.postform.get('recurring_end').setValidators([]);
+    }
+   // this.postform.get('recurring_start').updateValueAndValidity();
+    this.postform.get('recurring_end').updateValueAndValidity();
   }
   
   public getHubList(){

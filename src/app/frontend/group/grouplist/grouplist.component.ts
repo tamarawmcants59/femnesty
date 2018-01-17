@@ -10,12 +10,14 @@ export class GrouplistComponent implements OnInit {
   public isloginUserId: any;
   public isUserLogin: any;
   public groupList = [];
+
   private totalGroupList: any = [];
   public myGrpList = [];
   private totalMyGrpList: any = [];
   public latestArticles = [];
   search_group: string;
   private errorMsg: string;
+
   private categoryListWithCount: any = [];
   constructor(private dataService: UserService) {
     this.isloginUserId = localStorage.getItem("loginUserId");
@@ -41,6 +43,7 @@ export class GrouplistComponent implements OnInit {
 
 
   private getCatDetails(id) {
+
     let data = { "category_id": id }
     this.dataService.getGroupListByCategoryId(data).subscribe(data => {
       if (data.Ack == "1") {
@@ -51,6 +54,7 @@ export class GrouplistComponent implements OnInit {
         this.myGrpList = [];
         this.errorMsg = 'No record found.';
       }
+
     }, error => {
       console.log("Error");
     });
@@ -76,8 +80,10 @@ export class GrouplistComponent implements OnInit {
       this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
         //console.log(data);
         if (data.Ack == "1") {
+
           //this.myGrpList = data.GroupListByuserID;
           this.totalMyGrpList = data.GroupListByuserID
+
           //console.log(this.groupMemberList);
         }
       }, error => {
@@ -101,6 +107,7 @@ export class GrouplistComponent implements OnInit {
   public searchGroup() {
     console.log(this.search_group);
     if (this.search_group != '') {
+
       // //this.getConnectionList();
       // let goodFriends = this.groupList.filter(item => {
       //   if (item.group_name.search(this.search_group) !== -1) {
@@ -124,10 +131,12 @@ export class GrouplistComponent implements OnInit {
       // this.groupList = goodFriends;
       let myGrplistData = this.totalMyGrpList.filter(item1 => {
         if (item1.group_name.toLowerCase().search(this.search_group) !== -1) {
+
           return item1;
         }
       });
       this.myGrpList = myGrplistData;
+
       if (this.myGrpList.length > 0) {
         this.errorMsg = '';
       }
