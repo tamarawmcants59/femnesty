@@ -31,10 +31,7 @@ export class GroupComponent implements OnInit {
   public isJoinGroup: boolean = true;
   public loading = false;
   public groupPostDetData: object = {};
-<<<<<<< HEAD
-=======
-
->>>>>>> f62b8d997e891b822793e53b22a52f355c233e58
+  
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
