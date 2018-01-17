@@ -133,7 +133,7 @@ and also what they are used for.</p>
                   
                 </div>-->
 
-                <div class="form-group row">
+                <div class="form-group row half-time">
                   <div class="col-sm-6">
                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
@@ -286,7 +286,8 @@ and also what they are used for.</p>
                     <div class="action caption">Action</div>
                   </li>
                   <li  *ngFor="let groupData of hubRequestList">
-                    <div class="date">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}</div>
+                    <div class="date">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}
+                    <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span></div>
                     <div class="title">
                       <a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
                         {{groupData.title}}
@@ -294,8 +295,8 @@ and also what they are used for.</p>
                     </div>
                     <div class="action">
 
-                      <a *ngIf="groupData.status == '2'" class="btn btn-black btn-default">Rejected</a>
-                      <a *ngIf="groupData.status == '1'" class="btn btn-primary1">Accepted</a>
+                      <span *ngIf="groupData.status == '2'" class="rejected-text">Rejected</span>
+                      <span *ngIf="groupData.status == '1'" class="accepted-text">Accepted</span>
                       <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Unfollow</a>                      
                       <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
                       <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
@@ -319,28 +320,32 @@ and also what they are used for.</p>
                   <div class="tab-content">
                     <div class="tab-pane fade in active" id="attend">
                       <ul class="hub-listing subcontent">
-                        <li>
+                        <li class="mobile-off">
                           <div class="date caption labc">Date</div>
                           <div class="title caption labc">Title</div>
                           <div class="action caption labc">Action</div>
                         </li>
-                        <li *ngFor="let groupData of hubRequestList">
+                        <li *ngFor="let groupData of hubRequestList" style="margin-bottom:0px;border-bottom:0px;">
+                        
                           <div *ngIf="groupData.status==hubReqTab">
-                          <div class="date labc">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}</div>
+                          <div class="date labc">{{groupData.hub_date}},<br/>{{groupData.start_time}} - {{groupData.end_time}}
+                          <span  *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>
+                          </div>
                           <div class="title labc">
                             <a [routerLink]="['/user/hub_details',groupData.slug]">
                               {{groupData.title}}
                             </a>
                           </div>
                           <div class="action labc">
-                            <a *ngIf="groupData.status == '2'" class="btn btn-black btn-default">Rejected</a>
-                            <a *ngIf="groupData.status == '1'" class="btn btn-primary1">Accepted</a>
+                            <span *ngIf="groupData.status == '2'" class="rejected-text">Rejected</span>
+                            <span *ngIf="groupData.status == '1'" class="accepted-text">Accepted</span>
                             <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Unfollow</a>
                             <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
                             <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
 
                           </div>
                           </div>
+								
                         </li>
                       </ul>
                     </div>

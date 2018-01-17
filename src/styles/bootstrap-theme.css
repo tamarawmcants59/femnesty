@@ -4303,6 +4303,17 @@ color: #707070;
 .input-group-addon{position: absolute;left:15px;border:0;background: none;top:20px;}
 .hub-listing-title{color:#bb1926}
 
+.accepted-text{color:#bb1926;    line-height: 24px;
+    display: inline-block;
+    vertical-align: middle;}
+.rejected-text{color:#bb1926;    line-height: 24px;
+    display: inline-block;
+    vertical-align: middle;}
+
+.login-form .text-danger{position: absolute;}
+.new-tabs .tab-content ul{overflow: hidden;border-bottom: 1px solid #e1e1e1 !important}
+.hub-listing li div a,.hub-listing li div a:hover{color:#bb1926}
+
 
 
 @media screen and (max-width:1242px) {
@@ -4332,6 +4343,17 @@ color: #707070;
 }
 
 @media screen and (max-width:767px) {
+	
+	.half-time .col-sm-6:first-child{margin-bottom:15px;}
+	
+	.All-hub-list li{display: block !important;text-align: center;}
+	.All-hub-list li a{text-align: center;display: block !important;margin: 0}
+	.All-hub-list li a .round-image{margin: 0 auto 10px !important;}
+	
+	.hubMet.hubMet1.group .row{padding:10px 0 !important;}
+	.login-form .form-group{display: block;}
+	
+	
 	.profPhoto .img{width: 180px;height: 180px;background-size: cover !important}
 	.profPhoto .img {top: -82px !important;}
 	.profPhoto .img .inner-bg{height: 170px;}
@@ -4442,6 +4464,17 @@ section h1:after{
 
 }
 @media screen and (max-width:480px) {
+	
+	
+	
+	.hub-listing li{flex-wrap:wrap}
+	.hub-listing li div{width:100% !important;text-align: center !important;}
+	.group-list .hub-listing li:first-child,.mobile-off{display: none !important;}
+	
+	.tabPart ul.uilist.connection-box li{width:100% !important}
+	
+	
+	.tab-content .saveChanges[_ngcontent-c2] .btn-primary[_ngcontent-c2]{width: 100% !important;margin: 5px 0 !important;}
     
     .hubDes button.btn.btn-primary{margin-bottom:15px;}
 		.header-top ul li {

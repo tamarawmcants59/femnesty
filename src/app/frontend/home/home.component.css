@@ -30,7 +30,7 @@ blockquote{
 	  -ms-animation-delay: 12s;
 	  animation-delay: 12s;
 	} */
-	span{
+	/*span{
 	position:absolute;
 		top:0px;
 		left:0px;
@@ -38,7 +38,7 @@ blockquote{
 		font-size:2em;
 		-webkit-text-stroke-width: 1px;
 	   -webkit-text-stroke-color: black;
-	}
+	}*/
 	.colorDissolve .item:nth-child(4) {
 	  -webkit-animation-delay: 18s;
 	  -moz-animation-delay: 18s;
