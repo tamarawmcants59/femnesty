@@ -33,5 +33,28 @@
     cursor: pointer;
 }
 .userDelBth{
-    position: absolute;right: -10px;width: 22px;height: 22px; background: #bb1926;line-height: 23px;color: #fff;  text-align: center; top: -11px; border-radius: 100%;cursor: pointer;
+   position: absolute;
+    right: 35px;
+    width: 22px;
+    height: 22px;
+    background: #bb1926;
+    line-height: 23px;
+    color: #fff;
+    text-align: center;
+    top: 0;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.del-btns{
+	 position: absolute;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    background: #bb1926;
+    line-height: 23px;
+    color: #fff;
+    text-align: center;
+    top: 12px;
+    border-radius: 100%;
+    cursor: pointer;
 }
