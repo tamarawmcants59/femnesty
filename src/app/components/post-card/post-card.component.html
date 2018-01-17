@@ -49,7 +49,7 @@
         <div class="imageParts">
             <div class="profImageP">
                 <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
-                <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
+                
             </div>
             <div class="profTextPart">
                 <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
@@ -58,6 +58,7 @@
         </div>
     </div>
     <div class="col-md-2">
+        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
         <p class="icondown"><i class="icon ion-chevron-down"></i></p>
     </div>
 </div>
@@ -65,10 +66,11 @@
     <div class="col-md-12">
         <div class="userComment">
             <div class="imageLikeP" *ngIf="postData.file_name != ''">
-                <img [src]="postData.file_image_url" class="img-responsive">
-                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btn" (click)="deletePost(postData.id,'P',postData)">
+                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(postData.id,'P',postData)">
                     <i class="icon ion-android-close"></i>
                 </a>
+                <img [src]="postData.file_image_url" class="img-responsive">
+                
             </div>
             <p>{{postData.description}}</p>
             <ul>
@@ -144,10 +146,12 @@
                 </div>
                 <div class="right-comment-content">
                     <div class="profTextPart">
-                        <a [routerLink]="['/user/profile',cmtList.display_name]">
+                    		<div class="heading" style="width:100%;height:auto;overflow: hidden;">
+                        <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
                             <h4 class="commentee-name">{{cmtList.name}}</h4>
                         </a>
-                        <a *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtList.id,'C',postData.comments,key)"> <i  class="fa fa-trash"></i></a>
+                        <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtList.id,'C',postData.comments,key)"> <i style="color:#BB1926" class="fa fa-trash"></i></a>
+                        </div>
                         <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                         <div class="commenteeComment">
                             <p>{{cmtList.comment}}</p>
@@ -170,8 +174,10 @@
                             </div>
                             <div class="right-comment-content">
                                 <div class="profTextPart">
-                                    <h4 class="commentee-name">{{cmtReply.name}}</h4>
-                                    <a *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash"></i></a>
+                                	   <div class="heading" style="width:100%;height:auto;overflow: hidden;">
+                                    <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
+                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash" style="color:#BB1926"></i></a>
+                                    </div>
                                     <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                     <div class="commenteeComment">
                                         <p>{{cmtReply.comment}}</p>
