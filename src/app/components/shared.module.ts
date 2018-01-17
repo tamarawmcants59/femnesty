@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialService } from '../frontend/socialhome/social.service';
+import { AgmCoreModule } from '@agm/core';
 
 import { UserSidebar } from "./user-sidebar/user-sidebar.component";
 import { PostCardComponent } from './post-card/post-card.component';
@@ -43,6 +44,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         ImageCropperComponent,
         HubCreateComponent,
        PopupmodalComponent,
+       
     ],
     imports: [
         CommonModule,
@@ -60,7 +62,10 @@ import {MatDialogModule} from '@angular/material/dialog';
         // OwlDateTimeModule,
         // OwlNativeDateTimeModule,
         Ng4GeoautocompleteModule.forRoot(),
-        //MatDialogModule     
+        //MatDialogModule  
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
+          })   
     ],
     exports: [
         UserSidebar,

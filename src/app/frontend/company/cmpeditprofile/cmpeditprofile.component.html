@@ -101,7 +101,7 @@
                                                 <!-- <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
                                                 <a (click)="aboutToggleTab('overview')">OVERVIEW</a></li> -->
                                                 <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}">
-                                                <a (click)="aboutToggleTab('edit_details')">OVERVIEW</a></li>
+                                                <a (click)="aboutToggleTab('edit_details')">EDIT DETAILS</a></li>
                                                 <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}">
                                                 <a (click)="aboutToggleTab('add_subadmin')">ADD SUB ADMIN</a></li>
                                                 <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}">
@@ -224,15 +224,18 @@
                                                                         <li>
                                                                                 <div [ngClass]="{'hide_div' : editAbtActiveTab=='website'}">
                                                                                     <div class="edit" (click)="editAboutToggleTab('website')"></div>
-                                                                                    <h5>WEBSITE</h5>
+                                                                                    <h5>Company Url</h5>
                                                                                     <p>{{publicCmpDet.website}}</p>
                                                                                 </div>
                                                                                 <div *ngIf="editAbtActiveTab=='website'">
-                                                                                    <button class="check" type="submit"></button>
-                                                                                    <h5>WEBSITE</h5>
-                                                                                    <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.website" formControlName="website">
+                                                                                    <button class="check" type="submit" [disabled]="!domainmatch1"></button>
+                                                                                    <h5>Company Url</h5>
+                                                                                    <P> <input type="text" class="form-control-plaintext"  (ngModelChange)="checkCompanyurl($event,publicCmpDet.email)" [(ngModel)]="publicCmpDet.website" formControlName="website">
                                                                                         <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
-                                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['website'].valid && form.controls['website'].touched">Website Required</div>
+                                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['website'].valid && form.controls['website'].touched">Website Required Please Enter a valid url</div>
+                                                                                    <div class="text-danger pull-left" *ngIf="!domainmatch1 && form.controls['website'].valid">
+                                                                                            Company url domain and email domain not match.
+                                                                                        </div>
                                                                                 </div>
                                                                             </li>
 
@@ -381,6 +384,9 @@
                                                                                         <div class="text-danger" *ngIf="!checkEmailExist && adminform.controls['email'].valid">
                                                                                             This email already exist.
                                                                                         </div>
+                                                                                        <div class="text-danger" *ngIf="!domainmatch && adminform.controls['email'].valid">
+                                                                                                Company url domain and email domain not match.
+                                                                                            </div>
                                                                             </div>
                                                                             <div class="">
                                                                                     <div class="form-group row">
@@ -690,6 +696,7 @@
                                                                                 <p>
                                                                                     <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="deleteAdmin(friendData.id)">Delete</button>
                                                                                     <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="editAdmin(friendData.id)">Edit</button>
+                                                                                    <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="editAdmin(friendData.id)">Make Admin</button> -->
                                                                                 </p>
                                                                             </div>
                                                                         </li>

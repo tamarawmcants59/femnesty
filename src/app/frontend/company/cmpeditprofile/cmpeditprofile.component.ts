@@ -50,6 +50,9 @@ export class CmpEditprofileComponent implements OnInit {
   public cmpId ='';
   public editAbtActiveTab: string = '';
   public publicCmpDet: object = { };
+  public Getwebsite: object = { };
+  // public Getwebsite: {website:string };
+public com_website :any;
 
   prfImageData: any;
   coverImageData: any;
@@ -58,7 +61,9 @@ export class CmpEditprofileComponent implements OnInit {
   coverCropperSettings: CropperSettings;
   public groupPostDetData: object = { };
   public checkEmailExist:boolean = false;
-
+  public domainmatch:boolean = false;
+  public domainmatch1:boolean = false;
+  
   constructor(
     private builder: FormBuilder,
     private dataService: CompanyService,
@@ -140,7 +145,7 @@ export class CmpEditprofileComponent implements OnInit {
       ]],
       website: ['', [
         Validators.required,
-        Validators.minLength(3)
+        Validators.pattern('https?://.+')
       ]],
       opening_hour: ['', [
         Validators.required,
@@ -243,7 +248,7 @@ export class CmpEditprofileComponent implements OnInit {
         );
     } else {
     }
-
+    
   }
 
 
@@ -285,11 +290,13 @@ export class CmpEditprofileComponent implements OnInit {
             if(details.UserDetails[0].user_type=='CA' || details.UserDetails[0].user_type=='CSA'){
               if(details.UserDetails[0].user_type=='CA'){
                 this.publicCmpDet=details.UserDetails[0];
+                this.com_website = details.UserDetails[0].website;
+                //alert(this.com_website);
                 this.cmpId = details.UserDetails[0].id;
                 this.getSubadminListByAdmin();
               }else if(details.UserDetails[0].user_type=='CSA'){
                 this.cmpId = details.UserDetails[0].company_uid;
-
+                
                 this.dataService.getUserDetById({"id": parseInt(this.cmpId)}).subscribe(data => {
                   if (data.Ack == "1") {
                     this.publicCmpDet=data.UserDetails[0];
@@ -586,10 +593,51 @@ export class CmpEditprofileComponent implements OnInit {
       });
   }
 
+  public checkCompanyurl(values:Object,email){
+    //alert(email);
+    if(values!=''){
+      
+      let signupCheckcompanyurl={"company_name": "","email":email,"website":values};
+  //console.log(signupCheckcompanyname);
+      this.dataService.userCheckCompanyurl(signupCheckcompanyurl).subscribe(data => {
+             let details=data;
+             console.log(data);
+             if(details.domain_match == "1")
+             { 
+              this.domainmatch1 = false;
+              //return false;
+             }
+             else{
+              this.domainmatch1 = true;
+               //return false;
+             }
+  
+            //  if(details.Ack=="1") {
+            //      this.checkCompanynameExist = false;
+            //      //return false;
+            //  }else{
+            //    //alert('Invalid login');
+            //    this.checkCompanynameExist = true;
+            //   // return false;
+            //  }
+         },
+         error => {
+          console.log('details');
+         }
+       ); 
+    }else{
+  
+    }
+  }
   public checkEmail(values:Object):void {
+   // console.log(this.com_website);
+    
+    // let web_val = web_get.website;
+    //alert(this.com_website);
     if(values!=''){
       let signupCheckEmail={
-        "email": values
+        "email": values,
+        "website":this.com_website
       };
       console.log(signupCheckEmail)
       this.dataService.userCheckEmail(signupCheckEmail)
@@ -598,11 +646,20 @@ export class CmpEditprofileComponent implements OnInit {
              //console.log(details);
              if (details.Ack=="1") {
                  this.checkEmailExist = false;
-                 return false;
+                // return false;
              }else{
                //alert('Invalid login');
                this.checkEmailExist = true;
-               return false;
+               //return false;
+             }
+             if(details.domain_match == "1")
+             {
+              this.domainmatch = false;
+               //return false;
+             }
+             else {
+              this.domainmatch = true;
+               //return false;
              }
          },
          error => {

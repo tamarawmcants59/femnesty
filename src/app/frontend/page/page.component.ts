@@ -15,6 +15,7 @@ export class PageComponent implements OnInit {
   public successMsg:string= '';
   public errorMsg:string= '';
   public teamListData=[];
+  public siteSettingsDet: Object = {};
 
   constructor(
     private _page_service: FrontendService,
@@ -55,7 +56,16 @@ export class PageComponent implements OnInit {
 
   ngOnInit() {
     //alert('hi');
-    
+    this._page_service.getSiteSettings().subscribe(data => {
+      if (data.Ack == "1") {
+        this.siteSettingsDet = data.SiteSettings[0];
+        //console.log(this.siteSettingsDet);
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
   }
   
   public getPageDetails(){

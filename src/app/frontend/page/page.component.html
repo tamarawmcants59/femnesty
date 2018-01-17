@@ -1,4 +1,4 @@
-<section *ngIf="pageSlugName != 'contact-us'" class="inner-banner" style="background: url(assets/images/about-bg.jpg) center no-repeat; background-size: cover;">
+<section *ngIf="pageSlugName != 'contact-us'" class="inner-banner" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+siteSettingsDet?.aboutus_banner_image+')'} ">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
@@ -74,7 +74,7 @@
 </section>
 
 
-<section class="section team" *ngIf="pageSlugName == 'about-us'">
+<section class="section team" *ngIf="pageSlugName == 'about-us'" [ngStyle]="{'background-image':'url('+siteSettingsDet?.aboutus_banner_image+')'}">
     <div class="container">
         <h2 class="text-red mt-0">Femnesty Team</h2>
         <div class="row mt-50">

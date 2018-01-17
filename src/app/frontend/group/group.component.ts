@@ -103,7 +103,7 @@ export class GroupComponent implements OnInit {
   }*/
 
   public getUserPostDetails() {
-    alert();
+   // alert();
     if (this.isGroupId != '') {
       const dataUserDet = {
         "page_no": 1,
