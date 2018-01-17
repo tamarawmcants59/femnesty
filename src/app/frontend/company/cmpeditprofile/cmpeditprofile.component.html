@@ -65,7 +65,7 @@
                             <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
                             <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
                             <li [ngClass]="{'active' : activeTab=='contact'}"><a (click)="toggleTab('contact')">Contact</a></li>
-                            <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>
+                            <!-- <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li> -->
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
@@ -97,15 +97,15 @@
                                                     <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}"><a (click)="aboutToggleTab('list_subadmin')">Subadmin List</a></li>
                                                 </ul>
                                             </div> -->
-                                            <ul class="nav nav-tabs ">
-                                                <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
-                                                <a (click)="aboutToggleTab('overview')">OVERVIEW</a></li>
+                                            <ul class="nav nav-tabs " style="border-bottom: 1px solid #fff !important;">
+                                                <!-- <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                                                <a (click)="aboutToggleTab('overview')">OVERVIEW</a></li> -->
                                                 <li [ngClass]="{'active' : aboutActiveTab=='edit_details'}">
-                                                <a (click)="aboutToggleTab('edit_details')">EDIT DETAILS</a></li>
+                                                <a (click)="aboutToggleTab('edit_details')">OVERVIEW</a></li>
                                                 <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='add_subadmin'}">
-                                                <a (click)="aboutToggleTab('add_subadmin')">ADD SUBADMIN</a></li>
+                                                <a (click)="aboutToggleTab('add_subadmin')">ADD SUB ADMIN</a></li>
                                                 <li *ngIf="loginUserDet.user_type == 'CA'" [ngClass]="{'active' : aboutActiveTab=='list_subadmin'}">
-                                                <a (click)="aboutToggleTab('list_subadmin')">SUBADMIN LIST</a></li>
+                                                <a (click)="aboutToggleTab('list_subadmin')">SUB ADMIN LIST</a></li>
                                             </ul>                            
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="tab-content">
@@ -358,7 +358,7 @@
                                                                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                             <strong>Success: </strong> {{successMsg}}
                                                                         </div>
-                                                                    <h3>Add Subadmin</h3>
+                                                                    <h3>Add Sub admin</h3>
                                                                     
                                                                     <div class="menu">
                                                                         <form  class="login-form" [formGroup]="adminform" (ngSubmit)="addSubadminForm()" #adminForm="ngForm">
@@ -391,7 +391,7 @@
                                                                                      </div>
                                                                                      <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
                                                                                 </div>
-                                                                                <div class="">
+                                                                                <!--<div class="">
                                                                                         <div class="form-group row">
                                                                                             
                                                                                                 <input type="text" class="form-control-plaintext" formControlName="state" placeholder="State">
@@ -430,7 +430,7 @@
                                                                                                                 <textarea class="form-control-plaintext" formControlName="company_vission" placeholder="Company Vission"></textarea>
                                                                                                          </div>
                                                                                                          
-                                                                                                    </div>
+                                                                                                    </div>-->
                                                                                                     <div class="saveChanges">
                                                                                                             <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid  || !checkEmailExist">Create</button>
                                                                                                         </div>
@@ -516,7 +516,7 @@
                                                                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                                             <strong>Success: </strong> {{successMsg}}
                                                                         </div>
-                                                                    <h3>Edit Subadmin</h3>
+                                                                    <h3>Edit Sub admin</h3>
                                                                     
                                                                     <div class="menu">
                                                                         <form  class="login-form" [formGroup]="adminform" (ngSubmit)="editSubadminForm()" #adminEditForm="ngForm">
@@ -549,7 +549,7 @@
                                                                                      </div>
                                                                                      <div class="text-danger" *ngIf="!adminform.controls['txt_password'].valid && adminform.controls['txt_password'].touched">Password Required</div>
                                                                                 </div>
-                                                                                <div class="">
+                                                                                <!--<div class="">
                                                                                         <div class="form-group row">
                                                                                             
                                                                                                 <input type="text" class="form-control-plaintext" [(ngModel)]="editSubAdmindata.state" formControlName="state">
@@ -588,7 +588,7 @@
                                                                                                                 <textarea class="form-control-plaintext" [(ngModel)]="editSubAdmindata.company_vission" formControlName="company_vission" placeholder="Company Vission"></textarea>
                                                                                                          </div>
                                                                                                          
-                                                                                                    </div>
+                                                                                                    </div>-->
                                                                                                     <div class="saveChanges">
                                                                                                             <button type="submit" class="btn btn-primary" [disabled]="!adminForm.valid ">Update</button>
                                                                                                         </div>
@@ -735,11 +735,11 @@
                             <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
                                 <div class="connectionsPart">
                                     
-                                    <h2>Employee List</h2>
-                                    <div class="connections">
+                                    <!-- <h2>Employee List</h2> -->
+                                    <!-- <div class="connections">
 
                                         <div class="grp-rqsts" *ngIf="userEmployeeList?.length > 0">
-                                            <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
+                                            
                                             <ul >
                                                 <li *ngFor="let userData of userEmployeeList">
                                                     <div class="left-area">
@@ -757,8 +757,7 @@
                                                                 <a class="btn btn-primary" [routerLink]="['/user/profile',userData.display_name]">
                                                                    <b>View</b>
                                                                 </a>
-                                                            <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button> -->
-                                                            <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button> -->
+                                                           
                                                         </p>
                                                     </div>
                                                 </li>
@@ -766,45 +765,7 @@
                                             </ul>
                                     </div>
 
-
-
-
-
-
-                                        
-                                            <!-- <ul class="contn-box" *ngIf="userEmployeeList?.length > 0">
-                                                    <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
-                                                            <div class="friend-boxImage">
-                                                                    <a [routerLink]="['/user/profile',userData.display_name]">
-                                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="friend-boxText">
-                                                                    <h4>{{userData.name}}</h4>
-                                                                    <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
-                                                                    <!-- <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p> -->
-                                                               <!-- </div>
-                                                            
-                                                            
-                                                        </li>
-                                                </ul> -->
-
-
-
-                                        <!-- <ul class="friend-box" *ngIf="userEmployeeList?.length > 0">
-                                            <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
-                                                <div class="friend-boxImage">
-                                                    <a [routerLink]="['/user/profile',userData.display_name]">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
-                                                    </a>
-                                                </div>
-                                                <div class="friend-boxText">
-                                                    <a [routerLink]="['/user/profile',userData.display_name]">
-                                                        <h2>{{userData.name}}</h2>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        </ul> -->
+                                           
                                         <div class="likePart" *ngIf="userEmployeeList?.length == 0">
                                             <div class="row">
                                                 <div class="col-md-10">
@@ -812,11 +773,49 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <h2>Follower List</h2>
+
+                                    
+
+
                                     <div class="connections">
-                                        <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
+
+                                            <div class="grp-rqsts" *ngIf="userFollowerList?.length > 0">
+                                            
+                                                    <ul >
+                                                        <li *ngFor="let userData of userFollowerList">
+                                                            <div class="left-area">
+                                                                <div class="round-image">
+                                                                    <a [routerLink]="['/user/profile',userData.display_name]">
+                                                                        <img [src]="userData.profile_image" alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="content-part">
+                                                                    <p>{{userData.name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="right-area">
+                                                                <p>
+                                                                        <a class="btn btn-primary" (click)="follower_block(userData.id)" >
+                                                                           <b>Block</b>
+                                                                        </a>
+                                                                   
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                            </div>
+
+
+
+
+
+
+
+                                        <!-- <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
                                             <li class="friend-box-list" *ngFor="let followData of userFollowerList">
                                                 <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',followData.display_name]">
@@ -829,7 +828,7 @@
                                                     </a>  
                                                 </div>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                         <div class="likePart" *ngIf="userFollowerList?.length == 0">
                                             <div class="row">
                                                 <div class="col-md-10">

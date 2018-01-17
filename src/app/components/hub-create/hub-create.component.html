@@ -117,32 +117,35 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today">
                     <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
                   </div>
-                </div>
-
-                <div class="form-group row" *ngIf="addForm.type=='R'">
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" *ngIf="addForm.type=='R'">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
                       [min]="today">
                     <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
                   </div>
                 </div>
 
+                <!--<div class="form-group row" >
+                  
+                </div>-->
+
                 <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
+                   <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time">
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
-                </div>
-                
-                <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-6"> 
+                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                     <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time">
                     <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
                   </div>
                 </div>
+
 
                 <div class="form-group row">
                   <div class="col-sm-12">

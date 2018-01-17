@@ -15,7 +15,7 @@ export class CmpEditprofileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   public activeTab: string = 'activity';
-  public aboutActiveTab: string = 'overview';
+  public aboutActiveTab: string = 'edit_details';
   public showImgDive: boolean = false;  
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
@@ -209,7 +209,7 @@ export class CmpEditprofileComponent implements OnInit {
           if (details.Ack == "1") {
             this.userFollowerList = details.CompanyFollowers;
           } else {
-
+            this.userFollowerList = [];
           }
         },
         error => {
@@ -658,6 +658,26 @@ export class CmpEditprofileComponent implements OnInit {
         console.log('Something went wrong!');
       });
   }
+
+public follower_block(id)
+{
+  let follower_block={
+    "follow_id": id
+  };
+  this.dataService.block_flower(follower_block).subscribe(data => {
+    // console.log(data);
+     if (data.Ack == 1) {
+       this.successMsg = 'Follower blocked Successfully';
+       this.getFollowerList();
+       //this.getUnivitedUsers();
+     }
+   },
+     error => {
+       console.log('Something went wrong!');
+     });
+}
+
+
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;
