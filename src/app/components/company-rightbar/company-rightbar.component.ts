@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges,SimpleChange } from '@angular/core';
 import { CompanyService } from "../../frontend/company/company.service";
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'app-company-rightbar',

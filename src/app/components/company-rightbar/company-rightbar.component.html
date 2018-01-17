@@ -1,9 +1,12 @@
 <div class="rightPart">                			
     <div class="innerRightPart right-map-details">
       <h2>Company details</h2>
-      <!--<div class="right-map">
-        <img src="assets/images/map.jpg" alt="" />
-      </div>-->
+      <div class="right-map">
+        <!-- <img src="assets/images/map.jpg" alt="" /> -->
+        <agm-map style="height:133px" [latitude]="22.572645" [longitude]="88.363892">
+            <agm-marker [latitude]="22.572645" [longitude]="88.363892"></agm-marker>
+          </agm-map>
+      </div>
       <b>{{profileData.company_name}}</b>
       <!--<p>Lorem ipsum dolor sit amet, consectetur.</p>-->
       

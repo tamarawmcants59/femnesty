@@ -1,5 +1,6 @@
 import { Component, OnInit, Input,SimpleChanges,SimpleChange, ElementRef } from '@angular/core';
 import { UserService } from "../../frontend/user/user.service";
+import { Router, ActivatedRoute, Params } from '@angular/router';
 //import 'rxjs/add/operator/map';
 
 @Component({
@@ -9,6 +10,7 @@ import { UserService } from "../../frontend/user/user.service";
 })
 export class GroupRightbarComponent implements OnInit {
 
+  public groupNameByUrl: string = '';
   public isloginUserId: string = '';
   public isUserLogin: string = '';
   public isGroupId: string='';
@@ -17,6 +19,8 @@ export class GroupRightbarComponent implements OnInit {
   private _name: string;
   public memberViewAll:boolean = false;
   public showMemberDiv:boolean = false;
+  public groupDetailsData1: any;
+  public isJoinGroup: boolean = true;
   //public myStyle={};
   //public memberHideClass:string='isHideDiv';
 
@@ -36,11 +40,15 @@ export class GroupRightbarComponent implements OnInit {
     display_name: string;
     group_image: string;
     member_count: number;
+    
+    
     cdate: string;
   };
 
   constructor(
     private dataService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     public elementRef: ElementRef
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
@@ -58,6 +66,12 @@ export class GroupRightbarComponent implements OnInit {
       this.isGroupId=this._name
       this.getGroupPhotoList();
       this.getGroupMemberList();
+      this.activatedRoute.params.subscribe((params: Params) => {
+        console.log(params);
+        //alert(params['gname']);
+        this.groupNameByUrl = params['gname'];
+      });
+      this.getGroupDetailsByName();
   }
   
   get groupPId(): string {
@@ -69,10 +83,37 @@ export class GroupRightbarComponent implements OnInit {
     this._name = name;
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+    
     //console.log(this._name)
   }
+  public getGroupDetailsByName() {
+    //alert(this.groupNameByUrl);
+    if (this.groupNameByUrl != '') {
+      const dataUserDet = {
+        "group_slug": this.groupNameByUrl
+      };
+      this.dataService.getGrpDetBySlug(dataUserDet)
+        .subscribe(data => {
+          //console.log(data);
+          if (data.Ack == "1") {
+            this.groupDetailsData1 = data.GroupDetails[0];
+           
+            
 
+          }
+          else
+          {
+            
+
+          }
+        },
+        error => {
+
+        });
+    }
+  }
+  
   public getGroupPhotoList(){
     if (this.isGroupId != '') {
       const dataUserDet = {
@@ -105,6 +146,15 @@ export class GroupRightbarComponent implements OnInit {
               //if(data.groupMembers.length > 2){  
                 this.memberViewAll=true;
               }
+
+              if (this.isUserLogin == '1') {
+                let joinItemData = this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
+                //console.log(this.isloginUserId);
+                if (joinItemData.length > 0) {
+                  this.isJoinGroup = false;
+                }
+              }
+
               //console.log(this.groupMemberList);
           } 
       },error => {
