@@ -279,9 +279,10 @@
                                                                                             <div *ngIf="editAbtActiveTab=='address'">
                                                                                                 <button class="check" type="submit"></button>
                                                                                                 <h5>ADDRESS</h5>
-                                                                                                <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.address" formControlName="address">
+                                                                                                <P> <input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.address" formControlName="address"></P>
                                                                                                     <!-- <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P> -->
-                                                                                                <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                                                                                    <!-- <ng4geo-autocomplete [userSettings]="autocompleteSettings"  (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete> -->
+                                                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
                                                                                             </div>
                                                                                         </li>
 
@@ -781,7 +782,7 @@
                                             </div>
                                         </div>
                                     </div> -->
-
+ 
                                     <h2>Follower List</h2>
 
                                     

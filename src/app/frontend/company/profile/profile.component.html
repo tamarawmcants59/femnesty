@@ -19,14 +19,16 @@
                       <h2 class="text-center">{{otherProfileDet?.company_name}}</h2>
                       <p class="text-center">{{otherProfileDet?.bio}}</p>
                       <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
+                      <p class="text-center addressP">{{userFollowerList?.length }} Followers</p>
                       <p class="text-center" *ngIf="isFollowRequest">
+                          
                             <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
                         </p>
-                        <p class="text-center" style="padding-top: 10px;" *ngIf="isEmpRequest">
+                        <!-- <p class="text-center" style="padding-top: 10px;" *ngIf="isEmpRequest">
                         <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
-                        </p> 
+                        </p>  -->
                         
-                        <p class="text-center" style="padding-top: 10px;" *ngIf="!isEmpRequest">
+                        <p class="text-center" style="padding-top: 10px;" *ngIf="!isFollowRequest">
                                 <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="unflow_company()">Unfollow</button>
                                 </p> 
                   </div>
@@ -119,7 +121,7 @@
                                                                       </div>
                                                                   </div>
                                                                   <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">BIO</label>
+                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">About Company</label>
                                                                       <div class="col-sm-8">
                                                                           <span>{{otherProfileDet?.bio}}</span>
                                                                       </div>
@@ -149,11 +151,11 @@
                           <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
                             <div class="connectionsPart">
                                 
-                                <h2>Employee List</h2>
+                                <!--<h2>Employee List</h2>
                                 <div class="connections">
                                     
                                         <div class="grp-rqsts" *ngIf="userEmployeeList?.length > 0">
-                                                <!-- <h3 style="margin-top: 0px;">Request to join group</h3> -->
+                                                
                                                 <ul >
                                                     <li *ngFor="let userData of userEmployeeList">
                                                         <div class="left-area">
@@ -171,8 +173,7 @@
                                                                     <a class="btn btn-primary" [routerLink]="['/user/profile',userData.display_name]">
                                                                        <b>View Profile</b>
                                                                     </a>
-                                                                <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="RequestAccept(userData.id, 2)">Accept</button> -->
-                                                                <!-- <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="RequestAccept(userData.id, 3)">Decline</button> -->
+                                                               
                                                             </p>
                                                         </div>
                                                     </li>
@@ -190,27 +191,9 @@
                                     
                                     
                                     
-                                    
-                                    
-                                    
-                                    <!-- <ul class="friend-box" *ngIf="userEmployeeList?.length > 0">
-                                        <li class="friend-box-list" *ngFor="let userData of userEmployeeList">
-                                            <div class="friend-boxImage">
-                                                <a [routerLink]="['/user/profile',userData.display_name]">
-                                                <div class="img" [ngStyle]="{'background-image':'url('+userData.profile_image+')'}"></div>
-                                                </a>
-                                            </div>
-                                            <div class="friend-boxText">
-                                                <a [routerLink]="['/user/profile',userData.display_name]">
-                                                <h2>{{userData.name}}</h2>
-                                                </a>
-                                                <a [routerLink]="['/user/profile',userData.display_name]" class="btn btn-primary">View Profile</a> 
-                                            </div>
-                                        </li>
-                                    </ul> -->
 
                                     
-                                </div>
+                                </div>-->
 
                                 <h2>Follower List</h2>
                                 <div class="connections">

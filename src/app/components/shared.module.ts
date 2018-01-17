@@ -78,7 +78,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         CompanyRightbarComponent,
         ImageCropperComponent,
         HubCreateComponent,
-        PopupmodalComponent
+        PopupmodalComponent,
+        //Ng4GeoautocompleteModule
     ],
     providers: [
         HubService,

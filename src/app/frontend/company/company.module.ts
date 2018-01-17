@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../components/shared.module";
+//import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 
 @NgModule({
   imports: [
@@ -20,8 +21,12 @@ import { SharedModule } from "../../components/shared.module";
       backdropBorderRadius: '4px',
       primaryColour: '#bb1926',
       secondaryColour: '#bb1926',
-      tertiaryColour: '#ffffff'
+      tertiaryColour: '#ffffff',
+      
     }),
+    //Ng4GeoautocompleteModule.forRoot(),
+        //MatDialogModule  
+        
     SharedModule,  
   ],
   declarations: [SignupComponent, ProfileComponent],
