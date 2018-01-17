@@ -44,9 +44,11 @@ export class UserSidebar implements OnInit {
 
     window.onscroll = () => {
       //let st = window.pageYOffset;
+      //console.log(document.body.scrollHeight);
       let st = (window.innerHeight + window.scrollY);
+      //console.log(st);
       let dir = '';
-      if (st < document.body.scrollHeight- 300) {
+      if (st < document.body.scrollHeight- 620) {
         dir = "fix-to-top";
       } else {
         dir = "";
