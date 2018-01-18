@@ -5082,6 +5082,35 @@ padding: 9px 15px;
 	.HUB-Dtls .info{margin-bottom: 15px !important}
 }
 
+.modal-backdrop.fade{opacity:.5 !important }
+.modal.fade.show{opacity:1 !important }
+.modal-dialog{margin: 100px auto 30px;}
 
+.modal-btn-primary{
+    font-size: 10px !important;
+    padding: 9px 22px;
+    margin: 3px 0;
+    background: #bb1926;
+    color: #fff;
+    border: 0;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    font-family: 'montserratmedium';
+   
+}
 
-
+.modal-btn-black{
+    font-size: 10px !important;
+    padding: 9px 22px;
+    margin: 3px 0;
+    background: #000;
+    color: #fff;
+    border: 0;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    font-family: 'montserratmedium';   
+}
