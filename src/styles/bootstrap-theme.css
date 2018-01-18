@@ -3109,7 +3109,8 @@ background: #fff !important;}
 .connectionList h2 {
     font-size: 15px;
     color: #bb1926;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
+    line-height: 15px;
 }
 
 .connectionText .btn-primary {
@@ -3123,8 +3124,10 @@ background: #fff !important;}
 }
 
 .connectionText p {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     font-size: 13px;
+    line-height: 13px;
+   
 }
 
 .topPart {
@@ -4467,8 +4470,8 @@ section h1:after{
 	
 	
 	
-	.hub-listing li{flex-wrap:wrap}
-	.hub-listing li div{width:100% !important;text-align: center !important;}
+	.hub-listing li{flex-wrap:wrap;}
+	.hub-listing li div{width:100% !important;text-align: center !important;padding: 1px 0 !important}
 	.group-list .hub-listing li:first-child,.mobile-off{display: none !important;}
 	
 	.tabPart ul.uilist.connection-box li{width:100% !important}
@@ -5080,6 +5083,13 @@ padding: 9px 15px;
 	.frind-modal .media-right{display: block;padding: 10px 0 0 0 !important}
 	.HUB-Dtls .info span,.HUB-Dtls .info em{display: block !important;width: 100% !important;}
 	.HUB-Dtls .info{margin-bottom: 15px !important}
+	
+	.tabPart1 .tab-content .edit,.new-tabs .tab-content .edit,.new-tabs .tab-content .check,.tabPart1 .tab-content .check{top: 22px !important;right: 0 !important;width: 16px !important;height: 21px !important;background-size: cover !important;}
+	.tabPart1 .tab-content ul li h5,.new-tabs .tab-content ul li h5{font-size: 12px !important;}
+	.tabPart1 .tab-content ul li p,.new-tabs .tab-content ul li p{font-size: 12px !important;padding: 0 10px !important}
+	
+	
+	
 }
 
 

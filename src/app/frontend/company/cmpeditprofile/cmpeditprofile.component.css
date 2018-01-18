@@ -449,3 +449,19 @@ background-size: cover;
   .ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
   }
+  
+  
+  @media screen and (max-width:480px) {
+  	.tabPart1 ul{padding: 15px 0 !important}
+	.tabPart1 ul li{
+		background: #b8b8b8 !important;
+		padding: 15px 0 !important
+	}
+	.tabPart1 ul li a{
+		font-size: 9px !important;
+		padding: 5px !important;
+	}
+	.tabPart1 ul li:hover a{color: #000 !important}
+	.tabPart1 ul li.active, .tabPart1 ul li:hover, .tabPart1 ul li:focus{background: #fff !important}
+	
+}
