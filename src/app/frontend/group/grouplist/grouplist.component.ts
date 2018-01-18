@@ -51,6 +51,7 @@ export class GrouplistComponent implements OnInit {
 
 
   private getCatDetails(id) {
+    //this.aboutActiveTab='find';
 
     let data = { "category_id": id }
     this.dataService.getGroupListByCategoryId(data).subscribe(data => {
@@ -66,6 +67,7 @@ export class GrouplistComponent implements OnInit {
     }, error => {
       console.log("Error");
     });
+    this.router.navigateByUrl('/group/find');
   }
 
   public getAllGroupList() {
@@ -113,7 +115,6 @@ export class GrouplistComponent implements OnInit {
   }
 
   public searchGroup() {
-    console.log(this.search_group);
     if (this.search_group != '') {
 
       // //this.getConnectionList();
@@ -154,5 +155,6 @@ export class GrouplistComponent implements OnInit {
       this.getAllGroupList();
       this.getUserGroupList();
     }
+    this.router.navigateByUrl('/group/find');
   }
 }
