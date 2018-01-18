@@ -30,7 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 // import { AmazingTimePickerModule } from 'amazing-time-picker';
 // import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { CalendarModule } from 'primeng/components/calendar/calendar';
+import { DateTimePickerModule } from 'ngx-datetime-picker';
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -66,7 +66,7 @@ import { CalendarModule } from 'primeng/components/calendar/calendar';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
           }),
-        //   CalendarModule 
+          DateTimePickerModule
     ],
     exports: [
         UserSidebar,
