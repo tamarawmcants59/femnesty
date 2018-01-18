@@ -33,6 +33,11 @@ export class PostCardComponent implements OnInit {
   //public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
   public repoUrl = '';
   public likeListPostId = '';
+  public delPostId:any;
+  public delPostType:any;
+  public delPostKey:any;
+  public delPostData:any;
+
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   @Input() postData: {
     id: number;
@@ -79,26 +84,30 @@ export class PostCardComponent implements OnInit {
 
   }
 
-  deletePost(post_id, type, comments=null,delkey=null) {
-    let data = { "post_id": post_id, "post_type": type };
-     //console.log(comments);
-     //console.log(post_id);
-     //console.log(delkey);
-    
+  deletePost(confirmmodal,post_id, type, comments=null,delkey=null) {
+    //this.open(confirmmodal);
+    this.delPostId=post_id;
+    this.delPostType=type;
+    this.delPostData=comments;
+    this.delPostKey=delkey;
+    this.modalService.open(confirmmodal);
+  }
+
+  confirmPostDelete() {
+    let data = { "post_id": this.delPostId, "post_type": this.delPostType };
     this.dataService.deletePost(data).subscribe(data => {
       if (data.Ack == "1") {
-          if(delkey!=null){
-            comments[delkey].hide_div=true;
+          if(this.delPostKey!=null){
+            this.delPostData[this.delPostKey].hide_div=true;
           }else{
-            comments.hide_post_div=true;
+            this.delPostData.hide_post_div=true;
           }
       }
     }, error => {
       console.log(error);
     })
-
-
   }
+
   public userPostComment(post_id, postdata) {
     if (this.isLoggedIn == 1) {
       this.postCmtId = post_id;
@@ -236,35 +245,7 @@ export class PostCardComponent implements OnInit {
   }*/
 
   public shareOnFacebook(url, description, images) {
-    //let titleMeta = document.createElement('meta');
-    /*let descMeta = document.createElement('meta');
-    let imageMeta = document.createElement('meta');
-
-    descMeta.setAttribute('property', 'og:description');
-    descMeta.setAttribute('content', description);
     
-    imageMeta.setAttribute('property', 'og:image');
-    imageMeta.setAttribute('content', images);
-
-    document.getElementsByTagName('head')[0].appendChild(descMeta);
-    if(images!=''){
-      document.getElementsByTagName('head')[0].appendChild(imageMeta);
-    }*/
-
-    /*let link;
-    //this.siteSettingsDet = data.SiteSettings[0];
-    link = document.createElement('link');
-    link.type = 'image/x-icon';
-    link.rel = 'shortcut icon';
-    //link.href = 'http://www.stackoverflow.com/favicon.ico';
-    document.getElementsByTagName('head')[0].appendChild(link);*/
-
-    /*if (window.open) {
-        let poppedWindow = window.open('http://www.facebook.com/sharer.php?u='+url,'sharer','toolbar=0,status=0,width=548,height=325');
-    }else {
-        alert('Your security settings are not allowing our popup windows to function. Please make sure your security software allows popup windows to be opened by this web application.');
-    }*/
-
   }
 }
 

@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="col-md-2">
-        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
+        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(confirmmodal,postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
         <p class="icondown"><i class="icon ion-chevron-down"></i></p>
     </div>
 </div>
@@ -66,7 +66,7 @@
     <div class="col-md-12">
         <div class="userComment">
             <div class="imageLikeP" *ngIf="postData.file_name != ''">
-                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(postData.id,'P',postData)">
+                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     <i class="icon ion-android-close"></i>
                 </a>
                 <img [src]="postData.file_image_url" class="img-responsive">
@@ -150,7 +150,7 @@
                         <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
                             <h4 class="commentee-name">{{cmtList.name}}</h4>
                         </a>
-                        <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtList.id,'C',postData.comments,key)"> <i style="color:#BB1926" class="fa fa-trash"></i></a>
+                        <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)"> <i style="color:#BB1926" class="fa fa-trash"></i></a>
                         </div>
                         <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                         <div class="commenteeComment">
@@ -176,7 +176,7 @@
                                 <div class="profTextPart">
                                 	   <div class="heading" style="width:100%;height:auto;overflow: hidden;">
                                     <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
-                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash" style="color:#BB1926"></i></a>
+                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash" style="color:#BB1926"></i></a>
                                     </div>
                                     <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                     <div class="commenteeComment">
@@ -255,3 +255,18 @@
 </div>
 </div>
 
+<ng-template #confirmmodal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm!</h4>
+        <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>-->
+    </div>
+    <div class="modal-body">
+        <h4>Would you like to delete this data?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmPostDelete(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>
