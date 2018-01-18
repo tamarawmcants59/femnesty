@@ -186,19 +186,39 @@
 	<i class="fa fa-linkedin"></i>
 </button>-->
 						<ul>
-							<li ceiboShare [facebook]="{u: repoUrl}">
+							<li (click)="openBetaInfo(confirmmodal)">
 								<img src="assets/images/facebook.png" />
 							</li>
+							<!-- <li ceiboShare [facebook]="{u: repoUrl}">
+								<img src="assets/images/facebook.png" />
+							</li> -->
 							<li ceiboShare [linkedIn]="{url:repoUrl, text:hubDetails.description}">
 								<img src="assets/images/linkedin.png" />
 							</li>
 							<li ceiboShare [twitter]="{url:repoUrl, text:hubDetails.description}">
 								<img src="assets/images/twitter.png" />
-							</li>							
+							</li>	
+							
+							
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<ng-template #confirmmodal let-c="close" let-d="dismiss">
+		<div class="modal-header">
+			<h4 class="modal-title">Info!</h4>
+			<!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	            <span aria-hidden="true">&times;</span>
+	            </button>-->
+		</div>
+		<div class="modal-body">
+			<h4>Facebook share will not work in Beta Version.</h4>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Ok</button>
+			<!-- <button type="button" class="btn modal-btn-black btn-default" (click)="cnfDeleteChat(); c('Close click')">Confirm</button> -->
+		</div>
+	</ng-template>
 </section>
