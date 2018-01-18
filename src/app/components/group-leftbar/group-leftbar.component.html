@@ -1,15 +1,15 @@
 <div class="left-list" [ngClass]="{'fix-to-top':HeaderNavCls === 'fix-to-top'}">
     <div class="profImage">
-        <div class="img" [ngStyle]="{'background-image':'url('+groupData.profile_image+')'}"></div>
+        <div class="img" [ngStyle]="{'background-image':'url('+groupData?.profile_image+')'}"></div>
     </div>
     <div class="profDetails">
-        <h2>{{groupData.name}}</h2>
-        <p>{{groupData.address}}, {{groupData.city}}<br> {{groupData.state}}</p>
+        <h2>{{groupData?.name}}</h2>
+        <p>{{groupData?.address}}, {{groupData?.city}}<br> {{groupData?.state}}</p>
     </div>
     <div class="messagePart">
         <ul>
             <li>
-                <a [routerLink]="['/user/groupchat', groupData.id]">
+                <a [routerLink]="['/user/groupchat', groupData?.id]">
                     <span class="iconWidth">
                     <img src="assets/images/icon1.png">
                   </span>MESSAGES<span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
@@ -25,7 +25,7 @@
     </div>
     <div class="onlineUsers">
         <h2>Online Users</h2>
-        <ul class="onlineList" *ngIf="onlineUserList.length>0">
+        <ul class="onlineList" *ngIf="onlineUserList?.length>0">
             <li *ngFor="let friendData of onlineUserList">
                 <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
                     <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>

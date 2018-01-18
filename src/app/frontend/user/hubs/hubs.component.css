@@ -17,7 +17,8 @@
 .HUB-Dtls h2{font-size:12px}
 .HUB-Dtls .HUB-Dtls-txt{font-size:14px; color:#4e4e4e; margin-bottom: 20px}
 .HUB-Dtls .info{font-size:14px; color:#4e4e4e; margin-bottom: 5px; line-height: 1.42}
-.HUB-Dtls .info span{color:#000000; display: inline-block; min-width:120px;}
+.HUB-Dtls .info span{color:#000000; display: inline-block;width:120px;vertical-align: top}
+.HUB-Dtls .info em{width:calc(100% - 125px);display: inline-block;white-space: normal;word-wrap: break-word;font-style: normal;}
 .HUB-Dtls .right-map{margin-bottom: 20px}
 
 .attending h2{margin-bottom: 36px;}

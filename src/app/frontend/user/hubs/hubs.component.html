@@ -87,20 +87,20 @@
 					<div class="innerRightPart right-map-details HUB-Dtls">
 						  <h2>{{hubDetails.title}}</h2>	
 						  <p class="info" *ngIf="hubDetails.type=='R'">
-								{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
+								<span>Date:</span> <em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
 						<p class="info" *ngIf="hubDetails.type!='R'">
-							<span>Date:</span> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
-						  <p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
+							<span>Date:</span> <em>{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
+						  <p class="info"><span>Description:</span><em>{{hubDetails.description}} dshj hdsdsu jf udsjj jdskj jkdsjn kjdskjdskjh dskjk dsh kjdshhdskjhfdskjhdskjh dskj hdskj hdkjskjdshkjhsdkjhsdkjhdskjhfdskj</em></p>
 						
 						
-						  <p class="info"><span>Organizer:</span> {{hubDetails.organizer}}</p>
+						  <p class="info"><span>Organizer:</span> <em>{{hubDetails.organizer}}</em></p>
 						
 							
-						  <p class="info"><span>Email:</span> {{hubDetails.email}}</p>
+						  <p class="info"><span>Email:</span> <em>{{hubDetails.email}}</em></p>
 						<p class="info">
-							<span>Phone:</span> {{hubDetails.phone}}</p>
-      					<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
-      					<p class="info"><span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+							<span>Phone:</span> <em>{{hubDetails.phone}}</em></p>
+      					<p class="info"><span>Website:</span> <em>{{hubDetails.website}}</em></p>
+      					<p class="info"><span>Privacy:</span> <em>{{hubDetails.type=='O'?'Public':'Private'}}</em></p>
 					</div>
 					
 					<div class="innerRightPart right-map-details HUB-Dtls">
