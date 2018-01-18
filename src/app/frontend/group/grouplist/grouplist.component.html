@@ -8,7 +8,9 @@
             </div>
             <div class="col-md-6 flex-middle">
                 <div class="middlePart" style="background: transparent">
-
+                    
+                    <app-group-create></app-group-create>
+                    <div *ngIf="aboutActiveTab=='find'">
                     <div class="MyGroups-list" *ngIf="myGrpList.length>0 || errorMsg">
                         <h5 class="mt-0">FILTERED RESULTS</h5>
                         <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
@@ -69,7 +71,7 @@
                             </li>
                         </ul>
                     </div>
-
+                    </div>
                 </div>
                 <!--<ul class="search-list">
                       <div>

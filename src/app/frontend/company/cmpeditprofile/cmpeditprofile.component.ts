@@ -63,6 +63,7 @@ export class CmpEditprofileComponent implements OnInit {
   // public Getwebsite: {website:string };
 public com_website :any;
 
+public companyids :any;
   prfImageData: any;
   coverImageData: any;
   postImgData: any;
@@ -211,15 +212,32 @@ public com_website :any;
   }
 
   public getFollowerList() {
+
     const loginUserId = localStorage.getItem("loginUserId");
-    if (loginUserId != '') {
+    const logincomid = JSON.parse(localStorage.getItem("currentUser"));
+    let comp_id = logincomid.company_uid;
+    
+    if(comp_id != 0)
+      {
+       
+        this.companyids = comp_id;
+      }
+      else{
+        this.companyids = loginUserId;
+        //alert(company_id)
+      }
+    console.log(comp_id);
+    if (loginUserId != '' && this.companyids !='') {
+      
+      //alert(company_id)
       const dataUserDet = {
-        "company_id": loginUserId
+        "company_id": this.companyids
       };
+      console.log(dataUserDet);
       this.dataService.getCompanyFollowerList(dataUserDet)
         .subscribe(data => {
           const details = data;
-          //console.log(details);
+          console.log(details);
           if (details.Ack == "1") {
             this.userFollowerList = details.CompanyFollowers;
           } else {

@@ -5,7 +5,7 @@ import { GroupComponent } from "./group.component";
 import { GrouplistComponent } from './grouplist/grouplist.component';
 const routes: Routes = [
   {
-    path: '',
+    path: ':slug_name',
     component: GrouplistComponent,
     canActivate: [AuthGuard],
     data: {
