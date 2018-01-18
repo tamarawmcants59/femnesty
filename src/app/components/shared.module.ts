@@ -26,7 +26,6 @@ import { SelectModule } from "../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../node_modules/ng4-geoautocomplete";
 //import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { PopupmodalComponent } from './post-card/popupmodal.component';
-import {MatDialogModule} from '@angular/material/dialog';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 // import { AmazingTimePickerModule } from 'amazing-time-picker';
 // import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -55,14 +54,7 @@ import { DateTimePickerModule } from 'ngx-datetime-picker';
         EmojiPickerModule.forRoot(),
         NgbModule,
         SelectModule,
-        // AmazingTimePickerModule,
-        //MatButtonModule,
-        //MatCheckboxModule,
-        //BrowserAnimationsModule,
-        // OwlDateTimeModule,
-        // OwlNativeDateTimeModule,
         Ng4GeoautocompleteModule.forRoot(),
-        //MatDialogModule  
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
           }),
