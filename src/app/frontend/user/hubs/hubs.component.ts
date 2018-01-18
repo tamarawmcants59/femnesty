@@ -7,6 +7,7 @@ import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from
 import { SelectModule } from "../../../../../node_modules/ng2-select";
 // import { ShareButtons } from "@ngx-share/core";
 import { environment } from '../../../../environments/environment';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-hubs',
@@ -36,6 +37,7 @@ export class HubsComponent implements OnInit {
     private router: Router,
     private hubService: HubService,
     private builder: FormBuilder,
+    private modalService: NgbModal
     ) {
     this.postform = builder.group({
       user_ids: ['', [
@@ -168,6 +170,9 @@ export class HubsComponent implements OnInit {
       });
   }
 
+  public openBetaInfo(content) {
+    this.modalService.open(content);
+  }
 }
 export declare class FacebookParams {
   u: string;
