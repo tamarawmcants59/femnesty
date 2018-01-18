@@ -2852,6 +2852,7 @@ background: #fff !important;}
 
 .imageLikeP {
     margin: 25px 0;
+    position: relative;
 }
 
 .nothing {
@@ -4326,7 +4327,11 @@ padding: 6px 30px;
 font-family: 'sanchezregular';
 color: #707070;width:100%}
 .ngx-picker > button{position: absolute;top:18px;right:15px;background: none;border:0}
+.userSubDelBth{cursor: pointer;}
 
+.modal-backdrop.fade{opacity:.5 !important }
+.modal.fade.show{opacity:1 !important }
+.modal-dialog{margin: 100px auto 30px;}
 
 @media screen and (max-width:1242px) {
 	.flex-profile .flex-left{width:25%}
