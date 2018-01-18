@@ -85,7 +85,7 @@ and also what they are used for.</p>
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-12">                    
                     <select class="form-control-plaintext" [(ngModel)]="addForm.category_id" required formControlName="category_id">
                         <option value='' selected>Select Category</option>
                         <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
@@ -114,7 +114,7 @@ and also what they are used for.</p>
                     <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter Recurring Start date</div>
                   </div>
                 </div> -->
-
+                <!-- <p-calendar [(ngModel)]="addForm.date"></p-calendar> -->
                 <div class="form-group row half-time">
                   <div class="col-sm-6">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>

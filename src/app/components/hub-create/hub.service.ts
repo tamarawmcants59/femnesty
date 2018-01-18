@@ -37,9 +37,9 @@ export class HubService {
         return this.apiService.get(`/hub/categories`).map(data => data);
     }
 
-    getHubDetails(slug)
+    getHubDetails(slug,user_id)
     {
-        return this.apiService.get(`/hub/details/` + slug).map(data => data);
+        return this.apiService.get(`/hub/details/` + slug + `/` + user_id).map(data => data);
     }
 
     attendHub(data)

@@ -30,7 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 // import { AmazingTimePickerModule } from 'amazing-time-picker';
 // import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-
+import { CalendarModule } from 'primeng/components/calendar/calendar';
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -65,7 +65,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         //MatDialogModule  
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
-          })   
+          }),
+        //   CalendarModule 
     ],
     exports: [
         UserSidebar,
@@ -79,7 +80,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         ImageCropperComponent,
         HubCreateComponent,
         PopupmodalComponent,
-        //Ng4GeoautocompleteModule
+        Ng4GeoautocompleteModule
     ],
     providers: [
         HubService,
