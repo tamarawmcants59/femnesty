@@ -7,6 +7,7 @@ import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from
 import { SelectModule } from "../../../../../node_modules/ng2-select";
 // import { ShareButtons } from "@ngx-share/core";
 import { environment } from '../../../../environments/environment';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-hubs',
@@ -28,12 +29,15 @@ export class HubsComponent implements OnInit {
   public friends = [];
   public repoUrl = '';
   public latestArticles = [];
+  public startDateString;
+  public endDateString;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private hubService: HubService,
     private builder: FormBuilder,
+    private modalService: NgbModal
     ) {
     this.postform = builder.group({
       user_ids: ['', [
@@ -60,9 +64,12 @@ export class HubsComponent implements OnInit {
   {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
       if(data.Ack == 1){
-        //console.log(data);
+        console.log(data);
         localStorage.setItem("groupAdmin",data.details.user_id);
         this.hubDetails = data.details;
+        this.startDateString = new Date(data.details.start_date).toISOString().replace(/[-:.]/g, "").replace('000Z',"Z");
+        this.endDateString = new Date(data.details.end_date).toISOString().replace(/[-:.]/g, "").replace('000Z', "Z");
+        
         this.groupPostDetData = { activitytype: '4', activityid: this.hubDetails.id };
         this.getUserPostDetails();
         this.getUnivitedUsers();
@@ -97,6 +104,16 @@ export class HubsComponent implements OnInit {
   public attendHub()
   {
     const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
+    this.hubService.attendHub(attendData).subscribe(data => {
+      this.getHubDetails();
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+
+  public deleteInvites(user_id) {
+    const attendData = { hub_id: this.hubDetails.id, user_id: user_id };
     this.hubService.attendHub(attendData).subscribe(data => {
       this.getHubDetails();
     },
@@ -153,6 +170,9 @@ export class HubsComponent implements OnInit {
       });
   }
 
+  public openBetaInfo(content) {
+    this.modalService.open(content);
+  }
 }
 export declare class FacebookParams {
   u: string;

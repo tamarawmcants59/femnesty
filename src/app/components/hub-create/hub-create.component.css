@@ -551,12 +551,12 @@ body>.ui-select-bootstrap.open {
   }
 
   .hub-listing li .date {
-    width: 30%;
+    width: 31%;
     text-align: left;
   }
 
   .hub-listing li .title {
-    width: 30%;
+    width: 29%;
     text-align: left;
   }
 
@@ -647,13 +647,18 @@ body>.ui-select-bootstrap.open {
   text-transform: uppercase;
   margin: 3px 0;
 }
+.ngx-picker button
+{
+  display:none;
+}
+
 
 @media screen and (max-width:480px) {
 	.group-list .hub-listing li:first-child,.mobile-off,.new-tabs .tab-content .hub-listing li:first-child{display: none !important;}
 	.mobile-off,.new-tabs .tab-content .hub-listing li{border-bottom:1px solid #ddd;overflow: hidden;}
 	.mobile-off,.new-tabs .tab-content .hub-listing li:last-child{border-bottom:0;}
 	.new-tabs .nav-tabs > li.active,.new-tabs .nav-tabs > li:hover{background: #fff !important;}
-	.group-list .hub-listing li{border-bottom:1px solid #ddd}
+	.group-list .hub-listing li{border-bottom:1px solid #ddd;padding: 5px 0 !important;}
 	
 	.new-tabs .tab-content{padding: 10px 0 !important;}
 	.new-tabs .nav-tabs > li a{font-size:9px !important;}

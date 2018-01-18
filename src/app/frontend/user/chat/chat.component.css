@@ -1,0 +1,11 @@
+    .del-btns{position: absolute;
+    right: -11px;
+    width: 22px;
+    height: 22px;
+    background: #bb1926;
+    line-height: 23px;
+    color: #fff;
+    text-align: center;
+    top: -13px;
+    border-radius: 100%;
+    cursor: pointer;}

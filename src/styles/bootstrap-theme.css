@@ -2852,6 +2852,7 @@ background: #fff !important;}
 
 .imageLikeP {
     margin: 25px 0;
+    position: relative;
 }
 
 .nothing {
@@ -3109,7 +3110,8 @@ background: #fff !important;}
 .connectionList h2 {
     font-size: 15px;
     color: #bb1926;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
+    line-height: 15px;
 }
 
 .connectionText .btn-primary {
@@ -3123,8 +3125,10 @@ background: #fff !important;}
 }
 
 .connectionText p {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     font-size: 13px;
+    line-height: 13px;
+   
 }
 
 .topPart {
@@ -4314,6 +4318,22 @@ color: #707070;
 .new-tabs .tab-content ul{overflow: hidden;border-bottom: 1px solid #e1e1e1 !important}
 .hub-listing li div a,.hub-listing li div a:hover{color:#bb1926}
 
+.ngx-picker input{background: #f7f7f7;
+border: none;
+box-shadow: none;
+height: 64px;
+font-size: 14px;
+padding: 6px 30px;
+font-family: 'sanchezregular';
+color: #707070;width:100%}
+.ngx-picker > button{position: absolute;top:18px;right:15px;background: none;border:0}
+.userSubDelBth{cursor: pointer;}
+
+.modal-backdrop.fade{opacity:.5 !important }
+.modal.fade.show{opacity:1 !important }
+.modal-dialog{margin: 100px auto 30px;}
+
+.new-group-section .filter-reslt li a{text-transform: none;font-family: inherit;}
 
 
 @media screen and (max-width:1242px) {
@@ -4344,7 +4364,7 @@ color: #707070;
 
 @media screen and (max-width:767px) {
 	
-	.half-time .col-sm-6:first-child{margin-bottom:15px;}
+	.half-time .col-sm-6:last-child{margin-top: 15px;}
 	
 	.All-hub-list li{display: block !important;text-align: center;}
 	.All-hub-list li a{text-align: center;display: block !important;margin: 0}
@@ -4467,8 +4487,8 @@ section h1:after{
 	
 	
 	
-	.hub-listing li{flex-wrap:wrap}
-	.hub-listing li div{width:100% !important;text-align: center !important;}
+	.hub-listing li{flex-wrap:wrap;}
+	.hub-listing li div{width:100% !important;text-align: center !important;padding: 1px 0 !important}
 	.group-list .hub-listing li:first-child,.mobile-off{display: none !important;}
 	
 	.tabPart ul.uilist.connection-box li{width:100% !important}
@@ -5080,8 +5100,44 @@ padding: 9px 15px;
 	.frind-modal .media-right{display: block;padding: 10px 0 0 0 !important}
 	.HUB-Dtls .info span,.HUB-Dtls .info em{display: block !important;width: 100% !important;}
 	.HUB-Dtls .info{margin-bottom: 15px !important}
+	
+	.tabPart1 .tab-content .edit,.new-tabs .tab-content .edit,.new-tabs .tab-content .check,.tabPart1 .tab-content .check{top: 22px !important;right: 0 !important;width: 16px !important;height: 21px !important;background-size: cover !important;}
+	.tabPart1 .tab-content ul li h5,.new-tabs .tab-content ul li h5{font-size: 12px !important;}
+	.tabPart1 .tab-content ul li p,.new-tabs .tab-content ul li p{font-size: 12px !important;padding: 0 10px !important}
+	
+	
+	
 }
 
+.modal-backdrop.fade{opacity:.5 !important }
+.modal.fade.show{opacity:1 !important }
+.modal-dialog{margin: 100px auto 30px;}
 
+.modal-btn-primary{
+    font-size: 10px !important;
+    padding: 9px 22px;
+    margin: 3px 0;
+    background: #bb1926;
+    color: #fff;
+    border: 0;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    font-family: 'montserratmedium';
+   
+}
 
-
+.modal-btn-black{
+    font-size: 10px !important;
+    padding: 9px 22px;
+    margin: 3px 0;
+    background: #000;
+    color: #fff;
+    border: 0;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    font-family: 'montserratmedium';   
+}

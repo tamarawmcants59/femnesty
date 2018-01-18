@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="col-md-2">
-        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
+        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(confirmmodal,postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
         <p class="icondown"><i class="icon ion-chevron-down"></i></p>
     </div>
 </div>
@@ -66,7 +66,7 @@
     <div class="col-md-12">
         <div class="userComment">
             <div class="imageLikeP" *ngIf="postData.file_name != ''">
-                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(postData.id,'P',postData)">
+                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     <i class="icon ion-android-close"></i>
                 </a>
                 <img [src]="postData.file_image_url" class="img-responsive">
@@ -74,7 +74,7 @@
             </div>
             <p>{{postData.description}}</p>
             <ul>
-                <li><a href="javascript: void(0);" (click)="userPostLikeListPopup(postData.id)">{{postData.likecount}} Likes</a></li>
+                <li><a href="javascript: void(0);" (click)="userPostLikeListPopup(postData.id,postlikemodal)">{{postData.likecount}} Likes</a></li>
                 <li><a href="javascript: void(0);">{{postData.commentcount}} Comments</a></li>
                 <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2"><a href="javascript: void(0);"><i style="font-size: 16px;" class="ion-ios-people"></i> Connection</a></li>
                 <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1"><a href="javascript: void(0);"><i class="ion-android-globe"></i> Public</a></li>
@@ -150,16 +150,16 @@
                         <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
                             <h4 class="commentee-name">{{cmtList.name}}</h4>
                         </a>
-                        <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtList.id,'C',postData.comments,key)"> <i style="color:#BB1926" class="fa fa-trash"></i></a>
+                        <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)"> <i style="color:#BB1926" class="fa fa-trash"></i></a>
                         </div>
                         <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                         <div class="commenteeComment">
                             <p>{{cmtList.comment}}</p>
                             <ul>
                                 <li *ngIf="cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i> </a>
-                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id)">{{cmtList.likecount}} likes</a></li>
+                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id,postlikemodal)">{{cmtList.likecount}} likes</a></li>
                                 <li *ngIf="!cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a>
-                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id)">{{cmtList.likecount}} likes</a></li>
+                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id, postlikemodal)">{{cmtList.likecount}} likes</a></li>
                                 <li><a (click)="userSubPostComment(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
                             </ul>
                         </div>
@@ -176,16 +176,16 @@
                                 <div class="profTextPart">
                                 	   <div class="heading" style="width:100%;height:auto;overflow: hidden;">
                                     <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
-                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash" style="color:#BB1926"></i></a>
+                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash" style="color:#BB1926"></i></a>
                                     </div>
                                     <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                     <div class="commenteeComment">
                                         <p>{{cmtReply.comment}}</p>
                                         <ul>
                                             <li *ngIf="cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i> </a> 
-                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id)">{{cmtReply.likecount}} likes</a></li>
+                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id, postlikemodal)">{{cmtReply.likecount}} likes</a></li>
                                             <li *ngIf="!cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a>
-                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id)">{{cmtReply.likecount}} likes</a></li>
+                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id, postlikemodal)">{{cmtReply.likecount}} likes</a></li>
 			                            </ul>
                                     </div>
                                 </div>
@@ -255,3 +255,51 @@
 </div>
 </div>
 
+<ng-template #confirmmodal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm!</h4>
+        <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>-->
+    </div>
+    <div class="modal-body">
+        <h4>Would you like to delete this data?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmPostDelete(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>
+
+<ng-template #postlikemodal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Like User List</h4>
+        </div>
+        <div class="modal-body">
+            <div class="frind-modal">
+                <div *ngIf="userList.length > 0">
+                    <div class="media" *ngFor="let postData of userList">
+                        <div class="media-left">
+                            <a href="#">
+                                <img [src]="postData.profile_image" alt="">
+                            </a>
+                        </div>
+                        <div class="media-body media-middle">
+                            <h4 class="media-heading">{{postData.name}}</h4>
+                        </div>
+                        <div class="media-right media-middle">
+                            <a [routerLink]="['/user/profile',postData.display_name]" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media" *ngIf="userList.length == 0">
+                <div class="media-body media-middle">
+                    <h4 class="media-heading">No user found.</h4>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+            <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Close</button>
+        </div>
+    </ng-template>

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../user/user.service';
 import { Promise } from 'q';
-import * as _ from 'lodash';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-chat',
@@ -34,13 +34,17 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   public message: string ='';
   search_con: string;
   public fileData: any ='';
+  public delMsgId:any='';
   dbRef: any;
   isComponentActive: boolean;
+  //localContent:any;
   errorMsg='';
   constructor(
     private db: AngularFirestore,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    //private activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {
@@ -106,6 +110,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
     this.dbRef.subscribe(data => {
       this.chats = data;
+      //console.log(this.chats);
       this.updateUserOfMessages();
     });
   }
@@ -244,5 +249,35 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   
   public deleteImg() {
     this.fileData='';
+  }
+  
+  public deleteChat(msgId=null,confirmmodal) {
+    //console.log(msgId);
+    if(msgId){
+      this.delMsgId=msgId;
+      /*this.db.collection("Messages").doc(msgId).delete().then(function() {
+          //console.log("Document successfully deleted!");
+      }).catch(function(error) {
+          //console.error("Error removing document: ", error);
+      });*/
+      this.open(confirmmodal);
+    }    
+  }
+
+  public cnfDeleteChat() {
+    //console.log(msgId);
+    if(this.delMsgId!=''){
+      this.db.collection("Messages").doc(this.delMsgId).delete().then(function() {
+          //console.log("Document successfully deleted!");
+      }).catch(function(error) {
+          //console.error("Error removing document: ", error);
+      });
+      this.delMsgId='';
+      //this.activeModal.close();
+    }    
+  }
+
+  public open(content) {
+    this.modalService.open(content);
   }
 }
