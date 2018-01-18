@@ -4317,6 +4317,15 @@ color: #707070;
 .new-tabs .tab-content ul{overflow: hidden;border-bottom: 1px solid #e1e1e1 !important}
 .hub-listing li div a,.hub-listing li div a:hover{color:#bb1926}
 
+.ngx-picker input{background: #f7f7f7;
+border: none;
+box-shadow: none;
+height: 64px;
+font-size: 14px;
+padding: 6px 30px;
+font-family: 'sanchezregular';
+color: #707070;width:100%}
+.ngx-picker > button{position: absolute;top:18px;right:15px;background: none;border:0}
 
 
 @media screen and (max-width:1242px) {
@@ -4347,7 +4356,7 @@ color: #707070;
 
 @media screen and (max-width:767px) {
 	
-	.half-time .col-sm-6:first-child{margin-bottom:15px;}
+	.half-time .col-sm-6:last-child{margin-top: 15px;}
 	
 	.All-hub-list li{display: block !important;text-align: center;}
 	.All-hub-list li a{text-align: center;display: block !important;margin: 0}
