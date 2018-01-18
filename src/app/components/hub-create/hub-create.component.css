@@ -647,6 +647,11 @@ body>.ui-select-bootstrap.open {
   text-transform: uppercase;
   margin: 3px 0;
 }
+.ngx-picker button
+{
+  display:none;
+}
+
 
 @media screen and (max-width:480px) {
 	.group-list .hub-listing li:first-child,.mobile-off,.new-tabs .tab-content .hub-listing li:first-child{display: none !important;}

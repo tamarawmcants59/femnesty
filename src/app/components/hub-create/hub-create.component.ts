@@ -7,7 +7,7 @@ import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 // import { AmazingTimePickerService } from 'amazing-time-picker';
 
-import { CalendarModule } from 'primeng/components/calendar/calendar';
+
 
 @Component({
   selector: 'app-hub-create',
@@ -211,6 +211,14 @@ export class HubCreateComponent implements OnInit {
   public editHubTab(hub){
     // this.postform = hub;
     console.log(hub);
+    if(hub.date)
+    {
+      //alert(hub.date);
+      hub.date = new Date(hub.date);
+      //alert(hub.date);
+      //hub.date = hub.date.toDateString();
+      hub.recurring_end = new Date(hub.recurring_end);
+    }
     this.addForm = hub;
     this.autocompleteSettings['inputString'] = hub.address;
     this.aboutActiveTab = 'create';
