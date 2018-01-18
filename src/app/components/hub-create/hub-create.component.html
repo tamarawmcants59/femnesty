@@ -119,14 +119,14 @@ and also what they are used for.</p>
                 <div class="form-group row half-time">
                   <div class="col-sm-6">
                     
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <ngx-date-picker class="form-control-plaintext" formControlName="date" [(ngModel)]="addForm.date"></ngx-date-picker>
+                    
+                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date"></ngx-date-picker>
                     <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
                     <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
                   </div> 
                   <div class="col-sm-6" *ngIf="addForm.type=='R'">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <ngx-date-picker class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end" ></ngx-date-picker>
+                    
+                    <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end" ></ngx-date-picker>
                     <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
                       [min]="today"> -->
                     <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
@@ -139,13 +139,12 @@ and also what they are used for.</p>
 
                 <div class="form-group row half-time">
                   <div class="col-sm-6">
-                   <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
+                   
                       <ngx-time-picker formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
                     <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
                   <div class="col-sm-6"> 
-                    <span class="input-group-addon"><i class="fa fa-clock-o "></i></span>
                       <ngx-time-picker formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
 
 
