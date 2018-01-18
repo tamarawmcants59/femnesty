@@ -81,11 +81,11 @@ export class FindfriendsComponent implements OnInit {
                   }else{
                     this.userSearchFrndList=[];
                   }
-                  //console.log(data);
+                  console.log(data);
                   //this.postform.reset();
         },
         error => {
-          alert(error);
+         // alert(error);
         });
   }
   

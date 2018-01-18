@@ -15,7 +15,7 @@
 .grp-rqsts ul li .btn.btn-default:hover{background: #000; transition: ease all 0.2s}
 
 .grp-rqsts1 h4{font-family: 'montserratmedium';color: #000000;text-transform: uppercase;font-size: 12px; letter-spacing: 1px; margin-bottom: 20px}
-.new-tabs .nav-tabs{
+/*.new-tabs .nav-tabs{
 	border-bottom:  none !important;
 }
 .new-tabs ul li{ border-radius:  0; border: none; background: #b8b8b8 !important; font-weight:500; font-size: 12px;}
@@ -46,7 +46,7 @@
 }
 .new-tabs .tab-content ul li p{
 	font-size: 18px; color: #7b7b7b; padding: 0 25px; text-align: left; margin-bottom: 10px;
-}
+}*/
 
 
 .ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
@@ -99,7 +99,124 @@
   
   :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .currentlocation[_ngcontent-c4] a[_ngcontent-c4] {position: relative !important; padding-left: 30px !important}
   :host ::ng-deep .custom-autocomplete__dropdown[_ngcontent-c4] .currentlocation[_ngcontent-c4] .location-icon[_ngcontent-c4] {position: absolute; left:9px; top:10px;}
+
+  .new-tabs ul li {
+	border-radius: 0;
+	border: none;
+	background: #b8b8b8 !important;
+	font-weight: 500;
+	font-size: 12px;
+  }
   
+  .new-tabs .nav-tabs>li>a {
+	margin-right: 0 !important;
+	line-height: 1.42857143;
+	border: none;
+	border-radius: 0;
+	padding: 15px 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #fff;
+	letter-spacing: 2px;
+  }
+  .new-tabs ul li {
+		border-radius: 0;
+		border: none;
+		background: #b8b8b8 !important;
+		font-weight: 500;
+		font-size: 12px;
+		}
+		
+		.new-tabs .nav-tabs>li>a {
+		margin-right: 0 !important;
+		line-height: 1.42857143;
+		border: none;
+		border-radius: 0;
+		padding: 15px 20px;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 12px;
+		font-weight: bold;
+		cursor: pointer;
+		color: #fff;
+		letter-spacing: 2px;
+		}
+		
+		.new-tabs .nav-tabs>li.active>a {
+		color: #000;
+		}
+		
+		.new-tabs .nav-tabs>li.active>a:hover {
+		background: none;
+		}
+		
+		.new-tabs .tab-content {
+		background: #fff;
+		}
+		
+		.new-tabs .tab-content ul {
+		padding: 20px;
+		margin: 0;
+		display: block;
+		}
+		
+		.new-tabs .tab-content ul li {
+		padding: 15px;
+		margin-bottom: 10px;
+		border-bottom: solid 1px #f0f0f0;
+		background: none !important;
+		width: 100% !important;
+		position: relative;
+		display: block !important;
+		float: none !important;
+		}
+		
+		.new-tabs .tab-content ul li h5 {
+		font-size: 14px;
+		color: #000;
+		font-weight: bold;
+		padding-right: 25px;
+		text-align: left;
+		border: none;
+		}
+		
+		.new-tabs .tab-content ul li p {
+		font-size: 18px;
+		color: #7b7b7b;
+		padding: 0 25px;
+		text-align: left;
+		margin-bottom: 10px;
+		}
+		
+		.hub_top_tab{float: none;}
+		.new-tabs .nav-tabs > li > a {text-transform: uppercase;
+			margin-right: 0 !important;
+			line-height: 1.42857143;
+			border: none;
+			border-radius: 0;
+			padding: 15px 20px;
+			font-family: 'Montserrat', sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			cursor: pointer;
+			color: #222;
+			letter-spacing: 2px;
+	}
+	.new-tabs ul {border-bottom:0}
+	.new-tabs ul li{ background: #b8b8b8 !important;}
+	.new-tabs .tab-content{background: none !important; padding:10px}
+@media screen and (max-width:480px) {
+	.group-list .hub-listing li:first-child,.mobile-off,.new-tabs .tab-content .hub-listing li:first-child{display: none !important;}
+	.mobile-off,.new-tabs .tab-content .hub-listing li{border-bottom:1px solid #ddd;overflow: hidden;}
+	.mobile-off,.new-tabs .tab-content .hub-listing li:last-child{border-bottom:0;}
+	.new-tabs .nav-tabs > li.active,.new-tabs .nav-tabs > li:hover{background: #fff !important;}
+	.group-list .hub-listing li{border-bottom:1px solid #ddd}
+	
+	.new-tabs .tab-content{padding: 10px 0 !important;}
+	.new-tabs .nav-tabs > li a{font-size:9px !important;}
+}
+
 ng4geo-autocomplete.auto-text-input input{
         background: #f7f7f7;
     border: 0 !important;
@@ -109,4 +226,5 @@ ng4geo-autocomplete.auto-text-input input{
     padding: 6px 30px !important;
     font-family: 'sanchezregular';
     color: #707070;
+
 }

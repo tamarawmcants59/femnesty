@@ -1,8 +1,22 @@
+<div class="tabPart connections">
+        <div class="tab-content">
 <div class="row">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-sm-12 hub_top_tab">
         <div class="new-tabs">
             <ul class="nav nav-tabs">
+                <li [ngClass]="{'active' : aboutActiveTab=='find'}">
+                    <a [routerLink]="['/group/find']">GROUPS</a>
+                </li>
                 <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                    <a [routerLink]="['/group/overview']">GROUPS LIST</a>
+                </li>
+                <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
+                    <a [routerLink]="['/group/add_group']">CREATE GROUPS</a>
+                </li>
+                <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
+                    <a [routerLink]="['/group/group_request']">GROUPS REQUEST</a>
+                </li>
+                <!--<li [ngClass]="{'active' : aboutActiveTab=='overview'}">
                         <a (click)="aboutToggleTab('overview')">GROUP LIST</a>
                 </li>
                 <li [ngClass]="{'active' : aboutActiveTab=='add_group'}">
@@ -10,10 +24,12 @@
                 </li>
                 <li [ngClass]="{'active' : aboutActiveTab=='group_request'}">
                         <a (click)="aboutToggleTab('group_request')">GROUP REQUEST</a>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>
+</div>
+</div>
     <!--<div class="col-md-12 col-sm-12 group-list">-->
     <div class="col-md-12 col-sm-12">
         <div class="tab-content">

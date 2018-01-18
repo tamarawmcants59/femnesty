@@ -86,6 +86,9 @@ export class ProfileComponent implements OnInit {
             if (SuccessPageData.length > 0) {
               this.isFollowRequest = false;
             }
+            else{
+              this.isFollowRequest = true;
+            }
           } else {
 
           }
@@ -142,6 +145,9 @@ export class ProfileComponent implements OnInit {
           const details = data;
           if (details.Ack == "1") {
             this.successMsg = "You have successfully unfollowed.";
+            //this.isEmpRequest = false;
+            this.getFollowerList();
+            
           } else {
 
           }
@@ -237,6 +243,7 @@ export class ProfileComponent implements OnInit {
         .subscribe(
         data => {
           if (data.Ack == 1) {
+           
             this.successMsg = 'You have successfully sent the request';
           } else {
             this.errorMsg = 'You have already sent the request';
@@ -263,6 +270,8 @@ export class ProfileComponent implements OnInit {
           console.log(data);
           if (data.Ack == 1) {
             this.successMsg = 'You have successfully Follow.';
+            this.getFollowerList();
+            
           } else {
             this.errorMsg = 'You have unfollow.';
           }

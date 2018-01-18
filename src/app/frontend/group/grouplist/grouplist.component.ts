@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../user/user.service";
 
 @Component({
@@ -17,14 +18,21 @@ export class GrouplistComponent implements OnInit {
   public latestArticles = [];
   search_group: string;
   private errorMsg: string;
-
+  public aboutActiveTab: string = 'find';
   private categoryListWithCount: any = [];
-  constructor(private dataService: UserService) {
+  constructor(private dataService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+  ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.aboutActiveTab = params['slug_name'];
+      //console.log(this.bookSlugName);
+    });
     this.getAllGroupList();
     this.getUserGroupList();
     this.getLastFourArticle();

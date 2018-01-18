@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "../hub-create/hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
@@ -19,7 +19,8 @@ export class GroupCreateComponent implements OnInit {
   errorMsg: string = '';
   successMsg: string = '';
   postImgData: any;
-  public aboutActiveTab: string = 'overview';
+  public aboutActiveTab: string = '';
+  //public aboutActiveTab: string = 'overview';
   public loginUserDet: Object = {};
   public loginUserId: any;
   public groupList: any;
@@ -106,6 +107,10 @@ export class GroupCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.aboutActiveTab = params['slug_name'];
+      //console.log(this.bookSlugName);
+    });
     this.getMyGroupListData();
     this.getGroupRequestList();
     this.getHubCategories();
