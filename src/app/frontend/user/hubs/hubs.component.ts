@@ -109,6 +109,16 @@ export class HubsComponent implements OnInit {
         console.log('Something went wrong!');
       });
   }
+
+  public deleteInvites(user_id) {
+    const attendData = { hub_id: this.hubDetails.id, user_id: user_id };
+    this.hubService.attendHub(attendData).subscribe(data => {
+      this.getHubDetails();
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
   public getLastFourArticle() {
     this.dataService.getFourArticleList().subscribe(data => {
       let details = data;
