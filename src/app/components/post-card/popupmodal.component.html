@@ -28,4 +28,34 @@
 <div mat-dialog-actions>
   <button class="btn btn-primary" mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Close</button>
 </div>-->
-
+<ng-template #confirmmodal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Like User List</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="userList.length > 0">
+            <div class="media" *ngFor="let postData of userList">
+                <div class="media-left">
+                    <a href="#">
+                        <img [src]="postData.profile_image" alt="">
+                    </a>
+                </div>
+                <div class="media-body media-middle">
+                    <h4 class="media-heading">{{postData.name}}</h4>
+                </div>
+                <div class="media-right media-middle">
+                    <a [routerLink]="['/user/profile',postData.display_name]" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+                
+        </div>
+        <div class="media" *ngIf="userList.length == 0">
+            <div class="media-body media-middle">
+                <h4 class="media-heading">No user found.</h4>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+    </div>
+</ng-template>

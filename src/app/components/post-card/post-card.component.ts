@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { PopupmodalComponent } from './popupmodal.component';
 import { window } from 'rxjs/operators/window';
-//import { CeiboShare } from 'ng2-social-share';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-post-card',
@@ -51,7 +51,7 @@ export class PostCardComponent implements OnInit {
     private dataService: SocialService,
     private route: ActivatedRoute,
     private router: Router,
-    //public dialog: MatDialog
+    private modalService: NgbModal
   ) {
 
 
