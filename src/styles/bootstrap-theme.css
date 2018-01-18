@@ -5078,6 +5078,8 @@ padding: 9px 15px;
 	/*.frind-modal .media-left,.frind-modal .media-body{display: block;}*/
 	
 	.frind-modal .media-right{display: block;padding: 10px 0 0 0 !important}
+	.HUB-Dtls .info span,.HUB-Dtls .info em{display: block !important;width: 100% !important;}
+	.HUB-Dtls .info{margin-bottom: 15px !important}
 }
 
 
