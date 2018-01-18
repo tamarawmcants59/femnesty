@@ -82,6 +82,30 @@
 											
 											<input type="submit" value="Send" class="btn btn-primary">
 										</form>
+
+										<ul class="hub-listing" *ngIf="loginUserId==hubDetails.user_id">
+											<li>
+												<div class="date caption">Invited Members</div>
+												
+											</li>
+											<li *ngFor="let groupData of hubDetails.attenders">
+												<div class="date">
+													<a [routerLink]="['/user/profile',groupData.display_name]" title="{{groupData.name}}">
+														<img src="{{groupData.profile_image}}" width="200" alt="{{groupData.name}}" title="{{groupData.name}}" />
+													</a>
+													
+												</div>
+												<div class="title">
+													<a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
+														{{groupData.name}}
+													</a>
+												</div>
+												<div class="action">
+										
+													<a href="javascript:void(0);" (click)="deleteInvites(groupData.user_id)" class="btn btn-primary1">Remove</a>
+												</div>
+											</li>
+										</ul>
 									</div>
 								</div>
 							</div>
