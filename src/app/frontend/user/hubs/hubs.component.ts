@@ -28,6 +28,8 @@ export class HubsComponent implements OnInit {
   public friends = [];
   public repoUrl = '';
   public latestArticles = [];
+  public startDateString;
+  public endDateString;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -60,9 +62,12 @@ export class HubsComponent implements OnInit {
   {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
       if(data.Ack == 1){
-        //console.log(data);
+        console.log(data);
         localStorage.setItem("groupAdmin",data.details.user_id);
         this.hubDetails = data.details;
+        this.startDateString = new Date(data.details.start_date).toISOString().replace(/[-:.]/g, "").replace('000Z',"Z");
+        this.endDateString = new Date(data.details.end_date).toISOString().replace(/[-:.]/g, "").replace('000Z', "Z");
+        
         this.groupPostDetData = { activitytype: '4', activityid: this.hubDetails.id };
         this.getUserPostDetails();
         this.getUnivitedUsers();
