@@ -47,14 +47,14 @@
 }
 .del-btns{
 	 position: absolute;
-    right: 6px;
+    right: -9px;
     width: 22px;
     height: 22px;
     background: #bb1926;
     line-height: 23px;
     color: #fff;
     text-align: center;
-    top: 12px;
+    top: -11px;
     border-radius: 100%;
     cursor: pointer;
 }
