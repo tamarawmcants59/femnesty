@@ -7,6 +7,8 @@ import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 // import { AmazingTimePickerService } from 'amazing-time-picker';
 
+import { CalendarModule } from 'primeng/components/calendar/calendar';
+
 @Component({
   selector: 'app-hub-create',
   templateUrl: './hub-create.component.html',

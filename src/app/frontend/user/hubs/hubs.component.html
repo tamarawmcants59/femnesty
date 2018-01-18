@@ -15,7 +15,7 @@
 						<!-- <p class="shortP">Hub Short Description</p> -->
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
-							<button type="button" class="btn btn-primary" (click)="attendHub()">Attend</button>
+							<button type="button" class="btn btn-primary" (click)="attendHub()">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
 							<button type="button" class="btn btn-default">Add to calendar</button>
 						</p>
 					</div>
@@ -119,10 +119,10 @@
 						<h2>Attending</h2>
 						<ul>         
 							<li *ngFor="let user of hubDetails.attenders">               
-								<a [routerLink]="['/user/profile',user.display_name]"><img src="{{user.profile_image}}" alt="" /></a>
+								<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}"><img src="{{user.profile_image}}" alt="{{user.name}}"  title="{{user.name}}"/></a>
 							</li>
 						</ul>
-						<a href="#" class="viewAll text-center">View All (200)</a>
+						<a href="javascript:void(0);" *ngIf="hubDetails.attenders>12" class="viewAll text-center">View All ({{hubDetails.attenders.length}})</a>
 					</div>
 					<!-- <div class="innerRightPart latest-article">
 						<h2>Latest Articles</h2>
@@ -155,15 +155,15 @@
 	<i class="fa fa-linkedin"></i>
 </button>-->
 						<ul>
-							<!-- <li ceiboShare [facebook]="{u: repoUrl}">
+							<li ceiboShare [facebook]="{u: repoUrl}">
 								<img src="assets/images/facebook.png" />
 							</li>
-							<li ceiboShare [linkedIn]="{url:repoUrl, text:bookDetData.description}">
+							<li ceiboShare [linkedIn]="{url:repoUrl, text:hubDetails.description}">
 								<img src="assets/images/linkedin.png" />
 							</li>
-							<li ceiboShare [twitter]="{url:repoUrl, text:bookDetData.description}">
+							<li ceiboShare [twitter]="{url:repoUrl, text:hubDetails.description}">
 								<img src="assets/images/twitter.png" />
-							</li>							 -->
+							</li>							
 						</ul>
 					</div>
 				</div>

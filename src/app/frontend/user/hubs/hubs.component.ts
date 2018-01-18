@@ -58,7 +58,7 @@ export class HubsComponent implements OnInit {
 
   public getHubDetails()
   {
-    this.hubService.getHubDetails(this.hubSlug).subscribe(data => {
+    this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
       if(data.Ack == 1){
         //console.log(data);
         localStorage.setItem("groupAdmin",data.details.user_id);
@@ -98,9 +98,7 @@ export class HubsComponent implements OnInit {
   {
     const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
     this.hubService.attendHub(attendData).subscribe(data => {
-      if (data.Ack == 1) {
-        //this.hubDetails = data.details;
-      }
+      this.getHubDetails();
     },
       error => {
         console.log('Something went wrong!');
