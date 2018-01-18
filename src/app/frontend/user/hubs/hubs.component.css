@@ -50,7 +50,14 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  margin-top:60px
+  margin-top:60px;
+  background: #fff;
+}
+.head-caption{
+	    width: 100%;
+    background: #e7e7e7;
+    font-size: 17px;
+    line-height: 38px;
 }
 
 .hub-listing li {
@@ -60,6 +67,7 @@
   font-size: 12px;
   align-items: center;
   padding: 0 !important;
+  justify-content: space-between;
 }
 
 .hub-listing li .date,
@@ -68,20 +76,23 @@
   padding: 6px 8px;
   width: 100%;
 }
-
+.hub-listing li .date img{
+	width:60px;height:60px;border-radius:100%;overflow: hidden;
+}
 .hub-listing li .date {
-  width: 30%;
+  width: auto;
   text-align: left;
 }
 
 .hub-listing li .title {
-  width: 30%;
+  width: auto;
   text-align: left;
 }
 
 .hub-listing li .action {
-  width: 40%;
-  text-align: right
+  width: auto;
+  text-align: right;
+  float:right;
 }
 
 .hub-listing li .caption {

@@ -82,10 +82,10 @@
 											
 											<input type="submit" value="Send" class="btn btn-primary">
 										</form>
-
+										
 										<ul class="hub-listing" *ngIf="loginUserId==hubDetails.user_id">
 											<li>
-												<div class="date caption">Invited Members</div>
+												<div class="head-caption">Invited Members</div>
 												
 											</li>
 											<li *ngFor="let groupData of hubDetails.attenders">
@@ -102,7 +102,7 @@
 												</div>
 												<div class="action">
 										
-													<a href="javascript:void(0);" (click)="deleteInvites(groupData.user_id)" class="btn btn-primary1">Remove</a>
+													<a href="javascript:void(0);" (click)="deleteInvites(groupData.user_id)" class="btn btn-primary">Remove</a>
 												</div>
 											</li>
 										</ul>
