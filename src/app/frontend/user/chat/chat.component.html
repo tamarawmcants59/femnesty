@@ -18,8 +18,16 @@
                                         </div>
                                     </div>
                                     <div class="text-area">
-                                        <h5 *ngIf="chat.message.text">{{chat.message.text}}</h5>
-                                        <img class="img img-responsive" *ngIf="chat.message.image" src="{{chat.message.image}}" />
+                                        <h5 *ngIf="chat.message.text">
+                                            <a *ngIf="chat.isSelf" title="Delete" class="userSubDelBth" (click)="deleteChat(chat.id)"> <i style="color:#BB1926" class="fa fa-trash"></i></a> 
+                                            {{chat.message.text}}
+                                        </h5>
+                                        <span class="result" *ngIf="chat.message.image">
+                                            <img class="img img-responsive" src="{{chat.message.image}}" />
+                                            <a *ngIf="chat.isSelf" title="Delete" class="del-btns" (click)="deleteChat(chat.id)">
+                                                <i class="icon ion-android-close"></i>
+                                            </a>
+                                        </span>
                                         <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
                                         <div class="clearfix"></div>
                                         <!--<p class="date">{{chat.created | timeAgo}}</p>-->

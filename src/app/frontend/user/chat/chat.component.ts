@@ -106,6 +106,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
     this.dbRef.subscribe(data => {
       this.chats = data;
+      console.log(this.chats);
       this.updateUserOfMessages();
     });
   }
