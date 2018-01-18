@@ -80,7 +80,16 @@
 									<p class="red-text" *ngIf="hub.type=='R'">Recurring </p>
 									<div class="bottom-links-wrap">
 										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
-										<a href="javscript:void(0);"><i class="ion-android-calendar"></i> ADD TO CALENDAR</a>
+										<a href="http://www.google.com/calendar/event?
+																	action=TEMPLATE
+																	&text={{hub.title}}
+																	&dates={{hub.startDateString}}/{{hub.endDateString}}
+																	&details={{hub.description}}
+																	&location={{hub.address}}
+																	" target="_blank" rel="nofollow">
+											<i class="ion-android-calendar"></i> ADD TO CALENDAR
+										</a>
+										
 									</div>
 								</aside>
 							</li>

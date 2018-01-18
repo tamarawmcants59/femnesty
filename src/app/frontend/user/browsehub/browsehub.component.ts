@@ -34,6 +34,7 @@ export class BrowsehubComponent implements OnInit {
       if(data.Ack == 1)
       {
         this.allHubs = data.details;
+        
         this.allCategories = data.categories;
         this.lat = data.lat;
         this.lng = data.lng;
