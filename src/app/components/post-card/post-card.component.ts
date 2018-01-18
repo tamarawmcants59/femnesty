@@ -37,6 +37,7 @@ export class PostCardComponent implements OnInit {
   public delPostType:any;
   public delPostKey:any;
   public delPostData:any;
+  public userList=[];
 
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   @Input() postData: {
@@ -226,8 +227,12 @@ export class PostCardComponent implements OnInit {
       });
   }
 
-  public userPostLikeListPopup(postId) {
-    this.likeListPostId = postId;
+  public userPostLikeListPopup(postId,postlikemodal) {
+    if(postId!=''){
+      this.likeListPostId = postId;
+      this.getUserLikeList(postId, postlikemodal);
+    }
+    
     //this.openDialog();
 
   }
@@ -246,6 +251,24 @@ export class PostCardComponent implements OnInit {
 
   public shareOnFacebook(url, description, images) {
     
+  }
+
+  public getUserLikeList(postId, postlikemodal){
+    let dataUserDet ={
+      "post_id": postId
+    };
+    this.dataService.likePostUserList(dataUserDet).subscribe(data => {
+          let details=data;
+          if (details.Ack==1) {
+            this.userList=details.likeUserList;
+            this.modalService.open(postlikemodal);
+            this.likeListPostId = '';
+          }
+      },
+      error => {
+        
+      }
+    );
   }
 }
 
