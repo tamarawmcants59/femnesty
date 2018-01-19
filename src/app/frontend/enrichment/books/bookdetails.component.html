@@ -33,10 +33,13 @@
 				</button>-->
 				<div class="row" style="text-align: center;">
 					<ul class="n-social">
-						<li ceiboShare [facebook]="{u: repoUrl}">
+						<!-- <li ceiboShare [facebook]="{u: repoUrl}">
 							<img src="assets/images/facebook.png" />
+						</li> -->
+						<li>
+							<app-beta-restriction [height]="''" [image]="'assets/images/facebook.png'">
+							</app-beta-restriction>
 						</li>
-
 						<!-- <a class="fb-share-button"  data-href="https://pickuup-1512990637705.firebaseapp.com/#/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://pickuup-1512990637705.firebaseapp.com/#/">Share</a></a> -->
 		
               <li ceiboShare [linkedIn]="{url:repoUrl, text:bookDetData.description}">

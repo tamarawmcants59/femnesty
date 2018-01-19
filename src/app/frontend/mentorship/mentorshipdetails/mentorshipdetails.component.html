@@ -9,9 +9,13 @@
                     <h3 class="text-red">{{mentorshipDet?.name}}</h3>
                     <p class="text-gray">{{mentorshipDet?.qualification}}</p>
                     <ul class="n-social">
-                    	<li ceiboShare  [facebook]="{u: repoUrl}">
+                    	<!-- <li ceiboShare  [facebook]="{u: repoUrl}">
                     		<img src="assets/images/facebook.png" />
-                    	</li>
+                        </li> -->
+                        <li>
+                            <app-beta-restriction height="''" [image]="'assets/images/facebook.png'">
+                            </app-beta-restriction>
+                        </li>
                     	<li ceiboShare  [linkedIn]="{url:repoUrl, text:mentorshipDet?.short_desc}">
                     		<img src="assets/images/linkedin.png" />
                     	</li>
