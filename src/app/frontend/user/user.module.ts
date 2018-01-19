@@ -22,6 +22,7 @@ import { GroupChatComponent } from "./group-chat/chat.component";
 import { AgmCoreModule } from '@agm/core';
 import { SelectModule } from "../../../../node_modules/ng2-select";
 
+
 import {
   SocialLoginModule, 
   AuthServiceConfig,

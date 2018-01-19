@@ -1,0 +1,21 @@
+
+<img src='{{image}}' *ngIf="image" height="{{height}}" (click)='openBetaInfo(confirmmodal)' />
+<a *ngIf="postcard" style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" 
+   (click)='openBetaInfo(confirmmodal)'>
+  <i class="ion-social-facebook" style="font-size:16px"></i>
+</a>
+<ng-template #confirmmodal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Info!</h4>
+    <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	            <span aria-hidden="true">&times;</span>
+	            </button>-->
+  </div>
+  <div class="modal-body">
+    <h4>Facebook share will not work in Beta Version.</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Ok</button>
+    <!-- <button type="button" class="btn modal-btn-black btn-default" (click)="cnfDeleteChat(); c('Close click')">Confirm</button> -->
+  </div>
+</ng-template>

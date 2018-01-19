@@ -6,12 +6,13 @@ import { MentorshipdetailsComponent } from './mentorshipdetails/mentorshipdetail
 import { UserService } from "../user/user.service";
 import { ApplicationPipes } from "../../application-pipe.module";
 //import { CeiboShare } from 'ng2-social-share';
-
+import { SharedModule } from "../../components/shared.module";
 @NgModule({
   imports: [
     CommonModule,
     MentorshipRouting,
-    ApplicationPipes
+    ApplicationPipes,
+    SharedModule
   ],
   declarations: [
     MentorshipComponent, 

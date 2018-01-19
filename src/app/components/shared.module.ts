@@ -30,6 +30,7 @@ import { PopupmodalComponent } from './post-card/popupmodal.component';
 // import { AmazingTimePickerModule } from 'amazing-time-picker';
 // import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { DateTimePickerModule } from 'ngx-datetime-picker';
+import { BetaRestrictionComponent } from './beta-restriction/beta-restriction.component';
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -43,6 +44,7 @@ import { DateTimePickerModule } from 'ngx-datetime-picker';
         ImageCropperComponent,
         HubCreateComponent,
        PopupmodalComponent,
+       BetaRestrictionComponent,
        
     ],
     imports: [
@@ -72,7 +74,8 @@ import { DateTimePickerModule } from 'ngx-datetime-picker';
         ImageCropperComponent,
         HubCreateComponent,
         PopupmodalComponent,
-        Ng4GeoautocompleteModule
+        Ng4GeoautocompleteModule,
+        BetaRestrictionComponent
     ],
     providers: [
         HubService,

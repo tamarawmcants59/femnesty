@@ -22,7 +22,7 @@ import { BookcatComponent } from './books/bookcat.component';
 import {RatingModule} from "ng2-rating";
 import {TooltipModule} from "ng2-tooltip";
 // import { ShareModule } from '@ngx-share/core';
-
+import { SharedModule } from "../../components/shared.module";
 @NgModule({
   imports: [
     CommonModule,
@@ -32,7 +32,8 @@ import {TooltipModule} from "ng2-tooltip";
     FormsModule,
     ReactiveFormsModule,
     TooltipModule,
-    // ShareModule.forRoot()
+    // ShareModule.forRoot(),
+    SharedModule
   ],
   declarations: [
     EnrichmentComponent, 
