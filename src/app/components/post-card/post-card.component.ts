@@ -252,7 +252,10 @@ export class PostCardComponent implements OnInit {
   public shareOnFacebook(url, description, images) {
     
   }
-
+  public gotoProfPage(url) {
+      this.router.navigateByUrl('/user/profile',url);
+  }
+  
   public getUserLikeList(postId, postlikemodal){
     let dataUserDet ={
       "post_id": postId

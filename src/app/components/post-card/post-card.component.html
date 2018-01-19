@@ -280,7 +280,7 @@
                 <div *ngIf="userList.length > 0">
                     <div class="media" *ngFor="let postData of userList">
                         <div class="media-left">
-                            <a href="#">
+                            <a (click)="gotoProfPage(postData.display_name); c('Close click')" style="cursor: pointer;">
                                 <img [src]="postData.profile_image" alt="">
                             </a>
                         </div>
@@ -288,7 +288,7 @@
                             <h4 class="media-heading">{{postData.name}}</h4>
                         </div>
                         <div class="media-right media-middle">
-                            <a [routerLink]="['/user/profile',postData.display_name]" class="btn btn-primary">View Profile</a>
+                            <a (click)="gotoProfPage(postData.display_name); c('Close click')" class="btn btn-primary">View Profile</a>
                         </div>
                     </div>
                 </div>

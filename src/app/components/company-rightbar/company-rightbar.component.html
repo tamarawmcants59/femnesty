@@ -39,9 +39,21 @@
 <div class="innerRightPart right-map-details right-sharing">
   <h2>Share</h2>
       <ul>
-  <li><a href="" class="fa fa-facebook" style="background: #395899"></a></li>
-  <li><a href="" class="fa fa-linkedin" style="background: #19699c"></a></li>
-  <li><a href="" class="fa fa-twitter" style="background: #499bcd"></a></li>
+  <li><a (click)="open(confirmmodal)" class="fa fa-facebook" style="background: #395899"></a></li>
+  <li><a ceiboShare [linkedIn]="{url:repoUrl, text:profileData.bio}" class="fa fa-linkedin" style="background: #19699c"></a></li>
+  <li><a ceiboShare [twitter]="{url:repoUrl, text:profileData.bio}" class="fa fa-twitter" style="background: #499bcd"></a></li>
 </ul>
     </div>
   </div>
+
+<ng-template #confirmmodal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Alert</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Facebook share will not work in Beta Version.</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Ok</button>
+    </div>
+</ng-template>

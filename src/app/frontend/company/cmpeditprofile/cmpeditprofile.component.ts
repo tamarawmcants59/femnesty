@@ -8,6 +8,7 @@ import { CompanyService } from "../company.service";
 //import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { UserService } from "../../user/user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+//import { Ng4GeoautocompleteModule } from "ng4-geoautocomplete";
 @Component({
   selector: 'app-cmpeditprofile',
   templateUrl: './cmpeditprofile.component.html',

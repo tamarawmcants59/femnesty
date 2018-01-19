@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, SimpleChanges,SimpleChange } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyService } from "../../frontend/company/company.service";
 import { AgmCoreModule } from '@agm/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-company-rightbar',
@@ -13,7 +16,7 @@ export class CompanyRightbarComponent implements OnInit {
   private _name:number;
   public isCompanyId: number;
   public profileId: number;
-  
+  public repoUrl = '';
 
   @Input() profileData: {
     id: number;
@@ -29,9 +32,9 @@ export class CompanyRightbarComponent implements OnInit {
  
 
   constructor(
-    private dataService: CompanyService
-    
-   
+    private dataService: CompanyService,
+    private router: Router,
+    private modalService: NgbModal
   ) { 
     
   }
@@ -63,7 +66,7 @@ export class CompanyRightbarComponent implements OnInit {
   }
 
   public getFollowerList() {    
-    //console.log(this.isCompanyId);
+    this.repoUrl = environment.website_url + this.router.url;
     if (this.isCompanyId) {
       const dataUserDet = {
         "company_id": this.isCompanyId
@@ -111,5 +114,33 @@ export class CompanyRightbarComponent implements OnInit {
     }
 
   }
- 
+  public open(content) {
+    this.modalService.open(content);
+  } 
+}
+
+
+export declare class FacebookParams {
+  u: string;  
+}
+
+export class GooglePlusParams {
+  url: string
+}
+
+export class LinkedinParams {
+  url: string
+}
+
+export declare class PinterestParams {
+  url: string;
+  media: string;
+  description: string;
+}
+
+export class TwitterParams {
+  text: string;
+  url: string;
+  hashtags: string;
+  via: string;
 }
