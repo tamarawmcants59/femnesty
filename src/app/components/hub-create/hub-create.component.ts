@@ -39,7 +39,7 @@ export class HubCreateComponent implements OnInit {
   public autocompleteSettings: any = {
     showSearchButton: false,
     showCurrentLocation: false,
-    inputPlaceholderText: 'Type anything and you will get a location',
+    inputPlaceholderText: 'Type anything and you will get a location *',
   };
   public hubReqTab = 1;
 

@@ -79,7 +79,7 @@ and also what they are used for.</p>
                   <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
                   <div class="col-sm-12">
                     <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
-                    <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title">
+                    <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title *">
                     <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub Title Required</div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ and also what they are used for.</p>
                   <div class="col-sm-6">
                     
                     
-                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" (ngModelChange)="setMinDate($event)"></ngx-date-picker>
+                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" ></ngx-date-picker>
                     <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
                     <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
                   </div> 
@@ -140,12 +140,12 @@ and also what they are used for.</p>
                 <div class="form-group row half-time">
                   <div class="col-sm-6">
                    
-                      <ngx-time-picker formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
+                      <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
                     <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
                     <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
                   </div>
                   <div class="col-sm-6"> 
-                      <ngx-time-picker formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
+                      <ngx-time-picker [disableInput]="true" formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
 
 
 
@@ -157,7 +157,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer *">
                     <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer Required</div>
                   </div>
                 </div>
@@ -188,14 +188,14 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail" email>
+                    <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail *" email>
                     <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Please enter valid email.</div>                    
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone">
+                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone *">
                     <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone Required</div>
                   </div>
                 </div>
@@ -203,7 +203,7 @@ and also what they are used for.</p>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description"></textarea>
+                    <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description *"></textarea>
                     <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description Required</div>
                   </div>
                 </div>
