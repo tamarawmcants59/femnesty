@@ -66,7 +66,7 @@
                 <div class="form-group col-md-12">
                     <p>
                         <input type="checkbox" id="test1" [formControl]="agreetab" />
-                        <label for="test1">I agree to the <a class="text-red" href="#">Terms and Conditions</a></label>
+                        <label for="test1">I agree to the <a class="text-red" [routerLink]="['/page/terms-of-use']" target="_blank">Terms and Conditions</a></label>
                     </p>
                     <div class="text-danger" *ngIf="!agreetab.valid">Please check terms and conditions.</div>
                 </div>
