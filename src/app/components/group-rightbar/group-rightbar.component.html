@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="isJoinGroup && groupDetailsData1?.group_type!='2'">
+        <div *ngIf="isJoinGroup && groupDetailsData1?.group_type =='2'">
         You have no permission
         </div>
     </div>
@@ -38,7 +38,7 @@
                 </a>
             </li>
         </ul>
-        <div *ngIf=" isJoinGroup &&  groupDetailsData1?.group_type!='2'">
+        <div *ngIf=" isJoinGroup &&  groupDetailsData1?.group_type=='2'">
                 You have no permission
                 </div>
         <a *ngIf="groupImgList?.length > 5" [routerLink]="['/user/group_all_photo',groupData.group_uname]" class="viewAll text-center">View All</a>

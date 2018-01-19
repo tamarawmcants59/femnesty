@@ -228,3 +228,6 @@ ng4geo-autocomplete.auto-text-input input{
     color: #707070;
 
 }
+
+.new-tabs ul.nav-tabs li a{padding: 15px 16px;}
+.nav-tabs li.active a{background:#fff !important}    

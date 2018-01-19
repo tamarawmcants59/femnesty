@@ -18,9 +18,10 @@ export class GroupComponent implements OnInit {
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
+  public groupallMemberList = [];
   public userFrndList = [];
   public requestGrpJoinList = [];
-
+public allgrupstatus:any;
    qtd= {};  
   private IsShow: boolean = false;
   //public userPostList =[];
@@ -29,6 +30,7 @@ export class GroupComponent implements OnInit {
   public successMsg: string = '';
   public errorMsg: string = '';
   public isJoinGroup: boolean = true;
+  public allgroupstatusset = '';
   public loading = false;
   public groupPostDetData: object = {};
 
@@ -121,7 +123,7 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  public getGroupMemberList() {
+  public getGroupMemberList() { 
     if (this.isGroupId != '') {
       const dataUserDet = {
         "group_id": this.isGroupId
@@ -133,9 +135,12 @@ export class GroupComponent implements OnInit {
             this.groupMemberList = data.groupMembers;
             if (this.isUserLogin == '1') {
               let joinItemData = this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
-              //console.log(this.isloginUserId);
+              console.log(joinItemData);
               if (joinItemData.length > 0) {
                 this.isJoinGroup = false;
+              }
+              else{
+                this.isJoinGroup = true;
               }
             }
           }
@@ -152,6 +157,27 @@ export class GroupComponent implements OnInit {
         }
       },
         error => { });
+
+        this.dataService.getGroupReqMemberListById(dataUserDet).subscribe(data => {
+          //console.log(data);
+          if (data.Ack == "1") {
+            this.groupallMemberList = data.groupMembers;
+            console.log(this.groupallMemberList);
+            //alert(this.isUserLogin);
+              let reqjoinItemData = this.groupallMemberList.filter(item => item.user_id == this.isloginUserId);
+              console.log(reqjoinItemData);
+              if (reqjoinItemData.length > 0) {
+                this.allgrupstatus = reqjoinItemData;
+                console.log(this.allgrupstatus[0].request_type);
+                this.allgroupstatusset = this.allgrupstatus[0].request_type;
+              }
+              else{
+                this.allgroupstatusset ='';
+              }
+            
+          }
+        },
+          error => { });
 
     }
   }
@@ -170,6 +196,8 @@ export class GroupComponent implements OnInit {
           this.errorMsg = '';
           if (data.Ack == "1") {
             this.successMsg = data.msg;
+            this.getGroupMemberList();
+            this.getGroupDetailsByName();
           } else {
             this.errorMsg = data.msg;
           }
@@ -181,6 +209,69 @@ export class GroupComponent implements OnInit {
         });
     }
   }
+
+public LeaveGroupRequest(join_uid) { //alert(join_uid);
+  this.loading = true;
+  if (join_uid != '') {
+    const dataUserDet = {
+      "group_id": this.isGroupId,
+      "user_id": join_uid
+    };
+    this.dataService.leaveGroup(dataUserDet)
+      .subscribe(data => {
+        console.log(data);
+        //alert('here');
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") { 
+          this.successMsg = data.message;
+          this.getGroupMemberList();
+        this.getGroupDetailsByName();
+        } else {
+          this.errorMsg = data.message;
+        }
+        
+        this.loading = false;
+        //this.successMsg = 'You have successfully send the request.';
+      },
+      error => {
+
+      });
+  }
+}
+
+public CancelGroupRequest(join_uid) {
+  this.loading = true;
+  if (join_uid != '') {
+    const dataUserDet = {
+      "group_id": this.isGroupId,
+      "user_id": join_uid
+    };
+    this.dataService.cancelGroupRequestByUser(dataUserDet)
+      .subscribe(data => {
+        //console.log(data);
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          //alert(data.message);
+          this.successMsg = data.message;
+          this.getGroupMemberList();
+          this.getGroupDetailsByName();
+        } else {
+          this.errorMsg = data.message;
+        }
+        this.loading = false;
+        //this.successMsg = 'You have successfully send the request.';
+      },
+      error => {
+
+      });
+  }
+}
+
+
+
+
 
   public myFrndListforGrp() {
     if (this.isloginUserId != '') {

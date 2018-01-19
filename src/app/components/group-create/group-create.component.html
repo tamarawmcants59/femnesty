@@ -74,27 +74,27 @@
                 </div>
                 <h3>Create Group</h3>
                 <p>Short description on what a group is and what is required to make<br> a group
-        and also what they are used for.</p>
+        and also what they are used for.You need to fill all required field</p>
                 <div class="menu">
                     <form class="login-form" [formGroup]="postform" (ngSubmit)="createGroupPost()" #createGroupForm="ngForm">
                     <div class="">
                         <div class="form-group row">
                         <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
                         <div class="col-sm-12">
-                            <input type="text" class="form-control-plaintext" formControlName="group_name" placeholder="Group Name/Title">
+                            <input type="text" class="form-control-plaintext" formControlName="group_name" placeholder="Group Name/Title *">
                             <div class="text-danger" *ngIf="!postform.controls['group_name'].valid && postform.controls['group_name'].touched">Group Name Required</div>
                         </div>
                         </div>
                         <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="text" class="form-control-plaintext" formControlName="year_est" placeholder="Year of Establishment">
+                            <input type="text" class="form-control-plaintext" formControlName="year_est" placeholder="Year of Establishment *">
                             <div class="text-danger" *ngIf="!postform.controls['year_est'].valid && postform.controls['year_est'].touched">Year of Establishment Required</div>
                         </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="col-sm-3">
-                                <input type="radio" class="input_radio" formControlName="group_type" value="1"> Public
+                                <input type="radio" class="input_radio" formControlName="group_type" value="1" > Public
                                 </div>
                                 <div class="col-sm-3">
                                 <input type="radio" class="input_radio" formControlName="group_type" value="2"> Private
@@ -105,7 +105,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <select class="form-control-plaintext" required formControlName="cat_id">
-                                    <option value='' selected>Category</option>
+                                    <option value='' selected>Category *</option>
                                     <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
                                 </select>
                                 <div class="text-danger" *ngIf="!postform.controls['cat_id'].valid && postform.controls['cat_id'].touched">Category Required</div>
@@ -114,7 +114,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <select class="form-control-plaintext" required formControlName="country">
-                                    <option value='' selected>Country</option>
+                                    <option value='' selected>Country *</option>
                                     <option value="{{ cdata.id }}" *ngFor="let cdata of countryList">{{ cdata.countries_name }}</option>
                                 </select>
                                 <div class="text-danger" *ngIf="!postform.controls['country'].valid && postform.controls['country'].touched">Country Required</div>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="text" class="form-control-plaintext" formControlName="city" placeholder="City">
+                                <input type="text" class="form-control-plaintext" formControlName="city" placeholder="City *">
                                 <div class="text-danger" *ngIf="!postform.controls['city'].valid && postform.controls['city'].touched">City Required</div>
                             </div>
                         </div>
@@ -137,24 +137,24 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="text" class="form-control-plaintext" formControlName="postal_code" placeholder="Postal Code">
+                                <input type="text" class="form-control-plaintext" formControlName="postal_code" placeholder="Postal Code *">
                                 <div class="text-danger" *ngIf="!postform.controls['postal_code'].valid && postform.controls['postal_code'].touched">Postal Code Required</div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="text" class="form-control-plaintext" formControlName="cemail" placeholder="Contact E-mail">
+                                <input type="text" class="form-control-plaintext" formControlName="cemail" placeholder="Contact E-mail *">
                                 <div class="text-danger" *ngIf="!postform.controls['cemail'].valid && postform.controls['cemail'].touched">Contact E-mail Required</div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="text" class="form-control-plaintext" formControlName="phone" placeholder="Contact Phone">
+                                <input type="text" class="form-control-plaintext" formControlName="phone" placeholder="Contact Phone ">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <textarea class="form-control-plaintext" formControlName="short_desc" placeholder="Short Description"></textarea>
+                                <textarea class="form-control-plaintext" formControlName="short_desc" placeholder="Short Description *"></textarea>
                                 <div class="text-danger" *ngIf="!postform.controls['short_desc'].valid && postform.controls['short_desc'].touched">Short Description Required</div>
                             </div>
                         </div>
