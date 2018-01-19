@@ -176,6 +176,11 @@ export class HubCreateComponent implements OnInit {
     );
   }
 
+  public setMinDate(newValue)
+  {
+
+  }
+
   autoCompleteCallback1(data: any): any {
     console.log(data);
     this.searchData = {address:data.data.description,lat:data.data.geometry.location.lat,lng:data.data.geometry.location.lng};
