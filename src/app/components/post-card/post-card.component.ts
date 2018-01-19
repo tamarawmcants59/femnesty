@@ -253,7 +253,7 @@ export class PostCardComponent implements OnInit {
     
   }
   public gotoProfPage(url) {
-      this.router.navigateByUrl('/user/profile',url);
+      this.router.navigateByUrl('/user/profile/'+url);
   }
   
   public getUserLikeList(postId, postlikemodal){
