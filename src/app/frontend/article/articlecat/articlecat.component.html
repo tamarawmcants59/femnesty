@@ -19,9 +19,13 @@
                       <div [innerHTML]="articleCatData.description" class="mb-30"></div>
                       <a [routerLink]="['/articles/list',articleCatData.slug]" class="btn btn-primary">Read more</a>
                       <ul class="n-social mt-30">
-                            <li ceiboShare  [facebook]="{u: repoUrl}">
-                                <img src="assets/images/facebook.png" />
+                            <li>
+                                <app-beta-restriction [height]="''" [image]="'assets/images/facebook.png'">
+                                </app-beta-restriction>
                             </li>
+                            <!-- <li ceiboShare  [facebook]="{u: repoUrl}">
+                                <img src="assets/images/facebook.png" />
+                            </li> -->
                             <li ceiboShare  [linkedIn]="{url:repoUrl, text:articleCatData.short_description}">
                                 <img src="assets/images/linkedin.png" />
                             </li>

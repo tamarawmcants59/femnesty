@@ -12,13 +12,15 @@ import { ArticlecatwiselistComponent } from './articlecat/articlecatwiselist.com
 import { ArticledetailsComponent } from './articlecat/articledetails.component';
 import { ApplicationPipes } from "../../application-pipe.module";
 //import { CeiboShare } from 'ng2-social-share';
+import { SharedModule } from "../../components/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     //HttpModule,
     ArticleRouting,
-    ApplicationPipes
+    ApplicationPipes,
+    SharedModule
   ],
   //declarations: [ArticleComponent, TruncatePipe, SafePipe], 
   declarations: [ArticleComponent,
