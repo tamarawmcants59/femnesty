@@ -11,7 +11,7 @@ import { UserService } from "../../user/user.service";
 //import { ApplicationPipes } from "../../../application-pipe.module";
 //import { NgxCropperModule } from 'ngx-cropper';
 import {  SelectModule } from "../../../../../node_modules/ng2-select";
-//import { Ng4GeoautocompleteModule } from "../../../../../node_modules/ng4-geoautocomplete";
+//import { Ng4GeoautocompleteModule } from "ng4-geoautocomplete";
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import {  SelectModule } from "../../../../../node_modules/ng2-select";
         secondaryColour: '#bb1926', 
         tertiaryColour: '#ffffff'
     }),
-    //Ng4GeoautocompleteModule.forRoot(),
+    //Ng4GeoautocompleteModule,
         //MatDialogModule  
         
   ],
