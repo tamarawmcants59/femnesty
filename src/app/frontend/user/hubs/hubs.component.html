@@ -19,12 +19,12 @@
 							<button type="button" class="btn btn-default">Add to calendar</button>
 						</p>
 					</div>
-					<div class="tabcessMsg != Part">
+					<div class="tabPart">
 						<ul class="nav nav-pills">
 							<li [ngClass]="{'active':activeTab=='posts'}"><a (click)="activeTab='posts'">Hub Activity</a></li>
 							<li [ngClass]="{'active':activeTab=='details'}"><a (click)="activeTab='details'">Hub Details</a></li>
 							<li [ngClass]="{'active':activeTab=='invite'}"><a (click)="activeTab='invite'">Invite Member</a></li>
-						</ul>cessMsg != 
+						</ul>
 						<div class="tab-content">
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
 								<div >
