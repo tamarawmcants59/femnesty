@@ -16,22 +16,15 @@
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
 							<button type="button" class="btn btn-primary" (click)="attendHub()">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
-							
-							<a href="http://www.google.com/calendar/event?
-							action=TEMPLATE
-							&text={{hubDetails.title}}
-							&dates={{startDateString}}/{{endDateString}}
-							&details={{hubDetails.description}}
-							&location={{hubDetails.address}}
-							" target="_blank" rel="nofollow"><button type="button" class="btn btn-default">Add to calendar</button></a>
+							<button type="button" class="btn btn-default">Add to calendar</button>
 						</p>
 					</div>
-					<div class="tabPart">
+					<div class="tabcessMsg != Part">
 						<ul class="nav nav-pills">
 							<li [ngClass]="{'active':activeTab=='posts'}"><a (click)="activeTab='posts'">Hub Activity</a></li>
 							<li [ngClass]="{'active':activeTab=='details'}"><a (click)="activeTab='details'">Hub Details</a></li>
 							<li [ngClass]="{'active':activeTab=='invite'}"><a (click)="activeTab='invite'">Invite Member</a></li>
-						</ul>
+						</ul>cessMsg != 
 						<div class="tab-content">
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
 								<div >
@@ -82,30 +75,6 @@
 											
 											<input type="submit" value="Send" class="btn btn-primary">
 										</form>
-										
-										<ul class="hub-listing" *ngIf="loginUserId==hubDetails.user_id">
-											<li>
-												<div class="head-caption">Invited Members</div>
-												
-											</li>
-											<li *ngFor="let groupData of hubDetails.attenders">
-												<div class="date">
-													<a [routerLink]="['/user/profile',groupData.display_name]" title="{{groupData.name}}">
-														<img src="{{groupData.profile_image}}" width="200" alt="{{groupData.name}}" title="{{groupData.name}}" />
-													</a>
-													
-												</div>
-												<div class="title">
-													<a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
-														{{groupData.name}}
-													</a>
-												</div>
-												<div class="action">
-										
-													<a href="javascript:void(0);" (click)="deleteInvites(groupData.user_id)" class="btn btn-primary">Remove</a>
-												</div>
-											</li>
-										</ul>
 									</div>
 								</div>
 							</div>
@@ -194,19 +163,17 @@
 							<!-- <li ceiboShare [facebook]="{u: repoUrl}">
 								<img src="assets/images/facebook.png" />
 							</li> -->
+
 							<li ceiboShare [linkedIn]="{url:repoUrl, text:hubDetails.description}">
 								<img height="40" src="assets/images/linkedin.png" />
 							</li>
 							<li ceiboShare [twitter]="{url:repoUrl, text:hubDetails.description}">
-								<img height="40" src="assets/images/twitter.png" />
+                  <img height="40" src="assets/images/twitter.png" />
 							</li>	
-							
-							
-						</ul>
+					  </ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </section>

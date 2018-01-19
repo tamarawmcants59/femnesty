@@ -23,7 +23,12 @@
                       <p class="text-center">
                           <br />
                             <a *ngIf="checkIsFriend" [routerLink]="['/user/chat',otherProfileDet?.id]" class="btn btn-primary">Chat With {{otherProfileDet?.first_name}}</a>  
-                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && isloginUserId !='' && isJoinGroup" type="button" class="btn btn-primary" (click)="joinGroupRequest(isloginUserId)">Join Group</button>
+                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '' && isloginUserId !='' && isJoinGroup" type="button" class="btn btn-primary" (click)="joinGroupRequest(isloginUserId)">Join Group</button>
+                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '1' && isJoinGroup" type="button" class="btn btn-primary" >Group Request Send</button>
+                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '1' && isJoinGroup" type="button" class="btn btn-primary" (click)="CancelGroupRequest(isloginUserId)">Cancel group</button>
+                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '2' && !isJoinGroup" type="button" class="btn btn-primary" (click)="LeaveGroupRequest(isloginUserId)">Leave group</button>
+                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '4' && isJoinGroup" type="button" class="btn btn-primary">You Have Left This group</button>
+                            <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '3' && isJoinGroup" type="button" class="btn btn-primary">Admin rejected You from This group</button>
                         </p>
                       
                   </div>
@@ -208,7 +213,7 @@
 										<div class="tab-pane fade" id="not-renspond">
 											<p>This is tab 2</p>
 										</div>
-										<div class="tab-pane fade" id="rejected">
+										<div class="tab-pane fade" id="rejected">JOIN GROUP
 											<p>This is tab 3</p>
 										</div>
 									</div>

@@ -268,10 +268,30 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-  
+  getGroupReqMemberListById(form_data) {
+    return this.apiService.post(
+      `/users/appgroupmemberReqbygroupid`,
+      form_data
+    ).map(data => data);
+  }
+
   joinGroupRequestByUser(form_data) {
     return this.apiService.post(
       `/users/appsendjoinrequesttogrp`,
+      form_data
+    ).map(data => data);
+  }
+
+  leaveGroupRequestByUser(form_data) {
+    return this.apiService.post(
+      `/users/appsendleaverequesttogrp`,
+      form_data
+    ).map(data => data);
+  }
+
+  cancelGroupRequestByUser(form_data) {
+    return this.apiService.post(
+      `/users/appsendcancelrequesttogrp`,
       form_data
     ).map(data => data);
   }
