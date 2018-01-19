@@ -134,6 +134,7 @@
                             <div class="col-sm-12">
                                 <ng4geo-autocomplete class="auto-text-input" [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
                             </div>
+                            <div class="text-danger"  style="margin-top: 26px;" *ngIf="address_required">Location Required</div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
@@ -181,7 +182,7 @@
                         <div class="saveChanges">
         
                         <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">Create Group</button>
-        
+                        <div class="text-danger"  style="margin-left: 170px;" *ngIf="address_required">Please Fill All  Required (*) Field</div>
                         </div>
                     </div>
                     </form>
@@ -203,13 +204,13 @@
                                 <div class="">
                                     <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control-plaintext" formControlName="group_name" [(ngModel)]="groupEditDataJson.group_name" placeholder="Group Name/Title">
+                                        <input type="text" class="form-control-plaintext" formControlName="group_name" [(ngModel)]="groupEditDataJson.group_name" placeholder="Group Name/Title *">
                                         <div class="text-danger" *ngIf="!postform.controls['group_name'].valid && postform.controls['group_name'].touched">Group Name Required</div>
                                     </div>
                                     </div>
                                     <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control-plaintext" formControlName="year_est" [(ngModel)]="groupEditDataJson.year_est" placeholder="Year of Establishment">
+                                        <input type="text" class="form-control-plaintext" formControlName="year_est" [(ngModel)]="groupEditDataJson.year_est" placeholder="Year of Establishment *">
                                         <div class="text-danger" *ngIf="!postform.controls['year_est'].valid && postform.controls['year_est'].touched">Year of Establishment Required</div>
                                     </div>
                                     </div>
@@ -227,7 +228,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select class="form-control-plaintext" required formControlName="cat_id">
-                                                <option value='' selected>Category</option>
+                                                <option value='' selected>Category *</option>
                                                 <option value="{{ catlist.id }}" *ngFor="let catlist of catList" [selected]="groupEditDataJson.cat_id==catlist.id">{{ catlist?.title }}</option>
                                             </select>
                                             <div class="text-danger" *ngIf="!postform.controls['cat_id'].valid && postform.controls['cat_id'].touched">Category Required</div>
@@ -236,7 +237,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select class="form-control-plaintext" required formControlName="country">
-                                                <option value='' selected>Country</option>
+                                                <option value='' selected>Country *</option>
                                                 <option value="{{ cdata.id }}" *ngFor="let cdata of countryList" [selected]="groupEditDataJson.country==cdata.id">{{ cdata.countries_name }}</option>
                                             </select>
                                             <div class="text-danger" *ngIf="!postform.controls['country'].valid && postform.controls['country'].touched">Country Required</div>
@@ -244,24 +245,25 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control-plaintext" formControlName="city" [(ngModel)]="groupEditDataJson.city" placeholder="City">
+                                            <input type="text" class="form-control-plaintext" formControlName="city" [(ngModel)]="groupEditDataJson.city" placeholder="City *">
                                             <div class="text-danger" *ngIf="!postform.controls['city'].valid && postform.controls['city'].touched">City Required</div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                                            <ng4geo-autocomplete [userSettings]="autocompleteSettings1" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
                                         </div>
+                                        <div style="margin-top:26px;" class="text-danger" *ngIf="this.address_required">Location Required</div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control-plaintext" formControlName="postal_code" [(ngModel)]="groupEditDataJson.postal_code" placeholder="Postal Code">
+                                            <input type="text" class="form-control-plaintext" formControlName="postal_code" [(ngModel)]="groupEditDataJson.postal_code" placeholder="Postal Code *">
                                             <div class="text-danger" *ngIf="!postform.controls['postal_code'].valid && postform.controls['postal_code'].touched">Postal Code Required</div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control-plaintext" formControlName="cemail" [(ngModel)]="groupEditDataJson.cemail" placeholder="Contact E-mail">
+                                            <input type="text" class="form-control-plaintext" formControlName="cemail" [(ngModel)]="groupEditDataJson.cemail" placeholder="Contact E-mail *">
                                             <div class="text-danger" *ngIf="!postform.controls['cemail'].valid && postform.controls['cemail'].touched">Contact E-mail Required</div>
                                         </div>
                                     </div>
@@ -272,7 +274,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <textarea class="form-control-plaintext" formControlName="short_desc" [(ngModel)]="groupEditDataJson.short_desc" placeholder="Short Description"></textarea>
+                                            <textarea class="form-control-plaintext" formControlName="short_desc" [(ngModel)]="groupEditDataJson.short_desc" placeholder="Short Description *"></textarea>
                                             <div class="text-danger" *ngIf="!postform.controls['short_desc'].valid && postform.controls['short_desc'].touched">Short Description Required</div>
                                         </div>
                                     </div>
@@ -302,7 +304,7 @@
                                     <div class="saveChanges">
                     
                                     <button type="submit" class="btn btn-primary" [disabled]="!editGroupForm.valid">Submit</button>
-                    
+                                    <div style="margin-left:170px;" class="text-danger" *ngIf="this.address_required">Please Fiell All Required (*) Field</div>
                                     </div>
                                 </div>
                             </form>
