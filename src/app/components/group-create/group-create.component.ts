@@ -30,12 +30,13 @@ export class GroupCreateComponent implements OnInit {
   public searchData = { address: '', lat: '', lng: '' }
   public catList = [];
   public countryList = [];
+  public address_required: boolean = false;
   public autocompleteSettings: any = {
     showSearchButton: false,
     showCurrentLocation: false,
-    inputPlaceholderText: 'Type anything and you will get a location',
+    inputPlaceholderText: 'Type anything and you will get a location *',
   };
-
+  public autocompleteSettings1: any;
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
@@ -143,7 +144,7 @@ export class GroupCreateComponent implements OnInit {
         console.log('Something went wrong!');
       });
   }
-
+  
   public editGroupTab(groupId) {
 
     this.groupEditId = groupId;
@@ -153,7 +154,14 @@ export class GroupCreateComponent implements OnInit {
     this.dataService.getGroupDetById(dataUserDet).subscribe(data => {
       if (data.Ack == "1") {
         this.groupEditDataJson = data.GroupDetails[0];
+        //let add = data.GroupDetails[0].address;
         this.showPostImgDive = true;
+        this.autocompleteSettings1 = {
+          showSearchButton: false,
+          showCurrentLocation: false,
+          inputPlaceholderText: 'Type anything and you will get a location *',
+          "inputString":data.GroupDetails[0].address
+        };
         //this.postImgData=this.groupEditDataJson.group_image;
       }
     },
@@ -190,8 +198,7 @@ export class GroupCreateComponent implements OnInit {
       userValue.address = this.searchData.address;
       //userValue.lat = this.searchData.lat;
       //userValue.lng = this.searchData.lng;
-    }
-    this.dataService.createGroupDataSend(userValue)
+      this.dataService.createGroupDataSend(userValue)
       .subscribe(
       data => {
         this.showPostImgDive = false;
@@ -201,10 +208,16 @@ export class GroupCreateComponent implements OnInit {
         window.scrollTo(0, 0);
         this.getMyGroupListData();
         this.searchData.address = '';
+        this.address_required = false;
       },
       error => {
         alert(error);
       });
+    }
+    else{
+      this.address_required = true;
+    }
+   
 
   }
 
@@ -215,8 +228,7 @@ export class GroupCreateComponent implements OnInit {
     userValue.image = this.postImgData;
     if (this.searchData.address) {
       userValue.address = this.searchData.address;
-    }
-    this.dataService.editGroupDataSend(userValue).subscribe(data => {
+      this.dataService.editGroupDataSend(userValue).subscribe(data => {
 
         this.showPostImgDive = false;
         this.loading = false;
@@ -224,11 +236,17 @@ export class GroupCreateComponent implements OnInit {
         this.postform.reset();
         window.scrollTo(0, 0);
         this.getMyGroupListData();
+        this.address_required = false;
         this.aboutActiveTab='overview';
     },
       error => {
         alert(error);
       });
+    }
+    else{
+      this.address_required = true;
+    }
+    
   }
   leaveGroup(groupId) {
     let data = { user_id: this.loginUserId, group_id: groupId };
