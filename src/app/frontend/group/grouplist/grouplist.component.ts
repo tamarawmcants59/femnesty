@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../user/user.service";
 
@@ -20,6 +20,8 @@ export class GrouplistComponent implements OnInit {
   private errorMsg: string;
   public aboutActiveTab: string = 'find';
   private categoryListWithCount: any = [];
+  @ViewChild("topGroupsList") topGroupsList:ElementRef;
+  @ViewChild("myGroupsList") myGroupsList:ElementRef;
   constructor(private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -27,7 +29,6 @@ export class GrouplistComponent implements OnInit {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
   }
-
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.aboutActiveTab = params['slug_name'];
@@ -37,7 +38,30 @@ export class GrouplistComponent implements OnInit {
     this.getUserGroupList();
     this.getLastFourArticle();
     this.getcategoryListWithCount();
+    const self=this;
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "ResolveStart") {
+        const eventObj: any = event;
+
+         if(eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find'))
+         {
+             self.errorMsg='';
+             self.myGrpList=[];
+         }
+
+
+      }
+    });
   }
+  loadGroupList() {
+    this.getAllGroupList();
+    this.getUserGroupList();
+    this.getLastFourArticle();
+    this.getcategoryListWithCount();
+  }
+
+
+
   private getcategoryListWithCount() {
     this.dataService.getCategoryListWithCount().subscribe(data => {
       if (data.Ack == "1") {
@@ -49,7 +73,16 @@ export class GrouplistComponent implements OnInit {
       });
   }
 
-
+  scrollToTopGroups() {
+    this.errorMsg = '';
+    this.myGrpList=[];
+    this.topGroupsList.nativeElement.scrollIntoView();
+  }
+  scrollToMyGroup() {
+    this.errorMsg = '';
+    this.myGrpList=[];
+    this.myGroupsList.nativeElement.scrollIntoView();
+  }
   private getCatDetails(id) {
     //this.aboutActiveTab='find';
 

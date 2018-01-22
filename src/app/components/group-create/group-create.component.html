@@ -69,8 +69,8 @@
             </div>
             <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
             <ul class="ulList edit-forms">
-                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                    <strong>Success: </strong> {{successMsg}}
+                <div class="alert alert-success" role="alert" *ngIf="(createGroupSuccessMsg != '')">
+                    <strong>Success: </strong> {{createGroupSuccessMsg}}
                 </div>
                 <h3>Create Group</h3>
                 <p>Short description on what a group is and what is required to make<br> a group
@@ -204,7 +204,8 @@
                                 <div class="">
                                     <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control-plaintext" formControlName="group_name" [(ngModel)]="groupEditDataJson.group_name" placeholder="Group Name/Title *">
+                                        <!-- <input type="text" class="form-control-plaintext" formControlName="group_name" [(ngModel)]="groupEditDataJson.group_name" placeholder="Group Name/Title *"> -->
+                                         <input type="text" class="form-control-plaintext" formControlName="group_name" [(ngModel)]="groupEditDataJson.group_name" placeholder="Group Name/Title *">
                                         <div class="text-danger" *ngIf="!postform.controls['group_name'].valid && postform.controls['group_name'].touched">Group Name Required</div>
                                     </div>
                                     </div>
@@ -253,7 +254,7 @@
                                         <div class="col-sm-12">
                                             <ng4geo-autocomplete [userSettings]="autocompleteSettings1" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
                                         </div>
-                                        <div style="margin-top:26px;" class="text-danger" *ngIf="this.address_required">Location Required</div>
+                                        <div style="margin-top:26px;" class="text-danger" *ngIf="address_required">Location Required</div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
@@ -304,7 +305,7 @@
                                     <div class="saveChanges">
                     
                                     <button type="submit" class="btn btn-primary" [disabled]="!editGroupForm.valid">Submit</button>
-                                    <div style="margin-left:170px;" class="text-danger" *ngIf="this.address_required">Please Fiell All Required (*) Field</div>
+                                    <div style="margin-left:170px;" class="text-danger" *ngIf="address_required">Please Fill All Required (*) Field</div>
                                     </div>
                                 </div>
                             </form>
@@ -316,8 +317,8 @@
                     
                     <div class="grp-rqsts">
                             <h4>Group REQUESTS</h4>
-                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                <strong>Success: </strong> {{successMsg}}
+                            <div class="alert alert-success" role="alert" *ngIf="(groupReqSuccessMsg != '')">
+                                <strong>Success: </strong> {{groupReqSuccessMsg}}
                             </div>
                             <ul *ngIf="groupRequestList?.length > 0">
                                 <li *ngFor="let groupData of groupRequestList">

@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -5,7 +6,8 @@ import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "../hub-create/hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
-
+import {Subject} from 'rxjs/Subject';
+import {GrouplistComponent} from '../../frontend/group/grouplist/grouplist.component';
 @Component({
   selector: 'app-group-create',
   templateUrl: './group-create.component.html',
@@ -18,6 +20,8 @@ export class GroupCreateComponent implements OnInit {
   showPostImgDive: boolean;
   errorMsg: string = '';
   successMsg: string = '';
+  createGroupSuccessMsg: string = '';
+  createGroupErrorMsg: string = '';
   postImgData: any;
   public aboutActiveTab: string = '';
   //public aboutActiveTab: string = 'overview';
@@ -31,6 +35,7 @@ export class GroupCreateComponent implements OnInit {
   public catList = [];
   public countryList = [];
   public address_required: boolean = false;
+  public groupReqSuccessMsg: string = '';
   public autocompleteSettings: any = {
     showSearchButton: false,
     showCurrentLocation: false,
@@ -42,7 +47,8 @@ export class GroupCreateComponent implements OnInit {
     private dataService: UserService,
     private hubService: HubService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private groupListComp:GrouplistComponent
   ) {
     this.postform = builder.group({
       group_name: ['', [
@@ -144,23 +150,44 @@ export class GroupCreateComponent implements OnInit {
         console.log('Something went wrong!');
       });
   }
-  
+
   public editGroupTab(groupId) {
 
     this.groupEditId = groupId;
     let dataUserDet = {
       "group_id": this.groupEditId
     };
+    const self=this;
     this.dataService.getGroupDetById(dataUserDet).subscribe(data => {
       if (data.Ack == "1") {
         this.groupEditDataJson = data.GroupDetails[0];
+        this.postform.setValue({
+          group_name: self.groupEditDataJson['group_name'] == null ? '' : self.groupEditDataJson['group_name'],
+          image: self.groupEditDataJson['image'] == null ? '' : self.groupEditDataJson['image'],
+          short_desc: self.groupEditDataJson['short_desc'] == null ? '' : self.groupEditDataJson['short_desc'],
+          group_type: self.groupEditDataJson['group_type'] == null ? '' : self.groupEditDataJson['group_type'],
+          cat_id: self.groupEditDataJson['cat_id'] == null ? '' : self.groupEditDataJson['cat_id'],
+          year_est: self.groupEditDataJson['year_est'] == null ? '' : self.groupEditDataJson['year_est'],
+          country: self.groupEditDataJson['country'] == null ? '' : self.groupEditDataJson['country'],
+          city: self.groupEditDataJson['city'] == null ? '' : self.groupEditDataJson['city'],
+          address: self.groupEditDataJson['address'] == null ? '' : self.groupEditDataJson['address'],
+          postal_code: self.groupEditDataJson['postal_code'] == null ? '' : self.groupEditDataJson['postal_code'],
+          cemail: self.groupEditDataJson['cemail'] == null ? '' : self.groupEditDataJson['cemail'],
+          phone: self.groupEditDataJson['phone'] == null ? '' : self.groupEditDataJson['phone'],
+          long_desc: self.groupEditDataJson['long_desc'] == null ? '' : self.groupEditDataJson['long_desc']
+        });
+        self.address_required = self.groupEditDataJson['address'] == null ? true : false;
+        if(self.address_required==false)
+        {
+          self.searchData.address=self.groupEditDataJson['address'];
+        }
         //let add = data.GroupDetails[0].address;
         this.showPostImgDive = true;
         this.autocompleteSettings1 = {
           showSearchButton: false,
           showCurrentLocation: false,
           inputPlaceholderText: 'Type anything and you will get a location *',
-          "inputString":data.GroupDetails[0].address
+          "inputString": data.GroupDetails[0].address
         };
         //this.postImgData=this.groupEditDataJson.group_image;
       }
@@ -199,25 +226,26 @@ export class GroupCreateComponent implements OnInit {
       //userValue.lat = this.searchData.lat;
       //userValue.lng = this.searchData.lng;
       this.dataService.createGroupDataSend(userValue)
-      .subscribe(
-      data => {
-        this.showPostImgDive = false;
-        this.loading = false;
-        this.successMsg = 'Successfully create the group';
-        this.postform.reset();
-        window.scrollTo(0, 0);
-        this.getMyGroupListData();
-        this.searchData.address = '';
-        this.address_required = false;
-      },
-      error => {
-        alert(error);
-      });
+        .subscribe(
+        data => {
+          this.showPostImgDive = false;
+          this.loading = false;
+          this.createGroupSuccessMsg = 'Successfully created the group';
+          this.postform.reset();
+          window.scrollTo(0, 0);
+          this.getMyGroupListData();
+          this.searchData.address = '';
+          this.address_required = false;
+          this.groupListComp.loadGroupList();
+        },
+        error => {
+          alert(error);
+        });
     }
-    else{
+    else {
       this.address_required = true;
     }
-   
+
 
   }
 
@@ -232,27 +260,28 @@ export class GroupCreateComponent implements OnInit {
 
         this.showPostImgDive = false;
         this.loading = false;
-        this.successMsg = 'Successfully edit the group';
+        this.successMsg = 'Successfully edited the group';
         this.postform.reset();
         window.scrollTo(0, 0);
         this.getMyGroupListData();
         this.address_required = false;
-        this.aboutActiveTab='overview';
-    },
-      error => {
-        alert(error);
-      });
+        this.aboutActiveTab = 'overview';
+        this.groupListComp.loadGroupList();
+      },
+        error => {
+          alert(error);
+        });
     }
-    else{
+    else {
       this.address_required = true;
     }
-    
+
   }
   leaveGroup(groupId) {
     let data = { user_id: this.loginUserId, group_id: groupId };
     this.dataService.leaveGroup(data).subscribe(data => {
       if (data.Ack == 1) {
-        this.successMsg = "You have successfully unfollowed this group.";
+        this.groupReqSuccessMsg = "You have successfully unfollowed this group.";
       }
     }, error => {
       console.log("Error");
@@ -281,10 +310,10 @@ export class GroupCreateComponent implements OnInit {
         "request_type": type
       };
       this.dataService.responseGroupRequestByUser(dataUserDet).subscribe(data => {
-        this.successMsg = '';
+        this.groupReqSuccessMsg = '';
         this.errorMsg = '';
         if (data.Ack == "1") {
-          this.successMsg = data.msg;
+          this.groupReqSuccessMsg = data.msg;
         } else {
           this.errorMsg = data.msg;
         }
