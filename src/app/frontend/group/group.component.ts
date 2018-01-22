@@ -21,8 +21,8 @@ export class GroupComponent implements OnInit {
   public groupallMemberList = [];
   public userFrndList = [];
   public requestGrpJoinList = [];
-public allgrupstatus:any;
-   qtd= {};  
+  public allgrupstatus: any;
+  qtd = {};
   private IsShow: boolean = false;
   //public userPostList =[];
   public activeTab: string = 'activity';
@@ -63,7 +63,7 @@ public allgrupstatus:any;
             this.groupDetailsData = data.GroupDetails[0];
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
-            localStorage.setItem("groupAdmin",data.GroupDetails[0].user_id);
+            localStorage.setItem("groupAdmin", data.GroupDetails[0].user_id);
             this.groupPostDetData = { activitytype: '2', activityid: this.isGroupId };
             //this.groupPidData = { 'groupId': this.isGroupId};
             //console.log(this.groupPidData);
@@ -72,8 +72,7 @@ public allgrupstatus:any;
             this.getGroupMemberList();
             this.myFrndListforGrp();
           }
-          else
-          {
+          else {
             this.router.navigateByUrl('/user/edit_profile/activity');
 
           }
@@ -123,7 +122,7 @@ public allgrupstatus:any;
     }
   }
 
-  public getGroupMemberList() { 
+  public getGroupMemberList() {
     if (this.isGroupId != '') {
       const dataUserDet = {
         "group_id": this.isGroupId
@@ -139,7 +138,7 @@ public allgrupstatus:any;
               if (joinItemData.length > 0) {
                 this.isJoinGroup = false;
               }
-              else{
+              else {
                 this.isJoinGroup = true;
               }
             }
@@ -158,26 +157,26 @@ public allgrupstatus:any;
       },
         error => { });
 
-        this.dataService.getGroupReqMemberListById(dataUserDet).subscribe(data => {
-          //console.log(data);
-          if (data.Ack == "1") {
-            this.groupallMemberList = data.groupMembers;
-            console.log(this.groupallMemberList);
-            //alert(this.isUserLogin);
-              let reqjoinItemData = this.groupallMemberList.filter(item => item.user_id == this.isloginUserId);
-              console.log(reqjoinItemData);
-              if (reqjoinItemData.length > 0) {
-                this.allgrupstatus = reqjoinItemData;
-                console.log(this.allgrupstatus[0].request_type);
-                this.allgroupstatusset = this.allgrupstatus[0].request_type;
-              }
-              else{
-                this.allgroupstatusset ='';
-              }
-            
+      this.dataService.getGroupReqMemberListById(dataUserDet).subscribe(data => {
+        //console.log(data);
+        if (data.Ack == "1") {
+          this.groupallMemberList = data.groupMembers;
+          console.log(this.groupallMemberList);
+          //alert(this.isUserLogin);
+          let reqjoinItemData = this.groupallMemberList.filter(item => item.user_id == this.isloginUserId);
+          console.log(reqjoinItemData);
+          if (reqjoinItemData.length > 0) {
+            this.allgrupstatus = reqjoinItemData;
+            console.log(this.allgrupstatus[0].request_type);
+            this.allgroupstatusset = this.allgrupstatus[0].request_type;
           }
-        },
-          error => { });
+          else {
+            this.allgroupstatusset = '';
+          }
+
+        }
+      },
+        error => { });
 
     }
   }
@@ -210,64 +209,64 @@ public allgrupstatus:any;
     }
   }
 
-public LeaveGroupRequest(join_uid) { //alert(join_uid);
-  this.loading = true;
-  if (join_uid != '') {
-    const dataUserDet = {
-      "group_id": this.isGroupId,
-      "user_id": join_uid
-    };
-    this.dataService.leaveGroup(dataUserDet)
-      .subscribe(data => {
-        console.log(data);
-        //alert('here');
-        this.successMsg = '';
-        this.errorMsg = '';
-        if (data.Ack == "1") { 
-          this.successMsg = data.message;
-          this.getGroupMemberList();
-        this.getGroupDetailsByName();
-        } else {
-          this.errorMsg = data.message;
-        }
-        
-        this.loading = false;
-        //this.successMsg = 'You have successfully send the request.';
-      },
-      error => {
+  public LeaveGroupRequest(join_uid) { //alert(join_uid);
+    this.loading = true;
+    if (join_uid != '') {
+      const dataUserDet = {
+        "group_id": this.isGroupId,
+        "user_id": join_uid
+      };
+      this.dataService.leaveGroup(dataUserDet)
+        .subscribe(data => {
+          console.log(data);
+          //alert('here');
+          this.successMsg = '';
+          this.errorMsg = '';
+          if (data.Ack == "1") {
+            this.successMsg = data.message;
+            this.getGroupMemberList();
+            this.getGroupDetailsByName();
+          } else {
+            this.errorMsg = data.message;
+          }
 
-      });
+          this.loading = false;
+          //this.successMsg = 'You have successfully send the request.';
+        },
+        error => {
+
+        });
+    }
   }
-}
 
-public CancelGroupRequest(join_uid) {
-  this.loading = true;
-  if (join_uid != '') {
-    const dataUserDet = {
-      "group_id": this.isGroupId,
-      "user_id": join_uid
-    };
-    this.dataService.cancelGroupRequestByUser(dataUserDet)
-      .subscribe(data => {
-        //console.log(data);
-        this.successMsg = '';
-        this.errorMsg = '';
-        if (data.Ack == "1") {
-          //alert(data.message);
-          this.successMsg = data.message;
-          this.getGroupMemberList();
-          this.getGroupDetailsByName();
-        } else {
-          this.errorMsg = data.message;
-        }
-        this.loading = false;
-        //this.successMsg = 'You have successfully send the request.';
-      },
-      error => {
+  public CancelGroupRequest(join_uid) {
+    this.loading = true;
+    if (join_uid != '') {
+      const dataUserDet = {
+        "group_id": this.isGroupId,
+        "user_id": join_uid
+      };
+      this.dataService.cancelGroupRequestByUser(dataUserDet)
+        .subscribe(data => {
+          //console.log(data);
+          this.successMsg = '';
+          this.errorMsg = '';
+          if (data.Ack == "1") {
+            //alert(data.message);
+            this.successMsg = data.message;
+            this.getGroupMemberList();
+            this.getGroupDetailsByName();
+          } else {
+            this.errorMsg = data.message;
+          }
+          this.loading = false;
+          //this.successMsg = 'You have successfully send the request.';
+        },
+        error => {
 
-      });
+        });
+    }
   }
-}
 
 
 
@@ -317,9 +316,9 @@ public CancelGroupRequest(join_uid) {
     }
   }
 
-  public addGroupMember(join_uid,index) {
+  public addGroupMember(join_uid, index) {
 
-   
+
     this.loading = true;
     if (join_uid != '') {
       const dataUserDet = {
@@ -338,14 +337,13 @@ public CancelGroupRequest(join_uid) {
         this.loading = false;
 
         if (this.groupDetailsData.group_type == "2") {
-           this.qtd[join_uid]=true;
+          this.qtd[join_uid] = true;
         }
-        else
-        {
+        else {
           this.getGroupMemberList();
           this.myFrndListforGrp();
         }
-        
+
         //this.successMsg = 'You have successfully send the request.';
       },
         error => {
@@ -372,6 +370,18 @@ public CancelGroupRequest(join_uid) {
         }
         this.loading = false;
         //this.getGroupMemberList();
+        for (let i = 0; i < this.requestGrpJoinList.length; i++) {
+          if (this.requestGrpJoinList[i].id == pid) {
+            this.requestGrpJoinList[i].isPressed = true;
+            if (type == "2") {
+              this.requestGrpJoinList[i].text = "You have accepted the request."
+            }
+            else {
+              this.requestGrpJoinList[i].text = "You have declined the request."
+            }
+            break;
+          }
+        }
         this.getGroupMemberList();
         this.router.navigateByUrl('/group/details/' + this.groupNameByUrl);
         //this.getGroupMemberList();
@@ -381,6 +391,7 @@ public CancelGroupRequest(join_uid) {
 
         });
     }
+    
   }
 
   public toggleTab(data: any) {
