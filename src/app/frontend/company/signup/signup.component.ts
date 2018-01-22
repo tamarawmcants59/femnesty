@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   public loading = false;
   public isLoggedIn: any;
   public user_id:string;
-
+  public disableSignup = true;
 
   constructor(
     private builder:FormBuilder, 
@@ -93,16 +93,6 @@ export class SignupComponent implements OnInit {
                this.checkEmailExist = true;
                //return false;
              }
-
-          //    if (details.domain_match=="1") {
-          //     this.domainmatch = false;
-          //     return false;
-          // }else{
-          //   //alert('Invalid login');
-          //   this.domainmatch = true;
-          //   return false;
-          // }
-             
          },
          error => {
            console.log('err');
@@ -121,18 +111,8 @@ public checkCompanyname(values:Object){
 //console.log(signupCheckcompanyname);
     this.dataService.userCheckCompanyname(signupCheckcompanyname).subscribe(data => {
            let details=data;
-           console.log(data);
-          //  if(details.domain_match == "1")
-          //  {
-          //   this.domainmatch = false;
-          //   //return false;
-          //  }
-          //  else{
-          //   this.domainmatch = true;
-          //    //return false;
-          //  }
-
-           if(details.Ack=="1") {
+           //console.log(data);
+          if(details.Ack=="1") {
                this.checkCompanynameExist = false;
                //return false;
            }else{
@@ -168,15 +148,6 @@ public checkCompanyurl(values:Object){
             this.domainmatch1 = true;
              //return false;
            }
-
-          //  if(details.Ack=="1") {
-          //      this.checkCompanynameExist = false;
-          //      //return false;
-          //  }else{
-          //    //alert('Invalid login');
-          //    this.checkCompanynameExist = true;
-          //   // return false;
-          //  }
        },
        error => {
         console.log('details');
