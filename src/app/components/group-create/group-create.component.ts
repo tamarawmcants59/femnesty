@@ -260,7 +260,7 @@ export class GroupCreateComponent implements OnInit {
 
         this.showPostImgDive = false;
         this.loading = false;
-        this.successMsg = 'Successfully edit the group';
+        this.successMsg = 'Successfully edited the group';
         this.postform.reset();
         window.scrollTo(0, 0);
         this.getMyGroupListData();
