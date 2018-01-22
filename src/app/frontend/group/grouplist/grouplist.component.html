@@ -8,69 +8,69 @@
             </div>
             <div class="col-md-6 flex-middle">
                 <div class="middlePart" style="background: transparent">
-                    
+
                     <app-group-create></app-group-create>
                     <div *ngIf="aboutActiveTab=='find'">
-                    <div class="MyGroups-list" *ngIf="myGrpList.length>0 || errorMsg">
-                        <h5 class="mt-0">FILTERED RESULTS</h5>
-                        <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
-                            <strong>Error: </strong> {{errorMsg}}
+                        <div class="MyGroups-list" *ngIf="myGrpList.length>0 || errorMsg">
+                            <h5 class="mt-0">FILTERED RESULTS</h5>
+                            <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
+                                <strong>Error: </strong> {{errorMsg}}
+                            </div>
+                            <ul class="search-list">
+                                <li *ngFor="let grpData of myGrpList">
+                                    <a [routerLink]="['/group/details',grpData.group_uname]">
+                                        <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
+                                    </a>
+                                    <div class="right-side">
+                                        <h4>
+                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
+                                        </h4>
+                                        <!--<small class="text">{{grpData.short_desc}}</small>-->
+                                        <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
+                                        <p class="txt-red">By {{grpData.name}}</p>
+                                        <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="search-list">
-                            <li *ngFor="let grpData of myGrpList">
-                                <a [routerLink]="['/group/details',grpData.group_uname]">
-                                    <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
-                                </a>
-                                <div class="right-side">
-                                    <h4>
-                                        <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
-                                    </h4>
-                                    <!--<small class="text">{{grpData.short_desc}}</small>-->
-                                    <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-                                    <p class="txt-red">By {{grpData.name}}</p>
-                                    <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="MyGroups-list">
-                        <h5 class="mt-0">MY GROUPS</h5>
-                        <ul class="search-list">
-                            <li *ngFor="let grpData of totalMyGrpList">
-                                <a [routerLink]="['/group/details',grpData.group_uname]">
-                                    <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
-                                </a>
-                                <div class="right-side">
-                                    <h4>
-                                        <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
-                                    </h4>
-                                    <!--<small class="text">{{grpData.short_desc}}</small>-->
-                                    <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-                                    <p class="txt-red">By {{grpData.name}}</p>
-                                    <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="MyGroups-list">
-                        <h5 class="mt-0">TOP GROUPS</h5>
-                        <ul class="search-list">
-                            <li *ngFor="let grpData of groupList">
-                                <a [routerLink]="['/group/details',grpData.group_uname]">
-                                    <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
-                                </a>
-                                <div class="right-side">
-                                    <h4>
-                                        <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
-                                    </h4>
-                                    <!--<small class="text">{{grpData.short_desc}}</small>-->
-                                    <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-                                    <p class="txt-red">By {{grpData.name}}</p>
-                                    <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="MyGroups-list" #myGroupsList>
+                            <h5 class="mt-0">MY GROUPS</h5>
+                            <ul class="search-list">
+                                <li *ngFor="let grpData of totalMyGrpList">
+                                    <a [routerLink]="['/group/details',grpData.group_uname]">
+                                        <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
+                                    </a>
+                                    <div class="right-side">
+                                        <h4>
+                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
+                                        </h4>
+                                        <!--<small class="text">{{grpData.short_desc}}</small>-->
+                                        <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
+                                        <p class="txt-red">By {{grpData.name}}</p>
+                                        <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="MyGroups-list" #topGroupsList>
+                            <h5 class="mt-0">TOP GROUPS</h5>
+                            <ul class="search-list">
+                                <li *ngFor="let grpData of groupList">
+                                    <a [routerLink]="['/group/details',grpData.group_uname]">
+                                        <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
+                                    </a>
+                                    <div class="right-side">
+                                        <h4>
+                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
+                                        </h4>
+                                        <!--<small class="text">{{grpData.short_desc}}</small>-->
+                                        <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
+                                        <p class="txt-red">By {{grpData.name}}</p>
+                                        <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!--<ul class="search-list">
@@ -100,11 +100,15 @@
                                     </button>
                                 </div>
                             </li>
-                            <li>My Groups
-                                <span>({{totalMyGrpList?.length}})</span>
+                            <li>
+                                <a href="javascript:void(0);" (click)="scrollToMyGroup()">My Groups
+                                    <span>({{totalMyGrpList?.length}})</span>
+                                </a>
                             </li>
-                            <li>Top Groups
-                                <span>({{groupList?.length}})</span>
+                            <li>
+                                <a href="javascript:void(0)" (click)="scrollToTopGroups()">Top Groups
+                                    <span>({{groupList?.length}})</span>
+                                </a>
                             </li>
                             <li *ngFor="let item of categoryListWithCount">
                                 <a style="cursor:pointer;" (click)="getCatDetails(item.id)">{{item.title}}
