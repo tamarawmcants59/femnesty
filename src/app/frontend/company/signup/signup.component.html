@@ -9,33 +9,10 @@
            
             <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">    
                  
-                
-                <div class="form-group col-md-6">
-                    <input type="url" placeholder="Company Url" class="form-control" [formControl]="website" (ngModelChange)="checkCompanyurl($event)">
-                    <div class="text-danger" *ngIf="!website.valid && website.touched">
-                      Please enter the correct Company Url, this Company Url is not valid.
-                    </div>
-                    <div class="text-danger" *ngIf="!domainmatch1 && website.valid">
-                        Company url domain and email domain not match.
-                    </div>
-                </div>
-
-                 <div class="form-group col-md-6">
-                    <input type="text" placeholder="Email Address" class="form-control" [formControl]="email" (ngModelChange)="checkEmail($event)">
-                    <div class="text-danger" *ngIf="(email.hasError('email', 'email') || !email.valid) && email.touched">
-                      Please enter the correct email, this email not valid.
-                    </div>
-                    <div class="text-danger" *ngIf="!checkEmailExist && email.valid">
-                        This email already exist.
-                    </div>
-                    <div class="text-danger" *ngIf="!domainmatch && email.valid">
-                        Company url domain and email domain not match.
-                    </div>
-                </div>
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Company Name" class="form-control" [formControl]="company_name" (ngModelChange)="checkCompanyname($event)">
                     <div class="text-danger" *ngIf="!company_name.valid && company_name.touched">
-                      Please enter your company name.
+                        Please enter your company name.
                     </div>
                     <div class="text-danger" *ngIf="!checkCompanynameExist && company_name.valid">
                         This company already exist.
@@ -45,6 +22,28 @@
                     </div> -->
                     
                 </div>
+                <div class="form-group col-md-6">
+                    <input type="text" placeholder="Email Address" class="form-control" [formControl]="email" (ngModelChange)="checkEmail($event)">
+                    <div class="text-danger" *ngIf="(email.hasError('email', 'email') || !email.valid) && email.touched">
+                        Please enter the correct email, this email not valid.
+                    </div>
+                    <div class="text-danger" *ngIf="!checkEmailExist && email.valid">
+                        This email already exist.
+                    </div>
+                    <div class="text-danger" *ngIf="!domainmatch && email.valid">
+                        Company url domain and email domain not match.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="url" placeholder="Company Url" class="form-control" [formControl]="website" (ngModelChange)="checkCompanyurl($event)">
+                    <div class="text-danger" *ngIf="!website.valid && website.touched">
+                      Please enter the correct Company Url, this Company Url is not valid.
+                    </div>
+                    <div class="text-danger" *ngIf="!domainmatch1 && website.valid">
+                        Company url domain and email domain not match.
+                    </div>
+                </div>
+    
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Contact Number" class="form-control" [formControl]="mobile_number">
                     <div class="text-danger" *ngIf="!mobile_number.valid && mobile_number.touched">
@@ -72,6 +71,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <button class="btn btn-primary" [disabled]="!signupForm.valid || !checkEmailExist || !checkCompanynameExist || !domainmatch || !domainmatch1" type="submit">Submit</button>
+                     <!--<button class="btn btn-primary" [disabled]="!signupForm.valid || disableSignup" type="submit">Submit</button>-->
                 </div>
                
             </form>
