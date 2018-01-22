@@ -75,4 +75,5 @@ export class FrontendService {
   getArticleData(){
     return this.apiService.get(`/enrichment/apparticleWithCat`).map(data => data);
   }
+
 }

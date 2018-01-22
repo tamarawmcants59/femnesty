@@ -23,12 +23,15 @@ export class EditprofileComponent implements OnInit {
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
+  reqErrorMsg: string = '';
+  reqSuccessMsg: string = '';
   userTabActiveStr: string = '';
   public loading = false;
   public loginUserDet: Object = {};
   public userPostList = [];
   public userFrndList = [];
   public previousUrl:string;
+  public userRequestFrndList =[];
 
   prfImageData: any;
   coverImageData: any;
@@ -154,6 +157,7 @@ export class EditprofileComponent implements OnInit {
     this.getUserDetails();
     this.getUserPostDetails();
     this.getConnectionList();
+    this.getPendingFrndList();
   }
 
   public getConnectionList() {
@@ -241,6 +245,7 @@ export class EditprofileComponent implements OnInit {
       data => {
         this.editAbtActiveTab = '';
         const details = data;
+        //console.log
         localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
         localStorage.setItem('userName', details.UserDetails.first_name);
         localStorage.setItem('profile_image', details.UserDetails.image_url);
@@ -362,6 +367,66 @@ export class EditprofileComponent implements OnInit {
     this.successMsg = '';
     this.errorMsg = '';
     //console.log(data);
+  }
+
+  public getPendingFrndList(){
+    const loginUserId = localStorage.getItem("loginUserId");
+    if(loginUserId!=''){
+        let dataUserDet ={
+          "user_id": loginUserId
+        };
+        this.dataService.getRequestFrndListById(dataUserDet)
+        .subscribe(data => {
+              let details=data;
+              if (details.Ack=="1") {
+                  this.userRequestFrndList = details.PendingFriendListById;
+              }
+          },
+          error => {
+          }
+        ); 
+      }else{
+      }
+  }
+
+  public acceptFriendRequest(request_id) {
+    this.loading = true;
+    this.reqSuccessMsg='';
+    this.reqErrorMsg='';
+    let requestJsonData={"id": request_id};
+    this.dataService.acceptFrndRequest(requestJsonData)
+      .subscribe(
+            data => {
+                this.loading = false;
+                if(data.Ack==1){
+                  this.reqSuccessMsg=data.msg;
+                  this.getPendingFrndList();
+                }else{
+                  //this.errorMsg='You have already send the friend request';
+                }
+      },
+      error => {
+        alert(error);
+      });
+  }
+
+  public rejectFriendRequest(request_id) {
+      this.loading = true;
+      this.reqSuccessMsg='';
+      this.reqErrorMsg='';
+      let requestJsonData={"id": request_id};
+      this.dataService.rejectFrndRequest(requestJsonData).subscribe(data => {
+          this.loading = false;
+          if(data.Ack==1){
+            this.reqSuccessMsg=data.msg;
+            this.getPendingFrndList();
+          }else{
+            //this.errorMsg='You have already send the friend request';
+          }
+        },
+        error => {
+          alert(error);
+        });
   }
 
   /*public checkInputValue(values:Object,inputname):void {
