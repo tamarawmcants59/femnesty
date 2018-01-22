@@ -75,16 +75,12 @@ export class GrouplistComponent implements OnInit {
 
   scrollToTopGroups() {
     this.errorMsg = '';
-    // const ele = document.getElementById('topGroupsList');
-    // const offSetHeight = ele.offsetHeight;
-    // window.scrollTo(0, offSetHeight);
+    this.myGrpList=[];
     this.topGroupsList.nativeElement.scrollIntoView();
   }
   scrollToMyGroup() {
     this.errorMsg = '';
-    // const ele = document.getElementById('MyGroupsList');
-    // const offSetHeight = ele.offsetHeight;
-    // window.scrollTo(0, offSetHeight);
+    this.myGrpList=[];
     this.myGroupsList.nativeElement.scrollIntoView();
   }
   private getCatDetails(id) {
