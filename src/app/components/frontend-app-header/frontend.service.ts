@@ -65,8 +65,14 @@ export class FrontendService {
   }
 
   getAllCmsList() {
-    return this.apiService.get(`enrichment/appcontentallbyslug/all`)
-      .map(data => data);
+    return this.apiService.get(`/enrichment/appcontentallbyslug/all`).map(data => data);
+  }
+  
+  getHomePageSliderData() {
+    return this.apiService.get(`/users/appTestimoniallist`).map(data => data);
   }
 
+  getArticleData(){
+    return this.apiService.get(`/enrichment/apparticleWithCat`).map(data => data);
+  }
 }

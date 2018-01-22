@@ -9,6 +9,7 @@ import { FrontendService } from "../../components/frontend-app-header/frontend.s
 export class HomeComponent implements OnInit {
   public homepageData:any;
   public homepageArtData =[];
+  public homepageSliderData =[];
   public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
   public homepageCls='';
   constructor(
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getHomePageContent();
     this.getHomePageTopArticle();
+    this.getHomePageTestomonial();
   }
 
   getHomePageContent() {
@@ -43,6 +45,17 @@ export class HomeComponent implements OnInit {
       if (data.Ack == "1") {
         this.homepageArtData = data.ArticleList;
         //console.log(this.homepageData);
+      }
+    }, error => {
+      console.log('Something went wrong!');
+    });
+  }
+
+  getHomePageTestomonial() {
+    this.dataService.getHomePageSliderData().subscribe(data => {
+      if (data.Ack == "1") {
+        //console.log(data);
+        this.homepageSliderData = data.testimonial;
       }
     }, error => {
       console.log('Something went wrong!');

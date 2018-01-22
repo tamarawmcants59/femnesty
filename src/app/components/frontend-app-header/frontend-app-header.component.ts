@@ -4,6 +4,7 @@ import { NgZone } from "@angular/core";
 import * as firebase from 'firebase';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FrontendService } from "./frontend.service";
+// import { ArticleService } from "../../frontend/article/article.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -17,7 +18,7 @@ export class FrontendAppHeader {
   pageConData = [];
 
   HeaderNavCls: string = '';
-  lastScrollTop: number = 400;
+  lastScrollTop: number = 100;
   chatHeads: any[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   public userloggedIn: string = '';
@@ -29,6 +30,7 @@ export class FrontendAppHeader {
   public currentFireUserId: string = '';
   public getCurrentPageName: string = '';
   public show: boolean = false;
+  public articleArr =[];
 
   constructor(
     private el: ElementRef,
@@ -36,6 +38,7 @@ export class FrontendAppHeader {
     private route: ActivatedRoute,
     private router: Router,
     private _service: FrontendService,
+    //private artService: ArticleService,
     private builder: FormBuilder,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
@@ -62,9 +65,6 @@ export class FrontendAppHeader {
 
         //this.getCurrentPageName = params['slug'];
     });*/
-
-
-
 
     if (this.getCurrentPageName == '/home') {
       window.onscroll = () => {
@@ -139,14 +139,11 @@ export class FrontendAppHeader {
       }
     );
 
-
     if (this.userloggedIn == '1') {
       this.userNotiCountList();
     }
 
-
-
-
+    this.getArticleList();
     this.getUnreadMessages();
   }
 
@@ -182,6 +179,19 @@ export class FrontendAppHeader {
     this._chatListnerService.onChatHeadClick(chat);
   }
 
+  public getArticleList() {
+    this._service.getArticleData().subscribe(data=>{
+        let details=data;
+        //console.log(details);
+        if (details.Ack=="1") {
+            this.articleArr = details.ArticleCatList;
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
+  }
   public userNotiCountList() {
     let loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
@@ -240,7 +250,4 @@ export class FrontendAppHeader {
   toggleCollapse() {
     this.show = !this.show;
   }
-
-
-
 }

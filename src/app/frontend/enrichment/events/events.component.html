@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-6 mt-30" *ngFor="let catEnrichment of artCatData">
-                <div [ngStyle]="{'background-image':'url('+catEnrichment.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}" class="img-responsive event-img"> </div>
+                <div [ngStyle]="{'background-image':'url(\''+catEnrichment.image_url+'\')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}" class="img-responsive event-img"> </div>
                 <div class="enrichment-dtls">
                 	<h3 class="text-red text-center">{{catEnrichment.name}}</h3>
                 	<small>Street, City, Postal Code, Date</small>

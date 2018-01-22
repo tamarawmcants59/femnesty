@@ -45,7 +45,7 @@ we can do better?
       <div class="col-md-6 col-sm-8">
         <h1 style="width: 80%">{{homepageData?.below_top_header}}</h1>
         <p class="pr-50">{{homepageData?.below_top_text}}</p>
-        <a class="btn btn-primary" [routerLink]="['/page/about-us']">About us</a>
+        <a class="btn btn-primary" href="{{homepageData?.below_top_link}}">About us</a>
       </div>
       <div class="col-md-6 col-sm-4">
         <img [src]="homepageData?.below_top_side_image" alt="" class="img-responsive"/>
@@ -75,18 +75,13 @@ we can do better?
   </div>
 </section>
 <section class="section quote">
-  <div class="container">
+  <div class="container" *ngIf="homepageSliderData.length>0">
     <blockquote>
        <div class="colorDissolve">
-         <div class="item">
+         <div class="item" *ngFor="let homeSlider of homepageSliderData;">
             <i class="ion-quote"></i>
-            <p>{{homepageData?.below_list_maintext}}</p>
-            <footer>John C. Maxwell</footer>
-         </div>
-         <div class="item">
-            <i class="ion-quote"></i>
-            <p>Another Testimonial</p>
-            <footer>John C</footer>
+            <p>{{homeSlider?.description}}</p>
+            <footer>{{homeSlider?.name}}</footer>
          </div>
        </div>
     </blockquote>
@@ -116,17 +111,17 @@ we can do better?
       <div class="col-md-4">
         <h2>{{homepageData?.last_list_heading1}}</h2>
         <p>{{homepageData?.last_list_text1}}</p><br>
-        <a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">READ MORE</a>
+        <a href="{{homepageData?.last_list_link1}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
         <h2>{{homepageData?.last_list_heading2}}</h2>
         <p>{{homepageData?.last_list_text2}}</p><br>
-        <a [routerLink]="['/user/team']" class="btn btn-primary">READ MORE</a>
+        <a href="{{homepageData?.last_list_link2}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
         <h2>{{homepageData?.last_list_heading3}}</h2>
         <p>{{homepageData?.last_list_text3}}</p><br>
-        <a [routerLink]="['/user/mentor']" class="btn btn-primary">READ MORE</a>
+        <a href="{{homepageData?.last_list_link3}}" class="btn btn-primary">READ MORE</a>
       </div>
     </div>
   </div>

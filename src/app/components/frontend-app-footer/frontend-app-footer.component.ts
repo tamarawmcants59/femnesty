@@ -47,7 +47,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   successMsg: string='';
   public pageContactData: string = '';
   public siteSettingsDet: Object = {};
-  //public subsform: FormGroup;
+  public articleArr=[];
 
   constructor(
     //private builder: FormBuilder,
@@ -109,7 +109,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     });
 
     this.cmsAll();
-
+    this.getArticleList();
   }
 
   ngAfterViewChecked() {
@@ -311,4 +311,17 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     });
   }
 
+  public getArticleList() {
+    this._service.getArticleData().subscribe(data=>{
+        let details=data;
+        //console.log(details);
+        if (details.Ack=="1") {
+            this.articleArr = details.ArticleCatList;
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
+  }
 }
