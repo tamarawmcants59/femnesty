@@ -87,7 +87,7 @@ export class FrontendAppHeader {
 
     this.userloggedIn = localStorage.getItem("isLoggedIn");
     let getUserDet = localStorage.getItem("currentUser");
-    this.currentUserDet = JSON.parse(getUserDet);
+    //this.currentUserDet = JSON.parse(getUserDet);
 
     this.form = builder.group({
       skeyword: ['', [
@@ -142,7 +142,7 @@ export class FrontendAppHeader {
     if (this.userloggedIn == '1') {
       this.userNotiCountList();
     }
-
+    this.getUserDetails();
     this.getArticleList();
     this.getUnreadMessages();
   }
@@ -249,5 +249,26 @@ export class FrontendAppHeader {
 
   toggleCollapse() {
     this.show = !this.show;
+  }
+
+  public getUserDetails() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "id": parseInt(loginUserId)
+      };
+      this._service.getUserDetById(dataUserDet).subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            this.currentUserDet = details.UserDetails[0];
+            //console.log(this.currentUserDet);
+          } 
+        },
+        error => {
+        }
+        );
+    } else {
+    }
+
   }
 }

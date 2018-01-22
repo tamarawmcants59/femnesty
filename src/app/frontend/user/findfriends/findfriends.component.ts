@@ -37,11 +37,11 @@ export class FindfriendsComponent implements OnInit {
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.loginUserId=localStorage.getItem("loginUserId");
-    this.getPendingFrndList();
+    //this.getPendingFrndList();
     this.submitSearchUser();
   }
   
-  public getPendingFrndList(){
+  /*public getPendingFrndList(){
       if(this.loginUserId!=''){
           let dataUserDet ={
             "user_id": this.loginUserId
@@ -62,7 +62,7 @@ export class FindfriendsComponent implements OnInit {
           ); 
         }else{
         }
-  }
+  }*/
 
   public submitSearchUser() {
       this.loading = true;
@@ -112,7 +112,7 @@ export class FindfriendsComponent implements OnInit {
         });
   }
   
-  public acceptFriendRequest(request_id) {
+  /*public acceptFriendRequest(request_id) {
       this.loading = true;
       this.successMsg='';
       this.errorMsg='';
@@ -123,7 +123,7 @@ export class FindfriendsComponent implements OnInit {
                   this.loading = false;
                   if(data.Ack==1){
                     this.successMsg=data.msg;
-                    this.getPendingFrndList();
+                    //this.getPendingFrndList();
                   }else{
                     //this.errorMsg='You have already send the friend request';
                   }
@@ -142,7 +142,7 @@ export class FindfriendsComponent implements OnInit {
           this.loading = false;
           if(data.Ack==1){
             this.successMsg=data.msg;
-            this.getPendingFrndList();
+            //this.getPendingFrndList();
           }else{
             //this.errorMsg='You have already send the friend request';
           }
@@ -150,5 +150,5 @@ export class FindfriendsComponent implements OnInit {
         error => {
           alert(error);
         });
-  }
+  }*/
 }
