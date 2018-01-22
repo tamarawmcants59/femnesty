@@ -87,10 +87,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="right-area">
-                                                    <p>
-                                                        <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="requestGroupAction(groupData.id,'2')">Accept</button>
-                                                        <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="requestGroupAction(groupData.id,'3')">Decline</button>
+                                                    <p *ngIf="!friendData.isPressed">
+                                                        <button *ngIf="isloginUserId !=''" type="button" class="btn btn-primary" (click)="requestGroupAction(friendData.id,'2')">Accept</button>
+                                                        <button *ngIf="isloginUserId !=''" type="button" class="btn btn-black btn-default" (click)="requestGroupAction(friendData.id,'3')">Decline</button>
                                                     </p>
+                                                    <p *ngIf="friendData.isPressed">
+                                                           <a class=btn btn-primary>{{friendData.text}}</a>
+                                                        </p>
                                                 </div>
                                             </li>
                                             
