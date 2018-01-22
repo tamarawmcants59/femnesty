@@ -16,7 +16,12 @@
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
 							<button type="button" class="btn btn-primary" (click)="attendHub()">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
-							<button type="button" class="btn btn-default">Add to calendar</button>
+							<a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{hubDetails.title}}
+							&dates={{startDateString}}/{{endDateString}}
+							&details={{hubDetails.description}}
+							&location={{hubDetails.address}}
+							" target="_blank" rel="nofollow"><button type="button" class="btn btn-default">Add to calendar</button></a>
+							<!--<button type="button" class="btn btn-default">Add to calendar</button>-->
 						</p>
 					</div>
 					<div class="tabPart">
