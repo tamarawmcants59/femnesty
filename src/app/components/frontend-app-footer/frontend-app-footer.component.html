@@ -37,10 +37,10 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <h5>ARTICLES</h5>
-                    <ul>
-                        <li><a [routerLink]="['/articles/work-and-home-balance']">Work and Home Balance</a></li>
-                        <li><a [routerLink]="['/articles/strategies-for-success']">Strategies for Success</a></li>
-                        <li><a [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a></li>
+                    <ul *ngIf="articleArr.length>0">
+                        <li *ngFor="let artdata of articleArr;"><a [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a></li>
+                        <!--<li><a [routerLink]="['/articles/strategies-for-success']">Strategies for Success</a></li>
+                        <li><a [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a></li>-->
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6">

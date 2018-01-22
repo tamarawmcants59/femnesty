@@ -42,10 +42,10 @@
                         <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Articles
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
-                            <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
-                            <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="articleArr.length>0">
+                            <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
+                            <!--<a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
+                            <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>-->
                             <a class="dropdown-item" [routerLink]="['/articles']">All Articles</a>
                         </div>
                     </li>
@@ -119,10 +119,11 @@
                             <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Articles
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="articleArr.length>0">
+                                <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
+                                <!--<a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
                                 <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
-                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>
+                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>-->
                                 <a class="dropdown-item" [routerLink]="['/articles']">All Articles</a>
                             </div>
                         </li>
@@ -213,10 +214,11 @@
                 <div *ngIf="show" class="collapse navbar-collapse mobile-navs" style="display: block;">
                     <ul class="nav navbar-nav navbar-right display-on">
                         <li class="nav-item dropdown"><a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Articles</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5">
-                                <a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5" *ngIf="articleArr.length>0">
+                                    <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
+                                <!--<a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
                                 <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
-                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>
+                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>-->
                                 <a class="dropdown-item" [routerLink]="['/articles']">All Articles</a>
                             </div>
                         </li>

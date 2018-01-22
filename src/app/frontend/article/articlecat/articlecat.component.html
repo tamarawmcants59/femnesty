@@ -35,6 +35,7 @@
                         </ul>
                   </div>
                   <div class="col-md-4 right-gray-box">
+                      <div *ngIf="articleListData.length > 0">
                       <div class="right-img-hold">
                           <a [routerLink]="['/articles/details',articleListData[0].slug]"><img [src]="articleListData[0].image_url" alt="" class="img-responsive"></a>
                       </div>
@@ -58,6 +59,7 @@
                               </li>
                           </ul>-->
                           <a [routerLink]="['/articles/details',articleListData[0].slug]" class="btn btn-primary">Read more</a>
+                      </div>
                       </div>
                   </div>
               </div>

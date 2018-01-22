@@ -32,7 +32,8 @@ export class ArticlecatComponent implements OnInit {
   getCatwiseArticle(){
     this._artcat_service.getCatDetBySlug(this.SlugName).subscribe(data=>{
       let details=data;
-      if (details.Ack=="1") {
+      if (details.Ack==1) {
+          //console.log(details);
           this.articleCatData = details.ArticleCatBySlug[0];
           this.articleListData = details.TopArticleByCat;
       }
