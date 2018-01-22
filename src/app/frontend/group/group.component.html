@@ -4,8 +4,10 @@
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
           <div class="col-md-3 flex-left">
             <div>
+                <user-sidebar></user-sidebar>
             <!--<div *ngIf="isUserLogin == 1"> --> 
-                <app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>
+                <!--<app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>-->
+
             </div>
           </div>
           <div class="col-md-6 flex-middle">
