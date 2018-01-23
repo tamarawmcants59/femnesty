@@ -64,13 +64,53 @@ export class HubsComponent implements OnInit {
   {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
       if(data.Ack == 1){
-        console.log(data);
         localStorage.setItem("groupAdmin",data.details.user_id);
+        if(data.details.type=="R" && data.details.recurring_start)
+        {
+          let day=new Date(data.details.recurring_start).getDay();
+          let result='';
+          switch (day) {
+            case 0: {
+              result = 'Sunday';
+              break;
+            }
+            case 1: {
+              result = 'Monday';
+              break;
+            }
+            case 2: {
+              result = 'Tuesday';
+              break;
+            }
+            case 3: {
+              result = 'Wednesday';
+              break;
+            }
+            case 4: {
+              result = 'Thursday';
+              break;
+            }
+            case 5: {
+              result = 'Friday';
+              break;
+            }
+            case 6: {
+              result = 'Saturday';
+              break;
+            }
+            default: {
+              result = 'Sunday';
+              break;
+            }
+          }
+          data.details.day=result;
+        }
         this.hubDetails = data.details;
         this.startDateString = new Date(data.details.start_date).toISOString().replace(/[-:.]/g, "").replace('000Z',"Z");
         this.endDateString = new Date(data.details.end_date).toISOString().replace(/[-:.]/g, "").replace('000Z', "Z");
         
         this.groupPostDetData = { activitytype: '4', activityid: this.hubDetails.id };
+         
         this.getUserPostDetails();
         this.getUnivitedUsers();
       }
@@ -101,7 +141,7 @@ export class HubsComponent implements OnInit {
     }
   }
 
-  public attendHub()
+  public attendHub(hubDetails)
   {
     const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
     this.hubService.attendHub(attendData).subscribe(data => {

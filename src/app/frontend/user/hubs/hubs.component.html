@@ -15,7 +15,7 @@
 						<!-- <p class="shortP">Hub Short Description</p> -->
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
-							<button type="button" class="btn btn-primary" (click)="attendHub()">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
+							<button type="button" class="btn btn-primary" (click)="attendHub(hubDetails)">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
 							<a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{hubDetails.title}}
 							&dates={{startDateString}}/{{endDateString}}
 							&details={{hubDetails.description}}
@@ -53,7 +53,7 @@
 									<h2>{{hubDetails.title}}</h2>
 									<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
 									<p class="info" *ngIf="hubDetails.type=='R'">
-											{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
+											{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}}, {{hubDetails.day}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
 									<p class="info" *ngIf="hubDetails.type!='R'">
 										<span>Date:</span> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
 									<p class="info"><span>Organizer:</span> {{hubDetails.organizer}}</p>
@@ -92,10 +92,10 @@
 					<div class="innerRightPart right-map-details HUB-Dtls">
 						  <h2>{{hubDetails.title}}</h2>	
 						  <p class="info" *ngIf="hubDetails.type=='R'">
-								<span>Date:</span> <em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
+								<span>Date:</span> <em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},<br/> {{hubDetails.day}},<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
 						<p class="info" *ngIf="hubDetails.type!='R'">
 							<span>Date:</span> <em>{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
-						  <p class="info"><span>Description:</span><em>{{hubDetails.description}} dshj hdsdsu jf udsjj jdskj jkdsjn kjdskjdskjh dskjk dsh kjdshhdskjhfdskjhdskjh dskj hdskj hdkjskjdshkjhsdkjhsdkjhdskjhfdskj</em></p>
+						  <p class="info"><span>Description:</span><em>{{hubDetails.description}} </em></p>
 						
 						
 						  <p class="info"><span>Organizer:</span> <em>{{hubDetails.organizer}}</em></p>

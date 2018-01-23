@@ -127,7 +127,7 @@
                                 </a>
                                 <div class="article-text">
                                     <p>{{articleData.title | limitTo : 20}}</p>
-                                    <a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.created_date_mod}}</a>
+                                    <a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.c_date | dateTimeFormat: 'MMM dd, yyyy'}}</a>
                                 </div>
                             </div>
                         </div>

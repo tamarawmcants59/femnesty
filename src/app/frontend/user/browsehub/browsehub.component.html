@@ -76,7 +76,7 @@
 									</a>
 									<p class="black-text">{{hub.address}}</p>
 									<p class="red-text" *ngIf="hub.type!='R'">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
-									<p class="red-text" *ngIf="hub.type=='R'">{{hub.recurring_start}} - {{hub.recurring_end}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+									<p class="red-text" *ngIf="hub.type=='R'">{{hub.recurring_start}} - {{hub.recurring_end}}, {{hub.day}} @ {{hub.start_time}} - {{hub.end_time}}</p>
 									<p class="red-text" *ngIf="hub.type=='R'">Recurring </p>
 									<div class="bottom-links-wrap">
 										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
@@ -133,7 +133,7 @@
 								</a>
 								<div class="article-text">
 									<p>{{articleData.title | limitTo : 20}}</p>
-									<a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.created_date_mod}}</a>
+									<a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.c_date | dateTimeFormat: 'MMM dd, yyyy' }}</a>
 								</div>
 							</div>
 						</div>
