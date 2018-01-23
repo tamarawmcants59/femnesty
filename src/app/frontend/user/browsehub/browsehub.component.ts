@@ -8,7 +8,7 @@ import { UserService } from "../user.service";
   styleUrls: ['./browsehub.component.css']
 })
 export class BrowsehubComponent implements OnInit {
-  public isloginUser =1;
+  public isloginUser = 1;
   public loginUserId: any;
   public allHubs;
   public allCategories;
@@ -17,8 +17,8 @@ export class BrowsehubComponent implements OnInit {
   private search_con;
   public search_date;
   public latestArticles = [];
-  public search_data = { keyword: '', cat_id: '', search_date:''};
-  constructor(private hubService: HubService, private dataService: UserService,) {
+  public search_data = { keyword: '', cat_id: '', search_date: '' };
+  constructor(private hubService: HubService, private dataService: UserService, ) {
     this.loginUserId = localStorage.getItem("loginUserId");
   }
 
@@ -27,25 +27,73 @@ export class BrowsehubComponent implements OnInit {
     this.getLastFourArticle();
   }
 
-  public getAllHubs(){
+
+
+  private ReturnDayFromDate(date: Date) {
+    let result: any;
+    let day = date.getDay();
+    switch (day) {
+      case 0: {
+        result = 'Sunday';
+        break;
+      }
+      case 1: {
+        result = 'Monday';
+        break;
+      }
+      case 2: {
+        result = 'Tuesday';
+        break;
+      }
+      case 3: {
+        result = 'Wednesday';
+        break;
+      }
+      case 4: {
+        result = 'Thursday';
+        break;
+      }
+      case 5: {
+        result = 'Friday';
+        break;
+      }
+      case 6: {
+        result = 'Saturday';
+        break;
+      }
+      default: {
+        result = 'Sunday';
+        break;
+      }
+    }
+    return result;
+  }
+  public getAllHubs() {
     //console.log('search keyword', this.search_con);
     //const search_data = { keyword: this.search_con};
+    const self = this;
     this.hubService.getAllHubs(this.loginUserId, this.search_data).subscribe(data => {
-      if(data.Ack == 1)
-      {
+      if (data.Ack == 1) {
         this.allHubs = data.details;
-        
+        if (self.allHubs.length && self.allHubs.length > 0) {
+          for (var i = 0; i < self.allHubs.length; i++) {
+            if (self.allHubs[i].type == 'R') {
+              if (self.allHubs[i].recurring_start)
+                self.allHubs[i].day = self.ReturnDayFromDate(new Date(self.allHubs[i].recurring_start));
+            }
+          }
+        }
         this.allCategories = data.categories;
         this.lat = data.lat;
         this.lng = data.lng;
       }
-    }, 
+    },
       error => {
         console.log('Something went wrong!');
       })
   }
 
-  public searchByKeyword(){
+  public searchByKeyword() {
     this.search_data.keyword = this.search_con;
     this.getAllHubs();
   }
@@ -55,8 +103,7 @@ export class BrowsehubComponent implements OnInit {
     this.getAllHubs();
   }
 
-  public searchByCategory(id)
-  {
+  public searchByCategory(id) {
     this.search_data.cat_id = id;
     this.getAllHubs();
   }

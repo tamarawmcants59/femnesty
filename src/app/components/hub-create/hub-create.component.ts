@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
-import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
+// import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 // import { AmazingTimePickerService } from 'amazing-time-picker';
 
 
@@ -20,8 +20,10 @@ export class HubCreateComponent implements OnInit {
   loading: boolean;
   showPostImgDive: boolean;
   errorMsg: string = '';
+  createErrorMsg: string = '';
   successMsg: string = '';
   postImgData: any;
+  public minDate = new Date();
   public aboutActiveTab: string = 'overview';
   public loginUserDet: Object = {};
   public loginUserId: any;
@@ -29,12 +31,12 @@ export class HubCreateComponent implements OnInit {
   public groupEditId: any;
   public hubList = [];
   public groupEditDataJson = {};
-  public addForm = { type: 'O', category_id:'',privacy:'O'};
-  public catList=[];
-  public userSearchFrndList=[];
+  public addForm = { type: 'O', category_id: '', privacy: 'O' };
+  public catList = [];
+  public userSearchFrndList = [];
   public items = [];
   public hubRequestList = [];
-  public searchData = {address:'',lat:'',lng:''};
+  public searchData = { address: '', lat: '', lng: '' };
   public today = new Date().toJSON().split('T')[0];
   public autocompleteSettings: any = {
     showSearchButton: false,
@@ -51,7 +53,7 @@ export class HubCreateComponent implements OnInit {
     private hubService: HubService
   ) {
     this.postform = builder.group({
-      id:['',[]],
+      id: ['', []],
       title: ['', [
         Validators.required,
         Validators.minLength(3)
@@ -126,44 +128,41 @@ export class HubCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-        this.aboutActiveTab = params['slug'];
+      this.aboutActiveTab = params['slug'];
     });
     this.getMyGroupListData();
     // this.getGroupRequestList();
     this.getHubList();
     this.getHubCategories();
     this.getFriendList();
-    if(this.aboutActiveTab=='create'){
+    if (this.aboutActiveTab == 'create') {
       this.resetAddPage();
-    }else if(this.aboutActiveTab=='request'){
+    } else if (this.aboutActiveTab == 'request') {
       this.getMyHubRequest();
     }
   }
 
-  public resetAddPage(){
+  public resetAddPage() {
     this.addForm = { type: 'O', category_id: '', privacy: 'O' };
     this.searchData = { address: '', lat: '', lng: '' };
     this.autocompleteSettings['inputString'] = '';
   }
 
-  public checkValidation()
-  {
+  public checkValidation() {
     //alert(this.postform.get('type').value)
-    if(this.postform.get('type').value=='R')
-    {
+    if (this.postform.get('type').value == 'R') {
       //this.postform.get('recurring_start').setValidators([Validators.required]);
       this.postform.get('recurring_end').setValidators([Validators.required]);
     }
-    else
-    {
+    else {
       //this.postform.get('recurring_start').setValidators([]);
       this.postform.get('recurring_end').setValidators([]);
     }
-   // this.postform.get('recurring_start').updateValueAndValidity();
+    // this.postform.get('recurring_start').updateValueAndValidity();
     this.postform.get('recurring_end').updateValueAndValidity();
   }
-  
-  public getHubList(){
+
+  public getHubList() {
     this.hubService.getmyRequestGroupList(this.loginUserId).subscribe(data => {
       //console.log(data)
       if (data.Ack == "1") {
@@ -176,48 +175,62 @@ export class HubCreateComponent implements OnInit {
     );
   }
 
-  public setMinDate(newValue)
-  {
+  public setMinDate(newValue) {
 
   }
 
   autoCompleteCallback1(data: any): any {
-    console.log(data);
-    this.searchData = {address:data.data.description,lat:data.data.geometry.location.lat,lng:data.data.geometry.location.lng};
+if(data.response==true)
+    this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
   }
 
   public createHub() {
-    this.loading = true;
-    const userValue = this.postform.value;
-    userValue.user_id = this.loginUserId;
-    userValue.image = this.postImgData;
-    console.log(userValue);
-    if (this.searchData.address && this.searchData.lat)
-    {
-      userValue.address = this.searchData.address;
-      userValue.lat = this.searchData.lat;
-      userValue.lng = this.searchData.lng;
-    }
-    this.hubService.createNewHub(userValue).subscribe(
-      data => {
-        this.showPostImgDive = false;
-        this.loading = false;
-        this.successMsg = 'Hub Created Successfully';
-        this.postform.reset();
-        this.aboutActiveTab = 'overview';
+    if (this.postform.valid) {
+      if (this.searchData.address) {
+        this.createErrorMsg = '';
+        this.loading = true;
+        const userValue = this.postform.value;
+        userValue.user_id = this.loginUserId;
+        userValue.image = this.postImgData;
+        console.log(userValue);
+        if (this.searchData.address && this.searchData.lat) {
+          userValue.address = this.searchData.address;
+          userValue.lat = this.searchData.lat;
+          userValue.lng = this.searchData.lng;
+        }
+        this.hubService.createNewHub(userValue).subscribe(
+          data => {
+            this.showPostImgDive = false;
+            this.loading = false;
+            if (userValue.id) {
+              this.successMsg = "Hub edited Successfully.";
+            }
+            else
+              this.successMsg = 'Hub Created Successfully';
+            this.postform.reset();
+            this.aboutActiveTab = 'overview';
+            window.scrollTo(0, 0);
+            this.getHubList();
+          },
+          error => {
+            alert(error);
+          });
+      }
+      else {
+        this.createErrorMsg = "Please enter the location.";
         window.scrollTo(0, 0);
-        this.getHubList();
-      },
-      error => {
-        alert(error);
-      });
+      }
+
+    }
+
+
+
   }
 
-  public editHubTab(hub){
+  public editHubTab(hub) {
     // this.postform = hub;
     console.log(hub);
-    if(hub.date)
-    {
+    if (hub.date) {
       //alert(hub.date);
       hub.date = new Date(hub.date);
       //alert(hub.date);
@@ -226,6 +239,7 @@ export class HubCreateComponent implements OnInit {
     }
     this.addForm = hub;
     this.autocompleteSettings['inputString'] = hub.address;
+    this.searchData = { address: hub.address, lat: hub.lat, lng: hub.lng };
     this.aboutActiveTab = 'create';
     this.successMsg = '';
     this.postImgData = '';
@@ -252,7 +266,7 @@ export class HubCreateComponent implements OnInit {
     this.postImgData = '';
   }
 
-  public getHubCategories(){
+  public getHubCategories() {
     this.hubService.getHubCategories().subscribe(data => {
       if (data.Ack == "1") {
         this.catList = data.details;
@@ -263,8 +277,8 @@ export class HubCreateComponent implements OnInit {
       });
   }
 
-  public getFriendList(){
-    this.dataService.searchFrndListByName({suname:"", user_id: this.loginUserId})
+  public getFriendList() {
+    this.dataService.searchFrndListByName({ suname: "", user_id: this.loginUserId })
       .subscribe(
       data => {
         this.loading = false;
@@ -278,7 +292,7 @@ export class HubCreateComponent implements OnInit {
             });
           });
         } else {
-          this.userSearchFrndList =[];
+          this.userSearchFrndList = [];
         }
         //console.log(data);
         //this.postform.reset();
@@ -287,12 +301,60 @@ export class HubCreateComponent implements OnInit {
         alert(error);
       });
   }
-
-  public getMyHubRequest(){
+  private ReturnDayFromDate(date: Date) {
+    let result: any;
+    let day = date.getDay();
+    switch (day) {
+      case 0: {
+        result = 'Sunday';
+        break;
+      }
+      case 1: {
+        result = 'Monday';
+        break;
+      }
+      case 2: {
+        result = 'Tuesday';
+        break;
+      }
+      case 3: {
+        result = 'Wednesday';
+        break;
+      }
+      case 4: {
+        result = 'Thursday';
+        break;
+      }
+      case 5: {
+        result = 'Friday';
+        break;
+      }
+      case 6: {
+        result = 'Saturday';
+        break;
+      }
+      default: {
+        result = 'Sunday';
+        break;
+      }
+    }
+    return result;
+  }
+  public getMyHubRequest() {
     this.hubService.getMyHubRequest(this.loginUserId).subscribe(data => {
       console.log('category details ', data);
       if (data.Ack == "1") {
         this.hubRequestList = data.details;
+        if(this.hubRequestList.length && this.hubRequestList.length>0)
+        {
+          for(var i=0;i<this.hubRequestList.length;i++)
+          {
+            if (this.hubRequestList[i].type == 'R') {
+              if (this.hubRequestList[i].recurring_start)
+              this.hubRequestList[i].day = this.ReturnDayFromDate(new Date(this.hubRequestList[i].recurring_start));
+            }
+          }
+        }
       }
     },
       error => {
@@ -300,9 +362,9 @@ export class HubCreateComponent implements OnInit {
       });
   }
 
-  public acceptHubRequest(hub){
-    
-    this.hubService.acceptHubRequest({hub_id:hub.hub_id,user_id:this.loginUserId}).subscribe(data=>{
+  public acceptHubRequest(hub) {
+
+    this.hubService.acceptHubRequest({ hub_id: hub.hub_id, user_id: this.loginUserId }).subscribe(data => {
       console.log(data);
       this.getMyHubRequest();
     }, error => {
@@ -356,7 +418,7 @@ export class HubCreateComponent implements OnInit {
   //   );
   // }
 
- 
+
 
   public getMyGroupListData() {
     let dataUserDet = {
@@ -373,7 +435,7 @@ export class HubCreateComponent implements OnInit {
     );
   }
 
-  
+
 
   public editGroupPost() {
     this.loading = true;
@@ -394,7 +456,7 @@ export class HubCreateComponent implements OnInit {
       });
   }
 
-  
+
 
   public requestGroupAction(pid, type) {
     this.loading = true;
