@@ -70,27 +70,24 @@ export class SignupComponent implements OnInit {
         "company_name": this.company_name.value,
         "website" : this.website.value
       };
-      console.log(signupCheckEmail);
-      this.dataService.userCheckEmail(signupCheckEmail)
-      .subscribe(data => {
+      this.dataService.userCheckEmail(signupCheckEmail).subscribe(data => {
              let details=data;
              //console.log(details);
              if(details.domain_match == "1")
              {
-              this.domainmatch = false;
-               //return false;
-             }
-             else {
               this.domainmatch = true;
-               //return false;
+              this.domainmatch1 = true;
+             }else {
+              this.domainmatch = false;
+              this.domainmatch1 = false;
              }
 
              if (details.Ack=="1") {
-                 this.checkEmailExist = false;
+                 this.checkEmailExist = true;
                  //return false;
              }else{
                //alert('Invalid login');
-               this.checkEmailExist = true;
+               this.checkEmailExist = false;
                //return false;
              }
          },
@@ -141,11 +138,12 @@ public checkCompanyurl(values:Object){
            //console.log(data);
            if(details.domain_match == "1")
            {
-            this.domainmatch1 = false;
-            //return false;
+            this.domainmatch1 = true;
+            this.domainmatch = true;
            }
            else{
-            this.domainmatch1 = true;
+            this.domainmatch1 = false;
+            this.domainmatch = false;
              //return false;
            }
        },
