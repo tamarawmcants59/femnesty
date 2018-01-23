@@ -1,20 +1,20 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "../hub-create/hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
-import {Subject} from 'rxjs/Subject';
-import {GrouplistComponent} from '../../frontend/group/grouplist/grouplist.component';
+import { Subject } from 'rxjs/Subject';
+import { GrouplistComponent } from '../../frontend/group/grouplist/grouplist.component';
 @Component({
   selector: 'app-group-create',
   templateUrl: './group-create.component.html',
   styleUrls: ['./group-create.component.css'],
-  providers:[GrouplistComponent]
+  providers: [GrouplistComponent]
 })
-export class GroupCreateComponent implements OnInit {
+export class GroupCreateComponent implements OnInit, AfterViewInit {
   public postform: FormGroup;
   //public editPostform: FormGroup;
   loading: boolean;
@@ -43,14 +43,17 @@ export class GroupCreateComponent implements OnInit {
     inputPlaceholderText: 'Type anything and you will get a location *',
   };
   public autocompleteSettings1: any;
+  @ViewChild("groupListSuccessMsgDiv") groupListSuccessMsgDiv: ElementRef;
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
     private hubService: HubService,
     private route: ActivatedRoute,
     private router: Router,
-    private groupListComp:GrouplistComponent
+    private groupListComp: GrouplistComponent
   ) {
+
+
     this.postform = builder.group({
       group_name: ['', [
         Validators.required,
@@ -113,7 +116,40 @@ export class GroupCreateComponent implements OnInit {
     this.loginUserId = localStorage.getItem("loginUserId");
 
   }
+  ngAfterViewInit() {
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "ResolveStart") {
+        const eventObj: any = event;
+        const self = this;
+        if (eventObj.state.url.includes('group/overview')) {
 
+          setTimeout(function () {
+            var elements = document.getElementsByClassName('bottomList');
+            if(elements.length>0)
+            elements[0].scrollIntoView();
+          }, 100)
+
+        }
+        else if (eventObj.state.url.includes('group/add_group')) {
+          setTimeout(function () {
+            var elements = document.getElementsByClassName('bottomList');
+            if(elements.length>0)
+            elements[0].scrollIntoView();
+          }, 100)
+        }
+        else if (eventObj.state.url.includes('group/group_request')) {
+          setTimeout(function () {
+            var elements = document.getElementsByClassName('bottomList');
+            if(elements.length>0)
+            elements[0].scrollIntoView();
+          }, 100)
+
+        }
+
+
+      }
+    });
+  }
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.aboutActiveTab = params['slug_name'];
@@ -158,7 +194,7 @@ export class GroupCreateComponent implements OnInit {
     let dataUserDet = {
       "group_id": this.groupEditId
     };
-    const self=this;
+    const self = this;
     this.dataService.getGroupDetById(dataUserDet).subscribe(data => {
       if (data.Ack == "1") {
         this.groupEditDataJson = data.GroupDetails[0];
@@ -178,9 +214,8 @@ export class GroupCreateComponent implements OnInit {
           long_desc: self.groupEditDataJson['long_desc'] == null ? '' : self.groupEditDataJson['long_desc']
         });
         self.address_required = self.groupEditDataJson['address'] == null ? true : false;
-        if(self.address_required==false)
-        {
-          self.searchData.address=self.groupEditDataJson['address'];
+        if (self.address_required == false) {
+          self.searchData.address = self.groupEditDataJson['address'];
         }
         //let add = data.GroupDetails[0].address;
         this.showPostImgDive = true;
@@ -263,7 +298,12 @@ export class GroupCreateComponent implements OnInit {
         this.loading = false;
         this.successMsg = 'Successfully edited the group';
         this.postform.reset();
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);
+        const self = this;
+        setTimeout(function () {
+          self.groupListSuccessMsgDiv.nativeElement.scrollIntoView();
+        }, 200);
+
         this.getMyGroupListData();
         this.address_required = false;
         this.aboutActiveTab = 'overview';

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../user/user.service";
 
@@ -20,8 +20,8 @@ export class GrouplistComponent implements OnInit {
   private errorMsg: string;
   public aboutActiveTab: string = 'find';
   private categoryListWithCount: any = [];
-  @ViewChild("topGroupsList") topGroupsList:ElementRef;
-  @ViewChild("myGroupsList") myGroupsList:ElementRef;
+  @ViewChild("topGroupsList") topGroupsList: ElementRef;
+  @ViewChild("myGroupsList") myGroupsList: ElementRef;
   constructor(private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -30,6 +30,23 @@ export class GrouplistComponent implements OnInit {
     this.isUserLogin = localStorage.getItem("isLoggedIn");
   }
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "ResolveStart") {
+        const eventObj: any = event;
+        const self = this;
+        if (eventObj.state.url.includes('group/find')) {
+          setTimeout(function(){
+            var elements = document.getElementsByClassName('bottomList');
+            if(elements.length>0)
+            elements[0].scrollIntoView();
+          },100)
+          
+        }
+
+
+      }
+    });
     this.activatedRoute.params.subscribe((params: Params) => {
       this.aboutActiveTab = params['slug_name'];
       //console.log(this.bookSlugName);
@@ -38,16 +55,15 @@ export class GrouplistComponent implements OnInit {
     this.getUserGroupList();
     this.getLastFourArticle();
     this.getcategoryListWithCount();
-    const self=this;
+    const self = this;
     this.router.events.subscribe(event => {
       if (event.constructor.name === "ResolveStart") {
         const eventObj: any = event;
 
-         if(eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find'))
-         {
-             self.errorMsg='';
-             self.myGrpList=[];
-         }
+        if (eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find')) {
+          self.errorMsg = '';
+          self.myGrpList = [];
+        }
 
 
       }
@@ -75,13 +91,34 @@ export class GrouplistComponent implements OnInit {
 
   scrollToTopGroups() {
     this.errorMsg = '';
-    this.myGrpList=[];
-    this.topGroupsList.nativeElement.scrollIntoView();
+    this.myGrpList = [];
+    if (!this.topGroupsList) {
+      this.router.navigateByUrl('/group/find');
+      const self = this;
+      setTimeout(function () {
+        self.topGroupsList.nativeElement.scrollIntoView();
+      }, 200);
+
+    }
+    else {
+      this.topGroupsList.nativeElement.scrollIntoView();
+    }
+
   }
   scrollToMyGroup() {
     this.errorMsg = '';
-    this.myGrpList=[];
-    this.myGroupsList.nativeElement.scrollIntoView();
+    this.myGrpList = [];
+    if (!this.myGroupsList) {
+      this.router.navigateByUrl('/group/find');
+      const self = this;
+      setTimeout(function () {
+        self.myGroupsList.nativeElement.scrollIntoView();
+      }, 200);
+    }
+    else {
+      this.myGroupsList.nativeElement.scrollIntoView();
+    }
+
   }
   private getCatDetails(id) {
     //this.aboutActiveTab='find';

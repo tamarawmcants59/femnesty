@@ -59,7 +59,25 @@ export class HubsComponent implements OnInit {
     this.getHubDetails();
     this.getLastFourArticle();
   }
+  public acceptHubRequest() {
 
+    this.hubService.acceptHubRequest({ hub_id: this.hubDetails.id, user_id: this.loginUserId }).subscribe(data => {
+      console.log(data);
+      this.getHubDetails();
+    }, error => {
+      console.log('Something went wrong!');
+    });
+  }
+
+  public rejectHubRequest() {
+
+    this.hubService.rejectHubRequest({ hub_id: this.hubDetails.id, user_id: this.loginUserId }).subscribe(data => {
+      console.log(data);
+      this.getHubDetails();
+    }, error => {
+      console.log('Something went wrong!');
+    });
+  }
   public getHubDetails()
   {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
@@ -143,13 +161,19 @@ export class HubsComponent implements OnInit {
 
   public attendHub(hubDetails)
   {
-    const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
-    this.hubService.attendHub(attendData).subscribe(data => {
+    // const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
+    // this.hubService.attendHub(attendData).subscribe(data => {
+    //   this.getHubDetails();
+    // },
+    //   error => {
+    //     console.log('Something went wrong!');
+    //   });
+    this.hubService.rejectHubRequest({ hub_id: this.hubDetails.id, user_id: this.loginUserId }).subscribe(data => {
+      console.log(data);
       this.getHubDetails();
-    },
-      error => {
-        console.log('Something went wrong!');
-      });
+    }, error => {
+      console.log('Something went wrong!');
+    });
   }
 
   public deleteInvites(user_id) {

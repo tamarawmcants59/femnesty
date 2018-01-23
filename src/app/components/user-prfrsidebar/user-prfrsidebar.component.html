@@ -31,7 +31,8 @@
                 </div>
                 <div class="col-md-8">
                     <h2 style="margin-top: 8px">{{hubData.title}}</h2>
-                    <p style="margin:0px">{{hubData.hub_date}}</p>
+                    <p style="margin:0px" *ngIf="hubData.type !='R'">{{hubData.hub_date}}</p>
+                    <p style="margin:0px" *ngIf="hubData.type =='R'">{{hubData.recurring_start}} - {{hubData.recurring_end}}</p>
                     <!-- <p>{{hubData.address}}</p> -->
                     <a [routerLink]="['/user/hub_details',hubData.slug]" class="btn btn-primary" style="margin-top: 8px">View Hub</a>
                 </div>
