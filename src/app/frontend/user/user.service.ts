@@ -362,6 +362,10 @@ export class UserService {
     return this.apiService.post(`/users/appgrprivatememberlist`,form_data ).map(data => data);
   }
   
+  getAllUserListforGrp(form_data){
+    return this.apiService.post(`/users/appgrpublicmemberlist`,form_data ).map(data => data);
+  }
+
   getmyRequestGroupList(form_data){
     return this.apiService.post(`/users/appusergrprequestlistbyid`,form_data ).map(data => data);
   }
