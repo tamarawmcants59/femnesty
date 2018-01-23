@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   public loading = false;
   public isLoggedIn: any;
   public user_id:string;
-  public disableSignup = true;
+  //public disableSignup = true;
 
   constructor(
     private builder:FormBuilder, 
@@ -40,8 +40,8 @@ export class SignupComponent implements OnInit {
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
       'company_name': ['', Validators.compose([Validators.required])],
-      'website': ['', Validators.compose([Validators.required,Validators.pattern('https?://.+')])],
-      
+      //'website': ['', Validators.compose([Validators.required,Validators.pattern('https?://.+')])],
+      'website': ['', Validators.compose([Validators.required])],
       //'company_type': ['', Validators.compose([Validators.required])],
       'agreetab': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
       this.dataService.userCheckEmail(signupCheckEmail)
       .subscribe(data => {
              let details=data;
-             console.log(details);
+             //console.log(details);
              if(details.domain_match == "1")
              {
               this.domainmatch = false;
@@ -126,7 +126,7 @@ public checkCompanyname(values:Object){
        }
      ); 
   }else{
-
+    //this.disableSignup=true;
   }
 }
 
@@ -138,7 +138,7 @@ public checkCompanyurl(values:Object){
 //console.log(signupCheckcompanyname);
     this.dataService.userCheckCompanyurl(signupCheckcompanyurl).subscribe(data => {
            let details=data;
-           console.log(data);
+           //console.log(data);
            if(details.domain_match == "1")
            {
             this.domainmatch1 = false;
@@ -193,7 +193,7 @@ public checkCompanyurl(values:Object){
         }
       ); 
     } else{
-        alert('INVALID FORM');
+        //alert('INVALID FORM');
         
      }
   }

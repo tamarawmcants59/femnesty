@@ -10,17 +10,16 @@
             <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">    
                  
                 <div class="form-group col-md-6">
-                    <input type="text" placeholder="Company Name" class="form-control" [formControl]="company_name" (ngModelChange)="checkCompanyname($event)">
-                    <div class="text-danger" *ngIf="!company_name.valid && company_name.touched">
-                        Please enter your company name.
+                    <input type="url" placeholder="Company Url" class="form-control" [formControl]="website" (ngModelChange)="checkCompanyurl($event)">
+                    <!--<div class="text-danger" *ngIf="!website.valid && website.touched">
+                      Please enter the correct Company Url, this Company Url is not valid.
+                    </div>-->
+                    <div class="text-danger" *ngIf="!website.valid && website.touched">
+                        Please enter the Company Url.
                     </div>
-                    <div class="text-danger" *ngIf="!checkCompanynameExist && company_name.valid">
-                        This company already exist.
+                    <div class="text-danger" *ngIf="!domainmatch1 && website.valid">
+                        Company url domain and email domain not match.
                     </div>
-                    <!-- <div class="text-danger" *ngIf="!domainmatch && company_name.valid && checkCompanynameExist">
-                        Company name and domain not match.
-                    </div> -->
-                    
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Email Address" class="form-control" [formControl]="email" (ngModelChange)="checkEmail($event)">
@@ -35,13 +34,17 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="url" placeholder="Company Url" class="form-control" [formControl]="website" (ngModelChange)="checkCompanyurl($event)">
-                    <div class="text-danger" *ngIf="!website.valid && website.touched">
-                      Please enter the correct Company Url, this Company Url is not valid.
+                    <input type="text" placeholder="Company Name" class="form-control" [formControl]="company_name" (ngModelChange)="checkCompanyname($event)">
+                    <div class="text-danger" *ngIf="!company_name.valid && company_name.touched">
+                        Please enter your company name.
                     </div>
-                    <div class="text-danger" *ngIf="!domainmatch1 && website.valid">
-                        Company url domain and email domain not match.
+                    <div class="text-danger" *ngIf="!checkCompanynameExist && company_name.valid">
+                        This company already exist.
                     </div>
+                    <!-- <div class="text-danger" *ngIf="!domainmatch && company_name.valid && checkCompanynameExist">
+                        Company name and domain not match.
+                    </div> -->
+                    
                 </div>
     
                 <div class="form-group col-md-6">
