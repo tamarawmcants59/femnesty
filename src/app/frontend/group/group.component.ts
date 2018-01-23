@@ -278,7 +278,8 @@ export class GroupComponent implements OnInit {
         "group_id": this.isGroupId
       };
       //console.log(dataUserDet);
-      this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
+      this.dataService.getAllUserListforGrp(dataUserDet).subscribe(data => {
+      //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
           this.userFrndList = data.groupMembersPrivate;
           //console.log(this.userFrndList);
