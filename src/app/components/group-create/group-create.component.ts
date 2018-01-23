@@ -11,7 +11,8 @@ import {GrouplistComponent} from '../../frontend/group/grouplist/grouplist.compo
 @Component({
   selector: 'app-group-create',
   templateUrl: './group-create.component.html',
-  styleUrls: ['./group-create.component.css']
+  styleUrls: ['./group-create.component.css'],
+  providers:[GrouplistComponent]
 })
 export class GroupCreateComponent implements OnInit {
   public postform: FormGroup;
