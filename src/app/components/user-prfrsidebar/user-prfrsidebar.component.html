@@ -20,7 +20,7 @@
         </div>
     </div>-->
 	
-	 <div class="innerRightPart">
+	 <div class="innerRightPart" *ngIf="latestHubList?.length > 0">
         <h2 style="margin-bottom: 0">MY ATTENDING HUBS</h2>
         <div class="hubMet hubMet1 group">
             <div class="row" *ngFor="let hubData of latestHubList">

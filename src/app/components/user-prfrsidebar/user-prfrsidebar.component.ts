@@ -59,9 +59,9 @@ export class UserPrfrsidebarComponent implements OnInit {
   public getLatestHub()
   {
     this.dataService.getLatestHubs(this.loginUserId).subscribe(data => {
-      //console.log(data);
+      console.log(data);
       if (data.Ack == "1") {
-        this.latestHubList = data.details;
+        this.latestHubList = data.details2;
         //console.log(this.groupMemberList);
       }
     }, error => {
