@@ -21,8 +21,9 @@
 							&details={{hubDetails.description}}
 							&location={{hubDetails.address}}
 							" target="_blank" rel="nofollow" *ngIf="hubDetails.hub_invite_status!='2'"><button type="button" class="btn btn-default">Add to calendar</button></a>
-							<button *ngIf="hubDetails.hub_invite_status=='0'" type="button" class="btn btn-primary" (click)="acceptHubRequest()">Accept</button>
-							<button *ngIf="hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="rejectHubRequest()">Reject</button>
+							<button *ngIf="hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-primary" (click)="acceptHubRequest()">Accept</button>
+							<button *ngIf=" hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="rejectHubRequest()">Reject</button>
+							<button *ngIf=" hubDetails.privacy =='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="attendHubDetails(hubDetails)">Attend</button>
 							<span *ngIf="hubDetails.hub_invite_status=='2'">
 								You have rejected the invitation
 							</span>

@@ -78,6 +78,17 @@ export class HubsComponent implements OnInit {
       console.log('Something went wrong!');
     });
   }
+
+  attendHubDetails(hubDetails)
+  {
+    const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
+    this.hubService.attendHub(attendData).subscribe(data => {
+      this.getHubDetails();
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
   public getHubDetails()
   {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
@@ -161,13 +172,7 @@ export class HubsComponent implements OnInit {
 
   public attendHub(hubDetails)
   {
-    // const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId};
-    // this.hubService.attendHub(attendData).subscribe(data => {
-    //   this.getHubDetails();
-    // },
-    //   error => {
-    //     console.log('Something went wrong!');
-    //   });
+
     this.hubService.rejectHubRequest({ hub_id: this.hubDetails.id, user_id: this.loginUserId }).subscribe(data => {
       console.log(data);
       this.getHubDetails();
