@@ -83,7 +83,6 @@ export class GroupComponent implements OnInit {
     }
   }
 
-
   /*public getUserPostDetails(){
     if(this.isGroupId!=''){
         let dataUserDet ={
