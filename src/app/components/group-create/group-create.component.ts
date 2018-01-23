@@ -293,6 +293,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
 
     }
     else {
+      window.scrollTo(0, 0);
       this.address_required = true;
     }
 
