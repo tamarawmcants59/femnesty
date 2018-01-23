@@ -16,14 +16,16 @@
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
 							<button *ngIf="hubDetails.hub_invite_status=='1'" type="button" class="btn btn-primary" (click)="attendHub(hubDetails)">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
+							<button *ngIf=" hubDetails.privacy =='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="attendHubDetails(hubDetails)">Attend</button>
+							<button *ngIf="hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-primary" (click)="acceptHubRequest()">Accept</button>
+							<button *ngIf=" hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="rejectHubRequest()">Reject</button>
 							<a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{hubDetails.title}}
 							&dates={{startDateString}}/{{endDateString}}
 							&details={{hubDetails.description}}
 							&location={{hubDetails.address}}
 							" target="_blank" rel="nofollow" *ngIf="hubDetails.hub_invite_status!='2'"><button type="button" class="btn btn-default">Add to calendar</button></a>
-							<button *ngIf="hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-primary" (click)="acceptHubRequest()">Accept</button>
-							<button *ngIf=" hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="rejectHubRequest()">Reject</button>
-							<button *ngIf=" hubDetails.privacy =='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="attendHubDetails(hubDetails)">Attend</button>
+
+							
 							<span *ngIf="hubDetails.hub_invite_status=='2'">
 								You have rejected the invitation
 							</span>
