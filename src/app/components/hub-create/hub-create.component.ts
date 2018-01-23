@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
@@ -7,7 +7,7 @@ import { SelectModule } from "../../../../node_modules/ng2-select";
 // import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 // import { AmazingTimePickerService } from 'amazing-time-picker';
 
-
+declare var google: any;
 
 @Component({
   selector: 'app-hub-create',
@@ -180,8 +180,8 @@ export class HubCreateComponent implements OnInit {
   }
 
   autoCompleteCallback1(data: any): any {
-if(data.response==true)
-    this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
+    if (data.response == true)
+      this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
   }
 
   public createHub() {
@@ -340,18 +340,26 @@ if(data.response==true)
     }
     return result;
   }
+
+  // ngAfterViewInit() {
+  //   let autocomplete = new google.maps.places.Autocomplete(
+  //     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+  //     { types: ['geocode'] });
+  //   google.maps.event.addListener(autocomplete, 'place_changed', function () {
+  //     var place = autocomplete.getPlace();
+  //     this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+  //   });
+  // }
   public getMyHubRequest() {
     this.hubService.getMyHubRequest(this.loginUserId).subscribe(data => {
       console.log('category details ', data);
       if (data.Ack == "1") {
         this.hubRequestList = data.details;
-        if(this.hubRequestList.length && this.hubRequestList.length>0)
-        {
-          for(var i=0;i<this.hubRequestList.length;i++)
-          {
+        if (this.hubRequestList.length && this.hubRequestList.length > 0) {
+          for (var i = 0; i < this.hubRequestList.length; i++) {
             if (this.hubRequestList[i].type == 'R') {
               if (this.hubRequestList[i].recurring_start)
-              this.hubRequestList[i].day = this.ReturnDayFromDate(new Date(this.hubRequestList[i].recurring_start));
+                this.hubRequestList[i].day = this.ReturnDayFromDate(new Date(this.hubRequestList[i].recurring_start));
             }
           }
         }

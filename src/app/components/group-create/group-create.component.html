@@ -39,7 +39,7 @@
                         <h4>Group List</h4>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')"  #groupListSuccessMsgDiv>
                                     <strong>Success: </strong> {{successMsg}}
                                 </div>
                                 <!--<pre>{{groupList}}</pre>-->
@@ -67,8 +67,8 @@
                     </div>
                 </ul>
             </div>
-            <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}">
-            <ul class="ulList edit-forms">
+            <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}" >
+            <ul class="ulList edit-forms" >
                 <div class="alert alert-success" role="alert" *ngIf="(createGroupSuccessMsg != '')">
                     <strong>Success: </strong> {{createGroupSuccessMsg}}
                 </div>
@@ -315,7 +315,7 @@
                 </div>
                 <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='group_request'}">
                     
-                    <div class="grp-rqsts">
+                    <div class="grp-rqsts" >
                             <h4>Group REQUESTS</h4>
                             <div class="alert alert-success" role="alert" *ngIf="(groupReqSuccessMsg != '')">
                                 <strong>Success: </strong> {{groupReqSuccessMsg}}
