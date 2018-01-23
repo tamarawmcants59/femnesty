@@ -8,6 +8,7 @@ import { SelectModule } from "../../../../node_modules/ng2-select";
 import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 import { Subject } from 'rxjs/Subject';
 import { GrouplistComponent } from '../../frontend/group/grouplist/grouplist.component';
+declare var google: any;
 @Component({
   selector: 'app-group-create',
   templateUrl: './group-create.component.html',
@@ -125,23 +126,23 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
 
           setTimeout(function () {
             var elements = document.getElementsByClassName('bottomList');
-            if(elements.length>0)
-            elements[0].scrollIntoView();
+            if (elements.length > 0)
+              elements[0].scrollIntoView();
           }, 100)
 
         }
         else if (eventObj.state.url.includes('group/add_group')) {
           setTimeout(function () {
             var elements = document.getElementsByClassName('bottomList');
-            if(elements.length>0)
-            elements[0].scrollIntoView();
+            if (elements.length > 0)
+              elements[0].scrollIntoView();
           }, 100)
         }
         else if (eventObj.state.url.includes('group/group_request')) {
           setTimeout(function () {
             var elements = document.getElementsByClassName('bottomList');
-            if(elements.length>0)
-            elements[0].scrollIntoView();
+            if (elements.length > 0)
+              elements[0].scrollIntoView();
           }, 100)
 
         }
@@ -257,26 +258,39 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
 
-    if (this.searchData.address) {
-      userValue.address = this.searchData.address;
-      //userValue.lat = this.searchData.lat;
-      //userValue.lng = this.searchData.lng;
-      this.dataService.createGroupDataSend(userValue)
-        .subscribe(
-        data => {
-          this.showPostImgDive = false;
-          this.loading = false;
-          this.createGroupSuccessMsg = 'Successfully created the group';
-          this.postform.reset();
-          window.scrollTo(0, 0);
-          this.getMyGroupListData();
-          this.searchData.address = '';
-          this.address_required = false;
-          this.groupListComp.loadGroupList();
-        },
-        error => {
-          alert(error);
+    if (this.searchData.address && this.searchData.lat) {
+      const zipCode = userValue.postal_code;
+      if (zipCode) {
+        debugger;
+        const self = this;
+        let geocoder = new google.maps.Geocoder;
+        geocoder.geocode({ 'address': zipCode }, function (results, status) {
+          if (status === 'OK') {
+            self.createGroupErrorMsg = '';
+            userValue.address = self.searchData.address;
+            self.dataService.createGroupDataSend(userValue)
+              .subscribe(
+              data => {
+                self.showPostImgDive = false;
+                self.loading = false;
+                self.createGroupSuccessMsg = 'Successfully created the group';
+                self.postform.reset();
+                window.scrollTo(0, 0);
+                self.getMyGroupListData();
+                self.searchData.address = '';
+                self.address_required = false;
+                self.groupListComp.loadGroupList();
+              },
+              error => {
+                alert(error);
+              });
+          } else {
+            window.scrollTo(0, 0);
+            self.createGroupErrorMsg = "Please give a valid postal code.";
+          }
         });
+      }
+
     }
     else {
       this.address_required = true;

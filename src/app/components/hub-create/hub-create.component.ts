@@ -186,13 +186,12 @@ export class HubCreateComponent implements OnInit {
 
   public createHub() {
     if (this.postform.valid) {
-      if (this.searchData.address) {
+      if (this.searchData.address && this.searchData.lat) {
         this.createErrorMsg = '';
         this.loading = true;
         const userValue = this.postform.value;
         userValue.user_id = this.loginUserId;
         userValue.image = this.postImgData;
-        console.log(userValue);
         if (this.searchData.address && this.searchData.lat) {
           userValue.address = this.searchData.address;
           userValue.lat = this.searchData.lat;
