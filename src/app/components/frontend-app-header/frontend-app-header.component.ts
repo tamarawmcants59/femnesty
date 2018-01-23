@@ -45,14 +45,7 @@ export class FrontendAppHeader {
     private afAuth: AngularFireAuth,
     private cd: ChangeDetectorRef
   ) {
-    if(this.userloggedIn == '1')
-    {
-      let self=this;
-      setInterval(function () {
-        self.userNotiCountList();
-      }, 5000)
-    }
-
+    
     this.afAuth.authState.do(user => {
       if (user) {
         this.currentFireUserId = user.uid;
@@ -101,6 +94,13 @@ export class FrontendAppHeader {
     //console.log(this.currentUserDet);
     //localStorage.removeItem("isLoggedIn");
 
+    if(this.userloggedIn == '1'){
+      let self=this;
+      setInterval(function () {
+        self.userNotiCountList();
+      }, 5000)
+    }
+
     var nativeElement: HTMLElement = this.el.nativeElement,
       parentElement: HTMLElement = nativeElement.parentElement;
     // move all children out of the element
@@ -139,9 +139,9 @@ export class FrontendAppHeader {
       }
     );
 
-    if (this.userloggedIn == '1') {
+    /*if (this.userloggedIn == '1') {
       this.userNotiCountList();
-    }
+    }*/
     this.getUserDetails();
     this.getArticleList();
     this.getUnreadMessages();
@@ -199,9 +199,10 @@ export class FrontendAppHeader {
         "user_id": parseInt(loginUserId)
       };
       this._service.getUserNotiData(dataUserDet).subscribe(data => {
-        //console.log(data);
         if (data.Ack == "1") {
           this.userNotiCnt = data.Notificationcount;
+        }else{
+          this.userNotiCnt = 0;
         }
       }, error => {
         console.log('Something went wrong!');
