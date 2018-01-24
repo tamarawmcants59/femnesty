@@ -90,7 +90,8 @@ export class ProfileComponent implements OnInit {
     //console.log(this.otherProfileId);
     if (this.otherProfileId != '') {
       const dataUserDet = {
-        "user_id": this.otherProfileId
+        "user_id": this.otherProfileId,
+        "login_id": this.isloginUserId
       };
       this.dataService.getUserPostById(dataUserDet)
         .subscribe(data => {

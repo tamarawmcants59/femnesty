@@ -212,10 +212,10 @@ export class EditprofileComponent implements OnInit {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
       const dataUserDet = {
-        "user_id": loginUserId
+        "user_id": loginUserId,
+        "login_id": loginUserId
       };
-      this.dataService.getUserPostById(dataUserDet)
-        .subscribe(data => {
+      this.dataService.getUserPostById(dataUserDet).subscribe(data => {
           const details = data;
           if (details.Ack == "1") {
             this.userPostList = details.ActivePostByUser;
