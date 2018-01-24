@@ -83,8 +83,7 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.postData);
-    console.log(this.postData.post_like);
+    
   }
 
   deletePost(confirmmodal,post_id, type, comments=null,delkey=null) {
