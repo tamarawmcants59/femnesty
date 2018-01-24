@@ -41,7 +41,7 @@
 	                                     </li>
 	                                 </ul>-->
                                     
-                                    <h2>Find Friends</h2>
+                                    <h2>Find Connections</h2>
                                     <form class="" [formGroup]="postform" (ngSubmit)="submitSearchUser(postform.value)" #postForm="ngForm">
                                         <div class="row">&nbsp;</div>  
                                       <div class="row">
@@ -66,9 +66,9 @@
                                                     <div class="friend-boxText">
                                                         <h2>{{sfriendData.name}}</h2>
                                                         <!--<p>3 mutual friend</p>-->
-                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='C'" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Friend</button>
-                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==1" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">UnFollow</button>	
-                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==0" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Follow</button>	
+                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='C'" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Connection</button>
+                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==1" type="button" class="btn btn-primary" (click)="unflow_company(sfriendData.id,sfriendData)">UnFollow</button>	
+                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==0" type="button" class="btn btn-primary" (click)="sendFollowRequest(sfriendData.id,sfriendData)">Follow</button>	
                                                         <p *ngIf="sfriendData.request_type == '1' " class="req_style" >Friend Request Send</p>
                                                         <p *ngIf="sfriendData.request_type == '3' " class="req_style">Friend Request Rejected</p>
                                                     </div>

@@ -77,6 +77,7 @@ export class FindfriendsComponent implements OnInit {
               data => {
                   this.loading = false;
                   if(data.Ack=='1'){
+                      //console.log(data.FriendListById);
                       this.userSearchFrndList=data.FriendListById;
                   }else{
                     this.userSearchFrndList=[];
@@ -110,6 +111,64 @@ export class FindfriendsComponent implements OnInit {
         error => {
           //alert(error);
         });
+  }
+
+  public sendFollowRequest(company_id,sfriendData) {
+    this.loading = true;
+    //console.log(friend_id);
+    if (this.loginUserId != '' && company_id != '') {
+      let requestJsonData = { "user_id": this.loginUserId, "company_id": company_id };
+      
+      this.dataService.sendFollowRequest(requestJsonData)
+        .subscribe(
+        data => {
+          console.log(data);
+          if (data.Ack == 1) {
+            sfriendData.follow = 1;
+            //this.successMsg = 'You have successfully Follow.';
+            //this.getFollowerList();
+            
+          } else {
+            this.errorMsg = 'You have unfollow.';
+          }
+          this.loading = false;
+        },
+        error => {
+          alert(error);
+        });
+    } else {
+      this.router.navigateByUrl('/user/login');
+    }
+  }
+
+  public unflow_company(company_id,sfriendData) {
+    debugger;
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "user_id": loginUserId,
+        "company_id": company_id,
+        "id": ""
+      };
+      this.dataService.unflowcompany(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          if (details.Ack == "1") {
+            sfriendData.follow = 0;
+            //this.successMsg = "You have successfully unfollowed.";
+            //this.isEmpRequest = false;
+            //this.getFollowerList();
+            
+          } else {
+
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
   }
   
   /*public acceptFriendRequest(request_id) {
