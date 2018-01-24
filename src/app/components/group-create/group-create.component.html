@@ -73,7 +73,7 @@
                     <strong>Success: </strong> {{createGroupSuccessMsg}}
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="(createGroupErrorMsg != '')">
-                    <strong>Success: </strong> {{createGroupErrorMsg}}
+                    <strong>Error: </strong> {{createGroupErrorMsg}}
                 </div>
                 <div class="text-danger"  style="margin-top: 26px;" *ngIf="address_required">Please give valid location</div>
                 <h3>Create Group</h3>
@@ -200,6 +200,10 @@
                         <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                             <strong>Success: </strong> {{successMsg}}
                         </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                            <strong>Error: </strong> {{errorMsg}}
+                        </div>
+                        <div style="margin-top:26px;" class="text-danger" *ngIf="address_required">Please give valid location</div>
                         <h3>Edit Group</h3>
                         <p>Short description on what a group is and what is required to make<br> a group
                             and also what they are used for.</p>
@@ -258,7 +262,7 @@
                                         <div class="col-sm-12">
                                             <ng4geo-autocomplete [userSettings]="autocompleteSettings1" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
                                         </div>
-                                        <div style="margin-top:26px;" class="text-danger" *ngIf="address_required">Location Required</div>
+                                       
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
@@ -309,7 +313,7 @@
                                     <div class="saveChanges">
                     
                                     <button type="submit" class="btn btn-primary" [disabled]="!editGroupForm.valid">Submit</button>
-                                    <div style="margin-left:170px;" class="text-danger" *ngIf="address_required">Please Fill All Required (*) Field</div>
+                                    <!-- <div style="margin-left:170px;" class="text-danger" *ngIf="address_required">Please Fill All Required (*) Field</div> -->
                                     </div>
                                 </div>
                             </form>

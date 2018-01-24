@@ -301,34 +301,51 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
   public editGroupPost() {
+    debugger;
     this.loading = true;
     const userValue = this.postform.value;
     userValue.id = this.groupEditId;
     userValue.image = this.postImgData;
-    if (this.searchData.address) {
+    if (this.searchData.address && this.searchData.lat) {
       userValue.address = this.searchData.address;
-      this.dataService.editGroupDataSend(userValue).subscribe(data => {
-
-        this.showPostImgDive = false;
-        this.loading = false;
-        this.successMsg = 'Successfully edited the group';
-        this.postform.reset();
-        //window.scrollTo(0, 0);
+      const zipCode = userValue.postal_code;
+      if (zipCode) {
+        debugger;
         const self = this;
-        setTimeout(function () {
-          self.groupListSuccessMsgDiv.nativeElement.scrollIntoView();
-        }, 200);
+        let geocoder = new google.maps.Geocoder;
+        geocoder.geocode({ 'address': zipCode }, function (results, status) {
+          if (status === 'OK') {
+            self.createGroupErrorMsg = '';
+            userValue.address = self.searchData.address;
+            self.dataService.editGroupDataSend(userValue).subscribe(data => {
 
-        this.getMyGroupListData();
-        this.address_required = false;
-        this.aboutActiveTab = 'overview';
-        this.groupListComp.loadGroupList();
-      },
-        error => {
-          alert(error);
+              self.showPostImgDive = false;
+              self.loading = false;
+              self.successMsg = 'Successfully edited the group';
+              self.postform.reset();
+              //window.scrollTo(0, 0);
+              setTimeout(function () {
+                self.groupListSuccessMsgDiv.nativeElement.scrollIntoView();
+              }, 200);
+      
+              self.getMyGroupListData();
+              self.address_required = false;
+              self.aboutActiveTab = 'overview';
+              self.groupListComp.loadGroupList();
+            },
+              error => {
+                alert(error);
+              });
+          } else {
+            window.scrollTo(0, 0);
+            self.errorMsg = "Please give a valid postal code.";
+          }
         });
+      }
+    
     }
     else {
+      window.scrollTo(0, 0);
       this.address_required = true;
     }
 
