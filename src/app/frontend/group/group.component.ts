@@ -70,7 +70,7 @@ export class GroupComponent implements OnInit {
             //this.getUserPostDetails();
             this.getUserPostDetails();
             this.getGroupMemberList();
-            this.myFrndListforGrp();
+            this.checkMyFrndList();
           }
           else {
             this.router.navigateByUrl('/user/edit_profile/activity');
@@ -84,6 +84,12 @@ export class GroupComponent implements OnInit {
   }
   
   public checkMyFrndList(){
+    let grpOwnerId = localStorage.getItem("groupAdmin");
+    if(this.isloginUserId==grpOwnerId){
+      this.myFrndListforGrp();
+    }else{
+      this.myOwnFrndListforGrp();
+    }
     //myOwnFrndListforGrp
   }
   /*public getUserPostDetails(){
@@ -136,7 +142,6 @@ export class GroupComponent implements OnInit {
             this.groupMemberList = data.groupMembers;
             if (this.isUserLogin == '1') {
               let joinItemData = this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
-              console.log(joinItemData);
               if (joinItemData.length > 0) {
                 this.isJoinGroup = false;
               }
@@ -163,13 +168,10 @@ export class GroupComponent implements OnInit {
         //console.log(data);
         if (data.Ack == "1") {
           this.groupallMemberList = data.groupMembers;
-          console.log(this.groupallMemberList);
           //alert(this.isUserLogin);
           let reqjoinItemData = this.groupallMemberList.filter(item => item.user_id == this.isloginUserId);
-          console.log(reqjoinItemData);
           if (reqjoinItemData.length > 0) {
             this.allgrupstatus = reqjoinItemData;
-            console.log(this.allgrupstatus[0].request_type);
             this.allgroupstatusset = this.allgrupstatus[0].request_type;
           }
           else {
@@ -218,10 +220,8 @@ export class GroupComponent implements OnInit {
         "group_id": this.isGroupId,
         "user_id": join_uid
       };
-      this.dataService.leaveGroup(dataUserDet)
-        .subscribe(data => {
-          console.log(data);
-          //alert('here');
+      this.dataService.leaveGroup(dataUserDet).subscribe(data => {
+          
           this.successMsg = '';
           this.errorMsg = '';
           if (data.Ack == "1") {
@@ -248,8 +248,7 @@ export class GroupComponent implements OnInit {
         "group_id": this.isGroupId,
         "user_id": join_uid
       };
-      this.dataService.cancelGroupRequestByUser(dataUserDet)
-        .subscribe(data => {
+      this.dataService.cancelGroupRequestByUser(dataUserDet).subscribe(data => {
           //console.log(data);
           this.successMsg = '';
           this.errorMsg = '';
@@ -281,7 +280,7 @@ export class GroupComponent implements OnInit {
       //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
           this.userFrndList = data.groupMembersPrivate;
-          //console.log(this.userFrndList);
+          console.log(this.userFrndList);
         }
       }, error => {
 
@@ -324,7 +323,7 @@ export class GroupComponent implements OnInit {
           this.errorMsg = data.msg;
         }
         this.loading = false;
-        this.myFrndListforGrp();
+        this.checkMyFrndList();
         //this.successMsg = 'You have successfully send the request.';
       },
         error => {
@@ -358,7 +357,7 @@ export class GroupComponent implements OnInit {
         }
         else {
           this.getGroupMemberList();
-          this.myFrndListforGrp();
+          this.checkMyFrndList();
         }
 
         //this.successMsg = 'You have successfully send the request.';

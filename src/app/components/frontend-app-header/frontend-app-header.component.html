@@ -61,7 +61,17 @@
                         </div>
                     </li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                    <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkCon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Contribute
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCon">
+                            <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
+                            <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
+                            <a class="dropdown-item" [routerLink]="['/user/team']">Join the Team</a>
+                        </div>
+                    </li>
+                    <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
                     <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
                 </ul>
             </div>
@@ -141,7 +151,17 @@
                         <!--<li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                         <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>-->
                         <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                        <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Contribute
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkConUserLog">
+                                <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
+                                <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
+                                <a class="dropdown-item" [routerLink]="['/user/team']">Join the Team</a>
+                            </div>
+                        </li>
+                        <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
                         
                     </ul>
                     <ul class="nav navbar-nav navIcon">
@@ -231,7 +251,17 @@
                                 <a class="dropdown-item" [routerLink]="['/enrichment']">All</a>
                             </div>
                         </li>
-                        <li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>
+                        <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Contribute
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkConUserLog1">
+                                <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
+                                <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
+                                <a class="dropdown-item" [routerLink]="['/user/team']">Join the Team</a>
+                            </div>
+                        </li>
                         <li ngbDropdown class="dropdown">
                                 <!--<a *ngIf="chatHeads && chatHeads.length == 0" class="dropdown-toggle" [routerLink]="['/user/chat/list']">
                                    Message <i class="icon ion-chatboxes"></i>
