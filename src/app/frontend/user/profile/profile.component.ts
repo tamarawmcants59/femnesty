@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.userNameByUrl = params['uname'];
     });
+    localStorage.setItem("groupAdmin", '');
     this.getUserDetailsByUname();
   }
 
