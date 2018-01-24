@@ -31,6 +31,7 @@ import { PopupmodalComponent } from './post-card/popupmodal.component';
 // import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { DateTimePickerModule } from 'ngx-datetime-picker';
 import { BetaRestrictionComponent } from './beta-restriction/beta-restriction.component';
+import { PostListnerService } from './../service/post.listner.service';
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -79,7 +80,8 @@ import { BetaRestrictionComponent } from './beta-restriction/beta-restriction.co
     ],
     providers: [
         HubService,
-        SocialService
+        SocialService,
+        PostListnerService
     ],
     entryComponents: [PopupmodalComponent]
 })

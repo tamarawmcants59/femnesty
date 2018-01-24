@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyService } from "../company.service";
+import * as firebase from 'firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-signup',
@@ -25,16 +27,19 @@ export class SignupComponent implements OnInit {
   public submitted:boolean = false;
   returnUrl: string;
   errorMsg: string='';
+  public successMsg = false;
   public loading = false;
   public isLoggedIn: any;
   public user_id:string;
+  public currentFireUserId: string = '';
   //public disableSignup = true;
 
   constructor(
     private builder:FormBuilder, 
     private dataService: CompanyService, 
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth,
   ) {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
@@ -57,6 +62,12 @@ export class SignupComponent implements OnInit {
     //this.company_type = this.form.controls['compant_type'];
     this.agreetab = this.form.controls['agreetab'];
     this.cpassword = this.form.controls['cpassword'];
+
+    this.afAuth.authState.do(user => {
+      if (user) {
+        this.currentFireUserId = user.uid;
+      }
+    }).subscribe();
    }
 
   ngOnInit() {
@@ -99,6 +110,8 @@ export class SignupComponent implements OnInit {
 
     }
   }
+
+  
 
 public checkCompanyname(values:Object){
   //alert(this.email.value);
@@ -177,7 +190,9 @@ public checkCompanyurl(values:Object){
             let details=data;
             if (details.Ack=="1") {
                 this.loading = false;
-                this.router.navigate(['/user/login']);
+                this.form.reset();
+                this.successMsg = true;
+                //this.router.navigate(['/user/login']);
                 return false;
             }else{
               //alert('Invalid login');
@@ -194,5 +209,28 @@ public checkCompanyurl(values:Object){
         //alert('INVALID FORM');
         
      }
+  }
+
+  public companyLogin():void {    
+    let usersRef = firebase.database().ref('presence/' + this.currentFireUserId);
+    let connectedRef = firebase.database().ref('.info/connected');
+    let fUserId = parseInt(localStorage.getItem("loginUserId"));
+    connectedRef.on('value', function (snapshot) {
+      usersRef.set({ online: false, userid: fUserId });
+      
+    });
+    
+    firebase.auth().signOut().then(function () {
+      
+    }, function (error) {
+      
+    });
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("profile_image");
+    localStorage.removeItem("loginUserId");
+    
+    this.router.navigate(['/user/login']);
   }
 }
