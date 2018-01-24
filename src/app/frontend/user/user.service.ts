@@ -181,6 +181,12 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  sendFollowRequest(form_data) {
+    return this.apiService.post(
+      `/enrichment/appusercompanyfollowunfollow`,
+      form_data
+    ).map(data => data);
+  }
   getUserIsMyFrnd(form_data) {
     return this.apiService.post(
       `/users/appsearchexistfriendornot`,

@@ -51,6 +51,7 @@ export class PostCardComponent implements OnInit {
     commentcount: string;
     created_date: string;
     c_date: string;
+    post_like:boolean;
   };
   constructor(
     private builder: FormBuilder,
@@ -82,7 +83,8 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log(this.postData);
+    console.log(this.postData.post_like);
   }
 
   deletePost(confirmmodal,post_id, type, comments=null,delkey=null) {
@@ -138,6 +140,7 @@ export class PostCardComponent implements OnInit {
   }
 
   public userPostLike(post_id, postdata) {
+    console.log('anup');
     if (this.isLoggedIn == 1) {
       //this.postCmtId = post_id;
     } else {
