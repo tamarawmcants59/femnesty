@@ -23,6 +23,7 @@ export class HubCreateComponent implements OnInit {
   createErrorMsg: string = '';
   successMsg: string = '';
   postImgData: any;
+  public checkInvalidDate: boolean=true;
   public minDate = new Date();
   public aboutActiveTab: string = 'overview';
   public loginUserDet: Object = {};
@@ -186,8 +187,16 @@ export class HubCreateComponent implements OnInit {
 
   public createHub() {
     if (this.postform.valid) {
-      if (this.searchData.address && this.searchData.lat) {
-        this.createErrorMsg = '';
+      /*console.log(this.postform.value.type);
+      console.log(this.postform.value.recurring_end);
+      console.log(this.postform.value.date);*/
+      if(this.postform.value.type=='R' && new Date(this.postform.value.recurring_end) < new Date(this.postform.value.date)){
+        this.checkInvalidDate=false;
+      }else{
+        this.checkInvalidDate=true;
+      }
+      this.createErrorMsg = '';
+      if (this.searchData.address && this.searchData.lat && this.checkInvalidDate) {
         this.loading = true;
         const userValue = this.postform.value;
         userValue.user_id = this.loginUserId;
@@ -214,16 +223,14 @@ export class HubCreateComponent implements OnInit {
           error => {
             alert(error);
           });
-      }
-      else {
+      }else if(!this.checkInvalidDate){
+        this.createErrorMsg = "Please provide recurring to date greater than from date.";
+        window.scrollTo(0, 0);
+      }else {
         this.createErrorMsg = "Please enter the location.";
         window.scrollTo(0, 0);
       }
-
     }
-
-
-
   }
 
   public editHubTab(hub) {
