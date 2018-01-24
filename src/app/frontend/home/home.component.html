@@ -78,11 +78,13 @@ we can do better?
   <div class="container" *ngIf="homepageSliderData.length>0">
     <blockquote>
        <div class="colorDissolve">
-         <div class="item" *ngFor="let homeSlider of homepageSliderData;">
-            <i class="ion-quote"></i>
-            <p>{{homeSlider?.description}}</p>
-            <footer>{{homeSlider?.name}}</footer>
-         </div>
+          <div *ngFor="let homeSlider of homepageSliderData; let i=index">
+            <div class="item" *ngIf="i<3">
+                <i class="ion-quote"></i>
+                <p>{{homeSlider?.description}}</p>
+                <footer>{{homeSlider?.name}}</footer>
+            </div>
+          </div>
        </div>
     </blockquote>
   </div>

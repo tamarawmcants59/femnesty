@@ -8,6 +8,7 @@ import { SearchComponent } from './search/search.component';
 import { SharedModule } from "../components/shared.module";
 import { CorporateComponent } from './corporate/corporate.component';
 import { AdvisoryComponent } from './advisory/advisory.component';
+import { PartnershipComponent } from './partnership/partnership.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { AdvisoryComponent } from './advisory/advisory.component';
   declarations: [
     HomeComponent, 
     FrontendComponent, 
-    SearchComponent, CorporateComponent, AdvisoryComponent, 
+    SearchComponent, CorporateComponent, AdvisoryComponent, PartnershipComponent, 
     //TruncatePipe, 
     //SafePipe
   ],providers:[]

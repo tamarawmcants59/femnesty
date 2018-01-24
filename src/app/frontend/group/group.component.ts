@@ -82,7 +82,10 @@ export class GroupComponent implements OnInit {
         });
     }
   }
-
+  
+  public checkMyFrndList(){
+    //myOwnFrndListforGrp
+  }
   /*public getUserPostDetails(){
     if(this.isGroupId!=''){
         let dataUserDet ={
@@ -276,6 +279,24 @@ export class GroupComponent implements OnInit {
       //console.log(dataUserDet);
       this.dataService.getAllUserListforGrp(dataUserDet).subscribe(data => {
       //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
+        if (data.Ack == "1") {
+          this.userFrndList = data.groupMembersPrivate;
+          //console.log(this.userFrndList);
+        }
+      }, error => {
+
+      });
+    }
+  }
+
+  public myOwnFrndListforGrp() {
+    if (this.isloginUserId != '') {
+      const dataUserDet = {
+        "user_id": this.isloginUserId,
+        "group_id": this.isGroupId
+      };
+      //console.log(dataUserDet);
+      this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
           this.userFrndList = data.groupMembersPrivate;
           //console.log(this.userFrndList);
