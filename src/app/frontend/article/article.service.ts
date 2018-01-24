@@ -31,4 +31,7 @@ export class ArticleService {
       .map(data => data);
   }
 
+  getAllArticleByCategory(){
+    return this.apiService.get(`/enrichment/apparticleallcatsbyslug/all`).map(data => data);
+  }
 }

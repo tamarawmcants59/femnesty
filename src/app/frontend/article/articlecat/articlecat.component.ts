@@ -9,8 +9,10 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./articlecat.component.css']
 })
 export class ArticlecatComponent implements OnInit {
-  articleCatData=[];
+  articleCatData:any;
   articleListData=[];
+  articleMainData=[];
+  catWiseAllArt=[];
   SlugName='';
   public repoUrl = '';
   constructor(
@@ -20,7 +22,13 @@ export class ArticlecatComponent implements OnInit {
   ) { 
     this.activatedRoute.params.subscribe((params: Params) => {
         this.SlugName = params['slug'];
-        this.getCatwiseArticle();
+        if(this.SlugName=='all'){
+          this.getArticleMainImg();
+          this.getAllCatwiseArticle();
+        }else{
+          this.getCatwiseArticle();
+        }
+        
     });
     this.repoUrl=environment.website_url+this.router.url;
   }
@@ -42,8 +50,34 @@ export class ArticlecatComponent implements OnInit {
       console.log('Something went wrong!');
     });
   }
-}
 
+  getAllCatwiseArticle(){
+    this._artcat_service.getAllArticleByCategory().subscribe(data=>{
+      let details=data;
+      if (details.Ack==1) {
+          //console.log(details);
+          this.catWiseAllArt = details.ArticleAllBycatSlug;
+      }
+    },
+    error => {
+      console.log('Something went wrong!');
+    });
+  }
+
+  getArticleMainImg(){
+    this._artcat_service.getArticleData().subscribe(data=>{
+          let details=data;
+          if (details.Ack=="1") {
+              //this.articleMainData = details.ArticleList;
+              this.articleCatData = {'banner_image_url':details.ArticleList[0].banner_image_url,'name':details.ArticleList[0].title};
+            //console.log(this.articleCatData);
+          }
+        },
+        error => {
+          console.log('Something went wrong!');
+        });
+    }
+}
 
 export declare class FacebookParams {
   u: string;
