@@ -267,10 +267,6 @@ export class GroupComponent implements OnInit {
     }
   }
 
-
-
-
-
   public myFrndListforGrp() {
     if (this.isloginUserId != '') {
       const dataUserDet = {
