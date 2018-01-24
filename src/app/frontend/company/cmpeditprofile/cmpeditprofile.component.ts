@@ -39,6 +39,7 @@ export class CmpEditprofileComponent implements OnInit {
 
   returnUrl: string;
   errorMsg: string = '';
+  errorFriendrMsg: string = '';
   successMsg: string = '';
   public loading = false;
   public loginUserDet: object = { };
@@ -730,10 +731,11 @@ public companyids :any;
             // this.items = [{id:'1',text:'Amsterdam'},{id:'2',text: null}];
           });
         } else {
-          this.userSearchFrndList =[];
+          this.userSearchFrndList =[];          
         }
         console.log( this.items);
         //this.postform.reset();
+        
       },
       error => {
         alert(error);
@@ -750,6 +752,8 @@ public companyids :any;
         this.successMsg = 'Employee Added Successfully';
         this.postform.reset();
         //this.getUnivitedUsers();
+      }else{
+        this.errorFriendrMsg = data.msg;
       }
     },
       error => {

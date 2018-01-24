@@ -204,7 +204,7 @@ export class CompanyService {
   }
   searchFrndListByName(form_data) {
     return this.apiService.post(
-      `/users/appsearchfriend1`,
+      `/users/appInviteFriend`,
       form_data
     ).map(data => data);
   }

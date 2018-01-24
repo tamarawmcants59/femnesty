@@ -4,6 +4,7 @@ import { CompanyService } from "../../frontend/company/company.service";
 import { AgmCoreModule } from '@agm/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
+import { PostListnerService } from './../../service/post.listner.service';
 
 @Component({
   selector: 'app-company-rightbar',
@@ -34,9 +35,13 @@ export class CompanyRightbarComponent implements OnInit {
   constructor(
     private dataService: CompanyService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private _postListnerService: PostListnerService
   ) { 
-    
+    this._postListnerService.listen().subscribe((msg: any) => {
+      console.log(msg);
+      this.getMediaList();
+    });
   }
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.companyID;

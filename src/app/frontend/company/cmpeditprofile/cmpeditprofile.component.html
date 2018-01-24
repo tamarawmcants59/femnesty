@@ -65,7 +65,7 @@
                             <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
                             <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
                             <li [ngClass]="{'active' : activeTab=='contact'}"><a (click)="toggleTab('contact')">Contact</a></li>
-                            <!-- <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li> -->
+                            <li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
@@ -861,6 +861,9 @@
                                                 placeholder="No city selected"></ng-select> -->
                                                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                                         <strong>Success: </strong> {{successMsg}}
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert" *ngIf="errorFriendrMsg != ''">
+                                                        <strong>Error: </strong> {{errorFriendrMsg}}
                                                     </div>
                                                 <h2>Add Employee</h2>
                                                 <div class="form-group row">

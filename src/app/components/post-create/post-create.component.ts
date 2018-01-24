@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { EmojiPickerOptions } from 'angular2-emoji-picker';
 import { EmojiPickerAppleSheetLocator } from '../../../sheets';
+import { PostListnerService } from './../../service/post.listner.service';
+
 
 @Component({
   selector: 'app-post-create',
@@ -31,7 +33,8 @@ export class PostCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private emojiPickerOptions: EmojiPickerOptions, 
-    private _el: ElementRef
+    private _el: ElementRef,
+    private _postListnerService: PostListnerService
   ) {
     this.postform = builder.group({
       description: ['', [
@@ -91,6 +94,7 @@ export class PostCreateComponent implements OnInit {
           this.successMsg = 'Successfully post data';
           this.postImgData='';
           this.postform.controls['description'].setValue('');
+          this._postListnerService.onPostAdd('add');
           this.getUserPostDetails.emit();
           //this.postform.reset();
         },
