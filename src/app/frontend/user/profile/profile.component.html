@@ -22,7 +22,7 @@
                       <p class="text-center addressP" *ngIf="otherProfileDet?.address">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
                       <p class="text-center">
                             <a *ngIf="checkIsFriend" [routerLink]="['/user/chat',otherProfileDet?.id]" class="btn btn-primary">Chat With {{otherProfileDet?.first_name}}</a>  
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId && !checkIsFriend" type="button" class="btn btn-primary" (click)="sendFriendRequest(otherProfileDet?.id)">Add Friend</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && !checkIsFriend" type="button" class="btn btn-primary" (click)="sendFriendRequest(otherProfileDet?.id)">Add Connection</button>
                         </p>
                       
                   </div>
@@ -196,7 +196,7 @@
                                             <div class="sendmsg">
                                             	<!--<a href=""><span><img src="assets/images/send-msg.png" alt=""></span> SEND MESSAGE </a>-->
                                             	<!--<a [routerLink]="['/user/profile',friendData.display_name]" class="btn btn-primary">View Profile</a> -->
-                                                <a href="Javascript: void(0)" *ngIf="friendData.friend_id!=isloginUserId" (click)="sendFriendRequest(friendData.friend_id)"><span style="color:#bb1926; font-size:16px;"><i class="ion-android-person-add"></i></span> Add Friend</a>
+                                                <a href="Javascript: void(0)" *ngIf="friendData.friend_id!=isloginUserId" (click)="sendFriendRequest(friendData.friend_id)"><span style="color:#bb1926; font-size:16px;"><i class="ion-android-person-add"></i></span> Add Connection</a>
                                             </div>
                                             <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
                                         </li>
