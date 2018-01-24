@@ -1,7 +1,6 @@
- <ngx-loading *ngIf="loading" [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 <section class="sign-up-area">
     <div class="container">
-       
+        <ngx-loading *ngIf="loading" [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
         <div class="sign-form">
             <h2>{{pageHeading}}</h2>
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">

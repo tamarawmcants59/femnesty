@@ -243,7 +243,7 @@ export class FrontendAppHeader {
     localStorage.removeItem("userName");
     localStorage.removeItem("profile_image");
     localStorage.removeItem("loginUserId");
-    //this.router.navigate(['/']);
+    localStorage.removeItem("groupAdmin");
     this.router.navigateByUrl('/');
     //return false;
   }

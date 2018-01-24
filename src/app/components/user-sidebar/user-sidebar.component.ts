@@ -171,6 +171,7 @@ export class UserSidebar implements OnInit {
     localStorage.removeItem("userName");
     localStorage.removeItem("profile_image");
     localStorage.removeItem("loginUserId");
+    localStorage.removeItem("groupAdmin");
     //this.router.navigate(['/']);
     this.router.navigateByUrl('/');
     //return false;

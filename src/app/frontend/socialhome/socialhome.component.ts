@@ -57,9 +57,10 @@ export class SocialhomeComponent implements OnInit {
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.groupPostDetData = {activitytype:'', activityid:''};
+    localStorage.setItem("groupAdmin", '');
     this.getUserPostDetails();
     this.getLastFourArticle();
-    //console.log(this.IsloginUserId);
+    
   }
 
   public getLastFourArticle(){

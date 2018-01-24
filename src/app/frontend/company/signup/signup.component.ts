@@ -230,7 +230,7 @@ public checkCompanyurl(values:Object){
     localStorage.removeItem("userName");
     localStorage.removeItem("profile_image");
     localStorage.removeItem("loginUserId");
-    
+    localStorage.removeItem("groupAdmin");
     this.router.navigate(['/user/login']);
   }
 }

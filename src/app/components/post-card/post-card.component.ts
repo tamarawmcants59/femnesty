@@ -38,6 +38,7 @@ export class PostCardComponent implements OnInit {
   public delPostKey:any;
   public delPostData:any;
   public userList=[];
+  fhsgdff='';
 
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   @Input() postData: {
@@ -66,6 +67,7 @@ export class PostCardComponent implements OnInit {
     this.getCurrentUser = JSON.parse(this.getCurrentUser);
     this.IsloginUserId = localStorage.getItem("loginUserId");
     if (localStorage.getItem("groupAdmin")) {
+      this.fhsgdff=localStorage.getItem("groupAdmin");
       if (localStorage.getItem("groupAdmin") == this.IsloginUserId) {
         this.IsGroupAdmin = true;
       }
