@@ -228,9 +228,7 @@ export class EditprofileComponent implements OnInit {
 
         }
         );
-    } else {
     }
-
   }
 
   public updateAccount() {
