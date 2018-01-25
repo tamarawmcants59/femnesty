@@ -273,7 +273,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
               data => {
                 self.showPostImgDive = false;
                 self.loading = false;
-                self.createGroupSuccessMsg = 'Successfully created the group';
+                self.createGroupSuccessMsg = 'Successfully created the group.';
                 self.postform.reset();
                 window.scrollTo(0, 0);
                 self.getMyGroupListData();

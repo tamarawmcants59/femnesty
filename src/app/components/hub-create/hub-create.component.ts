@@ -23,7 +23,7 @@ export class HubCreateComponent implements OnInit {
   createErrorMsg: string = '';
   successMsg: string = '';
   postImgData: any;
-  public checkInvalidDate: boolean=true;
+  public checkInvalidDate: boolean = true;
   public minDate = new Date();
   public aboutActiveTab: string = 'overview';
   public loginUserDet: Object = {};
@@ -53,6 +53,49 @@ export class HubCreateComponent implements OnInit {
     private router: Router,
     private hubService: HubService
   ) {
+/*init */
+setTimeout(() => {
+          //debugger;
+          let autocomplete = new google.maps.places.Autocomplete(
+                  /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+            { types: ['geocode'] });
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+            localStorage.setItem("address",place.formatted_address);
+            localStorage.setItem("lat",place.geometry.location.lat());
+            localStorage.setItem("lng",place.geometry.location.lng());
+          });
+          
+        }, 1000);
+
+
+
+    this.router.events.subscribe(event => {
+      const eventObj: any = event;
+      const self = this;
+      if (event.constructor.name === "ResolveStart") {
+        if (eventObj.state.url.includes('create_hub/create')) {
+          setTimeout(() => {
+           // debugger;
+            let autocomplete = new google.maps.places.Autocomplete(
+                    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+              { types: ['geocode'] });
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var place = autocomplete.getPlace();
+              this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+              localStorage.setItem("address",place.formatted_address);
+              localStorage.setItem("lat",place.geometry.location.lat());
+              localStorage.setItem("lng",place.geometry.location.lng());
+            });
+            console.log('hi');
+          }, 1000);
+
+        }
+
+
+      }
+    });
     this.postform = builder.group({
       id: ['', []],
       title: ['', [
@@ -124,8 +167,9 @@ export class HubCreateComponent implements OnInit {
       ]]
     });*/
     this.loginUserId = localStorage.getItem("loginUserId");
-
   }
+
+
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -144,9 +188,29 @@ export class HubCreateComponent implements OnInit {
   }
 
   public resetAddPage() {
+   
     this.addForm = { type: 'O', category_id: '', privacy: 'O' };
     this.searchData = { address: '', lat: '', lng: '' };
     this.autocompleteSettings['inputString'] = '';
+
+    setTimeout(() => {
+      // debugger;
+       let autocomplete = new google.maps.places.Autocomplete(
+               /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+         { types: ['geocode'] });
+       google.maps.event.addListener(autocomplete, 'place_changed', function () {
+         var place = autocomplete.getPlace();
+         //console.log(place);
+         this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+         localStorage.setItem("address",place.formatted_address);
+         localStorage.setItem("lat",place.geometry.location.lat());
+         localStorage.setItem("lng",place.geometry.location.lng());
+         //console.log(this.searchData);
+       });
+     }, 1000);
+
+    // this.autocompleteSettings['inputPlaceholderText'] = 'This is the placeholder text after doing some external operation after some time';
+    // this.autocompleteSettings = Object.assign({},this.autocompleteSettings);
   }
 
   public checkValidation() {
@@ -190,21 +254,24 @@ export class HubCreateComponent implements OnInit {
       /*console.log(this.postform.value.type);
       console.log(this.postform.value.recurring_end);
       console.log(this.postform.value.date);*/
-      if(this.postform.value.type=='R' && new Date(this.postform.value.recurring_end) < new Date(this.postform.value.date)){
-        this.checkInvalidDate=false;
-      }else{
-        this.checkInvalidDate=true;
+      if (this.postform.value.type == 'R' && new Date(this.postform.value.recurring_end) < new Date(this.postform.value.date)) {
+        this.checkInvalidDate = false;
+      } else {
+        this.checkInvalidDate = true;
       }
       this.createErrorMsg = '';
-      if (this.searchData.address && this.searchData.lat && this.checkInvalidDate) {
+      let address= localStorage.getItem("address");
+      let lat= localStorage.getItem("lat");
+      let lng= localStorage.getItem("lng");
+      if (address && lat && lng) {
         this.loading = true;
         const userValue = this.postform.value;
         userValue.user_id = this.loginUserId;
         userValue.image = this.postImgData;
-        if (this.searchData.address && this.searchData.lat) {
-          userValue.address = this.searchData.address;
-          userValue.lat = this.searchData.lat;
-          userValue.lng = this.searchData.lng;
+        if (address && lat) {
+          userValue.address = address;
+          userValue.lat = lat;
+          userValue.lng = lng;
         }
         this.hubService.createNewHub(userValue).subscribe(
           data => {
@@ -214,7 +281,10 @@ export class HubCreateComponent implements OnInit {
               this.successMsg = "Hub edited Successfully.";
             }
             else
-              this.successMsg = 'Hub Created Successfully';
+              this.successMsg = 'Hub created successfully.';
+              localStorage.setItem("address",''); 
+              localStorage.setItem("lat",''); 
+              localStorage.setItem("lng",'');  
             this.postform.reset();
             this.aboutActiveTab = 'overview';
             window.scrollTo(0, 0);
@@ -223,10 +293,10 @@ export class HubCreateComponent implements OnInit {
           error => {
             alert(error);
           });
-      }else if(!this.checkInvalidDate){
+      } else if (!this.checkInvalidDate) {
         this.createErrorMsg = "Please provide recurring to date greater than from date.";
         window.scrollTo(0, 0);
-      }else {
+      } else {
         this.createErrorMsg = "Please enter the location.";
         window.scrollTo(0, 0);
       }
@@ -235,7 +305,7 @@ export class HubCreateComponent implements OnInit {
 
   public editHubTab(hub) {
     // this.postform = hub;
-    console.log(hub);
+    //console.log(hub);
     if (hub.date) {
       //alert(hub.date);
       hub.date = new Date(hub.date);
@@ -244,11 +314,25 @@ export class HubCreateComponent implements OnInit {
       hub.recurring_end = new Date(hub.recurring_end);
     }
     this.addForm = hub;
-    this.autocompleteSettings['inputString'] = hub.address;
-    this.searchData = { address: hub.address, lat: hub.lat, lng: hub.lng };
+    console.log(this.addForm);
+    //this.autocompleteSettings['inputString'] = hub.address;
+    //this.searchData = { address: hub.address, lat: hub.lat, lng: hub.lng };
     this.aboutActiveTab = 'create';
     this.successMsg = '';
     this.postImgData = '';
+    setTimeout(() => {
+      // debugger;
+       let autocomplete = new google.maps.places.Autocomplete(
+               /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+         { types: ['geocode'] });
+       google.maps.event.addListener(autocomplete, 'place_changed', function () {
+         var place = autocomplete.getPlace();
+         this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+         localStorage.setItem("address",place.formatted_address);
+         localStorage.setItem("lat",place.geometry.location.lat());
+         localStorage.setItem("lng",place.geometry.location.lng());
+       });
+     }, 1000);
   }
 
   public editGroupTab(groupId) {
@@ -288,7 +372,7 @@ export class HubCreateComponent implements OnInit {
       .subscribe(
       data => {
         this.loading = false;
-        console.log(data);
+        //console.log(data);
         if (data.Ack == '1') {
           this.userSearchFrndList = data.FriendListById;
           this.userSearchFrndList.forEach((color: { name: string, id: string }) => {
@@ -379,7 +463,6 @@ export class HubCreateComponent implements OnInit {
   public acceptHubRequest(hub) {
 
     this.hubService.acceptHubRequest({ hub_id: hub.hub_id, user_id: this.loginUserId }).subscribe(data => {
-      console.log(data);
       this.getMyHubRequest();
     }, error => {
       console.log('Something went wrong!');
@@ -389,7 +472,6 @@ export class HubCreateComponent implements OnInit {
   public rejectHubRequest(hub) {
 
     this.hubService.rejectHubRequest({ hub_id: hub.hub_id, user_id: this.loginUserId }).subscribe(data => {
-      console.log(data);
       this.getMyHubRequest();
     }, error => {
       console.log('Something went wrong!');
