@@ -82,7 +82,7 @@
                   <div class="col-sm-12">
                     <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
                     <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title *">
-                    <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub Title Required</div>
+                    <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub title Required.</div>
                   </div>
                 </div>
 
@@ -94,7 +94,7 @@
                     </select>
 
                     <!-- <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category Required</div>
+                    <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category required.</div>
                   </div>
                 </div>
 
@@ -160,16 +160,14 @@
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer *">
-                    <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer Required</div>
+                    <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer required.</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>
-                    <!-- <input type="text" class="form-control-plaintext"  placeholder="Type anything and you will get a location *" id="autocomplete"> -->
-                  
-
+                    <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>-->
+                    <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" id="autocomplete">
                     <!-- <input type="text" class="form-control-plaintext" 
                       [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
                     <!-- <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div> -->
@@ -194,14 +192,14 @@
                   <div class="col-sm-12">
                     <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail *"
                       email>
-                    <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Please enter valid email.</div>
+                    <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Enter valid email.</div>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone *">
-                    <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone Required</div>
+                    <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone required.</div>
                   </div>
                 </div>
 
@@ -209,7 +207,7 @@
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description *"></textarea>
-                    <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description Required</div>
+                    <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description required.</div>
                   </div>
                 </div>
 

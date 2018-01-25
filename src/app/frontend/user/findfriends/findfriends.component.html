@@ -70,7 +70,7 @@
                                                         <h2 *ngIf="sfriendData.user_type=='CA'">{{sfriendData.company_name}}</h2>
                                                         <h2 *ngIf="sfriendData.user_type=='C'">{{sfriendData.name}}</h2>
                                                         <!--<p>3 mutual friend</p>-->
-                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='C'" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">Add Connection</button>
+                                                        <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='C'" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">CONNECT</button>
                                                         <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==1" type="button" class="btn btn-primary" (click)="unflow_company(sfriendData.id,sfriendData)">UnFollow</button>	
                                                         <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==0" type="button" class="btn btn-primary" (click)="sendFollowRequest(sfriendData.id,sfriendData)">Follow</button>	
                                                         <p *ngIf="sfriendData.request_type == '1' " class="req_style" >Friend Request Send</p>

@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit {
           .subscribe(
             data => {
                 if(data.Ack==1){
-                  this.successMsg='You have successfully send the friend request';
+                  this.successMsg='Connection request Sent';
                 }else{
                   this.errorMsg='You have already send the friend request';
                 }

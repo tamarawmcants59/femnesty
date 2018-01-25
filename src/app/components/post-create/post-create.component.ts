@@ -91,7 +91,7 @@ export class PostCreateComponent implements OnInit {
       this.dataService.postDataSend(userValue).subscribe(data => {
           this.showPostImgDive = false;
           this.loading = false;
-          this.successMsg = 'Successfully post data';
+          this.successMsg = 'Successfully posted.';
           this.postImgData='';
           this.postform.controls['description'].setValue('');
           this._postListnerService.onPostAdd('add');
@@ -102,7 +102,7 @@ export class PostCreateComponent implements OnInit {
           alert(error);
         });
     }else{
-      this.errorMsg= 'Please share your thoughts or upload image.';
+      this.errorMsg= 'Please share your thoughts or upload an image to post.';
     }
   }
 

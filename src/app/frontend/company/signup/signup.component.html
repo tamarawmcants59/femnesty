@@ -7,7 +7,7 @@
                 <strong>Error!</strong> {{errorMsg}}
             </div>
             <div class="alert alert-success" role="alert" *ngIf="successMsg">
-                Please check you email and activate your account then <a (click)="companyLogin()" href="javascript:;">Login</a>
+                    Please check your email and ativate your account, then <a (click)="companyLogin()" href="javascript:;">login</a>
             </div>
            
             <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">    
@@ -19,7 +19,7 @@
                       Please enter the correct Company Url, this Company Url is not valid.
                     </div>-->
                     <div class="text-danger" *ngIf="!website.valid && website.touched">
-                        Please enter the Company Url.
+                            Enter the Company Url.
                     </div>
                     <div class="text-danger" *ngIf="!domainmatch1 && website.valid">
                         Company url domain and email domain not match.
@@ -28,7 +28,7 @@
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Email Address" class="form-control" [formControl]="email" (ngModelChange)="checkEmail($event)">
                     <div class="text-danger" *ngIf="(email.hasError('email', 'email') || !email.valid) && email.touched">
-                        Please enter the correct email, this email not valid.
+                            Enter the correct email, this email is not valid.
                     </div>
                     <div class="text-danger" *ngIf="checkEmailExist && email.valid">
                         This email already exist.
@@ -40,7 +40,7 @@
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Company Name" class="form-control" [formControl]="company_name" (ngModelChange)="checkCompanyname($event)">
                     <div class="text-danger" *ngIf="!company_name.valid && company_name.touched">
-                        Please enter your company name.
+                            Enter your company name.
                     </div>
                     <div class="text-danger" *ngIf="!checkCompanynameExist && company_name.valid">
                         This company already exist.
@@ -54,7 +54,7 @@
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Contact Number" class="form-control" [formControl]="mobile_number">
                     <div class="text-danger" *ngIf="!mobile_number.valid && mobile_number.touched">
-                      Please enter the correct contact no, this contact no not valid.
+                            Enter the correct contact no, this contact no is not valid.
                     </div>
                     <!-- <div class="text-danger" *ngIf="!domainmatch && company_name.valid">
                         Company email domain  and company url not match.
@@ -63,11 +63,11 @@
                 
                 <div class="form-group col-md-6">
                     <input type="password" placeholder="Password" name="password" validateEqual="cpassword" reverse="true" class="form-control" [formControl]="password">
-                    <div class="text-danger" *ngIf="!password.valid && password.touched">Password Required</div>
+                    <div class="text-danger" *ngIf="!password.valid && password.touched">Password required.</div>
                 </div>
                 <div class="form-group col-md-6">
                     <input type="password" placeholder="Confirm Password" name="cpassword" validateEqual="password" reverse="false" class="form-control" [formControl]="cpassword">
-                    <div class="text-danger" *ngIf="!cpassword.valid && cpassword.touched">Confirm Password Required and the passwords must match</div>                   
+                    <div class="text-danger" *ngIf="!cpassword.valid && cpassword.touched">Confirm password required and the passwords must match.</div>                   
                 </div>
                 <div class="form-group col-md-12">
                     <p>

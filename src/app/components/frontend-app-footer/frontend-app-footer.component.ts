@@ -223,7 +223,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
         this.userService.submitNewsLetter({email: this.newsletteremail}).subscribe(res => {
           //console.log(res);
           if(res.Ack==1){
-            this.successMsg=res.msg;
+            this.successMsg=' You have sucessfully subscribed';
             this.newsletteremail='';
           }else{
             this.errorMsg=res.msg;

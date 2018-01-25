@@ -144,7 +144,7 @@ export class ProfileComponent implements OnInit {
         .subscribe(data => {
           const details = data;
           if (details.Ack == "1") {
-            this.successMsg = "You have successfully unfollowed.";
+            this.successMsg = "Unfollow Successful.";
             //this.isEmpRequest = false;
             this.getFollowerList();
             
@@ -269,7 +269,7 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           if (data.Ack == 1) {
-            this.successMsg = 'You have successfully Follow.';
+            this.successMsg = 'Follow Successful.';
             this.getFollowerList();
             
           } else {
