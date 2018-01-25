@@ -280,7 +280,7 @@ export class GroupComponent implements OnInit {
       //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
           this.userFrndList = data.groupMembersPrivate;
-          console.log(this.userFrndList);
+          //console.log(this.userFrndList);
         }
       }, error => {
 

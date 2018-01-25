@@ -217,15 +217,21 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
     this.errorMsg='';
     this.successMsg='';
     if(this.newsletteremail!=''){
-      this.userService.submitNewsLetter({email: this.newsletteremail}).subscribe(res => {
-        //console.log(res);
-        if(res.Ack==1){
-          this.successMsg=res.msg;
-          this.newsletteremail='';
-        }else{
-          this.errorMsg=res.msg;
-        }
-      });
+      let isEmailValid = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/.test(this.newsletteremail); 
+      //console.log(isEmailValid);
+      if(isEmailValid){
+        this.userService.submitNewsLetter({email: this.newsletteremail}).subscribe(res => {
+          //console.log(res);
+          if(res.Ack==1){
+            this.successMsg=res.msg;
+            this.newsletteremail='';
+          }else{
+            this.errorMsg=res.msg;
+          }
+        });
+      }else{
+        this.errorMsg='Please provide a valid email.';
+      }
     }else{
       this.errorMsg='Please provide your email.';
     }

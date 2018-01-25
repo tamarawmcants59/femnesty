@@ -114,6 +114,7 @@
                                                     <h2>{{joinFrnd.name}}</h2>
                                                     </a>
                                                     <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Add</button>
+                                                    <!--<button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary" (click)="inviteFrndAsGroupMember(joinFrnd.friend_id)">Add</button>-->
                                                     <button  *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
                                                 </div>
                                             </li>
