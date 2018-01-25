@@ -70,7 +70,7 @@
         <div class="container">
             <div class="mb-50" *ngFor="let catData of catWiseAllArt">
                 <h2 class="">{{catData.name}}</h2>
-                <div class="row" *ngIf="catData.all_articlebycat.length > 0">
+                <div class="row modify-row" *ngIf="catData.all_articlebycat.length > 0">
                     <div class="col-md-3 col-sm-6 col-multi-article" *ngFor="let articleData of catData.all_articlebycat">
                         <!--<div class="cat-article-img" [ngStyle]="{'background-image':'url('+catData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"></div>-->
                         <img [src]="articleData.image_url" alt="" class="img-responsive">
