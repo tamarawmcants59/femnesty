@@ -75,8 +75,8 @@ we can do better?
   </div>
 </section>
 <section class="section quote">
-  <div class="container" *ngIf="homepageSliderData.length>0">
-    <blockquote>
+  <div class="container" style="height:100%" *ngIf="homepageSliderData.length>0">
+    <!--<blockquote>
        <div class="colorDissolve">
           <div *ngFor="let homeSlider of homepageSliderData; let i=index">
             <div class="item" *ngIf="i<3">
@@ -86,7 +86,28 @@ we can do better?
             </div>
           </div>
        </div>
-    </blockquote>
+    </blockquote>-->
+    <blockquote id="slider-css">
+	  <div class="slides-css">
+	    <div class="slider-css" *ngFor="let homeSlider of homepageSliderData; let i=index">
+	     	<div class="item" *ngIf="i<4">
+             <i class="ion-quote"></i>
+             <p>{{homeSlider?.description}}</p>
+             <footer>{{homeSlider?.name}}</footer>
+         </div>
+	    </div>   
+	  </div>
+	  <!--<div class="switch">
+	    <ul>
+	      <li>
+	        <div class="on"></div>
+	      </li>
+	      <li></li>
+	      <li></li>
+	    </ul>
+	  </div>-->
+	</blockquote>
+	
   </div>
 </section>
 <section class="section top-articles">
