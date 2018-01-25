@@ -8,3 +8,7 @@
 	object-fit: cover;
 	text-align: center;
 }
+.modify-row{
+	display: flex;
+	flex-wrap: wrap;
+}

@@ -92,7 +92,7 @@ we can do better?
 	    <div class="slider-css" *ngFor="let homeSlider of homepageSliderData; let i=index">
 	     	<div class="item" *ngIf="i<4">
              <i class="ion-quote"></i>
-             <p>{{homeSlider?.description}}</p>
+             <p>{{homeSlider?.description | limitTo : 120}}</p>
              <footer>{{homeSlider?.name}}</footer>
          </div>
 	    </div>   
