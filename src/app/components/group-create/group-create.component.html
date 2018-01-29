@@ -4,7 +4,7 @@
     <div class="col-md-12 col-sm-12 hub_top_tab">
         <div class="new-tabs">
             <ul class="nav nav-tabs">
-                <li [ngClass]="{'active' : aboutActiveTab=='find'}">
+                <li [ngClass]="{'active' : aboutActiveTab=='find'}" style="margin-bottom: 0px;">
                     <a [routerLink]="['/group/find']">GROUPS</a>
                 </li>
                 <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
@@ -138,7 +138,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <ng4geo-autocomplete class="auto-text-input" [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                                <!--<ng4geo-autocomplete class="auto-text-input" [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>-->
+                                <input type="text" class="form-control-plaintext" value="" formControlName="address" placeholder="Type anything and you will get a location *" id="autocomplete">
                             </div>
                            
                         </div>
@@ -262,7 +263,8 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <ng4geo-autocomplete [userSettings]="autocompleteSettings1" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                                            <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings1" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>-->
+                                            <input type="text" class="form-control-plaintext" value="{{groupEditDataJson.address}}" formControlName="address" placeholder="Type anything and you will get a location *" id="autocomplete1">
                                         </div>
                                        
                                     </div>

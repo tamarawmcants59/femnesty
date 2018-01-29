@@ -88,7 +88,6 @@ setTimeout(() => {
               localStorage.setItem("lat",place.geometry.location.lat());
               localStorage.setItem("lng",place.geometry.location.lng());
             });
-            console.log('hi');
           }, 1000);
 
         }
@@ -314,7 +313,6 @@ setTimeout(() => {
       hub.recurring_end = new Date(hub.recurring_end);
     }
     this.addForm = hub;
-    console.log(this.addForm);
     //this.autocompleteSettings['inputString'] = hub.address;
     //this.searchData = { address: hub.address, lat: hub.lat, lng: hub.lng };
     this.aboutActiveTab = 'create';
@@ -442,7 +440,6 @@ setTimeout(() => {
   // }
   public getMyHubRequest() {
     this.hubService.getMyHubRequest(this.loginUserId).subscribe(data => {
-      console.log('category details ', data);
       if (data.Ack == "1") {
         this.hubRequestList = data.details;
         if (this.hubRequestList.length && this.hubRequestList.length > 0) {
