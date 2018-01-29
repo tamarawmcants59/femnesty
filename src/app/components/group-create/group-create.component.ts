@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "../hub-create/hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
-import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
+//import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 import { Subject } from 'rxjs/Subject';
 import { GrouplistComponent } from '../../frontend/group/grouplist/grouplist.component';
 declare var google: any;
@@ -38,12 +38,12 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   public countryList = [];
   public address_required: boolean = false;
   public groupReqSuccessMsg: string = '';
-  public autocompleteSettings: any = {
+  /*public autocompleteSettings: any = {
     showSearchButton: false,
     showCurrentLocation: false,
     inputPlaceholderText: 'Type anything and you will get a location *',
   };
-  public autocompleteSettings1: any;
+  public autocompleteSettings1: any;*/
   @ViewChild("groupListSuccessMsgDiv") groupListSuccessMsgDiv: ElementRef;
   constructor(
     private builder: FormBuilder,
@@ -54,6 +54,41 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     private groupListComp: GrouplistComponent
   ) {
 
+    /*init */
+    setTimeout(() => {
+      //debugger;
+      let autocomplete = new google.maps.places.Autocomplete(
+              /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+        { types: ['geocode'] });
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+        localStorage.setItem("address",JSON.stringify(address_data));
+      });
+      
+    }, 1000);
+
+
+  this.router.events.subscribe(event => {
+    const eventObj: any = event;
+    const self = this;
+    if (event.constructor.name === "ResolveStart") {
+    if (eventObj.state.url.includes('group/add_group')) {
+      setTimeout(() => {
+      // debugger;
+        let autocomplete = new google.maps.places.Autocomplete(
+                /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+          { types: ['geocode'] });
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+          var place = autocomplete.getPlace();
+          let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+          localStorage.setItem("address",JSON.stringify(address_data));
+          //console.log(localStorage.getItem("address"));
+        });
+      }, 1000);
+    }
+    }
+  });
 
     this.postform = builder.group({
       group_name: ['', [
@@ -163,9 +198,9 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
 
-  autoCompleteCallback1(data: any): any {
+  /*autoCompleteCallback1(data: any): any {
     this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
-  }
+  }*/
 
   public getTotCounteyList() {
     this.dataService.getCountryList().subscribe(data => {
@@ -190,11 +225,24 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
   public editGroupTab(groupId) {
-
+    
     this.groupEditId = groupId;
     let dataUserDet = {
       "group_id": this.groupEditId
     };
+    setTimeout(() => {
+      // debugger;
+       let autocomplete = new google.maps.places.Autocomplete(
+               /** @type {HTMLInputElement} */(document.getElementById('autocomplete1')),
+         { types: ['geocode'] });
+       google.maps.event.addListener(autocomplete, 'place_changed', function () {
+         var place = autocomplete.getPlace();
+         let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+         localStorage.setItem("address",JSON.stringify(address_data));
+         
+       });
+     }, 1000);
+
     const self = this;
     this.dataService.getGroupDetById(dataUserDet).subscribe(data => {
       if (data.Ack == "1") {
@@ -220,12 +268,12 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
         }
         //let add = data.GroupDetails[0].address;
         this.showPostImgDive = true;
-        this.autocompleteSettings1 = {
+        /*this.autocompleteSettings1 = {
           showSearchButton: false,
           showCurrentLocation: false,
           inputPlaceholderText: 'Type anything and you will get a location *',
           "inputString": data.GroupDetails[0].address
-        };
+        };*/
         //this.postImgData=this.groupEditDataJson.group_image;
       }
     },
@@ -234,6 +282,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
       });
     this.aboutActiveTab = 'edit_group';
     this.successMsg = '';
+    this.errorMsg = '';
     this.postImgData = '';
   }
 
@@ -257,11 +306,12 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     const userValue = this.postform.value;
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
-
+    //localStorage.getItem("address");
+    this.searchData=JSON.parse(localStorage.getItem("address"));
     if (this.searchData.address && this.searchData.lat) {
       const zipCode = userValue.postal_code;
       if (zipCode) {
-        debugger;
+        //debugger;
         const self = this;
         let geocoder = new google.maps.Geocoder;
         geocoder.geocode({ 'address': zipCode }, function (results, status) {
@@ -275,9 +325,10 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
                 self.loading = false;
                 self.createGroupSuccessMsg = 'Successfully created the group.';
                 self.postform.reset();
+                localStorage.setItem("address",JSON.stringify({ address: '', lat:'', lng: ''}));
                 window.scrollTo(0, 0);
                 self.getMyGroupListData();
-                self.searchData.address = '';
+                //self.searchData.address = '';
                 self.address_required = false;
                 self.groupListComp.loadGroupList();
               },
@@ -301,22 +352,31 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
   public editGroupPost() {
-    debugger;
+    //debugger;
     this.loading = true;
     const userValue = this.postform.value;
     userValue.id = this.groupEditId;
     userValue.image = this.postImgData;
+    this.searchData=JSON.parse(localStorage.getItem("address"));
+    //if (this.searchData.address && this.searchData.lat) {
+    const self = this;  
     if (this.searchData.address && this.searchData.lat) {
-      userValue.address = this.searchData.address;
+      userValue.address=this.searchData.address;
+    }else{
+      userValue.address=userValue.address;
+    }  
+    
+    if (userValue.address) {  
+      //userValue.address = this.searchData.address;
       const zipCode = userValue.postal_code;
       if (zipCode) {
-        debugger;
-        const self = this;
+        //debugger;
+       
         let geocoder = new google.maps.Geocoder;
         geocoder.geocode({ 'address': zipCode }, function (results, status) {
           if (status === 'OK') {
             self.createGroupErrorMsg = '';
-            userValue.address = self.searchData.address;
+            //userValue.address = self.searchData.address;
             self.dataService.editGroupDataSend(userValue).subscribe(data => {
 
               self.showPostImgDive = false;
@@ -327,7 +387,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
               setTimeout(function () {
                 self.groupListSuccessMsgDiv.nativeElement.scrollIntoView();
               }, 200);
-      
+              localStorage.setItem("address",JSON.stringify({ address: '', lat:'', lng: ''})); 
               self.getMyGroupListData();
               self.address_required = false;
               self.aboutActiveTab = 'overview';
@@ -419,6 +479,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
   public aboutToggleTab(data: any) {
+    localStorage.setItem("address",JSON.stringify({ address: '', lat:'', lng: ''}));
     this.successMsg = '';
     this.errorMsg = '';
     this.postImgData = '';
