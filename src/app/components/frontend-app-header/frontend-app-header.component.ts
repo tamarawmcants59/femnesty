@@ -18,6 +18,7 @@ export class FrontendAppHeader {
   pageConData = [];
 
   HeaderNavCls: string = '';
+  HeaderTopCls: string = '';
   lastScrollTop: number = 100;
   chatHeads: any[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
@@ -71,11 +72,26 @@ export class FrontendAppHeader {
         //this.lastScrollTop = st;
         lc.run(() => {
           this.HeaderNavCls = dir;
+          this.HeaderTopCls = dir;
         });
 
       };
     } else {
       this.HeaderNavCls = 'navbar-white';
+      window.onscroll = () => {
+        let st = window.pageYOffset;
+        let dir = '';
+        if (st > this.lastScrollTop) {
+          dir = "navbar-white";
+        } else {
+          dir = "navbar-trans";
+        }
+        //this.lastScrollTop = st;
+        lc.run(() => {
+          this.HeaderTopCls = dir;
+        });
+
+      };
     }
 
     this.userloggedIn = localStorage.getItem("isLoggedIn");
