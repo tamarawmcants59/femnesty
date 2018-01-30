@@ -197,7 +197,12 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'**',
+    path: '**',
+    redirectTo: '404-not-found',
+    //pathMatch: 'full',
+  },
+  {
+    path:'404-not-found',
     component: FrontendLayout,
     data:{
       title: '404 Page Not Found'
@@ -205,7 +210,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './frontend/frontend.module#FrontendModule'
+        loadChildren: './frontend/pagenotfound/pagenotfound.module#PagenotfoundModule'
       }
     ]
   }

@@ -5,7 +5,6 @@ import { SearchComponent } from "./search/search.component";
 import { AdvisoryComponent } from "./advisory/advisory.component";
 import { CorporateComponent } from "./corporate/corporate.component";
 import { PartnershipComponent } from './partnership/partnership.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const frontendRoute: Routes = [
     {
