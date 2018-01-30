@@ -139,19 +139,7 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: './frontend/article/article.module#ArticleModule'
-      }/*,
-      {
-        path: ':slug',
-        loadChildren: './frontend/article/article.module#ArticleModule'
-      },
-      {
-        path: 'list/:slug',
-        loadChildren: './frontend/article/article.module#ArticleModule'
-      },
-      {
-        path: 'details/:slug',
-        loadChildren: './frontend/article/article.module#ArticleModule'
-      }*/
+      }
     ]
   },
   {
@@ -164,21 +152,7 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: './frontend/user/user.module#UserModule',
-      }/*,
-      {
-        path: 'login',
-        loadChildren: './frontend/user/user.module#UserModule',
-      },
-      {
-        path: 'signup',
-        loadChildren: './frontend/user/user.module#UserModule',
-      },
-      {
-        path: 'profile',
-        //canActivateChild: [AuthGuard],
-        loadChildren: './frontend/user/user.module#UserModule',
-      }*/
-      
+      }      
     ]
   },
   {
@@ -198,7 +172,6 @@ export const routes: Routes = [
   {
     path:'social_home',
     component: FrontendLayout,
-    //canActivateChild: [AuthGuard],
     data:{
       title: 'Home'
     },
@@ -222,35 +195,20 @@ export const routes: Routes = [
         loadChildren: './frontend/page/page.module#PageModule',
       }
     ]
-  }/*,
+  },
   {
-    path:'book_details/:slug',
+    path:'**',
     component: FrontendLayout,
     data:{
-      title: 'Book Details'
+      title: '404 Page Not Found'
     },
     children: [
       {
         path: '',
-        loadChildren: './frontend/enrichment/enrichment.module#EnrichmentModule'
-        //loadChildren: './frontend/enrichment/books/books.module#BooksModule'
+        loadChildren: './frontend/frontend.module#FrontendModule'
       }
     ]
-  }*/
-  /*,
-  {
-    path: 'pages',
-    component: SimpleLayout,
-    data: {
-      title: 'Pages'
-    },
-    children: [
-      {
-        path: '',
-        loadChildren: './views/pages/pages.module#PagesModule',
-      }
-    ]
-  }*/
+  }
 ];
 
 @NgModule({
