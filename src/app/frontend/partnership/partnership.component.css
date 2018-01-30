@@ -1,0 +1,79 @@
+.spb-row h1{
+	font-size: 42px;
+	position: relative;
+	margin-bottom: 35px;
+	padding-bottom: 35px;
+	line-height: 60px;
+}
+ .spb-row h1::after {
+    content: "";
+    width: 53px;
+    height: 10px;
+    background: #be1620;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.spb-row{
+	font-size: 16px;
+	color: #000;
+	line-height: 24px;
+}
+.mid-sec{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 80px 0;
+}
+.mid-sec h1{
+	font-size: 42px;
+	position: relative;
+	margin-bottom: 35px;
+	padding-bottom: 35px;
+	line-height: 60px;
+}
+.mid-sec h1::after {
+    content: "";
+    width: 53px;
+    height: 10px;
+    background: #be1620;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.mid-sec p{
+	font-size: 14px;
+	color: #000;
+	line-height: 24px;
+}
+.mid-sec h3{
+	font-size: 22px;
+}
+.pdl-0{
+	padding-left: 0;
+}
+.pdr-30{
+	padding-right: 30px;
+}
+.p-sec{
+	width: 100%;
+	height: auto;
+	padding: 80px 0;
+	background: #f7f7f7;
+}
+.p-sec h1{
+	font-size: 42px;
+	color: #000;
+	margin-bottom: 40px;
+}
+
+.p-sec p{
+	font-size: 14px;
+	color: #000;
+	line-height: 24px;
+}
+.spb-row h1{
+	line-height: 36px !important;
+	margin-bottom: 20px !important;
+	margin-top: 20px !important;
+}

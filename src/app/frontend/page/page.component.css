@@ -1,0 +1,18 @@
+.contact-right p{
+	margin-bottom: 25px;
+}
+.contact-dtls li .icon{
+	width:26px;
+	height: auto;
+}
+.contact-dtls li .icon img{
+	width:26px;
+	height: auto;
+}
+.number{
+	font-size: 18px;
+	color: #000;
+}
+.btn.btn-primary {
+    padding: 12px 25px;
+}
