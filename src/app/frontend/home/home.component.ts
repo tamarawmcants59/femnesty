@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     this.dataService.getHomePageTopArtData().subscribe(data => {
       if (data.Ack == "1") {
         this.homepageArtData = data.ArticleList;
-        //console.log(this.homepageData);
+        //console.log(this.homepageArtData);
       }
     }, error => {
       console.log('Something went wrong!');
