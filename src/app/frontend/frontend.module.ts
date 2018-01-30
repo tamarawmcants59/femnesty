@@ -9,6 +9,7 @@ import { SharedModule } from "../components/shared.module";
 import { CorporateComponent } from './corporate/corporate.component';
 import { AdvisoryComponent } from './advisory/advisory.component';
 import { PartnershipComponent } from './partnership/partnership.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,11 @@ import { PartnershipComponent } from './partnership/partnership.component';
   declarations: [
     HomeComponent, 
     FrontendComponent, 
-    SearchComponent, CorporateComponent, AdvisoryComponent, PartnershipComponent, 
+    SearchComponent, 
+    CorporateComponent, 
+    AdvisoryComponent, 
+    PartnershipComponent, 
+    PagenotfoundComponent, 
     //TruncatePipe, 
     //SafePipe
   ],providers:[]
