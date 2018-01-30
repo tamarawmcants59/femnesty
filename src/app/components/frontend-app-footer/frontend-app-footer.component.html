@@ -2,21 +2,21 @@
     <div class="footer-top">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <h4>Let’s Connect!</h4>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <h4><i class="ion-email"></i> Email us</h4>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <h4><i class="ion-ios-telephone"></i> Call Us</h4>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <h4><i class="ion-log-in"></i> Sign In</h4>
                 </div>
             </div>
             <div class="row">
-                <div  class="col-md-3 col-sm-6">
+                <div  class="col-md-3 col-sm-6 pdlr">
                     <h5>ABOUT FEMNESTY</h5>
                      <!--<ul *ngFor="let cmslist of cms">
                         <li ><a [routerLink]="['/page/',cmslist.slug]" >{{cmslist.page_heading}}</a></li>
@@ -32,7 +32,7 @@
                         <li><a [routerLink]="['/page',pageContactData]">Contact Us</a></li> 
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <h5>CONTRIBUTE</h5>
                     <ul>
                         <li><a [routerLink]="['/user/shareyourstory']">Share Your Story</a></li>
@@ -41,7 +41,7 @@
                         <li><a [routerLink]="['/mentorship']">Mentorship</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <h5>ARTICLES</h5>
                     <ul *ngIf="articleArr.length>0">
                         <li *ngFor="let artdata of articleArr;"><a [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a></li>
@@ -49,7 +49,7 @@
                         <li><a [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a></li>-->
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 pdlr">
                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                         <strong>Success!</strong> {{successMsg}}
                     </div>
@@ -73,9 +73,9 @@
         <div class="container">
             <p class="pull-left">Copyright © {{current_year | date:'y'}} {{siteSettingsDet.website}}. All rights reserved.</p>
             <ul class="pull-right">
-                <li><a target="_blank" href="{{siteSettingsDet.facebook_url}}"><i class="ion-social-facebook"></i></a></li>
-                <li><a target="_blank" href="{{siteSettingsDet.twitter_url}}"><i class="ion-social-twitter"></i></a></li>
-                <li><a target="_blank" href="{{siteSettingsDet.linkedIn_url}}"><i class="ion-social-linkedin"></i></a></li>
+                <li><a target="_blank" href="{{siteSettingsDet.facebook_url}}"><img src="assets/images/icon-s-1.png" alt="" /></a></li>
+                <li><a target="_blank" href="{{siteSettingsDet.twitter_url}}"><img src="assets/images/icon-s-2.png" alt="" /></a></li>
+                <li><a target="_blank" href="{{siteSettingsDet.linkedIn_url}}"><img src="assets/images/icon-s-3.png" alt="" /></a></li>
             </ul>
         </div>
     </div>
