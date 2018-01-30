@@ -631,7 +631,12 @@ fieldset[disabled] .btn-danger.active {
         filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff2e6da4', GradientType=0);
     }
     .enrichmentText p{height: auto !important}
-    
+    .pdl-0{
+	padding-left: 15px !important;
+}
+.pdr-30{
+	padding-right: 15px !important;
+}
 }
 
 .alert {
@@ -1184,7 +1189,7 @@ footer {
 
 .footer-top {
     background: #313131;
-    padding: 100px 0;
+    padding: 80px 0;
 }
 
 .footer-top h4 {
@@ -1423,7 +1428,7 @@ footer {
     border: none;
     box-shadow: none;
     height: 64px;
-    font-size:17px;
+    font-size:16px;
     padding: 6px 30px;
 }
 .form-area label{font-size: 16px;color: #707070}
@@ -4056,8 +4061,8 @@ ul.connectionlist li .text-area p {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    margin-bottom: 20px;
-    font-size: 24px
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 
 .contact-dtls li .icon {
@@ -4655,7 +4660,7 @@ ul.uploadVideo {
 .advisory-board{padding: 77px 0; overflow: hidden;}
 .advisory-board h2{font-size: 37px;margin: 0;color: #000;border-bottom: 3px solid #e6e6e6;}
 .advisory-board h3{font-size: 25px; color: #be1620;}
-.advisory-board p{font-size: 14px; line-height: 30px;}
+.advisory-board p{font-size: 14px; line-height: 25px;}
 .advisory.gray{padding-bottom: 0}
 .advisory.gray h2{font-size:28px}
 .advisory.gray h3.text-red{font-size:26px}
@@ -5108,8 +5113,41 @@ padding: 9px 15px;
 	.tabPart1 .tab-content ul li h5,.new-tabs .tab-content ul li h5{font-size: 12px !important;}
 	.tabPart1 .tab-content ul li p,.new-tabs .tab-content ul li p{font-size: 12px !important;padding: 0 10px !important}
 	
-	
-	
+.mid-sec h1{
+	font-size: 24px !important;
+	margin-bottom: 15px !important;
+	padding-bottom: 15px !important;
+	line-height: 36px !important;
+	text-align: center;
+}
+.mid-sec p{
+	text-align: center;
+}
+.mid-sec{
+	padding: 50px 0 !important;
+}
+.pdl-0{
+	padding-left: 15px !important;
+}
+.pdr-30{
+	padding-right: 15px !important;
+}
+.mid-sec h3{
+	text-align: center;
+}
+.p-sec{
+	padding: 40px 0 !important;
+}
+.p-sec h1{
+	font-size: 24px;
+	margin-bottom: 20px;
+	text-align: center;
+	line-height: 36px !important;
+}
+
+.p-sec p{
+	text-align: center;
+}
 }
 
 .modal-backdrop.fade{opacity:.5 !important }
