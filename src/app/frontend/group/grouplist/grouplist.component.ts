@@ -11,13 +11,16 @@ export class GrouplistComponent implements OnInit {
   public isloginUserId: any;
   public isUserLogin: any;
   public groupList = [];
-
+  public IsShowTopViewMore = false;
+  public IsShowMyViewMore = false;
   private totalGroupList: any = [];
   public myGrpList = [];
   private totalMyGrpList: any = [];
+  private totalListOfMyGroups: any = [];
   public latestArticles = [];
   search_group: string;
-  private errorMsg: string;
+  public errorMsg: string;
+  public filteredTitle: any;
   public aboutActiveTab: string = 'find';
   private categoryListWithCount: any = [];
   @ViewChild("topGroupsList") topGroupsList: ElementRef;
@@ -36,12 +39,12 @@ export class GrouplistComponent implements OnInit {
         const eventObj: any = event;
         const self = this;
         if (eventObj.state.url.includes('group/find')) {
-          setTimeout(function(){
+          setTimeout(function () {
             var elements = document.getElementsByClassName('bottomList');
-            if(elements.length>0)
-            elements[0].scrollIntoView();
-          },100)
-          
+            if (elements.length > 0)
+              elements[0].scrollIntoView();
+          }, 100)
+
         }
 
 
@@ -63,6 +66,8 @@ export class GrouplistComponent implements OnInit {
         if (eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find')) {
           self.errorMsg = '';
           self.myGrpList = [];
+          self.getAllGroupList();
+          self.getUserGroupList();
         }
 
 
@@ -120,9 +125,9 @@ export class GrouplistComponent implements OnInit {
     }
 
   }
-  private getCatDetails(id) {
+  private getCatDetails(id, title) {
     //this.aboutActiveTab='find';
-
+    this.filteredTitle = title.toUpperCase();
     let data = { "category_id": id }
     this.dataService.getGroupListByCategoryId(data).subscribe(data => {
       if (data.Ack == "1") {
@@ -143,13 +148,33 @@ export class GrouplistComponent implements OnInit {
   public getAllGroupList() {
     this.dataService.getAllGrpList().subscribe(data => {
       if (data.Ack == "1") {
-        this.groupList = data.ActiveGroupList;
+        if (data.ActiveGroupList.length > 5) {
+          this.IsShowTopViewMore = true;
+          this.groupList = [];
+          for (let i = 0; i < data.ActiveGroupList.length; i++) {
+            if (this.groupList.length < 5) {
+              this.groupList.push(data.ActiveGroupList[i]);
+            }
+          }
+
+        }
+        else {
+          this.IsShowTopViewMore = false;
+          this.groupList = data.ActiveGroupList;
+        }
+
         this.totalGroupList = data.ActiveGroupList;
       }
     },
       error => {
 
       });
+  }
+
+  viewMoreTop() {
+    this.IsShowTopViewMore = false;
+    this.groupList = [];
+    this.groupList = this.totalGroupList;
   }
 
   public getUserGroupList() {
@@ -162,7 +187,22 @@ export class GrouplistComponent implements OnInit {
         if (data.Ack == "1") {
 
           //this.myGrpList = data.GroupListByuserID;
-          this.totalMyGrpList = data.GroupListByuserID
+          this.totalListOfMyGroups = data.GroupListByuserID;
+          if (data.GroupListByuserID.length > 5) {
+            this.IsShowMyViewMore = true;
+            this.totalMyGrpList = [];
+            for (let i = 0; i < data.GroupListByuserID.length; i++) {
+              if (this.totalMyGrpList.length < 5) {
+                this.totalMyGrpList.push(data.GroupListByuserID[i]);
+              }
+            }
+
+          }
+          else {
+            this.IsShowMyViewMore = false;
+            this.totalMyGrpList = data.GroupListByuserID;
+          }
+
 
           //console.log(this.groupMemberList);
         }
@@ -171,7 +211,11 @@ export class GrouplistComponent implements OnInit {
       });
     }
   }
-
+  viewMoreMy() {
+    this.IsShowMyViewMore = false;
+    this.totalMyGrpList = [];
+    this.totalMyGrpList = this.totalListOfMyGroups;
+  }
   public getLastFourArticle() {
     this.dataService.getFourArticleList().subscribe(data => {
       let details = data;

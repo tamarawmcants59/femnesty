@@ -12,7 +12,7 @@
                     <app-group-create></app-group-create>
                     <div *ngIf="aboutActiveTab=='find'">
                         <div class="MyGroups-list" *ngIf="myGrpList.length>0 || errorMsg">
-                            <h5 class="mt-0">FILTERED RESULTS</h5>
+                            <h5 class="mt-0" *ngIf="filteredTitle">FILTERED GROUPS FOR "{{filteredTitle}}"</h5>
                             <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
                                 <strong>Error: </strong> {{errorMsg}}
                             </div>
@@ -51,6 +51,7 @@
                                     </div>
                                 </li>
                             </ul>
+                            <a class="btn btn-primary"  href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreMy()">View More</a>
                         </div>
                         <div class="MyGroups-list" #topGroupsList>
                             <h5 class="mt-0">TOP GROUPS</h5>
@@ -70,6 +71,7 @@
                                     </div>
                                 </li>
                             </ul>
+                            <a class="btn btn-primary"  href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMoreTop()">View More</a>
                         </div>
                     </div>
                 </div>
@@ -111,7 +113,7 @@
                                 </a>
                             </li>
                             <li *ngFor="let item of categoryListWithCount">
-                                <a style="cursor:pointer;" (click)="getCatDetails(item.id)">{{item.title}}
+                                <a style="cursor:pointer;" (click)="getCatDetails(item.id,item.title)">{{item.title}}
                                     <span>({{item.group_count}})</span>
                                 </a>
                             </li>
