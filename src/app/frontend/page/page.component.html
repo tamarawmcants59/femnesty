@@ -10,7 +10,7 @@
 <section *ngIf="pageSlugName == 'about-us'" class="inner-banner" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+pageDetData?.top_image_url+')'} ">
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <h1 class="text-white">{{pageDetData.page_name}}</h1>
             </div>
         </div>
@@ -47,7 +47,7 @@
 
 				<div class="text-center gray pic-icon-content">
 					<h2 class="text-red">{{pageDetData.logo_text}}</h2>
-					<p class="font-14">{{pageDetData.logo_desc}}</p>
+					<p style="color: #000;" class="font-14">{{pageDetData.logo_desc}}</p>
 				</div>
 			</div>
         </div>
@@ -70,7 +70,8 @@
 </section>
 
 
-<section class="section team" *ngIf="pageSlugName == 'about-us'" [ngStyle]="{'background-image':'url('+pageDetData?.team_background_img_url+')'}">
+<!--<section class="section team" *ngIf="pageSlugName == 'about-us'" [ngStyle]="{'background-image':'url('+pageDetData?.team_background_img_url+')'}">-->
+<section class="section team">
     <div class="container">
         <h2 class="text-red mt-0">{{pageDetData.founder_team_title}}</h2>
         <div class="row mt-50">
@@ -90,7 +91,7 @@
             <div class="col-md-5">
                 <div class="gray text-center team-right">
                     <h3 class="text-red mt-0">{{pageDetData.get_involved}}</h3>
-                    <p class="f-w-600">{{pageDetData.involved_text}}</p>
+                    <p style="color: #000;" class="f-w-600">{{pageDetData.involved_text}}</p>
                     <a [routerLink]="['/page/contact-us']" class="btn btn-primary btn-lg">Contact us</a>
                 </div>
             </div>
