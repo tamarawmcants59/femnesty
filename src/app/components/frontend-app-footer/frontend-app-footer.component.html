@@ -71,12 +71,16 @@
     
     <div class="footer-bottom">
         <div class="container">
-            <p class="pull-left">Copyright © {{current_year | date:'y'}} {{siteSettingsDet.website}}. All rights reserved.</p>
-            <ul class="pull-right">
+        <div class="row">
+             <div class="col-md-10"><p>Copyright © {{current_year | date:'y'}} {{siteSettingsDet.website}}. All rights reserved.</p></div>
+             <div class="col-md-2">
+            <ul>
                 <li><a target="_blank" href="{{siteSettingsDet.facebook_url}}"><img src="assets/images/icon-s-1.png" alt="" /></a></li>
                 <li><a target="_blank" href="{{siteSettingsDet.twitter_url}}"><img src="assets/images/icon-s-2.png" alt="" /></a></li>
                 <li><a target="_blank" href="{{siteSettingsDet.linkedIn_url}}"><img src="assets/images/icon-s-3.png" alt="" /></a></li>
             </ul>
+            </div>
+            </div>
         </div>
     </div>
     <div id="live-chat" class="{{chatClass}}">

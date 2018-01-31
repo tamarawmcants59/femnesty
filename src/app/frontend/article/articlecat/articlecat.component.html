@@ -3,7 +3,7 @@
         <section class="inner-banner" [ngStyle]="{'background-image':'url('+articleCatData?.banner_image_url+')', 'background-position': 'top center', 'background-repeat': 'no-repeat','background-size': 'cover'}">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         <h1 class="text-white">{{articleCatData?.name}}</h1>
                     </div>
                 </div>
@@ -14,11 +14,11 @@
           <div class="container">
               <div class="row">
                   <div class="col-md-8">
-                      <h1>{{articleCatData.name}}</h1>
+                      <h1 style="line-height: 28px;">{{articleCatData.name}}</h1>
                       <p class="font-weight-bold mb-30">{{articleCatData.short_description}}</p>
                       <div [innerHTML]="articleCatData.description" class="mb-30"></div>
-                      <a [routerLink]="['/articles/list',articleCatData.slug]" class="btn btn-primary">Read more</a>
-                      <ul class="n-social mt-30">
+                      <a [routerLink]="['/articles/list',articleCatData.slug]" class="btn btn-primary">Read Article</a>
+                      <ul class="n-social mt-30 mb-30">
                             <li>
                                 <app-beta-restriction [height]="''" [image]="'assets/images/facebook.png'">
                                 </app-beta-restriction>
@@ -58,7 +58,7 @@
                                   <span>5</span>
                               </li>
                           </ul>-->
-                          <a [routerLink]="['/articles/details',articleListData[0].slug]" class="btn btn-primary">Read more</a>
+                          <a [routerLink]="['/articles/details',articleListData[0].slug]" class="btn btn-primary">Read Article</a>
                       </div>
                       </div>
                   </div>
@@ -68,10 +68,28 @@
 
       <section *ngIf="SlugName=='all'" class="section p-16 article-page">
         <div class="container">
+        <div class="row">
+        	<div class="col-md-12 books-tab">
+        		<ul class="nav nav-tabs" role="tablist">
+              <li class="active">
+                  <a>All Articles <span>(22)</span></a>
+              </li>
+              <li>
+                  <a href="">Work and Home Balance <span>(10)</span></a>
+              </li>
+              <li>
+                  <a href="">Work and Home Balance <span>(10)</span></a>
+              </li>
+              <li>
+                  <a href="">Work and Home Balance <span>(10)</span></a>
+              </li>
+          </ul>
+        	</div>
+        </div>
             <div class="mb-50" *ngFor="let catData of catWiseAllArt">
                 <h2 class="">{{catData.name}}</h2>
                 <div class="row modify-row" *ngIf="catData.all_articlebycat.length > 0">
-                    <div class="col-md-3 col-sm-6 col-multi-article" *ngFor="let articleData of catData.all_articlebycat">
+                    <div class="col-md-4 col-sm-6 col-multi-article" *ngFor="let articleData of catData.all_articlebycat">
                         <!--<div class="cat-article-img" [ngStyle]="{'background-image':'url('+catData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"></div>-->
                         <img [src]="articleData.image_url" alt="" class="img-responsive">
                         <h3 class="text-red">{{articleData.title | limitTo : 19}}</h3>
