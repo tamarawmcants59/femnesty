@@ -415,6 +415,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     this.dataService.leaveGroup(data).subscribe(data => {
       if (data.Ack == 1) {
         this.groupReqSuccessMsg = "You have successfully unfollowed this group.";
+        this.getGroupRequestList();
       }
     }, error => {
       console.log("Error");
@@ -451,8 +452,9 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
           this.errorMsg = data.msg;
         }
         this.loading = false;
+        this.getGroupRequestList();
         //this.router.navigateByUrl('/group/details/'+this.groupNameByUrl);
-        this.router.navigateByUrl('/user/profile');
+        //this.router.navigateByUrl('/user/profile');
         //window.location.reload();
         //this.getGroupMemberList();
         //this.successMsg = 'You have successfully send the request.';

@@ -66,6 +66,8 @@ export class GrouplistComponent implements OnInit {
         if (eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find')) {
           self.errorMsg = '';
           self.myGrpList = [];
+          self.getAllGroupList();
+          self.getUserGroupList();
         }
 
 

@@ -28,8 +28,9 @@ export class GroupphotoComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.groupNameByUrl = params['gid'];
+        this.getGroupDetailsByName();
     });
-    this.getGroupDetailsByName();
+    
   }
 
   public getGroupDetailsByName() {
