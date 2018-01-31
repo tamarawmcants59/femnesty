@@ -48,7 +48,7 @@
                       <ul class="nav nav-pills" *ngIf="isloginUserId !='' && (groupDetailsData?.group_type=='1' || !isJoinGroup)">
                           <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Group Activity</a></li>
                           <li [ngClass]="{'active' : activeTab=='member'}"><a (click)="toggleTab('member')">Members</a></li>
-                          <li *ngIf="groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='2' || (groupDetailsData.group_type=='1' && !isJoinGroup)" [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite Friend</a></li>
+                          <li *ngIf="groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='2' || (groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='1' && !isJoinGroup)" [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite Friend</a></li>
                           <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">Invite Member</a></li>
                       </ul>
                       
