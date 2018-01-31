@@ -15,6 +15,7 @@ export class GroupRightbarComponent implements OnInit {
   public isUserLogin: string = '';
   public isGroupId: string='';
   public groupMemberList = [];
+  public totalGroupMemberList = [];
   public groupImgList = [];
   private _name: string;
   public memberViewAll:boolean = false;
@@ -141,10 +142,24 @@ export class GroupRightbarComponent implements OnInit {
       this.dataService.getGroupMemberListById(dataUserDet).subscribe(data => {
           //console.log(data);
           if (data.Ack == "1") {
-              this.groupMemberList = data.groupMembers;
+            this.totalGroupMemberList = data.groupMembers;
+             // this.groupMemberList = data.groupMembers;
+             this.groupMemberList =[];
               if(data.groupMembers.length > 12){
               //if(data.groupMembers.length > 2){  
                 this.memberViewAll=true;
+                for(let i=0;i <data.groupMembers.length;i++)
+                {
+                  if(this.groupMemberList.length<12)
+                  {
+                   this.groupMemberList.push(data.groupMembers[i]);
+                  }
+                }
+              }
+              else
+              {
+                this.memberViewAll=false;
+                this.groupMemberList= this.totalGroupMemberList;
               }
 
               if (this.isUserLogin == '1') {
@@ -166,7 +181,7 @@ export class GroupRightbarComponent implements OnInit {
   public showAllMember() {
     this.memberViewAll=false;
     this.showMemberDiv=true;
-    
+    this.groupMemberList=this.totalGroupMemberList;
   }
 }
 

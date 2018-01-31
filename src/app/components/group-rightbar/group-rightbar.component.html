@@ -21,7 +21,7 @@
                         <div class="img" [ngStyle]="{'background-image':'url('+memdata.profile_image+')'}"></div>
                     </a>
                 </div>
-                <a *ngIf="memberViewAll" (click)="showAllMember()" class="viewAll text-center col-md-12">View All ({{groupMemberList?.length}}) </a>
+                <a *ngIf="memberViewAll" (click)="showAllMember()" class="viewAll text-center col-md-12" style="cursor: pointer">View All ({{groupMemberList?.length}}) </a>
             </div>
             <div *ngIf="isJoinGroup &&  groupDetailsData1?.group_type=='2'">
                     You have no permission
