@@ -1,4 +1,4 @@
-<section *ngIf="pageSlugName != 'contact-us'" class="inner-banner" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+siteSettingsDet?.aboutus_banner_image+')'} ">
+<section *ngIf="pageSlugName != 'contact-us' && pageSlugName != 'about-us'" class="inner-banner" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+siteSettingsDet?.aboutus_banner_image+')'} ">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
@@ -6,6 +6,15 @@
           </div>
       </div>
   </div>
+</section>
+<section *ngIf="pageSlugName == 'about-us'" class="inner-banner" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+pageDetData?.top_image_url+')'} ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white">{{pageDetData.page_name}}</h1>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="section about-content-area new-about-content-area" *ngIf="pageSlugName != 'contact-us' && pageSlugName != 'about-us'">
@@ -19,7 +28,7 @@
                 
             </div>
         </div>
-    </section>
+</section>
 <section class="section about-content-area new-about-content-area" *ngIf="pageSlugName == 'about-us'">
     <div class="container">
         <div class="row">
@@ -29,28 +38,16 @@
 			</div>-->
 			<!--<div [innerHTML]="pageDetData.content" ></div>-->
 			<div class="col-md-8">
-				<h1>Woman was taken out of man; not out of his head to top him, nor out of his feet to be trampled underfoot, but out of his side to be equal to him.</h1>
-
-				<p class="f-style-italic">Femnesty is a network that connects women from all around the world. It exists to help women recognise and unleash the potential in their own personal and professional lives, and to promote the positive roles we play as parents, professionals, family members and friends.</p>
-
-				<p>We’re not a feminist organisation, but we do believe that men and women are born with equal values and status, that same equality should continue into our personal and professional adult lives.</p>
-
-				<p>Our logo illustrates our ethos: strength through unity. It also emphasises equality - the male and female deer stand strong by standing together, and though the male deer has horns and may be seen as a protector, the two are rooted together for stability and support. The heart-shaped roots represent friendship, harmony, love and respect; qualities that enrich all human relationships, regardless of sex or situation.</p>
-
-				<p>Women can face different challenges to men as we strive to be great mothers, loving partners and achieve financial independence. We often have to make sacrifices, personally and professionally, to achieve the things we set out to achieve. But while our nurturing instinct can get in the way of our ambition to succeed, it can also be used to great effect.</p>
-
-				<p>Whether we want to discuss our role in society, debate professional issues, seek personal advice or simply share our coping strategies for being a wife, mother, single mother, student – or all of the above – in the 21st century, Femnesty gives us a space to do just that.</p>
-
-				<p><a [routerLink]="['/user/signup']">Sign up</a> to Femnesty to share the strength, encouragement and wisdom of women around the world today.</p>
+				<div [innerHTML]="pageDetData.left_content" ></div>
 			</div>
 			<div class="col-md-4">
-				<div class="pic-icon"><img alt="" class="img-responsive" src="http://51.140.27.84/admin/images/pic-1.jpg">
-					<div class="pic-logo-icon img-responsive"><img alt="" src="http://51.140.27.84/admin/images/logo-icon.png"></div>
+				<div class="pic-icon"><img alt="" class="img-responsive" [src]="pageDetData.background_image_url">
+					<div class="pic-logo-icon img-responsive"><img alt="" [src]="pageDetData.back_top_img_url"></div>
 				</div>
 
 				<div class="text-center gray pic-icon-content">
-					<h2 class="text-red">Our Logo</h2>
-					<p class="font-14">Our logo illustrates our ethos: strength through unity. It also emphasises equality - the male and female deer stand strong by standing together, and though the male deer has horns and may be seen as a protector, the two are rooted together for stability and support. The heart-shaped roots represent friendship, harmony, love and respect; qualities that enrich all human relationships, regardless of sex or situation.</p>
+					<h2 class="text-red">{{pageDetData.logo_text}}</h2>
+					<p class="font-14">{{pageDetData.logo_desc}}</p>
 				</div>
 			</div>
         </div>
@@ -59,28 +56,23 @@
 
 <section class="founder gray font-15" *ngIf="pageSlugName == 'about-us'">
 	<div class="container">
-	    <h2 class="text-red mt-0">Femnesty Founder</h2>
+	    <h2 class="text-red mt-0">{{pageDetData.founder_heading}}</h2>
 	    <div class="row">
 	        <div class="col-md-3 col-sm-2 f-founder">
-	            <img src="assets/images/founder.jpg" class="img-responsive">
+	            <img [src]="pageDetData.founder_image_url" class="img-responsive">
 	        </div>
 	        <div class="col-md-9 col-sm-10">
-	            <h3 class="text-red">Farah Brown</h3>
-	            <p class="f-w-600">
-                    <b>Farah Brown has a Masters degree in Enterprise Architecture and works for a leading IT company.</b>
-                </p>
-	            <p class="f-w-600">The idea for Femnesty came to her in 2012 when she noticed a lack of self-belief in many of the women working around her. She began to coach and mentor some of them, and found she got huge satisfaction from their success. More than that she realised that she herself, as well as the women she mentored, had learnt and grown from the experience; and the idea for Femnesty was born.</p>
-                <p class="f-w-600">Some years later and now married with two daughters, Farah has experienced for herself the challenges and emotional demands of combining career, relationship and motherhood, and she is passionate about empowering women to lead happier, more fulfilled lives.</p>
-                <p class="f-w-600">Through Femnesty, she hopes to reach out to anyone who wants to change their lives for the better whether you are a mother working part time, a high flying executive, a student or you are just setting out on your career. Everyone has something to give, an experience to share, from which the rest of us can learn.</p>
-            </div>
+                <h3 class="text-red">{{pageDetData.founder_title}}</h3>
+                <div [innerHTML]="pageDetData.founder_desc" ></div>
+	        </div>
 	    </div>
 	</div>
 </section>
 
 
-<section class="section team" *ngIf="pageSlugName == 'about-us'" [ngStyle]="{'background-image':'url('+siteSettingsDet?.aboutus_banner_image+')'}">
+<section class="section team" *ngIf="pageSlugName == 'about-us'" [ngStyle]="{'background-image':'url('+pageDetData?.team_background_img_url+')'}">
     <div class="container">
-        <h2 class="text-red mt-0">Femnesty Team</h2>
+        <h2 class="text-red mt-0">{{pageDetData.founder_team_title}}</h2>
         <div class="row mt-50">
             <div class="col-md-7">
                     
@@ -97,11 +89,8 @@
             </div>
             <div class="col-md-5">
                 <div class="gray text-center team-right">
-                    <h3 class="text-red mt-0">Get Involved</h3>
-                    <p class="f-w-600">Femnesty is always looking for strong
-positive contributors to join our team. 
-If you would like to get involved, 
-please contact us.</p>
+                    <h3 class="text-red mt-0">{{pageDetData.get_involved}}</h3>
+                    <p class="f-w-600">{{pageDetData.involved_text}}</p>
                     <a [routerLink]="['/page/contact-us']" class="btn btn-primary btn-lg">Contact us</a>
                 </div>
             </div>
@@ -168,7 +157,7 @@ please contact us.</p>
                 </div>
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid">Submit</button>
                     </div>
                 </div>
             </div>

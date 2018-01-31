@@ -16,6 +16,7 @@ export class PageComponent implements OnInit {
   public errorMsg:string= '';
   public teamListData=[];
   public siteSettingsDet: Object = {};
+  public pageDataStr:string= '';
 
   constructor(
     private _page_service: FrontendService,
@@ -45,6 +46,11 @@ export class PageComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.pageSlugName = params['slug'];
         if(this.pageSlugName == 'contact-us'){
+          this.pageDataStr='';
+          this.getStaticPageDetails();
+        }else if(this.pageSlugName == 'about-us'){
+          this.pageDataStr='about_us';
+          this.getStaticPageDetails();
         }else{
           this.getPageDetails();
         }
@@ -68,6 +74,18 @@ export class PageComponent implements OnInit {
     );
   }
   
+  public getStaticPageDetails(){
+    this._page_service.getAboutPageDetBySlug(this.pageDataStr).subscribe(data=>{
+        if (data.Ack=="1") {
+            this.pageDetData = data.ContentAllBySlug[0];
+            //console.log(data);
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      }); 
+  }
+
   public getPageDetails(){
     this._page_service.getPageDetBySlug(this.pageSlugName).subscribe(data=>{
         let details=data;

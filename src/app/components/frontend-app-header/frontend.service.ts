@@ -23,6 +23,10 @@ export class FrontendService {
       .map(data => data);
   }
   
+  getAboutPageDetBySlug(slug){
+    return this.apiService.get(`/enrichment/appcontentaboutusslug/${slug}`).map(data => data);
+  }
+
   getUserDetById(form_data){
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  
     return this.apiService.post(
