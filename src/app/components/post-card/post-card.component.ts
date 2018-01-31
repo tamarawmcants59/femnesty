@@ -20,6 +20,10 @@ export class PostCardComponent implements OnInit {
   public isLoggedIn: any;
   public postCmtId: any;
   public subPostCmtId: any;
+  showPostImgDive: boolean;
+  loading =false;
+  editPostText: any;
+  postImgData : any;
   //public postCmtDiv:boolean = false;
   public postCmtDiv: any = {};
   public postSubCmtDiv: any = {};
@@ -239,6 +243,61 @@ export class PostCardComponent implements OnInit {
     
     //this.openDialog();
 
+  }
+  public deleteImg() {
+    this.postImgData='';
+    this.showPostImgDive = false;
+  }
+  public editPost() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const result = {};
+    // userValue = this.postform.value;
+    // userValue.user_id = loginUserId;
+    // userValue.file_name = this.postImgData;
+    // if(userValue.description!='' || userValue.file_name!=''){
+    //   this.dataService.postDataSend(userValue).subscribe(data => {
+    //       this.showPostImgDive = false;
+    //       this.loading = false;
+    //       this.successMsg = 'Successfully posted.';
+    //       this.postImgData='';
+    //       this.postform.controls['description'].setValue('');
+    //       this._postListnerService.onPostAdd('add');
+    //       this.getUserPostDetails.emit();
+    //       //this.postform.reset();
+    //     },
+    //     error => {
+    //       alert(error);
+    //     });
+    // }else{
+    //   this.errorMsg= 'Please share your thoughts or upload an image to post.';
+    // }
+  }
+  public fileChangePost($event) {
+    this.showPostImgDive = true;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      image.src = loadEvent.target.result;
+      that.postImgData = image.src;
+      //that.cropper.setImage(image);
+      //console.log(image.src);
+    };
+    myReader.readAsDataURL(file);
+  }
+  openEditModal(postData,editModal)
+  {
+    if(postData.description)
+    {
+      this.editPostText=postData.description;
+    }
+    else
+    {
+      this.editPostText="";
+    }
+    this.modalService.open(editModal);
   }
 
   /*public openDialog(): void {

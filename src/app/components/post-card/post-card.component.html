@@ -1,4 +1,3 @@
-
 <!--<div class="likePop">
 <div class="item">
 
@@ -44,72 +43,107 @@
 <button mat-raised-button (click)="openDialog()">Pick one</button>-->
 
 <div class="likePart" *ngIf="!postData.hide_post_div">
-<div class="row">
-    <div class="col-md-10">
-        <div class="imageParts">
-            <div class="profImageP">
-                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
-                
+    <div class="row">
+        <div class="col-md-10">
+            <div class="imageParts">
+                <div class="profImageP">
+                    <a [routerLink]="['/user/profile',postData.display_name]">
+                        <div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div>
+                    </a>
+
+                </div>
+                <div class="profTextPart">
+                    <a [routerLink]="['/user/profile',postData.display_name]">
+                        <h2>{{postData.name}}</h2>
+                    </a>
+                    <p>{{postData.created_date_mod}}</p>
+                </div>
             </div>
-            <div class="profTextPart">
-                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
-                <p>{{postData.created_date_mod}}</p>
-            </div>
+        </div>
+        <div class="col-md-2">
+            <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                <i class="fa fa-trash"></i>
+            </a>
+            <p class="icondown">
+                <i class="icon ion-chevron-down"></i>
+            </p>
+            <a class="userDelBth" title="Edit" *ngIf="IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
+                <i class="fa fa-pencil-square-o"></i>
+            </a>
+
         </div>
     </div>
-    <div class="col-md-2">
-        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(confirmmodal,postData.id,'P',postData)"> <i  class="fa fa-trash"></i></a>
-        <p class="icondown"><i class="icon ion-chevron-down"></i></p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="userComment">
-            <div class="imageLikeP" *ngIf="postData.file_name != ''">
-                <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
-                    <i class="icon ion-android-close"></i>
-                </a>
-                <img [src]="postData.file_image_url" class="img-responsive">
-                
+    <div class="row">
+        <div class="col-md-12">
+            <div class="userComment">
+                <div class="imageLikeP" *ngIf="postData.file_name != ''">
+                    <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                        <i class="icon ion-android-close"></i>
+                    </a>
+                    <img [src]="postData.file_image_url" class="img-responsive">
+
+                </div>
+                <p>{{postData.description}}</p>
+                <ul>
+                    <li>
+                        <a href="javascript: void(0);" (click)="userPostLikeListPopup(postData.id,postlikemodal)">{{postData.likecount}} Likes</a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">{{postData.commentcount}} Comments</a>
+                    </li>
+                    <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2">
+                        <a href="javascript: void(0);">
+                            <i style="font-size: 16px;" class="ion-ios-people"></i> Connection</a>
+                    </li>
+                    <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1">
+                        <a href="javascript: void(0);">
+                            <i class="ion-android-globe"></i> Public</a>
+                    </li>
+                </ul>
             </div>
-            <p>{{postData.description}}</p>
-            <ul>
-                <li><a href="javascript: void(0);" (click)="userPostLikeListPopup(postData.id,postlikemodal)">{{postData.likecount}} Likes</a></li>
-                <li><a href="javascript: void(0);">{{postData.commentcount}} Comments</a></li>
-                <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2"><a href="javascript: void(0);"><i style="font-size: 16px;" class="ion-ios-people"></i> Connection</a></li>
-                <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1"><a href="javascript: void(0);"><i class="ion-android-globe"></i> Public</a></li>
-            </ul>
         </div>
-        </div>
-        
-</div>
+
+    </div>
 </div>
 <div class="commentPart" *ngIf="!postData.hide_post_div">
-<div class="row">
-	<div class="col-md-12">
-        <div class="likeComment">
-            <div class="row">
-                <div class="col-md-10 col-xs-8">
-                    <ul>
-                        <li *ngIf="postData.post_like"><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i></a></li>
-                        <li *ngIf="!postData.post_like"><a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a></li>
-                        <li><a (click)="userPostComment(postData.id,postData)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-xs-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="likeComment">
+                <div class="row">
+                    <div class="col-md-10 col-xs-8">
+                        <ul>
+                            <li *ngIf="postData.post_like">
+                                <a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);">
+                                    <i class="fa fa-thumbs-o-down"></i>
+                                </a>
+                            </li>
+                            <li *ngIf="!postData.post_like">
+                                <a (click)="userPostLike(postData.id,postData)" href="Javascript:void(0);">
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="userPostComment(postData.id,postData)" href="Javascript:void(0);">
+                                    <i class="fa fa-commenting-o"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-xs-4">
                         <!--<a onClick="window.open('http://www.facebook.com/dialog/feed?app_id=150470825593599&link=http://111.93.169.90/team2/femnesty_web/#/home&picture=http://111.93.169.90/team2/Femnesty/all_images/103_25014750.jpeg&name=nm nmnbc bncbn c&description=n bkjcbkjcvbc cbn&message= nvn vbn vbn vnfg cbncvbvcbc','sharer','toolbar=0,status=0,width=548,height=325');" href="javascript: void(0)">Insert text or an image here.</a>-->
-                        
+
                         <ul class="social-link pull-right">
                             <li *ngIf="postData.file_image_url != ''">
                                 <!-- <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl, summary:postData.description, images:postData.file_image_url}">
                                     <i class="ion-social-facebook" style="font-size:16px"></i>
                                 </a> -->
-                                
+
                                 <app-beta-restriction [height]="'43'" [postcard]="'true'"></app-beta-restriction>
-                                
-                            </li>   
+
+                            </li>
                             <li *ngIf="postData.file_image_url == ''">
-                                <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl, summary:postData.description}">
+                                <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare
+                                    [facebook]="{u: repoUrl, summary:postData.description}">
                                     <i class="ion-social-facebook" style="font-size:16px"></i>
                                 </a>
                             </li>
@@ -119,12 +153,16 @@
                                 </a>
                             </li>-->
                             <li>
-                                <a style="width: 25px; height: 25px; border-radius:50%; color:#bb1926; border:1px solid #bb1926; background: #fff" ceiboShare  [linkedIn]="{url:repoUrl, text:postData.description}">
-                                   <i class="fa fa-linkedin" style="font-size:16px"></i>
+                                <a style="width: 25px; height: 25px; border-radius:50%; color:#bb1926; border:1px solid #bb1926; background: #fff" ceiboShare
+                                    [linkedIn]="{url:repoUrl, text:postData.description}">
+                                    <i class="fa fa-linkedin" style="font-size:16px"></i>
                                 </a>
                             </li>
                             <li>
-                                <a style="width: 25px; height: 25px; color:#bb1926; border-radius:50%; border:1px solid #bb1926; background: #fff" ceiboShare  [twitter]="{url:repoUrl, text:postData.description}"><i class="ion-social-twitter" style="font-size:16px"></i></a>
+                                <a style="width: 25px; height: 25px; color:#bb1926; border-radius:50%; border:1px solid #bb1926; background: #fff" ceiboShare
+                                    [twitter]="{url:repoUrl, text:postData.description}">
+                                    <i class="ion-social-twitter" style="font-size:16px"></i>
+                                </a>
                             </li>
                         </ul>
 
@@ -133,84 +171,110 @@
                         <button ceiboShare  [googlePlus]="{url:repoUrl, media: postData.file_image_url, description: postData.description}">Google Plus</button>
                         <button ceiboShare  [twitter]="{url:repoUrl, text:'Checkout this awesome ng2 social share directive', hashtags:'angular2, social, ceiboIT'}">Twitter</button>
                         <button ceiboShare [pinterest]="{url:repoUrl, media: imageUrl, description:'Checkout this awesome angular2 directive'}">Pinterest</button>-->
-                    <!--<ul class="pull-right">
+                        <!--<ul class="pull-right">
                         <li class="float-right"><a href="#"><i class="fa fa-share"></i></a></li>
                     </ul>-->
+                    </div>
                 </div>
             </div>
-        </div>
-        <div *ngIf="postData.comments?.length > 0">
-            <div *ngFor="let cmtList of postData.comments; let key = index">
-            <div class="reply-comment-wrapper" *ngIf="!cmtList.hide_div">
-                <div class="left-comment-content">
-                    <a [routerLink]="['/user/profile',cmtList.display_name]">
-                        <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
-                    </a>
-                </div>
-                <div class="right-comment-content">
-                    <div class="profTextPart">
-                    		<div class="heading" style="width:100%;height:auto;overflow: hidden;">
-                        <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
-                            <h4 class="commentee-name">{{cmtList.name}}</h4>
-                        </a>
-                        <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)"> <i style="color:#BB1926" class="fa fa-trash"></i></a>
+            <div *ngIf="postData.comments?.length > 0">
+                <div *ngFor="let cmtList of postData.comments; let key = index">
+                    <div class="reply-comment-wrapper" *ngIf="!cmtList.hide_div">
+                        <div class="left-comment-content">
+                            <a [routerLink]="['/user/profile',cmtList.display_name]">
+                                <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                            </a>
                         </div>
-                        <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
-                        <div class="commenteeComment">
-                            <p>{{cmtList.comment}}</p>
-                            <ul>
-                                <li *ngIf="cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i> </a>
-                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id,postlikemodal)">{{cmtList.likecount}} likes</a></li>
-                                <li *ngIf="!cmtList.post_like"><a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a>
-                                    <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id, postlikemodal)">{{cmtList.likecount}} likes</a></li>
-                                <li><a (click)="userSubPostComment(cmtList.id,cmtList)" href="Javascript:void(0);"><i class="fa fa-commenting-o"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div *ngIf="cmtList.reply?.length > 0">
-                        <div  *ngFor="let cmtReply of cmtList.reply; let subkey = index">
-                            <div *ngIf="!cmtReply.hide_div" class="sub-reply-comment-wrapper">
-                            <div class="left-comment-content">
-                                <a [routerLink]="['/user/profile',cmtReply.display_name]">
-                                    <div class="user-image" [ngStyle]="{'background-image':'url('+cmtReply.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
-                                </a>
-                            </div>
-                            <div class="right-comment-content">
-                                <div class="profTextPart">
-                                	   <div class="heading" style="width:100%;height:auto;overflow: hidden;">
-                                    <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
-                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)"> <i  class="fa fa-trash" style="color:#BB1926"></i></a>
-                                    </div>
-                                    <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
-                                    <div class="commenteeComment">
-                                        <p>{{cmtReply.comment}}</p>
-                                        <ul>
-                                            <li *ngIf="cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-down"></i> </a> 
-                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id, postlikemodal)">{{cmtReply.likecount}} likes</a></li>
-                                            <li *ngIf="!cmtReply.post_like"><a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);"><i class="fa fa-thumbs-o-up"></i></a>
-                                                <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id, postlikemodal)">{{cmtReply.likecount}} likes</a></li>
-			                            </ul>
-                                    </div>
+                        <div class="right-comment-content">
+                            <div class="profTextPart">
+                                <div class="heading" style="width:100%;height:auto;overflow: hidden;">
+                                    <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
+                                        <h4 class="commentee-name">{{cmtList.name}}</h4>
+                                    </a>
+                                    <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
+                                        <i style="color:#BB1926" class="fa fa-trash"></i>
+                                    </a>
+                                </div>
+                                <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                                <div class="commenteeComment">
+                                    <p>{{cmtList.comment}}</p>
+                                    <ul>
+                                        <li *ngIf="cmtList.post_like">
+                                            <a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);">
+                                                <i class="fa fa-thumbs-o-down"></i>
+                                            </a>
+                                            <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id,postlikemodal)">{{cmtList.likecount}} likes</a>
+                                        </li>
+                                        <li *ngIf="!cmtList.post_like">
+                                            <a (click)="userPostLike(cmtList.id,cmtList)" href="Javascript:void(0);">
+                                                <i class="fa fa-thumbs-o-up"></i>
+                                            </a>
+                                            <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id, postlikemodal)">{{cmtList.likecount}} likes</a>
+                                        </li>
+                                        <li>
+                                            <a (click)="userSubPostComment(cmtList.id,cmtList)" href="Javascript:void(0);">
+                                                <i class="fa fa-commenting-o"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
+                            <div *ngIf="cmtList.reply?.length > 0">
+                                <div *ngFor="let cmtReply of cmtList.reply; let subkey = index">
+                                    <div *ngIf="!cmtReply.hide_div" class="sub-reply-comment-wrapper">
+                                        <div class="left-comment-content">
+                                            <a [routerLink]="['/user/profile',cmtReply.display_name]">
+                                                <div class="user-image" [ngStyle]="{'background-image':'url('+cmtReply.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
+                                            </a>
+                                        </div>
+                                        <div class="right-comment-content">
+                                            <div class="profTextPart">
+                                                <div class="heading" style="width:100%;height:auto;overflow: hidden;">
+                                                    <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
+                                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">
+                                                        <i class="fa fa-trash" style="color:#BB1926"></i>
+                                                    </a>
+                                                </div>
+                                                <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                                                <div class="commenteeComment">
+                                                    <p>{{cmtReply.comment}}</p>
+                                                    <ul>
+                                                        <li *ngIf="cmtReply.post_like">
+                                                            <a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);">
+                                                                <i class="fa fa-thumbs-o-down"></i>
+                                                            </a>
+                                                            <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id, postlikemodal)">{{cmtReply.likecount}} likes</a>
+                                                        </li>
+                                                        <li *ngIf="!cmtReply.post_like">
+                                                            <a (click)="userPostLike(cmtReply.id,cmtReply)" href="Javascript:void(0);">
+                                                                <i class="fa fa-thumbs-o-up"></i>
+                                                            </a>
+                                                            <a *ngIf="cmtReply.likecount>0" (click)="userPostLikeListPopup(cmtReply.id, postlikemodal)">{{cmtReply.likecount}} likes</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        </div>
-                    </div>
-
-                    <div class="comment-text-box new-comment-text-box" *ngIf="postSubCmtDiv[cmtList.id]">
-                        <form class="" [formGroup]="commentform" (ngSubmit)="submitSubPostComment(cmtList.reply, postData,cmtList.id)" #commentForm="ngForm">
-                            <div class="input-group">
-                                <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
-                                <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default" [disabled]="!commentform.valid"><i class="fa fa-send"></i></button>
-                            </span>
+                                </div>
                             </div>
-                            <div class="text-danger" *ngIf="!commentform.controls['comment'].valid && commentform.controls['comment'].touched">Write a comment.</div>
-                        </form>
-                    </div>
 
-                    <!--<div class="sub-reply-comment-wrapper">
+                            <div class="comment-text-box new-comment-text-box" *ngIf="postSubCmtDiv[cmtList.id]">
+                                <form class="" [formGroup]="commentform" (ngSubmit)="submitSubPostComment(cmtList.reply, postData,cmtList.id)" #commentForm="ngForm">
+                                    <div class="input-group">
+                                        <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-default" [disabled]="!commentform.valid">
+                                                <i class="fa fa-send"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="text-danger" *ngIf="!commentform.controls['comment'].valid && commentform.controls['comment'].touched">Write a comment.</div>
+                                </form>
+                            </div>
+
+                            <!--<div class="sub-reply-comment-wrapper">
                 <div class="left-comment-content">
                 <div class="user-image" style="background: url('images/img-1.jpg') no-repeat center center;"></div>
                 </div>
@@ -238,24 +302,26 @@
                     </div>
                 </div>
             </div>-->
+                        </div>
+                    </div>
                 </div>
+                <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
+            </div>
+            <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
+                <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments, postData)" #commentForm="ngForm">
+                    <div class="input-group">
+                        <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default" [disabled]="!commentform.valid">
+                                <i class="fa fa-send"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="text-danger" *ngIf="!commentform.controls['comment'].valid && commentform.controls['comment'].touched">Write a comment.</div>
+                </form>
             </div>
         </div>
-            <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
-        </div>
-        <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">
-            <form class="" [formGroup]="commentform" (ngSubmit)="submitPostComment(postData.comments, postData)" #commentForm="ngForm">
-                <div class="input-group">
-                    <input placeholder="Write your comment here..." formControlName="comment" class="form-control">
-                    <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default" [disabled]="!commentform.valid"><i class="fa fa-send"></i></button>
-                </span>
-                </div>
-                <div class="text-danger" *ngIf="!commentform.controls['comment'].valid && commentform.controls['comment'].touched">Write a comment.</div>
-            </form>
-        </div>
     </div>
-</div>
 </div>
 
 <ng-template #confirmmodal let-c="close" let-d="dismiss">
@@ -275,34 +341,93 @@
 </ng-template>
 
 <ng-template #postlikemodal let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h4 class="modal-title">Like User List</h4>
-        </div>
-        <div class="modal-body">
-            <div class="frind-modal">
-                <div *ngIf="userList.length > 0">
-                    <div class="media" *ngFor="let postData of userList">
-                        <div class="media-left">
-                            <a (click)="gotoProfPage(postData.display_name); c('Close click')" style="cursor: pointer;">
-                                <img [src]="postData.profile_image" alt="">
-                            </a>
-                        </div>
-                        <div class="media-body media-middle">
-                            <h4 class="media-heading">{{postData.name}}</h4>
-                        </div>
-                        <div class="media-right media-middle">
-                            <a (click)="gotoProfPage(postData.display_name); c('Close click')" class="btn btn-primary">View Profile</a>
-                        </div>
+    <div class="modal-header">
+        <h4 class="modal-title">Like User List</h4>
+    </div>
+    <div class="modal-body">
+        <div class="frind-modal">
+            <div *ngIf="userList.length > 0">
+                <div class="media" *ngFor="let postData of userList">
+                    <div class="media-left">
+                        <a (click)="gotoProfPage(postData.display_name); c('Close click')" style="cursor: pointer;">
+                            <img [src]="postData.profile_image" alt="">
+                        </a>
+                    </div>
+                    <div class="media-body media-middle">
+                        <h4 class="media-heading">{{postData.name}}</h4>
+                    </div>
+                    <div class="media-right media-middle">
+                        <a (click)="gotoProfPage(postData.display_name); c('Close click')" class="btn btn-primary">View Profile</a>
                     </div>
                 </div>
             </div>
-            <div class="media" *ngIf="userList.length == 0">
-                <div class="media-body media-middle">
-                    <h4 class="media-heading">No user found.</h4>
-                </div>
+        </div>
+        <div class="media" *ngIf="userList.length == 0">
+            <div class="media-body media-middle">
+                <h4 class="media-heading">No user found.</h4>
             </div>
         </div>
-        <div class="modal-footer" style="border-top: none;">
-            <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Close</button>
+    </div>
+    <div class="modal-footer" style="border-top: none;">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>
+
+
+
+
+<ng-template #editModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Post</h4>
+    </div>
+    <div class="modal-body">
+        <div class="frind-modal">
+            <div *ngIf="postData.file_image_url && postData.file_name != '' && !showPostImgDive">
+                <img [src]="postData.file_image_url" class="img-responsive" style="height:220px;">
+            </div>
+            <div *ngIf="showPostImgDive">
+                <span class="result" *ngIf="postImgData">
+                    <img [src]="postImgData" [height]="200">
+                    <a (click)="deleteImg()" style="position: absolute;right:413px;width: 22px;height: 22px;background: #bb1926;line-height: 23px;color: #fff;text-align: center;
+                            top: 68px; border-radius: 100%;cursor: pointer;">
+                        <i class="icon ion-android-close"></i>
+                    </a>
+                </span>
+            </div>
+            <div *ngIf="postData.description">
+
+                <div class="textarea">
+                    <div class="form-group">
+
+
+                        <textarea class="form-control" rows="5" id="comment" placeholder="Share your thoughts..." [(ngModel)]="editPostText" name="editPostText"></textarea>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </ng-template>
+
+    </div>
+    <div class="modal-footer" style="border-top: none;">
+        <div class="row">
+            <div class="col-md-6" *ngIf="postData.file_image_url && postData.file_name != ''">
+                <ul class="uploadVideo">
+                    <li>
+                        <div class="upload-btn-wrapper uploadButtonPart">
+                            <button class="btn">Edit Image</button>
+                            <input name="myfile" type="file" (change)="fileChangePost($event)">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3" >
+
+                <button class="btn modal-btn-primary" type="submit">Edit Post</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
