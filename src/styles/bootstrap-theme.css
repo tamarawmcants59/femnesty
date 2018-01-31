@@ -1391,12 +1391,13 @@ footer {
 }
 
 .team-right h3 {
-    font-size: 26px;
+    font-size: 27px;
 }
 
 .team-right p {
     margin-top: 30px;
     font-size: 18px;
+    line-height: 33px;
 }
 
 .team-right .btn {
@@ -4782,7 +4783,7 @@ ul.uploadVideo {
 .star-icon{font-size:29px !important;}
 .f-founder img{width: 100%;}
 .display-off{display:  none !important;}
-.display-on{display:  block !important; height: 100vh; background: #fff;}
+.display-on{display:  block !important; height: 100vh; background: none;}
 .display-on li{ float:  none !important;}
 emoji-categories{display: none !important;}
 .f-style-italic{font-family: 'sanchez_regular_italic' !important;}
@@ -5229,6 +5230,13 @@ padding: 9px 15px;
 	color: #fff !important;
 	border-radius:0 !important;
 }
+.dropdown-menu{
+	right:  auto;
+	left: 15px;
+	background: #212121 !important;
+	color: #fff !important;
+	border-radius:0 !important;
+}
 
 header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
     font-size: 10px !important;
@@ -5240,4 +5248,20 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
     font-weight: 600;
     border-bottom: solid 1px #2c2c2c;
     
+}
+.new-about-content-area p{
+	color: #393939;
+}
+.f-w-600{
+	color: #202020;
+	letter-spacing: 1px;
+}
+.spb-asset-content, .mb-30 p{
+	color:#202020;
+}
+.black-txt{
+	color: #000 !important;
+}
+.dropdown-menu > li > a{
+	color:#fff !important;
 }

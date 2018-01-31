@@ -16,3 +16,15 @@
 .btn.btn-primary {
     padding: 12px 25px;
 }
+
+.new-about-content-area p{
+	color: #393939;
+}
+.f-w-600{
+	color: #202020;
+	line-height: 24px;
+	letter-spacing: 1px;
+}
+.team-right p{
+	line-height: 33px !important;
+}
