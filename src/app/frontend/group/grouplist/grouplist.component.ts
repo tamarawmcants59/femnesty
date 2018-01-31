@@ -15,6 +15,8 @@ export class GrouplistComponent implements OnInit {
   public IsShowMyViewMore = false;
   private totalGroupList: any = [];
   public myGrpList = [];
+  private topListPageSize =5;
+  private myListPageSize =5;
   private totalMyGrpList: any = [];
   private totalListOfMyGroups: any = [];
   public latestArticles = [];
@@ -66,6 +68,8 @@ export class GrouplistComponent implements OnInit {
         if (eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find')) {
           self.errorMsg = '';
           self.myGrpList = [];
+          self.topListPageSize=5;
+          self.myListPageSize=5;
           self.getAllGroupList();
           self.getUserGroupList();
         }
@@ -172,9 +176,27 @@ export class GrouplistComponent implements OnInit {
   }
 
   viewMoreTop() {
-    this.IsShowTopViewMore = false;
-    this.groupList = [];
-    this.groupList = this.totalGroupList;
+    // this.IsShowTopViewMore = false;
+    // this.groupList = [];
+    // this.groupList = this.totalGroupList;
+    this.topListPageSize=this.topListPageSize+5;
+    this.groupList=[];
+    if(this.totalGroupList.length>this.topListPageSize)
+    {
+      this.IsShowTopViewMore=true;
+    }
+    else
+    {
+      this.IsShowTopViewMore=false;
+    }
+    for(let i=0;i<this.topListPageSize;i++)
+    {
+      if(this.totalGroupList[i])
+      {
+        this.groupList.push(this.totalGroupList[i]);
+      }
+      
+    }
   }
 
   public getUserGroupList() {
@@ -212,9 +234,27 @@ export class GrouplistComponent implements OnInit {
     }
   }
   viewMoreMy() {
-    this.IsShowMyViewMore = false;
-    this.totalMyGrpList = [];
-    this.totalMyGrpList = this.totalListOfMyGroups;
+    // this.IsShowMyViewMore = false;
+    // this.totalMyGrpList = [];
+    // this.totalMyGrpList = this.totalListOfMyGroups;
+    this.myListPageSize=this.myListPageSize+5;
+    this.totalMyGrpList=[];
+    if(this.totalListOfMyGroups.length>this.myListPageSize)
+    {
+      this.IsShowMyViewMore=true;
+    }
+    else
+    {
+      this.IsShowMyViewMore=false;
+    }
+    for(let i=0;i<this.myListPageSize;i++)
+    {
+      if(this.totalListOfMyGroups[i])
+      {
+        this.totalMyGrpList.push(this.totalListOfMyGroups[i]);
+      }
+      
+    }
   }
   public getLastFourArticle() {
     this.dataService.getFourArticleList().subscribe(data => {

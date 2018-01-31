@@ -61,25 +61,42 @@
             </div>
         </div>
         <div class="col-md-2">
-            <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
-                <i class="fa fa-trash"></i>
-            </a>
-            <p class="icondown">
+            <!--             
+            <a class="icondown">
                 <i class="icon ion-chevron-down"></i>
-            </p>
-            <a class="userDelBth" title="Edit" *ngIf="IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
-                <i class="fa fa-pencil-square-o"></i>
             </a>
+            <div>
+                    <a class="userDelBth" title="Edit" *ngIf="IsGroupAdmin || IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                        <a *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" class="userDelBth" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+            </div> -->
 
+            <a class="icondown" href="javascript:void(0)" (click)="toggleOptions()">
+                <i class="icon ion-chevron-down"></i>
+            </a>
+            <div *ngIf="IsShowOption">
+                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
+                    <i class="fa fa-pencil-square-o"></i>
+                </a>
+                <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                    <i class="icon ion-android-close"></i>
+                </a>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="userComment">
                 <div class="imageLikeP" *ngIf="postData.file_name != ''">
-                    <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                    <!-- <a *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" class="del-btns" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                         <i class="icon ion-android-close"></i>
-                    </a>
+                    </a> -->
                     <img [src]="postData.file_image_url" class="img-responsive">
 
                 </div>
@@ -131,8 +148,10 @@
                     </div>
                     <div class="col-md-2 col-xs-4">
                         <!--<a onClick="window.open('http://www.facebook.com/dialog/feed?app_id=150470825593599&link=http://111.93.169.90/team2/femnesty_web/#/home&picture=http://111.93.169.90/team2/Femnesty/all_images/103_25014750.jpeg&name=nm nmnbc bncbn c&description=n bkjcbkjcvbc cbn&message= nvn vbn vbn vnfg cbncvbvcbc','sharer','toolbar=0,status=0,width=548,height=325');" href="javascript: void(0)">Insert text or an image here.</a>-->
-
-                        <ul class="social-link pull-right">
+                        <a class="icondown" href="javascript:void(0)" (click)="toggleShare()">
+                                <i class="fa fa-share"></i>
+                            </a>
+                        <ul class="social-link pull-right" *ngIf="IsShowShareOptions">
                             <li *ngIf="postData.file_image_url != ''">
                                 <!-- <a style="width: 25px; height: 25px; border-radius:50%; border:1px solid #bb1926; color:#bb1926; background: #fff" ceiboShare  [facebook]="{u: repoUrl, summary:postData.description, images:postData.file_image_url}">
                                     <i class="ion-social-facebook" style="font-size:16px"></i>
@@ -400,7 +419,7 @@
                     <div class="form-group">
 
 
-                        <textarea class="form-control" rows="5" id="comment" placeholder="Share your thoughts..." [(ngModel)]="editPostText" name="editPostText"></textarea>
+                        <textarea class="form-control" rows="5" placeholder="Share your thoughts..." id="postEdit" [(ngModel)]="editPostText" name="editPostText"></textarea>
                     </div>
                 </div>
             </div>
@@ -420,12 +439,12 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3" >
+            <div class="col-md-3">
 
-                <button class="btn modal-btn-primary" type="submit">Edit Post</button>
+                <button class="btn modal-btn-primary" type="button" (click)="editPost(postData)">Edit Post</button>
             </div>
             <div class="col-md-3">
-                <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+                <button type="button" class="btn modal-btn-primary" (click)="c('Close click')" #closeEditModal>Cancel</button>
             </div>
         </div>
 

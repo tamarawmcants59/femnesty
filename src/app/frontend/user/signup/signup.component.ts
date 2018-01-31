@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from "../user.service";
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider, SocialUser} from 'ng4-social-login';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider, SocialUser } from 'ng4-social-login';
 
 function duplicatePassword(input: FormControl) {
-  
-    if (!this.input.root || !this.input.root.controls) {
-      return null;
-    }
-  
-    const exactMatch = this.input.root.controls.password.value === this.input.value;
-    return exactMatch ? null : { mismatchedPassword: true };
+
+  if (!this.input.root || !this.input.root.controls) {
+    return null;
+  }
+
+  const exactMatch = this.input.root.controls.password.value === this.input.value;
+  return exactMatch ? null : { mismatchedPassword: true };
 }
 
 @Component({
@@ -20,30 +20,31 @@ function duplicatePassword(input: FormControl) {
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  public form:FormGroup;
-  public email:AbstractControl;
-  public password:AbstractControl;
-  public cpassword:AbstractControl;
-  public name:AbstractControl;
-  public agreetab:AbstractControl;
-  public mobile_number:AbstractControl;
-  public occupation:AbstractControl;
-  public submitted:boolean = false;
+  public form: FormGroup;
+  public email: AbstractControl;
+  public password: AbstractControl;
+  public cpassword: AbstractControl;
+  public name: AbstractControl;
+  public username: AbstractControl;
+  public agreetab: AbstractControl;
+  public mobile_number: AbstractControl;
+  public occupation: AbstractControl;
+  public submitted: boolean = false;
   returnUrl: string;
-  errorMsg: string='';
+  errorMsg: string = '';
   public loading = false;
-  public checkEmailExist:boolean = false;
+  public checkEmailExist: boolean = false;
   public isLoggedIn: any;
   private socialUser: SocialUser;
   private loggedIn: boolean;
 
   constructor(
-    private builder:FormBuilder, 
-    private dataService: UserService, 
+    private builder: FormBuilder,
+    private dataService: UserService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) { 
+  ) {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
@@ -51,7 +52,8 @@ export class SignupComponent implements OnInit {
       'occupation': ['', Validators.compose([Validators.required])],
       'agreetab': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'cpassword': ['', Validators.compose([Validators.required])]
+      'cpassword': ['', Validators.compose([Validators.required])],
+      'username': ['', Validators.compose([Validators.required])]
     });
 
     this.email = this.form.controls['email'];
@@ -61,11 +63,12 @@ export class SignupComponent implements OnInit {
     this.occupation = this.form.controls['occupation'];
     this.agreetab = this.form.controls['agreetab'];
     this.cpassword = this.form.controls['cpassword'];
+    this.username = this.form.controls['username'];
   }
 
   ngOnInit() {
-    this.isLoggedIn=localStorage.getItem("isLoggedIn");
-    if(this.isLoggedIn == 1){
+    this.isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (this.isLoggedIn == 1) {
       //this.router.navigateByUrl(this.returnUrl);
       this.router.navigateByUrl('/user/edit_profile/activity');
     }
@@ -75,86 +78,87 @@ export class SignupComponent implements OnInit {
       //console.log(user);
       this.loggedIn = (user != null);
     });
-    
+
   }
-  
-  public checkEmail(values:Object):void {
-    if(values!=''){
-      let signupCheckEmail={
+
+  public checkEmail(values: Object): void {
+    if (values != '') {
+      let signupCheckEmail = {
         "email": values
       };
       this.dataService.userCheckEmail(signupCheckEmail)
-      .subscribe(data => {
-             let details=data;
-             //console.log(details);
-             if (details.Ack=="1") {
-                 this.checkEmailExist = false;
-                 return false;
-             }else{
-               //alert('Invalid login');
-               this.checkEmailExist = true;
-               return false;
-             }
-         },
-         error => {
-           
-         }
-       ); 
-    }else{
+        .subscribe(data => {
+          let details = data;
+          //console.log(details);
+          if (details.Ack == "1") {
+            this.checkEmailExist = false;
+            return false;
+          } else {
+            //alert('Invalid login');
+            this.checkEmailExist = true;
+            return false;
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
 
     }
   }
 
-  public checkSignup(values:Object):void {
+  public checkSignup(values: Object): void {
     this.submitted = true;
     this.loading = true;
-   if (this.form.valid) {
-     //console.log(values);
-     let signupJsonData={
-       "email": this.email.value.toString(), 
-       "txt_password": this.password.value.toString(),
-       "name": this.name.value.toString(),
-       "mobile_number": this.mobile_number.value.toString(),
-       "occupation": this.occupation.value.toString()
+    if (this.form.valid) {
+      //console.log(values);
+      let signupJsonData = {
+        "email": this.email.value.toString(),
+        "txt_password": this.password.value.toString(),
+        "name": this.name.value.toString(),
+        "mobile_number": this.mobile_number.value.toString(),
+        "occupation": this.occupation.value.toString(),
+        "username":this.username.value.toString()
       };
-     this.dataService.userSignup(signupJsonData)
-     .subscribe(data => {
-            let details=data;
-            if (details.Ack=="1") {
-                this.loading = false;
-                localStorage.setItem('signupSuccessMsg', 'You have successfully signup.Please check your email to activate your account.');
-                this.router.navigate(['/user/login']);
-                return false;
-            }else{
-              //alert('Invalid login');
-              this.errorMsg=details.msg;
-              this.loading = false;
-              window.scrollTo(0,0);
-              return false;
-            }
+      this.dataService.userSignup(signupJsonData)
+        .subscribe(data => {
+          let details = data;
+          if (details.Ack == "1") {
+            this.loading = false;
+            localStorage.setItem('signupSuccessMsg', 'You have successfully signup.Please check your email to activate your account.');
+            this.router.navigate(['/user/login']);
+            return false;
+          } else {
+            //alert('Invalid login');
+            this.errorMsg = details.msg;
+            this.loading = false;
+            window.scrollTo(0, 0);
+            return false;
+          }
         },
         error => {
           this.loading = false;
         }
-      ); 
-    } else{
-        alert('INVALID FORM');
-        
-     }
+        );
+    } else {
+      alert('INVALID FORM');
+
+    }
   }
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
- 
+
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
- 
+
   signInWithLinkedIN(): void {
     this.authService.signIn(LinkedinLoginProvider.PROVIDER_ID);
   }
- 
+
   signOut(): void {
     this.authService.signOut();
   }
