@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SocialService } from "../../frontend/socialhome/social.service";
@@ -6,7 +6,8 @@ import { environment } from '../../../environments/environment';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { PopupmodalComponent } from './popupmodal.component';
 import { window } from 'rxjs/operators/window';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from "../../frontend/user/user.service";
 
 @Component({
   selector: 'app-post-card',
@@ -21,9 +22,12 @@ export class PostCardComponent implements OnInit {
   public postCmtId: any;
   public subPostCmtId: any;
   showPostImgDive: boolean;
-  loading =false;
+  loading = false;
   editPostText: any;
-  postImgData : any;
+  modalRef:any;
+  IsShowOption= false;
+  IsShowShareOptions = false;
+  postImgData: any;
   //public postCmtDiv:boolean = false;
   public postCmtDiv: any = {};
   public postSubCmtDiv: any = {};
@@ -37,13 +41,12 @@ export class PostCardComponent implements OnInit {
   //public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
   public repoUrl = '';
   public likeListPostId = '';
-  public delPostId:any;
-  public delPostType:any;
-  public delPostKey:any;
-  public delPostData:any;
-  public userList=[];
-  fhsgdff='';
-
+  public delPostId: any;
+  public delPostType: any;
+  public delPostKey: any;
+  public delPostData: any;
+  public userList = [];
+  fhsgdff = '';
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   @Input() postData: {
     id: number;
@@ -56,14 +59,15 @@ export class PostCardComponent implements OnInit {
     commentcount: string;
     created_date: string;
     c_date: string;
-    post_like:boolean;
+    post_like: boolean;
   };
   constructor(
     private builder: FormBuilder,
     private dataService: SocialService,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userSrvc:UserService
   ) {
 
 
@@ -71,7 +75,7 @@ export class PostCardComponent implements OnInit {
     this.getCurrentUser = JSON.parse(this.getCurrentUser);
     this.IsloginUserId = localStorage.getItem("loginUserId");
     if (localStorage.getItem("groupAdmin")) {
-      this.fhsgdff=localStorage.getItem("groupAdmin");
+      this.fhsgdff = localStorage.getItem("groupAdmin");
       if (localStorage.getItem("groupAdmin") == this.IsloginUserId) {
         this.IsGroupAdmin = true;
       }
@@ -89,15 +93,15 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
-  deletePost(confirmmodal,post_id, type, comments=null,delkey=null) {
+  deletePost(confirmmodal, post_id, type, comments = null, delkey = null) {
     //this.open(confirmmodal);
-    this.delPostId=post_id;
-    this.delPostType=type;
-    this.delPostData=comments;
-    this.delPostKey=delkey;
+    this.delPostId = post_id;
+    this.delPostType = type;
+    this.delPostData = comments;
+    this.delPostKey = delkey;
     this.modalService.open(confirmmodal);
   }
 
@@ -105,11 +109,11 @@ export class PostCardComponent implements OnInit {
     let data = { "post_id": this.delPostId, "post_type": this.delPostType };
     this.dataService.deletePost(data).subscribe(data => {
       if (data.Ack == "1") {
-          if(this.delPostKey!=null){
-            this.delPostData[this.delPostKey].hide_div=true;
-          }else{
-            this.delPostData.hide_post_div=true;
-          }
+        if (this.delPostKey != null) {
+          this.delPostData[this.delPostKey].hide_div = true;
+        } else {
+          this.delPostData.hide_post_div = true;
+        }
       }
     }, error => {
       console.log(error);
@@ -130,7 +134,7 @@ export class PostCardComponent implements OnInit {
   }
 
   public userSubPostComment(post_id, postdata) {
-    
+
     if (this.isLoggedIn == 1) {
       this.postCmtId = postdata.post_id;
       this.subPostCmtId = post_id;
@@ -189,18 +193,18 @@ export class PostCardComponent implements OnInit {
     userValue.post_id = this.postCmtId;
     //comment_id
     this.dataService.userPostDataSend(userValue).subscribe(data => {
-        userValue.id = data.last_id;
-        userValue.profile_image_url = this.userPrfImgStr;
-        userValue.name = this.userNameStr;
-        userValue.first_name = this.getCurrentUser.first_name;
-        userValue.last_name = this.getCurrentUser.last_name;
-        userValue.c_date = this.currentDate;
-        userValue.display_name = this.getCurrentUser.display_name;
-        userValue.reply =[];
-        comments.push(userValue);
-        this.commentform.reset();
-        postList.commentcount = parseInt(postList.commentcount) + 1;
-      },
+      userValue.id = data.last_id;
+      userValue.profile_image_url = this.userPrfImgStr;
+      userValue.name = this.userNameStr;
+      userValue.first_name = this.getCurrentUser.first_name;
+      userValue.last_name = this.getCurrentUser.last_name;
+      userValue.c_date = this.currentDate;
+      userValue.display_name = this.getCurrentUser.display_name;
+      userValue.reply = [];
+      comments.push(userValue);
+      this.commentform.reset();
+      postList.commentcount = parseInt(postList.commentcount) + 1;
+    },
       error => {
         alert(error);
       });
@@ -217,61 +221,72 @@ export class PostCardComponent implements OnInit {
     userValue.post_id = this.postCmtId;
     userValue.comment_id = this.subPostCmtId;
     this.dataService.userPostDataSend(userValue).subscribe(data => {
-        userValue.id = data.last_id;
-        userValue.profile_image_url = this.userPrfImgStr;
-        userValue.name = this.userNameStr;
-        userValue.first_name = this.getCurrentUser.first_name;
-        userValue.last_name = this.getCurrentUser.last_name;
-        userValue.c_date = this.currentDate;
-        userValue.display_name = this.getCurrentUser.display_name;
-        userValue.likecount = 0;
-        //userValue.reply =[];
-        comments.push(userValue);
-        this.commentform.reset();
-        postList.commentcount = parseInt(postList.commentcount) + 1;
-      },
+      userValue.id = data.last_id;
+      userValue.profile_image_url = this.userPrfImgStr;
+      userValue.name = this.userNameStr;
+      userValue.first_name = this.getCurrentUser.first_name;
+      userValue.last_name = this.getCurrentUser.last_name;
+      userValue.c_date = this.currentDate;
+      userValue.display_name = this.getCurrentUser.display_name;
+      userValue.likecount = 0;
+      //userValue.reply =[];
+      comments.push(userValue);
+      this.commentform.reset();
+      postList.commentcount = parseInt(postList.commentcount) + 1;
+    },
       error => {
         alert(error);
       });
   }
 
-  public userPostLikeListPopup(postId,postlikemodal) {
-    if(postId!=''){
+  public userPostLikeListPopup(postId, postlikemodal) {
+    if (postId != '') {
       this.likeListPostId = postId;
       this.getUserLikeList(postId, postlikemodal);
     }
-    
+
     //this.openDialog();
 
   }
   public deleteImg() {
-    this.postImgData='';
+    this.postImgData = '';
     this.showPostImgDive = false;
   }
-  public editPost() {
+  public editPost(postData) {
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const result = {};
-    // userValue = this.postform.value;
-    // userValue.user_id = loginUserId;
-    // userValue.file_name = this.postImgData;
-    // if(userValue.description!='' || userValue.file_name!=''){
-    //   this.dataService.postDataSend(userValue).subscribe(data => {
-    //       this.showPostImgDive = false;
-    //       this.loading = false;
-    //       this.successMsg = 'Successfully posted.';
-    //       this.postImgData='';
-    //       this.postform.controls['description'].setValue('');
-    //       this._postListnerService.onPostAdd('add');
-    //       this.getUserPostDetails.emit();
-    //       //this.postform.reset();
-    //     },
-    //     error => {
-    //       alert(error);
-    //     });
-    // }else{
-    //   this.errorMsg= 'Please share your thoughts or upload an image to post.';
-    // }
+    const data={id:postData.id, user_id:this.IsloginUserId,file_name:this.postImgData,description:this.editPostText};
+     if(data.description!='' || data.file_name!=''){
+      this.userSrvc.editPost(data).subscribe(data => {
+          this.showPostImgDive = false;
+          this.loading = false;
+          
+          this.postImgData='';
+          this.postImgData='';
+          if(this.editPostText)
+          postData.description=this.editPostText;
+          if(data.file_image_url)
+          {
+            postData.file_image_url=data.file_image_url;
+          }
+          this.modalRef.close();
+         
+        },
+        error => {
+          alert(error);
+        });
+    }
+    
+    
+  }
+  toggleOptions()
+  {
+    this.IsShowOption= !this.IsShowOption;
+  }
+  toggleShare()
+  {
+    this.IsShowShareOptions= !this.IsShowShareOptions;
   }
   public fileChangePost($event) {
     this.showPostImgDive = true;
@@ -280,6 +295,7 @@ export class PostCardComponent implements OnInit {
     const myReader: FileReader = new FileReader();
     const that = this;
     myReader.onloadend = function (loadEvent: any) {
+      debugger;
       image.src = loadEvent.target.result;
       that.postImgData = image.src;
       //that.cropper.setImage(image);
@@ -287,17 +303,25 @@ export class PostCardComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
-  openEditModal(postData,editModal)
-  {
-    if(postData.description)
-    {
-      this.editPostText=postData.description;
+  openEditModal(postData, editModal) {
+    if (postData.description) {
+      this.editPostText = postData.description;
     }
-    else
-    {
-      this.editPostText="";
+    else {
+      this.editPostText = "";
     }
-    this.modalService.open(editModal);
+    if (postData.description) {
+      const self = this;
+      setTimeout(function () {
+        const el = document.getElementById('postEdit');
+        if (el) {
+          el.focus();
+        }
+      }, 100)
+    }
+
+    this.modalRef =   this.modalService.open(editModal);
+
   }
 
   /*public openDialog(): void {
@@ -313,26 +337,26 @@ export class PostCardComponent implements OnInit {
   }*/
 
   public shareOnFacebook(url, description, images) {
-    
+
   }
   public gotoProfPage(url) {
-      this.router.navigateByUrl('/user/profile/'+url);
+    this.router.navigateByUrl('/user/profile/' + url);
   }
-  
-  public getUserLikeList(postId, postlikemodal){
-    let dataUserDet ={
+
+  public getUserLikeList(postId, postlikemodal) {
+    let dataUserDet = {
       "post_id": postId
     };
     this.dataService.likePostUserList(dataUserDet).subscribe(data => {
-          let details=data;
-          if (details.Ack==1) {
-            this.userList=details.likeUserList;
-            this.modalService.open(postlikemodal);
-            this.likeListPostId = '';
-          }
-      },
+      let details = data;
+      if (details.Ack == 1) {
+        this.userList = details.likeUserList;
+        this.modalService.open(postlikemodal);
+        this.likeListPostId = '';
+      }
+    },
       error => {
-        
+
       }
     );
   }

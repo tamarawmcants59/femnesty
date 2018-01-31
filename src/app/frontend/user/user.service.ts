@@ -89,6 +89,12 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  editPost(form_data) {
+    return this.apiService.post(
+      `/enrichment/appusereditposts`,
+      form_data
+    ).map(data => data);
+  }
 
   uploadFile(form_data) {
     return this.apiService.post(

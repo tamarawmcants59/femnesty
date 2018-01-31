@@ -47,7 +47,7 @@
                   <div class="tabPart">
                       <ul class="nav nav-pills" *ngIf="isloginUserId !='' && (groupDetailsData?.group_type=='1' || !isJoinGroup)">
                           <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Group Activity</a></li>
-                          <li [ngClass]="{'active' : activeTab=='member'}"><a (click)="toggleTab('member')">Members</a></li>
+                          <li [ngClass]="{'active' : activeTab=='member'}"><a (click)="toggleTab('member')">Send Message</a></li>
                           <li *ngIf="groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='2' || (groupDetailsData.user_id != isloginUserId && isloginUserId !='' && groupDetailsData.group_type=='1' && !isJoinGroup)" [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite Friend</a></li>
                           <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">Invite Member</a></li>
                       </ul>
@@ -166,10 +166,13 @@
                                                 <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
                                                 <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p>
                                             </div>
-                                            <div class="sendmsg">
+                                            <!-- <div class="sendmsg">
                                             	<a [routerLink]="['/user/profile',friendData.display_name]"><span style="color:#bb1926; font-size:16px;"><i class="ion-eye"></i></span> View</a>
                                             	
-                                            </div>
+                                            </div> -->
+                                            <div  class="sendmsg" *ngIf="isloginUserId!=friendData.user_id">
+                                                    <a [routerLink]="['/user/chat',friendData.user_id]"  ><span ><img  alt="" src="assets/images/send-msg.png"></span> SEND MESSAGE </a>
+                                                </div>
                                             <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
                                         </li>
                                     </ul>
