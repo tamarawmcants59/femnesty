@@ -250,7 +250,7 @@ export class EditprofileComponent implements OnInit {
         this.loading = false;
         this.successMsg = 'Data updated successfully';
         //this.router.navigateByUrl('/user/profile');
-        this.router.navigate(['/user/profile']);
+        this.router.navigate(['/user/edit_profile/about']);
       },
       error => {
         alert(error);
