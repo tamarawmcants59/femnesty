@@ -13,7 +13,7 @@ export class EventdetailsComponent implements OnInit {
   SlugName='';
   articleData=[];
   public repoUrl = '';
-
+  startDateString:any;
   constructor(
     private serviceData: EnrichmentService, 
     private activatedRoute: ActivatedRoute,
@@ -29,6 +29,11 @@ export class EventdetailsComponent implements OnInit {
     this.serviceData.getEventBySlug(this.SlugName).subscribe(data=>{
         let details=data;
         if (details.Ack=="1") {
+          debugger;
+          if(details.EventListBySlug[0].created_on)
+          {
+            this.startDateString = new Date(details.EventListBySlug[0].created_on).toISOString().replace(/[-:.]/g, "").replace('000Z', "Z");
+          }
             this.articleData = details.EventListBySlug[0];
             return false;
         }else{

@@ -9,13 +9,17 @@ import { SharedModule } from "../components/shared.module";
 import { CorporateComponent } from './corporate/corporate.component';
 import { AdvisoryComponent } from './advisory/advisory.component';
 import { PartnershipComponent } from './partnership/partnership.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {RatingModule} from "ng2-rating";
 @NgModule({
   imports: [
     FrontendRoute,
     SharedModule,
     CommonModule,
     ApplicationPipes,
+    FormsModule,
+    ReactiveFormsModule,
+    RatingModule
     //SelectModule
   ],
   //exports:[TruncatePipe, SafePipe],

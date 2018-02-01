@@ -27,7 +27,9 @@
         "styles.css",
         "../node_modules/ngx-datetime-picker/ngx-datetime-picker.css"
       ],
-      "scripts": [],
+      "scripts": [
+       
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -62,7 +64,7 @@
   "defaults": {
     "styleExt": "css",
     "serve": {
-       "port": 4200
+      "port": 4200
     },
     "component": {}
   }

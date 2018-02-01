@@ -1,43 +1,62 @@
-<!--<div class="feedback-n">
-	<a href="">FEEDBACK</a>
+<div class="feedback-n">
+  <span (click)="openForm()" *ngIf="isShowPlus">
+    <i class="fa fa-plus" style="color: red;
+    cursor: pointer;"></i>
+  </span>
+  <span (click)="closeForm()" *ngIf="!isShowPlus">
+    <i class="fa fa-minus" style="color: red;
+      cursor: pointer;"></i>
+  </span>
+  <a href="javascript:void(0)">FEEDBACK
+  </a>
+
 </div>
-<div class="feedback-from">
-	<div class="from">
-		<p>Help us improve Femnesty, we appreciate hearing from you. </p>
-		<textarea _ngcontent-c0="" class="form-control" placeholder="How has your experience been using our website? Is there anything else 
-we can do better? 
-" rows="5"></textarea>
-		<div class="form-group">
-          <input class="form-control" placeholder="E-mail" type="text">
-        </div>
-        <div class="rate">
-        	<h2>Rate your experience</h2>
-        	<p>
-        	<i class="ion-android-star"></i>
-        	<i class="ion-android-star"></i>
-        	<i class="ion-android-star"></i>
-        	<i class="ion-android-star"></i>
-        	<i class="ion-android-star"></i>
-        	</p>
-        </div>
-        <div class="rate">
-        	<h2>Can we contact you about your feedback?</h2>
-        	<p>
-               <label class="checkbox-inline">
-      <input type="checkbox" value="">Yes
-    </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" value="">No
-    </label>
+<div class="feedback-from" *ngIf="IsShowFeedForm">
+    <div class="alert alert-success" role="alert" *ngIf="successMsg">
+        <strong>Success: </strong> {{successMsg}}
+      </div>
+  <form [formGroup]="rForm" (ngSubmit)="sendFeedBack()">
+      <div class="from">
+          <p>Help us improve Femnesty, we appreciate hearing from you. </p>
+          <textarea class="form-control" placeholder="How has your experience been using our website? Is there anything else 
+      we can do better? 
+      " rows="5" formControlName="description"></textarea>
+          <div class="form-group">
+            <input class="form-control" placeholder="E-mail" type="text" formControlName="email">
+          </div>
+          <div class="rate">
+            <h2>Rate your experience</h2>
+            <p>
+              <!-- <i class="ion-android-star"></i>
+              <i class="ion-android-star"></i>
+              <i class="ion-android-star"></i>
+              <i class="ion-android-star"></i>
+              <i class="ion-android-star"></i> -->
+              <rating formControlName="rating"  [float]="true"></rating>
             </p>
+          </div>
+          <div class="rate">
+            <h2>Can we contact you about your feedback?</h2>
+            <p>
+              <label class="checkbox-inline">
+                <input type="radio" value="1" name="feedback" formControlName="feedback">Yes
+              </label>
+              <label class="checkbox-inline" >
+                <input type="radio" value="2" name="feedback" formControlName="feedback">No
+              </label>
+            </p>
+          </div>
         </div>
-	</div>
-	<div class="btn-area">
-		<a _ngcontent-c0="" class="btn btn-primary">SUBMIT</a>
-	</div>
-</div>-->
+        <div class="btn-area">
+          <button class="btn btn-primary" type="submit">SUBMIT</button>
+        </div>
+  </form>
+  
+</div>
 <section class="banner" [ngClass]="{'pt-64':homepageCls === 'pt-64','pt-150':homepageCls === 'pt-150'}" [ngStyle]="{'background-image':'url('+homepageData?.top_banner_image+')'}">
-  <div class="container"><h1>{{homepageData?.top_banner_main_text}}</h1></div>
+  <div class="container">
+    <h1>{{homepageData?.top_banner_main_text}}</h1>
+  </div>
 </section>
 <section class="section what-is-femnesty">
   <div class="container">
@@ -48,7 +67,7 @@ we can do better?
         <a class="btn btn-primary" href="{{homepageData?.below_top_link}}">About us</a>
       </div>
       <div class="col-md-6 col-sm-4">
-        <img [src]="homepageData?.below_top_side_image" alt="" class="img-responsive"/>
+        <img [src]="homepageData?.below_top_side_image" alt="" class="img-responsive" />
       </div>
     </div>
   </div>
@@ -58,17 +77,20 @@ we can do better?
     <div class="row">
       <div class="col-md-4">
         <h2>{{homepageData?.below_second_list_heading1}}</h2>
-        <p>{{homepageData?.below_second_list_text1}}</p><br>
+        <p>{{homepageData?.below_second_list_text1}}</p>
+        <br>
         <a href="{{homepageData?.below_second_list_link1}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
         <h2>{{homepageData?.below_second_list_heading2}}</h2>
-        <p>{{homepageData?.below_second_list_text2}}</p><br>
+        <p>{{homepageData?.below_second_list_text2}}</p>
+        <br>
         <a href="{{homepageData?.below_second_list_link2}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
         <h2>{{homepageData?.below_second_list_heading3}}</h2>
-        <p>{{homepageData?.below_second_list_text3}}</p><br>
+        <p>{{homepageData?.below_second_list_text3}}</p>
+        <br>
         <a href="{{homepageData?.below_second_list_link3}}" class="btn btn-primary">READ MORE</a>
       </div>
     </div>
@@ -88,16 +110,16 @@ we can do better?
        </div>
     </blockquote>-->
     <blockquote id="slider-css">
-	  <div class="slides-css">
-	    <div class="slider-css" *ngFor="let homeSlider of homepageSliderData; let i=index">
-	     	<div class="item" *ngIf="i<4">
-             <i class="ion-quote"></i>
-             <p>{{homeSlider?.description | limitTo : 120}}</p>
-             <footer>{{homeSlider?.name}}</footer>
-         </div>
-	    </div>   
-	  </div>
-	  <!--<div class="switch">
+      <div class="slides-css">
+        <div class="slider-css" *ngFor="let homeSlider of homepageSliderData; let i=index">
+          <div class="item" *ngIf="i<4">
+            <i class="ion-quote"></i>
+            <p>{{homeSlider?.description | limitTo : 120}}</p>
+            <footer>{{homeSlider?.name}}</footer>
+          </div>
+        </div>
+      </div>
+      <!--<div class="switch">
 	    <ul>
 	      <li>
 	        <div class="on"></div>
@@ -106,27 +128,30 @@ we can do better?
 	      <li></li>
 	    </ul>
 	  </div>-->
-	</blockquote>
-	
+    </blockquote>
+
   </div>
 </section>
 <section class="section top-articles">
   <div class="container">
     <h1>Top Articles</h1>
     <div class="row">
-    <div class="col-md-12">
-      <div style="padding: 7px;" class="col-md-4 col-sm-6" *ngFor="let artData of homepageArtData">
-        <div class="gray">
-          <div class="article-image-holder"><img [src]="artData.image_url" alt="" /></div>
-          <div class="article-add-holder">
-            <h3>{{artData.title | limitTo : 20}} </h3>
-            <span>Article by {{artData.author_name | limitTo : 15}}, {{artData.c_date | dateTimeFormat: 'MMM dd, yyyy'}}</span>
-            <p>{{artData.short_desc | limitTo : 200}}</p><br>
-            <a [routerLink]="['/articles/details',artData.slug]" class="btn btn-primary">Read Article</a>
+      <div class="col-md-12">
+        <div style="padding: 7px;" class="col-md-4 col-sm-6" *ngFor="let artData of homepageArtData">
+          <div class="gray">
+            <div class="article-image-holder">
+              <img [src]="artData.image_url" alt="" />
+            </div>
+            <div class="article-add-holder">
+              <h3>{{artData.title | limitTo : 20}} </h3>
+              <span>Article by {{artData.author_name | limitTo : 15}}, {{artData.c_date | dateTimeFormat: 'MMM dd, yyyy'}}</span>
+              <p>{{artData.short_desc | limitTo : 200}}</p>
+              <br>
+              <a [routerLink]="['/articles/details',artData.slug]" class="btn btn-primary">Read Article</a>
+            </div>
           </div>
         </div>
       </div>
-	</div>
     </div>
   </div>
 </section>
@@ -135,17 +160,20 @@ we can do better?
     <div class="row">
       <div class="col-md-4">
         <h2>{{homepageData?.last_list_heading1}}</h2>
-        <p>{{homepageData?.last_list_text1}}</p><br>
+        <p>{{homepageData?.last_list_text1}}</p>
+        <br>
         <a href="{{homepageData?.last_list_link1}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
         <h2>{{homepageData?.last_list_heading2}}</h2>
-        <p>{{homepageData?.last_list_text2}}</p><br>
+        <p>{{homepageData?.last_list_text2}}</p>
+        <br>
         <a href="{{homepageData?.last_list_link2}}" class="btn btn-primary">READ MORE</a>
       </div>
       <div class="col-md-4">
         <h2>{{homepageData?.last_list_heading3}}</h2>
-        <p>{{homepageData?.last_list_text3}}</p><br>
+        <p>{{homepageData?.last_list_text3}}</p>
+        <br>
         <a href="{{homepageData?.last_list_link3}}" class="btn btn-primary">READ MORE</a>
       </div>
     </div>

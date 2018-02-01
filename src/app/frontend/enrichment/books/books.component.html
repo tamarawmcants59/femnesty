@@ -25,7 +25,10 @@
                 </li>
                 <li *ngFor="let catBook of booksCatListData">
                     <a [routerLink]="['/enrichment/book_cat',catBook.slug]" tooltip="{{catBook.description}}" tooltipPlacement="top"> {{catBook.name}} <span>({{catBook.bookscount}})</span></a>
+                    <!-- <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="Hooray!"></a> -->
+                    <!-- <a [routerLink]="['/enrichment/book_cat',catBook.slug]" data-toggle="tooltip" data-placement="top" title="{{catBook.description}}" class="red-tooltip"> {{catBook.name}} <span>({{catBook.bookscount}})</span></a> -->
                 </li>
+                
             </ul>
 
             <!-- Tab panes -->

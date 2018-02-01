@@ -4976,6 +4976,11 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:12px; dis
 	text-decoration: none;
 
 }
+.feedback-n a:span{
+	
+	text-decoration: none;
+
+}
 .feedback-from{
 	position: fixed;
 	z-index: 9999;

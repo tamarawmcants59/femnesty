@@ -470,6 +470,7 @@ export class HubsComponent implements OnInit {
           const data = { address: addressData.address, lat: addressData.lat, lng: addressData.lng, id: this.hubDetails.id, user_id: hubDetails.user_id }
           this.hubService.editHubDetails(data).subscribe(data => {
             this.address = '';
+            this.IsShowAddress=true;
             this.lat=0;this.lng=0;
             this.IsShowAddress = true;
             this.loading = false;
@@ -483,6 +484,7 @@ export class HubsComponent implements OnInit {
 
       }
       else {
+
         this.title = '';
         this.description = '';
         this.email = ''

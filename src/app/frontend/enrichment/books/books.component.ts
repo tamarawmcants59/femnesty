@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EnrichmentService } from "../enrichment.service";
 import { DomSanitizer  } from '@angular/platform-browser';
-
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
@@ -22,7 +21,7 @@ export class BooksComponent implements OnInit {
     //this.getData();
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this._book_service.getAllBookListData().subscribe(data=>{
       let details=data;
       if (details.Ack=="1") {

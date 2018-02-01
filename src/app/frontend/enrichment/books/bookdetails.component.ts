@@ -20,10 +20,12 @@ export class BookdetailsComponent implements OnInit {
   public bookId = '';
   successMsg = '';
   public ratListData = [];
+  public totalRatingList = [];
   public repoUrl = '';
   public isloginUser = '';
   public loginUserDetails: any;
-
+  pageSize = 5;
+  public IsShowRatingViewMore = false;
   constructor(
     private builder: FormBuilder,
     private _book_details: EnrichmentService,
@@ -85,7 +87,7 @@ export class BookdetailsComponent implements OnInit {
     );
   }
 
-  
+
   public submitPost() {
     const userValue = this.postform.value;
     userValue.book_id = this.bookId;
@@ -100,14 +102,44 @@ export class BookdetailsComponent implements OnInit {
       });
 
   }
+  viewMore() {
+    this.pageSize = this.pageSize + 5;
+    this.ratListData = [];
+    if (this.totalRatingList.length > this.pageSize) {
+      this.IsShowRatingViewMore = true;
+    }
+    else {
+      this.IsShowRatingViewMore = false;
+    }
+    for (let i = 0; i < this.pageSize; i++) {
+      if (this.totalRatingList[i]) {
+        this.ratListData.push(this.totalRatingList[i]);
+      }
 
+    }
+  }
   public getRatingList() {
     const book_id = this.bookId;
     if (book_id != '') {
       this._book_details.getRatingData({ "book_id": this.bookId }).subscribe(data => {
         if (data.Ack == 1) {
+          this.totalRatingList = data.BookRatingList;
           //console.log(data);
-          this.ratListData = data.BookRatingList;
+          this.ratListData = [];
+          //this.ratListData = data.BookRatingList;
+          if (data.BookRatingList.length > 5) {
+            this.IsShowRatingViewMore = true;
+            for (let i = 0; i < data.BookRatingList.length; i++) {
+              if (this.ratListData.length < 5) {
+                this.ratListData.push(data.BookRatingList[i]);
+              }
+            }
+
+          }
+          else {
+            this.IsShowRatingViewMore = false;
+            this.ratListData = data.BookRatingList;
+          }
         }
       },
         error => {
