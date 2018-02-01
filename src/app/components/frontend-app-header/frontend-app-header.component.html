@@ -204,9 +204,9 @@
                                 <span class="colorWhite">{{currentUserDet.first_name}} <i class="icon ion-chevron-down"></i></span>
                             </a>
                             <ul class="dropdown-menu" role="menu" *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'">
-                                <li class="images">
+                                <!--<li class="images">
                                     <img src="assets/images/down-arrow.png" alt="">
-                                </li>
+                                </li>-->
                                 <li><a [routerLink]="['/user/edit_profile/activity']">My Profile</a></li>
                                 <!--<li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
                                 <li><a [routerLink]="['/user/hubs']">Find hubs</a></li>-->
