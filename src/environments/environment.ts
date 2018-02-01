@@ -11,7 +11,7 @@
 //   DATE_TIME_FMT:'dd/MMM/yyyy hh:mm:ss',
 // };
 
-/*export const environment = {
+export const environment = {
   production: false,
   api_url: 'http://111.93.169.90/team2/Femnesty/webservice',
   site_url: 'http://111.93.169.90/team2/Femnesty/',
@@ -19,12 +19,12 @@
   DATE_FMT: 'dd/MMM/yyyy',
   DATE_TIME_FMT:'dd/MMM/yyyy hh:mm:ss',
 };
-*/
-export const environment = {
+
+/*export const environment = {
   production: false,
   api_url: 'http://51.140.27.84/admin/webservice',
   site_url: 'http://51.140.27.84/admin/',
   website_url:'http://51.140.27.84/beta/#',
   DATE_FMT: 'dd/MMM/yyyy',
   DATE_TIME_FMT:'dd/MMM/yyyy hh:mm:ss',
-};
+};*/
