@@ -25,6 +25,8 @@ export class HubsComponent implements OnInit {
   public uninvitedUsers = [];
   public loading = false;
   public address: any;
+  public lat:0;
+  public lng:0;
   public IsShowAddress = true;
   public title: any;
   public activeTab = 'posts';
@@ -113,7 +115,6 @@ export class HubsComponent implements OnInit {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
       if (data.Ack == 1) {
         localStorage.setItem("groupAdmin", data.details.user_id);
-        debugger;
         if (this.loginUserId == data.details.user_id) {
           this.IsGroupAdmin = true;
         }
@@ -269,7 +270,6 @@ export class HubsComponent implements OnInit {
     this.fileTypeEdit.nativeElement.click();
   }
   openEdit(type, hubDetails) {
-    debugger;
     if (type == 'title') {
       this.IsShowAddress = true;
       if (this.title) {
@@ -470,6 +470,7 @@ export class HubsComponent implements OnInit {
           const data = { address: addressData.address, lat: addressData.lat, lng: addressData.lng, id: this.hubDetails.id, user_id: hubDetails.user_id }
           this.hubService.editHubDetails(data).subscribe(data => {
             this.address = '';
+            this.lat=0;this.lng=0;
             this.IsShowAddress = true;
             this.loading = false;
             this.getHubDetails();
@@ -488,6 +489,8 @@ export class HubsComponent implements OnInit {
         this.phone = '';
         this.website = '';
         this.organizer = '';
+        this.address=hubDetails.address;
+        this.lat=hubDetails.lat;this.lng=hubDetails.lng;
         this.addressEdit.nativeElement.style.display = "block";
       }
     }
