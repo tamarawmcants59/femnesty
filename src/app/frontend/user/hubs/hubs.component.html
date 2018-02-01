@@ -11,16 +11,16 @@
 				<div class="middlePart">
 					<div class="topPart" style="height:195px;" [ngStyle]="{'background-image':'url('+hubDetails.image+')'}">
 						<input name="myfile" type="file" (change)="fileChangePost($event,hubDetails)" style="display:none;" #fileTypeEdit>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openFile()">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openFile()">
 							<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
-						</a>
+						</a>-->
 					</div>
 					<div class="hubDes">
 						<input class="text-center" type="text" [(ngModel)]="title" *ngIf="title">
 						<h2 *ngIf="!title">{{hubDetails.title}}</h2>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -34px;margin-right: 34px;"></i>
-						</a>
+						</a>-->
 						<!-- <p class="shortP">Hub Short Description</p> -->
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
@@ -139,9 +139,9 @@
 							<textarea class="text-center" [(ngModel)]="description" *ngIf="description" style="width: 90%;"></textarea>
 							<!-- <input class="text-center" type="text" [(ngModel)]="description" *ngIf="description"> -->
 						</p>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
-						</a>
+						</a>-->
 
 
 						<p class="info" *ngIf="!organizer">
@@ -151,9 +151,9 @@
 						<p class="info" *ngIf="organizer">
 							<input class="text-center" type="text" [(ngModel)]="organizer" *ngIf="organizer">
 						</p>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
-						</a>
+						</a>-->
 
 
 						<p class="info" *ngIf="!email">
@@ -163,9 +163,9 @@
 						<p class="info" *ngIf="email">
 							<input class="text-center" type="text" [(ngModel)]="email" *ngIf="email">
 						</p>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
-						</a>
+						</a>-->
 						<p class="info" *ngIf="!phone">
 							<span>Phone:</span>
 							<em>{{hubDetails.phone}}</em>
@@ -173,9 +173,9 @@
 						<p class="info" *ngIf="phone">
 							<input class="text-center" type="text" [(ngModel)]="phone" *ngIf="phone">
 						</p>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
-						</a>
+						</a>-->
 						<p class="info" *ngIf="!website">
 							<span>Website:</span>
 							<em>{{hubDetails.website}}</em>
@@ -183,9 +183,9 @@
 						<p class="info" *ngIf="website">
 							<input class="text-center" type="text" [(ngModel)]="website" *ngIf="website">
 						</p>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
-						</a>
+						</a>-->
 						<p class="info">
 							<span>Privacy:</span>
 							<em>{{hubDetails.type=='O'?'Public':'Private'}}</em>
@@ -206,9 +206,9 @@
 							<input type="text" class="form-control-plaintext" value=""  placeholder="Type anything and you will get a location *"
 							 id="autocomplete" style="display:none" #addressEdit>
 						</p>
-						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address',hubDetails)">
+						<!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address',hubDetails)">
 							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -163px;margin-left: -18px;"></i>
-						</a>
+						</a>-->
 					</div>
 
 					<div class="innerRightPart right-map-details attending HUB-Dtls">
