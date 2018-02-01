@@ -1,4 +1,4 @@
-<div class="feedback-n">
+<!--<div class="feedback-n">
   <span (click)="openForm()" *ngIf="isShowPlus">
     <i class="fa fa-plus" style="color: red;
     cursor: pointer;"></i>
@@ -27,11 +27,6 @@
           <div class="rate">
             <h2>Rate your experience</h2>
             <p>
-              <!-- <i class="ion-android-star"></i>
-              <i class="ion-android-star"></i>
-              <i class="ion-android-star"></i>
-              <i class="ion-android-star"></i>
-              <i class="ion-android-star"></i> -->
               <rating formControlName="rating"  [float]="true"></rating>
             </p>
           </div>
@@ -52,7 +47,7 @@
         </div>
   </form>
   
-</div>
+</div>-->
 <section class="banner" [ngClass]="{'pt-64':homepageCls === 'pt-64','pt-150':homepageCls === 'pt-150'}" [ngStyle]="{'background-image':'url('+homepageData?.top_banner_image+')'}">
   <div class="container">
     <h1>{{homepageData?.top_banner_main_text}}</h1>

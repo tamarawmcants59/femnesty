@@ -19,8 +19,8 @@ export const environment = {
   DATE_FMT: 'dd/MMM/yyyy',
   DATE_TIME_FMT:'dd/MMM/yyyy hh:mm:ss',
 };
-/*
-export const environment = {
+
+/*export const environment = {
   production: false,
   api_url: 'http://51.140.27.84/admin/webservice',
   site_url: 'http://51.140.27.84/admin/',
