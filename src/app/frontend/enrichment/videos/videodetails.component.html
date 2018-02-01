@@ -3,7 +3,7 @@
       
       <div class="video-info">
           <h1 class="text-white">{{videoDetData.title}}</h1>
-          <!--<h3 class="gry-txt">Advice for Entrepreneurs</h3>-->
+          <h3 class="gry-txt">Advice for Entrepreneurs</h3>
       </div>
       
   </div>
@@ -21,12 +21,15 @@
             <li>
                 <app-beta-restriction [height]="'43'" [image]="'assets/images/facebook.png'">
                 </app-beta-restriction>
+                <span>5</span>
             </li>
             <li ceiboShare  [linkedIn]="{url:repoUrl, text:videoDetData.title}">
                 <img src="assets/images/linkedin.png" style="height: 43px;" />
+                <span>5</span>
             </li>
             <li ceiboShare  [twitter]="{url:repoUrl, text:videoDetData.title}">
                 <img src="assets/images/twitter.png" style="height: 43px;" />
+                <span>5</span>
             </li>
       </ul>     
   </div>

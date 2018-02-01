@@ -16,3 +16,55 @@
 .form-area .form-control{
 	font-size: 16px;
 }
+.form-area select {
+    line-height:normal;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    display:block;
+    width:100%;
+    color:#707070 !important;
+    
+    /*background:#fff url(images/inpbg.png) repeat-x 0 0;*/
+}
+.form-area select option{
+	color:#707070 !important;
+}
+.ie8 .form-area select{padding-right:0px}
+/*.form-area select:focus {
+    background:#f9f9f9;
+    outline:none;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 7px rgba(100,100,100,0.3);
+    border-color:#00c0f3;
+}*/
+.form-area::-ms-expand {
+ display:none;
+}
+/*.form-area:after{
+    content:"";
+    position:absolute;
+    z-index:2;
+    right:8px;
+    top:50%;
+    margin-top:-3px;
+    height:0;
+    width:0;
+    border-top:6px solid #f99300;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    pointer-events:none;
+}*/
+
+.form-area label {
+    font-weight: normal !important;
+}
+
+.btn.btn-primary{
+    padding: 0 25px;
+    font-size: 12px !important;
+   	font-family: 'montserratmedium';
+   	height: 46px !important;
+   	letter-spacing: 4px;
+   	line-height: 50px;
+}

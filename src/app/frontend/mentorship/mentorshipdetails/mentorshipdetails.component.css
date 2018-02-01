@@ -1,0 +1,14 @@
+.m-contact{
+	width: 100%;
+	margin-top: 50px;
+	clear: both;
+}
+.m-contact h3{
+	font-size: 18px;
+	color: #be1620;
+}
+.m-contact p{
+	font-size: 14px;
+	color: #000;
+	margin-bottom: 3px;
+}
