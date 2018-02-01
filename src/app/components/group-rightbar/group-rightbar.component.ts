@@ -59,10 +59,13 @@ export class GroupRightbarComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.groupPId;
-    this._name = name.currentValue;
-    if (this._name) {
-      this.setStoreId();
+    if (name) {
+      this._name = name.currentValue;
+      if (this._name) {
+        this.setStoreId();
+      }
     }
+
   }
   setStoreId() {
     this.isGroupId = this._name
@@ -192,6 +195,9 @@ export class GroupRightbarComponent implements OnInit {
 
       });
     }
+  }
+  deleteImg(data) {
+    alert();
   }
 
   public showAllMember() {

@@ -53,21 +53,21 @@ export class HubCreateComponent implements OnInit {
     private router: Router,
     private hubService: HubService
   ) {
-/*init */
-setTimeout(() => {
-          //debugger;
-          let autocomplete = new google.maps.places.Autocomplete(
+    /*init */
+    setTimeout(() => {
+      //debugger;
+      let autocomplete = new google.maps.places.Autocomplete(
                   /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-            { types: ['geocode'] });
-          google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-            localStorage.setItem("address",place.formatted_address);
-            localStorage.setItem("lat",place.geometry.location.lat());
-            localStorage.setItem("lng",place.geometry.location.lng());
-          });
-          
-        }, 1000);
+        { types: ['geocode'] });
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+        localStorage.setItem("address", place.formatted_address);
+        localStorage.setItem("lat", place.geometry.location.lat());
+        localStorage.setItem("lng", place.geometry.location.lng());
+      });
+
+    }, 1000);
 
 
 
@@ -77,16 +77,16 @@ setTimeout(() => {
       if (event.constructor.name === "ResolveStart") {
         if (eventObj.state.url.includes('create_hub/create')) {
           setTimeout(() => {
-           // debugger;
+            // debugger;
             let autocomplete = new google.maps.places.Autocomplete(
                     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
               { types: ['geocode'] });
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
               var place = autocomplete.getPlace();
               this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-              localStorage.setItem("address",place.formatted_address);
-              localStorage.setItem("lat",place.geometry.location.lat());
-              localStorage.setItem("lng",place.geometry.location.lng());
+              localStorage.setItem("address", place.formatted_address);
+              localStorage.setItem("lat", place.geometry.location.lat());
+              localStorage.setItem("lng", place.geometry.location.lng());
             });
           }, 1000);
 
@@ -187,26 +187,26 @@ setTimeout(() => {
   }
 
   public resetAddPage() {
-   
+
     this.addForm = { type: 'O', category_id: '', privacy: 'O' };
     this.searchData = { address: '', lat: '', lng: '' };
     this.autocompleteSettings['inputString'] = '';
 
     setTimeout(() => {
       // debugger;
-       let autocomplete = new google.maps.places.Autocomplete(
+      let autocomplete = new google.maps.places.Autocomplete(
                /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-         { types: ['geocode'] });
-       google.maps.event.addListener(autocomplete, 'place_changed', function () {
-         var place = autocomplete.getPlace();
-         //console.log(place);
-         this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-         localStorage.setItem("address",place.formatted_address);
-         localStorage.setItem("lat",place.geometry.location.lat());
-         localStorage.setItem("lng",place.geometry.location.lng());
-         //console.log(this.searchData);
-       });
-     }, 1000);
+        { types: ['geocode'] });
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        //console.log(place);
+        this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+        localStorage.setItem("address", place.formatted_address);
+        localStorage.setItem("lat", place.geometry.location.lat());
+        localStorage.setItem("lng", place.geometry.location.lng());
+        //console.log(this.searchData);
+      });
+    }, 1000);
 
     // this.autocompleteSettings['inputPlaceholderText'] = 'This is the placeholder text after doing some external operation after some time';
     // this.autocompleteSettings = Object.assign({},this.autocompleteSettings);
@@ -230,6 +230,16 @@ setTimeout(() => {
     this.hubService.getmyRequestGroupList(this.loginUserId).subscribe(data => {
       //console.log(data)
       if (data.Ack == "1") {
+        // this.hubList = [];
+        // // this.hubList.push(data.details[27]);
+        // // this.hubList.push(data.details[28]);
+        // debugger;
+        // let data1 = data.details[27];
+        // // data1.recurring_start = "2018-02-01";
+
+        // // data1.recurring_end = "2018-02-02";
+        // data1.date="2018-02-02";
+        // this.hubList.push(data1);
         this.hubList = data.details;
       }
     },
@@ -258,47 +268,105 @@ setTimeout(() => {
       } else {
         this.checkInvalidDate = true;
       }
-      this.createErrorMsg = '';
-      let address= localStorage.getItem("address");
-      let lat= localStorage.getItem("lat");
-      let lng= localStorage.getItem("lng");
-      if (address && lat && lng) {
-        this.loading = true;
-        const userValue = this.postform.value;
-        userValue.user_id = this.loginUserId;
-        userValue.image = this.postImgData;
-        if (address && lat) {
-          userValue.address = address;
-          userValue.lat = lat;
-          userValue.lng = lng;
-        }
-        this.hubService.createNewHub(userValue).subscribe(
-          data => {
-            this.showPostImgDive = false;
-            this.loading = false;
-            if (userValue.id) {
-              this.successMsg = "Hub edited Successfully.";
+      let IsValid = false;
+      if (this.hubList.length > 0) {
+        for (var i = 0; i < this.hubList.length; i++) {
+          if (this.hubList[i].type == 'O') {
+            const date = new Date(this.hubList[i].date);
+            date.setHours(0, 0, 0, 0);
+            let date1 = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
+            let compareDate = this.postform.value.date;
+            compareDate.setHours(0, 0, 0, 0);
+            let compareDate1 = compareDate.getDate() + "/" + (compareDate.getMonth() +1)+ "/" + compareDate.getFullYear();
+            if(this.postform.value.type=="O")
+            {
+              if (date1 == compareDate1) {
+                this.createErrorMsg = "A hub already exists on the entered date.";
+                IsValid = false;
+                window.scrollTo(0, 0);
+                break;
+              }
             }
-            else
-              this.successMsg = 'Hub created successfully.';
-              localStorage.setItem("address",''); 
-              localStorage.setItem("lat",''); 
-              localStorage.setItem("lng",'');  
-            this.postform.reset();
-            this.aboutActiveTab = 'overview';
-            window.scrollTo(0, 0);
-            this.getHubList();
-          },
-          error => {
-            alert(error);
-          });
-      } else if (!this.checkInvalidDate) {
-        this.createErrorMsg = "Please provide recurring to date greater than from date.";
-        window.scrollTo(0, 0);
-      } else {
-        this.createErrorMsg = "Please enter the location.";
-        window.scrollTo(0, 0);
+            else if(this.postform.value.type=="R")
+            {
+              let from = new Date(this.postform.value.date);
+              from.setHours(0, 0, 0, 0);
+              let to = new Date(this.postform.value.recurring_end);
+              to.setHours(0, 0, 0, 0);
+              let check =new Date(this.hubList[i].date);
+              check.setHours(0, 0, 0, 0);
+              if (check >= from && check <= to) {
+                this.createErrorMsg = "A hub already exists on the entered date.";
+                IsValid = false;
+                window.scrollTo(0, 0);
+                break;
+              }
+            }
+            
+          }
+          else if (this.hubList[i].type == 'R') {
+            let from = new Date(this.hubList[i].recurring_start);
+            from.setHours(0, 0, 0, 0);
+            let to = new Date(this.hubList[i].recurring_end);
+            to.setHours(0, 0, 0, 0);
+            let check = this.postform.value.date;
+            check.setHours(0, 0, 0, 0);
+            if (check >= from && check <= to) {
+              this.createErrorMsg = "A hub already exists on the entered date.";
+              IsValid = false;
+              window.scrollTo(0, 0);
+              break;
+            }
+          }
+        }
       }
+      else {
+        IsValid = true;
+      }
+      if (IsValid) {
+        this.createErrorMsg = '';
+        let address = localStorage.getItem("address");
+        let lat = localStorage.getItem("lat");
+        let lng = localStorage.getItem("lng");
+        if (address && lat && lng) {
+          this.loading = true;
+          const userValue = this.postform.value;
+          userValue.user_id = this.loginUserId;
+          userValue.image = this.postImgData;
+          if (address && lat) {
+            userValue.address = address;
+            userValue.lat = lat;
+            userValue.lng = lng;
+          }
+          this.hubService.createNewHub(userValue).subscribe(
+            data => {
+              this.showPostImgDive = false;
+              this.loading = false;
+              if (userValue.id) {
+                this.successMsg = "Hub edited Successfully.";
+              }
+              else
+                this.successMsg = 'Hub created successfully.';
+              localStorage.setItem("address", '');
+              localStorage.setItem("lat", '');
+              localStorage.setItem("lng", '');
+              this.postform.reset();
+              this.aboutActiveTab = 'overview';
+              window.scrollTo(0, 0);
+              this.getHubList();
+            },
+            error => {
+              alert(error);
+            });
+        } else if (!this.checkInvalidDate) {
+          this.createErrorMsg = "Please provide recurring to date greater than from date.";
+          window.scrollTo(0, 0);
+        } else {
+          this.createErrorMsg = "Please enter the location.";
+          window.scrollTo(0, 0);
+        }
+      }
+
     }
   }
 
@@ -320,17 +388,17 @@ setTimeout(() => {
     this.postImgData = '';
     setTimeout(() => {
       // debugger;
-       let autocomplete = new google.maps.places.Autocomplete(
+      let autocomplete = new google.maps.places.Autocomplete(
                /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-         { types: ['geocode'] });
-       google.maps.event.addListener(autocomplete, 'place_changed', function () {
-         var place = autocomplete.getPlace();
-         this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-         localStorage.setItem("address",place.formatted_address);
-         localStorage.setItem("lat",place.geometry.location.lat());
-         localStorage.setItem("lng",place.geometry.location.lng());
-       });
-     }, 1000);
+        { types: ['geocode'] });
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+        localStorage.setItem("address", place.formatted_address);
+        localStorage.setItem("lat", place.geometry.location.lat());
+        localStorage.setItem("lng", place.geometry.location.lng());
+      });
+    }, 1000);
   }
 
   public editGroupTab(groupId) {
