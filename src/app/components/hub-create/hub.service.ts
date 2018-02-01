@@ -26,6 +26,12 @@ export class HubService {
             form_data
         ).map(data => data);
     }
+    editHubDetails(form_data){
+        return this.apiService.post(
+            `/hub/appedithub`,
+            form_data
+        ).map(data => data);
+    }
 
     getMyHubRequest(user_id)
     {

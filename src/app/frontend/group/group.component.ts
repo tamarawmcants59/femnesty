@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../user/user.service";
 import * as _ from "lodash";
@@ -14,7 +14,8 @@ export class GroupComponent implements OnInit {
   public isUserLogin: any;
   public isGroupId = "";
   public groupDetailsData: any;
-
+  public group_name: any;
+  public short_desc: any;
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
@@ -33,7 +34,8 @@ export class GroupComponent implements OnInit {
   public allgroupstatusset = '';
   public loading = false;
   public groupPostDetData: object = {};
-
+  public IsGroupAdmin = false;
+  @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -50,7 +52,30 @@ export class GroupComponent implements OnInit {
     });
     this.getGroupDetailsByName();
   }
-
+  openFile() {
+    this.fileTypeEdit.nativeElement.click();
+  }
+  fileChangePost($event) {
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    this.loading = true;
+    myReader.onloadend = function (loadEvent: any) {
+      image.src = loadEvent.target.result;
+      //that.groupDetailsData.image = image.src;
+      const data = { image: image.src, id: that.groupDetailsData.id }
+      that.dataService.editGroupDataSend(data).subscribe(data => {
+        that.loading = false;
+        that.getGroupDetailsByName();
+      },
+        error => {
+          that.loading = false;
+          alert('Sorry there is some error.')
+        });
+    };
+    myReader.readAsDataURL(file);
+  }
   public getGroupDetailsByName() {
     if (this.groupNameByUrl != '') {
       const dataUserDet = {
@@ -63,6 +88,9 @@ export class GroupComponent implements OnInit {
             this.groupDetailsData = data.GroupDetails[0];
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
+            if (this.isloginUserId == data.GroupDetails[0].user_id) {
+              this.IsGroupAdmin = true;
+            }
             localStorage.setItem("groupAdmin", data.GroupDetails[0].user_id);
             this.groupPostDetData = { activitytype: '2', activityid: this.isGroupId };
             //this.groupPidData = { 'groupId': this.isGroupId};
@@ -82,12 +110,12 @@ export class GroupComponent implements OnInit {
         });
     }
   }
-  
-  public checkMyFrndList(){
+
+  public checkMyFrndList() {
     let grpOwnerId = localStorage.getItem("groupAdmin");
-    if(this.isloginUserId==grpOwnerId){
+    if (this.isloginUserId == grpOwnerId) {
       this.myFrndListforGrp();
-    }else{
+    } else {
       this.myOwnFrndListforGrp();
     }
     //myOwnFrndListforGrp
@@ -221,20 +249,20 @@ export class GroupComponent implements OnInit {
         "user_id": join_uid
       };
       this.dataService.leaveGroup(dataUserDet).subscribe(data => {
-          
-          this.successMsg = '';
-          this.errorMsg = '';
-          if (data.Ack == "1") {
-            this.successMsg = data.message;
-            this.getGroupMemberList();
-            this.getGroupDetailsByName();
-          } else {
-            this.errorMsg = data.message;
-          }
 
-          this.loading = false;
-          //this.successMsg = 'You have successfully send the request.';
-        },
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          this.successMsg = data.message;
+          this.getGroupMemberList();
+          this.getGroupDetailsByName();
+        } else {
+          this.errorMsg = data.message;
+        }
+
+        this.loading = false;
+        //this.successMsg = 'You have successfully send the request.';
+      },
         error => {
 
         });
@@ -249,20 +277,20 @@ export class GroupComponent implements OnInit {
         "user_id": join_uid
       };
       this.dataService.cancelGroupRequestByUser(dataUserDet).subscribe(data => {
-          //console.log(data);
-          this.successMsg = '';
-          this.errorMsg = '';
-          if (data.Ack == "1") {
-            //alert(data.message);
-            this.successMsg = data.message;
-            this.getGroupMemberList();
-            this.getGroupDetailsByName();
-          } else {
-            this.errorMsg = data.message;
-          }
-          this.loading = false;
-          //this.successMsg = 'You have successfully send the request.';
-        },
+        //console.log(data);
+        this.successMsg = '';
+        this.errorMsg = '';
+        if (data.Ack == "1") {
+          //alert(data.message);
+          this.successMsg = data.message;
+          this.getGroupMemberList();
+          this.getGroupDetailsByName();
+        } else {
+          this.errorMsg = data.message;
+        }
+        this.loading = false;
+        //this.successMsg = 'You have successfully send the request.';
+      },
         error => {
 
         });
@@ -277,7 +305,7 @@ export class GroupComponent implements OnInit {
       };
       //console.log(dataUserDet);
       this.dataService.getAllUserListforGrp(dataUserDet).subscribe(data => {
-      //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
+        //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
           this.userFrndList = data.groupMembersPrivate;
           //console.log(this.userFrndList);
@@ -367,7 +395,49 @@ export class GroupComponent implements OnInit {
         });
     }
   }
+  openEdit(type) {
+    if (type == 'name') {
+      if (this.group_name) {
+        this.short_desc = '';
+        this.loading = true;
+        const data = { group_name: this.group_name, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data).subscribe(data => {
+          this.group_name = '';
+          this.loading = false;
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+      }
+      else {
+        this.short_desc = '';
+        this.group_name = this.groupDetailsData.group_name;
+      }
 
+    }
+    else if (type == 'short_desc') {
+      if (this.short_desc) {
+        this.group_name = '';
+        this.loading = true;
+        const data = { short_desc: this.short_desc, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data).subscribe(data => {
+          this.short_desc = '';
+          this.loading = false;
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = this.groupDetailsData.short_desc;
+      }
+    }
+  }
   public requestGroupAction(pid, type) {
     this.loading = true;
     if (pid != '') {
@@ -407,7 +477,7 @@ export class GroupComponent implements OnInit {
 
         });
     }
-    
+
   }
 
   public toggleTab(data: any) {

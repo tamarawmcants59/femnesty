@@ -1,7 +1,7 @@
 <section class="section about-content-area visitingProfile">
 	<div class="container-fluid">
 		<div class="row flex-profile">
-          <!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
+			<!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
 			<div class="col-md-3 flex-left">
 				<div *ngIf="isloginUser == 1">
 					<user-sidebar></user-sidebar>
@@ -9,7 +9,7 @@
 			</div>
 			<div class="col-md-6 flex-middle">
 				<div class="middlePart" style="background: transparent">
-						<div class="tabPart connections">
+					<!-- <div class="tabPart connections">
 								<div class="tab-content">
 								<div class="row">
 									<div class="col-md-12 col-sm-12 hub_top_tab">
@@ -33,36 +33,36 @@
 								</div>
 					
 				</div>
-				</div>
+				</div> -->
 					<div class="browse-hub-map">
 						<div class="map-holder">
 							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="9">
-								<agm-marker  *ngFor="let hub of allHubs" [latitude]="hub.lat" [longitude]="hub.lng" >
+								<agm-marker *ngFor="let hub of allHubs" [latitude]="hub.lat" [longitude]="hub.lng">
 									<agm-info-window>
-											<div class="popup" style="width:250px">
-												<ul>
-													<li>
-														<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
-													</li>
-													<li>
-														<h2>{{hub.title}}</h2>
-														<p class="black-text">{{hub.address}}</p>
-														<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
-														<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
-														<a [routerLink]="['/user/hub_details/',hub.slug]" target="_blank">
-															<button class="btn btn-primary">Read More </button>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</agm-info-window>
+										<div class="popup" style="width:250px">
+											<ul>
+												<li>
+													<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
+												</li>
+												<li>
+													<h2>{{hub.title}}</h2>
+													<p class="black-text">{{hub.address}}</p>
+													<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
+													<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
+													<a [routerLink]="['/user/hub_details/',hub.slug]" target="_blank">
+														<button class="btn btn-primary">Read More </button>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</agm-info-window>
 								</agm-marker>
 							</agm-map>
 							<!-- <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
-							
+
 						</div>
 					</div>
-                 
+
 					<div class="profDes All-hub-list">
 						<p class="all-hb">ALL HUBS</p>
 						<ul>
@@ -79,7 +79,8 @@
 									<p class="red-text" *ngIf="hub.type=='R'">{{hub.recurring_start}} - {{hub.recurring_end}}, {{hub.day}} @ {{hub.start_time}} - {{hub.end_time}}</p>
 									<p class="red-text" *ngIf="hub.type=='R'">Recurring </p>
 									<div class="bottom-links-wrap">
-										<a [routerLink]="['/user/hub_details/',hub.slug]"><i class="ion-ios-information-outline"></i> READ MORE</a>
+										<a [routerLink]="['/user/hub_details/',hub.slug]">
+											<i class="ion-ios-information-outline"></i> READ MORE</a>
 										<a href="http://www.google.com/calendar/event?
 																	action=TEMPLATE
 																	&text={{hub.title}}
@@ -89,25 +90,28 @@
 																	" target="_blank" rel="nofollow">
 											<i class="ion-android-calendar"></i> ADD TO CALENDAR
 										</a>
-										
+
 									</div>
 								</aside>
 							</li>
-						</ul> 
-					</div>   
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-3 flex-right">
 				<div class="rightPart">
 					<div class="innerRightPart" style="padding: 30px">
+							<a class="btn btn-primary"[routerLink]="['/user/create_hub/create']"  >Create Hub</a>
 						<h2>BROWSE HUBS</h2>
-                        <div class="inline-search">
-                            <div class="input-group">
-                                <input placeholder="Search By Keyword" [(ngModel)]="search_con" (keypress)="handleKeyDown($event)" class="form-control">
-                                <span class="input-group-btn">
-                                    <button type="button" (click)="searchByKeyword()" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
+						<div class="inline-search">
+							<div class="input-group">
+								<input placeholder="Search By Keyword" [(ngModel)]="search_con" (keypress)="handleKeyDown($event)" class="form-control">
+								<span class="input-group-btn">
+									<button type="button" (click)="searchByKeyword()" class="btn btn-default">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
 						</div>
 						<div class="inline-search">
 							<div class="input-group">
@@ -119,9 +123,12 @@
 								</span>
 							</div>
 						</div>
-                        <ul class="filter-reslt">
+						<ul class="filter-reslt">
 							<li (click)="searchByCategory('')" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==''?'800':'200'}">All Hubs</li>
-	                        <li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}" (click)="searchByCategory(cat.id)" >{{cat.title}} <span *ngIf="cat.hubs">({{cat.hubs}})</span></li>	                       
+							<li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}"
+							 (click)="searchByCategory(cat.id)">{{cat.title}}
+								<span *ngIf="cat.hubs">({{cat.hubs}})</span>
+							</li>
 						</ul>
 					</div>
 					<div class="innerRightPart latest-article">
@@ -138,17 +145,21 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="innerRightPart share-story">
 						<h1>Share your Story</h1>
 						<p>Femnesty is always looking for strong, positive contributors to join our team.</p>
-						<p><a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">Share</a></p>
-					  </div>
-					  <div class="innerRightPart share-story">
+						<p>
+							<a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">Share</a>
+						</p>
+					</div>
+					<div class="innerRightPart share-story">
 						<h1>Start a Hub</h1>
 						<p>Make a difference where you are, start a Hub today.</p>
-						<p><a [routerLink]="['/user/create_hub/create']" class="btn btn-primary">Start</a></p>
-					  </div>
+						<p>
+							<a [routerLink]="['/user/create_hub/create']" class="btn btn-primary">Start</a>
+						</p>
+					</div>
 
 					<!--<div class="innerRightPart" style="padding-top: 56px; padding-bottom: 56px">
 					  <div class="article-add-holder article-add-holder1">
@@ -166,7 +177,7 @@
 					  </div>
 					</div>-->
 				</div>
-        </div>
+			</div>
 		</div>
 	</div>
 </section>

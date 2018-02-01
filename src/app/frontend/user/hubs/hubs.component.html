@@ -1,17 +1,26 @@
 <section class="section  visitingProfile">
 	<div class="container-fluid">
 		<div class="row flex-profile">
-          <!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
+			<!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
 			<div class="col-md-3 flex-left">
 				<div *ngIf="isloginUser == 1">
-				<user-sidebar></user-sidebar>
+					<user-sidebar></user-sidebar>
 				</div>
 			</div>
 			<div class="col-md-6 flex-middle">
 				<div class="middlePart">
-					<div class="topPart" style="height:195px;" [ngStyle]="{'background-image':'url('+hubDetails.image+')'}"></div>
+					<div class="topPart" style="height:195px;" [ngStyle]="{'background-image':'url('+hubDetails.image+')'}">
+						<input name="myfile" type="file" (change)="fileChangePost($event,hubDetails)" style="display:none;" #fileTypeEdit>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openFile()">
+							<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
+						</a>
+					</div>
 					<div class="hubDes">
-						<h2>{{hubDetails.title}}</h2>
+						<input class="text-center" type="text" [(ngModel)]="title" *ngIf="title">
+						<h2 *ngIf="!title">{{hubDetails.title}}</h2>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -34px;margin-right: 34px;"></i>
+						</a>
 						<!-- <p class="shortP">Hub Short Description</p> -->
 						<p class="attendingP">{{hubDetails.attendings}} attending this hub</p>
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
@@ -23,9 +32,11 @@
 							&dates={{startDateString}}/{{endDateString}}
 							&details={{hubDetails.description}}
 							&location={{hubDetails.address}}
-							" target="_blank" rel="nofollow" *ngIf="hubDetails.hub_invite_status!='2'"><button type="button" class="btn btn-default">Add to calendar</button></a>
+							" target="_blank" rel="nofollow" *ngIf="hubDetails.hub_invite_status!='2'">
+								<button type="button" class="btn btn-default">Add to calendar</button>
+							</a>
 
-							
+
 							<span *ngIf="hubDetails.hub_invite_status=='2'">
 								You have rejected the invitation
 							</span>
@@ -34,9 +45,15 @@
 					</div>
 					<div class="tabPart">
 						<ul class="nav nav-pills">
-							<li [ngClass]="{'active':activeTab=='posts'}"><a (click)="activeTab='posts'">Hub Activity</a></li>
-							<li [ngClass]="{'active':activeTab=='details'}"><a (click)="activeTab='details'">Hub Details</a></li>
-							<li [ngClass]="{'active':activeTab=='invite'}" *ngIf="hubDetails.hub_invite_status=='1' || loginUserId==hubDetails.user_id" ><a (click)="activeTab='invite'">Invite Member</a></li>
+							<li [ngClass]="{'active':activeTab=='posts'}">
+								<a (click)="activeTab='posts'">Hub Activity</a>
+							</li>
+							<li [ngClass]="{'active':activeTab=='details'}">
+								<a (click)="activeTab='details'">Hub Details</a>
+							</li>
+							<li [ngClass]="{'active':activeTab=='invite'}" *ngIf="hubDetails.hub_invite_status=='1' || loginUserId==hubDetails.user_id">
+								<a (click)="activeTab='invite'">Invite Member</a>
+							</li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
@@ -61,15 +78,20 @@
 									<h2>{{hubDetails.title}}</h2>
 									<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
 									<p class="info" *ngIf="hubDetails.type=='R'">
-											{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}}, {{hubDetails.day}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
+										{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}}, {{hubDetails.day}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
 									<p class="info" *ngIf="hubDetails.type!='R'">
 										<span>Date:</span> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
-									<p class="info"><span>Organizer:</span> {{hubDetails.organizer}}</p>
-									
-									<p class="info"><span>Email:</span> {{hubDetails.email}}</p>
-									<p class="info"><span>Phone:</span> {{hubDetails.phone}}</p>
-									<p class="info"><span>Website:</span> {{hubDetails.website}}</p>
-									<p class="info"><span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+									<p class="info">
+										<span>Organizer:</span> {{hubDetails.organizer}}</p>
+
+									<p class="info">
+										<span>Email:</span> {{hubDetails.email}}</p>
+									<p class="info">
+										<span>Phone:</span> {{hubDetails.phone}}</p>
+									<p class="info">
+										<span>Website:</span> {{hubDetails.website}}</p>
+									<p class="info">
+										<span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
 								</div>
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
@@ -85,7 +107,7 @@
 												</select>
 											</div>
 											<!-- <ng-select [multiple]="true" [(ngModel)]="friends" formControlName="user_ids" [items]="items" placeholder="No city selected"></ng-select> -->
-											
+
 											<input type="submit" value="Send" class="btn btn-primary">
 										</form>
 									</div>
@@ -96,43 +118,106 @@
 				</div>
 			</div>
 			<div class="col-md-3 flex-right">
-				<div class="rightPart">                			
+				<div class="rightPart">
 					<div class="innerRightPart right-map-details HUB-Dtls">
-						  <h2>{{hubDetails.title}}</h2>	
-						  <p class="info" *ngIf="hubDetails.type=='R'">
-								<span>Date:</span> <em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},<br/> {{hubDetails.day}},<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
+						<h2>{{hubDetails.title}}</h2>
+						<p class="info" *ngIf="hubDetails.type=='R'">
+							<span>Date:</span>
+							<em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},
+								<br/> {{hubDetails.day}},
+								<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+						</p>
 						<p class="info" *ngIf="hubDetails.type!='R'">
-							<span>Date:</span> <em>{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em></p>
-						  <p class="info"><span>Description:</span><em>{{hubDetails.description}} </em></p>
-						
-						
-						  <p class="info"><span>Organizer:</span> <em>{{hubDetails.organizer}}</em></p>
-						
-							
-						  <p class="info"><span>Email:</span> <em>{{hubDetails.email}}</em></p>
+							<span>Date:</span>
+							<em>{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+						</p>
+						<p class="info" *ngIf="!description">
+							<span>Description:</span>
+							<em>{{hubDetails.description}} </em>
+						</p>
+						<p class="info" *ngIf="description">
+							<textarea class="text-center" [(ngModel)]="description" *ngIf="description" style="width: 90%;"></textarea>
+							<!-- <input class="text-center" type="text" [(ngModel)]="description" *ngIf="description"> -->
+						</p>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
+						</a>
+
+
+						<p class="info" *ngIf="!organizer">
+							<span>Organizer:</span>
+							<em>{{hubDetails.organizer}}</em>
+						</p>
+						<p class="info" *ngIf="organizer">
+							<input class="text-center" type="text" [(ngModel)]="organizer" *ngIf="organizer">
+						</p>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
+						</a>
+
+
+						<p class="info" *ngIf="!email">
+							<span>Email:</span>
+							<em>{{hubDetails.email}}</em>
+						</p>
+						<p class="info" *ngIf="email">
+							<input class="text-center" type="text" [(ngModel)]="email" *ngIf="email">
+						</p>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
+						</a>
+						<p class="info" *ngIf="!phone">
+							<span>Phone:</span>
+							<em>{{hubDetails.phone}}</em>
+						</p>
+						<p class="info" *ngIf="phone">
+							<input class="text-center" type="text" [(ngModel)]="phone" *ngIf="phone">
+						</p>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
+						</a>
+						<p class="info" *ngIf="!website">
+							<span>Website:</span>
+							<em>{{hubDetails.website}}</em>
+						</p>
+						<p class="info" *ngIf="website">
+							<input class="text-center" type="text" [(ngModel)]="website" *ngIf="website">
+						</p>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -24px;margin-left: -18px;"></i>
+						</a>
 						<p class="info">
-							<span>Phone:</span> <em>{{hubDetails.phone}}</em></p>
-      					<p class="info"><span>Website:</span> <em>{{hubDetails.website}}</em></p>
-      					<p class="info"><span>Privacy:</span> <em>{{hubDetails.type=='O'?'Public':'Private'}}</em></p>
+							<span>Privacy:</span>
+							<em>{{hubDetails.type=='O'?'Public':'Private'}}</em>
+						</p>
 					</div>
-					
+
 					<div class="innerRightPart right-map-details HUB-Dtls">
-      					<h2>ADDRESS</h2>
-      					<div class="right-map">
+						<h2>ADDRESS</h2>
+						<div class="right-map">
 							<agm-map style="height:133px" [latitude]="hubDetails.lat" [longitude]="hubDetails.lng">
 								<agm-marker [latitude]="hubDetails.lat" [longitude]="hubDetails.lng"></agm-marker>
 							</agm-map>
-							
-					        <!-- <iframe width="100%" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll={{hubDetails.lat}},{{hubDetails.lng}}&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
+
+							<!-- <iframe width="100%" height="150px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll={{hubDetails.lat}},{{hubDetails.lng}}&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
 						</div>
-      					<p class="info">{{hubDetails.address}}</p>
+						<p class="info" *ngIf="IsShowAddress">{{hubDetails.address}}</p>
+						<p class="info">
+							<input type="text" class="form-control-plaintext" value=""  placeholder="Type anything and you will get a location *"
+							 id="autocomplete" style="display:none" #addressEdit>
+						</p>
+						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address',hubDetails)">
+							<i class="fa fa-pencil" style="color: #bd1927;float: left;margin-top: -163px;margin-left: -18px;"></i>
+						</a>
 					</div>
-					
+
 					<div class="innerRightPart right-map-details attending HUB-Dtls">
 						<h2>Attending</h2>
-						<ul>         
-							<li *ngFor="let user of hubDetails.attenders">               
-								<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}"><img src="{{user.profile_image}}" alt="{{user.name}}"  title="{{user.name}}"/></a>
+						<ul>
+							<li *ngFor="let user of hubDetails.attenders">
+								<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}">
+									<img src="{{user.profile_image}}" alt="{{user.name}}" title="{{user.name}}" />
+								</a>
 							</li>
 						</ul>
 						<a href="javascript:void(0);" *ngIf="hubDetails.attenders>12" class="viewAll text-center">View All ({{hubDetails.attenders.length}})</a>
@@ -151,13 +236,13 @@
 							</div>
 						</div>
 					</div> -->
-    
+
 					<div class="innerRightPart right-map-details right-sharing">
 						<h2>Share</h2>
 						<!-- Go to www.addthis.com/dashboard to customize your tools -->
-						
 
-<!--<button mat-button shareButton="facebook">
+
+						<!--<button mat-button shareButton="facebook">
 
 	<i class="fa fa-facebook"></i>
 </button>
@@ -168,8 +253,8 @@
 	<i class="fa fa-linkedin"></i>
 </button>-->
 						<ul>
-							<li>	
-								<app-beta-restriction [height]="'40'"	[image] = "'assets/images/facebook.png'">
+							<li>
+								<app-beta-restriction [height]="'40'" [image]="'assets/images/facebook.png'">
 								</app-beta-restriction>
 							</li>
 
@@ -181,9 +266,9 @@
 								<img height="40" src="assets/images/linkedin.png" />
 							</li>
 							<li ceiboShare [twitter]="{url:repoUrl, text:hubDetails.description}">
-                  <img height="40" src="assets/images/twitter.png" />
-							</li>	
-					  </ul>
+								<img height="40" src="assets/images/twitter.png" />
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
