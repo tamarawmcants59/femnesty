@@ -205,6 +205,7 @@ export class GrouplistComponent implements OnInit {
         "user_id": this.isloginUserId
       };
       this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
+        debugger;
         //console.log(data);
         if (data.Ack == "1") {
 
@@ -229,7 +230,8 @@ export class GrouplistComponent implements OnInit {
           //console.log(this.groupMemberList);
         }
       }, error => {
-
+        debugger;
+        console.log(error);
       });
     }
   }

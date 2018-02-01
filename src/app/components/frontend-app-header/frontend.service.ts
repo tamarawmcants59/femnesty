@@ -80,4 +80,8 @@ export class FrontendService {
     return this.apiService.get(`/enrichment/apparticleWithCat`).map(data => data);
   }
 
+  giveFeedback(form_data) {
+    return this.apiService.post(`/users/appaddfeedback`,form_data).map(data => data);
+  }
+
 }

@@ -1,25 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FrontendService } from "../../components/frontend-app-header/frontend.service";
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public homepageData:any;
-  public homepageArtData =[];
-  public homepageSliderData =[];
+  public homepageData: any;
+  public homepageArtData = [];
+  public rForm: FormGroup;
+  loading = false;
+  public homepageSliderData = [];
+  successMsg:any;
+  public IsShowFeedForm = false;
+  public isShowPlus = true;
   public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
-  public homepageCls='';
+  public homepageCls = '';
   constructor(
-    private dataService: FrontendService
-  ) { 
-    if(this.loginUserId>0){
-      this.homepageCls='pt-64';
-    }else{
-      this.homepageCls='pt-150';
+    private dataService: FrontendService,
+    private fb: FormBuilder
+  ) {
+    if (this.loginUserId > 0) {
+      this.homepageCls = 'pt-64';
+    } else {
+      this.homepageCls = 'pt-150';
     }
+    this.rForm = fb.group({
+      'description': [null, Validators.compose([Validators.required])],
+      'email': [null, Validators.compose([Validators.required, Validators.email])],
+      'feedback': [null, Validators.compose([Validators.required])],
+      'rating': [null, Validators.compose([Validators.required])],
+    });
     //console.log(this.homepageCls);
   }
 
@@ -27,6 +39,21 @@ export class HomeComponent implements OnInit {
     this.getHomePageContent();
     this.getHomePageTopArticle();
     this.getHomePageTestomonial();
+  }
+
+
+  sendFeedBack() {
+    this.loading = true;
+    this.dataService.giveFeedback(this.rForm.value).subscribe(data => {
+      if (data.Ack == "1") {
+        this.successMsg=data.msg;
+        this.loading = false;
+        this.rForm.reset();
+      }
+    }, error => {
+      this.loading = false;
+      console.log('Something went wrong!');
+    });
   }
 
   getHomePageContent() {
@@ -50,7 +77,14 @@ export class HomeComponent implements OnInit {
       console.log('Something went wrong!');
     });
   }
-
+  openForm() {
+    this.IsShowFeedForm = true;
+    this.isShowPlus = false;
+  }
+  closeForm() {
+    this.isShowPlus = true;
+    this.IsShowFeedForm = false;
+  }
   getHomePageTestomonial() {
     this.dataService.getHomePageSliderData().subscribe(data => {
       if (data.Ack == "1") {

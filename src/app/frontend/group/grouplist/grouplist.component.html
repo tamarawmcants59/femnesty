@@ -46,7 +46,8 @@
                                         </h4>
                                         <!--<small class="text">{{grpData.short_desc}}</small>-->
                                         <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-                                        <p class="txt-red">By {{grpData.name}}</p>
+                                        <!-- <p class="txt-red">By {{grpData.name}}</p> -->
+                                        <p class="text-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>
                                         <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
                                     </div>
                                 </li>
@@ -66,7 +67,8 @@
                                         </h4>
                                         <!--<small class="text">{{grpData.short_desc}}</small>-->
                                         <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-                                        <p class="txt-red">By {{grpData.name}}</p>
+                                        <!-- <p class="txt-red">By {{grpData.name}}</p> -->
+                                        <p class="txt-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>
                                         <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
                                     </div>
                                 </li>

@@ -62,7 +62,8 @@
 						<!--<span class="text-grey-light">-->Books | {{bookDetData.bookcatname}}
 						<!--</span>-->
 					</h4>
-					<a href="{{bookDetData.link}}" class="btn btn-primary mt-30">Find At Amazon
+					
+					<a href="{{bookDetData.link}}" class="btn btn-primary mt-30" >Find At Amazon
 						<!--<i class="ion-ios-arrow-forward"></i>-->
 					</a>
 					<div class="row">
@@ -83,6 +84,7 @@
 								<p class="mt-15">{{cmtList.comment}}</p>
 							</div>
 						</div>
+						<a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowRatingViewMore" (click)="viewMore()">View More</a>
 					</div>
 					<div class="leave-rvw mt-30" *ngIf="isloginUser==1">
 						<h3 class="mb-30">Leave a review</h3>

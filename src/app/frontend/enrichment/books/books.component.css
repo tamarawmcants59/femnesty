@@ -5,7 +5,7 @@
 .books-wrap .book-item .book-pic a{display: block;width:100%; height:100%;}
 .books-wrap .book-item .book-pic a .book-img{display: block; background-size: cover !important; background-repeat: no-repeat !important; background-position: center center !important; width:100%; height:100%;}
 .books-wrap .book-item p{font-size:16px; font-weight: 500; margin-bottom: 5px;}
-
+             
 
 @media screen and (max-width:767px) {
 	.books-wrap .book-item{width:48%;}
