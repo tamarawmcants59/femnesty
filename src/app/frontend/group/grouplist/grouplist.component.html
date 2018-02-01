@@ -42,7 +42,7 @@
                                     </a>
                                     <div class="right-side">
                                         <h4>
-                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
+                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name | limitTo : 20}}</a>
                                         </h4>
                                         <!--<small class="text">{{grpData.short_desc}}</small>-->
                                         <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
@@ -51,7 +51,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <a class="btn btn-primary"  href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreMy()">View More</a>
+                            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreMy()">View More</a>
                         </div>
                         <div class="MyGroups-list" #topGroupsList>
                             <h5 class="mt-0">TOP GROUPS</h5>
@@ -62,7 +62,7 @@
                                     </a>
                                     <div class="right-side">
                                         <h4>
-                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name}}</a>
+                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name | limitTo : 20}}</a>
                                         </h4>
                                         <!--<small class="text">{{grpData.short_desc}}</small>-->
                                         <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
@@ -71,7 +71,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <a class="btn btn-primary"  href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMoreTop()">View More</a>
+                            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMoreTop()">View More</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,13 @@
             <div class="col-md-3 flex-right">
                 <div class="rightPart">
                     <div class="innerRightPart new-group-section">
-                        <h2>BROWSE GROUPS</h2>
+                        <div>
+                            <a [routerLink]="['/group/add_group']" class="btn btn-primary" href="javascript:void(0)">Create Group</a>
+                        </div>
+                        <div>
+                            <h2>BROWSE GROUPS</h2>
+                        </div>
+
                         <ul class="filter-reslt">
                             <li style="position: relative;">
                                 <div class="form-group">
