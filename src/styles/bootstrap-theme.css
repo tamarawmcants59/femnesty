@@ -995,7 +995,6 @@ button{
 
 .section h1 {
     font-size: 52px;
-    font-size: 52px;
     position: relative;
     margin-bottom: 35px;
     padding-bottom: 35px;
@@ -1435,7 +1434,7 @@ footer {
     font-size:16px;
     padding: 6px 30px;
 }
-.form-area label{font-size: 16px;color: #707070}
+.form-area label{font-size: 14px;color: #707070}
 .form-area textarea.form-control {
     height: auto;
 }
@@ -1518,13 +1517,17 @@ footer {
 
 .file-upload__label {
     display: block;
-    padding: 1em 3em;
+    padding: 0 18px;
     color: #fff !important;
     background: #bb1926;
     border-radius: 40px;
     transition: background .3s;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 10px !important;
+    font-family: 'montserratmedium';
+    letter-spacing: 2px;
+    line-height: 32px;
+    height: 30px;
 }
 
 .file-upload__label:hover {
@@ -4152,7 +4155,7 @@ img-cropper{display:table;margin:0 auto;float:none;width:auto;}
 .mentor-partner{padding: 85px 0;}
 .mentor-partner h2{font-size: 37px;margin: 0;color: #000;border-bottom: 3px solid #e6e6e6;}
 .mentor-partner h3{font-size: 33px;}
-.mentor-partner p{font-size: 16px;}
+.mentor-partner p{font-size: 14px;}
 .mentor-partner .mentor-img{display: block;width:100%;height: auto;overflow: hidden;}
 .mentor-partner .mentor-img img{width:100%}
 .new-article h1::after{content:none;}
@@ -4239,7 +4242,7 @@ section.team h2.text-red {font-size: 28px;}
 
 /**************** Mentor ****************/
 
-.bcome-mntr .row h1{font-size:44px}
+.bcome-mntr .row h1{font-size:42px}
 .font-54{font-size:54px !important}
 .form-area textarea.form-control{padding-top: 15px; padding-bottom: 15px}
 
