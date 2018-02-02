@@ -1,8 +1,8 @@
-<section class="inner-banner bcome-mntr" style="background: url(assets/images/member-ship-bg.jpg) center no-repeat; background-size: cover;">
+<section class="inner-banner bcome-mntr" *ngIf="mentorShipContent" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+mentorShipContent?.back_image+')'} ">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
-              <h1 class="text-white">Mentorship</h1>
+              <h1 class="text-white" *ngIf="mentorShipContent">{{mentorShipContent.heading}}</h1>
           </div>
       </div>
   </div>
@@ -10,7 +10,7 @@
 
 <section class="section p-16 inner-pages-holder">
   <div class="container">
-      <h1>Mentorship</h1>
+      <h1 *ngIf="mentorShipContent">{{mentorShipContent.heading}}</h1>
       <p class="mb-30">A good mentor can literally change your life. Mentors guide you personally and professionally; their mission is to support you, encourage you, 
 challenge you if necessary and help you be the very best you can be. </p>
       <p class="mb-30">Everyone benefits from some support in their life. Often we get this from friends, family and loved ones, but sometimes it can help if that 

@@ -1,8 +1,8 @@
-<section class="inner-banner bcome-mntr" style="background: url(assets/images/join-team-bg.jpg) center no-repeat; background-size: cover;">
+<section class="inner-banner bcome-mntr" *ngIf="joinTeamContent" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+joinTeamContent?.back_image+')'} ">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
-              <h1 class="text-white">Join The Team</h1>
+              <h1 class="text-white" *ngIf="joinTeamContent">{{joinTeamContent.heading}}</h1>
           </div>
       </div>
   </div>
@@ -10,9 +10,8 @@
 
 <section class="section p-16 inner-pages-holder">
   <div class="container">
-      <h1>Be part of Femnesty.</h1>
-      <p>We want to hear from anyone who has something positive to share with us, whether you have a great idea for a seminar or you have a whole library of books and videos you think we should be promoting on our website. The more ideas, volunteers and contributors we have, 
-        the better we will be!</p>
+      <h1 *ngIf="joinTeamContent">{{joinTeamContent.below_heading}}</h1>
+      <p *ngIf="joinTeamContent">{{joinTeamContent.below_content}}</p>
 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
     <strong>Success: </strong> {{successMsg}}
 </div>

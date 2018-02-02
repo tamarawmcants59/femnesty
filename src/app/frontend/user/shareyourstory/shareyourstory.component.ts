@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-
+import { FrontendService } from '../../../components/frontend-app-header/frontend.service';
 @Component({
   selector: 'app-shareyourstory',
   templateUrl: './shareyourstory.component.html',
@@ -14,11 +14,21 @@ export class ShareyourstoryComponent implements OnInit {
   showPostImgDive: boolean;
   public loginUserId: any;
   successMsg: string = '';
-
+  shareYorStoryContent: any;
   constructor(
     private builder: FormBuilder,
-    private dataService: UserService
-  ) { 
+    private dataService: UserService,
+    private frontEndSrvc: FrontendService
+  ) {
+    this.frontEndSrvc.getShareYourStoryContent().subscribe(data => {
+      if (data.Ack == "1") {
+        this.shareYorStoryContent = data.Sharestories[0];
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
     this.form = builder.group({
       mag_category_id: ['', [
         Validators.required,
@@ -48,61 +58,61 @@ export class ShareyourstoryComponent implements OnInit {
         Validators.required,
         //Validators.minLength(3)
       ]]
-    }); 
+    });
   }
-     
+
 
   ngOnInit() {
     this.loginUserId = localStorage.getItem("loginUserId");
     this.getcategory();
   }
-    public getcategory(){
-     
-      this.dataService.apparticleWithCat()
-        .subscribe(data => {
-          const details = data;
-          if (details.Ack == "1") {
-            this.allArticlecat = details.ArticleCatList;
-          }
-        },
-        error => {
+  public getcategory() {
 
-        }
-        );
-    }
-
-    public shareStoryArticle() {
-      const userValue = this.form.value;
-      userValue.user_id = this.loginUserId;
-      userValue.image = this.postImgData;
-      //console.log(userValue.agreetab);
-      this.dataService.appsharestory(userValue).subscribe(data => {
-        //console.log(data);
-        if (data.Ack == "1") {
-          this.showPostImgDive = false;
-          this.postImgData='';
-          this.successMsg = 'Successfully posted for approval.';
-          this.form.reset();
+    this.dataService.apparticleWithCat()
+      .subscribe(data => {
+        const details = data;
+        if (details.Ack == "1") {
+          this.allArticlecat = details.ArticleCatList;
         }
       },
       error => {
-      });
-      
-    }
 
-    public fileChangePost($event) {
-      this.showPostImgDive = true;
-      const image: any = new Image();
-      const file: File = $event.target.files[0];
-      const myReader: FileReader = new FileReader();
-      const that = this;
-      myReader.onloadend = function (loadEvent: any) {
-        image.src = loadEvent.target.result;
-        that.postImgData = image.src;
-        //that.cropper.setImage(image);
-        //console.log(image.src);
-      };
-      myReader.readAsDataURL(file);
-    }
+      }
+      );
+  }
+
+  public shareStoryArticle() {
+    const userValue = this.form.value;
+    userValue.user_id = this.loginUserId;
+    userValue.image = this.postImgData;
+    //console.log(userValue.agreetab);
+    this.dataService.appsharestory(userValue).subscribe(data => {
+      //console.log(data);
+      if (data.Ack == "1") {
+        this.showPostImgDive = false;
+        this.postImgData = '';
+        this.successMsg = 'Successfully posted for approval.';
+        this.form.reset();
+      }
+    },
+      error => {
+      });
+
+  }
+
+  public fileChangePost($event) {
+    this.showPostImgDive = true;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      image.src = loadEvent.target.result;
+      that.postImgData = image.src;
+      //that.cropper.setImage(image);
+      //console.log(image.src);
+    };
+    myReader.readAsDataURL(file);
+  }
 
 }

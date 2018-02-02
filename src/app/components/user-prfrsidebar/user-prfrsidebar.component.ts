@@ -8,12 +8,15 @@ import { UserService } from "../../frontend/user/user.service";
 })
 export class UserPrfrsidebarComponent implements OnInit {
   public loginUserId = "";
-  public userImgList =[];
-  public userGrpList =[];
+  public userImgList = [];
+  public userGrpList = [];
   public latestHubList = [];
+  public totalLatestHubList = [];
+  totalPageSize = 5;
+  public IsShowViewMore = false;
   constructor(
     private dataService: UserService
-  ) { 
+  ) {
     this.loginUserId = localStorage.getItem("loginUserId");
   }
 
@@ -29,12 +32,12 @@ export class UserPrfrsidebarComponent implements OnInit {
         "id": this.loginUserId
       };
       this.dataService.getUserImgListById(dataUserDet).subscribe(data => {
-          //console.log(data);
-          if (data.Ack == "1") {
-              this.userImgList = data.UserAllImageById;
-              //console.log(this.groupMemberList);
-          } 
-      },error => {
+        //console.log(data);
+        if (data.Ack == "1") {
+          this.userImgList = data.UserAllImageById;
+          //console.log(this.groupMemberList);
+        }
+      }, error => {
       });
     }
   }
@@ -45,23 +48,51 @@ export class UserPrfrsidebarComponent implements OnInit {
         "user_id": this.loginUserId
       };
       this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
-          //console.log(data);
-          if (data.Ack == "1") {
-              this.userGrpList = data.GroupListByuserID;
-              //console.log(this.groupMemberList);
-          } 
-      },error => {
+        //console.log(data);
+        if (data.Ack == "1") {
+          this.userGrpList = data.GroupListByuserID;
+          //console.log(this.groupMemberList);
+        }
+      }, error => {
 
       });
     }
   }
+  viewMore() {
+    this.totalPageSize = this.totalPageSize + 5;
+    this.latestHubList = [];
+    if (this.totalLatestHubList.length > this.totalPageSize) {
+      this.IsShowViewMore = true;
+    }
+    else {
+      this.IsShowViewMore = false;
+    }
+    for (let i = 0; i < this.totalPageSize; i++) {
+      if (this.totalLatestHubList[i]) {
+        this.latestHubList.push(this.totalLatestHubList[i]);
+      }
 
-  public getLatestHub()
-  {
+    }
+  }
+  public getLatestHub() {
     this.dataService.getLatestHubs(this.loginUserId).subscribe(data => {
-      console.log(data);
       if (data.Ack == "1") {
-        this.latestHubList = data.details2;
+        this.totalLatestHubList = data.details2;
+        if (data.details2.length > 5) {
+          this.IsShowViewMore = true;
+          this.latestHubList = [];
+          for (let i = 0; i < data.details2.length; i++) {
+            if (this.latestHubList.length < 5) {
+              this.latestHubList.push(data.details2[i]);
+            }
+          }
+
+        }
+        else {
+          this.IsShowViewMore = false;
+          this.latestHubList = data.ActiveGroupList;
+        }
+        //  this.latestHubList = data.details2;
         //console.log(this.groupMemberList);
       }
     }, error => {

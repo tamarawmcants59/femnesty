@@ -139,7 +139,7 @@
             </div>
             <div class="article-add-holder">
               <h3>{{artData.title | limitTo : 20}} </h3>
-              <span>Article by {{artData.author_name | limitTo : 15}}, {{artData.c_date | dateTimeFormat: 'MMM dd, yyyy'}}</span>
+              <span>By {{artData.author_name | limitTo : 20}}, {{artData.c_date | dateTimeFormat: 'MMM dd, yyyy'}}</span>
               <p>{{artData.short_desc | limitTo : 200}}</p>
               <br>
               <a [routerLink]="['/articles/details',artData.slug]" class="btn btn-primary">Read Article</a>

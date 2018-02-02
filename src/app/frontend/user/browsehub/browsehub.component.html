@@ -49,7 +49,7 @@
 													<p class="black-text">{{hub.address}}</p>
 													<p class="red-text">{{hub.date}} @ {{hub.start_time}} - {{hub.end_time}}</p>
 													<p class="red-text" *ngIf="hub.type=='R'">Recurring</p>
-													<a [routerLink]="['/user/hub_details/',hub.slug]" target="_blank">
+													<a [routerLink]="['/user/hub_details/',hub.slug]">
 														<button class="btn btn-primary">Read More </button>
 													</a>
 												</li>

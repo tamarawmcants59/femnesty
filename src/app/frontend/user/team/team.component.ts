@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-
+import { FrontendService } from '../../../components/frontend-app-header/frontend.service';
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
@@ -14,11 +14,21 @@ export class TeamComponent implements OnInit {
   showPostImgDive: boolean;
   public loginUserId: any;
   successMsg: string = '';
-
+  joinTeamContent:any;
   constructor(
     private builder: FormBuilder,
-    private dataService: UserService
+    private dataService: UserService,
+    private frontEndSrvc: FrontendService
   ) { 
+    this.frontEndSrvc.getJointTheTeamContent().subscribe(data => {
+      if (data.Ack == "1") {
+       this.joinTeamContent = data.JoinTeamContent[0];
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
     this.form = builder.group({
       name: ['', [
         Validators.required,

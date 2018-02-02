@@ -26,6 +26,28 @@ export class FrontendService {
   getAboutPageDetBySlug(slug){
     return this.apiService.get(`/enrichment/appcontentaboutusslug/${slug}`).map(data => data);
   }
+  getContactUsPageDetails(){
+    return this.apiService.get(`/enrichment/app_contactus_content`).map(data => data);
+  }
+  getAdvisoryContent(){
+    return this.apiService.get(`/enrichment/app_advisory_content`).map(data => data);
+  }
+
+  getPartnershipContent(){
+    return this.apiService.get(`/enrichment/app_partnership_content`).map(data => data);
+  }
+  getShareYourStoryContent(){
+    return this.apiService.get(`/enrichment/app_sharestory_content`).map(data => data);
+  }
+  getBecomeMentorContent(){
+    return this.apiService.get(`/enrichment/app_mentor_content`).map(data => data);
+  }
+  getJointTheTeamContent(){
+    return this.apiService.get(`/enrichment/app_jointeam_content`).map(data => data);
+  }
+  getMentorshipContent(){
+    return this.apiService.get(`/enrichment/app_mentorship_content`).map(data => data);
+  }
 
   getUserDetById(form_data){
     //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)  

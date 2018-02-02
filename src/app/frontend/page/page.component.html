@@ -71,7 +71,7 @@
 
 
 <!--<section class="section team" *ngIf="pageSlugName == 'about-us'" [ngStyle]="{'background-image':'url('+pageDetData?.team_background_img_url+')'}">-->
-<section class="section team">
+<section class="section team"  *ngIf="pageSlugName == 'about-us'">
     <div class="container">
         <h2 class="text-red mt-0">{{pageDetData.founder_team_title}}</h2>
         <div class="row mt-50">
@@ -100,20 +100,20 @@
 </section>
 
 <section class="section contact-section" *ngIf="pageSlugName == 'contact-us'">
-    <div class="contact-left">
-        <img src="assets/images/contact-banner.jpg" alt="" class="img-responsive">
+    <div class="contact-left" *ngIf="contactUsContent && contactUsContent.image">
+        <img [src]="contactUsContent.image" alt="" class="img-responsive">
     </div>
     <div class="contact-right" style="padding-bottom:0px;">
-        <h1>Get in Touch.</h1>
-        <p>If you have any questions about our organisation, have any comment or feedback then please use the contact details below.</p>
+        <h1 *ngIf="contactUsContent && contactUsContent.heading">{{contactUsContent.heading}}</h1>
+        <p  *ngIf="contactUsContent && contactUsContent.description">{{contactUsContent.description}}</p>
         <ul class="contact-dtls">
             <li>
                 <div class="icon"><img src="assets/images/mobile.png" alt=""></div>
-                <div class="number">+{{getPageSiteSetData?.mobile}}</div>
+                <div class="number" *ngIf="contactUsContent && contactUsContent.phone">+{{contactUsContent.phone}}</div>
             </li>
             <li>
                 <div class="icon"><img src="assets/images/mail.png" alt=""></div>
-                <div class="number">{{getPageSiteSetData?.admin_email}}</div>
+                <div class="number" *ngIf="contactUsContent && contactUsContent.email">{{contactUsContent.email}}</div>
             </li>
         </ul>
         <div class="row" *ngIf="(successMsg != '')">

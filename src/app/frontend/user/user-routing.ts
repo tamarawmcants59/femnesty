@@ -199,7 +199,7 @@ const routes: Routes = [
   },
   {
     path: 'shareyourstory',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: ShareyourstoryComponent,
     data: {
       title: 'Share your story'

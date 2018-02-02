@@ -25,8 +25,8 @@ export class HubsComponent implements OnInit {
   public uninvitedUsers = [];
   public loading = false;
   public address: any;
-  public lat:0;
-  public lng:0;
+  public lat: 0;
+  public lng: 0;
   public IsShowAddress = true;
   public title: any;
   public activeTab = 'posts';
@@ -70,15 +70,15 @@ export class HubsComponent implements OnInit {
   }
 
   ngOnInit() {
-    let autocomplete = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-      { types: ['geocode'] });
-    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-      var place = autocomplete.getPlace();
-      let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-      localStorage.setItem("address", JSON.stringify(address_data));
+    // let autocomplete = new google.maps.places.Autocomplete(
+    //   /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+    //   { types: ['geocode'] });
+    // google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    //   var place = autocomplete.getPlace();
+    //   let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+    //   localStorage.setItem("address", JSON.stringify(address_data));
 
-    });
+    // });
     this.getHubDetails();
     this.getLastFourArticle();
   }
@@ -283,7 +283,7 @@ export class HubsComponent implements OnInit {
         this.hubService.editHubDetails(data).subscribe(data => {
           this.loading = false;
           this.title = "";
-          this.hubSlug=data.HubDetails.slug;
+          this.hubSlug = data.HubDetails.slug;
           this.getHubDetails();
         },
           error => {
@@ -470,8 +470,8 @@ export class HubsComponent implements OnInit {
           const data = { address: addressData.address, lat: addressData.lat, lng: addressData.lng, id: this.hubDetails.id, user_id: hubDetails.user_id }
           this.hubService.editHubDetails(data).subscribe(data => {
             this.address = '';
-            this.IsShowAddress=true;
-            this.lat=0;this.lng=0;
+            this.IsShowAddress = true;
+            this.lat = 0; this.lng = 0;
             this.IsShowAddress = true;
             this.loading = false;
             this.getHubDetails();
@@ -484,16 +484,28 @@ export class HubsComponent implements OnInit {
 
       }
       else {
+        setTimeout(function () {
+          debugger;
+          let autocomplete = new google.maps.places.Autocomplete(
+    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+            { types: ['geocode'] });
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+            localStorage.setItem("address", JSON.stringify(address_data));
 
+          });
+        }, 100)
         this.title = '';
         this.description = '';
         this.email = ''
         this.phone = '';
         this.website = '';
         this.organizer = '';
-        this.address=hubDetails.address;
-        this.lat=hubDetails.lat;this.lng=hubDetails.lng;
-        this.addressEdit.nativeElement.style.display = "block";
+        this.address = hubDetails.address;
+        this.lat = hubDetails.lat; this.lng = hubDetails.lng;
+
+        // this.addressEdit.nativeElement.style.display = "block";
       }
     }
   }
