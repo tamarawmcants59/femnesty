@@ -38,13 +38,13 @@
                     		<li><a href="">All Articles</a></li>
                     	</ul>
                     </li>-->
-                    <li class="nav-item dropdown">
+                    <li style="position: relative;" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Articles
-                        </a>
-                        <a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Articles 
+                        </a><span style="position: absolute; right:-2px; top:15px; width:14px; height:14px; "><i class="ion-arrow-down-b"></i></span>
+                        <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span> <i class="icon ion-chevron-down"></i></span>
-                        </a>
+                        </a>-->
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="articleArr.length>0">
                             <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
                             <!--<a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
@@ -52,13 +52,14 @@
                             <a class="dropdown-item" [routerLink]="['/articles/all']">All Articles</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li style="position: relative;" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Enrichment
                         </a>
-                        <a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span style="position: absolute; right:-2px; top:15px; width:14px; height:14px; "><i class="ion-arrow-down-b"></i></span>
+                        <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span> <i class="icon ion-chevron-down"></i></span>
-                        </a>
+                        </a>-->
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                             <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
                             <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
@@ -67,10 +68,10 @@
                         </div>
                     </li>
                     <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                    <li class="nav-item dropdown">
+                    <li style="position: relative" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkCon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Contribute
-                        </a>
+                        </a><span style="position: absolute; right:-2px; top:15px; width:14px; height:14px; "><i class="ion-arrow-down-b"></i></span>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCon">
                             <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
                             <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
@@ -131,13 +132,13 @@
                 <div class="collapse navbar-collapse">
                     <div class="pull-right">
                     <ul class="nav navbar-nav rightNav rightNavPart">
-                        <li class="nav-item dropdown">
+                        <li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Articles
-                            </a>
-                            <a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span> <i class="icon ion-chevron-down"></i></span>
-                            </a>
+                            </a>-->
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="articleArr.length>0">
                                 <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
                                 <!--<a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
@@ -146,13 +147,13 @@
                                 <a class="dropdown-item" [routerLink]="['/articles/all']">All Articles</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Enrichment
-                            </a>
-                            <a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span> <i class="icon ion-chevron-down"></i></span>
-                            </a>
+                            </a>-->
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                 <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
                                 <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
@@ -219,6 +220,12 @@
                                 <!--<li class="images">
                                     <img src="assets/images/down-arrow.png" alt="">
                                 </li>-->
+                                <li>
+                                	<a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
+                                <span class="colorWhite">{{currentUserDet.first_name}}</span>
+                            </a>
+                                </li>
                                 <li><a [routerLink]="['/user/edit_profile/activity']">My Profile</a></li>
                                 <!--<li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
                                 <li><a [routerLink]="['/user/hubs']">Find hubs</a></li>-->
@@ -245,9 +252,10 @@
                 <!-- /.navbar-collapse -->
                 <div *ngIf="show" class="collapse navbar-collapse mobile-navs" style="display: block;">
                     <ul class="nav navbar-nav navbar-right display-on">
-                        <li class="nav-item dropdown">
+                        <li style="position: relative;" class="nav-item dropdown">
                             <a routerLinkActive="active" [routerLink]="['/articles/all']" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Articles</a>
-                            <a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down" ><span> <i class="icon ion-chevron-down"></i></span></a>
+                            <span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down" ><span> <i class="icon ion-chevron-down"></i></span></a>-->
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5" *ngIf="articleArr.length>0">
                                     <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
                                 <!--<a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
@@ -257,9 +265,9 @@
                             </div>
                         </li>
                         <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
-                        <li class="nav-item dropdown">
-                            <a routerLinkActive="active" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrichment</a>
-                            <a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down"><span> <i class="icon ion-chevron-down"></i></span></a>    
+                        <li style="position: relative;" class="nav-item dropdown">
+                            <a routerLinkActive="active" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrichment</a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down"><span> <i class="icon ion-chevron-down"></i></span></a>-->    
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink6">
                                 <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
                                 <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
@@ -268,10 +276,10 @@
                             </div>
                         </li>
                         <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
-                        <li class="nav-item dropdown">
+                        <li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Contribute
-                            </a>
+                            </a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkConUserLog1">
                                 <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
                                 <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
