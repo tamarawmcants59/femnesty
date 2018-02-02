@@ -58,3 +58,24 @@
     border-radius: 100%;
     cursor: pointer;
 }
+.post-drop-box{
+	width: 228px;
+	height: 186px;
+	background: #fff;
+	border: solid 1px #f9f9f9;
+	border-radius: 3px;
+	box-shadow: 10px 10px 8px #dedede;
+	
+}
+.post-drop-box ul{
+	padding: 10px;
+	margin: 0;
+	width: 100%;
+}
+.post-drop-box ul li{
+	list-style-type: none !important;
+	float: none;
+	padding: 10px 0 !important;
+	border-bottom: solid 1px #f9f9f9;
+	width: 100% !important;
+}
