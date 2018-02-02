@@ -28,7 +28,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" [ngClass]="{'in':show}">
                 <ul class="nav navbar-nav navbar-right">
-                    <li *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }}</a></li>
+                    <li class="sp-hover" *ngIf="pageConData.is_active == 1"><a [routerLink]="['/page',pageConData.slug]"> {{ pageConData.page_heading }}</a></li>
                     <!--<li class="articl">
                     	<a routerLinkActive="active" [routerLink]="['/articles']">Articles</a>
                     	<ul class="submenu">
@@ -41,7 +41,7 @@
                     <li style="position: relative;" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Articles 
-                        </a><span style="position: absolute; right:-2px; top:15px; width:14px; height:14px; "><i class="ion-arrow-down-b"></i></span>
+                        </a><span style="position: absolute; right:-2px; top:12px; width:14px; height:14px; "><i style="font-size: 10px;" class="ion-arrow-down-b"></i></span>
                         <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span> <i class="icon ion-chevron-down"></i></span>
                         </a>-->
@@ -56,7 +56,7 @@
                         <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Enrichment
                         </a>
-                        <span style="position: absolute; right:-2px; top:15px; width:14px; height:14px; "><i class="ion-arrow-down-b"></i></span>
+                        <span style="position: absolute; right:-2px; top:12px; width:14px; height:14px; "><i style="font-size: 10px;" class="ion-arrow-down-b"></i></span>
                         <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span> <i class="icon ion-chevron-down"></i></span>
                         </a>-->
@@ -67,11 +67,11 @@
                             <!--<a class="dropdown-item" [routerLink]="['/enrichment']">All</a>-->
                         </div>
                     </li>
-                    <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                    <li class="sp-hover"><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                     <li style="position: relative" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkCon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Contribute
-                        </a><span style="position: absolute; right:-2px; top:15px; width:14px; height:14px; "><i class="ion-arrow-down-b"></i></span>
+                        </a><span style="position: absolute; right:-2px; top:12px; width:14px; height:14px; "><i style="font-size: 10px;" class="ion-arrow-down-b"></i></span>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCon">
                             <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
                             <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
@@ -79,7 +79,7 @@
                         </div>
                     </li>
                     <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
-                    <li *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
+                    <li class="sp-hover" *ngIf="userloggedIn != 1"><a routerLinkActive="active" [routerLink]="['/user/login']" style="padding-top: 0px;"><button>Login</button></a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
