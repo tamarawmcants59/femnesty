@@ -41,7 +41,7 @@
                     <li style="position: relative;" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Articles 
-</a><span style="position: absolute; right:-2px; top:12px; width:14px; height:14px; " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ion-arrow-down-b"></i></span>
+</a><span style="position: absolute; right:2px; top:12px; width:14px; height:14px; " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="font-size: 10px;" class="ion-arrow-down-b"></i></span>
                         <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span> <i class="icon ion-chevron-down"></i></span>
                         </a>-->
@@ -56,7 +56,7 @@
                         <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Enrichment
                         </a>
-<span style="position: absolute; right:-2px; top:12px; width:14px; height:14px; " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ion-arrow-down-b"></i></span>
+<span style="position: absolute; right:2px; top:12px; width:14px; height:14px; " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="font-size: 10px;" class="ion-arrow-down-b"></i></span>
                         <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span> <i class="icon ion-chevron-down"></i></span>
                         </a>-->
@@ -117,7 +117,7 @@
                         <li>
                             <a [routerLink]="['/social_home']"><img src="assets/images/logo-small.png"></a>
                         </li>
-                        <li class="form-search search-icon">
+                        <li class="form-search search-icon sp-hover">
                             <div class="form-group">
                                 <input type="text" class="form-control" formControlName="skeyword" (ngModelChange)="searchResult($event)" placeholder="Search" >
                                 <button type="submit"><i class="icon ion-ios-search"></i></button>
@@ -135,7 +135,7 @@
                         <li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" [routerLink]="['/articles']" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Articles
-                            </a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            </a><span style="position: absolute; right:2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i></span>
                             <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span> <i class="icon ion-chevron-down"></i></span>
                             </a>-->
@@ -150,7 +150,7 @@
                         <li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Enrichment
-                            </a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            </a><span style="position: absolute; right:2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i></span>
                             <!--<a class="nav-link dropdown-toggle mob_chevron_down" href="Javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span> <i class="icon ion-chevron-down"></i></span>
                             </a>-->
@@ -163,7 +163,7 @@
                         </li>
                         <!--<li><a routerLinkActive="active" [routerLink]="['/articles']">Articles</a></li>
                         <li><a routerLinkActive="active" [routerLink]="['/enrichment']">Enrichment</a></li>-->
-                        <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                        <li><a class="sp-hover" routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Contribute
@@ -179,11 +179,11 @@
                     </ul>
                     <ul class="nav navbar-nav navIcon">
                         <li ngbDropdown class="dropdown">
-                            <a *ngIf="chatHeads && chatHeads.length == 0" class="dropdown-toggle" [routerLink]="['/user/chat/list']">
+                            <a *ngIf="chatHeads && chatHeads.length == 0" class="dropdown-toggle sp-hover" [routerLink]="['/user/chat/list']">
                                 <i class="icon ion-ios-filing-outline" style="font-size: 32px;"></i>
                                 <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                             </a>
-                            <a *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownToggle class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownToggle class="dropdown-toggle sp-hover" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon ion-ios-filing-outline" style="font-size: 32px;"></i>
                                 <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                             </a>
@@ -254,7 +254,7 @@
                     <ul class="nav navbar-nav navbar-right display-on">
                         <li style="position: relative;" class="nav-item dropdown">
                             <a routerLinkActive="active" [routerLink]="['/articles/all']" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Articles</a>
-                            <span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            <span style="position: absolute; right:2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i></span>
                             <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down" ><span> <i class="icon ion-chevron-down"></i></span></a>-->
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5" *ngIf="articleArr.length>0">
                                     <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
@@ -264,9 +264,9 @@
                                 <!--<a class="dropdown-item" [routerLink]="['/articles/all']">All Articles</a>-->
                             </div>
                         </li>
-                        <li><a routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
+                        <li><a class="sp-hover" routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a></li>
                         <li style="position: relative;" class="nav-item dropdown">
-                            <a routerLinkActive="active" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrichment</a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            <a routerLinkActive="active" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrichment</a><span style="position: absolute; right:2px; top:19px; width:14px; height:14px; " id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i></span>
                             <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down"><span> <i class="icon ion-chevron-down"></i></span></a>-->    
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink6">
                                 <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
@@ -279,7 +279,7 @@
                         <li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Contribute
-                            </a><span style="position: absolute; right:-2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px;" class="ion-arrow-down-b"></i></span>
+                            </a><span style="position: absolute; right:2px; top:19px; width:14px; height:14px; "><i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i></span>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkConUserLog1">
                                 <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
                                 <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
