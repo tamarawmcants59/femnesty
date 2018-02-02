@@ -38,6 +38,7 @@ export class PostCardComponent implements OnInit {
   public getCurrentUser: any;
   public currentDate: Date = new Date();
   private IsGroupAdmin: boolean = false;
+  public IsShowEditDelete= false;
   //public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
   public repoUrl = '';
   public likeListPostId = '';
@@ -45,6 +46,14 @@ export class PostCardComponent implements OnInit {
   public delPostType: any;
   public delPostKey: any;
   public delPostData: any;
+  public blockPostId: any;
+  public blockPostType: any;
+  public blockPostKey: any;
+  public blockPostData: any;
+  public reportPostId: any;
+  public reportPostType: any;
+  public reportPostKey: any;
+  public reportPostData: any;
   public userList = [];
   fhsgdff = '';
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
@@ -104,7 +113,65 @@ export class PostCardComponent implements OnInit {
     this.delPostKey = delkey;
     this.modalService.open(confirmmodal);
   }
-
+  blockUser(blockConfirmModal, post_id, type, comments = null, delkey = null)
+  {
+    this.blockPostId = post_id;
+    this.blockPostType = type;
+    this.blockPostData = comments;
+    this.blockPostKey = delkey;
+    this.modalService.open(blockConfirmModal);
+  }
+  report(reportConfirmModal, post_id, type, comments = null, delkey = null)
+  {
+    this.reportPostId = post_id;
+    this.reportPostType = type;
+    this.reportPostData = comments;
+    this.reportPostKey = delkey;
+    this.modalService.open(reportConfirmModal);
+  }
+  confirmReport()
+  {
+    debugger;
+    let data={
+      "id":this.reportPostId,
+      "user_id":this.IsloginUserId
+      }
+      this.loading=true;
+      this.dataService.reportPost(data).subscribe(data => {
+        if (data.Ack == "1") {
+         this.loading=false;
+         if (this.blockPostKey != null) {
+          this.reportPostData[this.blockPostKey].hide_div = true;
+        } else {
+          this.reportPostData.hide_post_div = true;
+        }
+        }
+      }, error => {
+        this.loading=false;
+        console.log(error);
+      })
+  }
+  confirmBlock()
+  {
+    let data={
+      "id":this.blockPostId,
+      "user_id":this.IsloginUserId
+      }
+      this.loading=true;
+      this.dataService.blockPost(data).subscribe(data => {
+        if (data.Ack == "1") {
+         this.loading=false;
+         if (this.blockPostKey != null) {
+          this.blockPostData[this.blockPostKey].hide_div = true;
+        } else {
+          this.blockPostData.hide_post_div = true;
+        }
+        }
+      }, error => {
+        this.loading=false;
+        console.log(error);
+      })
+  }
   confirmPostDelete() {
     let data = { "post_id": this.delPostId, "post_type": this.delPostType };
     this.dataService.deletePost(data).subscribe(data => {
@@ -295,7 +362,6 @@ export class PostCardComponent implements OnInit {
     const myReader: FileReader = new FileReader();
     const that = this;
     myReader.onloadend = function (loadEvent: any) {
-      debugger;
       image.src = loadEvent.target.result;
       that.postImgData = image.src;
       //that.cropper.setImage(image);

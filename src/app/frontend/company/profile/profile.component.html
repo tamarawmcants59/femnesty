@@ -3,155 +3,268 @@
         <div class="row flex-profile">
             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
             <div class="col-md-3 flex-left">
-              <div *ngIf="isloginUser == 1">
-                  <user-sidebar></user-sidebar>
-              </div>
+                <div *ngIf="isloginUser == 1">
+                    <user-sidebar></user-sidebar>
+                </div>
             </div>
             <div class="col-md-6 flex-middle">
-              <div class="middlePart">
-                  <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
-                  </div>
-                  <div class="profPhoto">
-                      <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.profile_image+')'}">
-                      </div>
-                  </div>
-                  <div class="profDes">
-                      <h2 class="text-center">{{otherProfileDet?.company_name}}</h2>
-                      <p class="text-center">{{otherProfileDet?.bio}}</p>
-                      <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
-                      <p class="text-center addressP">{{userFollowerList?.length }} Followers</p>
-                      <p class="text-center" *ngIf="isFollowRequest">
-                          
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
+                <div class="middlePart">
+                    <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
+                        <input name="myfile1" type="file" (change)="coverFileChangePost($event)" style="display:none;" #fileTypeEdit>
+                        <a href="javascript:void(0)" (click)="openFile()" *ngIf="isAdmin">
+                            <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
+                        </a>
+                    </div>
+                    <div class="profPhoto">
+
+                        <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.profile_image+')'}">
+                            <input name="myfile" type="file" (change)="fileChangePost($event)" style="display:none;" #profileImageType>
+                            <a href="javascript:void(0)" (click)="openProFile()" *ngIf="isAdmin">
+                                <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="showImgDive">
+                        <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
+                            <div class="col-md-4" style="padding-top: 90px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Update Profile Image</button>
+                            </div>
+                        </div>
+                        <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                    </div>
+                    <div class="col-md-12" *ngIf="showCoverImgDive">
+                        <div class="col-md-12" *ngIf="coverImageData.image" style="padding-bottom:10px;">
+
+                            <div class="col-md-4" style="padding-top: 10px;">
+                                <button type="button" class="btn btn-primary" (click)="UploadCoverImg()">Update Cover Image</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <img-cropper #cropper [image]="coverImageData" [settings]="coverCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                        </div>
+                    </div>
+                    <div class="profDes">
+                        <h2 class="text-center">{{otherProfileDet?.company_name}}</h2>
+                        <p class="text-center">{{otherProfileDet?.bio}}</p>
+                        <p class="text-center addressP">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
+                        <p class="text-center addressP">{{userFollowerList?.length }} Followers</p>
+                        <p class="text-center" *ngIf="isFollowRequest">
+
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary"
+                                (click)="sendFollowRequest(otherProfileDet?.id)">Follow Company</button>
                         </p>
                         <!-- <p class="text-center" style="padding-top: 10px;" *ngIf="isEmpRequest">
                         <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="sendEmployeeRequest(otherProfileDet?.id)">Employee Request</button>
                         </p>  -->
-                        
-                        <p class="text-center" style="padding-top: 10px;" *ngIf="!isFollowRequest">
-                                <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary" (click)="unflow_company()">Unfollow</button>
-                                </p> 
-                  </div>
-                  <div class="row" *ngIf="(successMsg != '')">
-                      <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                           {{successMsg}}
-                      </div>
-                  </div>
-                  <div class="row" *ngIf="(errorMsg != '')">
-                      <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-                           {{errorMsg}}
-                      </div>
-                  </div>
-                  <div class="tabPart">
-                      <ul class="nav nav-pills">
-                          <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
-                          <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
-                          <li [ngClass]="{'active' : activeTab=='contact'}"><a (click)="toggleTab('contact')">Contact</a></li>
-                          <!--<li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>-->
-                      </ul>
-                      
-                      <div class="tab-content">
-                          <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
-                              <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
-                              <div *ngIf="userPostList?.length > 0">
-                                  <div *ngFor="let postData of userPostList">
-                                      <app-post-card [postData]="postData"></app-post-card>
-                                  </div>
-                              </div>
-                              <div class="likePart" *ngIf="userPostList?.length == 0">
-                                  <div class="row">
-                                      <div class="col-md-10">
-                                          <div class="nothing">Nothing more to show</div>
-                                      </div>
-                                  </div>
-                              </div>
 
-                          </div>
-                          <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
-                              <div class="aboutPart">
-                                  <h3 style="margin-top: 0px;">About {{otherProfileDet?.company_name}}</h3>
-                                  <div class="abouts">
-                                      <div class="row">
-                                          <div class="col-md-12">
-                                              <div class="tab-content">
-                                                  <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
-                                                      <ul class="ulList">
-                                                          <div class="menu">
-                                                              <div class="">
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.company_name}}</span>
-                                                                      </div>
-                                                                  </div> 
-                                                                  <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Website</label>
+                        <p class="text-center" style="padding-top: 10px;" *ngIf="!isFollowRequest">
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && loginUserDet.user_type == 'C'" type="button" class="btn btn-primary"
+                                (click)="unflow_company()">Unfollow</button>
+                        </p>
+                    </div>
+                    <div class="row" *ngIf="(successMsg != '')">
+                        <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                            {{successMsg}}
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="(errorMsg != '')">
+                        <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                            {{errorMsg}}
+                        </div>
+                    </div>
+                    <div class="tabPart">
+                        <ul class="nav nav-pills">
+                            <li [ngClass]="{'active' : activeTab=='activity'}">
+                                <a (click)="toggleTab('activity')">Activity</a>
+                            </li>
+                            <li [ngClass]="{'active' : activeTab=='about'}">
+                                <a (click)="toggleTab('about')">About</a>
+                            </li>
+                            <li [ngClass]="{'active' : activeTab=='contact'}">
+                                <a (click)="toggleTab('contact')">Contact</a>
+                            </li>
+                            <!--<li [ngClass]="{'active' : activeTab=='invite'}"><a (click)="toggleTab('invite')">Invite</a></li>-->
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
+                                <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
+                                <div *ngIf="userPostList?.length > 0">
+                                    <div *ngFor="let postData of userPostList">
+                                        <app-post-card [postData]="postData"></app-post-card>
+                                    </div>
+                                </div>
+                                <div class="likePart" *ngIf="userPostList?.length == 0">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="nothing">Nothing more to show</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
+                                <div class="aboutPart">
+                                    <h3 style="margin-top: 0px;">About {{otherProfileDet?.company_name}}</h3>
+                                    <div class="abouts">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                        <ul class="ulList">
+                                                            <div class="menu">
+                                                                <div class="">
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Name</label>
                                                                         <div class="col-sm-8">
+                                                                            <span>{{otherProfileDet?.company_name}}</span>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Website</label>
+                                                                        <div class="col-sm-8" *ngIf="!website">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('website')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
                                                                             <span>{{otherProfileDet?.website}}</span>
                                                                         </div>
-                                                                    </div>                                                                 
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.email}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.mobile_number}}</span>
-                                                                      </div>
-                                                                  </div>                                                                  
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.state}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.city}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.address}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                      <label for="staticEmail" class="col-sm-4 col-form-label">About Company</label>
-                                                                      <div class="col-sm-8">
-                                                                          <span>{{otherProfileDet?.bio}}</span>
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="form-group row">
-                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Mission</label>
+
+                                                                        <div class="col-sm-8" *ngIf="website">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('website')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="website">
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email </label>
                                                                         <div class="col-sm-8">
-                                                                            <span>{{otherProfileDet?.company_mission}}</span>
+                                                                            <span>{{otherProfileDet?.email}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Company Vission</label>
-                                                                            <div class="col-sm-8">
-                                                                                <span>{{otherProfileDet?.company_vission}}</span>
-                                                                            </div>
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Mobile No</label>
+                                                                        <div class="col-sm-8" *ngIf="!mobile_number">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('mobile_number')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.mobile_number}}</span>
                                                                         </div>
-                                                              </div>
-                                                          </div>
-                                                      </ul>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
-                            <div class="connectionsPart">
-                                
-                                <!--<h2>Employee List</h2>
+                                                                        <div class="col-sm-8" *ngIf="mobile_number">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('mobile_number')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="mobile_number">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                                        <div class="col-sm-8" *ngIf="!state">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('state')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.state}}</span>
+                                                                        </div>
+                                                                        <div class="col-sm-8" *ngIf="state">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('state')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="state">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">City</label>
+                                                                        <div class="col-sm-8" *ngIf="!city">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('city')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.city}}</span>
+                                                                        </div>
+                                                                        <div class="col-sm-8" *ngIf="city">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('city')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="city">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Address</label>
+                                                                        <div class="col-sm-8" *ngIf="!address">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('address')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.address}}</span>
+                                                                        </div>
+                                                                        <div class="col-sm-8">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('address')" *ngIf="isAdmin && address">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input type="text" class="form-control-plaintext" value="" placeholder="Type anything and you will get a location *" id="autocomplete"
+                                                                                style="display:none" #addressEdit>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">About Company</label>
+                                                                        <div class="col-sm-8" *ngIf="!bio">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('bio')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.bio}}</span>
+                                                                        </div>
+                                                                        <div class="col-sm-8" *ngIf="bio">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('bio')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="bio">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Mission</label>
+                                                                        <div class="col-sm-8" *ngIf="!company_mission">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('company_mission')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.company_mission}}</span>
+                                                                        </div>
+                                                                        <div class="col-sm-8" *ngIf="company_mission">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('company_mission')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="company_mission">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Company Vission</label>
+                                                                        <div class="col-sm-8" *ngIf="!company_vission">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('company_vission')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <span>{{otherProfileDet?.company_vission}}</span>
+                                                                        </div>
+                                                                        <div class="col-sm-8" *ngIf="company_vission">
+                                                                            <a href="javascript:void(0)" (click)="openEdit('company_vission')" *ngIf="isAdmin">
+                                                                                <i class="fa fa-pencil" style="color: #bd1927;float:right"></i>
+                                                                            </a>
+                                                                            <input class="text-center" type="text" [(ngModel)]="company_vission">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='contact'}">
+                                <div class="connectionsPart">
+
+                                    <!--<h2>Employee List</h2>
                                 <div class="connections">
                                     
                                         <div class="grp-rqsts" *ngIf="userEmployeeList?.length > 0">
@@ -195,49 +308,49 @@
                                     
                                 </div>-->
 
-                                <h2>Follower List</h2>
-                                <div class="connections">
-                                    <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
-                                        <li class="friend-box-list" *ngFor="let followData of userFollowerList">
-                                            <div class="friend-boxImage">
-                                                <a [routerLink]="['/user/profile',followData.display_name]">
-                                                <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
-                                                </a>
-                                            </div>
-                                            <div class="friend-boxText">
-                                                <a [routerLink]="['/user/profile',followData.display_name]">
-                                                <h2>{{followData.name}}</h2>
-                                                </a>
-                                                <a [routerLink]="['/user/profile',followData.display_name]" class="btn btn-primary">View Profile</a> 
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="likePart" *ngIf="!userFollowerList">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="nothing">No employee found</div>
+                                    <h2>Follower List</h2>
+                                    <div class="connections">
+                                        <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let followData of userFollowerList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',followData.display_name]">
+                                                        <h2>{{followData.name}}</h2>
+                                                    </a>
+                                                    <a [routerLink]="['/user/profile',followData.display_name]" class="btn btn-primary">View Profile</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="likePart" *ngIf="!userFollowerList">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="nothing">No employee found</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
-                          </div>
-                          <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
-                              <div class="connectionsPart">
-                                  <h2>invite</h2>
-                                  <div class="connections">
-                                      No Invite
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-3 flex-right">             
-                <app-company-rightbar [profileData]="otherProfileDet" [companyID]="otherProfileDet.id"></app-company-rightbar> 
-          </div>
-      </div>
-  </div>
+                            <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
+                                <div class="connectionsPart">
+                                    <h2>invite</h2>
+                                    <div class="connections">
+                                        No Invite
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 flex-right">
+                <app-company-rightbar [profileData]="otherProfileDet" [companyID]="otherProfileDet.id"></app-company-rightbar>
+            </div>
+        </div>
+    </div>
 </section>

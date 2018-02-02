@@ -132,7 +132,8 @@ export class GrouplistComponent implements OnInit {
   private getCatDetails(id, title) {
     //this.aboutActiveTab='find';
     this.filteredTitle = title.toUpperCase();
-    let data = { "category_id": id }
+    let data = { "category_id": id,   
+      "user_id": this.isloginUserId};
     this.dataService.getGroupListByCategoryId(data).subscribe(data => {
       if (data.Ack == "1") {
         this.myGrpList = data.ActiveGroupList
@@ -150,7 +151,10 @@ export class GrouplistComponent implements OnInit {
   }
 
   public getAllGroupList() {
-    this.dataService.getAllGrpList().subscribe(data => {
+    const dataUserDet = {
+      "user_id": this.isloginUserId
+    };
+    this.dataService.getAllGrpList(dataUserDet).subscribe(data => {
       if (data.Ack == "1") {
         if (data.ActiveGroupList.length > 5) {
           this.IsShowTopViewMore = true;
@@ -171,7 +175,6 @@ export class GrouplistComponent implements OnInit {
       }
     },
       error => {
-
       });
   }
 
@@ -205,7 +208,6 @@ export class GrouplistComponent implements OnInit {
         "user_id": this.isloginUserId
       };
       this.dataService.getUseAllGroupListById(dataUserDet).subscribe(data => {
-        debugger;
         //console.log(data);
         if (data.Ack == "1") {
 
@@ -230,7 +232,6 @@ export class GrouplistComponent implements OnInit {
           //console.log(this.groupMemberList);
         }
       }, error => {
-        debugger;
         console.log(error);
       });
     }

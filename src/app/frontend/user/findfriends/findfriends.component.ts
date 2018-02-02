@@ -141,7 +141,6 @@ export class FindfriendsComponent implements OnInit {
   }
 
   public unflow_company(company_id,sfriendData) {
-    debugger;
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
       const dataUserDet = {

@@ -27,12 +27,9 @@
           </div>
           <div class="col-md-8">
               <h1>{{articleData.title}}</h1>
-              <!-- <a  *ngIf="startDateString" href="http://www.google.com/calendar/event?action=TEMPLATE&text={{articleData.title}}
-              &dates={{startDateString}}
-              &details={{articleData.description}} &location='Baisakhi Abasan, Canal Side Road, AG Block, Sector II, Salt Lake City, Kolkata, West Bengal'
-              " target="_blank" rel="nofollow">
-                  <button type="button" class="btn btn-default">Add to calendar</button>
-              </a> -->
+              <a  *ngIf="startDateString" href="http://www.google.com/calendar/event?action=TEMPLATE&text={{articleData.title}}&dates={{startDateString}}&details={{articleData.title}}" target="_blank" rel="nofollow">
+                  <button type="button" class="btn btn-primary">Add to calendar</button>
+              </a>
               <p class="font-weight-bold mb-30">{{articleData.short_desc}}</p>
               <div [innerHTML]="articleData.description" class="mb-30"></div>
           </div>

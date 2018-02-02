@@ -74,11 +74,11 @@
                             </a>
             </div> -->
 
-            <!--<a class="icondown" href="javascript:void(0)" (click)="toggleOptions()">
+            <a class="icondown" href="javascript:void(0)" (click)="toggleOptions()">
                 <i class="icon ion-chevron-down"></i>
             </a>
             <div *ngIf="IsShowOption">
-                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
+                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEditModal(postData,editModal)">
                     <i class="fa fa-pencil-square-o"></i>
                 </a>
                 <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
@@ -87,13 +87,13 @@
                 <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     <i class="icon ion-android-close"></i>
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
+                <a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     <i class="fa fa-ban"></i>
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
+                <a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
                     <i class="fa fa-flag"></i>
                 </a>
-            </div>-->
+            </div>
         </div>
     </div>
     <div class="row">
@@ -364,6 +364,31 @@
         <button type="button" class="btn modal-btn-black btn-default" (click)="confirmPostDelete(); c('Close click')">Confirm</button>
     </div>
 </ng-template>
+<ng-template #blockConfirmModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm!</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Would you like to block this post?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmBlock(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>
+
+<ng-template #reportConfirmModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Confirm!</h4>
+        </div>
+        <div class="modal-body">
+            <h4>Would you like to report this post?</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+            <button type="button" class="btn modal-btn-black btn-default" (click)="confirmReport(); c('Close click')">Confirm</button>
+        </div>
+    </ng-template>
 
 <ng-template #postlikemodal let-c="close" let-d="dismiss">
     <div class="modal-header">

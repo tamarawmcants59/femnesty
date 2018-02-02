@@ -286,6 +286,10 @@ export class HubCreateComponent implements OnInit {
                 window.scrollTo(0, 0);
                 break;
               }
+              else
+              {
+                IsValid=true;
+              }
             }
             else if(this.postform.value.type=="R")
             {
@@ -300,6 +304,10 @@ export class HubCreateComponent implements OnInit {
                 IsValid = false;
                 window.scrollTo(0, 0);
                 break;
+              }
+              else
+              {
+                IsValid=true;
               }
             }
             
@@ -316,6 +324,10 @@ export class HubCreateComponent implements OnInit {
               IsValid = false;
               window.scrollTo(0, 0);
               break;
+            }
+            else
+            {
+              IsValid=true;
             }
           }
         }

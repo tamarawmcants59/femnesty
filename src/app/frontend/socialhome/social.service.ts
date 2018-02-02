@@ -59,6 +59,14 @@ export class SocialService {
   {
     return this.apiService.post(`/users/appuserpostdelete`,data).map(data => data);
   }
+  blockPost(data)
+  {
+    return this.apiService.post(`/users/app_user_blockpost`,data).map(data => data);
+  }
+  reportPost(data)
+  {
+    return this.apiService.post(`/users/app_user_reportpost`,data).map(data => data);
+  }
   /*getArticleBySlug(slug){
     return this.apiService.get(`/enrichment/apparticledetailsbyslug/${slug}`)
       .map(data => data);

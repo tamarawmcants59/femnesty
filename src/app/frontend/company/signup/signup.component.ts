@@ -75,6 +75,7 @@ export class SignupComponent implements OnInit {
   }
 
   public checkEmail(values:Object):void { 
+    debugger;
     if(values!=''){
       let signupCheckEmail={
         "email": values,

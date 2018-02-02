@@ -1,8 +1,8 @@
- <section class="inner-banner bcome-mntr" style="background: url(assets/images/share-story-bg.jpg) center no-repeat; background-size: cover;">
+ <section class="inner-banner bcome-mntr" *ngIf="shareYorStoryContent" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+shareYorStoryContent?.header_image+')'} ">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
-              <h1 class="text-white">Contribute</h1>
+              <h1 class="text-white" *ngIf="shareYorStoryContent">{{shareYorStoryContent.heading}}</h1>
           </div>
       </div>
   </div>
@@ -10,10 +10,8 @@
 
 <section class="section p-16">
   <div class="container">
-      <h1>Share your story.</h1>
-      <p>Are you combining further education with raising a family? Have you made sacrifices for the sake of your career? <br>
-Are you a businesswoman, single parent, carer, or all three? By sharing your story, you may be able to help other women facing the same 
-issues or challenges in their lives.</p>
+      <h1 *ngIf="shareYorStoryContent">{{shareYorStoryContent.below_header_heading}}</h1>
+      <p *ngIf="shareYorStoryContent">{{shareYorStoryContent.below_header_content}}</p>
 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
     <strong>Success: </strong> {{successMsg}}
 </div>
@@ -59,8 +57,7 @@ issues or challenges in their lives.</p>
         </div>
       <div class="form-group col-lg-12">
           <div class="mt-30"><input class="styled-checkbox" id="styled-checkbox-1" formControlName="agreetab" type="checkbox" value="value1">
-<label for="styled-checkbox-1">I understand my submission may be edited or reformatted in line with existing articles, and that I<br> 
-will receive a copy to approve before publication.</label></div>
+<label for="styled-checkbox-1" *ngIf="shareYorStoryContent">{{shareYorStoryContent.codition_submit}}</label></div>
 <!--<div class="text-danger" *ngIf="!form.controls['agreetab'].valid">Please check and continue.</div>-->
       </div>
       <div class="form-group col-lg-12">

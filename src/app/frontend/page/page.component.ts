@@ -11,6 +11,7 @@ export class PageComponent implements OnInit {
   public commentform: FormGroup;
   pageDetData=[];
   pageSlugName='';
+  contactUsContent:any;
   public getPageSiteSetData:any;
   public successMsg:string= '';
   public errorMsg:string= '';
@@ -47,7 +48,7 @@ export class PageComponent implements OnInit {
         this.pageSlugName = params['slug'];
         if(this.pageSlugName == 'contact-us'){
           this.pageDataStr='';
-          this.getStaticPageDetails();
+          this.getContactUsPage();
         }else if(this.pageSlugName == 'about-us'){
           this.pageDataStr='about_us';
           this.getStaticPageDetails();
@@ -78,6 +79,18 @@ export class PageComponent implements OnInit {
     this._page_service.getAboutPageDetBySlug(this.pageDataStr).subscribe(data=>{
         if (data.Ack=="1") {
             this.pageDetData = data.ContentAllBySlug[0];
+            //console.log(data);
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      }); 
+  }
+    
+  public getContactUsPage(){
+    this._page_service.getContactUsPageDetails().subscribe(data=>{
+        if (data.Ack=="1") {
+            this.contactUsContent = data.ContactUsContent[0];
             //console.log(data);
         }
       },

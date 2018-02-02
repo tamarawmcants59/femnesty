@@ -1,8 +1,8 @@
-<section class="inner-banner bcome-mntr" style="background: url(assets/images/menotor-bg.jpg) center no-repeat; background-size: cover;">
+<section class="inner-banner bcome-mntr" *ngIf="becomeMetorContent" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+becomeMetorContent?.back_image+')'} ">
   <div class="container">
       <div class="row">
           <div class="col-md-7">
-              <h1 class="text-white">Become a Mentor</h1>
+              <h1 class="text-white" *ngIf="becomeMetorContent">{{becomeMetorContent.heading}}</h1>
           </div>
       </div>
   </div>
@@ -10,8 +10,8 @@
 
 <section class="section p-16 inner-pages-holder">
   <div class="container">
-      <h1>Femnesty is always looking for strong, positive contributors to join our team.</h1>
-      <p>You can be a mentor at any stage in your life or career. If you’re a high flyer, why not help someone coming up through the business, or if your career is just taking off, why not mentor a student or someone who just started? It’s never too early – or late – to help someone achieve their goals.</p>
+      <h1 *ngIf="becomeMetorContent">{{becomeMetorContent.below_heading}}</h1>
+      <p *ngIf="becomeMetorContent">{{becomeMetorContent.below_content}}</p>
 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
     <strong>Success: </strong> {{successMsg}}
 </div>

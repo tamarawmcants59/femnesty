@@ -1,27 +1,32 @@
  <!-- inner  banner -->
         
- <section class="inner-banner" style="background: url(assets/images/advisory-banner-bg.jpg) center no-repeat; background-size: cover;">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-7">
-              <h1 class="text-white">Advisory Board</h1>
-          </div>
-      </div>
-  </div>
-</section>
+ <!-- <section class="inner-banner" style="background: url(assets/images/advisory-banner-bg.jpg) center no-repeat; background-size: cover;">
+ -->
+
+    <section class="inner-banner" *ngIf="advisoryContent" style="center: no-repeat; background-size: cover;" [ngStyle]="{'background-image':'url('+advisoryContent?.image+')'} ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white" *ngIf="advisoryContent">{{advisoryContent.heading}}</h1>
+                </div>
+            </div>
+        </div>
+      </section>
+
+ 
  
 <section class="founder p-16 advisory-board">
   <div class="container">
-      <div class="row">
+      <div class="row" *ngFor="let data of advisoryContentList">
           <div class="col-md-3">
-          	<img class="img-responsive" src="assets/images/sir-ronald.jpg" />
+          	<img class="img-responsive" [src]="data.image" />
           </div>
           <div class="col-md-9">
-          	<h3>Sir Ronald Sanders, KCMG</h3>
-          	<p>Sir Ronald Sanders, Ambassador to the United States and the Organisation of American States, has had a career spanning journalism, banking, diplomacy and international negotiations in both the public and private sectors. Sir Ronald holds a Masters degree in International Relations and is a Senior Fellow at the Institute of Commonwealth Studies, University of London and Massey College in the University of Toronto. He was knighted by HM the Queen in 2002. His expertise is global, having served on numerous committees, task forces and advisory boards for the Commonwealth of Nations, as well as on the Board of Directors for media, telecommunications and financial institutions in the private sector.</p>
+          	<h3>{{data.name}}</h3>
+          	<p>{{data.description}}</p>
           </div>
       </div>
-	  <div class="row">
+	  <!-- <div class="row">
           <div class="col-md-3">
           	<img class="img-responsive" src="assets/images/catherine.jpg" />
           </div>
@@ -38,6 +43,6 @@
           	<h3>Adam Williams</h3>
           	<p>Adam Williams is Senior Director at Rackspace, a company that manages cloud-based computer storage, networks and operating systems. Adam is a strong believer in servant leadership, and measures his own success by what he helps others to achieve. Adam was educated at Washington and Lee University and has held numerous positions in sales and IT. An entrepreneur with proven business skills, he also founded several successful companies before joining Rackspace in 2008. Alongside his business career, Adam is a keen and highly experienced mentor who believes passionately in the benefits of mentorship on all sides. In a Gallup Strengths test his five key strengths were Achiever, Activator, Arranger, Belief and Relator – all of which help him lead, inspire and encourage people every day.</p>
           </div>
-      </div>
+      </div> -->
   </div>
 </section>
