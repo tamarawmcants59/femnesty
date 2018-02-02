@@ -74,26 +74,36 @@
                             </a>
             </div> -->
 
-            <!--<a class="icondown" href="javascript:void(0)" (click)="toggleOptions()">
+            <a class="icondown" href="javascript:void(0)" (click)="toggleOptions()">
                 <i class="icon ion-chevron-down"></i>
             </a>
-            <div *ngIf="IsShowOption">
-                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
-                    <i class="fa fa-pencil-square-o"></i>
+            <div class="post-drop-box" *ngIf="IsShowOption">
+            <ul>
+            	<li>
+	                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
+	                    Report
+	                </a>
+                </li>
+                <li>
+                	<a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                    Block
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
-                    <i class="fa fa-trash"></i>
+                </li>
+                <li>
+                	<a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                    Edit
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
-                    <i class="icon ion-android-close"></i>
+                </li>
+                <li>
+                	<a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
+                    Delete
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
-                    <i class="fa fa-ban"></i>
-                </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
+                </li>
+                </ul>
+                <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
                     <i class="fa fa-flag"></i>
-                </a>
-            </div>-->
+                </a>-->
+            </div>
         </div>
     </div>
     <div class="row">
