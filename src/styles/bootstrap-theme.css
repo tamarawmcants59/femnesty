@@ -5271,6 +5271,7 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
 }
 .nav > li:hover{
 	background:#313131;
+	color: #fff;
 }
 .rightNavPart li{
 	padding-bottom:10px;
@@ -5283,4 +5284,8 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
 }
 .dropdown-menu > li{
 	border-bottom: solid 1px #3c3c3c !important;
+	
+}
+.nav > li:hover{
+	color:#fff;
 }
