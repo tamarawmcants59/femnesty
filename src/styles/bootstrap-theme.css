@@ -638,9 +638,9 @@ fieldset[disabled] .btn-danger.active {
 	padding-right: 15px !important;
 }
 .navbar-right .dropdown-menu{
-	right:  auto !important;
-	left: 0 !important;
+	right: 0 !important;	
 	border:  none !important;
+	border-radius: 0 3px 3px 3px !important;
 	}
 }
 
@@ -1000,6 +1000,7 @@ button{
     margin-bottom: 35px;
     padding-bottom: 35px;
     line-height:60px;
+    font-family: 'sanchezregular' !important;
 }
 
 .section h1:after {
@@ -1904,8 +1905,7 @@ footer {
 		padding: 0 !important;
 	}
 	.navbar-right .dropdown-menu{
-	right:  auto !important;
-	left: 0 !important;
+	right: 0;
 	}
 }
 
@@ -2276,7 +2276,7 @@ footer {
     /* Firefox 18- */
     color: #fff;
 }
-.headerTopPart .navbar-nav > li > a{padding: 12px 15px;font-size: 12px; font-family: 'montserratmedium';}
+.headerTopPart .navbar-nav > li > a{padding: 12px 20px 15px 15px;font-size: 12px; font-family: 'montserratmedium';}
 .headerTopPart .navbar-nav.navbar-left > li:first-child > a{padding-left: 0}
 .user-account .dropdown-toggle{margin-top:5px}
 .user-account .dropdown-toggle{}
@@ -4508,7 +4508,13 @@ section h1:after{
     .fix-to-top {position: relative !important; width: 100% !important; top: 0 !important;}
     .left-list.fix-to-top {width:100% !important;}
 
-	header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu{position: relative; float:none; border:0; box-shadow:none; padding-top:0; padding-bottom:0; transition: ease all 0.3s}
+	header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu{
+		position: relative; 
+		float:none; border:0; 
+		box-shadow:none; 
+		padding-top:0; 
+		padding-bottom:0; 
+		transition: ease all 0.3s}
 
 }
 @media screen and (max-width:480px) {
@@ -4838,7 +4844,15 @@ header .nav.navbar-nav li ul.submenu li a{font-size:11px; display: block;padding
 /*------------------------------- 08-01-2018 soumen --------------------------*/
 
 .articl, .enrich{position:relative}
-header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{font-size:12px; display: block;padding: 6px 8px;text-transform: none;letter-spacing: normal; color:#444; font-weight: 600}
+header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{
+	font-size:12px; 
+    display: block;
+    padding: 6px 8px;
+    text-transform: none;
+    letter-spacing: normal; 
+    color:#444; 
+    font-weight: 600;
+    }
 
 .shareYourThought form .result, .message-writing-wrap .result{position: relative; display: inline-block;}
 .shareYourThought form .result .del-btn, .message-writing-wrap .result .del-btn{position: absolute; right:-10px; width:22px; height:22px; background: #bb1926; line-height: 23px; color:#fff; text-align: center; top: -11px; border-radius: 100%; cursor: pointer;}
@@ -5233,18 +5247,18 @@ padding: 9px 15px;
 	vertical-align: top !important;
 }
 .navbar-right .dropdown-menu{
-	right:  auto;
-	left: 0;
+	right:  0;
 	background: #313131 !important;
 	color: #fff !important;
-	border-radius:0 !important;
+	border-radius:0 0 3px 3px !important;
 }
 .dropdown-menu{
-	right:  auto;
-	left: 0;
+	right:0;
 	background: #313131 !important;
 	color: #fff !important;
 	border-radius:0 !important;
+	left: auto !important;
+	border-radius: 0 0 3px 3px;
 }
 
 header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
@@ -5257,6 +5271,12 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
     font-weight: 600;
     border-bottom: solid 1px #3c3c3c;
     
+}
+header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:last-child{
+border: none;
+}
+header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
+	text-decoration: none;
 }
 .new-about-content-area p{
 	color: #393939;
@@ -5276,6 +5296,7 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
 }
 .nav > li:hover{
 	background:#313131;
+	color: #fff;
 }
 .rightNavPart li{
 	padding-bottom:10px;
@@ -5288,4 +5309,47 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
 }
 .dropdown-menu > li{
 	border-bottom: solid 1px #3c3c3c !important;
+	
+}
+.nav > li:hover{
+	color:#fff;
+}
+.post-drop-box{
+	width: 228px;
+	height: auto;
+	background: #fff;
+	border: solid 1px #ededed;
+	border-radius: 3px;
+	box-shadow: 4px 4px 2px #eeeeee;
+	position: absolute;
+	right: 0;
+	z-index: 10000;
+	top: 20px;
+	overflow: hidden;
+	
+}
+
+.post-drop-box a{ 
+	display:  block;
+	color: #000;
+	font-weight: normal;
+	width: 208 !important;
+	margin: 0 10px !important;
+	border-bottom: solid 1px #ededed;
+	text-align: left;
+	clear: both;
+	padding: 12px 0;
+}
+.post-drop-box a:last-child{
+	border: none; 
+}
+
+.sp-hover{
+	
+}
+.sp-hover:hover{
+	background: none !important;
+}
+.sp-hover a:hover{
+	color: #1a1a1a !important;
 }
