@@ -78,28 +78,28 @@
                 <i class="icon ion-chevron-down"></i>
             </a>
             <div class="post-drop-box" *ngIf="IsShowOption">
-            <ul>
-            	<li>
+            
+            	
 	                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || IsloginUserId==postData.user_id" (click)="openEditModal(postData,editModal)">
 	                    Report
 	                </a>
-                </li>
-                <li>
-                	<a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                
+                
+              <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name == ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     Block
                 </a>
-                </li>
-                <li>
+               
+               
                 	<a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     Edit
                 </a>
-                </li>
-                <li>
+                
+                
                 	<a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
                     Delete
                 </a>
-                </li>
-                </ul>
+                
+                
                 <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" title="Block">
                     <i class="fa fa-flag"></i>
                 </a>-->
