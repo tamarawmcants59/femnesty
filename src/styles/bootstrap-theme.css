@@ -640,7 +640,7 @@ fieldset[disabled] .btn-danger.active {
 .navbar-right .dropdown-menu{
 	right: 0 !important;	
 	border:  none !important;
-	border-radius: 0 3px 3px 3px;
+	border-radius: 0 3px 3px 3px !important;
 	}
 }
 
@@ -2276,7 +2276,7 @@ footer {
     /* Firefox 18- */
     color: #fff;
 }
-.headerTopPart .navbar-nav > li > a{padding: 12px 15px;font-size: 12px; font-family: 'montserratmedium';}
+.headerTopPart .navbar-nav > li > a{padding: 12px 20px 15px 15px;font-size: 12px; font-family: 'montserratmedium';}
 .headerTopPart .navbar-nav.navbar-left > li:first-child > a{padding-left: 0}
 .user-account .dropdown-toggle{margin-top:5px}
 .user-account .dropdown-toggle{}
