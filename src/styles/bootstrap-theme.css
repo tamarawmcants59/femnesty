@@ -995,11 +995,11 @@ button{
 }
 
 .section h1 {
-    font-size: 52px;
+    font-size: 48px;
     position: relative;
     margin-bottom: 35px;
     padding-bottom: 35px;
-    line-height:60px;
+    line-height:56px;
     font-family: 'sanchezregular' !important;
 }
 
@@ -1014,7 +1014,7 @@ button{
 }
 
 .what-is-femnesty p {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 30px;
     
 }
@@ -1028,7 +1028,7 @@ button{
 }
 
 .article h2 {
-    font-size: 26px;
+    font-size: 36px;
     position: relative;
     margin-bottom: 25px;
     padding-bottom: 25px;
@@ -1076,7 +1076,7 @@ blockquote {
 
 blockquote p {
     color: #fff;
-    font-size: 36px;
+    font-size: 48px;
 }
 
 blockquote footer {
@@ -5352,4 +5352,10 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 }
 .sp-hover a:hover{
 	color: #1a1a1a !important;
+}
+.sp-hover2:hover{
+	background: none !important;
+}
+.sp-hover2 a:hover{
+	color: #e7e7e7 !important;
 }
