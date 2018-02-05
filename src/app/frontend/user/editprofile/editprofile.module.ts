@@ -8,6 +8,7 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../../components/shared.module";
 import { ApplicationPipes } from "../../../application-pipe.module";
 import { DateTimePickerModule } from 'ngx-datetime-picker';
+import { ImageCropperModule } from 'ngx-image-cropper'
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +25,8 @@ import { DateTimePickerModule } from 'ngx-datetime-picker';
         secondaryColour: '#bb1926', 
         tertiaryColour: '#ffffff'
     }),
-    DateTimePickerModule
+    DateTimePickerModule,
+    ImageCropperModule
   ],
   declarations: [
     EditprofileComponent

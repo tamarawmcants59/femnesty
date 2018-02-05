@@ -132,7 +132,7 @@
                                         </ul>
                                     </div>
                                     <div class="connections">
-                                        <h3 style="margin-top: 0px;">Join member to group</h3>
+                                        <!-- <h3 style="margin-top: 0px;">Join member to group</h3>
                                         <ul class="friend-box" *ngIf="userFrndList?.length > 0">
                                             <li class="friend-box-list" *ngFor="let joinFrnd of userFrndList;let i=index">
                                                 <div class="friend-boxImage">
@@ -146,11 +146,72 @@
                                                     </a>
                                                     <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary"
                                                         (click)="addGroupMember(joinFrnd.friend_id)">Add</button>
-                                                    <!--<button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary" (click)="inviteFrndAsGroupMember(joinFrnd.friend_id)">Add</button>-->
                                                     <button *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
                                                 </div>
                                             </li>
                                         </ul>
+                                        <div *ngIf="userFrndList?.length == 0">
+                                            <p>No member found.</p>
+                                        </div> -->
+                                        <h3 style="margin-top: 0px;">INVITE</h3>
+                                        <div class="row">
+                                            <div class="form-group co,l-md-12 col-sm-12">
+                                                <input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
+                                                    [(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
+                                            </div>
+                                        </div>
+                                        <h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length>0">FILTERED CONNECTIONS</h3>
+                                        <h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>
+                                        <ul class="friend-box" *ngIf="filetredFriendList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let joinFrnd of filetredFriendList;let i=index">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                        <h2>{{joinFrnd.name}}</h2>
+                                                    </a>
+                                                    <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary"
+                                                        (click)="addGroupMember(joinFrnd.friend_id)">INVITE</button>
+                                                    <button *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <h3 style="margin-top: 0px;">MEMBERS</h3>
+                                        <ul class="contn-box" *ngIf="groupMemberList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let friendData of groupMemberList">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+friendData?.profile_image+')'}" style="width:70px;height:75px;"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <h4>{{friendData.name}}</h4>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length==0 && !searchErrorMessage">SUGGESTED CONNECTIONS</h3>
+                                        <ul class="friend-box" *ngIf="userFrndList?.length > 0 && filetredFriendList.length==0 && !searchErrorMessage">
+                                            <li class="friend-box-list" *ngFor="let joinFrnd of userFrndList;let i=index">
+                                                <div class="friend-boxImage">
+                                                    <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                        <h2>{{joinFrnd.name}}</h2>
+                                                    </a>
+                                                    <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary"
+                                                        (click)="addGroupMember(joinFrnd.friend_id)">INVITE</button>
+                                                    <button *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                        <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
                                         <div *ngIf="userFrndList?.length == 0">
                                             <p>No member found.</p>
                                         </div>

@@ -17,9 +17,15 @@ export class EditprofileComponent implements OnInit {
   public aboutActiveTab: string = 'overview';
   public editAbtActiveTab: string = '';
   public showImgDive: boolean = false;
+  public showProfileCrop = false;
+  public showCoverCrop = false;
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
   public form: FormGroup;
+  imageChangedEvent: any = '';
+  coverImageChangedEvent:any='';
+  croppedImage: any = '';
+  coverCroppedImage:any='';
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
@@ -203,6 +209,8 @@ export class EditprofileComponent implements OnInit {
     }
   }
   openUpdateProModal(updateProfilePictureModal) {
+   this.showProfileCrop=false;
+   this.croppedImage='';
     this.modalService.open(updateProfilePictureModal);
   }
   public getUserDetails() {
@@ -218,9 +226,8 @@ export class EditprofileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
-            if(this.loginUserDet.dob)
-            {
-             this. loginUserDet.dateOfBirth=new Date(this.loginUserDet.dob);
+            if (this.loginUserDet.dob) {
+              this.loginUserDet.dateOfBirth = new Date(this.loginUserDet.dob);
             }
           } else {
 
@@ -288,32 +295,46 @@ export class EditprofileComponent implements OnInit {
 
   }
 
-  public fileChangeListener($event) {
-    this.showImgDive = true;
-    const image: any = new Image();
-    const file: File = $event.target.files[0];
-    const myReader: FileReader = new FileReader();
-    const that = this;
-    myReader.onloadend = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      that.cropper.setImage(image);
-      //console.log(that.cropper);
-    };
-    myReader.readAsDataURL(file);
+  openUpdateCoverProModal(updateCoverPictureModal)
+  {
+    this.showCoverCrop=false;
+    this.coverCroppedImage='';
+    this.modalService.open(updateCoverPictureModal);
   }
 
+  public fileChangeListener($event) {
+    // this.showImgDive = true;
+    // const image: any = new Image();
+    // const file: File = $event.target.files[0];
+    // const myReader: FileReader = new FileReader();
+    // const that = this;
+    // myReader.onloadend = function (loadEvent: any) {
+    //   image.src = loadEvent.target.result;
+    //   that.cropper.setImage(image);
+    // };
+    // myReader.readAsDataURL(file);
+    this.showProfileCrop = true;
+    this.imageChangedEvent = event;
+  }
+  imageCropped(image: string) {
+    this.croppedImage = image;
+  }
+  coverImageCropped(image: string) {
+    this.coverCroppedImage = image;
+  }
   public fileChangeListenerCover($event) {
-    this.showCoverImgDive = true;
-    const image: any = new Image();
-    const file: File = $event.target.files[0];
-    const myReader: FileReader = new FileReader();
-    const that = this;
-    myReader.onloadend = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      that.cropper.setImage(image);
-      //console.log(that.cropper);
-    };
-    myReader.readAsDataURL(file);
+    // this.showCoverImgDive = true;
+    // const image: any = new Image();
+    // const file: File = $event.target.files[0];
+    // const myReader: FileReader = new FileReader();
+    // const that = this;
+    // myReader.onloadend = function (loadEvent: any) {
+    //   image.src = loadEvent.target.result;
+    //   that.cropper.setImage(image);
+    // };
+    // myReader.readAsDataURL(file);
+    this.showCoverCrop = true;
+    this.coverImageChangedEvent = event;
   }
 
   public cropped(bounds: Bounds) {
@@ -321,42 +342,40 @@ export class EditprofileComponent implements OnInit {
   }
 
   public UploadPrfImg() {
-    //console.log(this.cropper.image.image);
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
+    // const uploadJsonData = {
+    //   "id": loginUserId,
+    //   "profile_image": this.cropper.image.image
+    // };
     const uploadJsonData = {
       "id": loginUserId,
-      "profile_image": this.cropper.image.image
+      "profile_image": this.croppedImage
     };
-    //console.log(uploadJsonData);
     this.dataService.updateImgService(uploadJsonData)
       .subscribe(
       data => {
         this.loading = false;
         this.showImgDive = false;
         this.getUserDetails();
-        //localStorage.setItem('profile_image', this.loginUserDet[0].image_url);
         window.location.reload();
-        //this.router.navigateByUrl('/user/profile');
-        //let details = data;
-        //localStorage.setItem('profile_image', details.UserDetails.image_url);
-        //this.successMsg='Data updated successfully';
-        //this.router.navigateByUrl('/user/profile');
       },
       error => {
         alert(error);
       });
-
-    //console.log(this.cropper.image);
   }
 
   public UploadCoverImg() {
     //console.log(this.cropper.image.image);
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
+    // const uploadJsonData = {
+    //   "id": loginUserId,
+    //   "cover_img": this.cropper.image.image
+    // };
     const uploadJsonData = {
       "id": loginUserId,
-      "cover_img": this.cropper.image.image
+      "cover_img": this.coverCroppedImage
     };
     //console.log(uploadJsonData);
     this.dataService.updateImgService(uploadJsonData)
@@ -416,10 +435,7 @@ export class EditprofileComponent implements OnInit {
     } else {
     }
   }
-  openProImageInput() {
-    console.log(document.getElementById('theFileInput'));
-    debugger;
-  }
+
   public acceptFriendRequest(request_id) {
     this.loading = true;
     this.reqSuccessMsg = '';
