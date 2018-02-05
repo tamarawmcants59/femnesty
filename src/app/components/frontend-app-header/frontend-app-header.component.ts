@@ -222,7 +222,9 @@ export class FrontendAppHeader {
 
     }
     else {
-
+      this.title = "Error!!!";
+      this.errorMsg = "Please give email and password to login";
+      this.modalService.open(messageModal);
     }
 
 
