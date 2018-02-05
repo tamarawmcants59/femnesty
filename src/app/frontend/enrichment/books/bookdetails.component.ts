@@ -94,12 +94,14 @@ export class BookdetailsComponent implements OnInit {
   public submitPost() {
     const userValue = this.postform.value;
     userValue.book_id = this.bookId;
-    
+    delete userValue.femnestymember;
     //console.log(userValue);
+    //exit;
     this._book_details.postRatingData(userValue).subscribe(data => {
       this.successMsg = 'You have successfully post the review';
       this.getRatingList();
       this.postform.reset();
+      this.loginUserDetails.first_name=this.loginUserDetails.first_name;
     },
       error => {
         alert(error);
