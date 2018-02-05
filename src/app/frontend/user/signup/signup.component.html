@@ -56,7 +56,7 @@
                     <ngx-date-picker class="" formControlName="dob" [disableInput]="true" placeholder="Date of Birth" (ngModelChange)="calculateAge($event)"
                         [max]="minDate"></ngx-date-picker>
                     <div class="text-danger" *ngIf="!validAge && dob.valid">
-                        Date of Birth must be set to 16 and above.
+                        Have to be 16 or above to become a member.
                     </div>
                 </div>
                 <div class="form-group col-md-6">

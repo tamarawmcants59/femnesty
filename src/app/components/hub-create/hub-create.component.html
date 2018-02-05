@@ -27,7 +27,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                  <strong>Success: </strong> {{successMsg}}
+                  {{successMsg}}
                 </div>
                 <!--<pre>{{groupList}}</pre>-->
                 <ul class="uilist connection-box" *ngIf="hubList?.length > 0">
@@ -65,10 +65,10 @@
       <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='create'}">
         <ul class="ulList edit-forms">
           <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-            <strong>Success: </strong> {{successMsg}}
+            {{successMsg}}
           </div>
           <div class="alert alert-danger" role="alert" *ngIf="(createErrorMsg != '')">
-            <strong>Error: </strong> {{createErrorMsg}}
+            {{createErrorMsg}}
           </div>
           <!-- <h3>Create Hub</h3> -->
           <h3>&nbsp;</h3>
