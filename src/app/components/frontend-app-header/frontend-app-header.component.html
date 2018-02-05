@@ -38,8 +38,8 @@
                	  </form>
                	   
                 </div>
-                <ul class="pull-right">
-						<li>LOGIN USING</li>
+                <ul class="pull-right right-social-login">
+						<li><span>LOGIN USING</span></li>
 						<li><a href=""><i class="fa fa-facebook"></i></a></li>
 						<li><a href=""><i class="fa fa-linkedin"></i></a></li>
 						<li><a href=""><i class="fa fa-twitter"></i></a></li>
@@ -119,6 +119,7 @@
         </nav>
     </div>
 </header>
+
 <header class="navbar-fixed-top" *ngIf="userloggedIn != 1  && getCurrentPageName !='/user/login'">
     <div class="header-top" [ngClass]="{'top-hide':HeaderTopCls === 'navbar-white'}">
         <div class="container-fluid">
