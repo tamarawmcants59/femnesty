@@ -7,7 +7,13 @@
 @media screen and (max-width:767px) {
 	.vid-details-section{margin-top: 170px;}
 	.vid-details-section .container .video-info{left: 15px}
+	
+	.inner-banner.vid-details-section{background-position: right center !important;}
 }
 .text-white{
 	font-size: 42px !important;
 }
+
+
+
+

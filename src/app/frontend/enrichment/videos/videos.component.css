@@ -1,4 +1,7 @@
 .section h1{font-size:52px}
 .motivational h4 {
-    font-size: 16px !important; min-height: 77px;
+    font-size: 16px !important;margin: 25px 0;
 }
+.video-pic {
+    height: 142px;}
+.inner-pages-holder p{margin: 0;}
