@@ -2276,7 +2276,7 @@ footer {
     /* Firefox 18- */
     color: #fff;
 }
-.headerTopPart .navbar-nav > li > a{padding: 12px 20px 15px 15px;font-size: 12px; font-family: 'montserratmedium';}
+.headerTopPart .navbar-nav > li > a{padding: 12px 20px 15px 15px;font-size: 12px; font-family: 'montserratmedium';letter-spacing: 1px;}
 .headerTopPart .navbar-nav.navbar-left > li:first-child > a{padding-left: 0}
 .user-account .dropdown-toggle{margin-top:5px}
 .user-account .dropdown-toggle{}
@@ -5262,9 +5262,9 @@ padding: 9px 15px;
 }
 
 header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
-    font-size: 10px !important;
+    /*font-size: 10px !important;*/
     display: block;
-    padding: 12px;
+    padding: 12px 20px;
     text-transform: none;
     letter-spacing: normal;
     color: #fff;
@@ -5359,3 +5359,28 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 .sp-hover2 a:hover{
 	color: #e7e7e7 !important;
 }
+
+/**************************soumen*************************/
+.alert-success, .alert-danger{background-color:none; background-image: none; text-shadow: none!important; border: 0}
+
+
+/*********************************************************/
+.navbar-nav > li > .dropdown-menu a{font-size:12px !important;font-family: 'sanchezregular';font-weight: normal !important;text-transform: none !important}
+
+
+.user-account .dropdown-menu li{margin: 0;width:100%;padding: 15px 20px;margin: 0;}
+.user-account .dropdown-menu li:last-child{border-bottom:0 !important;}
+.user-account .dropdown-menu li .media-profile img{width:60px;height:60px;border:1px solid #ffffff;border-radius:100%;object-fit:cover;}
+.user-account .dropdown-menu{min-width:290px;}
+.user-account .dropdown-menu li a{padding: 0;font-size:12px;line-height: 20px;text-transform: none;}
+.user-account .dropdown-toggle {margin-top: 9px;}
+
+.user-account .dropdown-menu li .media-profile h4{font-size: 16px;margin: 0}
+.user-account .dropdown-menu li .media-profile a{font-size: 9px !important;color:#8e8e8e;text-decoration:none;font-family: 'montserratmedium';}
+.navbar-nav > li > .dropdown-menu{border-radius: 0 0 5px 5px !important;}
+
+.headerTopPart .navbar-nav > li:hover > a{color: #e7e7e7 !important}
+
+.dropdown-menu a.dropdown-item:hover,.user-account .dropdown-menu li a:hover{color: #e7e7e7 !important}
+
+

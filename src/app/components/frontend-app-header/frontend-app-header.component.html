@@ -210,7 +210,7 @@
                         <li class="show-on-hover">
                             <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
-                                <span class="colorWhite">{{currentUserDet.first_name}} <i class="icon ion-chevron-down"></i></span>
+                                <span class="colorWhite"><!--{{currentUserDet.first_name}}--> <i class="icon ion-chevron-down"></i></span>
                             </a>
                             <a *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'" [routerLink]="['/company/profile']" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
@@ -221,19 +221,44 @@
                                     <img src="assets/images/down-arrow.png" alt="">
                                 </li>-->
                                 <li>
+                                   <div class="media media-profile">
+												  <div class="media-left">
+												    <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
+												      <img [src]="currentUserDet.image_url">
+												    </a>
+												  </div>
+												  <div class="media-body media-middle">
+												    <h4 class="media-heading">{{currentUserDet.first_name}}</h4>
+												    <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
+												     VIEW PROFILE
+												    </a>
+												  </div>
+												</div>
+                                 <!-- <a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
+                                  	<span class="userIcon"><img [src]="currentUserDet.image_url"></span>
+                                  </a>
                                 	<a *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'" [routerLink]="['/user/edit_profile/activity']" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="userIcon"><img [src]="currentUserDet.image_url"></span>
+                                
                                 <span class="colorWhite">{{currentUserDet.first_name}}</span>
-                            </a>
+                                VIEW PROFILE
+                               </a>-->
                                 </li>
-                                <li><a [routerLink]="['/user/edit_profile/activity']">My Profile</a></li>
+                                <li><!--<a [routerLink]="['/user/edit_profile/activity']">My Profile</a>-->
+												<a href="">Groups</a>
+												<a href="">Hubs</a>
+												<a href="">Company Page</a>                             	
+                                	
+                                </li>
                                 <!--<li><a [routerLink]="['/user/find_friends']">Find friends</a></li>
                                 <li><a [routerLink]="['/user/hubs']">Find hubs</a></li>-->
-                                <li class="divider"></li>
-                                <li><a [routerLink]="['/company']">Create company</a></li>
+                                
+                                <li><!--<a [routerLink]="['/company']">Create company</a>-->
+                                	<a href="">Edit Profile</a>
+											<a href="">Privacy Settings</a>
+                                </li>
                                 <!--<li><a [routerLink]="['/user/mycmplist']">List company</a></li>
                                 <li><a [routerLink]="['/user/login']">Company Login</a></li>-->
-                                <li class="divider"></li>
+                                
                                 <!--<li><a [routerLink]="['/user/mentor']">Join mentor</a></li>-->
                                 <li *ngIf="userloggedIn == 1"><a href="Javascript: void(0)" (click)="userLogout()">Logout</a></li>
                             </ul>
