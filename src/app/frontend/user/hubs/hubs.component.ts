@@ -17,12 +17,18 @@ declare var google: any;
 export class HubsComponent implements OnInit {
   public isloginUser = 1;
   public postform: FormGroup;
+  searchName: any;
   public loginUserId: any;
+  searchErrorMessage: any;
   public hubSlug = '';
+  private connectionsPageSize = 5;
+  public totalUninvitedUsers = [];
   public hubDetails = { id: '' };
   public groupPostDetData: object = {};
   public groupPostList = {};
   public uninvitedUsers = [];
+  filetredFriendList = [];
+  public IsShowTopViewMore = false;
   public loading = false;
   public address: any;
   public lat: 0;
@@ -251,20 +257,89 @@ export class HubsComponent implements OnInit {
     this.hubService.uninvitedUsers(attendData).subscribe(data => {
       if (data.Ack == 1) {
         console.log('uninvited', data.details);
-        this.uninvitedUsers = data.details;
-        this.uninvitedUsers.forEach((color: { first_name: string, id: string }) => {
+        // this.uninvitedUsers = data.details;
+        // this.uninvitedUsers.forEach((color: { first_name: string, id: string }) => {
+        //   console.log(color);
+        //   this.items.push({
+        //     id: color.id,
+        //     text: color.first_name
+        //   });
+        // });
+        this.uninvitedUsers = [];
+        if (data.details.length > 5) {
+          this.IsShowTopViewMore = true;
+          for (let i = 0; i < data.details.length; i++) {
+            if (this.uninvitedUsers.length < 5) {
+              this.uninvitedUsers.push(data.details[i]);
+            }
+          }
+
+        }
+        else {
+          this.IsShowTopViewMore = false;
+          this.uninvitedUsers = data.details;
+        }
+
+        this.totalUninvitedUsers = data.details;
+        this.totalUninvitedUsers.forEach((color: { first_name: string, id: string }) => {
           console.log(color);
           this.items.push({
             id: color.id,
             text: color.first_name
           });
         });
-        console.log('items', this.items);
       }
     },
       error => {
         console.log('Something went wrong!');
       });
+  }
+  viewMore() {
+    this.connectionsPageSize = this.connectionsPageSize + 5;
+    this.uninvitedUsers = [];
+    if (this.totalUninvitedUsers.length > this.connectionsPageSize) {
+      this.IsShowTopViewMore = true;
+    }
+    else {
+      this.IsShowTopViewMore = false;
+    }
+    for (let i = 0; i < this.connectionsPageSize; i++) {
+      if (this.totalUninvitedUsers[i]) {
+        this.uninvitedUsers.push(this.totalUninvitedUsers[i]);
+      }
+
+    }
+  }
+  searchConnections(value) {
+    if (value) {
+      this.IsShowTopViewMore = false;
+      value = value.toLowerCase();
+      let searchResult = this.totalUninvitedUsers.filter(item => {
+        if (item.name) {
+          if (item.name.toLowerCase().search(value) !== -1) {
+            return item;
+          }
+        }
+
+      });
+      if (searchResult && searchResult.length) {
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          this.filetredFriendList.push(searchResult[i]);
+        }
+      }
+      else {
+        this.IsShowTopViewMore = false;
+        this.filetredFriendList = [];
+        this.searchErrorMessage = "No record found.";
+      }
+    }
+    else {
+      this.IsShowTopViewMore = true;
+      this.filetredFriendList = [];
+      this.searchErrorMessage = '';
+    }
+
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
@@ -485,7 +560,6 @@ export class HubsComponent implements OnInit {
       }
       else {
         setTimeout(function () {
-          debugger;
           let autocomplete = new google.maps.places.Autocomplete(
     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
             { types: ['geocode'] });
@@ -509,20 +583,24 @@ export class HubsComponent implements OnInit {
       }
     }
   }
-  public sendInvites() {
+  public sendInvites(id) {
     const userValue = this.postform.value;
     userValue.hub_id = this.hubDetails.id;
-    console.log(userValue);
+    userValue.user_ids =[];
+    userValue.user_ids.push(id);
     this.hubService.sendInvites(userValue).subscribe(data => {
       if (data.Ack == 1) {
         this.successMsg = 'Request Sent Successfully';
-        this.postform.reset();
+        //this.postform.reset();
+        this.filetredFriendList = [];
+        this.searchName='';
         this.getUnivitedUsers();
       }
     },
       error => {
         console.log('Something went wrong!');
       });
+
   }
 
   public openBetaInfo(content) {

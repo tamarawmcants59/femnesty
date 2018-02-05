@@ -176,7 +176,7 @@
 													<span>Address:</span>
 													<input type="text" class="form-control-plaintext" value="" placeholder="Type anything and you will get a location *" id="autocomplete"
 													 #addressEdit>
-													  
+
 													<p class="info">
 														<span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
 								</div>
@@ -185,7 +185,7 @@
 								<div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
 									<strong>Success: </strong> {{successMsg}}
 								</div>
-								<div class="form-group row">
+								<!-- <div class="form-group row">
 									<div class="col-sm-12">
 										<form method="post" [formGroup]="postform" (ngSubmit)="sendInvites()" #createGroupForm="ngForm">
 											<div class="form-group">
@@ -193,10 +193,68 @@
 													<option value="{{ user.id }}" *ngFor="let user of uninvitedUsers">{{ user?.first_name }}</option>
 												</select>
 											</div>
-											<!-- <ng-select [multiple]="true" [(ngModel)]="friends" formControlName="user_ids" [items]="items" placeholder="No city selected"></ng-select> -->
+											
 
 											<input type="submit" value="Send" class="btn btn-primary">
 										</form>
+									</div>
+								</div> -->
+								<div class="connections">
+									
+									<h3 style="margin-top: 0px;">INVITE</h3>
+									<div class="row">
+										<div class="form-group co,l-md-12 col-sm-12">
+											<input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
+												[(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
+										</div>
+									</div>
+									<h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length>0">FILTERED CONNECTIONS</h3>
+									<h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>
+									<ul class="friend-box" *ngIf="filetredFriendList?.length > 0">
+										<li class="friend-box-list" *ngFor="let joinFrnd of filetredFriendList;let i=index">
+											<div class="friend-boxImage">
+												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
+													<div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
+												</a>
+											</div>
+											<div class="friend-boxText">
+												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
+													<h2>{{joinFrnd.first_name}}</h2>
+												</a>
+												<button type="button" class="btn btn-primary"
+													(click)="sendInvites(joinFrnd.id)">INVITE</button>
+											</div>
+										</li>
+									</ul>
+									<h3 style="margin-top: 0px;">ATTENDING</h3>
+									<ul class="contn-box" *ngIf="hubDetails.attenders && hubDetails.attenders.length > 0">
+										<li *ngFor="let user of hubDetails.attenders">
+											<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}">
+												<img src="{{user.profile_image}}" alt="{{user.name}}" title="{{user.name}}" class="img  rounded" style="width:20%"/>
+											</a>
+										</li>
+									</ul>
+									<h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length==0 && !searchErrorMessage">SUGGESTED CONNECTIONS</h3>
+									<ul class="friend-box" *ngIf="uninvitedUsers?.length > 0 && filetredFriendList.length==0 && !searchErrorMessage">
+										<li class="friend-box-list" *ngFor="let joinFrnd of uninvitedUsers;let i=index">
+											<div class="friend-boxImage">
+												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
+													<div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
+												</a>
+											</div>
+											<div class="friend-boxText">
+												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
+													<h2>{{joinFrnd.first_name}}</h2>
+												</a>
+												<button type="button" class="btn btn-primary"
+													(click)="sendInvites(joinFrnd.id)">INVITE</button>
+											</div>
+										</li>
+									</ul>
+
+									<a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
+									<div *ngIf="userFrndList?.length == 0">
+										<p>No member found.</p>
 									</div>
 								</div>
 							</div>

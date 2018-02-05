@@ -15,8 +15,8 @@ export class GrouplistComponent implements OnInit {
   public IsShowMyViewMore = false;
   private totalGroupList: any = [];
   public myGrpList = [];
-  private topListPageSize =5;
-  private myListPageSize =5;
+  private topListPageSize = 5;
+  private myListPageSize = 5;
   private totalMyGrpList: any = [];
   private totalListOfMyGroups: any = [];
   public latestArticles = [];
@@ -68,8 +68,8 @@ export class GrouplistComponent implements OnInit {
         if (eventObj.url.includes('/group/overview') || eventObj.url.includes('/group/find')) {
           self.errorMsg = '';
           self.myGrpList = [];
-          self.topListPageSize=5;
-          self.myListPageSize=5;
+          self.topListPageSize = 5;
+          self.myListPageSize = 5;
           self.getAllGroupList();
           self.getUserGroupList();
         }
@@ -132,8 +132,10 @@ export class GrouplistComponent implements OnInit {
   private getCatDetails(id, title) {
     //this.aboutActiveTab='find';
     this.filteredTitle = title.toUpperCase();
-    let data = { "category_id": id,   
-      "user_id": this.isloginUserId};
+    let data = {
+      "category_id": id,
+      "user_id": this.isloginUserId
+    };
     this.dataService.getGroupListByCategoryId(data).subscribe(data => {
       if (data.Ack == "1") {
         this.myGrpList = data.ActiveGroupList
@@ -182,23 +184,19 @@ export class GrouplistComponent implements OnInit {
     // this.IsShowTopViewMore = false;
     // this.groupList = [];
     // this.groupList = this.totalGroupList;
-    this.topListPageSize=this.topListPageSize+5;
-    this.groupList=[];
-    if(this.totalGroupList.length>this.topListPageSize)
-    {
-      this.IsShowTopViewMore=true;
+    this.topListPageSize = this.topListPageSize + 5;
+    this.groupList = [];
+    if (this.totalGroupList.length > this.topListPageSize) {
+      this.IsShowTopViewMore = true;
     }
-    else
-    {
-      this.IsShowTopViewMore=false;
+    else {
+      this.IsShowTopViewMore = false;
     }
-    for(let i=0;i<this.topListPageSize;i++)
-    {
-      if(this.totalGroupList[i])
-      {
+    for (let i = 0; i < this.topListPageSize; i++) {
+      if (this.totalGroupList[i]) {
         this.groupList.push(this.totalGroupList[i]);
       }
-      
+
     }
   }
 
@@ -240,23 +238,19 @@ export class GrouplistComponent implements OnInit {
     // this.IsShowMyViewMore = false;
     // this.totalMyGrpList = [];
     // this.totalMyGrpList = this.totalListOfMyGroups;
-    this.myListPageSize=this.myListPageSize+5;
-    this.totalMyGrpList=[];
-    if(this.totalListOfMyGroups.length>this.myListPageSize)
-    {
-      this.IsShowMyViewMore=true;
+    this.myListPageSize = this.myListPageSize + 5;
+    this.totalMyGrpList = [];
+    if (this.totalListOfMyGroups.length > this.myListPageSize) {
+      this.IsShowMyViewMore = true;
     }
-    else
-    {
-      this.IsShowMyViewMore=false;
+    else {
+      this.IsShowMyViewMore = false;
     }
-    for(let i=0;i<this.myListPageSize;i++)
-    {
-      if(this.totalListOfMyGroups[i])
-      {
+    for (let i = 0; i < this.myListPageSize; i++) {
+      if (this.totalListOfMyGroups[i]) {
         this.totalMyGrpList.push(this.totalListOfMyGroups[i]);
       }
-      
+
     }
   }
   public getLastFourArticle() {
@@ -301,7 +295,24 @@ export class GrouplistComponent implements OnInit {
           return item1;
         }
       });
-      this.myGrpList = myGrplistData;
+      this.myGrpList = [];
+      if (goodFriends) {
+        if (goodFriends.length) {
+          for (let i = 0; i < goodFriends.length; i++) {
+            this.myGrpList.push(goodFriends[i]);
+          }
+        }
+
+      }
+      if (myGrplistData) {
+        if (myGrplistData.length) {
+          for (let i = 0; i < myGrplistData.length; i++) {
+            this.myGrpList.push(myGrplistData[i]);
+          }
+        }
+
+      }
+      //this.myGrpList = myGrplistData;
 
       if (this.myGrpList.length > 0) {
         this.errorMsg = '';

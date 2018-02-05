@@ -16,14 +16,20 @@ export class GroupComponent implements OnInit {
   public groupDetailsData: any;
   public group_name: any;
   public short_desc: any;
+  public searchErrorMessage:any;
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
   public groupallMemberList = [];
   public userFrndList = [];
+  public totaluserFrndList = [];
   public requestGrpJoinList = [];
+  public filetredFriendList = [];
   public allgrupstatus: any;
+  searchName: any;
   qtd = {};
+  private connectionsPageSize = 5;
+  IsShowTopViewMore = false;
   private IsShow: boolean = false;
   //public userPostList =[];
   public activeTab: string = 'activity';
@@ -54,6 +60,35 @@ export class GroupComponent implements OnInit {
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
+  }
+  searchConnections(value) {
+    if (value) {
+      this.IsShowTopViewMore=false;
+      value = value.toLowerCase();
+      let searchResult = this.totaluserFrndList.filter(item => {
+        if (item.name.toLowerCase().search(value) !== -1) {
+          return item;
+        }
+      });
+      if (searchResult && searchResult.length) {
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          this.filetredFriendList.push(searchResult[i]);
+        }
+      }
+      else
+      {
+        this.IsShowTopViewMore=false;
+        this.filetredFriendList=[];
+        this.searchErrorMessage="No record found.";
+      }
+    }
+    else {
+      this.IsShowTopViewMore=true;
+      this.filetredFriendList = [];
+      this.searchErrorMessage='';
+    }
+
   }
   fileChangePost($event) {
     const image: any = new Image();
@@ -307,7 +342,23 @@ export class GroupComponent implements OnInit {
       this.dataService.getAllUserListforGrp(dataUserDet).subscribe(data => {
         //this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
-          this.userFrndList = data.groupMembersPrivate;
+          // this.userFrndList = data.groupMembersPrivate;
+          this.userFrndList = [];
+          if (data.groupMembersPrivate.length > 5) {
+            this.IsShowTopViewMore = true;
+            for (let i = 0; i < data.groupMembersPrivate.length; i++) {
+              if (this.userFrndList.length < 5) {
+                this.userFrndList.push(data.groupMembersPrivate[i]);
+              }
+            }
+
+          }
+          else {
+            this.IsShowTopViewMore = false;
+            this.userFrndList = data.groupMembersPrivate;
+          }
+
+          this.totaluserFrndList = data.groupMembersPrivate;
           //console.log(this.userFrndList);
         }
       }, error => {
@@ -315,7 +366,22 @@ export class GroupComponent implements OnInit {
       });
     }
   }
+  viewMore() {
+    this.connectionsPageSize = this.connectionsPageSize + 5;
+    this.userFrndList = [];
+    if (this.totaluserFrndList.length > this.connectionsPageSize) {
+      this.IsShowTopViewMore = true;
+    }
+    else {
+      this.IsShowTopViewMore = false;
+    }
+    for (let i = 0; i < this.connectionsPageSize; i++) {
+      if (this.totaluserFrndList[i]) {
+        this.userFrndList.push(this.totaluserFrndList[i]);
+      }
 
+    }
+  }
   public myOwnFrndListforGrp() {
     if (this.isloginUserId != '') {
       const dataUserDet = {
@@ -325,7 +391,23 @@ export class GroupComponent implements OnInit {
       //console.log(dataUserDet);
       this.dataService.getUserGrpFrndListById(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
-          this.userFrndList = data.groupMembersPrivate;
+          // this.userFrndList = data.groupMembersPrivate;
+          this.userFrndList = [];
+          if (data.groupMembersPrivate.length > 5) {
+            this.IsShowTopViewMore = true;
+            for (let i = 0; i < data.groupMembersPrivate.length; i++) {
+              if (this.userFrndList.length < 5) {
+                this.userFrndList.push(data.groupMembersPrivate[i]);
+              }
+            }
+
+          }
+          else {
+            this.IsShowTopViewMore = false;
+            this.userFrndList = data.groupMembersPrivate;
+          }
+
+          this.totaluserFrndList = data.groupMembersPrivate;
           //console.log(this.userFrndList);
         }
       }, error => {
@@ -386,6 +468,7 @@ export class GroupComponent implements OnInit {
         else {
           this.getGroupMemberList();
           this.checkMyFrndList();
+          this.filetredFriendList=[];
         }
 
         //this.successMsg = 'You have successfully send the request.';
