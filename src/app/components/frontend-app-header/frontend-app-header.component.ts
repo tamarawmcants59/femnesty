@@ -8,19 +8,25 @@ import { FrontendService } from "./frontend.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { UserService } from "../../frontend/user/user.service";
 //import { ChangeDetectorRef } from '@angular/core/src/change_detection/change_detector_ref';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'frontend-app-header',
   templateUrl: './frontend-app-header.component.html'
 })
 export class FrontendAppHeader {
   pageConData = [];
-
+  public loginForm: FormGroup;
   HeaderNavCls: string = '';
   HeaderTopCls: string = '';
   lastScrollTop: number = 100;
   chatHeads: any[];
+  successMsg: any;
+  errorMsg: any;
+  title: any;
+  public submitted: boolean = false;
+  loading = false;
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   public userloggedIn: string = '';
   public currentUserDet: Object = {};
@@ -31,8 +37,9 @@ export class FrontendAppHeader {
   public currentFireUserId: string = '';
   public getCurrentPageName: string = '';
   public show: boolean = false;
-  public articleArr =[];
-
+  public articleArr = [];
+  public email: any;
+  public password: any;
   constructor(
     private el: ElementRef,
     lc: NgZone,
@@ -44,9 +51,16 @@ export class FrontendAppHeader {
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private loginService: UserService,
+    private modalService: NgbModal
   ) {
-    
+    // this.loginForm = builder.group({
+    //   'email': ['', Validators.compose([Validators.required, Validators.email])],
+    //   'password': ['', Validators.compose([Validators.required, Validators.minLength(3)])]
+    // });
+    // this.email = this.loginForm.controls['email'];
+    // this.password = this.loginForm.controls['password'];
     this.afAuth.authState.do(user => {
       if (user) {
         this.currentFireUserId = user.uid;
@@ -110,8 +124,8 @@ export class FrontendAppHeader {
     //console.log(this.currentUserDet);
     //localStorage.removeItem("isLoggedIn");
 
-    if(this.userloggedIn == '1'){
-      let self=this;
+    if (this.userloggedIn == '1') {
+      let self = this;
       setInterval(function () {
         self.userNotiCountList();
       }, 5000)
@@ -166,7 +180,54 @@ export class FrontendAppHeader {
   ngOnChanges(): void {
     this.show = false;
   }
+  checkLogin(messageModal) {
+    if (this.email && this.password) {
+      if (this.validateEmail(this.email)) {
+        this.submitted = true;
+        this.loading = true;
+        const values = { email: this.email, password: this.password };
+        this.loginService.userLogin(values)
+          .subscribe(data => {
+            const details = data;
+            if (details.Ack === 1) {
+              localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
+              localStorage.setItem('isLoggedIn', '1');
+              localStorage.setItem('loginUserId', details.UserDetails.id);
+              localStorage.setItem('userName', details.UserDetails.first_name);
+              localStorage.setItem('profile_image', details.UserDetails.image_url);
+              if (details.UserDetails.user_type == 'CA' || details.UserDetails.user_type == 'CSA') {
+                this.router.navigateByUrl('/company/profile');
+              } else {
+                this.router.navigateByUrl('/social_home');
+              }
+              this.loading = false;
+            } else {
+              this.title = "Error!!!";
+              this.errorMsg = data.msg;
+              this.loading = false;
+              this.modalService.open(messageModal);
+            }
+          },
+          error => {
+            this.loading = false;
+          }
+          );
+      }
+      else {
+        this.title = "Error!!!";
+        this.errorMsg = "Please give valid email.";
+        this.modalService.open(messageModal);
+      }
 
+
+    }
+    else {
+
+    }
+
+
+
+  }
   getUnreadMessages() {
     const messages = this.db.collection('Messages', ref => {
       return ref.where('to_user_id', '==', this.loginUserId).where('is_read', '==', false);
@@ -196,13 +257,13 @@ export class FrontendAppHeader {
   }
 
   public getArticleList() {
-    this._service.getArticleData().subscribe(data=>{
-        let details=data;
-        //console.log(details);
-        if (details.Ack=="1") {
-            this.articleArr = details.ArticleCatList;
-        }
-      },
+    this._service.getArticleData().subscribe(data => {
+      let details = data;
+      //console.log(details);
+      if (details.Ack == "1") {
+        this.articleArr = details.ArticleCatList;
+      }
+    },
       error => {
         console.log('Something went wrong!');
       }
@@ -217,7 +278,7 @@ export class FrontendAppHeader {
       this._service.getUserNotiData(dataUserDet).subscribe(data => {
         if (data.Ack == "1") {
           this.userNotiCnt = data.Notificationcount;
-        }else{
+        } else {
           this.userNotiCnt = 0;
         }
       }, error => {
@@ -267,7 +328,10 @@ export class FrontendAppHeader {
   toggleCollapse() {
     this.show = !this.show;
   }
-
+  private validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
@@ -275,15 +339,15 @@ export class FrontendAppHeader {
         "id": parseInt(loginUserId)
       };
       this._service.getUserDetById(dataUserDet).subscribe(data => {
-          const details = data;
-          if (details.Ack == "1") {
-            this.currentUserDet = details.UserDetails[0];
-            //console.log(this.currentUserDet);
-          } 
-        },
+        const details = data;
+        if (details.Ack == "1") {
+          this.currentUserDet = details.UserDetails[0];
+          //console.log(this.currentUserDet);
+        }
+      },
         error => {
         }
-        );
+      );
     } else {
     }
 
