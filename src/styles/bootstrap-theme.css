@@ -5277,7 +5277,7 @@ padding: 9px 15px;
 header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a {
     /*font-size: 10px !important;*/
     display: block;
-    padding: 12px 20px;
+    padding: 12px 72px 12px 20px;
     text-transform: none;
     letter-spacing: normal;
     color: #fff;
@@ -5407,7 +5407,7 @@ header .dropdown-menu{min-width: 218px;}
 
 /*---------------------- 05-02-2018 --------------------------*/
 
-.btn-primary{
+.btn-primary,.navbar-right button{
 	outline: none !important;
 }
 
@@ -5433,6 +5433,7 @@ line-height: 31px;padding: 0;left:0}
 .right-social-login li span{line-height: 66px;font-size: 10px;font-family: 'montserratmedium';}
 .right-social-login li a i{display: block;width:30px;height:30px;line-height:30px !important;color: #c11b28;text-align: center;font-size: 20px;}
 .right-social-login li a{margin-top: 15px !important;display: block;}
+.alert-success, .alert-danger{background: none !important;background-image: none;box-shadow: none!important;border: 0;}
 
 
 
