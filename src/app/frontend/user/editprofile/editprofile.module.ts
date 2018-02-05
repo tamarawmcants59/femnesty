@@ -7,7 +7,7 @@ import { EditprofileRouting } from "./editprofile-routing";
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../../components/shared.module";
 import { ApplicationPipes } from "../../../application-pipe.module";
-
+import { DateTimePickerModule } from 'ngx-datetime-picker';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +23,8 @@ import { ApplicationPipes } from "../../../application-pipe.module";
         primaryColour: '#bb1926', 
         secondaryColour: '#bb1926', 
         tertiaryColour: '#ffffff'
-    })
+    }),
+    DateTimePickerModule
   ],
   declarations: [
     EditprofileComponent

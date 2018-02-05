@@ -15,6 +15,7 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import { ApplicationPipes } from "../application-pipe.module";
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { UserPrfrsidebarComponent } from './user-prfrsidebar/user-prfrsidebar.component';
+import { OtherUserPrfrsidebarComponent } from './othet-user-prfrsidebar/other-user-prfrsidebar.component';
 import { GroupLeftbarComponent } from './group-leftbar/group-leftbar.component';
 import { GroupRightbarComponent } from './group-rightbar/group-rightbar.component';
 import { CompanyRightbarComponent } from './company-rightbar/company-rightbar.component';
@@ -46,7 +47,7 @@ import { PostListnerService } from './../service/post.listner.service';
         HubCreateComponent,
        PopupmodalComponent,
        BetaRestrictionComponent,
-       
+       OtherUserPrfrsidebarComponent
     ],
     imports: [
         CommonModule,
@@ -76,7 +77,8 @@ import { PostListnerService } from './../service/post.listner.service';
         HubCreateComponent,
         PopupmodalComponent,
         Ng4GeoautocompleteModule,
-        BetaRestrictionComponent
+        BetaRestrictionComponent,
+        OtherUserPrfrsidebarComponent
     ],
     providers: [
         HubService,

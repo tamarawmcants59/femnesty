@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { UserService } from "../user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
@@ -26,20 +26,22 @@ export class EditprofileComponent implements OnInit {
   reqErrorMsg: string = '';
   reqSuccessMsg: string = '';
   userTabActiveStr: string = '';
+  public minDate = new Date();
+  public validAge = false;
   public loading = false;
   public loginUserDet: Object = {};
   public userPostList = [];
   public userFrndList = [];
-  public previousUrl:string;
-  public userRequestFrndList =[];
+  public previousUrl: string;
+  public userRequestFrndList = [];
 
   prfImageData: any;
   coverImageData: any;
   postImgData: any;
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
-  public groupPostDetData: object = { };
-  
+  public groupPostDetData: object = {};
+
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
@@ -103,6 +105,10 @@ export class EditprofileComponent implements OnInit {
         Validators.required,
         Validators.minLength(10)
       ]],
+      dob: ['', [
+        Validators.required,
+        Validators.minLength(10)
+      ]],
 			/*dob: ['', [
 			   Validators.required,
 			   Validators.minLength(3)
@@ -134,7 +140,7 @@ export class EditprofileComponent implements OnInit {
 
     });
     //console.log(this.cropper);
-    
+
     /*router.events.filter(event => event instanceof NavigationEnd).subscribe(e => {
       console.log('prev:', this.previousUrl);
         //this.previousUrl = e.url;
@@ -144,22 +150,36 @@ export class EditprofileComponent implements OnInit {
   ngOnInit() {
     //activeTab: string = 'activity';
     this.route.params.subscribe((params: Params) => {
-        this.userTabActiveStr = params['type'];
-        if(this.userTabActiveStr != ''){
-          this.activeTab=this.userTabActiveStr;
-        }else{
-          this.activeTab='activity';
-        }
+      this.userTabActiveStr = params['type'];
+      if (this.userTabActiveStr != '') {
+        this.activeTab = this.userTabActiveStr;
+      } else {
+        this.activeTab = 'activity';
+      }
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.groupPostDetData = {activitytype:'', activityid:''};
-    
+    this.groupPostDetData = { activitytype: '', activityid: '' };
+
     this.getUserDetails();
     this.getUserPostDetails();
     this.getConnectionList();
     this.getPendingFrndList();
   }
-
+  public calculateAge(birthday) {
+    var today = new Date();
+    var birthDate = new Date(birthday);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age >= 16) {
+      this.validAge = true;
+    }
+    else {
+      this.validAge = false;
+    }
+  }
   public getConnectionList() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
@@ -167,14 +187,14 @@ export class EditprofileComponent implements OnInit {
         "user_id": loginUserId
       };
       this.dataService.getUserFrndListById(dataUserDet).subscribe(data => {
-          const details = data;
-          //console.log(details);
-          if (details.Ack == "1") {
-            this.userFrndList = details.FriendListById;
-          } else {
+        const details = data;
+        //console.log(details);
+        if (details.Ack == "1") {
+          this.userFrndList = details.FriendListById;
+        } else {
 
-          }
-        },
+        }
+      },
         error => {
 
         });
@@ -184,7 +204,7 @@ export class EditprofileComponent implements OnInit {
 
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
-    localStorage.setItem("groupAdmin",loginUserId);
+    localStorage.setItem("groupAdmin", loginUserId);
     if (loginUserId != '') {
       const dataUserDet = {
         "id": parseInt(loginUserId)
@@ -216,18 +236,18 @@ export class EditprofileComponent implements OnInit {
         "login_id": loginUserId
       };
       this.dataService.getUserPostById(dataUserDet).subscribe(data => {
-          const details = data;
-          if (details.Ack == "1") {
-            this.userPostList = details.ActivePostByUser;
-            //console.log(this.userPostList);
-          } else {
+        const details = data;
+        if (details.Ack == "1") {
+          this.userPostList = details.ActivePostByUser;
+          //console.log(this.userPostList);
+        } else {
 
-          }
-        },
+        }
+      },
         error => {
 
         }
-        );
+      );
     }
   }
 
@@ -359,7 +379,7 @@ export class EditprofileComponent implements OnInit {
     this.errorMsg = '';
     this.aboutActiveTab = data;
   }
-  
+
   public editAboutToggleTab(data: any) {
     this.editAbtActiveTab = data;
     this.successMsg = '';
@@ -367,41 +387,41 @@ export class EditprofileComponent implements OnInit {
     //console.log(data);
   }
 
-  public getPendingFrndList(){
+  public getPendingFrndList() {
     const loginUserId = localStorage.getItem("loginUserId");
-    if(loginUserId!=''){
-        let dataUserDet ={
-          "user_id": loginUserId
-        };
-        this.dataService.getRequestFrndListById(dataUserDet)
+    if (loginUserId != '') {
+      let dataUserDet = {
+        "user_id": loginUserId
+      };
+      this.dataService.getRequestFrndListById(dataUserDet)
         .subscribe(data => {
-              let details=data;
-              if (details.Ack=="1") {
-                  this.userRequestFrndList = details.PendingFriendListById;
-              }
-          },
-          error => {
+          let details = data;
+          if (details.Ack == "1") {
+            this.userRequestFrndList = details.PendingFriendListById;
           }
-        ); 
-      }else{
-      }
+        },
+        error => {
+        }
+        );
+    } else {
+    }
   }
 
   public acceptFriendRequest(request_id) {
     this.loading = true;
-    this.reqSuccessMsg='';
-    this.reqErrorMsg='';
-    let requestJsonData={"id": request_id};
+    this.reqSuccessMsg = '';
+    this.reqErrorMsg = '';
+    let requestJsonData = { "id": request_id };
     this.dataService.acceptFrndRequest(requestJsonData)
       .subscribe(
-            data => {
-                this.loading = false;
-                if(data.Ack==1){
-                  this.reqSuccessMsg=data.msg;
-                  this.getPendingFrndList();
-                }else{
-                  //this.errorMsg='You have already send the friend request';
-                }
+      data => {
+        this.loading = false;
+        if (data.Ack == 1) {
+          this.reqSuccessMsg = data.msg;
+          this.getPendingFrndList();
+        } else {
+          //this.errorMsg='You have already send the friend request';
+        }
       },
       error => {
         alert(error);
@@ -409,22 +429,22 @@ export class EditprofileComponent implements OnInit {
   }
 
   public rejectFriendRequest(request_id) {
-      this.loading = true;
-      this.reqSuccessMsg='';
-      this.reqErrorMsg='';
-      let requestJsonData={"id": request_id};
-      this.dataService.rejectFrndRequest(requestJsonData).subscribe(data => {
-          this.loading = false;
-          if(data.Ack==1){
-            this.reqSuccessMsg=data.msg;
-            this.getPendingFrndList();
-          }else{
-            //this.errorMsg='You have already send the friend request';
-          }
-        },
-        error => {
-          alert(error);
-        });
+    this.loading = true;
+    this.reqSuccessMsg = '';
+    this.reqErrorMsg = '';
+    let requestJsonData = { "id": request_id };
+    this.dataService.rejectFrndRequest(requestJsonData).subscribe(data => {
+      this.loading = false;
+      if (data.Ack == 1) {
+        this.reqSuccessMsg = data.msg;
+        this.getPendingFrndList();
+      } else {
+        //this.errorMsg='You have already send the friend request';
+      }
+    },
+      error => {
+        alert(error);
+      });
   }
 
   /*public checkInputValue(values:Object,inputname):void {

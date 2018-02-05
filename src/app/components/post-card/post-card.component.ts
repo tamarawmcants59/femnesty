@@ -131,7 +131,6 @@ export class PostCardComponent implements OnInit {
   }
   confirmReport()
   {
-    debugger;
     let data={
       "id":this.reportPostId,
       "user_id":this.IsloginUserId

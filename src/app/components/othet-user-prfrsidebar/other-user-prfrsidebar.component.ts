@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../frontend/user/user.service";
 @Component({
-  selector: 'app-user-prfrsidebar',
-  templateUrl: './user-prfrsidebar.component.html',
-  styleUrls: ['./user-prfrsidebar.component.css']
+  selector: 'app-other-user-prfrsidebar',
+  templateUrl: './other-user-prfrsidebar.component.html',
+  styleUrls: ['./other-user-prfrsidebar.component.css']
 })
-export class UserPrfrsidebarComponent implements OnInit {
+export class OtherUserPrfrsidebarComponent implements OnInit {
   public loginUserId = "";
   public userImgList = [];
   public userGrpList = [];
@@ -16,7 +16,7 @@ export class UserPrfrsidebarComponent implements OnInit {
   constructor(
     private dataService: UserService
   ) {
-    this.loginUserId = localStorage.getItem("loginUserId");
+    this.loginUserId = localStorage.getItem("otherProfileId");
   }
 
   ngOnInit() {

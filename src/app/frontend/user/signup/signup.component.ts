@@ -29,11 +29,14 @@ export class SignupComponent implements OnInit {
   public agreetab: AbstractControl;
   public mobile_number: AbstractControl;
   public occupation: AbstractControl;
+  public dob: AbstractControl;
   public submitted: boolean = false;
   returnUrl: string;
   errorMsg: string = '';
+  public minDate = new Date();
   public loading = false;
   public checkEmailExist: boolean = false;
+  public validAge = false;
   public isLoggedIn: any;
   private socialUser: SocialUser;
   private loggedIn: boolean;
@@ -53,7 +56,8 @@ export class SignupComponent implements OnInit {
       'agreetab': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'cpassword': ['', Validators.compose([Validators.required])],
-      'username': ['', Validators.compose([Validators.required])]
+      'username': ['', Validators.compose([Validators.required])],
+      'dob': ['', Validators.compose([Validators.required])]
     });
 
     this.email = this.form.controls['email'];
@@ -64,6 +68,7 @@ export class SignupComponent implements OnInit {
     this.agreetab = this.form.controls['agreetab'];
     this.cpassword = this.form.controls['cpassword'];
     this.username = this.form.controls['username'];
+    this.dob = this.form.controls['dob'];
   }
 
   ngOnInit() {
@@ -80,7 +85,21 @@ export class SignupComponent implements OnInit {
     });
 
   }
-
+  public calculateAge(birthday) {
+    var today = new Date();
+    var birthDate = new Date(birthday);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age >= 16) {
+      this.validAge = true;
+    }
+    else {
+      this.validAge = false;
+    }
+  }
   public checkEmail(values: Object): void {
     if (values != '') {
       let signupCheckEmail = {
@@ -112,14 +131,16 @@ export class SignupComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     if (this.form.valid) {
-      //console.log(values);
+      const dateOfBirth = this.dob.value.getFullYear() + '-' + ('0' + (this.dob.value.getMonth() + 1)).slice(-2) + '-'
+        + ('0' + this.dob.value.getDate()).slice(-2);
       let signupJsonData = {
         "email": this.email.value.toString(),
         "txt_password": this.password.value.toString(),
         "name": this.name.value.toString(),
         "mobile_number": this.mobile_number.value.toString(),
         "occupation": this.occupation.value.toString(),
-        "username":this.username.value.toString()
+        "username":this.username.value.toString(),
+        'dob':dateOfBirth
       };
       this.dataService.userSignup(signupJsonData)
         .subscribe(data => {

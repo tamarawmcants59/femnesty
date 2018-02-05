@@ -183,6 +183,19 @@
                                                     <div class="text-danger pull-left" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
                                                 </div>
                                             </li>
+                                            <li>
+                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='dob'}">
+                                                    <div class="edit" (click)="editAboutToggleTab('dob')"></div>
+                                                    <h5>DATE OF BIRTH</h5>
+                                                    <p>{{loginUserDet.dob}}</p>
+                                                </div>
+                                                <div *ngIf="editAbtActiveTab=='dob'">
+                                                    <button class="check" type="submit"></button>
+                                                    <h5>DATE OF BIRTH</h5>
+                                                   <p> <ngx-date-picker class="" formControlName="dob" [(ngModel)]="loginUserDet.dob"  placeholder="Date of Birth" (ngModelChange)="calculateAge($event)" [max]="minDate" [disableInput]="true"></ngx-date-picker></p>
+                                                    <div class="text-danger pull-left" *ngIf="!validAge && !form.controls['dob'].valid && form.controls['mobile_number'].touched">  Date of Birth must be set to 16 and above. </div>
+                                                </div>
+                                            </li>
                                         </ul>
 									 </div>
 								  	<div *ngIf="aboutActiveTab=='contact_details'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='contact_details'}">
@@ -315,3 +328,4 @@
         </div>
     </div>
 </section>
+
