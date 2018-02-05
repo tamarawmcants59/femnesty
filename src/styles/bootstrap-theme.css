@@ -343,7 +343,6 @@ fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
     background-color: #bb1926;
     background-image: none;
-    border: none !important;
     outline: none !important;
 }
 
@@ -1457,10 +1456,11 @@ footer {
     
 }
 
-.books-tab .nav-tabs>li a:after {
+.books-tab .nav-tabs>li:after {
     content: "|";
-    position: absolute;
-    right: 0;
+    position: relative;
+    right: 5px;
+    
 }
 
 .books-tab .nav-tabs>li a:hover,
@@ -1469,7 +1469,7 @@ footer {
     border: none;
 }
 
-.books-tab .nav-tabs>li:last-child a:after {
+.books-tab .nav-tabs>li:last-child:after {
     display: none;
 }
 

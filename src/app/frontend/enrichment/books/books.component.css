@@ -5,8 +5,71 @@
 .books-wrap .book-item .book-pic a{display: block;width:100%; height:100%;}
 .books-wrap .book-item .book-pic a .book-img{display: block; background-size: cover !important; background-repeat: no-repeat !important; background-position: center center !important; width:100%; height:100%;}
 .books-wrap .book-item p{font-size:16px; font-weight: 500; margin-bottom: 5px;}
-             
+     .books-tab .nav-tabs li:hover{
+	 	background: none !important;
+	 	color: #000 !important;
+	 }
+.books-tab .nav-tabs > li a:hover, .books-tab .nav-tabs > li a:focus{
+	 	color:#000;
+} 
+.toolti {
+    display: inline;
+   
+}
 
+.toolti:hover {
+    color: #c00;
+    text-decoration: none;
+    
+}      
+.tooltips {
+    display: inline;
+    position: relative;
+    overflow: hidden;
+}
+
+.tooltips:hover {
+    color: #c00;
+    text-decoration: none;
+}
+
+
+
+.tooltips:hover:after {
+    background: #111;
+    background: #be1620;
+    bottom: 45px;
+    color: #fff;
+    content: attr(name);
+    display: block;
+    left: -115px;
+    padding: 15px;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 9800;
+    width: 320px;
+    height: auto;
+    white-space: pre-wrap;
+    border-radius: 0 !important;
+    font-size: 10px;
+}
+
+.tooltips:hover:before {
+    border: solid;
+    border-color: #111 transparent;
+    border-color: rgba(190,22,32,1) transparent;
+    border-width: .8em .8em 0 .8em;
+    bottom: 35px;
+    content: "";
+    display: block;
+    left: 2em;
+    position: absolute;
+    z-index: 9900;
+     
+}
+.nav-tabs > li > a{
+	border: none !important;
+}
 @media screen and (max-width:767px) {
 	.books-wrap .book-item{width:48%;}
 	.books-wrap .book-item .book-pic{height:500px;}
@@ -16,6 +79,7 @@
 	.books-wrap{margin-right:0; margin-left: 0}
 	.books-wrap .book-item{width:100%; margin-right:0; margin-left: 0}
 }
+
 
 /*tooltip-content{
 	border-top-color: #be1620;
@@ -33,3 +97,4 @@ box-shadow: none;
 border: none;
 border-radius: 0;
 }*/
+

@@ -21,11 +21,11 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active">
-                    <a [routerLink]="['/enrichment/books']" >All <span>({{booksCatData.length}})</span></a>
+                    <a class="toolti" [routerLink]="['/enrichment/books']" >All <span>({{booksCatData.length}})</span></a>
                 </li>
                 <li *ngFor="let catBook of booksCatListData">
-                    <a [routerLink]="['/enrichment/book_cat',catBook.slug]" tooltip="{{catBook.description}}" tooltipPlacement="top"> {{catBook.name}} <span>({{catBook.bookscount}})</span></a>
-                    <!-- <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="Hooray!"></a> -->
+                    <!--<a class="tooltips" [routerLink]="['/enrichment/book_cat',catBook.slug]" tooltip="{{catBook.description}}" tooltipPlacement="top"> {{catBook.name}} <span>({{catBook.bookscount}})</span></a>-->
+                    <a class="tooltips" [routerLink]="['/enrichment/book_cat',catBook.slug]" name="{{catBook.description}}"> {{catBook.name}} <span>({{catBook.bookscount}})</span></a>
                     <!-- <a [routerLink]="['/enrichment/book_cat',catBook.slug]" data-toggle="tooltip" data-placement="top" title="{{catBook.description}}" class="red-tooltip"> {{catBook.name}} <span>({{catBook.bookscount}})</span></a> -->
                 </li>
                 
