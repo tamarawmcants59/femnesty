@@ -1,7 +1,7 @@
 <footer >
     <div class="footer-top">
         <div class="container">
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-md-3 col-sm-6 pdlr">
                     <h4>Let’s Connect!</h4>
                 </div>
@@ -14,9 +14,10 @@
                 <div class="col-md-3 col-sm-6 pdlr">
                     <h4><i class="ion-log-in"></i> Sign In</h4>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div  class="col-md-3 col-sm-6 pdlr">
+                <h4>Let’s Connect!</h4>
                     <h5>ABOUT FEMNESTY</h5>
                      <!--<ul *ngFor="let cmslist of cms">
                         <li ><a [routerLink]="['/page/',cmslist.slug]" >{{cmslist.page_heading}}</a></li>
@@ -33,6 +34,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 pdlr">
+                <h4><i class="ion-email"></i> Email us</h4>
                     <h5>CONTRIBUTE</h5>
                     <ul>
                         <li><a [routerLink]="['/user/shareyourstory']">Share Your Story</a></li>
@@ -42,6 +44,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 pdlr">
+                <h4><i class="ion-ios-telephone"></i> Call Us</h4>
                     <h5>ARTICLES</h5>
                     <ul *ngIf="articleArr.length>0">
                         <li *ngFor="let artdata of articleArr;"><a [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a></li>
@@ -50,6 +53,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 pdlr">
+                <h4><i class="ion-log-in"></i> Sign In</h4>
                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                         <strong>Success!</strong> {{successMsg}}
                     </div>
