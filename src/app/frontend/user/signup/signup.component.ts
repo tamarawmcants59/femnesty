@@ -26,6 +26,8 @@ export class SignupComponent implements OnInit {
   public cpassword: AbstractControl;
   public name: AbstractControl;
   public username: AbstractControl;
+  public first_name:AbstractControl;
+  public last_name:AbstractControl;
   public agreetab: AbstractControl;
   public mobile_number: AbstractControl;
   public occupation: AbstractControl;
@@ -51,23 +53,25 @@ export class SignupComponent implements OnInit {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
-      'name': ['', Validators.compose([Validators.required])],
+      'first_name': ['', Validators.compose([Validators.required])],
+      'last_name': ['', Validators.compose([Validators.required])],
       'occupation': ['', Validators.compose([Validators.required])],
       'agreetab': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'cpassword': ['', Validators.compose([Validators.required])],
-      'username': ['', Validators.compose([Validators.required])],
       'dob': ['', Validators.compose([Validators.required])]
     });
 
     this.email = this.form.controls['email'];
     this.password = this.form.controls['password'];
     this.mobile_number = this.form.controls['mobile_number'];
-    this.name = this.form.controls['name'];
+    // this.name = this.form.controls['name'];
+    this.first_name=this.form.controls['first_name'];
+    this.last_name=this.form.controls['last_name'];
     this.occupation = this.form.controls['occupation'];
     this.agreetab = this.form.controls['agreetab'];
     this.cpassword = this.form.controls['cpassword'];
-    this.username = this.form.controls['username'];
+    // this.username = this.form.controls['username'];
     this.dob = this.form.controls['dob'];
   }
 
@@ -136,12 +140,12 @@ export class SignupComponent implements OnInit {
       let signupJsonData = {
         "email": this.email.value.toString(),
         "txt_password": this.password.value.toString(),
-        "name": this.name.value.toString(),
+        "name": this.first_name.value.toString()+" "+this.last_name.value.toString(),
         "mobile_number": this.mobile_number.value.toString(),
         "occupation": this.occupation.value.toString(),
-        "username":this.username.value.toString(),
         'dob':dateOfBirth
       };
+
       this.dataService.userSignup(signupJsonData)
         .subscribe(data => {
           let details = data;

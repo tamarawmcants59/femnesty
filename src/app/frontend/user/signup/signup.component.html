@@ -1,6 +1,7 @@
 <section class="sign-up-area">
     <div class="container">
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>        <div class="sign-form">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+        <div class="sign-form">
             <h2>Sign Up</h2>
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
                 <strong>Error!</strong> {{errorMsg}}
@@ -10,27 +11,39 @@
                 <!--<cuppa-oauth [authConfig]="config"></cuppa-oauth>-->
                 <ul class="social-link mt-30 text-center">
                     <li>
-                        <a (click)="signInWithFB()" class="fb-bg"><i class="ion-social-facebook"></i></a>
+                        <a (click)="signInWithFB()" class="fb-bg">
+                            <i class="ion-social-facebook"></i>
+                        </a>
                     </li>
                     <li>
-                        <a (click)="signInWithLinkedIN()" class="linked-bg"><i class="fa fa-linkedin"></i></a>
+                        <a (click)="signInWithLinkedIN()" class="linked-bg">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
                     </li>
                     <li>
-                        <a (click)="signInWithGoogle()" class="google-bg"><i class="fa fa-google"></i></a>
+                        <a (click)="signInWithGoogle()" class="google-bg">
+                            <i class="fa fa-google"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
-            <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">    
-                    <div class="form-group col-md-6">
+            <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">
+                <!-- <div class="form-group col-md-6">
                             <input type="text" placeholder="User Name" class="form-control" [formControl]="username">
                             <div class="text-danger" *ngIf="!username.valid && username.touched">
                                 Please enter user name.
                             </div>
-                        </div>
+                        </div> -->
                 <div class="form-group col-md-6">
-                    <input type="text" placeholder="Full Name" class="form-control" [formControl]="name">
-                    <div class="text-danger" *ngIf="!name.valid && name.touched">
-                        Please enter your full name.
+                    <input type="text" placeholder="First Name" class="form-control" [formControl]="first_name">
+                    <div class="text-danger" *ngIf="!first_name.valid && first_name.touched">
+                        Please enter your first name.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" placeholder="Last Name" class="form-control" [formControl]="last_name">
+                    <div class="text-danger" *ngIf="!last_name.valid && last_name.touched">
+                        Please enter your last name.
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -40,9 +53,10 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <ngx-date-picker class="" formControlName="dob"  [disableInput]="true" placeholder="Date of Birth" (ngModelChange)="calculateAge($event)" [max]="minDate"></ngx-date-picker>
+                    <ngx-date-picker class="" formControlName="dob" [disableInput]="true" placeholder="Date of Birth" (ngModelChange)="calculateAge($event)"
+                        [max]="minDate"></ngx-date-picker>
                     <div class="text-danger" *ngIf="!validAge && dob.valid">
-                        Date of Birth must be set to 16 and above. 
+                        Date of Birth must be set to 16 and above.
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -61,18 +75,22 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="password" placeholder="Password" name="password" validateEqual="cpassword" reverse="true" class="form-control" [formControl]="password">
+                    <input type="password" placeholder="Password" name="password" validateEqual="cpassword" reverse="true" class="form-control"
+                        [formControl]="password">
                     <div class="text-danger" *ngIf="!password.valid && password.touched">Password required.</div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="password" placeholder="Confirm Password" name="cpassword" validateEqual="password" reverse="false" class="form-control" [formControl]="cpassword">
+                    <input type="password" placeholder="Confirm Password" name="cpassword" validateEqual="password" reverse="false" class="form-control"
+                        [formControl]="cpassword">
                     <div class="text-danger" *ngIf="!cpassword.valid && cpassword.touched">Confirm password required and the passwords must match.</div>
                     <!--<div class="text-danger" *ngIf="cpassword.pristine">The passwords must match</div>-->
                 </div>
                 <div class="form-group col-md-12">
                     <p>
                         <input type="checkbox" id="test1" [formControl]="agreetab" />
-                        <label for="test1">I agree to the <a class="text-red" [routerLink]="['/page/terms-of-use']" target="_blank">Terms and Conditions</a></label>
+                        <label for="test1">I agree to the
+                            <a class="text-red" [routerLink]="['/page/terms-of-use']" target="_blank">Terms and Conditions</a>
+                        </label>
                     </p>
                     <div class="text-danger" *ngIf="!agreetab.valid">Please check terms and conditions.</div>
                 </div>
@@ -81,13 +99,13 @@
                 </div>
                 <div class="form-group col-md-12">
                     <p>
-                        <label>You have a account? <a class="text-red" [routerLink]="['/user/login']">Login</a></label>
+                        <label>You have a account?
+                            <a class="text-red" [routerLink]="['/user/login']">Login</a>
+                        </label>
                     </p>
                 </div>
             </form>
         </div>
-		  <a [routerLink]="['/']" class="btn btn-back" style="width: 220px;">BACK TO HOME</a>
+        <a [routerLink]="['/']" class="btn btn-back" style="width: 220px;">BACK TO HOME</a>
     </div>
-  </section>
-  
-  
+</section>

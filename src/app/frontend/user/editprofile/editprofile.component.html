@@ -27,7 +27,10 @@
                             <div class="inner-bg">
                                 <div class="icon-change" id="clickableLiElement">
                                     <i class="fa fa-camera"></i>
-                                    <div class="txt">Update Profile <br> Picture</div>
+                                    <!-- <div class="txt" (click)="openUpdateProModal(updateProfilePictureModal)">Update Profile
+                                        <br> Picture</div> -->
+                                        <div class="txt">Update Profile
+                                            <br> Picture</div>
                                     <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
                                 </div>
                             </div>
@@ -62,10 +65,18 @@
                     </div>
                     <div class="tabPart">
                         <ul class="nav nav-pills">
-                            <li [ngClass]="{'active' : activeTab=='activity'}"><a (click)="toggleTab('activity')">Activity</a></li>
-                            <li [ngClass]="{'active' : activeTab=='about'}"><a (click)="toggleTab('about')">About</a></li>
-                            <li [ngClass]="{'active' : activeTab=='connections'}"><a (click)="toggleTab('connections')">Connections</a></li>
-                            <li><a [routerLink]="['/user/find_friends']">Invite</a></li>
+                            <li [ngClass]="{'active' : activeTab=='activity'}">
+                                <a (click)="toggleTab('activity')">Activity</a>
+                            </li>
+                            <li [ngClass]="{'active' : activeTab=='about'}">
+                                <a (click)="toggleTab('about')">About</a>
+                            </li>
+                            <li [ngClass]="{'active' : activeTab=='connections'}">
+                                <a (click)="toggleTab('connections')">Connections</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="['/user/find_friends']">Invite</a>
+                            </li>
                             <!-- <li [ngClass]="{'active' : activeTab=='group'}"><a (click)="toggleTab('group')">Group</a></li> -->
                         </ul>
                         <div class="tab-content">
@@ -75,7 +86,7 @@
                                     <div *ngFor="let postData of userPostList">
                                         <app-post-card [postData]="postData"></app-post-card>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="likePart" *ngIf="userPostList?.length == 0">
                                     <div class="row">
@@ -90,201 +101,228 @@
                                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                                     <strong>Success: </strong> {{successMsg}}
                                 </div>
-                            <div class="new-tabs">
-                           	 	<ul class="nav nav-tabs">
-  									<li [ngClass]="{'active' : aboutActiveTab=='overview'}">
-                                          <a (click)="aboutToggleTab('overview')">PROFILE DETAILS</a>
-                                    </li>
-  									<li [ngClass]="{'active' : aboutActiveTab=='privacy_setting'}">
-                                          <a (click)="aboutToggleTab('privacy_setting')">PRIVACY SETTINGS</a>
-                                    </li>
-  									<li [ngClass]="{'active' : aboutActiveTab=='contact_details'}">
-                                          <a (click)="aboutToggleTab('contact_details')">CONTACT DETAILS</a>
-                                    </li>
-								</ul>
-                                                              
-								<div class="tab-content">
-                                    <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
-                                    <div *ngIf="aboutActiveTab=='overview'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
-                                        <ul>
-    										<li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='first_name'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('first_name')"></div>
-                                                    <h5>FIRST NAME</h5>
-                                                    <p>{{loginUserDet.first_name}}</p>
-                                                </div>
-    										    <div *ngIf="editAbtActiveTab=='first_name'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>FIRST NAME</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name" placeholder="Enter your first name"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
-                                                </div>
-    										</li>
-											<li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='last_name'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('last_name')"></div>
-                                                    <h5>LAST NAME</h5>
-                                                    <p>{{loginUserDet.last_name}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='last_name'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>LAST NAME</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name" placeholder="Enter your last name"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
-                                                </div>
-    										</li>
-    										<li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='occupation'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('occupation')"></div>
-                                                    <h5>OCCUPATION</h5>
-                                                    <p>{{loginUserDet.occupation}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='occupation'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>OCCUPATION</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation" placeholder="Enter your occupation"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='bio'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('bio')"></div>
-                                                    <h5>ABOUT YOURSELF</h5>
-                                                    <p>{{loginUserDet.bio}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='bio'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>ABOUT YOURSELF</h5>
-                                                    <P>
-                                                        <textarea class="form-control-plaintext" [(ngModel)]="loginUserDet.bio" formControlName="bio" style="width: 90%;" placeholder="Enter about yourself"></textarea>
-                                                    </P>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                <div class="new-tabs">
+                                    <ul class="nav nav-tabs">
+                                        <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+                                            <a (click)="aboutToggleTab('overview')">PROFILE DETAILS</a>
+                                        </li>
+                                        <li [ngClass]="{'active' : aboutActiveTab=='privacy_setting'}">
+                                            <a (click)="aboutToggleTab('privacy_setting')">PRIVACY SETTINGS</a>
+                                        </li>
+                                        <li [ngClass]="{'active' : aboutActiveTab=='contact_details'}">
+                                            <a (click)="aboutToggleTab('contact_details')">CONTACT DETAILS</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
+                                            <div *ngIf="aboutActiveTab=='overview'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                <ul>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='first_name'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('first_name')"></div>
+                                                            <h5>FIRST NAME</h5>
+                                                            <p>{{loginUserDet.first_name}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='first_name'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>FIRST NAME</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name" placeholder="Enter your first name">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='last_name'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('last_name')"></div>
+                                                            <h5>LAST NAME</h5>
+                                                            <p>{{loginUserDet.last_name}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='last_name'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>LAST NAME</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name" placeholder="Enter your last name">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='occupation'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('occupation')"></div>
+                                                            <h5>OCCUPATION</h5>
+                                                            <p>{{loginUserDet.occupation}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='occupation'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>OCCUPATION</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation" placeholder="Enter your occupation">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='bio'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('bio')"></div>
+                                                            <h5>ABOUT YOURSELF</h5>
+                                                            <p>{{loginUserDet.bio}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='bio'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>ABOUT YOURSELF</h5>
+                                                            <P>
+                                                                <textarea class="form-control-plaintext" [(ngModel)]="loginUserDet.bio" formControlName="bio" style="width: 90%;" placeholder="Enter about yourself"></textarea>
+                                                            </P>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div *ngIf="aboutActiveTab=='privacy_setting'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='privacy_setting'}">
+                                                <ul>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='email'}">
+                                                            <h5>EMAIL</h5>
+                                                            <p>{{loginUserDet.email}}</p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='mobile_number'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('mobile_number')"></div>
+                                                            <h5>MOBILE NUMBER</h5>
+                                                            <p>{{loginUserDet.mobile_number}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='mobile_number'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>MOBILE NUMBER</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number"
+                                                                    placeholder="Enter your mobile number">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='dob'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('dob')"></div>
+                                                            <h5>DATE OF BIRTH</h5>
+                                                            <p>{{loginUserDet.dob}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='dob'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>DATE OF BIRTH</h5>
+                                                            <p>
+                                                                <ngx-date-picker class="" formControlName="dob" [(ngModel)]="loginUserDet.dateOfBirth" placeholder="Date of Birth" (ngModelChange)="calculateAge($event)"
+                                                                    [max]="minDate" [disableInput]="true" ></ngx-date-picker>
+                                                            </p>
+                                                            <div class="text-danger pull-left" *ngIf="!validAge && form.controls['dob'].valid">
+                                                                Date of Birth must be set to 16 and above. </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div *ngIf="aboutActiveTab=='contact_details'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='contact_details'}">
+                                                <ul>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='state'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('state')"></div>
+                                                            <h5>STATE NAME</h5>
+                                                            <p>{{loginUserDet.state}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='state'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>STATE NAME</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.state" formControlName="state" placeholder="Enter your state name">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='city'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('city')"></div>
+                                                            <h5>CITY NAME</h5>
+                                                            <p>{{loginUserDet.city}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='city'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>CITY NAME</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.city" formControlName="city" placeholder="Enter your city name">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='address'}">
+                                                            <div class="edit" (click)="editAboutToggleTab('address')"></div>
+                                                            <h5>ADDRESS</h5>
+                                                            <p>{{loginUserDet.address}}</p>
+                                                        </div>
+                                                        <div *ngIf="editAbtActiveTab=='address'">
+                                                            <button class="check" type="submit"></button>
+                                                            <h5>ADDRESS</h5>
+                                                            <P>
+                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address" placeholder="Enter your address">
+                                                            </P>
+                                                            <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
                                     </div>
-									 <div *ngIf="aboutActiveTab=='privacy_setting'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='privacy_setting'}">
-									    <ul>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='email'}">
-                                                    <h5>EMAIL</h5>
-                                                    <p>{{loginUserDet.email}}</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='mobile_number'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('mobile_number')"></div>
-                                                    <h5>MOBILE NUMBER</h5>
-                                                    <p>{{loginUserDet.mobile_number}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='mobile_number'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>MOBILE NUMBER</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.mobile_number" formControlName="mobile_number" placeholder="Enter your mobile number"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['mobile_number'].valid && form.controls['mobile_number'].touched">Mobile No Required</div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='dob'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('dob')"></div>
-                                                    <h5>DATE OF BIRTH</h5>
-                                                    <p>{{loginUserDet.dob}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='dob'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>DATE OF BIRTH</h5>
-                                                   <p> <ngx-date-picker class="" formControlName="dob" [(ngModel)]="loginUserDet.dob"  placeholder="Date of Birth" (ngModelChange)="calculateAge($event)" [max]="minDate" [disableInput]="true"></ngx-date-picker></p>
-                                                    <div class="text-danger pull-left" *ngIf="!validAge && !form.controls['dob'].valid && form.controls['mobile_number'].touched">  Date of Birth must be set to 16 and above. </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-									 </div>
-								  	<div *ngIf="aboutActiveTab=='contact_details'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='contact_details'}">
-								   		<ul>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='state'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('state')"></div>
-                                                    <h5>STATE NAME</h5>
-                                                    <p>{{loginUserDet.state}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='state'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>STATE NAME</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.state" formControlName="state" placeholder="Enter your state name"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['state'].valid && form.controls['state'].touched">State Name Required</div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='city'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('city')"></div>
-                                                    <h5>CITY NAME</h5>
-                                                    <p>{{loginUserDet.city}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='city'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>CITY NAME</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.city" formControlName="city" placeholder="Enter your city name"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City Name Required</div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='address'}">
-                                                    <div class="edit" (click)="editAboutToggleTab('address')"></div>
-                                                    <h5>ADDRESS</h5>
-                                                    <p>{{loginUserDet.address}}</p>
-                                                </div>
-                                                <div *ngIf="editAbtActiveTab=='address'">
-                                                    <button class="check" type="submit"></button>
-                                                    <h5>ADDRESS</h5>
-                                                    <P><input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address" placeholder="Enter your address"></P>
-                                                    <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    </form>  
                                 </div>
-                            </div>
                             </div>
                             <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
                                 <div class="connectionsPart">
                                     <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
                                         <div class="row" *ngIf="(reqSuccessMsg != '')">
                                             <div class="alert alert-success" role="alert" *ngIf="(reqSuccessMsg != '')">
-                                                    {{reqSuccessMsg}}
+                                                {{reqSuccessMsg}}
                                             </div>
                                         </div>
                                         <div class="row" *ngIf="(reqErrorMsg != '')">
                                             <div class="alert alert-danger" role="alert" *ngIf="(reqErrorMsg != '')">
-                                                    {{reqErrorMsg}}
+                                                {{reqErrorMsg}}
                                             </div>
                                         </div>
                                         <h2 *ngIf="userRequestFrndList?.length > 0">Friend Requests</h2>
                                         <ul class="contn-box" *ngIf="userRequestFrndList?.length > 0">
                                             <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
-                                                    <div class="friend-boxImage">
+                                                <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',friendData.display_name]">
                                                         <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
                                                     </a>
-                                                    </div>
-                                                    <div class="friend-boxText">
-                                                        <h4>{{friendData.name}}</h4>
-                                                        <p>{{friendData.bio | limitTo : 30}}</p>
-                                                    </div>
-                                                    <div class="sendmsg">
-                                                        <a (click)="acceptFriendRequest(friendData.id)"><span><img alt="" src="assets/images/check.png"></span>&nbsp;&nbsp;ACCEPT</a>
-                                                        <a (click)="rejectFriendRequest(friendData.id)"><span><img alt="" src="assets/images/cancel.png"></span>&nbsp;&nbsp;IGNORE</a>
-                                                    </div>
-                                                    <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
-                                                </li>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <h4>{{friendData.name}}</h4>
+                                                    <p>{{friendData.bio | limitTo : 30}}</p>
+                                                </div>
+                                                <div class="sendmsg">
+                                                    <a (click)="acceptFriendRequest(friendData.id)">
+                                                        <span>
+                                                            <img alt="" src="assets/images/check.png">
+                                                        </span>&nbsp;&nbsp;ACCEPT</a>
+                                                    <a (click)="rejectFriendRequest(friendData.id)">
+                                                        <span>
+                                                            <img alt="" src="assets/images/cancel.png">
+                                                        </span>&nbsp;&nbsp;IGNORE</a>
+                                                </div>
+                                                <div class="dwn-arrow">
+                                                    <i class="icon ion-chevron-down"></i>
+                                                </div>
+                                            </li>
                                         </ul>
-                                    </div>    
+                                    </div>
                                     <h2>Friends</h2>
                                     <ul class="contn-box" *ngIf="userFrndList?.length > 0">
                                         <li class="friend-box-list" *ngFor="let friendData of userFrndList">
                                             <div class="friend-boxImage">
-	                                            <a [routerLink]="['/user/profile',friendData.display_name]">
-	                                                <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-	                                            </a>
+                                                <a [routerLink]="['/user/profile',friendData.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                </a>
                                             </div>
                                             <div class="friend-boxText">
                                                 <h4>{{friendData.name}}</h4>
@@ -292,9 +330,14 @@
                                                 <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p>
                                             </div>
                                             <div class="sendmsg">
-                                            	<a [routerLink]="['/user/chat',friendData.friend_id]"><span><img src="assets/images/send-msg.png" alt=""></span> SEND MESSAGE </a>
+                                                <a [routerLink]="['/user/chat',friendData.friend_id]">
+                                                    <span>
+                                                        <img src="assets/images/send-msg.png" alt="">
+                                                    </span> SEND MESSAGE </a>
                                             </div>
-                                            <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
+                                            <div class="dwn-arrow">
+                                                <i class="icon ion-chevron-down"></i>
+                                            </div>
                                         </li>
                                     </ul>
 
@@ -314,7 +357,7 @@
                                 <div class="connectionsPart">
                                     <!--<h2>Groups</h2>-->
                                     <div class="connections">
-                                        <app-group-create></app-group-create> 
+                                        <app-group-create></app-group-create>
                                     </div>
                                 </div>
                             </div>
@@ -329,3 +372,41 @@
     </div>
 </section>
 
+<ng-template #updateProfilePictureModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Change Image</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="img result" *ngIf="!prfImageData.image">
+            <img [src]="loginUserDet.image_url" style="width:100%; height:100%">
+        </div>
+        <div class="img result" *ngIf="prfImageData.image">
+            <img [src]="prfImageData.image" style="width:100%; height:100%">
+
+
+        </div>
+        <div class="col-md-12" *ngIf="showImgDive">
+            <div class="col-md-12" *ngIf="prfImageData.image" style="padding-bottom:10px;">
+                <div class="col-md-4" style="padding-top: 90px;">
+                    <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
+                </div>
+            </div>
+            <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper>
+        </div>
+        <div class="inner-bg">
+            <div class="icon-change">
+                <div class=" btn modal-btn-black btn-default" style="float:right;">Update Image
+                    <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmPostDelete(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>

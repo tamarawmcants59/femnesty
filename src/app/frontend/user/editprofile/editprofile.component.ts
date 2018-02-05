@@ -3,7 +3,7 @@ import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from
 import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { UserService } from "../user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-editprofile',
@@ -29,7 +29,7 @@ export class EditprofileComponent implements OnInit {
   public minDate = new Date();
   public validAge = false;
   public loading = false;
-  public loginUserDet: Object = {};
+  public loginUserDet: any;
   public userPostList = [];
   public userFrndList = [];
   public previousUrl: string;
@@ -46,7 +46,8 @@ export class EditprofileComponent implements OnInit {
     private builder: FormBuilder,
     private dataService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal,
   ) {
     //super();
     const getUserDet = localStorage.getItem("currentUser");
@@ -201,7 +202,9 @@ export class EditprofileComponent implements OnInit {
     } else {
     }
   }
-
+  openUpdateProModal(updateProfilePictureModal) {
+    this.modalService.open(updateProfilePictureModal);
+  }
   public getUserDetails() {
     const loginUserId = localStorage.getItem("loginUserId");
     localStorage.setItem("groupAdmin", loginUserId);
@@ -215,6 +218,10 @@ export class EditprofileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
+            if(this.loginUserDet.dob)
+            {
+             this. loginUserDet.dateOfBirth=new Date(this.loginUserDet.dob);
+            }
           } else {
 
           }
@@ -257,7 +264,9 @@ export class EditprofileComponent implements OnInit {
     const result = {},
       userValue = this.form.value;
     userValue.id = loginUserId;
-    //console.log(userValue);
+    const dateOfBirth = this.form.value.dob.getFullYear() + '-' + ('0' + (this.form.value.dob.getMonth() + 1)).slice(-2) + '-'
+      + ('0' + this.form.value.dob.getDate()).slice(-2);
+    userValue.dob = dateOfBirth;
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
@@ -269,6 +278,7 @@ export class EditprofileComponent implements OnInit {
         localStorage.setItem('profile_image', details.UserDetails.image_url);
         this.loading = false;
         this.successMsg = 'Data updated successfully';
+        this.loginUserDet.dob = dateOfBirth;
         //this.router.navigateByUrl('/user/profile');
         this.router.navigate(['/user/edit_profile/about']);
       },
@@ -406,7 +416,10 @@ export class EditprofileComponent implements OnInit {
     } else {
     }
   }
-
+  openProImageInput() {
+    console.log(document.getElementById('theFileInput'));
+    debugger;
+  }
   public acceptFriendRequest(request_id) {
     this.loading = true;
     this.reqSuccessMsg = '';
