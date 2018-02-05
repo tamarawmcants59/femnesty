@@ -234,6 +234,9 @@
 											</a>
 										</li>
 									</ul>
+									<div *ngIf="hubDetails.attenders && hubDetails.attenders.length == 0">
+										<p>No attenders found.</p>
+									</div>
 									<h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length==0 && !searchErrorMessage">SUGGESTED CONNECTIONS</h3>
 									<ul class="friend-box" *ngIf="uninvitedUsers?.length > 0 && filetredFriendList.length==0 && !searchErrorMessage">
 										<li class="friend-box-list" *ngFor="let joinFrnd of uninvitedUsers;let i=index">
@@ -253,9 +256,7 @@
 									</ul>
 
 									<a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
-									<div *ngIf="userFrndList?.length == 0">
-										<p>No member found.</p>
-									</div>
+									
 								</div>
 							</div>
 						</div>
