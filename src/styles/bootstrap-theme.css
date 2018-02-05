@@ -5397,8 +5397,8 @@ header .dropdown-menu{min-width: 218px;}
 .dropdown-menu a.dropdown-item:hover,.user-account .dropdown-menu li a:hover{color: #d4d4d4 !important}
 .header-top ul li i.ion-arrow-down-b{font-size:6.2px !important;opacity: .5;}
 
-.before-login-home .nav.navbar-nav.navbar-right a{padding-right: 26px;}
-.before-login-home .nav.navbar-nav.navbar-right li:hover a{color: #fff !important}
+.before-login-home .nav.navbar-nav.navbar-right a{padding-right: 26px;color: #000}
+.before-login-home .nav.navbar-nav.navbar-right li.nav-item:hover a,.before-login-home .nav.navbar-nav.navbar-right li.nav-item:focus a{color: #fff !important}
 
 
 @media screen and (max-width:767px) {
@@ -5413,8 +5413,29 @@ header .dropdown-menu{min-width: 218px;}
 
 
 /******************login-header**********************/
-.login-head-form li .form-group{float:left;}
-.login-head-form li .form-group{}
+.login-head-form li .form-group{float:left;margin-right:10px;}
+.login-head-form li .form-group span{line-height: 34px;font-size: 10px;font-family: 'montserratmedium';}
+.login-head-form li .form-group button{position: relative;
+border: 2px solid #fff;
+top: 0;
+color: #fff;
+width: 115px;
+font-size: 10px !important;
+height: 32px;
+line-height: 31px;padding: 0;left:0}
+.login-head-form li .form-group input{height: 32px;left:0;width:208px;}
+.login-head-form li .form-group a{color: #fff;text-decoration:none;line-height: 34px;opacity: .30;font-family: 'montserratmedium';margin: 0 20px;}
+.login-head-form li .form-group a:hover{opacity: 1;color: #fff !important;}
+.login-head-form li:last-child{border-right:0}
+.login-head-form li.form-search{padding: 16px 18px;}
+
+.right-social-login li{margin-right: 0 !important;margin-left: 10px !important;}
+.right-social-login li span{line-height: 66px;font-size: 10px;font-family: 'montserratmedium';}
+.right-social-login li a i{display: block;width:30px;height:30px;line-height:30px !important;color: #c11b28;text-align: center;font-size: 20px;}
+.right-social-login li a{margin-top: 15px !important;display: block;}
+
+
+
 
 /*****************************************/
 
