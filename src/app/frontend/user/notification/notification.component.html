@@ -12,7 +12,7 @@
                 </div><br/>
                 <div class="notification-wrap">
                       <ul>
-                          <li *ngFor="let notiData of userNotiList">
+                          <li *ngFor="let notiData of userNotiList" [ngClass]="{'unread' : notiData.is_view=='0'}">
                               <div class="image-area">
                                   <!--<a [routerLink]="['/user/profile',notiData.display_name]">
                                     <div class="noti-image" [ngStyle]="{'background-image':'url('+notiData.profile_image+')'}"></div>

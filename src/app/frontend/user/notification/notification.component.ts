@@ -40,7 +40,7 @@ export class NotificationComponent implements OnInit {
                 });
               }
             }
-            //console.log(this.userNotiList);
+            console.log(this.userNotiList);
           }
         },
         error => {
