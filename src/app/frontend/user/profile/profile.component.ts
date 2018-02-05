@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
             this.otherProfileDet = data.UserDetails[0];
             //console.log(this.otherProfileDet.id);
             this.otherProfileId = this.otherProfileDet.id;
-
+            localStorage.setItem("otherProfileId",this.otherProfileId);
             this.getUserPostDetails();
             this.getConnectionList();
             this.checkMyFrndData();

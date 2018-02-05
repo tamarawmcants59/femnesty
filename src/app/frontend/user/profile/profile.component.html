@@ -230,8 +230,9 @@
                   </div>
               </div>
           </div>
-          <div class="col-md-3 flex-right">
-                <app-user-prfrsidebar></app-user-prfrsidebar>
+          <div class="col-md-3 flex-right" *ngIf="otherProfileId">
+                <!-- <app-user-prfrsidebar></app-user-prfrsidebar> -->
+                <app-other-user-prfrsidebar></app-other-user-prfrsidebar>
           </div>
       </div>
   </div>
