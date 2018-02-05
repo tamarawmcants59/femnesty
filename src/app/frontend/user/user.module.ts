@@ -39,6 +39,7 @@ import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from './createhub/createhub.component';
 import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 import { MycmplistComponent } from './mycmplist/mycmplist.component';
+import { MyconnectionComponent } from './myconnection/myconnection.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -104,7 +105,8 @@ export function provideConfig() {
     HubsComponent,
     CreatehubComponent,
     GroupphotoComponent,
-    MycmplistComponent
+    MycmplistComponent,
+    MyconnectionComponent
     //ImageCropperComponent
   ],
   providers: [
