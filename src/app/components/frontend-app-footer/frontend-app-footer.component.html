@@ -55,10 +55,10 @@
                 <div class="col-md-3 col-sm-6 pdlr">
                 <h4><i class="ion-log-in"></i> Sign In</h4>
                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                        <strong>Success!</strong> {{successMsg}}
+                        {{successMsg}}
                     </div>
                     <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-                        <strong>Error!</strong> {{errorMsg}}
+                        {{errorMsg}}
                     </div>
                     <h5>NEWSLETTER</h5>
                     <form (ngSubmit)="sendNewsletter()">

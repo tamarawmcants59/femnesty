@@ -43,6 +43,9 @@ export class BookdetailsComponent implements OnInit {
       ]],
       rating: ['', [
         Validators.required
+      ]],
+      femnestymember: ['', [
+        //Validators.required
       ]]
     });
     this.repoUrl = environment.website_url + this.router.url;
@@ -91,6 +94,7 @@ export class BookdetailsComponent implements OnInit {
   public submitPost() {
     const userValue = this.postform.value;
     userValue.book_id = this.bookId;
+    
     //console.log(userValue);
     this._book_details.postRatingData(userValue).subscribe(data => {
       this.successMsg = 'You have successfully post the review';
@@ -118,6 +122,17 @@ export class BookdetailsComponent implements OnInit {
 
     }
   }
+  //public checkEmail(values: Object): void {
+  public CheckFemnestyUser() {
+    let logUserDet = localStorage.getItem("currentUser");
+    let userLoginUserDetails = JSON.parse(logUserDet);
+    if (this.postform.get('femnestymember').value == '1') {
+      this.loginUserDetails.first_name='Femnesty Member';
+    }else {
+      this.loginUserDetails.first_name=userLoginUserDetails.first_name;
+    }
+  }
+  
   public getRatingList() {
     const book_id = this.bookId;
     if (book_id != '') {
