@@ -1,9 +1,12 @@
-<header class="navbar-fixed-top" *ngIf="userloggedIn != 1">
+<header class="login_header" *ngIf="userloggedIn != 1  && getCurrentPageName =='/user/login'">
+    <!-- login header -->
+</header>
+<header class="navbar-fixed-top" *ngIf="userloggedIn != 1  && getCurrentPageName !='/user/login'">
     <div class="header-top" [ngClass]="{'top-hide':HeaderTopCls === 'navbar-white'}">
         <div class="container-fluid">
             <ul class="pull-left">
                 <li><img src="assets/images/icon-t-1.png" alt="" /> +{{siteSettingsDet.phone}}</li>
-                <li><img src="assets/images/icon-t-2.png" alt="" /> {{siteSettingsDet.admin_email}}</li>
+                <li><img src="assets/images/icon-t-2.png" alt="" /> {{siteSettingsDet.admin_email}} </li>
             </ul>
             <ul class="pull-right">
                 <li><a target="_blank" href="{{siteSettingsDet.facebook_url}}"><img src="assets/images/icon-t-3.png" alt="" /></a></li>
@@ -88,8 +91,8 @@
     </nav>
     
 </header>
-<div class="mb-150" *ngIf="userloggedIn != 1"></div>
-
+<div class="mb-150" *ngIf="userloggedIn != 1  && getCurrentPageName !='/user/login'"></div>
+<div class="mb-64" *ngIf="userloggedIn != 1  && getCurrentPageName =='/user/login'"></div>
 <header class="navbar-fixed-top header-inner" *ngIf="userloggedIn == 1">
     <div class="header-top headerTopPart">
         <nav>
