@@ -2276,7 +2276,7 @@ footer {
     /* Firefox 18- */
     color: #fff;
 }
-.headerTopPart .navbar-nav > li > a{padding: 12px 20px 15px 15px;font-size: 12px; font-family: 'montserratmedium';letter-spacing: 1px;}
+.headerTopPart .navbar-nav > li > a{padding: 12px 26px 15px 15px;font-size: 12px; font-family: 'montserratmedium';letter-spacing: 1px;}
 .headerTopPart .navbar-nav.navbar-left > li:first-child > a{padding-left: 0}
 .user-account .dropdown-toggle{margin-top:5px}
 .user-account .dropdown-toggle{}
@@ -5365,6 +5365,7 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 
 
 /*********************************************************/
+header .dropdown-menu{min-width: 218px;}
 .navbar-nav > li > .dropdown-menu a{font-size:12px !important;font-family: 'sanchezregular';font-weight: normal !important;text-transform: none !important}
 
 
@@ -5380,7 +5381,22 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 .navbar-nav > li > .dropdown-menu{border-radius: 0 0 5px 5px !important;}
 
 .headerTopPart .navbar-nav > li:hover > a{color: #e7e7e7 !important}
+.dropdown-menu a.dropdown-item:hover,.user-account .dropdown-menu li a:hover{color: #d4d4d4 !important}
+.header-top ul li i.ion-arrow-down-b{font-size:6.2px !important;opacity: .5;}
 
-.dropdown-menu a.dropdown-item:hover,.user-account .dropdown-menu li a:hover{color: #e7e7e7 !important}
+.before-login-home .nav.navbar-nav.navbar-right a{padding-right: 26px;}
+.before-login-home .nav.navbar-nav.navbar-right li:hover a{color: #fff !important}
+
+
+@media screen and (max-width:767px) {
+	.before-login-home .nav.navbar-nav.navbar-right span{top: 8px !important;color:#fff !important;}
+}
+
+
+
+
+
+
+
 
 
