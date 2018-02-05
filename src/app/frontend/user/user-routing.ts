@@ -21,6 +21,8 @@ import { HubsComponent } from './hubs/hubs.component';
 import { CreatehubComponent } from "./createhub/createhub.component";
 import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 import { MycmplistComponent } from "./mycmplist/mycmplist.component";
+import { MyconnectionComponent } from './myconnection/myconnection.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -95,6 +97,15 @@ const routes: Routes = [
       title: 'Hubs'
     }
   },
+  {
+    path: 'myconnection',
+    canActivate: [AuthGuard],
+    component: MyconnectionComponent,
+    data: {
+      title: 'My connections'
+    }
+  },
+  
   {
     path: 'find_friends',
     canActivate: [AuthGuard],
