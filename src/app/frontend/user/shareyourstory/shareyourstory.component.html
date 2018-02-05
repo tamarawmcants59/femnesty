@@ -61,7 +61,7 @@
 <!--<div class="text-danger" *ngIf="!form.controls['agreetab'].valid">Please check and continue.</div>-->
       </div>
       <div class="form-group col-lg-12">
-          <button type="submit" class="btn btn-primary"> <!--[disabled]="!sharestoryForm.valid"-->Share your story</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!sharestoryForm.valid">Share your story</button>
       </div>
   </form>
   </div>
