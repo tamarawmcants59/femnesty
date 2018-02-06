@@ -1,3 +1,140 @@
-<p>
-  myconnection works!
-</p>
+<section class="section  visitingProfile">
+	<div class="container-fluid">
+		<div class="row flex-profile">
+			<!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
+			<div class="col-md-3 flex-left">
+				<div *ngIf="isloginUser == 1">
+					<user-sidebar></user-sidebar>
+				</div>
+			</div>
+			<div class="col-md-6 flex-middle">
+				<div class="middlePart">
+					<div>
+            <p>Online Connection</p>
+            <ul class="onlineList" *ngIf="totalMyOnlineConList.length>0">
+                <li *ngFor="let friendData of totalMyOnlineConList">
+                    <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
+                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                    </a>
+                    <div class="greenIcon"></div>
+                </li>
+    
+            </ul>
+            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">View More</a>
+          </div>
+					<div class="connectionsPart">
+            <!-- <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
+                <div class="row" *ngIf="(reqSuccessMsg != '')">
+                    <div class="alert alert-success" role="alert" *ngIf="(reqSuccessMsg != '')">
+                            {{reqSuccessMsg}}
+                    </div>
+                </div>
+                <div class="row" *ngIf="(reqErrorMsg != '')">
+                    <div class="alert alert-danger" role="alert" *ngIf="(reqErrorMsg != '')">
+                            {{reqErrorMsg}}
+                    </div>
+                </div>
+                <h2 *ngIf="userRequestFrndList?.length > 0">Friend Requests</h2>
+                <ul class="contn-box" *ngIf="userRequestFrndList?.length > 0">
+                    <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
+                            <div class="friend-boxImage">
+                            <a [routerLink]="['/user/profile',friendData.display_name]">
+                                <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                            </a>
+                            </div>
+                            <div class="friend-boxText">
+                                <h4>{{friendData.name}}</h4>
+                                <p>{{friendData.bio | limitTo : 30}}</p>
+                            </div>
+                            <div class="sendmsg">
+                                <a (click)="acceptFriendRequest(friendData.id)"><span><img alt="" src="assets/images/check.png"></span>&nbsp;&nbsp;ACCEPT</a>
+                                <a (click)="rejectFriendRequest(friendData.id)"><span><img alt="" src="assets/images/cancel.png"></span>&nbsp;&nbsp;IGNORE</a>
+                            </div>
+                            <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
+                        </li>
+                </ul>
+            </div>     -->
+            <h2>All Connections</h2>
+            <ul class="contn-box" *ngIf="totalMyConList?.length > 0">
+                <li class="friend-box-list" *ngFor="let friendData of totalMyConList">
+                    <div class="friend-boxImage">
+                      <a [routerLink]="['/user/profile',friendData.display_name]">
+                          <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                      </a>
+                    </div>
+                    <div class="friend-boxText">
+                        <h4>{{friendData.name}}</h4>
+                        <!--<a [routerLink]="['/user/chat',friendData.friend_id]" class="btn btn-primary">Chat </a>-->
+                        <p *ngIf="friendData.bio !=''">{{friendData.bio | limitTo : 40}}</p>
+                    </div>
+                    <div class="sendmsg">
+                      <a [routerLink]="['/user/chat',friendData.friend_id]"><span><img src="assets/images/send-msg.png" alt=""></span> SEND MESSAGE </a>
+                    </div>
+                    <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
+                </li>
+            </ul>
+            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">View More</a>
+            <div class="connections">
+                <div class="likePart" *ngIf="userFrndList?.length == 0">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="nothing">No connection found</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+				</div>
+			</div>
+			<div class="col-md-3 flex-right">
+				<div class="rightPart">
+					<div class="innerRightPart right-map-details HUB-Dtls">
+						<h2>Search</h2>
+            <div class="form-group">
+              <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
+              <button type="button" (click)="searchConnection()">
+                  <i class="icon ion-ios-search"></i>
+              </button>
+          </div>
+					</div>
+
+          <div class="innerRightPart latest-article">
+            <h2>Latest Articles</h2>
+            <div *ngIf="latestArticles?.length > 0">
+            <div class="hubMet hubMet2" *ngFor="let articleData of latestArticles">
+                 <a [routerLink]="['/articles/details',articleData.slug]">
+                      <div class="img" [ngStyle]="{'background-image':'url('+articleData.image_url+')'}"></div>
+                 </a>
+                 <div class="article-text">
+                    <p>{{articleData.title | limitTo : 20}}</p>
+                    <a [routerLink]="['/articles/details',articleData.slug]" class="downtxt">By {{articleData.author_name}} on {{articleData.c_date | dateTimeFormat: 'MMM dd, yyyy' }}</a>
+                 </div>
+                
+            </div>
+            </div>
+        </div>
+        <div class="innerRightPart">
+          <div class="article-add-holder article-add-holder1">
+            <h3>SHARE YOUR STORY</h3>
+            <p>Femnesty is always looking for strong, positive contributors to join our team.</p>
+            <a [routerLink]="['/user/shareyourstory']" class="btn btn-primary">SHARE</a>
+          </div>
+        </div>
+
+        <div class="innerRightPart">
+          <div class="article-add-holder article-add-holder1">
+            <h3>START A HUB</h3>
+            <p> Make a difference where you are, start a Hub today. </p>
+            <a [routerLink]="['/user/create_hub']" class="btn btn-primary">START</a>
+          </div>
+        </div>
+
+					
+					
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
