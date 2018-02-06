@@ -10,7 +10,7 @@
 			<div class="col-md-6 flex-middle">
 				<div class="middlePart">
 					<div>
-            <p>Online Connection</p>
+            <h2>Online Connection</h2>
             <ul class="onlineList" *ngIf="totalMyOnlineConList.length>0">
                 <li *ngFor="let friendData of totalMyOnlineConList">
                     <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
@@ -20,8 +20,15 @@
                 </li>
     
             </ul>
-            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">View More</a>
-          </div>
+            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">Load More</a>
+            <ul class="onlineList" *ngIf="totalMyOnlineConList.length == 0">
+                    <li >
+                            Nothing more to show
+                    </li>
+        
+                </ul>
+                
+        </div>
 					<div class="connectionsPart">
             <!-- <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
                 <div class="row" *ngIf="(reqSuccessMsg != '')">
@@ -73,9 +80,9 @@
                     <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
                 </li>
             </ul>
-            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">View More</a>
+            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">Load More</a>
             <div class="connections">
-                <div class="likePart" *ngIf="userFrndList?.length == 0">
+                <div class="likePart" *ngIf="userFrndList.length == 0">
                     <div class="row">
                         <div class="col-md-10">
                             <div class="nothing">No connection found</div>
