@@ -106,6 +106,7 @@ export class PostCardComponent implements OnInit {
   }
 
   deletePost(confirmmodal, post_id, type, comments = null, delkey = null) {
+    this.IsShowOption= !this.IsShowOption;
     //this.open(confirmmodal);
     this.delPostId = post_id;
     this.delPostType = type;
@@ -115,6 +116,7 @@ export class PostCardComponent implements OnInit {
   }
   blockUser(blockConfirmModal, post_id, type, comments = null, delkey = null)
   {
+    this.IsShowOption= !this.IsShowOption;
     this.blockPostId = post_id;
     this.blockPostType = type;
     this.blockPostData = comments;
@@ -122,7 +124,7 @@ export class PostCardComponent implements OnInit {
     this.modalService.open(blockConfirmModal);
   }
   report(reportConfirmModal, post_id, type, comments = null, delkey = null)
-  {
+  { this.IsShowOption= !this.IsShowOption;
     this.reportPostId = post_id;
     this.reportPostType = type;
     this.reportPostData = comments;
@@ -347,7 +349,7 @@ export class PostCardComponent implements OnInit {
     
   }
   toggleOptions()
-  {
+  { 
     this.IsShowOption= !this.IsShowOption;
   }
   toggleShare()
@@ -369,6 +371,7 @@ export class PostCardComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
   openEditModal(postData, editModal) {
+    this.IsShowOption= !this.IsShowOption;
     if (postData.description) {
       this.editPostText = postData.description;
     }
