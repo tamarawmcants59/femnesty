@@ -19,9 +19,9 @@
        </div>
        <div class="row">
        	<div class="col-md-12">
-       		<form class="row form-area">
+       		<form class="row form-area" [formGroup]="form" (ngSubmit)="searchDataResult(form.value)" #searchForm="ngForm">
        			<div class="col-md-6 form-group">
-       			<input class="form-control" placeholder="Search for … " type="text">
+       			<input class="form-control" placeholder="Search for … " type="text" formControlName="skeyword" (ngModelChange)="searchResult($event)">
        			</div>
        			<div class="col-md-2">
        				<button class="btn btn-primary" type="submit">Search</button>
