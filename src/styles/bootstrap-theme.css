@@ -1369,7 +1369,7 @@ footer {
 }
 
 .pic-logo-icon img {
-    width: 30%;
+    width: 37%;
 }
 
 .pic-icon-content {
@@ -5457,7 +5457,7 @@ header .dropdown-menu{min-width: 218px;}
 
 /*---------------------- 05-02-2018 --------------------------*/
 
-.btn-primary, .navbar-right button, .login-head-form li .form-group button{
+.btn-primary, .navbar-right button, .login-head-form li .form-group button, .search-icon button{
 	outline: none !important;
 }
 
@@ -5524,4 +5524,7 @@ line-height: 31px;padding: 0;left:0}
 
 .notification-wrap ul li.unread {
     background: #f0f0f0;
+}
+.f-style-italic{
+	font-weight: bold !important;
 }
