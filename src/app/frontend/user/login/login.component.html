@@ -54,7 +54,7 @@
                     </p>
                 <form [formGroup]="forgotForm" (ngSubmit)="checkForgotPws(forgotForm.value)" class="row form-area" #forgotPwsForm="ngForm">    
                     <div class="form-group col-md-12">
-                        <input type="text" placeholder="E-mail or Phone" class="form-control" formControlName="email">
+                        <input type="text" placeholder="E-mail" class="form-control" formControlName="email">
                         <div class="text-danger" *ngIf="(!forgotForm.controls['email'].valid) && forgotForm.controls['email'].touched">
                             Please enter the correct email. This email is not valid.
                         </div>
