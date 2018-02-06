@@ -1,7 +1,7 @@
 <section class="sign-up-area">
     <div class="container">
         <ngx-loading *ngIf="loading" [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-        <div class="sign-form">
+        <div class="sign-form pad">
             <h2>{{pageHeading}}</h2>
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
                 {{errorMsg}}.
@@ -53,8 +53,8 @@
                         <label>Please enter your email to search for your account. </label>
                     </p>
                 <form [formGroup]="forgotForm" (ngSubmit)="checkForgotPws(forgotForm.value)" class="row form-area" #forgotPwsForm="ngForm">    
-                    <div class="form-group col-md-6">
-                        <input type="text" placeholder="E-mail" class="form-control" formControlName="email">
+                    <div class="form-group col-md-12">
+                        <input type="text" placeholder="E-mail or Phone" class="form-control" formControlName="email">
                         <div class="text-danger" *ngIf="(!forgotForm.controls['email'].valid) && forgotForm.controls['email'].touched">
                             Please enter the correct email. This email is not valid.
                         </div>
@@ -70,7 +70,7 @@
                 </form>
             </div>
         </div>
-		  <a [routerLink]="['/']" style="width: 220px;" class="btn btn-back">BACK TO HOME</a>
+		  <a [routerLink]="['/']" style="width: 200px;" class="btn btn-back">BACK TO HOME</a>
     </div>
   </section>
   

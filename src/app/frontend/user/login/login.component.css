@@ -2,3 +2,29 @@
     background: #a32b1c !important;
 }
 .hi{ display: none;}
+.btn-back{
+	padding: 13px 20px !important;
+	font-size: 12px !important;
+	font-family: 'montserratmedium' !important;
+}
+label{
+	font-size: 18px !important;
+	color: #000;
+	font-weight: normal !important;
+}
+.sign-form h2{
+	font-size: 32px !important;
+}
+.sign-form h2{
+	margin-bottom: 0 !important;
+}
+.form-area{
+	margin-top:20px !important;
+	margin-bottom: 19px !important;
+}
+.form-group{
+	margin-bottom: 46px !important;
+}
+.form-area .form-control{
+	font-size:14px !important;
+}

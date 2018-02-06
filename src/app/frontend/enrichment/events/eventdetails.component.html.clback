@@ -16,9 +16,11 @@
               <!--<p class="font-weight-bold mb-30">{{articleData.short_desc}}</p>-->
               <h5>The Bear, 71 High St, Esher, Surrey KT10 9RQ United Kingdom
 <span> 4, 6:30 pm - 8:30 pm</span></h5>
-<p class="mb-30">Phone: <span>071-123 12 32</span><br>
-Email: <span>info@femnesty.com</span><br>
-Cost: <span>£100</span></p>
+<p>
+	Phone: 071-123 12 32
+Email: info@femnesty.com
+Cost: £100
+</p>
               <a  *ngIf="startDateString" href="http://www.google.com/calendar/event?action=TEMPLATE&text={{articleData.title}}&dates={{startDateString}}&details={{articleData.title}}" target="_blank" rel="nofollow">
                   <button type="button" class="btn btn-primary">Add to calendar</button>
               </a>
@@ -26,7 +28,7 @@ Cost: <span>£100</span></p>
               
           </div>
       </div>
-      <div class="row mt-30">
+      <div class="row">
       	<div [innerHTML]="articleData.description" class="mb-30"></div>
       	<ul class="n-social mt-30">
                         <!-- <li ceiboShare  [facebook]="{u: repoUrl}">

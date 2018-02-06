@@ -9,17 +9,11 @@
 .single-article P{
 	font-size: 14px !important;
 }
-.single-article P span{
-	color: #5e5e5e
-}
 .single-article h5{
 	font-size: 16px;
-	line-height: 20px;
+	line-break: 22px;
 }
 .single-article h5 span{
  display: block;
  color: #ce1626;
-}
-.mt-30{
-	margin-top: 30px;
 }
