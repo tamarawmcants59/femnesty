@@ -3867,7 +3867,7 @@ ul.connectionlist li .text-area p {
     display: flex;
     flex-wrap: nowrap;
     padding: 10px 5px;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid #e2e2e2;
     margin-bottom: 5px;position: relative;
 }
 
@@ -3897,7 +3897,7 @@ ul.connectionlist li .text-area p {
 .notification-wrap ul li .time {
     font-size: 12px;
     color: #8f8f8f;
-    margin: 0;position: absolute;top:8px;right:6px;
+    margin: 0;position: absolute;top:15px;right:20px;
 }
 
 .notification-wrap ul li .desc {
@@ -5525,3 +5525,9 @@ line-height: 31px;padding: 0;left:0}
 .notification-wrap ul li.unread {
     background: #f0f0f0;
 }
+
+
+/**********************************/
+.notfi-padding{padding: 0}
+.notification-wrap.notfi-padding ul li{margin: 0;padding: 10px 20px}
+
