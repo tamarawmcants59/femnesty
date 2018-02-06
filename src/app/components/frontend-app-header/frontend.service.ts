@@ -106,4 +106,8 @@ export class FrontendService {
     return this.apiService.post(`/users/appaddfeedback`,form_data).map(data => data);
   }
 
+  getArticalListData(){
+    return this.apiService.get(`/enrichment/appeventlist`).map(data => data);
+  }
+
 }

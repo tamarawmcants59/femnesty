@@ -17,6 +17,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FrontendAppHeader {
   pageConData = [];
+  artCatData=[];
   public loginForm: FormGroup;
   HeaderNavCls: string = '';
   HeaderTopCls: string = '';
@@ -123,7 +124,7 @@ export class FrontendAppHeader {
   ngOnInit(): void {
     //console.log(this.currentUserDet);
     //localStorage.removeItem("isLoggedIn");
-
+    this.getFemnestyEvent();
     if (this.userloggedIn == '1') {
       let self = this;
       setInterval(function () {
@@ -172,6 +173,7 @@ export class FrontendAppHeader {
     /*if (this.userloggedIn == '1') {
       this.userNotiCountList();
     }*/
+    
     this.getUserDetails();
     this.getArticleList();
     this.getUnreadMessages();
@@ -180,6 +182,21 @@ export class FrontendAppHeader {
   ngOnChanges(): void {
     this.show = false;
   }
+
+  public getFemnestyEvent(){
+    this._service.getArticalListData().subscribe(data=>{
+        let details=data;
+        //console.log(details.EventList[0]);
+        if (details.Ack=="1") {
+            //this.artDetData = details.BooksAll[0].image_url;
+            this.artCatData = details.EventList[0];
+        }
+      },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+
   checkLogin(messageModal) {
     if (this.email && this.password) {
       if (this.validateEmail(this.email)) {
