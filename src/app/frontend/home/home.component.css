@@ -28,7 +28,10 @@ blockquote{padding: 10px 0;}
 }
 
 
-
+.feedhover{
+  left:0 !important;
+  background-color: black !important;
+}
 
 /* Switch */
 .switch{
@@ -173,7 +176,7 @@ blockquote{padding: 10px 0;}
   0%{left:-420px;}
   10%{left:20px;}
   15%{left:0px;}
-  30%{left:0px;}
+  30%{left:0px;}h
   40%{left:0px;}
   50%{left:0px;}
   60%{left:0px;}

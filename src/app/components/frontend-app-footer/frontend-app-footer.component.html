@@ -34,7 +34,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 pdlr">
-                <h4><i class="ion-email"></i> Email us</h4>
+                <h4><a href="mailto:info@femnesty.com"><i class="ion-email"></i> Email us</a></h4>
                     <h5>CONTRIBUTE</h5>
                     <ul>
                         <li><a [routerLink]="['/user/shareyourstory']">Share Your Story</a></li>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 pdlr">
-                <h4><i class="ion-ios-telephone"></i> Call Us</h4>
+                <h4><a href="tel:+1-347-555-000000"><i class="ion-ios-telephone"></i> Call Us</a></h4>
                     <h5>ARTICLES</h5>
                     <ul *ngIf="articleArr.length>0">
                         <li *ngFor="let artdata of articleArr;"><a [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a></li>

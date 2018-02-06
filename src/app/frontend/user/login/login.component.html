@@ -4,10 +4,10 @@
         <div class="sign-form">
             <h2>{{pageHeading}}</h2>
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-                <strong>Error!</strong> {{errorMsg}}.
+                {{errorMsg}}.
             </div>
             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                <strong>Success!</strong> {{successMsg}}.
+                {{successMsg}}.
             </div>
             <div *ngIf="pageHeading == 'Login'">
             <div class="sign-up-social">
@@ -49,21 +49,24 @@
             </form>
             </div>
             <div *ngIf="pageHeading != 'Login'">
+                    <p>
+                        <label>Please enter your email to search for your account. </label>
+                    </p>
                 <form [formGroup]="forgotForm" (ngSubmit)="checkForgotPws(forgotForm.value)" class="row form-area" #forgotPwsForm="ngForm">    
                     <div class="form-group col-md-6">
-                        <input type="text" placeholder="Email Address" class="form-control" formControlName="email">
+                        <input type="text" placeholder="E-mail" class="form-control" formControlName="email">
                         <div class="text-danger" *ngIf="(!forgotForm.controls['email'].valid) && forgotForm.controls['email'].touched">
                             Please enter the correct email. This email is not valid.
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <button class="btn btn-primary" [disabled]="!forgotPwsForm.valid" type="submit">Submit</button>
+                        <button class="btn btn-primary" [disabled]="!forgotPwsForm.valid" type="submit">Reset Password</button>
                     </div>
-                    <div class="form-group col-md-12">
+                    <!--<div class="form-group col-md-12">
                         <p>
                             <label>Not a Member <a class="text-red" [routerLink]="['/user/signup']">Sign Up</a></label>
                         </p>
-                    </div>
+                    </div>-->
                 </form>
             </div>
         </div>

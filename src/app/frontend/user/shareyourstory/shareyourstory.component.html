@@ -13,7 +13,7 @@
       <h1 *ngIf="shareYorStoryContent">{{shareYorStoryContent.below_header_heading}}</h1>
       <p *ngIf="shareYorStoryContent">{{shareYorStoryContent.below_header_content}}</p>
 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-    <strong>Success: </strong> {{successMsg}}
+    {{successMsg}}
 </div>
   <form class="row form-area" [formGroup]="form" (ngSubmit)="shareStoryArticle()" #sharestoryForm="ngForm">
   <div class="form-group col-md-12">
@@ -22,7 +22,7 @@
       </div>
        <div class="form-group col-md-12">
           <input type="text" placeholder="Article Title" class="form-control" formControlName="title">
-          <div class="text-danger" *ngIf="!form.controls['mag_category_id'].valid && form.controls['mag_category_id'].touched">Article Title Required</div>
+          <div class="text-danger" *ngIf="!form.controls['title'].valid && form.controls['title'].touched">Article Title Required</div>
       </div>
       <div class="form-group col-md-12">
           <select formControlName="mag_category_id" class="form-control" >
@@ -32,8 +32,8 @@
          <div class="text-danger" *ngIf="!form.controls['mag_category_id'].valid && form.controls['mag_category_id'].touched">Category Required</div>
       </div>
       <div class="form-group col-md-12">
-          <input type="text" placeholder="Your Email" class="form-control" formControlName="title">
-          <div class="text-danger" *ngIf="!form.controls['mag_category_id'].valid && form.controls['mag_category_id'].touched">Article Title Required</div>
+          <input type="text" placeholder="Your Email" class="form-control" formControlName="auther_email">
+          <div class="text-danger" *ngIf="!form.controls['auther_email'].valid && form.controls['auther_email'].touched">Email Required</div>
       </div>
       <!--<div class="form-group col-md-12">
           <textarea placeholder="Short Description" class="form-control" formControlName="short_desc"></textarea>
@@ -43,6 +43,7 @@
         <textarea placeholder="Long Description" class="form-control" formControlName="description"></textarea>
         <div class="text-danger" *ngIf="!form.controls['description'].valid && form.controls['description'].touched">Long Description Required</div>
       </div>-->
+
       <div class="form-group col-md-12 file-upload-area mb-0">
             <div class="file-upload">
                 <label for="upload" class="file-upload__label">Choose File</label>
