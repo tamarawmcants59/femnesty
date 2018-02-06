@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public isLoggedIn: any;
   private socialUser: SocialUser;
   private loggedIn: boolean;
-  public pageHeading: string = 'Login';
+  public pageHeading: string = 'Forgot Password';
   //public myFocusDivEmitter = new EventEmitter<boolean>();
   //@ViewChild('scrollMeDiv') private myChatContainer: ElementRef;
   //@Inject(Window) private window: Window;
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
    
   ) {
+    this.route.params.subscribe( params => console.log(params) );
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(3)])]
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+     
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
