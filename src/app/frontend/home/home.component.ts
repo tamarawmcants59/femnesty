@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public isShowPlus = true;
   public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
   public homepageCls = '';
+  public shhover = '';
   constructor(
     private dataService: FrontendService,
     private fb: FormBuilder
@@ -78,10 +79,12 @@ export class HomeComponent implements OnInit {
     });
   }
   openForm() {
+    this.shhover = "feedhover";
     this.IsShowFeedForm = true;
     this.isShowPlus = false;
   }
   closeForm() {
+    this.shhover = "";
     this.isShowPlus = true;
     this.IsShowFeedForm = false;
   }

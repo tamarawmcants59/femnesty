@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { environment } from '../../../../environments/environment';
-
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -11,7 +11,8 @@ export class NotificationComponent implements OnInit {
   public userNotiList = [];
   public repoUrl='';
   constructor(
-    private dataService: UserService
+    private dataService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,10 +36,10 @@ export class NotificationComponent implements OnInit {
                   viewNotiIdStr+=element.id+',';
                 }
               });
-              if(viewNotiIdStr!=''){
-                this.dataService.editNotificationById({ "id": viewNotiIdStr }).subscribe(res => {
-                });
-              }
+              // if(viewNotiIdStr!=''){
+              //   this.dataService.editNotificationById({ "id": viewNotiIdStr }).subscribe(res => {
+              //   });
+              // }
             }
             console.log(this.userNotiList);
           }
@@ -46,5 +47,16 @@ export class NotificationComponent implements OnInit {
         error => {
         });
     }
+  }
+
+  public go_notification_details(url,id)
+  {
+    this.dataService.editNotificationById({ "id": id }).subscribe(res => {
+      if(res.Ack == 1)
+      {
+        this.router.navigate([url]);
+      }
+    });
+    //alert(id);
   }
 }
