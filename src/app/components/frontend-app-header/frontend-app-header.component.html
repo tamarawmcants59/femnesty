@@ -4,20 +4,21 @@
         <nav>
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
+                <div class="navbar-header navbar-header2">
                     <button type="button" (click)="toggleCollapse()" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
 
-                    <div class="pull-left login-head-form">
+                    <div class="pull-left">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="sp-hover">
-                                <a [routerLink]="['/']">
-                                    <img src="assets/images/logo-small.png">
-                                </a>
-                            </li>
+                            <li class="sp-hover"><a [routerLink]="['/']"><img src="assets/images/logo-small.png"></a></li>
+                        </ul>
+                    </div>
+                    <div class="collapse navbar-collapse login-home" [ngClass]="{'in':show}">
+                    	<div class="login-head-form">
+                         <ul>
                             <li class="form-search search-icon sp-hover">
                                 <div class="form-group">
                                     <span>LOGIN</span>
@@ -36,125 +37,17 @@
                                 </div>
                             </li>
                         </ul>
-
+						<ul class="pull-right right-social-login">
+                    		<li><span>LOGIN USING</span></li>
+                    		<li><a href=""><i class="fa fa-facebook"></i></a></li>
+                    		<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                    		<li><a href=""><i class="fa fa-twitter"></i></a> </li>
+                    	</ul>
                     </div>
-
+					</div>
                 </div>
-                <ul class="pull-right right-social-login">
-                    <li>
-                        <span>LOGIN USING</span>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                </ul>
+                
                 <!-- /.navbar-collapse -->
-                <div *ngIf="show" class="collapse navbar-collapse mobile-navs" style="display: block;">
-                    <ul class="nav navbar-nav navbar-right display-on">
-                        <li style="position: relative;" class="nav-item dropdown">
-                            <a routerLinkActive="active" [routerLink]="['/articles/all']" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">Articles</a>
-                            <span style="position: absolute; right:2px; top:10px; width:14px; height:14px; " id="navbarDropdownMenuLink5" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i>
-                            </span>
-                            <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down" ><span> <i class="icon ion-chevron-down"></i></span></a>-->
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5" *ngIf="articleArr.length>0">
-                                <a *ngFor="let artdata of articleArr;" class="dropdown-item" [routerLink]="['/articles',artdata.slug]">{{artdata.name}}</a>
-                                <!--<a class="dropdown-item" [routerLink]="['/articles/work-and-home-balance']">Work & Home Balance</a>
-                                <a class="dropdown-item" [routerLink]="['/articles/women-in-21st-century']">Women in 21st Century</a>
-                                <a class="dropdown-item" [routerLink]="['/articles/strategies-for-success']">Strategies for success</a>-->
-                                <!--<a class="dropdown-item" [routerLink]="['/articles/all']">All Articles</a>-->
-                            </div>
-                        </li>
-                        <li>
-                            <a class="sp-hover" routerLinkActive="active" [routerLink]="['/mentorship']">Mentorship</a>
-                        </li>
-                        <li style="position: relative;" class="nav-item dropdown">
-                            <a routerLinkActive="active" [routerLink]="['/enrichment']" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">Enrichment</a>
-                            <span style="position: absolute; right:2px; top:10px; width:14px; height:14px; " id="navbarDropdownMenuLink6" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i>
-                            </span>
-                            <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down"><span> <i class="icon ion-chevron-down"></i></span></a>-->
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink6">
-                                <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
-                                <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
-                                <a class="dropdown-item" [routerLink]="['/enrichment/category_details',artCatData.slug]">Femnesty Events</a>
-                                <!--<a class="dropdown-item" [routerLink]="['/enrichment']">All</a>-->
-                            </div>
-                        </li>
-                        <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
-                        <li style="position: relative;" class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog1" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Contribute
-                            </a>
-                            <span style="position: absolute; right:2px; top:10px; width:14px; height:14px; ">
-                                <i style="background: none; color:#fff; height: 14px; width: 14px; font-size: 10px; color: #ebebeb" class="ion-arrow-down-b"></i>
-                            </span>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkConUserLog1">
-                                <a class="dropdown-item" [routerLink]="['/user/shareyourstory']">Share Your Story</a>
-                                <a class="dropdown-item" [routerLink]="['/user/mentor']">Become a Mentor</a>
-                                <a class="dropdown-item" [routerLink]="['/user/team']">Join the Team</a>
-                            </div>
-                        </li>
-                        <li ngbDropdown class="dropdown">
-                            <!--<a *ngIf="chatHeads && chatHeads.length == 0" class="dropdown-toggle" [routerLink]="['/user/chat/list']">
-                                   Message <i class="icon ion-chatboxes"></i>
-                                    <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
-                                </a>
-                                <a *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownToggle class="dropdown-toggle" id="dropdownMenuButton" [routerLink]="['/user/chat/list']">
-                                    <i class="icon ion-chatboxes"></i>
-                                    <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
-                                </a>-->
-                            <!--<div ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
-                                    <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
-                                        <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread notify-box-top" href="javascript:void(0)">
-                                            <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />
-                                            <div *ngIf="chat.userDetails" class="txt">
-                                                <div class="upr">
-                                                    <div class="name">{{chat.userDetails.first_name}} {{chat.userDetails.last_name}}</div>
-                                                    <div class="time">{{chat.created | date}}</div>
-                                                </div>
-                                                <div class="msg">{{chat.message.text}}</div>
-                                            </div>
-                                        </a>
-                                        
-                                    </div>
-                                </div>-->
-                        </li>
-                        <!-- <li><a [routerLink]="['/user/notification']"> Notification <i class="icon ion-android-globe"></i> <span *ngIf="userNotiCnt > 0" class="badge" style="background-color:red">{{userNotiCnt}}</span></a></li>-->
-                        <li *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'">
-                            <a [routerLink]="['/user/edit_profile/activity']">My Profile</a>
-                        </li>
-                        <li *ngIf="currentUserDet.user_type=='C' || currentUserDet.user_type=='CE'">
-                            <a [routerLink]="['/company']">Create company</a>
-                        </li>
-                        <li *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'">
-                            <a [routerLink]="['/company/profile']">Company Profile</a>
-                        </li>
-                        <li *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'">
-                            <a [routerLink]="['/company/profile',currentUserDet.company_slug]">View Company Profile</a>
-                        </li>
-                        <li *ngIf="userloggedIn == 1">
-                            <a href="Javascript: void(0)" (click)="userLogout()">Logout</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
             <!-- /.container-fluid -->
         </nav>

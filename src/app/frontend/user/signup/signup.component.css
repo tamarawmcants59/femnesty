@@ -1,3 +1,8 @@
 .google-bg{ 
     background: #a32b1c !important;
 }
+.btn-back{
+	padding: 13px 20px !important;
+	font-size: 12px !important;
+	font-family: 'montserratmedium' !important;
+}
