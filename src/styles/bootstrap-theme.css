@@ -1138,10 +1138,10 @@ blockquote i {
 
 .article-add-holder p {
     display: block;
-    
     margin: 25px 0;
     font-size: 14px;
     line-height: 25px;
+    word-wrap: break-word !important;
 }
 
 .article-add-holder1 {
@@ -4802,7 +4802,7 @@ ul.uploadVideo {
 .n-social li img{width: 100%; height: auto;}
 .n-social .point{width: 21px; height: 21px; position: relative; border-radius:100%; background: #f7f7f7; top: 45px; right: -30px;color: #000; font-size: 10px;  z-index: 100; text-align: center; line-height: 24px;}
 
-.article-page{padding: 40px 0;}
+.article-page{padding: 70px 0;}
 .star-icon{font-size:29px !important;}
 .f-founder img{width: 100%;}
 .display-off{display:  none !important;}
