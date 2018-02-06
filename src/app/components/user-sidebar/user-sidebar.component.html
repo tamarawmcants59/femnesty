@@ -7,8 +7,7 @@
     <div class="profDetails">
         <a href="javascript:void(0)" [routerLink]="['/user/edit_profile/activity']">
             <h2>{{currentUserLoginDet.name}}</h2>
-            <p *ngIf="currentUserLoginDet.address">{{currentUserLoginDet.address}}, {{currentUserLoginDet.city}}
-                <br> {{currentUserLoginDet.state}}
+            <p *ngIf="currentUserLoginDet.bio">{{currentUserLoginDet.bio | limitTo : 50}}
             </p>
         </a>
     </div>

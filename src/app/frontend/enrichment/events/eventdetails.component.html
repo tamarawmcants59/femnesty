@@ -11,7 +11,7 @@
               </div>-->
           </div>
           <div class="col-md-6">
-          <h1>Femnesty Event Name</h1>
+          <h1>{{articleData.title}}</h1>
               <!--<h1>{{articleData.title}}</h1>-->
               <!--<p class="font-weight-bold mb-30">{{articleData.short_desc}}</p>-->
               <h5>The Bear, 71 High St, Esher, Surrey KT10 9RQ United Kingdom
@@ -22,8 +22,6 @@ Cost: <span>£100</span></p>
               <a  *ngIf="startDateString" href="http://www.google.com/calendar/event?action=TEMPLATE&text={{articleData.title}}&dates={{startDateString}}&details={{articleData.title}}" target="_blank" rel="nofollow">
                   <button type="button" class="btn btn-primary">Add to calendar</button>
               </a>
-              
-              
           </div>
       </div>
       <div class="row mt-30">
