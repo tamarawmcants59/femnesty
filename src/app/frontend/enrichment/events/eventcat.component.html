@@ -24,7 +24,7 @@
             <h1 style="margin-top: 0">{{articleCatData.name}}</h1>
             <p class="font-weight-bold mb-30">{{articleCatData.short_description}}</p>
             <div [innerHTML]="articleCatData.description" class="mb-30"></div>
-            <a [routerLink]="['/enrichment/list',articleCatData.slug]" class="btn btn-primary">Read more</a>
+            <a [routerLink]="['/enrichment/list',articleCatData.slug]" class="btn btn-primary">What's On?</a>
             <ul class="n-social mt-30">
                 <!-- <li ceiboShare  [facebook]="{u: repoUrl}">
                     <img src="assets/images/facebook.png" />
