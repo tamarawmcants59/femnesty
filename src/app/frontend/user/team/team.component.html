@@ -13,7 +13,7 @@
       <h1 *ngIf="joinTeamContent">{{joinTeamContent.below_heading}}</h1>
       <p *ngIf="joinTeamContent">{{joinTeamContent.below_content}}</p>
 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-    <strong>Success: </strong> {{successMsg}}
+    {{successMsg}}
 </div>
   <form class="row form-area" [formGroup]="form" (ngSubmit)="mentor()" #mentorForm="ngForm">
       <div class="form-group col-lg-6">

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public isLoggedIn: any;
   private socialUser: SocialUser;
   private loggedIn: boolean;
-  public pageHeading: string = 'Forgot Password';
+  public pageHeading: string = 'Forgot Password?';
   //public myFocusDivEmitter = new EventEmitter<boolean>();
   //@ViewChild('scrollMeDiv') private myChatContainer: ElementRef;
   //@Inject(Window) private window: Window;
