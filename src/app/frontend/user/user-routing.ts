@@ -39,6 +39,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'forgotpassword',
+    component: LoginComponent,
+    data: {
+      title: 'Forgot Password'
+    }
+  },
+  {
     path: 'signup',
     component: SignupComponent,
     data: {
