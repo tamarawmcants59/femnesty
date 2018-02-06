@@ -78,4 +78,7 @@ ng4geo-autocomplete.auto-text-input input{
 }
 
 
+.profPhoto .img .inner-bg .icon-change{height: 100%;background: none;padding: 0}
+.profPhoto .img .inner-bg .txt{display: none;}
+.profPhoto .img .inner-bg i{font-size: 40px}
 
