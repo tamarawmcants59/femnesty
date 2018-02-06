@@ -50,6 +50,10 @@ export class ShareyourstoryComponent implements OnInit {
         Validators.required,
         //Validators.minLength(3)
       ]],
+      auther_email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
       image: ['', [
         //Validators.required,
         //Validators.minLength(3)

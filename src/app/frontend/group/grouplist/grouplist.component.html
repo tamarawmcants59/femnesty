@@ -14,7 +14,7 @@
                         <div class="MyGroups-list" *ngIf="myGrpList.length>0 || errorMsg">
                             <h5 class="mt-0" *ngIf="filteredTitle">FILTERED GROUPS FOR "{{filteredTitle}}"</h5>
                             <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
-                                <strong>Error: </strong> {{errorMsg}}
+                                {{errorMsg}}
                             </div>
                             <ul class="search-list">
                                 <li *ngFor="let grpData of myGrpList">

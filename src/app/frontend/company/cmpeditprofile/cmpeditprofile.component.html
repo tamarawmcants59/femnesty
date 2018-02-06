@@ -188,7 +188,7 @@
                                                             <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm"> 
                                                         <ul>
                                                                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                                        <strong>Success: </strong> {{successMsg}}
+                                                                        {{successMsg}}
                                                                     </div>
                                                                     <li>
                                                                         <div [ngClass]="{'hide_div' : editAbtActiveTab=='company_name'}">
@@ -361,7 +361,7 @@
                                                         
                                                             <ul class="ulList edit-forms1">
                                                                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                                            <strong>Success: </strong> {{successMsg}}
+                                                                            {{successMsg}}
                                                                         </div>
                                                                     <h3>Add Sub admin</h3>
                                                                     
@@ -522,7 +522,7 @@
 
                                                             <ul class="ulList edit-forms1">
                                                                     <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                                            <strong>Success: </strong> {{successMsg}}
+                                                                            {{successMsg}}
                                                                         </div>
                                                                     <h3>Edit Sub admin</h3>
                                                                     
@@ -674,7 +674,7 @@
                                                     </div>
                                                     <div *ngIf="loginUserDet.user_type == 'CA'" class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='list_subadmin'}">
                                                             <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                                <strong>Success: </strong> {{successMsg}}
+                                                                {{successMsg}}
                                                             </div>
                                                             <h3> </h3>
 
@@ -860,10 +860,10 @@
                                                 (removed)="removed($event)"
                                                 placeholder="No city selected"></ng-select> -->
                                                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                                                        <strong>Success: </strong> {{successMsg}}
+                                                        {{successMsg}}
                                                     </div>
                                                     <div class="alert alert-danger" role="alert" *ngIf="errorFriendrMsg != ''">
-                                                        <strong>Error: </strong> {{errorFriendrMsg}}
+                                                        {{errorFriendrMsg}}
                                                     </div>
                                                 <h2>Add Employee</h2>
                                                 <div class="form-group row">

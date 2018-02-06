@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')"  #groupListSuccessMsgDiv>
-                                    <strong>Success: </strong> {{successMsg}}
+                                    {{successMsg}}
                                 </div>
                                 <!--<pre>{{groupList}}</pre>-->
                                 <ul class="uilist connection-box" *ngIf="groupList?.length > 0">
@@ -63,10 +63,10 @@
             <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='add_group'}" >
             <ul class="ulList edit-forms" >
                 <div class="alert alert-success" role="alert" *ngIf="(createGroupSuccessMsg != '')">
-                    <strong>Success: </strong> {{createGroupSuccessMsg}}
+                    {{createGroupSuccessMsg}}
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="(createGroupErrorMsg != '')">
-                    <strong>Error: </strong> {{createGroupErrorMsg}}
+                    {{createGroupErrorMsg}}
                 </div>
                 <div class="text-danger"  style="margin-top: 26px;" *ngIf="address_required">Please give valid location</div>
                 <h3>Create Group</h3>
@@ -192,10 +192,10 @@
             <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='edit_group'}">
                     <ul class="ulList edit-forms">
                         <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                            <strong>Success: </strong> {{successMsg}}
+                            {{successMsg}}
                         </div>
                         <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-                            <strong>Error: </strong> {{errorMsg}}
+                           {{errorMsg}}
                         </div>
                         <div style="margin-top:26px;" class="text-danger" *ngIf="address_required">Please give valid location</div>
                         <h3>Edit Group</h3>
@@ -321,7 +321,7 @@
                     <div class="grp-rqsts" >
                             <h4>Group REQUESTS</h4>
                             <div class="alert alert-success" role="alert" *ngIf="(groupReqSuccessMsg != '')">
-                                <strong>Success: </strong> {{groupReqSuccessMsg}}
+                                {{groupReqSuccessMsg}}
                             </div>
                             <ul *ngIf="groupRequestList?.length > 0">
                                 <li *ngFor="let groupData of groupRequestList">
