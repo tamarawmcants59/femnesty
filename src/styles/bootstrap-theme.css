@@ -1153,7 +1153,7 @@ blockquote i {
 }
 
 .article-add-holder {
-    padding: 30px 20px;
+    padding: 30px 20px 50px;
 }
 
 .article-add-holder h3 {
@@ -5457,7 +5457,7 @@ header .dropdown-menu{min-width: 218px;}
 
 /*---------------------- 05-02-2018 --------------------------*/
 
-.btn-primary,.navbar-right button{
+.btn-primary, .navbar-right button, .login-head-form li .form-group button{
 	outline: none !important;
 }
 
@@ -5510,5 +5510,18 @@ line-height: 31px;padding: 0;left:0}
 	opacity: .09 !important;
 }
 
+.pad{
+	padding: 120px 87px;
+}
 
+.footer-top a{
+	color: #fff !important;
+}
+.footer-top a:hover{
+	opacity: 0.9;
+	text-decoration: none;
+}
 
+.notification-wrap ul li.unread {
+    background: #f0f0f0;
+}
