@@ -204,7 +204,7 @@
             </div>
             <div *ngIf="postData.comments?.length > 0">
                 <div *ngFor="let cmtList of postData.comments; let key = index">
-                    <div class="reply-comment-wrapper" *ngIf="!cmtList.hide_div">
+                    <div class="reply-comment-wrapper" *ngIf="!cmtList.hide_div && (key < 2 || showmore)">
                         <div class="left-comment-content">
                             <a [routerLink]="['/user/profile',cmtList.display_name]">
                                 <div class="user-image" [ngStyle]="{'background-image':'url('+cmtList.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
@@ -329,7 +329,12 @@
             </div>-->
                         </div>
                     </div>
+                    
                 </div>
+                <div *ngIf="  !showmore">
+                        <a href="javascript:void(0)" (click)="show_more()">Show More</a>
+                         
+                     </div>
                 <!--<div *ngIf="postCmtHtml!=''" [innerHTML]="postCmtHtml"></div>-->
             </div>
             <div class="comment-text-box" *ngIf="postCmtDiv[postData.id]">

@@ -21,6 +21,7 @@ export class PostCardComponent implements OnInit {
   public isLoggedIn: any;
   public postCmtId: any;
   public subPostCmtId: any;
+  public showmore = false;
   showPostImgDive: boolean;
   loading = false;
   editPostText: any;
@@ -427,6 +428,10 @@ export class PostCardComponent implements OnInit {
 
       }
     );
+  }
+  public show_more()
+  {
+    this.showmore = true;
   }
 }
 
