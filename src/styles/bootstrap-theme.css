@@ -2407,6 +2407,7 @@ background: #fff !important;}
     width: 30px;
     height: 30px;
     border-radius: 100px;
+    object-fit: cover;
 }
 
 .colorWhite {
@@ -5453,6 +5454,13 @@ header .dropdown-menu{min-width: 218px;}
 @media screen and (max-width:767px) {
 	.before-login-home .nav.navbar-nav.navbar-right span{top: 8px !important;color:#fff !important;}
 	.sign-form .text-danger{position: relative;bottom:0}
+	.pad{padding: 20px !important;}
+	.sign-up-area{padding: 50px 0 50px 0;}
+	
+	.join-champion .pdr-30{overflow: hidden;}
+	.join-champion .pdr-30 h3{margin-bottom: 20px;}
+	.join-champion .pdr-30 p{margin-bottom: 0}
+	
 }
 
 /*---------------------- 05-02-2018 --------------------------*/
@@ -5528,4 +5536,20 @@ line-height: 31px;padding: 0;left:0}
 }
 .notfi-padding{padding: 0}
 .notification-wrap.notfi-padding ul li{margin: 0;padding: 10px 20px}
+
+.acpt-cond-after:before{top: 2px !important;}
+.acpt-cond-after{max-width: 685px;}
+.view-more-down{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;
+background: url(../assets/images/down-arrow-gray.png)no-repeat left center;background-repeat: no-repeat;padding-left: 20px;margin-bottom: 20px;display: block;}
+
+
+
+
+
+
+
+
+
+
+
 

@@ -58,7 +58,7 @@
         </div>
       <div class="form-group col-lg-12">
           <div class="mt-30"><input class="styled-checkbox" id="styled-checkbox-1" formControlName="agreetab" type="checkbox" value="value1">
-<label for="styled-checkbox-1" *ngIf="shareYorStoryContent">{{shareYorStoryContent.codition_submit}}</label></div>
+<label class="acpt-cond-after" for="styled-checkbox-1" *ngIf="shareYorStoryContent" [innerHTML]="shareYorStoryContent.codition_submit"></label></div>
 <!--<div class="text-danger" *ngIf="!form.controls['agreetab'].valid">Please check and continue.</div>-->
       </div>
       <div class="form-group col-lg-12">
