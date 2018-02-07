@@ -1,7 +1,7 @@
 <section class="section p-16 single-article">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 pdr-35">
                 <div>
                     <img [src]="articleData.image_url" alt="" class="img-responsive">
                 </div>
@@ -9,7 +9,7 @@
                     <h3 class="text-red">{{articleData.title}}</h3>
                     <p class="text-gray">Article by {{articleData.author_name}}</p>
                     <p class="text-gray">Posted on {{articleData.c_date | dateTimeFormat: 'MMM dd, yyyy'}}</p>
-                    <ul class="n-social social-link mb-30">
+                    <ul class="n-social social-link mb-30 mt-20">
                     	<!-- <li ceiboShare  [facebook]="{u: repoUrl}">
                     		<img src="assets/images/facebook.png" />
                         </li> -->
