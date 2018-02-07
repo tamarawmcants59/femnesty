@@ -87,10 +87,13 @@
                 <!-- <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     Delete
                 </a> -->
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
+                <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
+                    Block
+                </a>-->
+                <a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
+                <a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
                     Report
                 </a>
             </div>
