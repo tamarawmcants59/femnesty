@@ -85,7 +85,7 @@
                                 <a (click)="toggleTab('about')">Invite Member</a>
                             </li>
                             <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='groupdetails'}">
-                                <a (click)="toggleTab('groupdetails')">Group Edit</a>
+                                <a (click)="toggleTab('groupdetails')">Edit Group</a>
                             </li>
                             <li *ngIf="groupDetailsData.user_id != isloginUserId" [ngClass]="{'active' : activeTab=='group'}">
                                 <a (click)="toggleTab('group')">Group Details</a>
