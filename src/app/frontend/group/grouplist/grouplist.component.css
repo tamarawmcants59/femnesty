@@ -4,3 +4,10 @@
 .about-content-area p:last-child{
 	margin-bottom: 0 !important;
 }
+.obj-center{
+	margin: 0 auto 20px;
+	float: none !important;
+	clear: both;
+	display:  block;
+	text-align: center;
+}
