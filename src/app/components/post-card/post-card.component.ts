@@ -25,6 +25,8 @@ export class PostCardComponent implements OnInit {
   showPostImgDive: boolean;
   loading = false;
   editPostText: any;
+  editCommentText:any;
+  editCommentTextId:any;
   modalRef:any;
   IsShowOption= false;
   IsShowShareOptions = false;
@@ -392,7 +394,51 @@ export class PostCardComponent implements OnInit {
     this.modalRef =   this.modalService.open(editModal);
 
   }
+  openCommentEditModal(postData1, editcommentModal) { 
+    this.IsShowOption= !this.IsShowOption;
+    if (postData1.comment) {
+      this.editCommentText = postData1.comment;
+      this.editCommentTextId = postData1.id;
+    }
+    else {
+      this.editCommentText = "";
+    }
+    //alert(this.editCommentText)
+    if (postData1.comment) {
+      const self = this;
+      setTimeout(function () {
+        const el = document.getElementById('commentEdit');
+        if (el) {
+          el.focus();
+        }
+      }, 100)
+    }
 
+    this.modalRef =   this.modalService.open(editcommentModal);
+
+  }
+
+  public editComment(postData1,id) {
+  
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const result = {};
+    const data={id:id,comment:postData1,user_id:loginUserId};
+     if(data.comment!='' ){
+      this.userSrvc.editComment(data).subscribe(data => {
+          
+          this.loading = false;
+          
+          this.modalRef.close();
+         
+        },
+        error => {
+          alert(error);
+        });
+    }
+    
+    
+  }
   /*public openDialog(): void {
     let dialogRef = this.dialog.open(PopupmodalComponent, {
       width: '100%',
