@@ -17,7 +17,7 @@
       <div class="row">
           <div class="col-md-4 col-sm-6 mt-30" *ngFor="let catData of articleCatConData">
               <a [routerLink]="['/articles',catData.slug]" ><div class="cat-article-img" [ngStyle]="{'background-image':'url('+catData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"></div> </a>
-              <h3 class="text-red">{{catData.name | limitTo : 20}}</h3>
+              <h3 class="text-red">{{catData.name}}</h3>
               <p>{{catData.short_description | limitTo : 320}}</p>
               <a [routerLink]="['/articles',catData.slug]" class="btn btn-primary"> Read more</a>
           </div>

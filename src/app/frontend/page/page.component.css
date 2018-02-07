@@ -26,5 +26,10 @@
 	letter-spacing: 1px;
 }
 .team-right p{
-	line-height: 33px !important;
+	line-height: 33px;
 }
+.pic-icon{
+	margin-top: 8px;
+}
+
+

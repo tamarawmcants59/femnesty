@@ -13,11 +13,12 @@
 	flex-wrap: wrap;
 }
 .single-article.section.women-21 h1{
-	line-height: 28px !important;
-	margin-bottom: 30px !important;
+	line-height: 28px;
+	margin-bottom: 30px;
 }
 .right-gray-box .right-text-hold{
-	padding: 42px 18px;
+	padding: 42px 16px;
+	
 }
 .font-weight-bold{
 	font-weight: bold;

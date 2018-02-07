@@ -41,7 +41,7 @@
                       </div>
                       <div class="right-text-hold">
                             <h3 class="text-red">{{articleListData[0].title}}</h3>
-                            <p class="font-weight-bold">By {{articleListData[0].author_name}}</p>
+                            <p class="color64">By {{articleListData[0].author_name}}</p>
                             <p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>
                             
                           <!--<ul class="social-link mt-30">
@@ -86,7 +86,7 @@
           </ul>
         	</div>
         </div>
-            <div class="mb-50" *ngFor="let catData of catWiseAllArt">
+            <div *ngFor="let catData of catWiseAllArt">
                 <!--<h2 class="">{{catData.name}}</h2>-->
                 <div class="row modify-row" *ngIf="catData.all_articlebycat.length > 0">
                     <div class="col-md-4 col-sm-6 col-multi-article" *ngFor="let articleData of catData.all_articlebycat">
