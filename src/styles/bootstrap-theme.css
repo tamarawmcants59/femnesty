@@ -1031,7 +1031,7 @@ button{
 .section h1 {
     font-size: 48px;
     position: relative;
-    margin-bottom: 35px;
+    margin-bottom: 45px;
     padding-bottom: 35px;
     line-height:56px;
     font-family: 'sanchezregular' !important;
@@ -1388,7 +1388,7 @@ footer {
 }
 
 .founder {
-    padding: 100px 0;
+    padding: 89px 0;
 }
 
 .founder h2 {
@@ -1449,6 +1449,8 @@ footer {
     margin-bottom: 25px;
     height: 32px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .form-area {
@@ -1943,6 +1945,25 @@ footer {
 	.navbar-right .dropdown-menu{
 	right: 0;
 	}
+.inner-banner{
+	height: 200px !important;
+	width: 100% !important;
+	background-position: center !important;
+}
+.inner-banner .row{
+	height: 200px;
+}
+.about-content-area h1{
+	font-size: 18px !important;
+	line-height: 24px;
+}
+.pic-icon-content{
+	padding:10px 15px;
+}
+.team-right {
+    padding: 30px 10px;
+}
+
 }
 
 .footer-top {
@@ -4352,7 +4373,7 @@ font-weight: normal;padding: 2px 5px;}
 
 .single-article.section.women-21 h1{font-size: 32px}
 .inner-pages-holder.women-21 p{font-size: 14px;}
-.women-21 .right-gray-box .right-text-hold h3{font-size: 22px}
+.women-21 .right-gray-box .right-text-hold h3{font-size: 22px; margin-bottom: 5px !important;}
 .women-21 .right-gray-box .right-text-hold p.font-weight-bold{font-size: 12px}
 .women-21 .right-gray-box .right-text-hold p.text-gray{font-size: 14px} 
 
@@ -4524,7 +4545,7 @@ color: #707070;width:100%}
     
     .books-wrap .book-item{width:48%;}
     
-    .new-about-content-area, .founder.gray, section.team {padding:50px 0}
+    .new-about-content-area, .founder.gray, section.team {padding:30px 0}
     .advisory-board{
 		margin: 15px 0 !important;
 	}
@@ -4578,11 +4599,35 @@ section h1:after{
 		.login-head-form li .form-group input{
 		width: 100% !important;
 		}
+		.team-right h3{
+			font-size:22px !important;
+		}
+		.pic-icon-content h2{
+			font-size: 24px !important;
+		}
+		
+		.founder.gray h2{
+			font-size: 24px !important;
+		}
+		.founder.gray h3.text-red{
+			font-size: 22px !important;
+		}
+		.container{
+			padding-left: 25px !important;
+			padding-right: 25px !important;
+		}
 
 }
 @media screen and (max-width:480px) {
 	
-	
+	.inner-banner{
+	height: 200px !important;
+	width: 100% !important;
+	background-position: center !important;
+}
+.inner-banner .row{
+	height: 200px;
+}
 	
 	.hub-listing li{flex-wrap:wrap;}
 	.hub-listing li div{width:100% !important;text-align: center !important;padding: 1px 0 !important}
@@ -4634,6 +4679,17 @@ section h1{
 	.banner h1{margin: 90% auto 0 !important;}
 	.header-top{padding: 7px 0;}
 	
+}
+@media screen and (max-width:320px) {
+	
+	.inner-banner{
+	height: 200px !important;
+	width: 100% !important;
+	background-position: center !important;
+}
+.inner-banner .row{
+	height: 200px;
+}
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
 width: 19px; height: 25px; background-repeat:  no-repeat;}
@@ -5454,13 +5510,53 @@ header .dropdown-menu{min-width: 218px;}
 @media screen and (max-width:767px) {
 	.before-login-home .nav.navbar-nav.navbar-right span{top: 8px !important;color:#fff !important;}
 	.sign-form .text-danger{position: relative;bottom:0}
-	.pad{padding: 20px !important;}
+  .team-right p {
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 22px !important;
+}
+.article-page{
+	padding: 0;
+}
+.article-page h3{
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+.right-gray-box{
+	margin-top: 40px;
+}
+.single-article.section h1{
+	text-align: left;
+	font-size: 24px !important;
+	margin-bottom: 20px !important;
+}
+.women-21 h1{
+	text-align: left;
+	font-size: 24px !important;
+	margin-bottom: 20px !important;
+}
+.women-21 .right-gray-box .right-text-hold h3{
+	text-align: left;
+}
+.inner-pages-holder.women-21 p{
+	text-align: left;
+}
+.col-multi-article{
+	margin-top: 30px;
+}
+.article-page .btn{
+	margin-bottom: 20px !important;
+}
+.article-page .col-multi-article p{
+	height: auto !important;
+}
+  .pad{padding: 20px !important;}
 	.sign-up-area{padding: 50px 0 50px 0;}
 	
 	.join-champion .pdr-30{overflow: hidden;}
 	.join-champion .pdr-30 h3{margin-bottom: 20px;}
 	.join-champion .pdr-30 p{margin-bottom: 0}
-	
+
 }
 
 /*---------------------- 05-02-2018 --------------------------*/
@@ -5536,20 +5632,11 @@ line-height: 31px;padding: 0;left:0}
 }
 .notfi-padding{padding: 0}
 .notification-wrap.notfi-padding ul li{margin: 0;padding: 10px 20px}
-
+.color64{
+	color: #646464;
+	font-size: 12px !important;
+}
 .acpt-cond-after:before{top: 2px !important;}
 .acpt-cond-after{max-width: 685px;}
 .view-more-down{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;
 background: url(../assets/images/down-arrow-gray.png)no-repeat left center;background-repeat: no-repeat;padding-left: 20px;margin-bottom: 20px;display: block;}
-
-
-
-
-
-
-
-
-
-
-
-
