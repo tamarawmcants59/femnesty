@@ -27,8 +27,10 @@ export class CmpEditprofileComponent implements OnInit {
   public showPostImgDive: boolean = false;
   public form: FormGroup;
   public adminform: FormGroup;
+  public IsShowCropperCoverImage = false;
   public IsShowCropperProfileImage = false;
   public postform: FormGroup;
+  modalErrorMsg: any;
   public showCoverCrop = false;
   public showProfileCrop = false;
   croppedImage: any = '';
@@ -223,7 +225,24 @@ export class CmpEditprofileComponent implements OnInit {
     this.getFriendList();
     //console.log(this.loginUserDet);
   }
-
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
   public getFollowerList() {
 
     const loginUserId = localStorage.getItem("loginUserId");
@@ -479,8 +498,10 @@ export class CmpEditprofileComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
   resetCover() {
-    this.showCoverCrop = false;
-    this.coverCroppedImage = "";
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = "";
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
   }
   public fileChangeListenerCover($event) {
     // this.showCoverImgDive = true;
@@ -510,20 +531,27 @@ export class CmpEditprofileComponent implements OnInit {
       type: 'canvas',
       size: 'viewport'
     }).then(function (resp) {
-      const uploadJsonData = {
-        "id": that.cmpId,
-        "profile_image": resp
-      };
-      that.dataService.updateImgService(uploadJsonData)
-        .subscribe(
-        data => {
-          that.loading = false;
-          that.getUserDetails();
-          window.location.reload();
-        },
-        error => {
-          alert(error);
-        });
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          "id": that.cmpId,
+          "profile_image": resp
+        };
+        that.dataService.updateImgService(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.getUserDetails();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
     });
     // this.loading = true;
     // const loginUserId = localStorage.getItem("loginUserId");
@@ -545,26 +573,38 @@ export class CmpEditprofileComponent implements OnInit {
   }
 
   public UploadCoverImg() {
-    //console.log(this.cropper.image.image);
+
+
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
-    const uploadJsonData = {
-      "id": this.cmpId,
-      "cover_img": this.coverCroppedImage
-    };
-    //console.log(uploadJsonData);
-    this.dataService.updateImgService(uploadJsonData)
-      .subscribe(
-      data => {
-        this.loading = false;
-        this.showCoverImgDive = false;
-        this.getUserDetails();
-        window.location.reload();
-        //this.router.navigateByUrl('/user/profile');
-      },
-      error => {
-        alert(error);
-      });
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          "id": that.cmpId,
+          "cover_img": resp
+        };
+        that.dataService.updateImgService(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.getUserDetails();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+    });
+
   }
 
   public deleteAdmin(del_id) {
@@ -803,16 +843,32 @@ export class CmpEditprofileComponent implements OnInit {
       });
   }
   openUpdateCoverProModal(updateCoverPictureModal) {
-
-    this.showCoverCrop = false;
-    this.coverCroppedImage = '';
+    this.modalErrorMsg = '';
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
     this.modalService.open(updateCoverPictureModal);
   }
   resetPro() {
-    $('.upload-demo').removeClass('ready');
+    // $('.upload-demo').removeClass('ready');
+    // this.IsShowCropperProfileImage = false;
+    $(".upload-demo-wrap").hide();
     this.IsShowCropperProfileImage = false;
   }
   openUpdateProModal(updateProfilePictureModal) {
+    this.modalErrorMsg = '';
     setTimeout(() => {
       this.$uploadCrop = $('#upload-demo').croppie({
         viewport: {
@@ -828,6 +884,7 @@ export class CmpEditprofileComponent implements OnInit {
     this.modalService.open(updateProfilePictureModal);
   }
   cropperChange(event) {
+    $(".upload-demo-wrap").show();
     this.IsShowCropperProfileImage = true;
     const image: any = new Image();
     const file: File = event.target.files[0];
