@@ -11,7 +11,7 @@
   <div class="container">
       <div class="row">
           <div class="col-md-7">
-              <h1 class="text-white">{{articleCatData.name}}</h1>
+              <h1 class="text-white">Femnesty Events</h1>
           </div>
       </div>
   </div>   
@@ -21,7 +21,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1 style="margin-top: 0">{{articleCatData.name}}</h1>
+            <h1 style="margin-top: 0" [innerHTML]="articleCatData.name"></h1>
             <p class="font-weight-bold mb-30">{{articleCatData.short_description}}</p>
             <div [innerHTML]="articleCatData.description" class="mb-30"></div>
             <a [routerLink]="['/enrichment/list',articleCatData.slug]" class="btn btn-primary">What's On?</a>
