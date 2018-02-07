@@ -41,6 +41,10 @@ export class GroupComponent implements OnInit {
   public loading = false;
   public groupPostDetData: object = {};
   public IsGroupAdmin = false;
+  
+  public editAbtActiveTab:any;
+  
+
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   constructor(
     private dataService: UserService,
@@ -121,6 +125,7 @@ export class GroupComponent implements OnInit {
           //console.log(data);
           if (data.Ack == "1") {
             this.groupDetailsData = data.GroupDetails[0];
+            //alert(JSON.stringify(this.groupDetailsData))
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
             if (this.isloginUserId == data.GroupDetails[0].user_id) {
@@ -520,6 +525,8 @@ export class GroupComponent implements OnInit {
         this.short_desc = this.groupDetailsData.short_desc;
       }
     }
+    
+    
   }
   public requestGroupAction(pid, type) {
     this.loading = true;
@@ -569,5 +576,21 @@ export class GroupComponent implements OnInit {
     this.successMsg = '';
     this.errorMsg = '';
   }
+  public editAboutToggleTab(data: any) {
+    this.editAbtActiveTab = data;
+    alert( this.editAbtActiveTab);
+    this.successMsg = '';
+    this.errorMsg = '';
+    //console.log(data);
+  }
+  public updateAccount() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    // const result = {},
+    //   userValue = this.form.value;
+    // userValue.id = loginUserId;
+    
+    
 
+  }
 }
