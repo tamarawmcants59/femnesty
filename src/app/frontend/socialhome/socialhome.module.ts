@@ -8,11 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from "../../components/shared.module";
 import { UserService } from '../user/user.service';
-
+import {RatingModule} from "ng2-rating";
 
 @NgModule({
   imports: [
     CommonModule,
+    RatingModule,
     SocialRouting,
     FormsModule,
     ApplicationPipes,
