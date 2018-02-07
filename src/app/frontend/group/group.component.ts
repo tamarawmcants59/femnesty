@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../user/user.service";
+
 import * as _ from "lodash";
 
 @Component({
@@ -15,7 +17,16 @@ export class GroupComponent implements OnInit {
   public isGroupId = "";
   public groupDetailsData: any;
   public group_name: any;
-  public short_desc: any;
+  public year_est:any;
+  public cat_id:any;
+  public country:any;
+  public city:any;
+  public address:any;
+  public postal_code:any;
+  public phone:any;
+  public email:any;
+  public short_desc:any;
+  public long_desc:any;
   public searchErrorMessage:any;
   //public groupPidData: object = { };
   public groupPostList = [];
@@ -41,19 +52,64 @@ export class GroupComponent implements OnInit {
   public loading = false;
   public groupPostDetData: object = {};
   public IsGroupAdmin = false;
-  
+  public catList = [];
+  public countryList = [];
   public editAbtActiveTab:any;
-  
+  public form: FormGroup;
 
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private builder: FormBuilder,
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
+
+
+
+    this.form = builder.group({
+      group_name: ['', [
+        Validators.required
+      ]],
+      year_est: ['', [
+        Validators.required
+      ]],
+      cat_id: ['', [
+        Validators.required
+      ]],
+      country: ['', [
+        Validators.required
+      ]],
+      city: ['', [
+        Validators.required
+      ]],
+      address: ['', [
+        Validators.required
+      ]],
+      postal_code: ['', [
+        Validators.required
+      ]],
+      email: ['', [
+        Validators.required
+      ]],
+      phone: ['', [
+        Validators.required
+      ]]
+      ,
+      short_desc: ['', [
+        Validators.required
+      ]]
+      ,
+      long_desc: ['', [
+        
+      ]]
+      
+			
+
+    });
   }
 
   ngOnInit() {
@@ -61,9 +117,31 @@ export class GroupComponent implements OnInit {
       this.groupNameByUrl = params['gname'];
     });
     this.getGroupDetailsByName();
+    this.getHubCategories();
+    this.getTotCounteyList();
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
+  }
+  public getTotCounteyList() {
+    this.dataService.getCountryList().subscribe(data => {
+      if (data.Ack == 1) {
+        this.countryList = data.country_list;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+  public getHubCategories() {
+    this.dataService.getHubCategories().subscribe(data => {
+      if (data.Ack == "1") {
+        this.catList = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
   }
   searchConnections(value) {
     if (value) {
@@ -578,18 +656,27 @@ export class GroupComponent implements OnInit {
   }
   public editAboutToggleTab(data: any) {
     this.editAbtActiveTab = data;
-    alert( this.editAbtActiveTab);
     this.successMsg = '';
     this.errorMsg = '';
     //console.log(data);
   }
-  public updateAccount() {
+  public updateGroup() {
     this.loading = true;
-    const loginUserId = localStorage.getItem("loginUserId");
-    // const result = {},
-    //   userValue = this.form.value;
-    // userValue.id = loginUserId;
-    
+   
+    const data1 = this.form.value;
+      data1.id = this.groupDetailsData.id;
+    this.loading = true;
+        const data = { group_name: this.group_name, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data1).subscribe(data1 => {
+         // this.group_name = '';
+          this.loading = false;
+          this.editAbtActiveTab ='';
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
     
 
   }
