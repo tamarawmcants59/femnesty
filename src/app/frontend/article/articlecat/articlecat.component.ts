@@ -12,9 +12,11 @@ export class ArticlecatComponent implements OnInit {
   articleCatData:any;
   articleListData=[];
   articleMainData=[];
+  articleAllCatData=[];
   catWiseAllArt=[];
   SlugName='';
   public repoUrl = '';
+  public AllArtCnt:number=0;
   constructor(
     private _artcat_service:ArticleService,
     private activatedRoute: ActivatedRoute,
@@ -25,6 +27,7 @@ export class ArticlecatComponent implements OnInit {
         if(this.SlugName=='all'){
           this.getArticleMainImg();
           this.getAllCatwiseArticle();
+          this.getAllCatArticle();
         }else{
           this.getCatwiseArticle();
         }
@@ -44,6 +47,25 @@ export class ArticlecatComponent implements OnInit {
           //console.log(details);
           this.articleCatData = details.ArticleCatBySlug[0];
           this.articleListData = details.TopArticleByCat;
+      }
+    },
+    error => {
+      console.log('Something went wrong!');
+    });
+  }
+
+  getAllCatArticle(){
+    this._artcat_service.getCatAllArticleList().subscribe(data=>{
+      let details=data;
+      if (details.Ack==1) {
+          this.articleAllCatData = details.ArticleAllCategory;
+          if(details.ArticleAllCategory.length>0){
+            details.ArticleAllCategory.forEach(element => {
+              if(element.count>0){
+                this.AllArtCnt+=element.count;
+              }
+            });
+          }
       }
     },
     error => {
