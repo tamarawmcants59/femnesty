@@ -14,6 +14,8 @@ export class BrowsehubComponent implements OnInit {
   public allCategories;
   public lat;
   public lng;
+  currentLat = 0;
+  currentLng = 0;
   private search_con;
   public search_date;
   public latestArticles = [];
@@ -23,7 +25,19 @@ export class BrowsehubComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllHubs();
+    const self = this;
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+
+        self.currentLat = position.coords.latitude;
+        self.currentLng = position.coords.longitude;
+        self.getAllHubs();
+
+      }, function (err) {
+        self.getAllHubs();
+      }, { timeout: 10000 });
+    }
+
     this.getLastFourArticle();
   }
 

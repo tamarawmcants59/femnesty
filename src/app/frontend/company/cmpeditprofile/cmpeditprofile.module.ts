@@ -12,6 +12,7 @@ import { UserService } from "../../user/user.service";
 //import { NgxCropperModule } from 'ngx-cropper';
 import {  SelectModule } from "../../../../../node_modules/ng2-select";
 //import { Ng4GeoautocompleteModule } from "ng4-geoautocomplete";
+import { ImageCropperModule } from 'ngx-image-cropper'
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import {  SelectModule } from "../../../../../node_modules/ng2-select";
         secondaryColour: '#bb1926', 
         tertiaryColour: '#ffffff'
     }),
+    ImageCropperModule
     //Ng4GeoautocompleteModule,
         //MatDialogModule  
         

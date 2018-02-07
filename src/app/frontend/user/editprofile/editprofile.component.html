@@ -11,7 +11,7 @@
                         <!--<img [src]="loginUserDet.cover_image_url" class="img-responsive">-->
                         <div class="change-img" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
                             <i class="fa fa-camera"></i>
-                            <div class="txt" >Upload Banner Photo</div>
+                            <div class="txt">Upload Banner Photo</div>
                         </div>
                         <!-- <input type="file" class="change-img-input" (change)="fileChangeListenerCover($event)">
                         <div class="addCoverPhoto">
@@ -27,7 +27,7 @@
                             <div class="inner-bg" (click)="openUpdateProModal(updateProfilePictureModal)">
                                 <div class="icon-change" id="clickableLiElement">
                                     <i class="fa fa-camera"></i>
-                                    <div class="txt" >Update Profile
+                                    <div class="txt">Update Profile
                                         <br> Picture</div>
                                     <!-- <div class="txt">Update Profile
                                             <br> Picture</div>
@@ -217,7 +217,7 @@
                                                                     [max]="minDate" [disableInput]="true"></ngx-date-picker>
                                                             </p>
                                                             <div class="text-danger pull-left" *ngIf="!validAge && form.controls['dob'].valid">
-                                                                    Have to be 16 or above to become a member.</div>
+                                                                Have to be 16 or above to become a member.</div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -371,48 +371,47 @@
         </div>
     </div>
 </section>
-
 <ng-template #updateProfilePictureModal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Change Image</h4>
-        <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="img result" *ngIf="!croppedImage">
-            <img [src]="loginUserDet.image_url" style="width:100%; height:100%">
+        <div class="modal-header">
+            <h4 class="modal-title">Change Image</h4>
+            <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        <div class="img result" *ngIf="croppedImage">
-            <img [src]="croppedImage" style="width:100%; height:100%">
-
-
-        </div>
-
-        <div class="col-md-12" *ngIf="showProfileCrop">
-            <!-- <div class="col-md-12" *ngIf="croppedImage" style="padding-bottom:10px;">
-                <div class="col-md-4" style="padding-top: 90px;">
-                    <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
-                </div>
+        <div class="modal-body">
+            <div class="img result" *ngIf="!IsShowCropperProfileImage">
+                <img [src]="loginUserDet.image_url" style="width:100%; height:100%">
+            </div>
+            <!-- <div class="img result" *ngIf="croppedImage">
+                <img [src]="croppedImage" style="width:100%; height:100%">
+    
+    
+            </div>
+    
+            <div class="col-md-12" *ngIf="showProfileCrop">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="200"
+                    format="png" (imageCropped)="imageCropped($event)"></image-cropper>
             </div> -->
-            <!-- <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper> -->
-            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="200"
-                format="png" (imageCropped)="imageCropped($event)"></image-cropper>
-        </div>
-        <div class="inner-bg">
-            <div class="icon-change">
-                <div class=" btn modal-btn-black btn-default" style="float:right;">Update Image
-                    <input type="file" id="theFileInput" (change)="fileChangeListener($event)" />
+            <div class="inner-bg">
+                <div class="icon-change">
+                    <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+                        <input type="file" id="upload" accept="image/*" (change)="cropperChange($event)" />
+                    </div>
                 </div>
             </div>
+            <div class="upload-demo">
+                <div class="upload-demo-wrap">
+                    <div id="upload-demo"></div>
+                </div>
+            </div>
+    
         </div>
-
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn modal-btn-black btn-default"  *ngIf="croppedImage" (click)="UploadPrfImg()">Upload</button>
-    </div>
-</ng-template>
+        <div class="modal-footer">
+                <button type="button" class="btn modal-btn-primary" (click)="resetPro()">Remove Image</button>
+            <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+            <button type="button" class="btn modal-btn-black btn-default"  (click)="UploadPrfImg()">Change</button>
+        </div>
+    </ng-template>
 
 <ng-template #updateCoverPictureModal let-c="close" let-d="dismiss">
     <div class="modal-header">
@@ -432,18 +431,12 @@
         </div>
 
         <div class="col-md-12" *ngIf="showCoverCrop">
-            <!-- <div class="col-md-12" *ngIf="croppedImage" style="padding-bottom:10px;">
-                <div class="col-md-4" style="padding-top: 90px;">
-                    <button type="button" class="btn btn-primary" (click)="UploadPrfImg()">Upload</button>
-                </div>
-            </div> -->
-            <!-- <img-cropper #cropper [image]="prfImageData" [settings]="prfCropperSettings" (onCrop)="cropped($event)"></img-cropper> -->
             <image-cropper [imageChangedEvent]="coverImageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="200"
                 format="png" (imageCropped)="coverImageCropped($event)"></image-cropper>
         </div>
         <div class="inner-bg">
             <div class="icon-change">
-                <div class=" btn modal-btn-black btn-default" style="float:right;">Update Image
+                <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
                     <input type="file" id="theFileInput" (change)="fileChangeListenerCover($event)" />
                 </div>
             </div>
@@ -451,7 +444,8 @@
 
     </div>
     <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>
         <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn modal-btn-black btn-default"  *ngIf="coverImageCropped" (click)="UploadCoverImg()">Upload</button>
+        <button type="button" class="btn modal-btn-black btn-default" *ngIf="coverImageCropped" (click)="UploadCoverImg()">Change</button>
     </div>
 </ng-template>
