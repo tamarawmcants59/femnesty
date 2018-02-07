@@ -2850,12 +2850,12 @@ background: #fff !important;}
 .commentPart {
     background: #fff;
     margin-top: 0;
-    padding: 0;
-    
-
+    padding: 20px;
+    background: #f0f0f0;
+	border-top: solid 1px #dddfe2;
      
 }
-.commentPart .likeComment{border-top: solid 1px #dddfe2;width:calc(100% - 40px);padding: 20px 0;margin: 0 auto;}
+.commentPart .likeComment{/*width:calc(100% - 40px);padding: 20px 0;*/margin: 0 auto;}
 .tabPart .tab-content {
     background: #f7f7f7;
 }
@@ -2898,6 +2898,7 @@ background: #fff !important;}
     margin-top: 0px;
     color: #e6e6e6;
 }
+.icondown:hover,.icondown:focus,.icondown:active{color: #bf1a28}
 
 .userComment {
     padding-bottom: 0px;
@@ -3551,7 +3552,8 @@ background: #fff !important;}
 .reply-comment-wrapper {
     margin-top: 20px;
     display: flex;
-    flex-wrap: nowrap
+    flex-wrap: nowrap;
+    padding: 0 20px;
 }
 
 .reply-comment-wrapper .left-comment-content {
@@ -5658,6 +5660,7 @@ line-height: 31px;padding: 0;left:0}
 .view-more-down{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;
 background: url(../assets/images/down-arrow-gray.png)no-repeat left center;background-repeat: no-repeat;padding-left: 20px;margin-bottom: 20px;display: block;}
 
+.view-more-down:hover{color: #bf1a28}
 .right-share-new{padding: 56px 23px} 
 .right-share-new p{font-size:17px;margin: 18px 0 35px;line-height: 20px;}
 /*.right-share-new .btn.btn-primary{font-size: 17px !important;height: 58px;padding: 0 43px;line-height:58px;}*/
