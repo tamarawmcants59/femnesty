@@ -8,7 +8,7 @@ import { SharedModule } from "../../components/shared.module";
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { UserService } from "../user/user.service";
 import { GrouplistComponent } from './grouplist/grouplist.component';
-
+import { ImageCropperModule } from 'ngx-image-cropper'
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +24,8 @@ import { GrouplistComponent } from './grouplist/grouplist.component';
       primaryColour: '#bb1926',
       secondaryColour: '#bb1926',
       tertiaryColour: '#ffffff'
-    })
+    }),
+    ImageCropperModule
   ],
   declarations: [GroupComponent, GrouplistComponent],
   providers: [UserService]

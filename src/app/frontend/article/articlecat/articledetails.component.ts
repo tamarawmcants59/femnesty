@@ -28,9 +28,7 @@ export class ArticledetailsComponent implements OnInit {
         let details=data;
         if (details.Ack=="1") {
             this.articleData = details.ArticleListBySlug[0];
-            return false;
-        }else{
-            return false;
+            //console.log(this.articleData);
         }
       },
       error => {

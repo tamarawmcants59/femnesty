@@ -4,11 +4,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
 import { HubService } from "./hub.service";
 import { SelectModule } from "../../../../node_modules/ng2-select";
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 // import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 // import { AmazingTimePickerService } from 'amazing-time-picker';
 
 declare var google: any;
-
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-hub-create',
   templateUrl: './hub-create.component.html',
@@ -23,13 +25,20 @@ export class HubCreateComponent implements OnInit {
   createErrorMsg: string = '';
   successMsg: string = '';
   postImgData: any;
+  croppedImage: any = '';
+  modalRef: any;
   public checkInvalidDate: boolean = true;
   public minDate = new Date();
   public aboutActiveTab: string = 'overview';
   public loginUserDet: Object = {};
   public loginUserId: any;
+  coverImgData: any;
+  public showProfileCrop = false;
   public groupList: any;
+  IsShowCropperCoverImage = false;
   public groupEditId: any;
+  $uploadCrop: any;
+  modalErrorMsg: any;
   public hubList = [];
   public groupEditDataJson = {};
   public addForm = { type: 'O', category_id: '', privacy: 'O' };
@@ -51,7 +60,8 @@ export class HubCreateComponent implements OnInit {
     private dataService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private hubService: HubService
+    private hubService: HubService,
+    private modalService: NgbModal
   ) {
     /*init */
     setTimeout(() => {
@@ -248,7 +258,23 @@ export class HubCreateComponent implements OnInit {
       }
     );
   }
+  openUpdateCoverProModal(updateCoverPictureModal) {
 
+    this.modalErrorMsg = '';
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalRef = this.modalService.open(updateCoverPictureModal);
+  }
   public setMinDate(newValue) {
 
   }
@@ -274,30 +300,27 @@ export class HubCreateComponent implements OnInit {
           if (this.hubList[i].type == 'O') {
             const date = new Date(this.hubList[i].date);
             date.setHours(0, 0, 0, 0);
-            let date1 = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
+            let date1 = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
             let compareDate = this.postform.value.date;
             compareDate.setHours(0, 0, 0, 0);
-            let compareDate1 = compareDate.getDate() + "/" + (compareDate.getMonth() +1)+ "/" + compareDate.getFullYear();
-            if(this.postform.value.type=="O")
-            {
+            let compareDate1 = compareDate.getDate() + "/" + (compareDate.getMonth() + 1) + "/" + compareDate.getFullYear();
+            if (this.postform.value.type == "O") {
               if (date1 == compareDate1) {
                 this.createErrorMsg = "A hub already exists on the entered date.";
                 IsValid = false;
                 window.scrollTo(0, 0);
                 break;
               }
-              else
-              {
-                IsValid=true;
+              else {
+                IsValid = true;
               }
             }
-            else if(this.postform.value.type=="R")
-            {
+            else if (this.postform.value.type == "R") {
               let from = new Date(this.postform.value.date);
               from.setHours(0, 0, 0, 0);
               let to = new Date(this.postform.value.recurring_end);
               to.setHours(0, 0, 0, 0);
-              let check =new Date(this.hubList[i].date);
+              let check = new Date(this.hubList[i].date);
               check.setHours(0, 0, 0, 0);
               if (check >= from && check <= to) {
                 this.createErrorMsg = "A hub already exists on the entered date.";
@@ -305,12 +328,11 @@ export class HubCreateComponent implements OnInit {
                 window.scrollTo(0, 0);
                 break;
               }
-              else
-              {
-                IsValid=true;
+              else {
+                IsValid = true;
               }
             }
-            
+
           }
           else if (this.hubList[i].type == 'R') {
             let from = new Date(this.hubList[i].recurring_start);
@@ -325,9 +347,8 @@ export class HubCreateComponent implements OnInit {
               window.scrollTo(0, 0);
               break;
             }
-            else
-            {
-              IsValid=true;
+            else {
+              IsValid = true;
             }
           }
         }
@@ -344,7 +365,11 @@ export class HubCreateComponent implements OnInit {
           this.loading = true;
           const userValue = this.postform.value;
           userValue.user_id = this.loginUserId;
-          userValue.image = this.postImgData;
+          // userValue.image = this.postImgData;
+          if (this.coverImgData)
+            userValue.image = this.coverImgData;
+          else
+            userValue.image = '';
           if (address && lat) {
             userValue.address = address;
             userValue.lat = lat;
@@ -657,6 +682,44 @@ export class HubCreateComponent implements OnInit {
 
         });
     }
+  }
+  closeModal(updateCoverPictureModal) {
+    if (this.modalRef) {
+      const that = this;
+      this.$uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+      }).then(function (resp) {
+        if (resp == 'data:,') {
+        }
+        else {
+          that.coverImgData = resp;
+        }
+        that.modalRef.close();
+      })
+    }
+  }
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
+  resetCover() {
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
   }
 
   public fileChangePost($event) {
