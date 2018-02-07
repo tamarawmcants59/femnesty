@@ -15,6 +15,8 @@ export class EventdetailsComponent implements OnInit {
   articleData = [];
   public repoUrl = '';
   startDateString: any;
+  startTime: any;
+  endTime: any;
   constructor(
     private serviceData: EnrichmentService,
     private activatedRoute: ActivatedRoute,
@@ -33,8 +35,15 @@ export class EventdetailsComponent implements OnInit {
         if (details.EventListBySlug[0].created_on) {
           this.startDateString = new Date(details.EventListBySlug[0].created_on).toISOString().replace(/[-:.]/g, "").replace('000Z', "Z");
         }
+        /*if (details.EventListBySlug[0].event_start_time) {
+          this.startTime = new Date(details.EventListBySlug[0].event_start_time);
+        }
+        if (details.EventListBySlug[0].event_end_time) {
+          this.endTime = new Date(details.EventListBySlug[0].event_end_time);
+        }*/
+        
         this.articleData = details.EventListBySlug[0];
-        return false;
+        //console.log(this.articleData);
       } else {
         return false;
       }
