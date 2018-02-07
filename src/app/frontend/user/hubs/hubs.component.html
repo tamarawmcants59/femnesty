@@ -103,6 +103,53 @@
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='editHub'}">
 								<div class="innerRightPart right-map-details HUB-Dtls">
 									<h2 *ngIf="!title">{{hubDetails.title}}</h2>
+									
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>TITLE</span>
+											<p>From TLC to the pointer sisters, check out the top girl groups ever.</p>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/check-icon.png" alt="" /></a></div>
+											<span>TITLE</span>
+											<div class="form-group"><input class="form-control" type="text"></div>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>DESCRIPTION</span>
+											<p>At Billboard.com, we're celebrating Girl Group Week by looking at the biggest songs, best music videos, current state of girl groups, drafting our dream girl groups, scoping out post-girl group solo songs and a whole lot more.</p>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/check-icon.png" alt="" /></a></div>
+											<span>DESCRIPTION</span>
+											<div class="form-group"><textarea class="form-control" rows="6"></textarea></div>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>DATE</span>
+											<p>eb 01, 12:00 AM - 12:00 AM</p>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>ORGANIZER</span>
+											<p>Emily</p>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>EMAIL</span>
+											<p>emily@em.com</p>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>PHONE</span>
+											<p>98765432100</p>
+										</div>
+										<div class="item">
+											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
+											<span>WEBSITE</span>
+											<p>Public</p>
+										</div>
+									
 									<p *ngIf="title">
 										<input class="text-center" type="text" [(ngModel)]="title" *ngIf="title">
 									</p>
