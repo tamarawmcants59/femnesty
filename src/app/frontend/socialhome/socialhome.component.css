@@ -1,4 +1,17 @@
 .feedhover{
     left:0 !important;
-    background-color: black !important;
   }
+
+.form-group-new input{
+	border-radius: 0px;
+	background: #f7f7f7;
+	height: 42px;
+	margin-top: 7px;
+	border: solid 1px #dfdfdf !important;
+	color: #6a6a6a;
+	font-size: 10px;
+}
+.rate .checkbox-inline input[type="radio"]{display: inline;vertical-align: top;margin: 0;margin-right:5px}
+.rate .checkbox-inline{padding-left: 0;}
+
+

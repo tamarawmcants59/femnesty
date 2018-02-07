@@ -5029,14 +5029,18 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{
 .feedback-n{
 	position: fixed;
 	z-index: 9999;
-	width: 65px;
-	height: 160px;
-	left: -50px;
+	width: 66px;
+	height: 162px;
+	left: -53px;
 	top: 200px;
 	background: #bd1520;
 	display: flex;
 	
 }
+.feedback-n span{position: absolute;top:9px;right:9px;}
+.feedback-n span{position: absolute;top:9px;right:14px;}
+.feedback-n span i{color: #fff !important}
+
 .feedback-n:hover{
 	left: 0 !important;
 	background: #212121;
@@ -5045,10 +5049,10 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{
 .feedback-n a{
 	display: block;	
 	text-align: center;
-	transform: rotate(90deg);
-	transform-origin: left 42px 0;
+	transform: rotate(-90deg);
+	transform-origin: 83% 33%;;
 	color: #fff;
-	font-size: 14px;
+	font-size: 16px;
 	font-family: 'montserratmedium';
 	text-decoration: none;
 }
@@ -5541,8 +5545,6 @@ line-height: 31px;padding: 0;left:0}
 .acpt-cond-after{max-width: 685px;}
 .view-more-down{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;
 background: url(../assets/images/down-arrow-gray.png)no-repeat left center;background-repeat: no-repeat;padding-left: 20px;margin-bottom: 20px;display: block;}
-
-
 
 
 
