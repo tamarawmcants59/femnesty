@@ -339,6 +339,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
                   self.showPostImgDive = false;
                   self.loading = false;
                   self.createGroupSuccessMsg = 'Successfully created the group.';
+                  this.coverImgData='';
                   self.postform.reset();
                   localStorage.setItem("address", JSON.stringify({ address: '', lat: '', lng: '' }));
                   window.scrollTo(0, 0);
