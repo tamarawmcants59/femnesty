@@ -95,7 +95,13 @@ export class UserService {
       form_data
     ).map(data => data);
   }
-
+  
+  editComment(form_data) {
+    return this.apiService.post(
+      `/enrichment/appusereditcomment`,
+      form_data
+    ).map(data => data);
+  }
   uploadFile(form_data) {
     return this.apiService.post(
       `/users/uploadfile`,

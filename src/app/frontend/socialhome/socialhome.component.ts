@@ -3,6 +3,7 @@ import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup} from 
 import { Router, ActivatedRoute } from '@angular/router';
 import { SocialService } from "./social.service";
 import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+import { FrontendService } from "../../components/frontend-app-header/frontend.service";
 
 @Component({
   selector: 'app-socialhome',
@@ -28,11 +29,20 @@ export class SocialhomeComponent implements OnInit {
   public showCmtDiv:boolean = false;
   public groupPostDetData: object ={ };
   
+  public rForm: FormGroup;
+  public IsShowFeedForm = false;
+  public isShowPlus = true;
+  public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
+  public homepageCls = '';
+  public shhover = '';
+
   constructor(
     private builder:FormBuilder, 
     private dataService: SocialService, 
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dataService1: FrontendService,
+    private fb: FormBuilder
   ) {
     let loginUserId=localStorage.getItem("loginUserId");
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -52,6 +62,13 @@ export class SocialhomeComponent implements OnInit {
     });
 
       this.IsloginUserId=loginUserId;
+
+      this.rForm = fb.group({
+        'description': [null, Validators.compose([Validators.required])],
+        'email': [null, Validators.compose([Validators.required, Validators.email])],
+        'feedback': [null, Validators.compose([Validators.required])],
+        'rating': [null, Validators.compose([Validators.required])],
+      });
    }
 
   ngOnInit() {
@@ -139,7 +156,7 @@ export class SocialhomeComponent implements OnInit {
                 this.postform.reset();
               
       },
-      error => {
+      error => { 
         alert(error);
       });
 
@@ -156,6 +173,34 @@ export class SocialhomeComponent implements OnInit {
           that.postImgData= image.src;
       };
       myReader.readAsDataURL(file);
+  }
+
+  sendFeedBack() {
+    this.loading = true;
+    this.dataService1.giveFeedback(this.rForm.value).subscribe(data => {
+      if (data.Ack == "1") {
+        this.successMsg=data.msg;
+        this.loading = false;
+        this.rForm.reset();
+      }
+      else if(data.Ack == "0"){
+        this.errorMsg=data.msg;
+        this.loading = false;
+      }
+    }, error => {
+      this.loading = false;
+      console.log('Something went wrong!');
+    });
+  }
+  openForm() {
+    this.shhover = "feedhover";
+    this.IsShowFeedForm = true;
+    this.isShowPlus = false;
+  }
+  closeForm() {
+    this.shhover = "";
+    this.isShowPlus = true;
+    this.IsShowFeedForm = false;
   }
 
 }

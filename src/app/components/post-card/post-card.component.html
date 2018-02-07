@@ -216,8 +216,11 @@
                                     <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
                                         <h4 class="commentee-name">{{cmtList.name}}</h4>
                                     </a>
-                                    <a style="float:right;" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
+                                    <a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
                                         <i style="color:#BB1926" class="fa fa-trash"></i>
+                                    </a>
+                                    <a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">
+                                        <i style="color:#BB1926" class="fa fa-edit"></i>
                                     </a>
                                 </div>
                                 <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
@@ -256,8 +259,11 @@
                                             <div class="profTextPart">
                                                 <div class="heading" style="width:100%;height:auto;overflow: hidden;">
                                                     <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
-                                                    <a style="float:right" *ngIf="IsGroupAdmin" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">
+                                                    <a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">
                                                         <i class="fa fa-trash" style="color:#BB1926"></i>
+                                                    </a>
+                                                    <a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">
+                                                        <i class="fa fa-edit" style="color:#BB1926"></i>
                                                     </a>
                                                 </div>
                                                 <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
@@ -478,6 +484,43 @@
             <div class="col-md-3">
 
                 <button class="btn modal-btn-primary" type="button" (click)="editPost(postData)">Edit Post</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn modal-btn-primary" (click)="c('Close click')" #closeEditModal>Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+<ng-template #editcommentModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Comment</h4>
+    </div>
+    <div class="modal-body">
+        <div class="frind-modal">
+            
+            
+            <div *ngIf="editCommentText">
+
+                <div class="textarea">
+                    <div class="form-group">
+
+
+                        <textarea class="form-control" rows="5" placeholder="Share your thoughts..." id="commentEdit" [(ngModel)]="editCommentText" name="editCommentText"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer" style="border-top: none;">
+        <div class="row">
+            
+            <div class="col-md-3">
+
+                <button class="btn modal-btn-primary" type="button" (click)="editComment(editCommentText,editCommentTextId)">Edit Comment</button>
             </div>
             <div class="col-md-3">
                 <button type="button" class="btn modal-btn-primary" (click)="c('Close click')" #closeEditModal>Cancel</button>
