@@ -64,7 +64,7 @@
 					</div>
 
 					<div class="profDes All-hub-list">
-						<p class="all-hb">ALL HUBS</p>
+						<p class="all-hb">ALL HUBS NEAR BY</p>
 						<ul>
 							<li *ngFor="let hub of allHubs">
 								<a [routerLink]="['/user/hub_details/',hub.slug]">
@@ -128,6 +128,7 @@
 							<li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}"
 							 (click)="searchByCategory(cat.id)">{{cat.title}}
 								<span *ngIf="cat.hubs">({{cat.hubs}})</span>
+								<span *ngIf="!cat.hubs">(0)</span>
 							</li>
 						</ul>
 					</div>

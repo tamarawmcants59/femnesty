@@ -4,7 +4,8 @@ import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { UserService } from "../user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
@@ -17,18 +18,20 @@ export class EditprofileComponent implements OnInit {
   public aboutActiveTab: string = 'overview';
   public editAbtActiveTab: string = '';
   public showImgDive: boolean = false;
+  public IsShowCropperProfileImage = false;
   public showProfileCrop = false;
   public showCoverCrop = false;
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
   public form: FormGroup;
   imageChangedEvent: any = '';
-  coverImageChangedEvent:any='';
+  coverImageChangedEvent: any = '';
   croppedImage: any = '';
-  coverCroppedImage:any='';
+  coverCroppedImage: any = '';
   returnUrl: string;
   errorMsg: string = '';
   successMsg: string = '';
+  $uploadCrop: any;
   reqErrorMsg: string = '';
   reqSuccessMsg: string = '';
   userTabActiveStr: string = '';
@@ -155,15 +158,6 @@ export class EditprofileComponent implements OnInit {
   }
 
   ngOnInit() {
-    //activeTab: string = 'activity';
-    this.route.params.subscribe((params: Params) => {
-      this.userTabActiveStr = params['type'];
-      if (this.userTabActiveStr != '') {
-        this.activeTab = this.userTabActiveStr;
-      } else {
-        this.activeTab = 'activity';
-      }
-    });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.groupPostDetData = { activitytype: '', activityid: '' };
 
@@ -209,8 +203,18 @@ export class EditprofileComponent implements OnInit {
     }
   }
   openUpdateProModal(updateProfilePictureModal) {
-   this.showProfileCrop=false;
-   this.croppedImage='';
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 200,
+          height: 200,
+          type: 'circle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
     this.modalService.open(updateProfilePictureModal);
   }
   public getUserDetails() {
@@ -264,7 +268,14 @@ export class EditprofileComponent implements OnInit {
       );
     }
   }
-
+  resetCover() {
+    this.showCoverCrop = false;
+    this.coverCroppedImage = "";
+  }
+  resetPro() {
+    $('.upload-demo').removeClass('ready');
+    this.IsShowCropperProfileImage = false;
+  }
   public updateAccount() {
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
@@ -294,11 +305,27 @@ export class EditprofileComponent implements OnInit {
       });
 
   }
+  cropperChange(event) {
+    this.IsShowCropperProfileImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
+  openUpdateCoverProModal(updateCoverPictureModal) {
 
-  openUpdateCoverProModal(updateCoverPictureModal)
-  {
-    this.showCoverCrop=false;
-    this.coverCroppedImage='';
+    this.showCoverCrop = false;
+    this.coverCroppedImage = '';
     this.modalService.open(updateCoverPictureModal);
   }
 
@@ -348,21 +375,29 @@ export class EditprofileComponent implements OnInit {
     //   "id": loginUserId,
     //   "profile_image": this.cropper.image.image
     // };
-    const uploadJsonData = {
-      "id": loginUserId,
-      "profile_image": this.croppedImage
-    };
-    this.dataService.updateImgService(uploadJsonData)
-      .subscribe(
-      data => {
-        this.loading = false;
-        this.showImgDive = false;
-        this.getUserDetails();
-        window.location.reload();
-      },
-      error => {
-        alert(error);
-      });
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      const uploadJsonData = {
+        "id": loginUserId,
+        "profile_image": resp
+      };
+      that.dataService.updateImgService(uploadJsonData)
+        .subscribe(
+        data => {
+          that.loading = false;
+          that.showImgDive = false;
+          that.getUserDetails();
+          window.location.reload();
+        },
+        error => {
+          alert(error);
+        });
+    });
+
+
   }
 
   public UploadCoverImg() {

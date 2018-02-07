@@ -1,84 +1,184 @@
 .result {
-    margin-top: 30px;
-    border: 1px solid rgba(125,125,125,0.6);
-    display: inline-block;
-    padding: 1px;
+  margin-top: 30px;
+  border: 1px solid rgba(125, 125, 125, 0.6);
+  display: inline-block;
+  padding: 1px;
 }
 
-.result.rounded > img {
-    border-radius: 50%;
+.result.rounded>img {
+  border-radius: 50%;
 }
-.topPart{
-    height: 210px;
-    background-size: cover;
 
+.topPart {
+  height: 210px;
+  background-size: cover;
 }
-.profPhoto .img{
-    top: -60px;
+
+.profPhoto .img {
+  top: -60px;
 }
 
 .profImageP .img {
-    height: 50px;
-    width: 50px;
-    background-size: cover;
-    border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  border-radius: 50%;
 }
 
-.new-tabs .nav-tabs{
-	border-bottom:  none !important;
-}
-.new-tabs ul li{ border-radius:  0; border: none; background: #b8b8b8 !important; font-weight:500; font-size: 12px;}
-.new-tabs .nav-tabs > li > a {
-    margin-right:0 !important;
-    line-height: 1.42857143;
-    border: none;
-    border-radius:0;
-    padding: 15px 20px;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 12px;
-	font-weight: bold;
-	cursor: pointer;
-	color: #fff;
-	letter-spacing: 2px;
-}
-.new-tabs .nav-tabs > li.active > a{
-	color: #000;
-}
-.new-tabs .nav-tabs > li.active > a:hover{ background: none;}
-.new-tabs .tab-content{
-	background: #fff;
-}
-.new-tabs .tab-content ul{ padding:20px; margin:0; display: block; overflow:visible !important}
-.new-tabs .tab-content ul li{ padding:15px; margin-bottom: 10px; border-bottom: solid 1px #f0f0f0; background: none !important; width: 100% !important; position: relative; display: block !important; float: none !important;}
-.new-tabs .tab-content ul li h5{
-	font-size: 14px; color: #000; font-weight: bold; padding-right: 25px; text-align: left; border:none; 
-}
-.new-tabs .tab-content ul li p{
-	font-size: 18px; color: #7b7b7b; padding: 0 25px; text-align: left; margin-bottom: 10px;
+.new-tabs .nav-tabs {
+  border-bottom: none !important;
 }
 
-.hide_div{ display: none;}
-.show_div{ display: block;}
-.text_hide_div{ display: none;}
-.imgp1{
-    background-position: center center;
-    background-size: cover;
-    }
-
-
-ng4geo-autocomplete.auto-text-input input{
-        background: #f7f7f7;
-    border: 0 !important;
-    box-shadow: none;
-    height: 64px !important;
-    font-size: 14px !important;
-    padding: 6px 30px !important;
-    font-family: 'sanchezregular';
-    color: #707070;
+.new-tabs ul li {
+  border-radius: 0;
+  border: none;
+  background: #b8b8b8 !important;
+  font-weight: 500;
+  font-size: 12px;
 }
 
+.new-tabs .nav-tabs>li>a {
+  margin-right: 0 !important;
+  line-height: 1.42857143;
+  border: none;
+  border-radius: 0;
+  padding: 15px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 2px;
+}
 
-.profPhoto .img .inner-bg .icon-change{height: 100%;background: none;padding: 0}
-.profPhoto .img .inner-bg .txt{display: none;}
-.profPhoto .img .inner-bg i{font-size: 40px}
+.new-tabs .nav-tabs>li.active>a {
+  color: #000;
+}
 
+.new-tabs .nav-tabs>li.active>a:hover {
+  background: none;
+}
+
+.new-tabs .tab-content {
+  background: #fff;
+}
+
+.new-tabs .tab-content ul {
+  padding: 20px;
+  margin: 0;
+  display: block;
+  overflow: visible !important
+}
+
+.new-tabs .tab-content ul li {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #f0f0f0;
+  background: none !important;
+  width: 100% !important;
+  position: relative;
+  display: block !important;
+  float: none !important;
+}
+
+.new-tabs .tab-content ul li h5 {
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+  padding-right: 25px;
+  text-align: left;
+  border: none;
+}
+
+.new-tabs .tab-content ul li p {
+  font-size: 18px;
+  color: #7b7b7b;
+  padding: 0 25px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.hide_div {
+  display: none;
+}
+
+.show_div {
+  display: block;
+}
+
+.text_hide_div {
+  display: none;
+}
+
+.imgp1 {
+  background-position: center center;
+  background-size: cover;
+}
+
+ng4geo-autocomplete.auto-text-input input {
+  background: #f7f7f7;
+  border: 0 !important;
+  box-shadow: none;
+  height: 64px !important;
+  font-size: 14px !important;
+  padding: 6px 30px !important;
+  font-family: 'sanchezregular';
+  color: #707070;
+}
+
+.profPhoto .img .inner-bg .icon-change {
+  height: 100%;
+  background: none;
+  padding: 0
+}
+
+.profPhoto .img .inner-bg .txt {
+  display: none;
+}
+
+.profPhoto .img .inner-bg i {
+  font-size: 40px
+}
+
+.demo-wrap {
+  border-bottom: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.upload-demo .upload-demo-wrap,
+.upload-demo .upload-result,
+.upload-demo.ready .upload-msg {
+  display: none;
+}
+
+.upload-msg {
+  text-align: center;
+  padding: 50px;
+  font-size: 22px;
+  color: #aaa;
+  width: 260px;
+  margin: 50px auto;
+  border: 1px solid #aaa;
+}
+
+.upload-demo.ready .upload-demo-wrap {
+  display: block;
+}
+
+.upload-demo-wrap {
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.demo-wrap .container {
+  padding-bottom: 10px;
+}
+
+.grid {
+  width: 100%;
+  max-width: 1140px;
+  min-width: 755px;
+  margin: 0 auto;
+  overflow: hidden;
+}

@@ -28,7 +28,7 @@
         "../node_modules/ngx-datetime-picker/ngx-datetime-picker.css"
       ],
       "scripts": [
-       
+
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -31,6 +31,7 @@
     "bootstrap": "^3.3.7",
     "calendar": "^0.1.0",
     "core-js": "^2.4.1",
+    "croppie": "^2.6.1",
     "firebase": "^4.6.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
