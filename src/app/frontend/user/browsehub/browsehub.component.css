@@ -126,12 +126,12 @@
 .new-tabs ul li{ background: #b8b8b8 !important;}
 .new-tabs .tab-content{background: none !important; padding:10px}
 .obj-center{
-	margin: 0 auto 20px !important;
+	margin: 0 auto 20px;
 	float: none !important;
 	clear: both;
 	display:  block;
 	text-align: center;
 }
 .about-content-area{
-	padding:40px !important;
+	padding:40px;
 }

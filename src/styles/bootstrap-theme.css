@@ -4042,7 +4042,7 @@ ul.connectionlist li .text-area p {
 .filter-reslt li {
     display: block;
     padding: 5px 0;
-    color: #222;
+    color: #000;
     
     font-size: 14px;
     text-transform: inherit !important;
@@ -4351,7 +4351,7 @@ section.team h2.text-red {font-size: 28px;}
 /*----------------------- 11-12-2017 -------------*/
 .fix-to-top{
 	position: fixed;
-	top: 80px;
+	top: 105px;
 	padding: 20px !important;
 	width:255px !important;
 }
@@ -5570,6 +5570,9 @@ header .dropdown-menu{min-width: 218px;}
 	.inner-pages-holder h1{
 		text-align: left;
 		font-size: 14px;
+	}
+	.obj-center{
+		margin-top: 20px !important;
 	}
 }
 
