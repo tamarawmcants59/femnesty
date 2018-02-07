@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../user/user.service";
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from "lodash";
-
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
@@ -12,11 +15,29 @@ export class GroupComponent implements OnInit {
   public groupNameByUrl: string = '';
   public isloginUserId: any;
   public isUserLogin: any;
+  public showProfileCrop = false;
+  modalErrorMsg: any;
+  croppedImage: any = '';
   public isGroupId = "";
   public groupDetailsData: any;
   public group_name: any;
+  public year_est:any;
+  public cat_id:any;
+  public country:any;
+  public city:any;
+  public address:any;
+  public postal_code:any;
+  public phone:any;
+  public email:any;
+  public long_desc:any;
+  coverImageChangedEvent: any = '';
+  public showCoverCrop = false;
   public short_desc: any;
-  public searchErrorMessage:any;
+  coverCroppedImage: any = '';
+  public searchErrorMessage: any;
+  public IsShowCropperCoverImage = false;
+  $uploadCrop: any;
+
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
@@ -41,15 +62,65 @@ export class GroupComponent implements OnInit {
   public loading = false;
   public groupPostDetData: object = {};
   public IsGroupAdmin = false;
+  public catList = [];
+  public countryList = [];
+  public editAbtActiveTab:any;
+  public form: FormGroup;
+
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private builder: FormBuilder, 
+    private modalService: NgbModal
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
+
+
+
+    this.form = builder.group({
+      group_name: ['', [
+        Validators.required
+      ]],
+      year_est: ['', [
+        Validators.required
+      ]],
+      cat_id: ['', [
+        Validators.required
+      ]],
+      country: ['', [
+        Validators.required
+      ]],
+      city: ['', [
+        Validators.required
+      ]],
+      address: ['', [
+        Validators.required
+      ]],
+      postal_code: ['', [
+        Validators.required
+      ]],
+      email: ['', [
+        Validators.required
+      ]],
+      phone: ['', [
+        Validators.required
+      ]]
+      ,
+      short_desc: ['', [
+        Validators.required
+      ]]
+      ,
+      long_desc: ['', [
+        
+      ]]
+      
+			
+
+    });
   }
 
   ngOnInit() {
@@ -57,13 +128,35 @@ export class GroupComponent implements OnInit {
       this.groupNameByUrl = params['gname'];
     });
     this.getGroupDetailsByName();
+    this.getHubCategories();
+    this.getTotCounteyList();
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
   }
+  public getTotCounteyList() {
+    this.dataService.getCountryList().subscribe(data => {
+      if (data.Ack == 1) {
+        this.countryList = data.country_list;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
+  public getHubCategories() {
+    this.dataService.getHubCategories().subscribe(data => {
+      if (data.Ack == "1") {
+        this.catList = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
+  }
   searchConnections(value) {
     if (value) {
-      this.IsShowTopViewMore=false;
+      this.IsShowTopViewMore = false;
       value = value.toLowerCase();
       let searchResult = this.totaluserFrndList.filter(item => {
         if (item.name.toLowerCase().search(value) !== -1) {
@@ -76,18 +169,84 @@ export class GroupComponent implements OnInit {
           this.filetredFriendList.push(searchResult[i]);
         }
       }
-      else
-      {
-        this.IsShowTopViewMore=false;
-        this.filetredFriendList=[];
-        this.searchErrorMessage="No record found.";
+      else {
+        this.IsShowTopViewMore = false;
+        this.filetredFriendList = [];
+        this.searchErrorMessage = "No record found.";
       }
     }
     else {
-      this.IsShowTopViewMore=true;
+      this.IsShowTopViewMore = true;
       this.filetredFriendList = [];
-      this.searchErrorMessage='';
+      this.searchErrorMessage = '';
     }
+
+  }
+  openUpdateCoverProModal(updateCoverPictureModal) {
+
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    this.modalErrorMsg = '';
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalService.open(updateCoverPictureModal);
+  }
+
+  public UploadCoverImg() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          image: resp, id: that.groupDetailsData.id
+        };
+        that.dataService.editGroupDataSend(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.getGroupDetailsByName();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+    });
+    //console.log(this.cropper.image.image);
+    // this.loading = true;
+    // const data = { image: this.coverCroppedImage, id: this.groupDetailsData.id }
+    // this.dataService.editGroupDataSend(data).subscribe(data => {
+    //   this.loading = false;
+    //   this.getGroupDetailsByName();
+    //   window.location.reload();
+    // },
+    //   error => {
+    //     this.loading = false;
+    //     alert('Sorry there is some error.')
+    //   });
 
   }
   fileChangePost($event) {
@@ -111,6 +270,8 @@ export class GroupComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+
+
   public getGroupDetailsByName() {
     if (this.groupNameByUrl != '') {
       const dataUserDet = {
@@ -121,6 +282,7 @@ export class GroupComponent implements OnInit {
           //console.log(data);
           if (data.Ack == "1") {
             this.groupDetailsData = data.GroupDetails[0];
+            //alert(JSON.stringify(this.groupDetailsData))
             //console.log(this.groupDetailsData);
             this.isGroupId = data.GroupDetails[0].id;
             if (this.isloginUserId == data.GroupDetails[0].user_id) {
@@ -468,7 +630,7 @@ export class GroupComponent implements OnInit {
         else {
           this.getGroupMemberList();
           this.checkMyFrndList();
-          this.filetredFriendList=[];
+          this.filetredFriendList = [];
         }
 
         //this.successMsg = 'You have successfully send the request.';
@@ -520,6 +682,8 @@ export class GroupComponent implements OnInit {
         this.short_desc = this.groupDetailsData.short_desc;
       }
     }
+    
+    
   }
   public requestGroupAction(pid, type) {
     this.loading = true;
@@ -562,12 +726,68 @@ export class GroupComponent implements OnInit {
     }
 
   }
+  resetCover() {
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = "";
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
+  }
+  coverImageCropped(image: string) {
+    this.coverCroppedImage = image;
+  }
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
+  public fileChangeListenerCover($event) {
 
+    this.showCoverCrop = true;
+    this.coverImageChangedEvent = $event;
+  }
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;
     this.successMsg = '';
     this.errorMsg = '';
   }
+  public editAboutToggleTab(data: any) {
+    this.editAbtActiveTab = data;
+    this.successMsg = '';
+    this.errorMsg = '';
+    //console.log(data);
+  }
+  public updateGroup() {
+    this.loading = true;
+   
+    const data1 = this.form.value;
+      data1.id = this.groupDetailsData.id;
+    this.loading = true;
+        const data = { group_name: this.group_name, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data1).subscribe(data1 => {
+         // this.group_name = '';
+          this.loading = false;
+          this.editAbtActiveTab ='';
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+    
 
+  }
 }

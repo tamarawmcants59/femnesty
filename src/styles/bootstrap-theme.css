@@ -1947,12 +1947,12 @@ footer {
 	right: 0;
 	}
 .inner-banner{
-	height: 200px !important;
+	max-height: 184px !important;
 	width: 100% !important;
 	background-position: center !important;
 }
 .inner-banner .row{
-	height: 200px;
+	max-height: 184px;
 }
 .about-content-area h1{
 	font-size: 18px !important;
@@ -2718,7 +2718,7 @@ background: #fff !important;}
 
 .profDes p {
     margin-bottom: 0px;
-    color: #4e4e4e;
+    color: #000;
     
 }
 
@@ -3804,6 +3804,9 @@ ul.uploadVideo {
     font-size: 13px;
     letter-spacing: 1px;
     height: 46px;
+    font-weight: normal !important;
+    color: #000;
+    outline:  none !important;
 }
 
 .inline-search .input-group-btn .btn {
@@ -4098,7 +4101,7 @@ ul.connectionlist li .text-area p {
     color: #be1620;
     padding-bottom: 0;
     margin: 20px auto;
-    font-size: 25px;
+    font-size: 28px;
 }
 
 .share-story h1:after {
@@ -4683,12 +4686,12 @@ section h1{
 @media screen and (max-width:320px) {
 	
 	.inner-banner{
-	height: 200px !important;
+	max-height: 184px !important;
 	width: 100% !important;
 	background-position: center !important;
 }
 .inner-banner .row{
-	height: 200px;
+	max-height: 184px;
 }
 }
 .new-tabs .tab-content .edit{ position: absolute; z-index: 100; right:30px; top:50px; cursor: pointer; background: url('../assets/images/edit.png');
@@ -5509,7 +5512,9 @@ header .dropdown-menu{min-width: 218px;}
 
 .before-login-home .nav.navbar-nav.navbar-right a{padding-right: 26px;color: #000}
 .before-login-home .nav.navbar-nav.navbar-right li.nav-item:hover a,.before-login-home .nav.navbar-nav.navbar-right li.nav-item:focus a{color: #fff !important}
-
+.pdr-35{
+	padding-right:35px; 
+}
 
 @media screen and (max-width:767px) {
 	.before-login-home .nav.navbar-nav.navbar-right span{top: 8px !important;color:#fff !important;}
@@ -5560,7 +5565,12 @@ header .dropdown-menu{min-width: 218px;}
 	.join-champion .pdr-30{overflow: hidden;}
 	.join-champion .pdr-30 h3{margin-bottom: 20px;}
 	.join-champion .pdr-30 p{margin-bottom: 0}
-
+	.pdr-35{padding-right:15px;}
+	section h1::after {left: 28px !important;}
+	.inner-pages-holder h1{
+		text-align: left;
+		font-size: 14px;
+	}
 }
 
 /*---------------------- 05-02-2018 --------------------------*/
@@ -5648,6 +5658,47 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 .right-share-new{padding: 56px 23px} 
 .right-share-new p{font-size:17px;margin: 18px 0 35px;line-height: 20px;}
 /*.right-share-new .btn.btn-primary{font-size: 17px !important;height: 58px;padding: 0 43px;line-height:58px;}*/
+.article-page .col-multi-article h5{
+	font-size:10px !important;
+	color: #616161 !important;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.article-page h3{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.mt-20{
+	margin-top: 20px;
+}
 
+.obj-center .btn-primary{
+	padding-left:35px !important;
+	padding-right: 35px !important;
+}
 
+.inline-search .form-control::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #000;
+    opacity: 1 !important;
+}
 
+.inline-search .form-control::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #000;
+    opacity: 1 !important;
+}
+
+.inline-search .form-control:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #000;
+    opacity: 1 !important;
+}
+
+.inline-search .form-control:-moz-placeholder {
+    /* Firefox 18- */
+    color: #000;
+    opacity: 1 !important;
+}

@@ -56,3 +56,58 @@
 .new-tabs ul {border-bottom:0}
 .new-tabs ul li{ background: #b8b8b8 !important;}
 .new-tabs .tab-content{background: none !important; padding:10px}
+.demo-wrap {
+    border-bottom: 1px solid #ddd;
+    padding-top: 20px;
+  }
+  
+  .upload-demo .upload-demo-wrap,
+  .upload-demo .upload-result,
+  .upload-demo.ready .upload-msg {
+    display: none;
+  }
+  
+  .upload-msg {
+    text-align: center;
+    padding: 50px;
+    font-size: 22px;
+    color: #aaa;
+    width: 260px;
+    margin: 50px auto;
+    border: 1px solid #aaa;
+  }
+  
+  .upload-demo.ready .upload-demo-wrap {
+    display: block;
+  }
+  
+  .upload-demo-wrap {
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .demo-wrap .container {
+    padding-bottom: 10px;
+  }
+  
+  .grid {
+    width: 100%;
+    max-width: 1140px;
+    min-width: 755px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+.tabPart .tab-content .edit {
+    position: absolute;
+    z-index: 100;
+    right: 30px;
+    top: 50px;
+    cursor: pointer;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAZCAYAAADTyxWqAAAAGXRFW…lyihEmBiqCUcOGk2GwdGZBQtGNDUjAUvttIBalgsNeAgQYAP+MVUd5VkVGAAAAAElFTkSuQmCC);
+    width: 19px;
+    height: 25px;
+    background-repeat: no-repeat;
+}
+

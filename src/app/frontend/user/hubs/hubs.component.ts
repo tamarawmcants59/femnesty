@@ -9,6 +9,8 @@ import { SelectModule } from "../../../../../node_modules/ng2-select";
 import { environment } from '../../../../environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 declare var google: any;
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-hubs',
   templateUrl: './hubs.component.html',
@@ -18,8 +20,12 @@ export class HubsComponent implements OnInit {
   public isloginUser = 1;
   public postform: FormGroup;
   searchName: any;
+  public showProfileCrop = false;
   public loginUserId: any;
   searchErrorMessage: any;
+  modalErrorMsg: any;
+  public IsShowCropperCoverImage = false;
+  croppedImage: any = '';
   public hubSlug = '';
   private connectionsPageSize = 5;
   public totalUninvitedUsers = [];
@@ -27,6 +33,7 @@ export class HubsComponent implements OnInit {
   public groupPostDetData: object = {};
   public groupPostList = {};
   public uninvitedUsers = [];
+  $uploadCrop: any;
   filetredFriendList = [];
   public IsShowTopViewMore = false;
   public loading = false;
@@ -116,6 +123,23 @@ export class HubsComponent implements OnInit {
       error => {
         console.log('Something went wrong!');
       });
+  }
+  openUpdateCoverProModal(updateCoverPictureModal) {
+
+    this.modalErrorMsg = '';
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalService.open(updateCoverPictureModal);
   }
   public getHubDetails() {
     this.hubService.getHubDetails(this.hubSlug, this.loginUserId).subscribe(data => {
@@ -231,6 +255,48 @@ export class HubsComponent implements OnInit {
       error => {
       }
     );
+  }
+  public UploadCoverImg(hubDetails) {
+    this.loading = true;
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          image: resp, id: that.hubDetails.id, user_id: hubDetails.user_id
+        };
+        that.hubService.editHubDetails(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.getHubDetails();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+    });
+    //console.log(this.cropper.image.image);
+    // this.loading = true;
+    // const data = { image: this.coverCroppedImage, id: this.groupDetailsData.id }
+    // this.dataService.editGroupDataSend(data).subscribe(data => {
+    //   this.loading = false;
+    //   this.getGroupDetailsByName();
+    //   window.location.reload();
+    // },
+    //   error => {
+    //     this.loading = false;
+    //     alert('Sorry there is some error.')
+    //   });
+
   }
   fileChangePost($event, hubDetails) {
     const image: any = new Image();
@@ -583,17 +649,39 @@ export class HubsComponent implements OnInit {
       }
     }
   }
+  resetCover() {
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
+  }
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
   public sendInvites(id) {
     const userValue = this.postform.value;
     userValue.hub_id = this.hubDetails.id;
-    userValue.user_ids =[];
+    userValue.user_ids = [];
     userValue.user_ids.push(id);
     this.hubService.sendInvites(userValue).subscribe(data => {
       if (data.Ack == 1) {
         this.successMsg = 'Request Sent Successfully';
         //this.postform.reset();
         this.filetredFriendList = [];
-        this.searchName='';
+        this.searchName = '';
         this.getUnivitedUsers();
       }
     },

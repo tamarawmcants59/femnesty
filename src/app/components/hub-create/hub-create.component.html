@@ -234,14 +234,17 @@
                   <label for="staticEmail" class="col-sm-4 col-form-label">Hub Image</label>
                   <div class="col-sm-8">
                     <div class="upload-btn-wrapper uploadButtonPart">
-                      <button class="btn">Upload Image</button>
-                      <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                      <button class="btn" (click)="openUpdateCoverProModal(updateCoverPictureModal)">Upload Image</button>
+                      <!-- <input type="file" name="myfile" (change)="fileChangePost($event)" /> -->
                     </div>
                     <div class="" *ngIf="showPostImgDive">
                       <span class="result" *ngIf="postImgData">
                         <img [src]="postImgData" [height]="100">
                       </span>
                     </div>
+                    <span class="result" *ngIf="coverImgData">
+                        <img [src]="coverImgData" [height]="100">
+                    </span>
                     <div class="" *ngIf="!showPostImgDive && addForm.image">
                       <span class="result" *ngIf="addForm.image">
                         <img [src]="addForm.image" [height]="100">
@@ -376,3 +379,35 @@
     </div>
   </div>
 </div>
+
+<ng-template #updateCoverPictureModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Upload Image</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
+            {{modalErrorMsg}}
+        </div>
+        <div class="inner-bg">
+            <div class="icon-change">
+                <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+                    <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
+                </div>
+            </div>
+        </div>
+        <div class="upload-demo">
+            <div class="upload-demo-wrap">
+                <div id="upload-demo"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="closeModal()">Ok</button>
+    </div>
+</ng-template>

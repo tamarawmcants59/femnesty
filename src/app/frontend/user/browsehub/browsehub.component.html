@@ -39,7 +39,7 @@
 							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="9">
 								<agm-marker *ngFor="let hub of allHubs" [latitude]="hub.lat" [longitude]="hub.lng">
 									<agm-info-window>
-										<div class="popup" style="width:250px">
+										<div class="popup" style="width:254px">
 											<ul>
 												<li>
 													<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
@@ -99,9 +99,10 @@
 				</div>
 			</div>
 			<div class="col-md-3 flex-right">
+			<div class="obj-center"><a class="btn btn-primary"[routerLink]="['/user/create_hub/create']"  >Create Hub</a></div>
 				<div class="rightPart">
 					<div class="innerRightPart" style="padding: 30px">
-							<a class="btn btn-primary"[routerLink]="['/user/create_hub/create']"  >Create Hub</a>
+							
 						<h2>BROWSE HUBS</h2>
 						<div class="inline-search">
 							<div class="input-group">
@@ -113,7 +114,7 @@
 								</span>
 							</div>
 						</div>
-						<div class="inline-search">
+						<!--<div class="inline-search">
 							<div class="input-group">
 								<input type="date" placeholder="Search By Date" [(ngModel)]="search_date" (keypress)="handleKeyDown1($event)" class="form-control">
 								<span class="input-group-btn">
@@ -122,7 +123,7 @@
 									</button>
 								</span>
 							</div>
-						</div>
+						</div>-->
 						<ul class="filter-reslt">
 							<li (click)="searchByCategory('')" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==''?'800':'200'}">All Hubs</li>
 							<li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}"

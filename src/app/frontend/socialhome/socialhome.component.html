@@ -13,10 +13,10 @@
   </div>
   <div class="feedback-from" *ngIf="IsShowFeedForm">
       <div class="alert alert-success" role="alert" *ngIf="successMsg">
-          <strong>Success: </strong> {{successMsg}}
+          {{successMsg}}
         </div>
         <div class="" role="alert" *ngIf="errorMsg">
-            <strong>Error: </strong> {{errorMsg}}
+             {{errorMsg}}
           </div>
     <form [formGroup]="rForm" (ngSubmit)="sendFeedBack()">
         <div class="from">

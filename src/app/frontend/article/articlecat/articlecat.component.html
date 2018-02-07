@@ -14,10 +14,10 @@
           <div class="container">
               <div class="row">
                   <div class="col-md-8">
-                      <h1 style="line-height: 28px;">{{articleCatData.name}}</h1>
+                      <h1 style="line-height: 28px;">{{articleCatData.name}} Articles</h1>
                       <p class="font-weight-bold mb-30">{{articleCatData.short_description}}</p>
                       <div [innerHTML]="articleCatData.description" class="mb-30"></div>
-                      <a [routerLink]="['/articles/list',articleCatData.slug]" class="btn btn-primary">Read Article</a>
+                      <a [routerLink]="['/articles/list',articleCatData.slug]" class="btn btn-primary">Read Articles</a>
                       <ul class="n-social mt-30 mb-30">
                             <li>
                                 <app-beta-restriction [height]="''" [image]="'assets/images/facebook.png'">
@@ -41,7 +41,7 @@
                       </div>
                       <div class="right-text-hold">
                             <h3 class="text-red">{{articleListData[0].title}}</h3>
-                            <p class="color64">By {{articleListData[0].author_name}}</p>
+                            <p class="color64">By {{articleListData[0].author_name}}, {{articleListData[0].c_date | dateTimeFormat: 'MMM dd, yyyy'}}</p>
                             <p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>
                             
                           <!--<ul class="social-link mt-30">
@@ -70,40 +70,37 @@
         <div class="container">
         <div class="row">
         	<div class="col-md-12 books-tab">
-        		<ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs" role="tablist">
               <li class="active">
-                  <a class="toolti">All Articles <span>(22)</span></a>
+                  <a class="toolti" [routerLink]="['/articles/all']">All Articles <span>({{AllArtCnt}})</span></a>
               </li>
-              <li>
-                  <a class="tooltips" name="Sample Text Here" href="">Work and Home Balance <span>(10)</span></a>
-              </li>
-              <li>
-                  <a class="tooltips" name="Sample Text Here" href="">Work and Home Balance <span>(10)</span></a>
-              </li>
-              <li>
-                  <a class="tooltips" name="Sample Text Here" href="">Work and Home Balance <span>(10)</span></a>
+              <li *ngFor="let catListData of articleAllCatData">
+                  <a class="tooltips" name="{{catListData.short_description}}" [routerLink]="['/articles',catListData.slug]">{{catListData.name}} <span>({{catListData.count}})</span></a>
               </li>
           </ul>
         	</div>
         </div>
+        <div class="row">
             <div *ngFor="let catData of catWiseAllArt">
                 <!--<h2 class="">{{catData.name}}</h2>-->
-                <div class="row modify-row" *ngIf="catData.all_articlebycat.length > 0">
+                <div *ngIf="catData.all_articlebycat.length > 0">
+                <!--<div class="row modify-row" *ngIf="catData.all_articlebycat.length > 0">-->
                     <div class="col-md-4 col-sm-6 col-multi-article" *ngFor="let articleData of catData.all_articlebycat">
                         <!--<div class="cat-article-img" [ngStyle]="{'background-image':'url('+catData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"></div>-->
                         <img [src]="articleData.image_url" alt="" class="img-responsive">
-                        <h3 class="text-red">{{articleData.title | limitTo : 19}}</h3>
-                        <h5 > <span>Article by {{articleData.author_name}} in</span> <span class="text-red"> {{catData.name | limitTo : 13}}</span></h5>
+                        <h5 > <span>Article by {{articleData.author_name}} in</span> <span class="text-red"> {{catData.name}}</span></h5>
+                        <h3 class="text-red">{{articleData.title}}</h3>
                         <p>{{articleData.short_desc | limitTo : 250}}</p>
                         <a [routerLink]="['/articles/details',articleData.slug]" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
-                <div class="row" *ngIf="catData.all_articlebycat.length == 0">
+                <!--<div class="row" *ngIf="catData.all_articlebycat.length == 0">
                     <div class="col-md-12 col-sm-12 col-multi-article">
                         <p class="text-center">No article found.</p>
                     </div>
-                </div>
+                </div>-->
             </div>
+        </div>
         </div>
     </section>
 

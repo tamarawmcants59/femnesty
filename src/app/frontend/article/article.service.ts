@@ -34,4 +34,8 @@ export class ArticleService {
   getAllArticleByCategory(){
     return this.apiService.get(`/enrichment/apparticleallcatsbyslug/all`).map(data => data);
   }
+
+  getCatAllArticleList(){
+    return this.apiService.get(`/enrichment/apparticleallcatcount`).map(data => data);
+  }
 }
