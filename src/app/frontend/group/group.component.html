@@ -84,6 +84,12 @@
                             <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='about'}">
                                 <a (click)="toggleTab('about')">Invite Member</a>
                             </li>
+                            <li *ngIf="groupDetailsData.user_id == isloginUserId && isloginUserId !=''" [ngClass]="{'active' : activeTab=='groupdetails'}">
+                                <a (click)="toggleTab('groupdetails')">Group Edit</a>
+                            </li>
+                            <li *ngIf="groupDetailsData.user_id != isloginUserId" [ngClass]="{'active' : activeTab=='group'}">
+                                <a (click)="toggleTab('group')">Group Details</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content" *ngIf="(groupDetailsData?.group_type=='1' || !isJoinGroup)">
@@ -357,6 +363,67 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                            </div>
+                            <div id="menu4" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='group'}">
+                                <div class="connectionsPart">
+                                    <div class="connections">
+                                        
+                                       <h2>{{groupDetailsData.group_name}}</h2>
+                                       
+									<p class="HUB-Dtls-txt">{{groupDetailsData?.short_desc}}</p>
+									<p class="info" >
+										<span>Year:</span>{{groupDetailsData?.year_est}}</p>
+									<p class="info">
+                                        <span>Address:</span> {{groupDetailsData?.address}}</p>
+                                    <p class="info">
+                                        <span>City:</span> {{groupDetailsData?.city}}</p>
+                                    <p class="info">
+                                        <span>Country:</span> {{groupDetailsData?.country_name}}</p>
+
+									<p class="info">
+										<span>Email:</span>{{groupDetailsData?.cemail}}</p>
+									<!-- <p class="info">
+										<span>Phone:</span> {{groupDetailsData?.phone}}</p> -->
+									<p class="info">
+										<span>Category:</span> {{groupDetailsData?.short_desc}}</p>
+									<p class="info">
+										<span>Descriptions:</span> {{groupDetailsData?.long_desc}}</p>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu5" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='groupdetails'}">
+                                <div class="connectionsPart">
+                                    <div class="connections">
+                                            <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
+                                                    
+                                                        <ul>
+                                                            <li>
+                                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='group_name'}">
+                                                                    <div class="edit" (click)="editAboutToggleTab('group_name')">edit</div>
+                                                                    <div (click)="editAboutToggleTab('group_name')" style="float:right">edit</div>
+                                                                    <h5>Title</h5>
+                                                                    <p>{{groupDetailsData.group_name}}</p>
+                                                                </div>
+                                                                <div *ngIf="editAbtActiveTab=='group_name'">
+                                                                    <button class="check" type="submit"></button>
+                                                                    <h5>Title</h5>
+                                                                    <P>
+                                                                        <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.group_name" formControlName="group_name" placeholder="Enter Group Title">
+                                                                    </P>
+                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['group_name'].valid && form.controls['group_name'].touched">Group Title required</div>
+                                                                </div>
+                                                            </li>
+                                                            
+                                                        </ul>
+                                                    
+                                                    
+                                                    
+                                                </form>
+                                           </div>
                                 </div>
 
                             </div>
