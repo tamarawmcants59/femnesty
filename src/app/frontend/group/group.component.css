@@ -56,3 +56,15 @@
 .new-tabs ul {border-bottom:0}
 .new-tabs ul li{ background: #b8b8b8 !important;}
 .new-tabs .tab-content{background: none !important; padding:10px}
+
+.tabPart .tab-content .edit {
+    position: absolute;
+    z-index: 100;
+    right: 30px;
+    top: 50px;
+    cursor: pointer;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAZCAYAAADTyxWqAAAAGXRFW…lyihEmBiqCUcOGk2GwdGZBQtGNDUjAUvttIBalgsNeAgQYAP+MVUd5VkVGAAAAAElFTkSuQmCC);
+    width: 19px;
+    height: 25px;
+    background-repeat: no-repeat;
+}

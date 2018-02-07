@@ -418,12 +418,12 @@ export class PostCardComponent implements OnInit {
 
   }
 
-  public editComment(postData1,id) {
-  
+  public editComment(comment,id) {
+   // alert(JSON.stringify(postData1))
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const result = {};
-    const data={id:id,comment:postData1,user_id:loginUserId};
+    const data={id:id,comment:comment,user_id:loginUserId};
      if(data.comment!='' ){
       this.userSrvc.editComment(data).subscribe(data => {
           
