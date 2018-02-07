@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../user/user.service";
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from "lodash";
-
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
@@ -12,11 +14,19 @@ export class GroupComponent implements OnInit {
   public groupNameByUrl: string = '';
   public isloginUserId: any;
   public isUserLogin: any;
+  public showProfileCrop = false;
+  modalErrorMsg: any;
+  croppedImage: any = '';
   public isGroupId = "";
   public groupDetailsData: any;
   public group_name: any;
+  coverImageChangedEvent: any = '';
+  public showCoverCrop = false;
   public short_desc: any;
-  public searchErrorMessage:any;
+  coverCroppedImage: any = '';
+  public searchErrorMessage: any;
+  public IsShowCropperCoverImage = false;
+  $uploadCrop: any;
   //public groupPidData: object = { };
   public groupPostList = [];
   public groupMemberList = [];
@@ -46,7 +56,8 @@ export class GroupComponent implements OnInit {
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
@@ -63,7 +74,7 @@ export class GroupComponent implements OnInit {
   }
   searchConnections(value) {
     if (value) {
-      this.IsShowTopViewMore=false;
+      this.IsShowTopViewMore = false;
       value = value.toLowerCase();
       let searchResult = this.totaluserFrndList.filter(item => {
         if (item.name.toLowerCase().search(value) !== -1) {
@@ -76,18 +87,84 @@ export class GroupComponent implements OnInit {
           this.filetredFriendList.push(searchResult[i]);
         }
       }
-      else
-      {
-        this.IsShowTopViewMore=false;
-        this.filetredFriendList=[];
-        this.searchErrorMessage="No record found.";
+      else {
+        this.IsShowTopViewMore = false;
+        this.filetredFriendList = [];
+        this.searchErrorMessage = "No record found.";
       }
     }
     else {
-      this.IsShowTopViewMore=true;
+      this.IsShowTopViewMore = true;
       this.filetredFriendList = [];
-      this.searchErrorMessage='';
+      this.searchErrorMessage = '';
     }
+
+  }
+  openUpdateCoverProModal(updateCoverPictureModal) {
+
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    this.modalErrorMsg = '';
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalService.open(updateCoverPictureModal);
+  }
+
+  public UploadCoverImg() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          image: resp, id: that.groupDetailsData.id
+        };
+        that.dataService.editGroupDataSend(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.getGroupDetailsByName();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+    });
+    //console.log(this.cropper.image.image);
+    // this.loading = true;
+    // const data = { image: this.coverCroppedImage, id: this.groupDetailsData.id }
+    // this.dataService.editGroupDataSend(data).subscribe(data => {
+    //   this.loading = false;
+    //   this.getGroupDetailsByName();
+    //   window.location.reload();
+    // },
+    //   error => {
+    //     this.loading = false;
+    //     alert('Sorry there is some error.')
+    //   });
 
   }
   fileChangePost($event) {
@@ -111,6 +188,8 @@ export class GroupComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+
+
   public getGroupDetailsByName() {
     if (this.groupNameByUrl != '') {
       const dataUserDet = {
@@ -468,7 +547,7 @@ export class GroupComponent implements OnInit {
         else {
           this.getGroupMemberList();
           this.checkMyFrndList();
-          this.filetredFriendList=[];
+          this.filetredFriendList = [];
         }
 
         //this.successMsg = 'You have successfully send the request.';
@@ -562,7 +641,38 @@ export class GroupComponent implements OnInit {
     }
 
   }
+  resetCover() {
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = "";
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
+  }
+  coverImageCropped(image: string) {
+    this.coverCroppedImage = image;
+  }
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
+  public fileChangeListenerCover($event) {
 
+    this.showCoverCrop = true;
+    this.coverImageChangedEvent = $event;
+  }
   public toggleTab(data: any) {
     //console.log(data);
     this.activeTab = data;

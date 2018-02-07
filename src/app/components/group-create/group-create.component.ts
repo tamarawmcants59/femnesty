@@ -8,7 +8,10 @@ import { SelectModule } from "../../../../node_modules/ng2-select";
 //import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 import { Subject } from 'rxjs/Subject';
 import { GrouplistComponent } from '../../frontend/group/grouplist/grouplist.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 declare var google: any;
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-group-create',
   templateUrl: './group-create.component.html',
@@ -24,11 +27,18 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   successMsg: string = '';
   createGroupSuccessMsg: string = '';
   createGroupErrorMsg: string = '';
+  $uploadCrop: any;
   postImgData: any;
+  coverImgData: any;
+  croppedImage: any = '';
+  modalRef: any;
+  public showProfileCrop = false;
   public aboutActiveTab: string = '';
   //public aboutActiveTab: string = 'overview';
   public loginUserDet: Object = {};
   public loginUserId: any;
+  IsShowCropperCoverImage = false;
+  modalErrorMsg: any;
   public groupList: any;
   public groupEditId: any;
   public groupRequestList = [];
@@ -51,7 +61,8 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     private hubService: HubService,
     private route: ActivatedRoute,
     private router: Router,
-    private groupListComp: GrouplistComponent
+    private groupListComp: GrouplistComponent,
+    private modalService: NgbModal
   ) {
 
     /*init */
@@ -63,32 +74,32 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
       google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
         let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-        localStorage.setItem("address",JSON.stringify(address_data));
+        localStorage.setItem("address", JSON.stringify(address_data));
       });
-      
+
     }, 1000);
 
 
-  this.router.events.subscribe(event => {
-    const eventObj: any = event;
-    const self = this;
-    if (event.constructor.name === "ResolveStart") {
-    if (eventObj.state.url.includes('group/add_group')) {
-      setTimeout(() => {
-      // debugger;
-        let autocomplete = new google.maps.places.Autocomplete(
+    this.router.events.subscribe(event => {
+      const eventObj: any = event;
+      const self = this;
+      if (event.constructor.name === "ResolveStart") {
+        if (eventObj.state.url.includes('group/add_group')) {
+          setTimeout(() => {
+            // debugger;
+            let autocomplete = new google.maps.places.Autocomplete(
                 /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-          { types: ['geocode'] });
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-          var place = autocomplete.getPlace();
-          let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-          localStorage.setItem("address",JSON.stringify(address_data));
-          //console.log(localStorage.getItem("address"));
-        });
-      }, 1000);
-    }
-    }
-  });
+              { types: ['geocode'] });
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var place = autocomplete.getPlace();
+              let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+              localStorage.setItem("address", JSON.stringify(address_data));
+              //console.log(localStorage.getItem("address"));
+            });
+          }, 1000);
+        }
+      }
+    });
 
     this.postform = builder.group({
       group_name: ['', [
@@ -225,23 +236,23 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
   public editGroupTab(groupId) {
-    
+
     this.groupEditId = groupId;
     let dataUserDet = {
       "group_id": this.groupEditId
     };
     setTimeout(() => {
       // debugger;
-       let autocomplete = new google.maps.places.Autocomplete(
+      let autocomplete = new google.maps.places.Autocomplete(
                /** @type {HTMLInputElement} */(document.getElementById('autocomplete1')),
-         { types: ['geocode'] });
-       google.maps.event.addListener(autocomplete, 'place_changed', function () {
-         var place = autocomplete.getPlace();
-         let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-         localStorage.setItem("address",JSON.stringify(address_data));
-         
-       });
-     }, 1000);
+        { types: ['geocode'] });
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+        localStorage.setItem("address", JSON.stringify(address_data));
+
+      });
+    }, 1000);
 
     const self = this;
     this.dataService.getGroupDetById(dataUserDet).subscribe(data => {
@@ -302,51 +313,62 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
   }
 
   public createGroupPost() {
-    this.loading = true;
-    const userValue = this.postform.value;
-    userValue.user_id = this.loginUserId;
-    userValue.image = this.postImgData;
-    //localStorage.getItem("address");
-    this.searchData=JSON.parse(localStorage.getItem("address"));
-    if (this.searchData.address && this.searchData.lat) {
-      const zipCode = userValue.postal_code;
-      if (zipCode) {
-        //debugger;
-        const self = this;
-        let geocoder = new google.maps.Geocoder;
-        geocoder.geocode({ 'address': zipCode }, function (results, status) {
-          if (status === 'OK') {
-            self.createGroupErrorMsg = '';
-            userValue.address = self.searchData.address;
-            self.dataService.createGroupDataSend(userValue)
-              .subscribe(
-              data => {
-                self.showPostImgDive = false;
-                self.loading = false;
-                self.createGroupSuccessMsg = 'Successfully created the group.';
-                self.postform.reset();
-                localStorage.setItem("address",JSON.stringify({ address: '', lat:'', lng: ''}));
-                window.scrollTo(0, 0);
-                self.getMyGroupListData();
-                //self.searchData.address = '';
-                self.address_required = false;
-                self.groupListComp.loadGroupList();
-              },
-              error => {
-                alert(error);
-              });
-          } else {
-            window.scrollTo(0, 0);
-            self.createGroupErrorMsg = "Please give a valid postal code.";
-          }
-        });
+    if (this.postform.valid) {
+      this.loading = true;
+      const that = this;
+      const userValue = this.postform.value;
+      userValue.user_id = this.loginUserId;
+      if (this.coverImgData)
+        userValue.image = this.coverImgData;
+      else
+        userValue.image = '';
+      that.searchData = JSON.parse(localStorage.getItem("address"));
+      if (that.searchData.address && that.searchData.lat) {
+        const zipCode = userValue.postal_code;
+        if (zipCode) {
+          //debugger;
+          const self = that;
+          let geocoder = new google.maps.Geocoder;
+          geocoder.geocode({ 'address': zipCode }, function (results, status) {
+            if (status === 'OK') {
+              self.createGroupErrorMsg = '';
+              userValue.address = self.searchData.address;
+              self.dataService.createGroupDataSend(userValue)
+                .subscribe(
+                data => {
+                  self.showPostImgDive = false;
+                  self.loading = false;
+                  self.createGroupSuccessMsg = 'Successfully created the group.';
+                  self.postform.reset();
+                  localStorage.setItem("address", JSON.stringify({ address: '', lat: '', lng: '' }));
+                  window.scrollTo(0, 0);
+                  self.getMyGroupListData();
+                  //self.searchData.address = '';
+                  self.address_required = false;
+                  self.groupListComp.loadGroupList();
+                },
+                error => {
+                  alert(error);
+                });
+            } else {
+              window.scrollTo(0, 0);
+              self.createGroupErrorMsg = "Please give a valid postal code.";
+            }
+          });
+        }
+
+      }
+      else {
+        window.scrollTo(0, 0);
+        that.address_required = true;
       }
 
+
     }
-    else {
-      window.scrollTo(0, 0);
-      this.address_required = true;
-    }
+
+
+    //localStorage.getItem("address");
+
 
 
   }
@@ -357,21 +379,21 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     const userValue = this.postform.value;
     userValue.id = this.groupEditId;
     userValue.image = this.postImgData;
-    this.searchData=JSON.parse(localStorage.getItem("address"));
+    this.searchData = JSON.parse(localStorage.getItem("address"));
     //if (this.searchData.address && this.searchData.lat) {
-    const self = this;  
+    const self = this;
     if (this.searchData.address && this.searchData.lat) {
-      userValue.address=this.searchData.address;
-    }else{
-      userValue.address=userValue.address;
-    }  
-    
-    if (userValue.address) {  
+      userValue.address = this.searchData.address;
+    } else {
+      userValue.address = userValue.address;
+    }
+
+    if (userValue.address) {
       //userValue.address = this.searchData.address;
       const zipCode = userValue.postal_code;
       if (zipCode) {
         //debugger;
-       
+
         let geocoder = new google.maps.Geocoder;
         geocoder.geocode({ 'address': zipCode }, function (results, status) {
           if (status === 'OK') {
@@ -387,7 +409,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
               setTimeout(function () {
                 self.groupListSuccessMsgDiv.nativeElement.scrollIntoView();
               }, 200);
-              localStorage.setItem("address",JSON.stringify({ address: '', lat:'', lng: ''})); 
+              localStorage.setItem("address", JSON.stringify({ address: '', lat: '', lng: '' }));
               self.getMyGroupListData();
               self.address_required = false;
               self.aboutActiveTab = 'overview';
@@ -402,7 +424,7 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
           }
         });
       }
-    
+
     }
     else {
       window.scrollTo(0, 0);
@@ -479,9 +501,63 @@ export class GroupCreateComponent implements OnInit, AfterViewInit {
     };
     myReader.readAsDataURL(file);
   }
+  openUpdateCoverProModal(updateCoverPictureModal) {
 
+    this.modalErrorMsg = '';
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalRef = this.modalService.open(updateCoverPictureModal);
+  }
+  closeModal(updateCoverPictureModal) {
+    if (this.modalRef) {
+      const that = this;
+      this.$uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+      }).then(function (resp) {
+        if (resp == 'data:,') {
+        }
+        else {
+          that.coverImgData = resp;
+        }
+        that.modalRef.close();
+      })
+    }
+  }
+  resetCover() {
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
+  }
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
   public aboutToggleTab(data: any) {
-    localStorage.setItem("address",JSON.stringify({ address: '', lat:'', lng: ''}));
+    localStorage.setItem("address", JSON.stringify({ address: '', lat: '', lng: '' }));
     this.successMsg = '';
     this.errorMsg = '';
     this.postImgData = '';
