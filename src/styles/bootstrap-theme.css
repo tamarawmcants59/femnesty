@@ -5807,3 +5807,7 @@ input[type=text]:focus, textarea:focus {
 .invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
 .invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
 
+.modal-dialog{
+	box-shadow: none !important;
+	border-radius:  none !important;
+}
