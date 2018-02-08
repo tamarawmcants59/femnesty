@@ -1,4 +1,4 @@
-<section class="section about-content-area visitingProfile">
+<section class="section section2 about-content-area visitingProfile">
     <div class="container-fluid">
         <div class="row flex-profile">
             <div class="col-md-3 flex-left">
@@ -98,21 +98,20 @@
                         </div>
                 <div class="rightPart">
                     <div class="innerRightPart new-group-section">
-                        
-                        <div>
-                            <h2>BROWSE GROUPS</h2>
+                         <h2>BROWSE GROUPS</h2>
+                        <div class="inline-search">
+                            <div class="input-group">     
+                                <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
+                                <span class="input-group-btn">
+                                	<button type="button" (click)="searchGroup()"  class="btn btn-default">
+                               	 		<!--<i class="icon ion-ios-search"></i>-->
+                                 		<img src="assets/images/search-icon.png" alt="" />
+                                	</button>
+                                </span>
+                            </div>
                         </div>
-
                         <ul class="filter-reslt">
-                            <li style="position: relative;">
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
-                                    <button type="button" (click)="searchGroup()">
-                                        <!--<i class="icon ion-ios-search"></i>-->
-                                        <img src="assets/images/search-icon.png" alt="" />
-                                    </button>
-                                </div>
-                            </li>
+                            
                             <li>
                                 <a href="javascript:void(0);" (click)="scrollToMyGroup()">My Groups
                                     <span>({{totalMyGrpList?.length}})</span>
