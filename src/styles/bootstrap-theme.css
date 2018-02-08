@@ -298,6 +298,7 @@ fieldset[disabled] .btn-default:active,
 fieldset[disabled] .btn-default.active {
     background-color: #e0e0e0;
     background-image: none;
+
 }
 
 .btn-primary {
@@ -3792,7 +3793,7 @@ ul.uploadVideo {
 }
 
 .inline-search {
-    margin-bottom: 25px
+    margin-bottom: 22px
 }
 
 .inline-search .form-control {
@@ -4982,12 +4983,12 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a{
 .shareYourThought form .result, .message-writing-wrap .result{position: relative; display: inline-block;}
 .shareYourThought form .result .del-btn, .message-writing-wrap .result .del-btn{position: absolute; right:-10px; width:22px; height:22px; background: #bb1926; line-height: 23px; color:#fff; text-align: center; top: -11px; border-radius: 100%; cursor: pointer;}
 
-.form-control:focus{
+/*.form-control:focus{
 	box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 3px rgb(104, 9, 9) !important;
 	-webkit-box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 3px rgb(104, 9, 9) !important;
 	-moz-box-shadow: inset 0 1px 1px rgba(165,7,7,.055), 0 0 3px rgb(104, 9, 9) !important;}
 
-.form-control:focus{border-color:transparent !important}
+.form-control:focus{border-color:transparent !important}*/
 
 
 
@@ -5731,6 +5732,10 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 	position: relative;
 	display: block !important;
 }
+.HUB-Dtls .item:last-child{
+	border-bottom:  none !important;
+	margin-bottom: 0;
+}
 .HUB-Dtls .item p{
 	font-size: 12px;
 	color: #222222;
@@ -5771,6 +5776,19 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 	height: 130px !important;
 }
 
+
+button{
+	outline: none !important;
+	
+}
+input[type=text]:focus, textarea:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+.section2{
+	padding: 41px 0 !important;
+}
+
 .invite-member-new{padding: 5px}
 .invite-member-new h3{font-size:12px;font-family: 'montserratmedium';margin-bottom: 23px;}
 .invite-member-new .form-control-plaintext{border-radius:0;border: 2px solid #e9e9e9;box-shadow: none;height:40px;}
@@ -5787,5 +5805,4 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 .invite-member-new .media-list.connections li .media-right button{font-size: 10px !important;padding: 9px 22px;text-transform: uppercase;margin: 3px 0;color:#fff;border-radius: 50px;border:0;min-width:92px;float:left;text-shadow: none;margin-left: 6px;}
 .invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
 .invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
-
 
