@@ -76,7 +76,7 @@ public divshow = true;
 public groupMemberList1 = [];
 public totalgrupmember = [];
 public totalmember:number=0;
-
+public invitediv = '';
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   @ViewChild("addressEdit") addressEdit: ElementRef;
   constructor(
@@ -89,7 +89,7 @@ public totalmember:number=0;
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
-
+    this.invitediv = localStorage.getItem("invitediv");
 
 
     this.form = builder.group({
@@ -141,6 +141,10 @@ public totalmember:number=0;
     this.getGroupDetailsByName();
     this.getHubCategories();
     this.getTotCounteyList();
+    if(this.invitediv)
+    {
+      this.toggleTab('about');
+    }
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
