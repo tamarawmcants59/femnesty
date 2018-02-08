@@ -203,7 +203,9 @@ export class GroupRightbarComponent implements OnInit {
   public showAllMember() {
     this.memberViewAll = false;
     this.showMemberDiv = true;
-    this.groupMemberList = this.totalGroupMemberList;
+    localStorage.setItem("invitediv",'1');
+    //this.groupMemberList = this.totalGroupMemberList;
+    window.location.reload();
   }
 }
 

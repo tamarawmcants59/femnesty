@@ -1,4 +1,4 @@
-<section class="section about-content-area visitingProfile">
+<section class="section section2 about-content-area visitingProfile">
   <div class="container-fluid">
       <div class="row flex-profile">
           <!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
@@ -7,7 +7,136 @@
           </div>
           <div class="col-md-6 flex-middle">
               <div class="middlePart">
-                  
+                  <div class="MyGroups-list">
+                  	<h2>Edit Profile <span><a class="btn btn-primary">Update</a></span></h2>
+                  </div>
+              </div>
+              <div class="middlePart">
+                  <div class="MyGroups-list edit-forms">
+                  	<h5>Basic Overview  </h5>
+                  	<div class="menu">
+                  		<form class="login-form">
+                  			<div class="form-group row">
+                                 <div class="col-md-6">
+                                   <label>First Name</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Erik"> 
+                                 </div>
+                                 <div class="col-md-6">
+                                   <label>Last Name</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Sandberg"> 
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                 <div class="col-md-6">
+                                   <label>Email</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="erik@gillbogroup.com"> 
+                                 </div>
+                                 <div class="col-md-6">
+                                   <label>Date of Birth</label>
+                                   <ul>
+                                   	<li>
+                                   		 <select class="form-control-plaintext">
+                                           <option>1994</option>
+                                        </select>
+                                   	</li>
+                                   	<li>
+                                   		 <select class="form-control-plaintext">
+                                           <option>Nov</option>
+                                        </select>
+                                   	</li>
+                                   	<li>
+                                   		 <select class="form-control-plaintext">
+                                           <option>17</option>
+                                        </select>
+                                   	</li>
+                                   </ul>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                 <div class="col-md-6">
+                                   <label>Location</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Stockholm"> 
+                                 </div>
+                                 <div class="col-md-6">
+                                   <label>Mobile Number</label>
+                                   <div>
+                                   		<div class="code"><input type="text" class="form-control-plaintext" placeholder="+46"></div>
+                                   		<div class="num"><input type="text" class="form-control-plaintext" placeholder="073 031 93 76"></div>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                 <div class="col-md-6">
+                                   <label>Website</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="www.gillbogroup.com"> 
+                                 </div>
+                                 <div class="col-md-6">
+                                   <label>Occupation</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Project Manager"> 
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                 <div class="col-md-6">
+                                   <label>Education</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Bachelor's degree in Finance"> 
+                                 </div>
+                                 <div class="col-md-6">
+                                   <label>Favorite Quotes</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Balla Balla Balla - Klimpen"> 
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                 <div class="col-md-6">
+                                   <label>Marriage Status</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="In a Relationship"> 
+                                 </div>
+                                 <div class="col-md-6">
+                                   <label>Children</label>
+                                   <input type="text" class="form-control-plaintext" placeholder="Yes"> 
+                                </div>
+                            </div>
+                  	</form>
+					</div>
+                  </div>
+              </div>
+              <div class="middlePart">
+                  <div class="MyGroups-list edit-forms">
+                  	<h5>Security</h5>
+                  	<div class="form-group row">
+                         <div class="col-md-6">
+                            <label>Change Password</label>
+                            <input type="password" class="form-control-plaintext" placeholder="************"> 
+                         </div>
+                         <div class="col-md-6">
+                             <label>Confirm Password</label>
+                             <input type="text" class="form-control-plaintext" placeholder=""> 
+                         </div>
+                         <div class="col-md-12"><p (click)="report(closeConfirmModal)">Close down your Femnesty Account?</p></div>
+                     </div>
+                  </div>
+              </div>
+              <div class="middlePart">
+                  <div class="MyGroups-list edit-forms">
+                  	<h5>Email Notification Settings</h5>
+                  	<div class="form-group row">
+          				<div class="col-md-12 mb-15">
+          				<input class="styled-checkbox" id="styled-checkbox-1" type="checkbox">
+						<label class="acpt-cond-after" for="styled-checkbox-1">New Connection Request</label>
+						</div>
+						<div class="col-md-12 mb-15">
+          				<input class="styled-checkbox" id="styled-checkbox-1" type="checkbox">
+						<label class="acpt-cond-after" for="styled-checkbox-1">Comment on Your Post</label>
+						</div>
+						<div class="col-md-12 mb-15">
+          				<input class="styled-checkbox" id="styled-checkbox-1" type="checkbox">
+						<label class="acpt-cond-after" for="styled-checkbox-1">Comment on a Post on my Group</label>
+						</div>
+						<div class="col-md-12 mb-15">
+          				<input class="styled-checkbox" id="styled-checkbox-1" type="checkbox">
+						<label class="acpt-cond-after" for="styled-checkbox-1">Acceptance/decline of Hub invitation</label>
+						</div>
+      				</div>
+                  </div>
               </div>
           </div>
           <div class="col-md-3 flex-right">
@@ -16,3 +145,17 @@
       </div>
   </div>
 </section>
+
+
+<ng-template #closeConfirmModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm!</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Would you like to report this post?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmReport(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>
