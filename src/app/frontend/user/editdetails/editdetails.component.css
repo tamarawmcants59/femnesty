@@ -1,0 +1,110 @@
+.MyGroups-list h2{
+	font-size: 22px !important;
+	 padding: 0 !important;
+	 margin: 0 !important;
+	 line-height: 40px !important;
+	 height: 40px;
+}
+.MyGroups-list h2 span{
+	float: right;
+	padding: 0 !important;
+}
+.MyGroups-list{
+	padding: 25px !important;
+}
+.MyGroups-list .btn-primary{
+	padding: 0 !important;
+	width: 140px !important;
+	height: 40px !important;
+	text-align: center !important;
+	border-radius: 3px !important;
+	line-height: 40px !important;
+}
+
+.form-control-plaintext {
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  height: 38px;
+  font-size: 12px;
+  padding: 6px 15px;
+  font-family: 'sanchezregular';
+  color: #727272;
+}
+
+.edit-forms h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #202020;
+  font-family: 'montserratregular';
+  margin-bottom: 10px;
+}
+
+.edit-forms p {
+  font-size: 12px;
+  color: #414141;
+  font-family: 'sanchezregular';
+}
+
+.edit-forms textarea.form-control-plaintext {
+  height: 144px !important;
+  padding-top: 15px;
+}
+
+.saveChanges .btn-primary {
+  width: 143px !important;
+  height: 41px !important;
+  font-emphasize: 11px !important;
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+label{
+	font-size: 12px;
+	color:#727272 !important;
+	font-family: 'sanchezregular';
+	font-weight: normal;
+}
+.form-group {
+    margin-bottom: 14px !important;
+}
+.edit-forms select{
+	margin-bottom: 0 !important;
+}
+.form-group ul{
+	
+}
+.form-group ul li{
+	width: 32%;
+	float: left;
+	margin-right: 2%;
+}
+.form-group ul li:last-child{
+	margin-right: 0;
+}
+.form-group .code{
+	float: left;
+	width: 20%;
+	margin-right: 2%;
+}
+.form-group .num{
+	float: left;
+	width: 78%;
+}
+.about-content-area p{
+	margin-bottom: 0;
+	margin-top: 30px;
+	color: #222222;
+}
+.mb-15{
+	margin-bottom: 15px;
+}
+[type="checkbox"]:not(:checked) + label::before, [type="checkbox"]:checked + label::before {
+  
+    border: 0px solid #373636 !important;
+    background: #e8e8e8 !important;
+    box-shadow: none !important;
+    width: 12px !important;
+    height: 12px !important;
+ 
+}

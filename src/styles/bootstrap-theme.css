@@ -4393,7 +4393,7 @@ font-weight: normal;padding: 2px 5px;}
 .mobile-navs ul li:hover .dropdown-menu{display: block;}
 .commenteeComment ul li a{color: #bb1926}
 
-.tabPart ul.edit-forms{padding: 15px;overflow: hidden;}
+.tabPart ul.edit-forms{padding: 35px 45px;overflow: hidden;}
 .tab-content .tab-pane .connectionsPart{padding: 15px}
 ng4geo-autocomplete.auto-text-input input{
 background: #f7f7f7;
@@ -5584,6 +5584,7 @@ header .dropdown-menu{min-width: 218px;}
 	.invite-member-new .media-list.connections li .media-left,.invite-member-new .media-list.connections li .media-right,.invite-member-new .media-list.connections li .media-body{display: block !important;margin: 0 !important;text-align: center !important;padding: 0;width:100%}
 	.invite-member-new .media-list.connections li a{text-align: center;margin: 0 auto;display: block;}
 	.invite-member-new .media-list.connections li .media-left .img,.invite-member-new .media-list.connections li .media-body h2,.invite-member-new .media-list.connections li .media-right .button-holder-width{text-align: center !important;margin: 5px auto !important;}
+	.tabPart ul.edit-forms{padding: 20px;}
 }
 
 /*---------------------- 05-02-2018 --------------------------*/
