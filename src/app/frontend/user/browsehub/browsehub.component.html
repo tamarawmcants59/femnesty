@@ -39,7 +39,7 @@
 							<agm-map [latitude]="lat" [longitude]="lng" style="height:100%;width:100%" [zoom]="9">
 								<agm-marker *ngFor="let hub of allHubs" [latitude]="hub.lat" [longitude]="hub.lng">
 									<agm-info-window>
-										<div class="popup" style="width:254px">
+										<div class="popup" style="width:260px">
 											<ul>
 												<li>
 													<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
@@ -109,7 +109,8 @@
 								<input placeholder="Search By Keyword" [(ngModel)]="search_con" (keypress)="handleKeyDown($event)" class="form-control">
 								<span class="input-group-btn">
 									<button type="button" (click)="searchByKeyword()" class="btn btn-default">
-										<i class="fa fa-search"></i>
+										<!--<i class="fa fa-search"></i>-->
+										<img src="assets/images/search-icon.png" alt="" />
 									</button>
 								</span>
 							</div>
