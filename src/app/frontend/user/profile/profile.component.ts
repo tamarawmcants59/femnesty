@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   public successMsg: string ='';
   public errorMsg: string = '';
   public checkIsFriend:boolean = false;
-
+  public sendrequest = false;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -157,6 +157,7 @@ export class ProfileComponent implements OnInit {
     }
 
     public sendFriendRequest(friend_id) {
+      this.sendrequest = true;
       //console.log(friend_id);
       if (this.isloginUserId != '' && friend_id != '') {
         let requestJsonData={"user_id": this.isloginUserId, "friend_id": friend_id};
