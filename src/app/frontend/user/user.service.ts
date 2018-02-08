@@ -391,6 +391,15 @@ export class UserService {
   responseGroupRequestByUser(form_data){
     return this.apiService.post(`/users/acceptorRejectgroupRequestbyuser`,form_data ).map(data => data);
   }
+
+  responsePrivateGroupRequestByUser(form_data){
+    return this.apiService.post(`/users/appacceptorrejectgrouprequest`,form_data ).map(data => data);
+  }
+
+  checkPrivateGroupsStatus(form_data){
+    return this.apiService.post(`/users/app_user_grpreqlist`,form_data ).map(data => data);
+  }
+
   
   getUseAllGroupListById(form_data){
     return this.apiService.post(`/users/appusergroupresentlistbyuserid`,form_data ).map(data => data);

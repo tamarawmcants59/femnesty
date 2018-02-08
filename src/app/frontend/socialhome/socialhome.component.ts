@@ -44,6 +44,8 @@ export class SocialhomeComponent implements OnInit {
     private dataService1: FrontendService,
     private fb: FormBuilder
   ) {
+    window.addEventListener('scroll', this.scroll, true);
+    
     let loginUserId=localStorage.getItem("loginUserId");
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
     let getUserDet = localStorage.getItem("currentUser");
@@ -79,7 +81,11 @@ export class SocialhomeComponent implements OnInit {
     this.getLastFourArticle();
     
   }
-
+scroll()
+{
+  let st = (window.innerHeight + window.scrollY);
+  console.log(st);
+}
   public getLastFourArticle(){
     this.dataService.getFourArticleList()
     .subscribe(data => {
@@ -161,7 +167,10 @@ export class SocialhomeComponent implements OnInit {
       });
 
   }
-
+  onScroll()
+  {
+    alert();
+  }
   public fileChangePost($event) {
       this.showPostImgDive=true;
       var image:any = new Image();

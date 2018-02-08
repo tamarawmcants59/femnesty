@@ -376,61 +376,59 @@
 										</form>
 									</div>
 								</div> -->
-								<div class="connections">
+								<div class="connections invite-member-new">
 
 									<h3 style="margin-top: 0px;">INVITE</h3>
+
 									<div class="row">
-										<div class="form-group co,l-md-12 col-sm-12">
+										<div class="form-group col-md-12 col-sm-12">
 											<input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
 											 [(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
 										</div>
 									</div>
-									<h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length>0">FILTERED CONNECTIONS</h3>
-									<h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>
-									<ul class="friend-box" *ngIf="filetredFriendList?.length > 0">
-										<li class="friend-box-list" *ngFor="let joinFrnd of filetredFriendList;let i=index">
-											<div class="friend-boxImage">
-												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
-													<div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
-												</a>
-											</div>
-											<div class="friend-boxText">
-												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
-													<h2>{{joinFrnd.first_name}}</h2>
-												</a>
-												<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd.id)">INVITE</button>
-											</div>
-										</li>
-									</ul>
-									<h3 style="margin-top: 0px;">ATTENDING</h3>
+									<h3 style="margin-top: 0px;">ATTENDING <span *ngIf="hubDetails.attenders && hubDetails.attenders.length > 0">{{hubDetails.attenders.length}} ATTENDANTS</span></h3>
 									<ul class="contn-box" *ngIf="hubDetails.attenders && hubDetails.attenders.length > 0">
-										<li *ngFor="let user of hubDetails.attenders">
-											<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}">
-												<img src="{{user.profile_image}}" alt="{{user.name}}" title="{{user.name}}" class="img  rounded" style="width:20%" />
-											</a>
+										<li class="friend-box-list" *ngFor="let user of hubDetails.attenders">
+											<div class="friend-boxImage">
+												<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}">
+													<div class="img" [ngStyle]="{'background-image':'url('+user.profile_image+')'}" style="width:70px;height:75px;"></div>
+												</a>
+											</div>
+
 										</li>
 									</ul>
 									<div *ngIf="hubDetails.attenders && hubDetails.attenders.length == 0">
 										<p>No attenders found.</p>
 									</div>
-									<h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length==0 && !searchErrorMessage">SUGGESTED CONNECTIONS</h3>
-									<ul class="friend-box" *ngIf="uninvitedUsers?.length > 0 && filetredFriendList.length==0 && !searchErrorMessage">
-										<li class="friend-box-list" *ngFor="let joinFrnd of uninvitedUsers;let i=index">
-											<div class="friend-boxImage">
+									<h3 style="margin-top: 0px;" *ngIf="searchName">SUGGESTED CONNECTIONS
+										<span (click)="resetFilter()">HIDE</span>
+									</h3>
+									<ul class="media-list connections" *ngIf="filetredFriendList?.length > 0">
+										<li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
+											<div class="media-left">
 												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
 													<div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
 												</a>
 											</div>
-											<div class="friend-boxText">
+											<div class="media-body media-middle">
 												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
 													<h2>{{joinFrnd.first_name}}</h2>
 												</a>
-												<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd.id)">INVITE</button>
+
+											</div>
+											<div class="media-right media-middle">
+												<div class="button-holder-width">
+													<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd.id)">INVITE</button>
+													<button class="btn btn-black btn-default">
+														HIDE
+													</button>
+												</div>
 											</div>
 										</li>
 									</ul>
 
-									<a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
+									<a class="view-more-down" style="margin:20px 0 0" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
+									<a  style="margin:20px 0 0" *ngIf="IsShowText" >Nothing More to show</a>
 
 								</div>
 							</div>
@@ -541,7 +539,7 @@
 								</a>
 							</li>
 						</ul>
-						<a href="javascript:void(0);" *ngIf="hubDetails.attenders>12" class="viewAll text-center">View All ({{hubDetails.attenders.length}})</a>
+						<a href="javascript:void(0);" *ngIf="hubDetails.attenders>12" class="viewAll text-center" (click)="activeTab='invite'">View All ({{hubDetails.attenders.length}})</a>
 					</div>
 					<!-- <div class="innerRightPart latest-article">
 						<h2>Latest Articles</h2>

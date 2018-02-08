@@ -24,7 +24,7 @@ export class EditprofileComponent implements OnInit {
   public showCoverCrop = false;
   public showCoverImgDive: boolean = false;
   public showPostImgDive: boolean = false;
-  modalErrorMsg:any;
+  modalErrorMsg: any;
   public form: FormGroup;
   imageChangedEvent: any = '';
   coverImageChangedEvent: any = '';
@@ -205,7 +205,7 @@ export class EditprofileComponent implements OnInit {
     }
   }
   openUpdateProModal(updateProfilePictureModal) {
-    this.modalErrorMsg='';
+    this.modalErrorMsg = '';
     setTimeout(() => {
       this.$uploadCrop = $('#upload-demo').croppie({
         viewport: {
@@ -289,9 +289,13 @@ export class EditprofileComponent implements OnInit {
     const result = {},
       userValue = this.form.value;
     userValue.id = loginUserId;
-    const dateOfBirth = this.form.value.dob.getFullYear() + '-' + ('0' + (this.form.value.dob.getMonth() + 1)).slice(-2) + '-'
-      + ('0' + this.form.value.dob.getDate()).slice(-2);
-    userValue.dob = dateOfBirth;
+    let dateOfBirth;
+    if (this.form.value.dob) {
+      dateOfBirth = this.form.value.dob.getFullYear() + '-' + ('0' + (this.form.value.dob.getMonth() + 1)).slice(-2) + '-'
+        + ('0' + this.form.value.dob.getDate()).slice(-2);
+      userValue.dob = dateOfBirth;
+    }
+
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
@@ -303,7 +307,8 @@ export class EditprofileComponent implements OnInit {
         localStorage.setItem('profile_image', details.UserDetails.image_url);
         this.loading = false;
         this.successMsg = 'Data updated successfully';
-        this.loginUserDet.dob = dateOfBirth;
+        if (dateOfBirth)
+          this.loginUserDet.dob = dateOfBirth;
         //this.router.navigateByUrl('/user/profile');
         this.router.navigate(['/user/edit_profile/about']);
       },
@@ -349,7 +354,7 @@ export class EditprofileComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
   openUpdateCoverProModal(updateCoverPictureModal) {
-    this.modalErrorMsg='';
+    this.modalErrorMsg = '';
 
     // this.showCoverCrop = false;
     // this.coverCroppedImage = '';
@@ -420,13 +425,11 @@ export class EditprofileComponent implements OnInit {
       type: 'canvas',
       size: 'viewport'
     }).then(function (resp) {
-      if(resp=='data:,')
-      {
-        that.loading=false;
+      if (resp == 'data:,') {
+        that.loading = false;
         that.modalErrorMsg = 'please upload an image to save.';
       }
-      else
-      {
+      else {
         const uploadJsonData = {
           "id": loginUserId,
           "profile_image": resp
@@ -443,7 +446,7 @@ export class EditprofileComponent implements OnInit {
             alert(error);
           });
       }
-     
+
     });
 
 
@@ -457,13 +460,11 @@ export class EditprofileComponent implements OnInit {
       type: 'canvas',
       size: 'viewport'
     }).then(function (resp) {
-      if(resp=='data:,')
-      {
-        that.loading=false;
+      if (resp == 'data:,') {
+        that.loading = false;
         that.modalErrorMsg = 'please upload an image to save.';
       }
-      else
-      {
+      else {
         const uploadJsonData = {
           "id": loginUserId,
           "cover_img": resp
@@ -480,7 +481,7 @@ export class EditprofileComponent implements OnInit {
             alert(error);
           });
       }
-      
+
     });
     // this.loading = true;
     // const loginUserId = localStorage.getItem("loginUserId");

@@ -53,6 +53,9 @@
                                 (click)="LeaveGroupRequest(isloginUserId)">Leave group</button>
                             <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '4' && isJoinGroup" type="button" class="btn btn-primary">You Have Left This group</button>
                             <button *ngIf="groupDetailsData?.user_id!=isloginUserId && allgroupstatusset == '3' && isJoinGroup" type="button" class="btn btn-primary">Admin rejected You from This group</button>
+                            <button  type="button" class="btn btn-primary" *ngIf="isShowPrivateGroupAction" (click)="acceptReject('2')">Accept</button>
+                            <button  type="button" class="btn btn-primary" *ngIf="isShowPrivateGroupAction" (click)="acceptReject('3')">Reject</button>
+                            <button *ngIf="IsShowRejectMessage" type="button" class="btn btn-primary">You Have declined the request</button>
                         </p>
 
                     </div>
@@ -161,7 +164,7 @@
                                         </div> -->
                                         <h3 style="margin-top: 0px;">INVITE</h3>
                                         <div class="row">
-                                            <div class="form-group co,l-md-12 col-sm-12">
+                                            <div class="form-group col-md-12 col-sm-12">
                                                 <input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
                                                     [(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
                                             </div>

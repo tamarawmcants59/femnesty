@@ -28,6 +28,7 @@ export class HubsComponent implements OnInit {
   category_id: any;
   isShowPicker = false;
   public catList = [];
+  IsShowText=false;
   public hubList = [];
   recurring_end: any;
   public IsShowCropperCoverImage = false;
@@ -368,7 +369,7 @@ export class HubsComponent implements OnInit {
         // });
         this.uninvitedUsers = [];
         if (data.details.length > 5) {
-          this.IsShowTopViewMore = true;
+          //  this.IsShowTopViewMore = true;
           for (let i = 0; i < data.details.length; i++) {
             if (this.uninvitedUsers.length < 5) {
               this.uninvitedUsers.push(data.details[i]);
@@ -377,7 +378,7 @@ export class HubsComponent implements OnInit {
 
         }
         else {
-          this.IsShowTopViewMore = false;
+          // this.IsShowTopViewMore = false;
           this.uninvitedUsers = data.details;
         }
 
@@ -398,15 +399,18 @@ export class HubsComponent implements OnInit {
   viewMore() {
     this.connectionsPageSize = this.connectionsPageSize + 5;
     this.uninvitedUsers = [];
+    this.filetredFriendList = [];
     if (this.totalUninvitedUsers.length > this.connectionsPageSize) {
       this.IsShowTopViewMore = true;
     }
     else {
+      this.IsShowText=true;
       this.IsShowTopViewMore = false;
     }
     for (let i = 0; i < this.connectionsPageSize; i++) {
       if (this.totalUninvitedUsers[i]) {
         this.uninvitedUsers.push(this.totalUninvitedUsers[i]);
+        this.filetredFriendList.push(this.totalUninvitedUsers[i]);
       }
 
     }
@@ -424,19 +428,29 @@ export class HubsComponent implements OnInit {
 
       });
       if (searchResult && searchResult.length) {
+        if (searchResult.length > 6) {
+          this.IsShowTopViewMore = true;
+        }
+        else {
+          this.IsShowTopViewMore = false;
+        }
         this.filetredFriendList = [];
         for (var i = 0; i < searchResult.length; i++) {
-          this.filetredFriendList.push(searchResult[i]);
+          if (this.filetredFriendList.length < 6) {
+            this.filetredFriendList.push(searchResult[i]);
+          }
+
         }
       }
       else {
         this.IsShowTopViewMore = false;
         this.filetredFriendList = [];
+        this.IsShowText=false;
         this.searchErrorMessage = "No record found.";
       }
     }
     else {
-      this.IsShowTopViewMore = true;
+      this.IsShowTopViewMore = false;
       this.filetredFriendList = [];
       this.searchErrorMessage = '';
     }
@@ -797,9 +811,8 @@ export class HubsComponent implements OnInit {
           if (hubDetails.type == "O") {
             data = { hub_date: this.editDate, id: this.hubDetails.id, user_id: hubDetails.user_id, start_time: this.start_time, end_time: this.end_time };
           }
-          else
-          {
-            data = { recurring_start: this.editDate,recurring_end:this.recurring_end, id: this.hubDetails.id, user_id: hubDetails.user_id, start_time: this.start_time, end_time: this.end_time };
+          else {
+            data = { recurring_start: this.editDate, recurring_end: this.recurring_end, id: this.hubDetails.id, user_id: hubDetails.user_id, start_time: this.start_time, end_time: this.end_time };
           }
 
           this.hubService.editHubDetails(data).subscribe(data => {
@@ -832,8 +845,8 @@ export class HubsComponent implements OnInit {
           this.start_time = hubDetails.start_time; this.end_time = hubDetails.end_time;
         }
         else if (hubDetails.type == 'R') {
-          this.editDate =  new Date(hubDetails.recurring_start);
-          this.recurring_end =  new Date(hubDetails.recurring_end);
+          this.editDate = new Date(hubDetails.recurring_start);
+          this.recurring_end = new Date(hubDetails.recurring_end);
           this.start_time = hubDetails.start_time; this.end_time = hubDetails.end_time;
         }
 
@@ -915,6 +928,10 @@ export class HubsComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+  resetFilter() {
+    this.IsShowTopViewMore = false;
+    this.filetredFriendList = [];
+  }
   public sendInvites(id) {
     const userValue = this.postform.value;
     userValue.hub_id = this.hubDetails.id;
@@ -924,8 +941,25 @@ export class HubsComponent implements OnInit {
       if (data.Ack == 1) {
         this.successMsg = 'Request Sent Successfully';
         //this.postform.reset();
-        this.filetredFriendList = [];
+        //this.filetredFriendList = [];
+        if (this.filetredFriendList.length == 1) {
+          this.filetredFriendList = [];
+        }
+        else {
+          var index;
+          for (var i = 0; i < this.filetredFriendList.length; i++) {
+            if (this.filetredFriendList[i].id == id) {
+              index = id;
+              break;
+            }
+          }
+          if (index) {
+            this.filetredFriendList.splice(index, 0);
+          }
+        }
+
         this.searchName = '';
+        this.IsShowText=false;
         this.getUnivitedUsers();
       }
     },
