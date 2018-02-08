@@ -111,7 +111,7 @@
                              <label>Confirm Password</label>
                              <input type="text" class="form-control-plaintext" placeholder=""> 
                          </div>
-                         <div class="col-md-12"><p>Close down your Femnesty Account?</p></div>
+                         <div class="col-md-12"><p (click)="report(closeConfirmModal)">Close down your Femnesty Account?</p></div>
                      </div>
                   </div>
               </div>
@@ -145,3 +145,17 @@
       </div>
   </div>
 </section>
+
+
+<ng-template #closeConfirmModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm!</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Would you like to report this post?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmReport(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>
