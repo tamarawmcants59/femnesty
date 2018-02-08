@@ -88,7 +88,7 @@
                     <div class="col-md-4 col-sm-6 col-multi-article" *ngFor="let articleData of catData.all_articlebycat">
                         <!--<div class="cat-article-img" [ngStyle]="{'background-image':'url('+catData.image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'cover'}"></div>-->
                         <img [src]="articleData.image_url" alt="" class="img-responsive">
-                        <h5 > <span>Article by {{articleData.author_name}} in</span> <span class="text-red"> {{catData.name}}</span></h5>
+                        <h5 > <span><!--Article -->By {{articleData.author_name}} in</span> <span class="text-red"> {{catData.name}}</span></h5>
                         <h3 class="text-red">{{articleData.title}}</h3>
                         <p>{{articleData.short_desc | limitTo : 250}}</p>
                         <a [routerLink]="['/articles/details',articleData.slug]" class="btn btn-primary">Read more</a>
