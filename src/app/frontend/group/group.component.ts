@@ -19,10 +19,13 @@ export class GroupComponent implements OnInit {
   public showProfileCrop = false;
   modalErrorMsg: any;
   croppedImage: any = '';
+  isShowPrivateGroupAction = false;
+  actionId: any;
   public isGroupId = "";
   public groupDetailsData: any;
   public group_name: any;
   public year_est: any;
+  IsShowRejectMessage = false;
   public cat_id: any;
   public country: any;
   public city: any;
@@ -38,6 +41,7 @@ export class GroupComponent implements OnInit {
   coverCroppedImage: any = '';
   public searchErrorMessage: any;
   public IsShowCropperCoverImage = false;
+  public totalserchFrndList = [];
   $uploadCrop: any;
 
   //public groupPidData: object = { };
@@ -52,7 +56,9 @@ export class GroupComponent implements OnInit {
   searchName: any;
   qtd = {};
   private connectionsPageSize = 5;
+  private connectionsPageSize1 = 5;
   IsShowTopViewMore = false;
+  IsShowTopViewMore1 = false;
   private IsShow: boolean = false;
   //public userPostList =[];
   public activeTab: string = 'activity';
@@ -68,7 +74,12 @@ export class GroupComponent implements OnInit {
   public countryList = [];
   public editAbtActiveTab: any;
   public form: FormGroup;
-
+public suggestshow = false;
+public divshow = true;
+public groupMemberList1 = [];
+public totalgrupmember = [];
+public totalmember:number=0;
+public invitediv = '';
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   @ViewChild("addressEdit") addressEdit: ElementRef;
   constructor(
@@ -81,7 +92,7 @@ export class GroupComponent implements OnInit {
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
-
+    this.invitediv = localStorage.getItem("invitediv");
 
 
     this.form = builder.group({
@@ -133,9 +144,39 @@ export class GroupComponent implements OnInit {
     this.getGroupDetailsByName();
     this.getHubCategories();
     this.getTotCounteyList();
+    if(this.invitediv)
+    {
+      this.toggleTab('about');
+    }
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
+  }
+
+  checkPrivateGroupsStatus() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    const data = { user_id: loginUserId, group_id: this.isGroupId };
+    this.loading = true;
+    this.dataService.checkPrivateGroupsStatus(data).subscribe(data => {
+      if (data.Ack == 1) {
+        this.loading = false;
+        if (data.RequestsList[0].request_type == "0") {
+          this.isShowPrivateGroupAction = true;
+          this.actionId = data.RequestsList[0].id;
+        }
+        else {
+          this.actionId = "";
+          this.isShowPrivateGroupAction = false;
+        }
+
+      }
+      else {
+        this.loading = false;
+      }
+    }, error => {
+      this.loading = false;
+    })
+
   }
   public getTotCounteyList() {
     this.dataService.getCountryList().subscribe(data => {
@@ -158,6 +199,7 @@ export class GroupComponent implements OnInit {
       });
   }
   searchConnections(value) {
+    this.divshow = true;
     if (value) {
       this.IsShowTopViewMore = false;
       value = value.toLowerCase();
@@ -166,11 +208,23 @@ export class GroupComponent implements OnInit {
           return item;
         }
       });
-      if (searchResult && searchResult.length) {
+      if (searchResult && searchResult.length>3) { 
+        this.IsShowTopViewMore = true;
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          if(this.filetredFriendList.length < 3)
+          {
+          this.filetredFriendList.push(searchResult[i]);
+          }
+        }
+        this.totalserchFrndList = searchResult;
+       // alert(JSON.stringify(searchResult.length))
+      }else  if (searchResult && searchResult.length) {
         this.filetredFriendList = [];
         for (var i = 0; i < searchResult.length; i++) {
           this.filetredFriendList.push(searchResult[i]);
         }
+        this.totalserchFrndList = searchResult;
       }
       else {
         this.IsShowTopViewMore = false;
@@ -183,7 +237,27 @@ export class GroupComponent implements OnInit {
       this.filetredFriendList = [];
       this.searchErrorMessage = '';
     }
+   
+  }
+  acceptReject(status) {
+    this.loading = true;
+    const data = { "id": this.actionId, "request_type": status };
+    this.dataService.responsePrivateGroupRequestByUser(data).subscribe(
+      data => {
+        this.loading = false;
+        if (status == "2") {
+          this.getGroupDetailsByName();
+        }
+        else {
+          this.isShowPrivateGroupAction=false;
+          this.IsShowRejectMessage = true;
+        }
 
+      },
+      error => {
+        alert(error);
+        this.loading = false;
+      });
   }
   openUpdateCoverProModal(updateCoverPictureModal) {
 
@@ -299,6 +373,7 @@ export class GroupComponent implements OnInit {
             this.getUserPostDetails();
             this.getGroupMemberList();
             this.checkMyFrndList();
+            this.checkPrivateGroupsStatus();
           }
           else {
             this.router.navigateByUrl('/user/edit_profile/activity');
@@ -368,6 +443,28 @@ export class GroupComponent implements OnInit {
           //console.log(data);
           if (data.Ack == "1") {
             this.groupMemberList = data.groupMembers;
+            this.totalmember = this.groupMemberList.length;
+            
+            if (this.groupMemberList.length > 6) { 
+              this.IsShowTopViewMore1 = true;
+              for (let i = 0; i < this.groupMemberList.length; i++) {
+                if (this.groupMemberList1.length < 6) {
+                  this.groupMemberList1.push(this.groupMemberList[i]);
+                }
+              }
+              //alert(JSON.stringify(this.groupMemberList1))
+            }
+            else { 
+              this.IsShowTopViewMore = false;
+              this.groupMemberList1 = this.groupMemberList;
+            }
+
+            this.totalgrupmember = this.groupMemberList
+
+
+
+
+
             if (this.isUserLogin == '1') {
               let joinItemData = this.groupMemberList.filter(item => item.user_id == this.isloginUserId);
               if (joinItemData.length > 0) {
@@ -377,6 +474,7 @@ export class GroupComponent implements OnInit {
                 this.isJoinGroup = true;
               }
             }
+
           }
           //console.log(this.userFrndList);
         },
@@ -532,21 +630,43 @@ export class GroupComponent implements OnInit {
     }
   }
   viewMore() {
-    this.connectionsPageSize = this.connectionsPageSize + 5;
-    this.userFrndList = [];
-    if (this.totaluserFrndList.length > this.connectionsPageSize) {
+    this.connectionsPageSize = this.connectionsPageSize + 3;
+    this.filetredFriendList = [];
+    if (this.totalserchFrndList.length > this.connectionsPageSize) {
       this.IsShowTopViewMore = true;
     }
     else {
       this.IsShowTopViewMore = false;
     }
     for (let i = 0; i < this.connectionsPageSize; i++) {
-      if (this.totaluserFrndList[i]) {
-        this.userFrndList.push(this.totaluserFrndList[i]);
+      if (this.totalserchFrndList[i]) {
+        this.filetredFriendList.push(this.totalserchFrndList[i]);
       }
 
     }
   }
+  viewMore1() {
+    this.connectionsPageSize1 = this.connectionsPageSize1 + 6;
+    this.groupMemberList1 = [];
+    if (this.totalgrupmember.length > this.connectionsPageSize1) {
+      this.IsShowTopViewMore1 = true;
+    }
+    else {
+      this.IsShowTopViewMore1 = false;
+    }
+    for (let i = 0; i < this.connectionsPageSize1; i++) {
+      if (this.totalgrupmember[i]) {
+        this.groupMemberList1.push(this.totalgrupmember[i]);
+      }
+
+    }
+  }
+
+  
+
+
+
+
   public myOwnFrndListforGrp() {
     if (this.isloginUserId != '') {
       const dataUserDet = {
@@ -1209,5 +1329,18 @@ export class GroupComponent implements OnInit {
       });
 
 
+  }
+  
+  public divhide(sts)
+  {
+    if(sts == 1)
+    {
+      this.suggestshow = false;
+      this.divshow = true;
+    }
+    else{
+      this.suggestshow = true;
+      this.divshow = false;
+    }
   }
 }

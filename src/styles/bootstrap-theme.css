@@ -2700,7 +2700,7 @@ background: #fff !important;}
 }
 
 .profPhoto .img {
-    background-size: cover;
+    background-size: cover !important;
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -5584,7 +5584,17 @@ header .dropdown-menu{min-width: 218px;}
 	.invite-member-new .media-list.connections li .media-left,.invite-member-new .media-list.connections li .media-right,.invite-member-new .media-list.connections li .media-body{display: block !important;margin: 0 !important;text-align: center !important;padding: 0;width:100%}
 	.invite-member-new .media-list.connections li a{text-align: center;margin: 0 auto;display: block;}
 	.invite-member-new .media-list.connections li .media-left .img,.invite-member-new .media-list.connections li .media-body h2,.invite-member-new .media-list.connections li .media-right .button-holder-width{text-align: center !important;margin: 5px auto !important;}
+
+	
+	.connectionsPart.new-connection-request .contn-box li.friend-box-list .friend-boxText h4{text-align: center;}
+	.contn-box li.friend-box-list .sendmsg.new-acpt-reject{margin-right: auto;}
+	.connection-middle .onlineList li{margin: 7px;}
+	
+	.all-connection-new .contn-box li.friend-box-list .friend-boxText h4{text-align: center;margin-top: 15px !important}
+	.all-connection-new .contn-box li.friend-box-list .sendmsg{margin: 0 auto;}
+
 	.tabPart ul.edit-forms{padding: 20px;}
+
 }
 
 /*---------------------- 05-02-2018 --------------------------*/
@@ -5669,7 +5679,12 @@ line-height: 31px;padding: 0;left:0}
 .view-more-down{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;
 background: url(../assets/images/down-arrow-gray.png)no-repeat left center;background-repeat: no-repeat;padding-left: 20px;margin-bottom: 20px;display: block;}
 
-.view-more-down:hover{color: #bf1a28}
+
+.only-load-more{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;display: block;text-align: center;cursor: pointer;}
+
+.view-more-down:hover,.only-load-more:hover{color: #bf1a28}
+
+
 .right-share-new{padding: 56px 23px} 
 .right-share-new p{font-size:17px;margin: 18px 0 35px;line-height: 20px;}
 /*.right-share-new .btn.btn-primary{font-size: 17px !important;height: 58px;padding: 0 43px;line-height:58px;}*/
@@ -5807,7 +5822,46 @@ input[type=text]:focus, textarea:focus {
 .invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
 .invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
 
+
 .modal-dialog{
 	box-shadow: none !important;
 	border-radius:  none !important;
 }
+
+.connection-middle{overflow: hidden;padding:0;background: none;}
+.connection-middle h2{font-size:12px;text-transform: uppercase;font-family: 'montserratmedium';margin: 0}
+.online-connerction{background: #fff;overflow: hidden;padding: 30px 20px;margin-bottom: 10px;}
+.online-connerction .onlineList{margin: 30px -7px;}
+.online-connerction .onlineList li .img{width:91px;height: 91px;}
+.online-connerction .onlineList li .greenIcon{width: 20px;height: 20px;right: 5px;bottom: 0;}
+.connectionsPart.new-connection-request{margin-bottom: 10px}
+.connectionsPart.new-connection-request .connectionsPart{padding:0}
+.connectionsPart.new-connection-request .contn-box li.friend-box-list{min-height:auto;border-bottom: 2px solid #f0f0f0;padding: 20px 15px;}
+.connectionsPart.new-connection-request .contn-box li.friend-box-list:last-child{border-bottom:0}
+.connectionsPart.new-connection-request .contn-box li.friend-box-list .friend-boxImage{margin-right: 20px;}
+.connectionsPart.new-connection-request .contn-box li.friend-box-list .friend-boxImage a .img{width:40px;height:40px;margin: 0}
+.connectionsPart.new-connection-request .contn-box li.friend-box-list .friend-boxText h4{font-size:16px;}
+
+.contn-box li.friend-box-list .sendmsg.new-acpt-reject{margin-left: auto;}
+.contn-box li.friend-box-list .sendmsg.new-acpt-reject a{margin-left: auto;font-family: 'montserratmedium';font-size:10px;font-weight: normal;cursor: pointer;}
+.contn-box li.friend-box-list .sendmsg.new-acpt-reject a img{display: block;vertical-align: middle;margin-right:5px;float:left;}
+.contn-box li.friend-box-list .sendmsg.new-acpt-reject a b{display: block;vertical-align: middle;float:left;font-weight: normal;}
+.contn-box li.friend-box-list .sendmsg.new-acpt-reject a.ignore{color: #c01a28;margin-left:35px;}
+
+.all-connection-new{padding: 30px 20px;margin-bottom:10px;}
+.all-connection-new .contn-box li.friend-box-list .friend-boxImage a .img{width:93px;height:93px;margin: 0}
+.all-connection-new .contn-box li.friend-box-list{min-height: auto;padding: 40px 20px;}
+.all-connection-new .contn-box li.friend-box-list .friend-boxText h4{font-size:16px;color: #000000;margin: 0 0 10px 0;}
+.all-connection-new .contn-box li.friend-box-list .friend-boxText p{font-size:14px;color: #585858;line-height: 20px;}
+.all-connection-new .contn-box li.friend-box-list .sendmsg a{font-size:10px;text-transform: uppercase;font-family: 'montserratmedium';color: #202020;}
+.all-connection-new .contn-box li.friend-box-list .sendmsg a img{width:19px;margin-right: 7px;}
+
+
+
+
+
+
+
+
+
+

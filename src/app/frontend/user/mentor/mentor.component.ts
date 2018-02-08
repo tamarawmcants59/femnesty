@@ -32,6 +32,7 @@ becomeMetorContent:any;
     this.form = builder.group({
       name: ['', [
         Validators.required,
+        Validators.pattern('([a-zA-Z])+([a-zA-Z])+'),
         Validators.minLength(3)
       ]],
       email: ['', [
@@ -41,7 +42,8 @@ becomeMetorContent:any;
       ]],
       mobile_no: ['', [
         Validators.required,
-        Validators.minLength(10)
+        Validators.minLength(10),
+        Validators.pattern('[0-9][0-9]+')
       ]],
       qualification: ['', [
         //Validators.required,
