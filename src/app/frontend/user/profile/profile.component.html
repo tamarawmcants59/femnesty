@@ -22,7 +22,8 @@
                       <p class="text-center addressP" *ngIf="otherProfileDet?.address">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
                       <p class="text-center">
                             <a *ngIf="checkIsFriend" [routerLink]="['/user/chat',otherProfileDet?.id]" class="btn btn-primary">Chat With {{otherProfileDet?.first_name}}</a>  
-                            <button *ngIf="otherProfileDet?.id!=isloginUserId && !checkIsFriend" type="button" class="btn btn-primary" (click)="sendFriendRequest(otherProfileDet?.id)">Add Connection</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && !checkIsFriend && !sendrequest" type="button" class="btn btn-primary" (click)="sendFriendRequest(otherProfileDet?.id)">Add Connection</button>
+                            <button *ngIf="otherProfileDet?.id!=isloginUserId && sendrequest" type="button" class="btn btn-primary" >Request Sent</button>
                         </p>
                       
                   </div>

@@ -3809,6 +3809,7 @@ ul.uploadVideo {
     font-weight: normal !important;
     color: #000;
     outline:  none !important;
+    padding-left: 22px;
 }
 
 .inline-search .input-group-btn .btn {
@@ -5693,28 +5694,82 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 
 .inline-search .form-control::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    color: #000;
+    color: #2b2b2b;
     opacity: 1 !important;
 }
 
 .inline-search .form-control::-moz-placeholder {
     /* Firefox 19+ */
-    color: #000;
+    color: #2b2b2b;
     opacity: 1 !important;
 }
 
 .inline-search .form-control:-ms-input-placeholder {
     /* IE 10+ */
-    color: #000;
+    color: #2b2b2b;
     opacity: 1 !important;
 }
 
 .inline-search .form-control:-moz-placeholder {
     /* Firefox 18- */
-    color: #000;
+    color: #2b2b2b;
     opacity: 1 !important;
 }
-/*******************************************************/
+
+.inline-search .input-group-btn .btn{
+	adding: 6px 20px 6px 4px !important;
+}
+
+.HUB-Dtls .item{
+	padding: 0 0 22px 0;
+	list-style-type: none;
+	float: none;
+	margin-bottom: 22px;
+	border-bottom: 2px solid #f7f7f7;
+	width: 100% !important;
+	text-align: left;
+	position: relative;
+	display: block !important;
+}
+.HUB-Dtls .item p{
+	font-size: 12px;
+	color: #222222;
+	line-height: 20px;
+	padding-right: 60px;
+	font-family: 'sanchezregular';
+	position: relative;
+}
+.HUB-Dtls .item span{
+	font-family: 'montserratmedium';
+	font-size: 10px;
+	color: #9e9e9e;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+.HUB-Dtls .item .edit{
+	position: absolute;
+	width: 17px;
+	height: 18px;
+	top: 0;
+	right: 20px;
+}
+.HUB-Dtls .item .form-group{
+	margin-top: 5px;
+	padding-right: 60px;
+}
+.HUB-Dtls .item .form-control {
+    background: #f7f7f7;
+    border: none;
+    box-shadow: none;
+    height: 44px;
+    font-size: 16px;
+    padding: 6px 15px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.HUB-Dtls .item .form-group textarea{
+	height: 130px !important;
+}
 
 .invite-member-new{padding: 5px}
 .invite-member-new h3{font-size:12px;font-family: 'montserratmedium';margin-bottom: 23px;}
@@ -5732,11 +5787,5 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 .invite-member-new .media-list.connections li .media-right button{font-size: 10px !important;padding: 9px 22px;text-transform: uppercase;margin: 3px 0;color:#fff;border-radius: 50px;border:0;min-width:92px;float:left;text-shadow: none;margin-left: 6px;}
 .invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
 .invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
-
-
-
-
-
-
 
 

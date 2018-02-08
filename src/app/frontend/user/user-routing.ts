@@ -22,6 +22,8 @@ import { CreatehubComponent } from "./createhub/createhub.component";
 import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 import { MycmplistComponent } from "./mycmplist/mycmplist.component";
 import { MyconnectionComponent } from './myconnection/myconnection.component';
+import {OtherAllphotoComponent} from './other-allphoto/other-allphoto.component';
+import { EditdetailsComponent } from './editdetails/editdetails.component';
 
 const routes: Routes = [
   {
@@ -78,6 +80,14 @@ const routes: Routes = [
     component: TeamComponent,
     data: {
       title: 'Team'
+    }
+  },
+  {
+    path: 'edit_details',
+    canActivate: [AuthGuard],
+    component: EditdetailsComponent,
+    data: {
+      title: 'Edit Details'
     }
   },
   {
@@ -171,6 +181,14 @@ const routes: Routes = [
     path: 'all_photo',
     canActivate: [AuthGuard],
     component: AllphotoComponent,
+    data: {
+      title: 'All Photo'
+    }
+  },
+  {
+    path: 'other_all_photo',
+    canActivate: [AuthGuard],
+    component: OtherAllphotoComponent,
     data: {
       title: 'All Photo'
     }

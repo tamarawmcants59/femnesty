@@ -31,6 +31,7 @@ import {
   LinkedinLoginProvider
 } from 'ng4-social-login';
 import { AllphotoComponent } from './allphoto/allphoto.component';
+import { OtherAllphotoComponent } from './other-allphoto/other-allphoto.component';
 import { TeamComponent } from './team/team.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ActivationlinkComponent } from './activationlink/activationlink.component';
@@ -40,6 +41,7 @@ import { CreatehubComponent } from './createhub/createhub.component';
 import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 import { MycmplistComponent } from './mycmplist/mycmplist.component';
 import { MyconnectionComponent } from './myconnection/myconnection.component';
+import { EditdetailsComponent } from './editdetails/editdetails.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -107,7 +109,9 @@ export function provideConfig() {
     CreatehubComponent,
     GroupphotoComponent,
     MycmplistComponent,
-    MyconnectionComponent
+    MyconnectionComponent,
+    OtherAllphotoComponent,
+    EditdetailsComponent
     //ImageCropperComponent
   ],
   providers: [

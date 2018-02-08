@@ -56,8 +56,11 @@
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Occupation" class="form-control" [formControl]="occupation">
                     <div class="text-danger" *ngIf="!occupation.valid && occupation.touched">
-                        Please enter your occupation.
+                        Please enter your valid alphanumeric occupation.
                     </div>
+                    <!-- <div class="text-danger" *ngIf="!occupation.pattern && occupation.touched">
+                            Please enter alpha numeric.
+                        </div> -->
                 </div>
                 
                 <div class="form-group col-md-6">
@@ -72,7 +75,7 @@
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="Contact Number" class="form-control" [formControl]="mobile_number">
                     <div class="text-danger" *ngIf="!mobile_number.valid && mobile_number.touched">
-                        Please enter the correct contact no, this contact no is not valid.
+                        Please enter the correct numeric contact no, this contact no is not valid.
                     </div>
                 </div>
                 <div class="form-group col-md-6">
