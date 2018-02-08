@@ -384,7 +384,7 @@ export class HubCreateComponent implements OnInit {
               }
               else
                 this.successMsg = 'Hub created successfully.';
-                this.coverImgData='';
+              this.coverImgData = '';
               localStorage.setItem("address", '');
               localStorage.setItem("lat", '');
               localStorage.setItem("lng", '');
