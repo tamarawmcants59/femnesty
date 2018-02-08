@@ -32,7 +32,8 @@ export class TeamComponent implements OnInit {
     this.form = builder.group({
       name: ['', [
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(3),
+        Validators.pattern('[a-zA-Z][a-zA-Z ]+')
       ]],
       email: ['', [
         Validators.required,
@@ -41,11 +42,13 @@ export class TeamComponent implements OnInit {
       ]],
       mobile_no: ['', [
         Validators.required,
-        Validators.minLength(10)
+        Validators.minLength(10),
+        Validators.pattern('^[0-9]*$')
       ]],
       qualification: ['', [
         //Validators.required,
         //Validators.minLength(10)
+        Validators.pattern('([a-zA-Z0-9])+([0-9a-zA-Z])+')
       ]],
       message: ['', [
         Validators.required,

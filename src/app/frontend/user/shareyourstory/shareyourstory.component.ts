@@ -44,14 +44,14 @@ export class ShareyourstoryComponent implements OnInit {
         Validators.pattern('([a-zA-Z])+([a-zA-Z])+'),
         Validators.minLength(3)
       ]],
-      short_desc: ['', [
-        Validators.required,
-        //Validators.minLength(10)
-      ]],
-      description: ['', [
-        Validators.required,
-        //Validators.minLength(3)
-      ]],
+      // short_desc: ['', [
+      //   Validators.required,
+      //   //Validators.minLength(10)
+      // ]],
+      // description: ['', [
+      //   Validators.required,
+      //   //Validators.minLength(3)
+      // ]],
       auther_email: ['', [
         Validators.required,
         Validators.email

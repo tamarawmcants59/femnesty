@@ -56,7 +56,8 @@
                     <a [routerLink]="['/user/profile',postData.display_name]">
                         <h2>{{postData.name}}</h2>
                     </a>
-                    <p>{{postData.created_date_mod}}</p>
+                    <!-- <p>{{postData.created_date_mod}}</p> -->
+                    <p>{{postData.created_date | dateTimeFormat: 'dd MMM yyyy'}}</p>
                 </div>
             </div>
         </div>
