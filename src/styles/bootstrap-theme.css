@@ -2749,13 +2749,13 @@ background: #fff !important;}
 	font-family: 'montserratmedium';
     color: #000000;
     text-transform: uppercase;
-    padding: 15px 27px;
-    
+    padding: 15px 0;
     font-size: 10px;
-    
     cursor: pointer;
+    background-color:#fff;
 }
 .tabPart .nav-pills li{width:100%}
+
 
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:hover,
@@ -5576,6 +5576,12 @@ header .dropdown-menu{min-width: 218px;}
 	.obj-center{
 		margin-top: 20px !important;
 	}
+	
+	.invite-member-new .contn-box li.friend-box-list{margin-bottom: 10px}
+	.invite-member-new ul.contn-box{margin-bottom: 40px}
+	.invite-member-new .media-list.connections li .media-left,.invite-member-new .media-list.connections li .media-right,.invite-member-new .media-list.connections li .media-body{display: block !important;margin: 0 !important;text-align: center !important;padding: 0;width:100%}
+	.invite-member-new .media-list.connections li a{text-align: center;margin: 0 auto;display: block;}
+	.invite-member-new .media-list.connections li .media-left .img,.invite-member-new .media-list.connections li .media-body h2,.invite-member-new .media-list.connections li .media-right .button-holder-width{text-align: center !important;margin: 5px auto !important;}
 }
 
 /*---------------------- 05-02-2018 --------------------------*/
@@ -5708,3 +5714,29 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
     color: #000;
     opacity: 1 !important;
 }
+/*******************************************************/
+
+.invite-member-new{padding: 5px}
+.invite-member-new h3{font-size:12px;font-family: 'montserratmedium';margin-bottom: 23px;}
+.invite-member-new .form-control-plaintext{border-radius:0;border: 2px solid #e9e9e9;box-shadow: none;height:40px;}
+.invite-member-new ul.contn-box{display: flex !important;flex-wrap:wrap;justify-conent:flex-start;margin-bottom: 50px;}
+.invite-member-new .contn-box li.friend-box-list{padding: 0;width: auto;border: 0;height: auto;min-height: auto;}
+.invite-member-new .contn-box li.friend-box-list .friend-boxImage{margin-right: 10px;}
+.invite-member-new .contn-box li.friend-box-list .friend-boxImage a .img{margin: 0;width:80px !important;height:80px !important;object-fit:cover;}
+
+.invite-member-new h3 span{color: #aaaaaa;display: inline-block;float:right}
+.invite-member-new .media-list.connections{display: block !important;} 
+.invite-member-new .media-list.connections li{margin: 0 0 5px 0;}
+.invite-member-new .media-list.connections li .media-left .img{width:62px;height:62px;border-radius:100%;margin: 0}
+.invite-member-new .media-list.connections li .media-body h2{margin: 0;font-size:14px;color: #000000;text-align:left;}
+.invite-member-new .media-list.connections li .media-right button{font-size: 10px !important;padding: 9px 22px;text-transform: uppercase;margin: 3px 0;color:#fff;border-radius: 50px;border:0;min-width:92px;float:left;text-shadow: none;margin-left: 6px;}
+.invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
+.invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
+
+
+
+
+
+
+
+
