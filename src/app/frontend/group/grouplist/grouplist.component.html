@@ -93,11 +93,12 @@
                 </ul>-->
             </div>
             <div class="col-md-3 flex-right">
+            <div class="obj-center">
+                            <a [routerLink]="['/group/add_group']" class="btn btn-primary" href="javascript:void(0)">Create A Group</a>
+                        </div>
                 <div class="rightPart">
                     <div class="innerRightPart new-group-section">
-                        <div class="obj-center">
-                            <a [routerLink]="['/group/add_group']" class="btn btn-primary" href="javascript:void(0)">Create Group</a>
-                        </div>
+                        
                         <div>
                             <h2>BROWSE GROUPS</h2>
                         </div>
@@ -107,7 +108,8 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
                                     <button type="button" (click)="searchGroup()">
-                                        <i class="icon ion-ios-search"></i>
+                                        <!--<i class="icon ion-ios-search"></i>-->
+                                        <img src="assets/images/search-icon.png" alt="" />
                                     </button>
                                 </div>
                             </li>
