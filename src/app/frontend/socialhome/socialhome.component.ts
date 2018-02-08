@@ -35,7 +35,7 @@ export class SocialhomeComponent implements OnInit {
   public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
   public homepageCls = '';
   public shhover = '';
-
+  public email = '';
   constructor(
     private builder:FormBuilder, 
     private dataService: SocialService, 
@@ -47,7 +47,9 @@ export class SocialhomeComponent implements OnInit {
     let loginUserId=localStorage.getItem("loginUserId");
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
     let getUserDet = localStorage.getItem("currentUser");
+    this.email = getUserDet;
     this.loginUserDet = JSON.parse(getUserDet);
+    //alert(JSON.stringify(this.loginUserDet))
     this.postform = builder.group({
 			description: ['', [
 				Validators.required,

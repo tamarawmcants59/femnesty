@@ -52,10 +52,10 @@ export class SignupComponent implements OnInit {
   ) {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
-      'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
+      'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10),Validators.pattern('[0-9][0-9]+')])],
       'first_name': ['', Validators.compose([Validators.required])],
       'last_name': ['', Validators.compose([Validators.required])],
-      'occupation': ['', Validators.compose([Validators.required])],
+      'occupation': ['', Validators.compose([Validators.required,Validators.pattern('([a-zA-Z0-9])+([0-9a-zA-Z])+')])],
       'agreetab': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'cpassword': ['', Validators.compose([Validators.required])],
