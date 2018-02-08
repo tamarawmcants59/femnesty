@@ -1034,7 +1034,7 @@ button{
     position: relative;
     margin-bottom: 45px;
     padding-bottom: 35px;
-    line-height:56px;
+    line-height:52px;
     font-family: 'sanchezregular' !important;
 }
 
@@ -5596,7 +5596,13 @@ header .dropdown-menu{min-width: 218px;}
 	.all-connection-new .contn-box li.friend-box-list .sendmsg{margin: 0 auto;}
 
 	.tabPart ul.edit-forms{padding: 20px;}
-
+	.section{
+		padding: 20px 0;
+	}
+.h2.text-red{
+	font-size: 22px !important;
+	line-height: 26px !important;
+}
 }
 
 /*---------------------- 05-02-2018 --------------------------*/

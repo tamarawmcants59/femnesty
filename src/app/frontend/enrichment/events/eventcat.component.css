@@ -7,4 +7,7 @@
 @media screen and (max-width:767px) {
 	.inner-banner-section{margin-top: 170px;}
 	.inner-banner-section .container .video-info{left: 15px}
+	.section h1{
+		text-align: left !important;
+	}
 }

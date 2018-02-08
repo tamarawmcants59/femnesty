@@ -46,6 +46,15 @@ h3{
 
 @media screen and (max-width:767px) {
 	.extra-left-pad{padding-left: 0}
+	.extra-left-pad{
+		padding-left: 0 !important;
+	}
+.text-red{
+	font-size: 22px !important;
+	line-height: 26px !important;
+	margin-top: 25px !important;
+}
+
 }
 
 
