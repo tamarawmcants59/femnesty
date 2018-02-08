@@ -1,0 +1,64 @@
+<section class="section about-content-area visitingProfile">
+  <div class="container-fluid">
+      <div class="row flex-profile">
+          <div class="col-md-3 flex-left">
+            <div *ngIf="isloginUser == 1">
+                <user-sidebar></user-sidebar>
+            </div>
+          </div>
+          <div class="col-md-6 flex-middle">
+              <div class="middlePart">
+                  <div class="topPart" [ngStyle]="{'background-image':'url('+loginUserDet?.cover_image_url+')'}">
+                  </div>
+                  <div class="profPhoto">
+                      <div class="img" [ngStyle]="{'background-image':'url('+loginUserDet?.image_url+')'}">
+                      </div>
+                  </div>
+                 
+                  <div class="profDes">
+                      <h2 class="text-center">{{loginUserDet?.name}}</h2>
+                      <p class="text-center">{{loginUserDet?.bio}}</p>
+                      <p class="text-center addressP">{{loginUserDet?.address}}, {{loginUserDet?.city}}</p>
+                      
+                  </div>
+                  
+                  <div class="tabPart">
+                      
+                      <div class="tab-content">
+                          <div class="tab-pane fade in active">
+                              <div class="shareYourThought">
+                              	<div class="row">
+									<div class="col-md-4" *ngFor="let imgData of userImgList">
+	                					<div class="img" [ngStyle]="{'background-image':'url('+imgData.image_url+')'}"></div>
+	            					</div>
+	            					<!-- <div class="col-md-4">
+	                					<div class="img" style="background-image: url(http://111.93.169.90/team2/Femnesty/all_images/100_57445149.jpeg);"></div>
+	            					</div>
+	            					<div class="col-md-4">
+	                					<div class="img" style="background-image: url(http://111.93.169.90/team2/Femnesty/all_images/100_57445149.jpeg);"></div>
+	            					</div>
+	            					<div class="col-md-4">
+	                					<div class="img" style="background-image: url(http://111.93.169.90/team2/Femnesty/all_images/100_57445149.jpeg);"></div>
+	            					</div>
+	            					<div class="col-md-4">
+	                					<div class="img" style="background-image: url(http://111.93.169.90/team2/Femnesty/all_images/100_57445149.jpeg);"></div>
+	            					</div>
+	            					<div class="col-md-4">
+	                					<div class="img" style="background-image: url(http://111.93.169.90/team2/Femnesty/all_images/100_57445149.jpeg);"></div>
+	            					</div> -->
+	            					
+                                </div>
+                                <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">View More</a>
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3 flex-right">
+            <app-other-user-prfrsidebar></app-other-user-prfrsidebar>
+          </div>
+      </div>
+  </div>
+</section>

@@ -31,6 +31,7 @@ import {
   LinkedinLoginProvider
 } from 'ng4-social-login';
 import { AllphotoComponent } from './allphoto/allphoto.component';
+import { OtherAllphotoComponent } from './other-allphoto/other-allphoto.component';
 import { TeamComponent } from './team/team.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ActivationlinkComponent } from './activationlink/activationlink.component';
@@ -107,7 +108,8 @@ export function provideConfig() {
     CreatehubComponent,
     GroupphotoComponent,
     MycmplistComponent,
-    MyconnectionComponent
+    MyconnectionComponent,
+    OtherAllphotoComponent
     //ImageCropperComponent
   ],
   providers: [
