@@ -5822,6 +5822,12 @@ input[type=text]:focus, textarea:focus {
 .invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
 .invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
 
+
+.modal-dialog{
+	box-shadow: none !important;
+	border-radius:  none !important;
+}
+
 .connection-middle{overflow: hidden;padding:0;background: none;}
 .connection-middle h2{font-size:12px;text-transform: uppercase;font-family: 'montserratmedium';margin: 0}
 .online-connerction{background: #fff;overflow: hidden;padding: 30px 20px;margin-bottom: 10px;}

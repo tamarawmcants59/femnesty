@@ -108,3 +108,42 @@ label{
     height: 12px !important;
  
 }
+.modal-body h4{
+	font-size: 24px;
+	color: #222222;
+	font-family: 'sanchezregular';
+	margin-bottom: 15px;
+	margin-top: 20px;
+}
+.modal-body P{
+	font-size: 18px;
+	color: #7a7a7a;
+	font-family: 'sanchezregular';
+	margin-bottom: 20px;
+}
+.modal-body .btn-primary {
+  	padding: 0 !important;
+	width: 140px !important;
+	height: 40px !important;
+	text-align: center !important;
+	border-radius: 3px !important;
+	line-height: 40px !important;
+}
+.modal-content{
+	box-shadow: none !important;
+}
+.close{
+	font-size: 50px !important;
+	color: #ccc !important;
+}
+@media (min-width: 768px){
+.modal-body{
+	width: 700px !important;
+	border-radius: 0 !important;
+	background: #fff;
+	padding: 40px;
+	margin: 0 auto !important;
+	box-shadow: none !important;
+	background: #fff;
+}
+}
