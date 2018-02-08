@@ -396,203 +396,144 @@
 
                             </div>
                             <div id="menu5" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='groupdetails'}">
-                                <div class="connectionsPart">
-                                    <div class="connections">
-                                            <form class="login-form" [formGroup]="form" (ngSubmit)="updateGroup(form.value)" #loginForm="ngForm">
-                                                    
-                                                        <ul>
-                                                            <li>
-                                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='group_name'}">
-                                                                    <div class="edit" (click)="editAboutToggleTab('group_name')">edit</div>
-                                                                    <div (click)="editAboutToggleTab('group_name')" style="float:right">edit</div>
-                                                                    <h5>Title</h5>
-                                                                    <p>{{groupDetailsData.group_name}}</p>
-                                                                </div>
-                                                                <div *ngIf="editAbtActiveTab=='group_name'">
-                                                                    <button class="check" type="submit"></button>
-                                                                    <h5>Title</h5>
-                                                                    <P>
-                                                                        <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.group_name" formControlName="group_name" placeholder="Enter Group Title">
-                                                                    </P>
-                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['group_name'].valid && form.controls['group_name'].touched">Group Title required</div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                    <div [ngClass]="{'hide_div' : editAbtActiveTab=='year_est'}">
-                                                                        <div class="edit" (click)="editAboutToggleTab('year_est')">edit</div>
-                                                                        <div (click)="editAboutToggleTab('year_est')" style="float:right">edit</div>
-                                                                        <h5>Year Of Establishment</h5>
-                                                                        <p>{{groupDetailsData.year_est}}</p>
-                                                                    </div>
-                                                                    <div *ngIf="editAbtActiveTab=='year_est'">
-                                                                        <button class="check" type="submit"></button>
-                                                                        <h5>Year Of Establishment</h5>
-                                                                        <P>
-                                                                            <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.year_est" formControlName="year_est" placeholder="Year of Establishement">
-                                                                        </P>
-                                                                        <div class="text-danger pull-left" *ngIf="!form.controls['year_est'].valid && form.controls['year_est'].touched">Group Establish Year required</div>
-                                                                    </div>
-                                                                </li>
+                                <div class="innerRightPart right-map-details HUB-Dtls">
+									<h2 *ngIf="!title">{{groupDetailsData.title}}</h2>
+									<!-- <div class="alert alert-danger" role="alert" *ngIf="erroMsg">
+										{{erroMsg}}
+									</div> -->
+									<div class="item" *ngIf="!title">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title')">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>TITLE</span>
+										<p>{{groupDetailsData.title}}</p>
+									</div>
+									<div class="item" *ngIf="title">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('title')">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>TITLE</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="title" *ngIf="title">
+										</div>
+									</div>
+									<div class="item" *ngIf="!description">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description')">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DESCRIPTION</span>
+										<p>{{groupDetailsData.description}}</p>
+									</div>
+									<div class="item" *ngIf="description">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('description')">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DESCRIPTION</span>
+										<div class="form-group">
+											<textarea class="form-control" rows="6" [(ngModel)]="description" *ngIf="description"></textarea>
+										</div>
+									</div>
+									<div class="item">
+										<div class="edit">
+											<a href="javascript:void(0)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DATE</span>
+										<p>eb 01, 12:00 AM - 12:00 AM</p>
+									</div>
+									<div class="item" *ngIf="!organizer">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer')">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>ORGANIZER</span>
+										<p>{{groupDetailsData.organizer}}</p>
+									</div>
 
-                                                                <li>
-                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='category'}">
-                                                                            <div class="edit" (click)="editAboutToggleTab('category')">edit</div>
-                                                                            <div (click)="editAboutToggleTab('category')" style="float:right">edit</div>
-                                                                            <h5>Category</h5>
-                                                                            <p>{{groupDetailsData.year_est}}</p>
-                                                                        </div>
-                                                                        <div *ngIf="editAbtActiveTab=='category'">
-                                                                            <button class="check" type="submit"></button>
-                                                                            <h5>Category</h5>
-                                                                            <P>
-                                                                                    <select class="form-control-plaintext" required formControlName="cat_id">
-                                                                                            <option value='' selected>Category *</option>
-                                                                                            <option value="{{ catlist.id }}" *ngFor="let catlist of catList" [selected]="groupDetailsData.cat_id==catlist.id">{{ catlist?.title }}</option>
-                                                                                        </select>
-                                                                            </P>
-                                                                            <div class="text-danger pull-left" *ngIf="!form.controls['cat_id'].valid && form.controls['cat_id'].touched">Category is required</div>
-                                                                        </div>
-                                                                    </li>
+									<div class="item" *ngIf="organizer">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('organizer')">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>ORGANIZER</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="organizer" *ngIf="organizer">
+										</div>
+									</div>
+									<div class="item" *ngIf="!email">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email')">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>EMAIL</span>
+										<p>{{hubDetails.email}}</p>
+									</div>
 
-                                                                    <li>
-                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='country'}">
-                                                                                <div class="edit" (click)="editAboutToggleTab('country')">edit</div>
-                                                                                <div (click)="editAboutToggleTab('country')" style="float:right">edit</div>
-                                                                                <h5>Country</h5>
-                                                                                <p>{{groupDetailsData.country_name}}</p>
-                                                                            </div>
-                                                                            <div *ngIf="editAbtActiveTab=='country'">
-                                                                                <button class="check" type="submit"></button>
-                                                                                <h5>Country</h5>
-                                                                                <P>
-                                                                                        <select class="form-control-plaintext" required formControlName="country">
-                                                                                                <option value='' selected>Country *</option>
-                                                                                                <option value="{{ cdata.id }}" *ngFor="let cdata of countryList" [selected]="groupDetailsData.country==cdata.id">{{ cdata.countries_name }}</option>
-                                                                                            </select>
-                                                                                </P>
-                                                                                <div class="text-danger pull-left" *ngIf="!form.controls['country'].valid && form.controls['country'].touched">Country is required</div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                                <div [ngClass]="{'hide_div' : editAbtActiveTab=='city'}">
-                                                                                    <div class="edit" (click)="editAboutToggleTab('city')">edit</div>
-                                                                                    <div (click)="editAboutToggleTab('city')" style="float:right">edit</div>
-                                                                                    <h5>City</h5>
-                                                                                    <p>{{groupDetailsData.city}}</p>
-                                                                                </div>
-                                                                                <div *ngIf="editAbtActiveTab=='city'">
-                                                                                    <button class="check" type="submit"></button>
-                                                                                    <h5>City</h5>
-                                                                                    <P>
-                                                                                            <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.city" formControlName="city" placeholder="City ">    
-                                                                                    </P>
-                                                                                    <div class="text-danger pull-left" *ngIf="!form.controls['city'].valid && form.controls['city'].touched">City is required</div>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                    <div [ngClass]="{'hide_div' : editAbtActiveTab=='address'}">
-                                                                                        <div class="edit" (click)="editAboutToggleTab('address')">edit</div>
-                                                                                        <div (click)="editAboutToggleTab('address')" style="float:right">edit</div>
-                                                                                        <h5>Address</h5>
-                                                                                        <p>{{groupDetailsData.address}}</p>
-                                                                                    </div>
-                                                                                    <div *ngIf="editAbtActiveTab=='address'">
-                                                                                        <button class="check" type="submit"></button>
-                                                                                        <h5>City</h5>
-                                                                                        <P>
-                                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.address" formControlName="address" placeholder="address ">    
-                                                                                        </P>
-                                                                                        <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address is required</div>
-                                                                                    </div>
-                                                                                </li>    
-                                                                                <li>
-                                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='postal_code'}">
-                                                                                            <div class="edit" (click)="editAboutToggleTab('postal_code')">edit</div>
-                                                                                            <div (click)="editAboutToggleTab('postal_code')" style="float:right">edit</div>
-                                                                                            <h5>Postal Code</h5>
-                                                                                            <p>{{groupDetailsData.postal_code}}</p>
-                                                                                        </div>
-                                                                                        <div *ngIf="editAbtActiveTab=='postal_code'">
-                                                                                            <button class="check" type="submit"></button>
-                                                                                            <h5>Postal Code</h5>
-                                                                                            <P>
-                                                                                                    <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.postal_code" formControlName="postal_code" placeholder="Postal Code ">    
-                                                                                            </P>
-                                                                                            <div class="text-danger pull-left" *ngIf="!form.controls['postal_code'].valid && form.controls['postal_code'].touched">Postal Code is required</div>
-                                                                                        </div>
-                                                                                    </li> <li>
-                                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='phone'}">
-                                                                                                <div class="edit" (click)="editAboutToggleTab('phone')">edit</div>
-                                                                                                <div (click)="editAboutToggleTab('phone')" style="float:right">edit</div>
-                                                                                                <h5>Phone</h5>
-                                                                                                <p>{{groupDetailsData.phone}}</p>
-                                                                                            </div>
-                                                                                            <div *ngIf="editAbtActiveTab=='phone'">
-                                                                                                <button class="check" type="submit"></button>
-                                                                                                <h5>Phone</h5>
-                                                                                                <P>
-                                                                                                        <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.phone" formControlName="phone" placeholder="Phone ">    
-                                                                                                </P>
-                                                                                                <div class="text-danger pull-left" *ngIf="!form.controls['phone'].valid && form.controls['phone'].touched">Phone is required</div>
-                                                                                            </div>
-                                                                                        </li>
-                                                                                    <li>
-                                                                                            <div [ngClass]="{'hide_div' : editAbtActiveTab=='cemail'}">
-                                                                                                <div class="edit" (click)="editAboutToggleTab('cemail')">edit</div>
-                                                                                                <div (click)="editAboutToggleTab('cemail')" style="float:right">edit</div>
-                                                                                                <h5>Email</h5>
-                                                                                                <p>{{groupDetailsData.cemail}}</p>
-                                                                                            </div>
-                                                                                            <div *ngIf="editAbtActiveTab=='cemail'">
-                                                                                                <button class="check" type="submit"></button>
-                                                                                                <h5>Email</h5>
-                                                                                                <P>
-                                                                                                        <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.cemail" formControlName="cemail" placeholder="Email ">    
-                                                                                                </P>
-                                                                                                <div class="text-danger pull-left" *ngIf="!form.controls['cemail'].valid && form.controls['cemail'].touched">Email is required</div>
-                                                                                            </div>
-                                                                                        </li>   
-                                                                                         
-                                                                                            <li>
-                                                                                                    <div [ngClass]="{'hide_div' : editAbtActiveTab=='short_desc'}">
-                                                                                                        <div class="edit" (click)="editAboutToggleTab('short_desc')">edit</div>
-                                                                                                        <div (click)="editAboutToggleTab('short_desc')" style="float:right">edit</div>
-                                                                                                        <h5>Short Description</h5>
-                                                                                                        <p>{{groupDetailsData.short_desc}}</p>
-                                                                                                    </div>
-                                                                                                    <div *ngIf="editAbtActiveTab=='short_desc'">
-                                                                                                        <button class="check" type="submit"></button>
-                                                                                                        <h5>Short Description</h5>
-                                                                                                        <P>
-                                                                                                                <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.short_desc" formControlName="short_desc" placeholder="Short Description ">    
-                                                                                                        </P>
-                                                                                                        <div class="text-danger pull-left" *ngIf="!form.controls['short_desc'].valid && form.controls['short_desc'].touched">Short description is required</div>
-                                                                                                    </div>
-                                                                                                </li> 
-                                                                                                <li>
-                                                                                                        <div [ngClass]="{'hide_div' : editAbtActiveTab=='long_desc'}">
-                                                                                                            <div class="edit" (click)="editAboutToggleTab('long_desc')">edit</div>
-                                                                                                            <div (click)="editAboutToggleTab('long_desc')" style="float:right">edit</div>
-                                                                                                            <h5>Long Description</h5>
-                                                                                                            <p>{{groupDetailsData.long_desc}}</p>
-                                                                                                        </div>
-                                                                                                        <div *ngIf="editAbtActiveTab=='long_desc'">
-                                                                                                            <button class="check" type="submit"></button>
-                                                                                                            <h5>Long Description</h5>
-                                                                                                            <P>
-                                                                                                                    <input type="text" class="form-control-plaintext" [(ngModel)]="groupDetailsData.long_desc" formControlName="long_desc" placeholder="Long Description ">    
-                                                                                                            </P>
-                                                                                                            
-                                                                                                        </div>
-                                                                                                    </li> 
-                                                        </ul>
-                                                    
-                                                    
-                                                    
-                                                </form>
-                                           </div>
-                                </div>
+									<div class="item" *ngIf="email">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('email')">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>EMAIL</span>
+										<div class="form-group">
+											<input class="form-control" type="email" [(ngModel)]="email" *ngIf="email">
+										</div>
+									</div>
+									<div class="item" *ngIf="!phone">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone')">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>PHONE</span>
+										<p>{{hubDetails.phone}}</p>
+									</div>
+									<div class="item" *ngIf="phone">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('phone')">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>PHONE</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="phone" *ngIf="phone">
+										</div>
+									</div>
+									<div class="item" *ngIf="!website">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website')">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>WEBSITE</span>
+										<p>{{hubDetails.website}}</p>
+									</div>
+									<div class="item" *ngIf="website">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('website')">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>WEBSITE</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="website" *ngIf="website">
+										</div>
+									</div>
 
+								</div>
                             </div>
                         </div>
                     </div>
