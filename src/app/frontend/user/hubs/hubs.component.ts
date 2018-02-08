@@ -25,9 +25,16 @@ export class HubsComponent implements OnInit {
   searchErrorMessage: any;
   modalErrorMsg: any;
   erroMsg: any;
+  category_id: any;
+  isShowPicker = false;
+  public catList = [];
+  public hubList = [];
+  recurring_end: any;
   public IsShowCropperCoverImage = false;
   croppedImage: any = '';
   public hubSlug = '';
+  start_time: any;
+  end_time: any;
   private connectionsPageSize = 5;
   public totalUninvitedUsers = [];
   public hubDetails = { id: '' };
@@ -47,8 +54,10 @@ export class HubsComponent implements OnInit {
   IsGroupAdmin = false;
   public successMsg = '';
   public items = [];
+  public minDate = new Date();
   public email: any;
   public phone: any;
+  editDate: any;
   public website: any;
   public organizer: any;
   public friends = [];
@@ -94,7 +103,32 @@ export class HubsComponent implements OnInit {
 
     // });
     this.getHubDetails();
+    this.getHubCategories();
     this.getLastFourArticle();
+    this.getHubList();
+  }
+
+  public getHubList() {
+    this.hubService.getmyRequestGroupList(this.loginUserId).subscribe(data => {
+      //console.log(data)
+      if (data.Ack == "1") {
+        this.hubList = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      }
+    );
+  }
+  public getHubCategories() {
+    this.dataService.getHubCategories().subscribe(data => {
+      if (data.Ack == "1") {
+        this.catList = data.details;
+      }
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
   }
   public acceptHubRequest() {
 
@@ -422,7 +456,9 @@ export class HubsComponent implements OnInit {
       if (this.title) {
         this.description = '';
         this.organizer = '';
+        this.category_id = '';
         this.email = '';
+        this.address = '';
         this.phone = '';
         this.website = '';
         this.loading = true;
@@ -444,6 +480,8 @@ export class HubsComponent implements OnInit {
         this.email = '';
         this.phone = '';
         this.website = '';
+        this.category_id = '';
+        this.address = '';
         this.title = hubDetails.title;
       }
 
@@ -455,6 +493,8 @@ export class HubsComponent implements OnInit {
         this.organizer = '';
         this.email = '';
         this.phone = '';
+        this.category_id = '';
+        this.address = '';
         this.website = '';
         this.loading = true;
         const data = { description: this.description, id: this.hubDetails.id, user_id: hubDetails.user_id }
@@ -473,6 +513,8 @@ export class HubsComponent implements OnInit {
         this.organizer = '';
         this.email = '';
         this.phone = '';
+        this.address = '';
+        this.category_id = '';
         this.website = '';
         this.description = hubDetails.description;
       }
@@ -484,6 +526,8 @@ export class HubsComponent implements OnInit {
         this.description = '';
         this.email = '';
         this.phone = '';
+        this.address = '';
+        this.category_id = '';
         this.website = '';
         this.loading = true;
         const data = { organizer: this.organizer, id: this.hubDetails.id, user_id: hubDetails.user_id }
@@ -499,8 +543,10 @@ export class HubsComponent implements OnInit {
       }
       else {
         this.title = '';
+        this.address = '';
         this.description = '';
         this.email = '';
+        this.category_id = '';
         this.phone = '';
         this.website = '';
         this.organizer = hubDetails.organizer;
@@ -514,6 +560,8 @@ export class HubsComponent implements OnInit {
           this.description = '';
           this.organizer = '';
           this.phone = '';
+          this.address = '';
+          this.category_id = '';
           this.website = '';
           this.loading = true;
           const data = { email: this.email, id: this.hubDetails.id, user_id: hubDetails.user_id }
@@ -529,7 +577,7 @@ export class HubsComponent implements OnInit {
         }
         else {
           this.erroMsg = "Please give a valid email.";
-          window.scrollTo(0,0);
+          window.scrollTo(0, 0);
         }
 
       }
@@ -540,6 +588,8 @@ export class HubsComponent implements OnInit {
         this.phone = '';
         this.website = '';
         this.organizer = '';
+        this.address = '';
+        this.category_id = '';
       }
     }
     else if (type == 'phone') {
@@ -550,6 +600,8 @@ export class HubsComponent implements OnInit {
         this.organizer = '';
         this.email = '';
         this.website = '';
+        this.address = '';
+        this.category_id = '';
         this.loading = true;
         const data = { phone: this.phone, id: this.hubDetails.id, user_id: hubDetails.user_id }
         this.hubService.editHubDetails(data).subscribe(data => {
@@ -565,10 +617,12 @@ export class HubsComponent implements OnInit {
       else {
         this.title = '';
         this.description = '';
-        this.email = ''
+        this.email = '';
+        this.address = '';
         this.phone = hubDetails.phone;
         this.website = '';
         this.organizer = '';
+        this.category_id = '';
       }
     }
     else if (type == 'website') {
@@ -577,7 +631,9 @@ export class HubsComponent implements OnInit {
         this.title = '';
         this.description = '';
         this.organizer = '';
+        this.address = '';
         this.email = '';
+        this.category_id = '';
         this.phone = '';
         if (this.website == "Enter your website") {
           this.website = '';
@@ -601,13 +657,188 @@ export class HubsComponent implements OnInit {
         this.title = '';
         this.description = '';
         this.email = ''
+        this.category_id = '';
         this.phone = '';
+        this.address = '';
         if (hubDetails.website)
           this.website = hubDetails.website;
         else
           this.website = "Enter your website"
         this.organizer = '';
       }
+    }
+    else if (type == 'category_id') {
+      if (this.category_id) {
+        this.title = '';
+        this.description = '';
+        this.organizer = '';
+        this.email = '';
+        this.phone = '';
+        this.address = '';
+        this.website = '';
+        this.loading = true;
+        const data = { category_id: this.category_id, id: this.hubDetails.id, user_id: hubDetails.user_id }
+        this.hubService.editHubDetails(data).subscribe(data => {
+          this.category_id = '';
+          this.loading = false;
+          this.getHubDetails();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+
+      }
+      else {
+        this.title = '';
+        this.description = '';
+        this.email = '';
+        this.phone = '';
+        this.address = '';
+        this.website = '';
+        this.organizer = '';
+        this.category_id = hubDetails.category_id;
+      }
+    }
+    else if (type == 'time') {
+      if (this.isShowPicker) {
+        let IsValid = false;
+        if (this.hubList.length > 0) {
+          for (var i = 0; i < this.hubList.length; i++) {
+            if (this.hubList[i].type == 'O') {
+              const date = new Date(this.hubList[i].date);
+              if (date)
+                date.setHours(0, 0, 0, 0);
+              let date1 = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+              let compareDate = this.editDate;
+              if (compareDate)
+                compareDate.setHours(0, 0, 0, 0);
+              let compareDate1 = compareDate.getDate() + "/" + (compareDate.getMonth() + 1) + "/" + compareDate.getFullYear();
+              if (hubDetails.type == "O") {
+                if (date1 == compareDate1) {
+                  if (hubDetails.id != this.hubList[i].id) {
+                    this.erroMsg = "A hub already exists on the entered date.";
+                    IsValid = false;
+                    window.scrollTo(0, 0);
+                    break;
+                  }
+
+                }
+                else {
+                  IsValid = true;
+                }
+              }
+              else if (hubDetails.type == "R") {
+                let from = new Date(this.editDate);
+                if (from)
+                  from.setHours(0, 0, 0, 0);
+                let to = new Date(this.recurring_end);
+                if (to)
+                  to.setHours(0, 0, 0, 0);
+                let check = new Date(this.hubList[i].date);
+                if (check)
+                  check.setHours(0, 0, 0, 0);
+                if (check >= from && check <= to) {
+                  if (hubDetails.id != this.hubList[i].id) {
+                    this.erroMsg = "A hub already exists on the entered date.";
+                    IsValid = false;
+                    window.scrollTo(0, 0);
+                    break;
+                  }
+
+                }
+                else {
+                  IsValid = true;
+                }
+              }
+
+            }
+            else if (this.hubList[i].type == 'R') {
+              let from = new Date(this.hubList[i].recurring_start);
+              if (from)
+                from.setHours(0, 0, 0, 0);
+              let to = new Date(this.hubList[i].recurring_end);
+              if (to)
+                to.setHours(0, 0, 0, 0);
+              let check = this.editDate;
+              if (check)
+                check.setHours(0, 0, 0, 0);
+              if (check >= from && check <= to) {
+                if (hubDetails.id != this.hubList[i].id) {
+                  this.erroMsg = "A hub already exists on the entered date.";
+                  IsValid = false;
+                  window.scrollTo(0, 0);
+                  break;
+                }
+
+              }
+              else {
+                IsValid = true;
+              }
+            }
+          }
+        }
+        else {
+          IsValid = true;
+        }
+        if (IsValid) {
+          this.title = '';
+          this.description = '';
+          this.organizer = '';
+          this.email = '';
+          this.phone = '';
+          this.address = '';
+          this.website = '';
+          this.category_id = '';
+          this.isShowPicker = false;
+          this.loading = true;
+          let data;
+          debugger;
+          if (hubDetails.type == "O") {
+            data = { hub_date: this.editDate, id: this.hubDetails.id, user_id: hubDetails.user_id, start_time: this.start_time, end_time: this.end_time };
+          }
+          else
+          {
+            data = { recurring_start: this.editDate,recurring_end:this.recurring_end, id: this.hubDetails.id, user_id: hubDetails.user_id, start_time: this.start_time, end_time: this.end_time };
+          }
+
+          this.hubService.editHubDetails(data).subscribe(data => {
+            this.editDate = ''; this.start_time = ''; this.end_time = ''; this.editDate = ''; this.recurring_end;
+            this.loading = false;
+            this.getHubDetails();
+          },
+            error => {
+              this.loading = false;
+              alert('Sorry there is some error.')
+            });
+        }
+      }
+      else {
+        this.title = '';
+        this.description = '';
+        this.email = '';
+        this.phone = '';
+        this.address = '';
+        this.website = '';
+        this.organizer = '';
+        this.category_id = '';
+        this.isShowPicker = true;
+        if (hubDetails.type == 'O') {
+          debugger;
+          if (hubDetails[16])
+            this.editDate = new Date(hubDetails[16]);
+          else
+            this.editDate = new Date(hubDetails.hub_date_new);
+          this.start_time = hubDetails.start_time; this.end_time = hubDetails.end_time;
+        }
+        else if (hubDetails.type == 'R') {
+          this.editDate =  new Date(hubDetails.recurring_start);
+          this.recurring_end =  new Date(hubDetails.recurring_end);
+          this.start_time = hubDetails.start_time; this.end_time = hubDetails.end_time;
+        }
+
+      }
+
     }
     else if (type == 'address') {
       this.IsShowAddress = false;

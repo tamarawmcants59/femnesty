@@ -18,29 +18,26 @@
                             <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
                         </a> -->
                         <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
-                                <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
-                            </a>
+                            	<img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;margin-right:-22px" />
+                        </a>
                     </div>
                     <div class="profDes">
-                        <input class="text-center" type="text" [(ngModel)]="group_name" *ngIf="group_name">
-                        <h2 class="text-center" *ngIf="!group_name">{{groupDetailsData?.group_name}}</h2>
-                        <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('name')">
-                            <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -34px;margin-right: 34px;"></i>
-                        </a>
+                        <h2 class="text-center">{{groupDetailsData?.group_name}}</h2>
 
-                        <p class="text-center" *ngIf="!short_desc">
+
+                        <p class="text-center">
 
                             {{groupDetailsData?.short_desc}}
 
                             <span *ngIf="groupDetailsData?.group_type=='1'"> (Public)</span>
                             <span *ngIf="groupDetailsData?.group_type=='2'"> (Private)</span>
                         </p>
-                        <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('short_desc')">
+                        <!-- <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('short_desc')">
                             <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -14px;margin-right: 31px;"></i>
                         </a>
                         <p class="text-center" *ngIf="short_desc">
                             <input class="text-center" type="text" [(ngModel)]="short_desc" *ngIf="short_desc">
-                        </p>
+                        </p> -->
                         <p class="text-center addressP">{{groupDetailsData?.member_count}} Members</p>
                         <p class="text-center">
                             <!--<br />-->
@@ -374,173 +371,278 @@
 
                             </div>
                             <div id="menu4" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='group'}">
-                                <div class="connectionsPart">
-                                    <div class="connections">
-                                        
-                                       <h2>{{groupDetailsData.group_name}}</h2>
-                                       
-									<p class="HUB-Dtls-txt">{{groupDetailsData?.short_desc}}</p>
-									<p class="info" >
-										<span>Year:</span>{{groupDetailsData?.year_est}}</p>
-									<p class="info">
-                                        <span>Address:</span> {{groupDetailsData?.address}}</p>
-                                    <p class="info">
-                                        <span>City:</span> {{groupDetailsData?.city}}</p>
-                                    <p class="info">
-                                        <span>Country:</span> {{groupDetailsData?.country_name}}</p>
-
-									<p class="info">
-										<span>Email:</span>{{groupDetailsData?.cemail}}</p>
-									<!-- <p class="info">
-										<span>Phone:</span> {{groupDetailsData?.phone}}</p> -->
-									<p class="info">
-										<span>Category:</span> {{groupDetailsData?.short_desc}}</p>
-									<p class="info">
-										<span>Descriptions:</span> {{groupDetailsData?.long_desc}}</p>
-                                        
+                                <div class="innerRightPart right-map-details HUB-Dtls">
+                                    <h2>{{groupDetailsData.group_name}}</h2>
+                                    <div class="item">
+                                        <div class="edit">
+                                        </div>
+                                        <span>GROUP NAME</span>
+                                        <p>{{groupDetailsData?.group_name}}</p>
                                     </div>
+                                    <div class="item">
+                                        <div class="edit">
+                                        </div>
+                                        <span>SHORT DESCRIPTION</span>
+                                        <p>{{groupDetailsData?.short_desc}}</p>
+                                    </div>
+                                    <div class="item">
+                                        <div class="edit">
+                                        </div>
+                                        <span>YEAR OF ESTABLISHMENT</span>
+                                        <p>{{groupDetailsData?.year_est}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="!email">
+                                        <div class="edit">
+
+                                        </div>
+                                        <span>EMAIL</span>
+                                        <p>{{groupDetailsData?.cemail}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="!phone">
+                                        <div class="edit">
+                                        </div>
+                                        <span>PHONE</span>
+                                        <p>{{groupDetailsData?.phone}}</p>
+                                    </div>
+
+
+
                                 </div>
 
                             </div>
                             <div id="menu5" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='groupdetails'}">
                                 <div class="innerRightPart right-map-details HUB-Dtls">
-									<h2 *ngIf="!title">{{groupDetailsData.title}}</h2>
-									<!-- <div class="alert alert-danger" role="alert" *ngIf="erroMsg">
-										{{erroMsg}}
-									</div> -->
-									<div class="item" *ngIf="!title">
-										<div class="edit">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title')">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>TITLE</span>
-										<p>{{groupDetailsData.title}}</p>
-									</div>
-									<div class="item" *ngIf="title">
-										<div class="edit">
-											<a href="javascript:void(0)" (click)="openEdit('title')">
-												<img src="assets/images/check-icon.png" alt="" />
-											</a>
-										</div>
-										<span>TITLE</span>
-										<div class="form-group">
-											<input class="form-control" type="text" [(ngModel)]="title" *ngIf="title">
-										</div>
-									</div>
-									<div class="item" *ngIf="!description">
-										<div class="edit">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description')">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>DESCRIPTION</span>
-										<p>{{groupDetailsData.description}}</p>
-									</div>
-									<div class="item" *ngIf="description">
-										<div class="edit">
-											<a href="javascript:void(0)" (click)="openEdit('description')">
-												<img src="assets/images/check-icon.png" alt="" />
-											</a>
-										</div>
-										<span>DESCRIPTION</span>
-										<div class="form-group">
-											<textarea class="form-control" rows="6" [(ngModel)]="description" *ngIf="description"></textarea>
-										</div>
-									</div>
-									<div class="item">
-										<div class="edit">
-											<a href="javascript:void(0)">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>DATE</span>
-										<p>eb 01, 12:00 AM - 12:00 AM</p>
-									</div>
-									<div class="item" *ngIf="!organizer">
-										<div class="edit">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer')">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>ORGANIZER</span>
-										<p>{{groupDetailsData.organizer}}</p>
-									</div>
-
-									<div class="item" *ngIf="organizer">
-										<div class="edit">
-											<a href="javascript:void(0)" (click)="openEdit('organizer')">
-												<img src="assets/images/check-icon.png" alt="" />
-											</a>
-										</div>
-										<span>ORGANIZER</span>
-										<div class="form-group">
-											<input class="form-control" type="text" [(ngModel)]="organizer" *ngIf="organizer">
-										</div>
-									</div>
-									<div class="item" *ngIf="!email">
-										<div class="edit">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email')">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>EMAIL</span>
-										<p>{{hubDetails.email}}</p>
-									</div>
-
-									<div class="item" *ngIf="email">
-										<div class="edit">
-											<a href="javascript:void(0)" (click)="openEdit('email')">
-												<img src="assets/images/check-icon.png" alt="" />
-											</a>
-										</div>
-										<span>EMAIL</span>
-										<div class="form-group">
-											<input class="form-control" type="email" [(ngModel)]="email" *ngIf="email">
-										</div>
-									</div>
-									<div class="item" *ngIf="!phone">
-										<div class="edit">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone')">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>PHONE</span>
-										<p>{{hubDetails.phone}}</p>
-									</div>
-									<div class="item" *ngIf="phone">
-										<div class="edit">
-											<a href="javascript:void(0)" (click)="openEdit('phone')">
-												<img src="assets/images/check-icon.png" alt="" />
-											</a>
-										</div>
-										<span>PHONE</span>
-										<div class="form-group">
-											<input class="form-control" type="text" [(ngModel)]="phone" *ngIf="phone">
-										</div>
-									</div>
-									<div class="item" *ngIf="!website">
-										<div class="edit">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website')">
-												<img src="assets/images/pencil-icon.png" alt="" />
-											</a>
-										</div>
-										<span>WEBSITE</span>
-										<p>{{hubDetails.website}}</p>
-									</div>
-									<div class="item" *ngIf="website">
-										<div class="edit">
-											<a href="javascript:void(0)" (click)="openEdit('website')">
-												<img src="assets/images/check-icon.png" alt="" />
-											</a>
-										</div>
-										<span>WEBSITE</span>
-										<div class="form-group">
-											<input class="form-control" type="text" [(ngModel)]="website" *ngIf="website">
-										</div>
-									</div>
-
-								</div>
+                                    <h2 *ngIf="!group_name">{{groupDetailsData.group_name}}</h2>
+                                    <div class="alert alert-danger" role="alert" *ngIf="editErrorMsg">
+                                        {{editErrorMsg}}
+                                    </div>
+                                    <div class="item" *ngIf="!group_name">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('name')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>GROUP NAME</span>
+                                        <p>{{groupDetailsData?.group_name}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="group_name">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('name')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>GROUP NAME</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" [(ngModel)]="group_name" *ngIf="group_name">
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!short_desc">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('short_desc')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>SHORT DESCRIPTION</span>
+                                        <p>{{groupDetailsData?.short_desc}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="short_desc">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('short_desc')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>SHORT DESCRIPTION</span>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="6" [(ngModel)]="short_desc" *ngIf="short_desc"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!long_desc">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('long_desc')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>LONG DESCRIPTION</span>
+                                        <p>{{groupDetailsData?.long_desc}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="long_desc">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('long_desc')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>LONG DESCRIPTION</span>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="6" [(ngModel)]="long_desc" *ngIf="long_desc"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!year_est">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('year_est')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>YEAR OF ESTABLISHMENT</span>
+                                        <p>{{groupDetailsData?.year_est}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="year_est">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('year_est')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>YEAR OF ESTABLISHMENT</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" [(ngModel)]="year_est" *ngIf="year_est">
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!cat_id">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('cat_id')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>CATEGORY</span>
+                                        <p>{{groupDetailsData?.grp_cat_name}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="cat_id">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('cat_id')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>CATEGORY</span>
+                                        <div class="form-group">
+                                            <select class="form-control-plaintext" [(ngModel)]="cat_id">
+                                                <option value='' selected>Category *</option>
+                                                <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!email">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>EMAIL</span>
+                                        <p>{{groupDetailsData?.cemail}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="email">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('email')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>EMAIL</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" [(ngModel)]="email" *ngIf="email">
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!phone">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>PHONE</span>
+                                        <p>{{groupDetailsData?.phone}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="phone">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('phone')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>PHONE</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" [(ngModel)]="phone" *ngIf="phone">
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!city">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('city')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>CITY</span>
+                                        <p>{{groupDetailsData?.grp_city}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="city">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('city')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>CITY</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" [(ngModel)]="city" *ngIf="city">
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!country">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('country')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>COUNTRY</span>
+                                        <p>{{groupDetailsData?.country_name}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="country">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('country')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>COUNTRY</span>
+                                        <div class="form-group">
+                                            <select class="form-control-plaintext" [(ngModel)]="country">
+                                                <option value='' selected>Country *</option>
+                                                <option value="{{ cdata.id }}" *ngFor="let cdata of countryList">{{ cdata.countries_name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!postal_code">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('postal_code')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>POSTAL CODE</span>
+                                        <p>{{groupDetailsData?.postal_code}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="postal_code">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('postal_code')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>POSTAL CODE</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" [(ngModel)]="postal_code" *ngIf="postal_code">
+                                        </div>
+                                    </div>
+                                    <div class="item" *ngIf="!address">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address')">
+                                                <img src="assets/images/pencil-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>ADDRESS</span>
+                                        <p>{{groupDetailsData?.address}}</p>
+                                    </div>
+                                    <div class="item" *ngIf="address">
+                                        <div class="edit">
+                                            <a href="javascript:void(0)" (click)="openEdit('address')">
+                                                <img src="assets/images/check-icon.png" alt="" />
+                                            </a>
+                                        </div>
+                                        <span>ADDRESS</span>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Type anything and you will get a location *" id="autocomplete" #addressEdit>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -586,23 +688,23 @@
             </div>
         </div> -->
         <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
-                {{modalErrorMsg}}
-            </div>
+            {{modalErrorMsg}}
+        </div>
         <div class="img result" *ngIf="!IsShowCropperCoverImage">
-                <img [src]="groupDetailsData?.group_image" style="width:100%; height:100%">
+            <img [src]="groupDetailsData?.group_image" style="width:100%; height:100%">
+        </div>
+        <div class="inner-bg">
+            <div class="icon-change">
+                <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+                    <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
+                </div>
             </div>
-            <div class="inner-bg">
-                    <div class="icon-change">
-                        <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
-                            <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
-                        </div>
-                    </div>
-                </div>
-                <div class="upload-demo">
-                    <div class="upload-demo-wrap">
-                        <div id="upload-demo"></div>
-                    </div>
-                </div>
+        </div>
+        <div class="upload-demo">
+            <div class="upload-demo-wrap">
+                <div id="upload-demo"></div>
+            </div>
+        </div>
 
     </div>
     <div class="modal-footer">
