@@ -94,6 +94,7 @@ public invitediv = '';
     this.isUserLogin = localStorage.getItem("isLoggedIn");
     this.invitediv = localStorage.getItem("invitediv");
 
+    localStorage.setItem("invitediv",'');
 
     this.form = builder.group({
       group_name: ['', [

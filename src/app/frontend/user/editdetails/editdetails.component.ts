@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ViewChild } from '@angular/core';
+import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
+import { UserService } from "../user.service";
+import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 
 @Component({
   selector: 'app-editdetails',
@@ -7,16 +12,215 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./editdetails.component.css']
 })
 export class EditdetailsComponent implements OnInit {
+  public loginUserDet: any;
+  public form: FormGroup;
+  public editAbtActiveTab: string = '';
+  errorMsg: string = '';
+  successMsg: string = '';
+  public loading = false;
+
+
+  public dobmonth:any;
+  public dobyear:any;
+  public dobdate:any;
+ 
+  public mobnumber:any;
+  public mobcode:any;
+
+
+
 
   constructor(
     private modalService: NgbModal,
-  ) { }
+    private builder: FormBuilder,
+    private dataService: UserService,
+    private router: Router,
+  ) { 
+    this.form = builder.group({
+      first_name: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      last_name: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+			/*email: ['', [
+				Validators.required,
+				//BasicValidators.email
+				Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+			]],*/
+      mobcode: ['', [
+        Validators.required,
+        Validators.minLength(2)
+      ]],
+      mobnumber: ['', [
+        Validators.required,
+        Validators.minLength(10)
+      ]],
+      dobmonth: ['', [
+        Validators.required,
+      ]],
+      dobyear: ['', [
+        Validators.required,
+      ]],
+      dobdate: ['', [
+        Validators.required,
+      ]],
+      website: ['', [
+        
+      ]],
+			/*dob: ['', [
+			   Validators.required,
+			   Validators.minLength(3)
+			 ]],
+			country: ['', [
+			   Validators.required,
+			   Validators.minLength(3)
+			 ]],*/
+      state: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      city: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      address: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      occupation: ['', [
+        Validators.required,
+        //Validators.minLength(3)
+      ]],
+      bio: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      email: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      education: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      favourite_quotes: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      marriage_status: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      children: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      password: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      cnfpassword: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+    });
+  }
 
   ngOnInit() {
+    this.getUserDetails();
   }
 
   report(closeConfirmModal){ 
     this.modalService.open(closeConfirmModal);
   }
+  public getUserDetails() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    localStorage.setItem("groupAdmin", loginUserId);
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "id": parseInt(loginUserId)
+      };
+      this.dataService.getUserDetById(dataUserDet)
+        .subscribe(data => {
+          const details = data;
+          //console.log(details);
+          if (details.Ack == "1") {
+            this.loginUserDet = details.UserDetails[0];
+            if (this.loginUserDet.dob) {
+              
+              var res = this.loginUserDet.dob.split("-");
+              this.dobmonth = res[1]
+              this.dobyear = res[0]
+              this.dobdate = res[2]
+              //alert(res[0])
+              //this.loginUserDet.dateOfBirth = new Date(this.loginUserDet.dob);
+            }
+            if (this.loginUserDet.mobile_number) {
+              //alert(this.loginUserDet.mobile_number)
+              var res = this.loginUserDet.mobile_number.split("-");
+              if(this.mobnumber = res[1])
+              {
+                this.mobnumber = res[1]
+              this.mobcode = res[0]
+              }
+              else{
+                this.mobnumber = res[0]
+                this.mobcode = '+00';
+              }
+              
+              
+            }
+          } else {
 
+          }
+        },
+        error => {
+
+        }
+        );
+    } else {
+    }
+
+  }
+  public updateAccount() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const result = {},
+      userValue = this.form.value;
+    userValue.id = loginUserId;
+    const dateOfBirth = this.form.value.dobyear + '-' + this.form.value.dobmonth  + '-' + this.form.value.dobdate;
+      const mobile = this.form.value.mobcode + '-' +  this.form.value.mobnumber;
+      userValue.mobile_number = mobile;
+      //alert(JSON.stringify(userValue))
+    userValue.dob = dateOfBirth;
+    this.dataService.updateAccountDet(userValue)
+      .subscribe(
+      data => {
+        this.editAbtActiveTab = '';
+        const details = data;
+        //console.log
+        localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
+        localStorage.setItem('userName', details.UserDetails.first_name);
+        localStorage.setItem('profile_image', details.UserDetails.image_url);
+        this.loading = false;
+        this.successMsg = 'Data updated successfully';
+        this.loginUserDet.dob = dateOfBirth;
+        //this.router.navigateByUrl('/user/profile');
+        this.router.navigate(['/user/edit_details']);
+      },
+      error => {
+        alert(error);
+      });
+
+  }
 }

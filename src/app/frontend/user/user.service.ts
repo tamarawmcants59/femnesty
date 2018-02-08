@@ -69,7 +69,7 @@ export class UserService {
     ).map(data => data);
   }
 
-  updateAccountDet(form_data) {
+  updateAccountDet(form_data) { //alert(JSON.stringify(form_data))
     return this.apiService.post(
       `/users/appupdateaccount`,
       form_data
