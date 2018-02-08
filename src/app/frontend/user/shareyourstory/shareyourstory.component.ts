@@ -36,10 +36,12 @@ export class ShareyourstoryComponent implements OnInit {
       ]],
       author_name: ['', [
         Validators.required,
+        Validators.pattern('([a-zA-Z])+([a-zA-Z])+'),
         Validators.minLength(3)
       ]],
       title: ['', [
         Validators.required,
+        Validators.pattern('([a-zA-Z])+([a-zA-Z])+'),
         Validators.minLength(3)
       ]],
       short_desc: ['', [

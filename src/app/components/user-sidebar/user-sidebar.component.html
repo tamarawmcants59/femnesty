@@ -72,12 +72,12 @@
                 </a>
                 <div class="greenIcon"></div>
             </li>
-
+            
             <li>
                 <div class="upload-btn-wrapper uploadBut">
                    <!-- <button class="btn"><i class="icon ion-ios-plus-empty"></i></button>
                     <input type="file" name="myfile" />-->
-                    <a href=""><div class="img" style="background-image: url('assets/images/plus-icon.png')"></div></a>
+                    <a [routerLink]="['/user/myconnection']"><div class="img" style="background-image: url('assets/images/plus-icon.png')"></div></a>
                 </div>
             </li>
         </ul>
@@ -89,7 +89,7 @@
             </li>
             <li>|</li>
             <li>
-                <a [routerLink]="['/user/edit_profile/activity']">SETTINGS</a>
+                <a [routerLink]="['/user/edit_details']">SETTINGS</a>
             </li>
         </ul>
     </div>
