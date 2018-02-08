@@ -15,7 +15,7 @@
 							<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
 						</a>-->
 						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
-							<img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;" />
+							<img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;margin-right:-22px" />
 						</a>
 					</div>
 					<div class="hubDes">
@@ -82,22 +82,59 @@
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='details'}">
 								<div class="innerRightPart right-map-details HUB-Dtls">
 									<h2>{{hubDetails.title}}</h2>
-									<p class="HUB-Dtls-txt">{{hubDetails.description}}</p>
-									<p class="info" *ngIf="hubDetails.type=='R'">
-										{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}}, {{hubDetails.day}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
-									<p class="info" *ngIf="hubDetails.type!='R'">
-										<span>Date:</span> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
-									<p class="info">
-										<span>Organizer:</span> {{hubDetails.organizer}}</p>
+									<div class="item">
+										<div class="edit">
+										</div>
+										<span>TITLE</span>
+										<p>{{hubDetails.title}}</p>
+									</div>
+									<div class="item">
+										<div class="edit">
+										</div>
+										<span>DESCRIPTION</span>
+										<p>{{hubDetails.description}}</p>
+									</div>
 
-									<p class="info">
-										<span>Email:</span> {{hubDetails.email}}</p>
-									<p class="info">
-										<span>Phone:</span> {{hubDetails.phone}}</p>
-									<p class="info">
-										<span>Website:</span> {{hubDetails.website}}</p>
-									<p class="info">
-										<span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+									<div class="item">
+										<span>DATE</span>
+										<p *ngIf="hubDetails.type=='R'">
+											<em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},
+												<br/> {{hubDetails.day}},
+												<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+										</p>
+										<p *ngIf="hubDetails.type!='R'">
+											<em>{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+										</p>
+									</div>
+									<div class="item">
+										<div class="edit">
+										</div>
+										<span>ORGANIZER</span>
+										<p>{{hubDetails.organizer}}</p>
+									</div>
+									<div class="item">
+										<div class="edit">
+										</div>
+										<span>EMAIL</span>
+										<p>{{hubDetails.email}}</p>
+									</div>
+									<div class="item">
+										<div class="edit">
+										</div>
+										<span>PHONE</span>
+										<p>{{hubDetails.phone}}</p>
+									</div>
+									<div class="item">
+										<div class="edit">
+										</div>
+										<span>WEBSITE</span>
+										<p>{{hubDetails.website}}</p>
+									</div>
+									<div class="item">
+										<span>PRIVACY</span>
+										<p>{{hubDetails.type=='O'?'Public':'Private'}}</p>
+									</div>
+
 								</div>
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='editHub'}">
@@ -146,14 +183,71 @@
 											<textarea class="form-control" rows="6" [(ngModel)]="description" *ngIf="description"></textarea>
 										</div>
 									</div>
-									<div class="item">
+									<div class="item" *ngIf="!category_id">
 										<div class="edit">
-											<a href="javascript:void(0)">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('category_id',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>CATEGORY</span>
+										<p>{{hubDetails?.hub_cat_name}}</p>
+									</div>
+									<div class="item" *ngIf="category_id">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('category_id',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>CATEGORY</span>
+										<div class="form-group">
+											<select class="form-control-plaintext" [(ngModel)]="category_id">
+												<option value='' selected>Category *</option>
+												<option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="item" *ngIf="!isShowPicker">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('time',hubDetails)">
 												<img src="assets/images/pencil-icon.png" alt="" />
 											</a>
 										</div>
 										<span>DATE</span>
-										<p>eb 01, 12:00 AM - 12:00 AM</p>
+										<p *ngIf="hubDetails.type=='R'">
+											<em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},
+												<br/> {{hubDetails.day}},
+												<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+										</p>
+										<p *ngIf="hubDetails.type!='R'">
+											<em>{{hubDetails.hub_date_new}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+										</p>
+									</div>
+									<div class="item" *ngIf="isShowPicker && hubDetails.type=='O'">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('time',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DATE</span>
+										<div class="form-group">
+											<ngx-date-picker class="" *ngIf="editDate" [(ngModel)]="editDate" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+											<ngx-time-picker [disableInput]="true" *ngIf="start_time" [(ngModel)]="start_time"></ngx-time-picker>
+											<ngx-time-picker [disableInput]="true" *ngIf="end_time" [(ngModel)]="end_time"></ngx-time-picker>
+										</div>
+									</div>
+									<div class="item" *ngIf="isShowPicker && hubDetails.type=='R'">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('time',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DATE</span>
+										<div class="form-group">
+											<ngx-date-picker class="" *ngIf="editDate" [(ngModel)]="editDate" [disableInput]="true"></ngx-date-picker>
+											<ngx-date-picker class="" *ngIf="recurring_end" [(ngModel)]="recurring_end" [disableInput]="true"></ngx-date-picker>
+											<ngx-time-picker [disableInput]="true" *ngIf="start_time" [(ngModel)]="start_time"></ngx-time-picker>
+											<ngx-time-picker [disableInput]="true" *ngIf="end_time" [(ngModel)]="end_time"></ngx-time-picker>
+										</div>
 									</div>
 									<div class="item" *ngIf="!organizer">
 										<div class="edit">

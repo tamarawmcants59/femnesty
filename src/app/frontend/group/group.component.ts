@@ -6,6 +6,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from "lodash";
 declare var jquery: any;
 declare var $: any;
+declare var google: any;
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
@@ -21,15 +22,16 @@ export class GroupComponent implements OnInit {
   public isGroupId = "";
   public groupDetailsData: any;
   public group_name: any;
-  public year_est:any;
-  public cat_id:any;
-  public country:any;
-  public city:any;
-  public address:any;
-  public postal_code:any;
-  public phone:any;
-  public email:any;
-  public long_desc:any;
+  public year_est: any;
+  public cat_id: any;
+  public country: any;
+  public city: any;
+  public address: any;
+  editErrorMsg: any;
+  public postal_code: any;
+  public phone: any;
+  public email: any;
+  public long_desc: any;
   coverImageChangedEvent: any = '';
   public showCoverCrop = false;
   public short_desc: any;
@@ -64,16 +66,17 @@ export class GroupComponent implements OnInit {
   public IsGroupAdmin = false;
   public catList = [];
   public countryList = [];
-  public editAbtActiveTab:any;
+  public editAbtActiveTab: any;
   public form: FormGroup;
 
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
+  @ViewChild("addressEdit") addressEdit: ElementRef;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
     private router: Router,
-    private builder: FormBuilder, 
+    private builder: FormBuilder,
     private modalService: NgbModal
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
@@ -115,10 +118,10 @@ export class GroupComponent implements OnInit {
       ]]
       ,
       long_desc: ['', [
-        
+
       ]]
-      
-			
+
+
 
     });
   }
@@ -641,9 +644,18 @@ export class GroupComponent implements OnInit {
     }
   }
   openEdit(type) {
+    this.editErrorMsg = '';
     if (type == 'name') {
       if (this.group_name) {
         this.short_desc = '';
+        this.cat_id = '';
+        this.long_desc = '';
+        this.phone = '';
+        this.country = '';
+        this.year_est = '';
+        this.postal_code = '';
+        this.city = '';
+        this.email = '';
         this.loading = true;
         const data = { group_name: this.group_name, id: this.groupDetailsData.id }
         this.dataService.editGroupDataSend(data).subscribe(data => {
@@ -658,6 +670,14 @@ export class GroupComponent implements OnInit {
       }
       else {
         this.short_desc = '';
+        this.year_est = '';
+        this.long_desc = '';
+        this.email = '';
+        this.city = '';
+        this.postal_code = '';
+        this.cat_id = '';
+        this.country = '';
+        this.phone = '';
         this.group_name = this.groupDetailsData.group_name;
       }
 
@@ -665,6 +685,14 @@ export class GroupComponent implements OnInit {
     else if (type == 'short_desc') {
       if (this.short_desc) {
         this.group_name = '';
+        this.year_est = '';
+        this.long_desc = '';
+        this.cat_id = '';
+        this.email = '';
+        this.city = '';
+        this.postal_code = '';
+        this.phone = '';
+        this.country = '';
         this.loading = true;
         const data = { short_desc: this.short_desc, id: this.groupDetailsData.id }
         this.dataService.editGroupDataSend(data).subscribe(data => {
@@ -679,11 +707,403 @@ export class GroupComponent implements OnInit {
       }
       else {
         this.group_name = '';
+        this.year_est = '';
+        this.long_desc = '';
+        this.country = '';
+        this.phone = '';
+        this.city = '';
+        this.postal_code = '';
+        this.cat_id = '';
+        this.email = '';
         this.short_desc = this.groupDetailsData.short_desc;
       }
     }
-    
-    
+    else if (type == 'long_desc') {
+      if (this.long_desc) {
+        this.group_name = '';
+        this.year_est = '';
+        this.country = '';
+        this.short_desc = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.phone = '';
+        this.city = '';
+        this.email = '';
+        if (this.long_desc == 'Long Description') {
+          this.long_desc = '';
+        }
+        else {
+          this.loading = true;
+          const data = { long_desc: this.long_desc, id: this.groupDetailsData.id }
+          this.dataService.editGroupDataSend(data).subscribe(data => {
+            this.long_desc = '';
+            this.loading = false;
+            this.getGroupDetailsByName();
+          },
+            error => {
+              this.loading = false;
+              alert('Sorry there is some error.')
+            });
+        }
+
+
+      }
+      else {
+        this.group_name = '';
+        this.year_est = '';
+        this.short_desc = '';
+        this.country = '';
+        this.phone = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.city = '';
+        this.email = '';
+        if (this.groupDetailsData.long_desc)
+          this.long_desc = this.groupDetailsData.long_desc;
+        else
+          this.long_desc = "Long Description"
+      }
+    }
+    else if (type == 'year_est') {
+      if (this.year_est) {
+        this.group_name = '';
+        this.phone = '';
+        this.email = '';
+        this.country = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.city = '';
+        this.short_desc = '';
+        this.long_desc = '';
+        this.loading = true;
+        const data = { year_est: this.year_est, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data).subscribe(data => {
+          this.year_est = '';
+          this.loading = false;
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.phone = '';
+        this.city = '';
+        this.country = '';
+        this.email = '';
+        this.long_desc = '';
+        this.year_est = this.groupDetailsData.year_est;
+      }
+    }
+    else if (type == 'email') {
+      if (this.email) {
+        this.group_name = '';
+        this.short_desc = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.long_desc = '';
+        this.country = '';
+        this.city = '';
+        this.year_est = '';
+        this.phone = '';
+        if (this.validateEmail(this.email)) {
+
+          this.loading = true;
+          const data = { cemail: this.email, id: this.groupDetailsData.id }
+          this.dataService.editGroupDataSend(data).subscribe(data => {
+            this.email = '';
+            this.loading = false;
+            this.getGroupDetailsByName();
+          },
+            error => {
+              this.loading = false;
+              alert('Sorry there is some error.')
+            });
+        }
+        else {
+          this.editErrorMsg = "Please give a valid email.";
+          window.scrollTo(0, 0);
+        }
+
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.country = '';
+        this.long_desc = '';
+        this.phone = '';
+        this.city = '';
+        this.year_est = '';
+        this.email = this.groupDetailsData.cemail;
+      }
+    }
+    else if (type == 'phone') {
+      if (this.phone) {
+        this.group_name = '';
+        this.short_desc = '';
+        this.cat_id = '';
+        this.country = '';
+        this.postal_code = '';
+        this.long_desc = '';
+        this.year_est = '';
+        this.city = '';
+        this.email = '';
+        if (this.phone == 'Enter phone') {
+          this.phone = '';
+        }
+        else {
+          this.loading = true;
+          const data = { phone: this.phone, id: this.groupDetailsData.id }
+          this.dataService.editGroupDataSend(data).subscribe(data => {
+            this.phone = '';
+            this.loading = false;
+            this.getGroupDetailsByName();
+          },
+            error => {
+              this.loading = false;
+              alert('Sorry there is some error.')
+            });
+        }
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.long_desc = '';
+        this.year_est = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.country = '';
+        this.city = '';
+        this.email = '';
+        if (this.groupDetailsData.phone)
+          this.phone = this.groupDetailsData.phone;
+        else
+          this.phone = "Enter phone";
+      }
+    }
+    else if (type == 'city') {
+      if (this.city) {
+        this.group_name = '';
+        this.phone = '';
+        this.email = '';
+        this.short_desc = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.long_desc = '';
+        this.country = '';
+        this.year_est = '';
+        this.loading = true;
+        const data = { city: this.city, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data).subscribe(data => {
+          this.city = '';
+          this.loading = false;
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.phone = '';
+        this.cat_id = '';
+        this.email = '';
+        this.long_desc = '';
+        this.postal_code = '';
+        this.country = '';
+        this.city = this.groupDetailsData.grp_city;
+        this.year_est = '';
+      }
+    }
+    else if (type == 'country') {
+      if (this.country) {
+        this.group_name = '';
+        this.phone = '';
+        this.email = '';
+        this.short_desc = '';
+        this.long_desc = '';
+        this.year_est = '';
+        this.cat_id = '';
+        this.postal_code = '';
+        this.city = '';
+        this.loading = true;
+        const data = { country: this.country, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data).subscribe(data => {
+          this.country = '';
+          this.loading = false;
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.phone = '';
+        this.cat_id = '';
+        this.email = '';
+        this.postal_code = '';
+        this.long_desc = '';
+        this.city = '';
+        this.year_est = '';
+        this.country = this.groupDetailsData.country;
+      }
+    }
+    else if (type == 'postal_code') {
+      if (this.postal_code) {
+        this.group_name = '';
+        this.phone = '';
+        this.email = '';
+        this.short_desc = '';
+        this.long_desc = '';
+        this.city = '';
+        this.cat_id = '';
+        this.country = '';
+        this.year_est = '';
+        this.loading = true;
+        const self = this;
+        let geocoder = new google.maps.Geocoder;
+        geocoder.geocode({ 'address': this.postal_code }, function (results, status) {
+          if (status === 'OK') {
+            const data = { postal_code: self.postal_code, id: self.groupDetailsData.id }
+            self.dataService.editGroupDataSend(data).subscribe(data => {
+              self.postal_code = '';
+              self.loading = false;
+              self.getGroupDetailsByName();
+            },
+              error => {
+                self.loading = false;
+                alert('Sorry there is some error.')
+              });
+          } else {
+            self.loading = false;
+            window.scrollTo(0, 0);
+            self.editErrorMsg = "Please give a valid postal code.";
+          }
+        });
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.phone = '';
+        this.email = '';
+        this.long_desc = '';
+        this.country = '';
+        this.city = '';
+        this.cat_id = '';
+        this.year_est = '';
+        this.postal_code = this.groupDetailsData.postal_code;
+      }
+    }
+    else if (type == 'cat_id') {
+      if (this.cat_id) {
+        this.group_name = '';
+        this.phone = '';
+        this.email = '';
+        this.short_desc = '';
+        this.long_desc = '';
+        this.year_est = '';
+        this.postal_code = '';
+        this.city = '';
+        this.country = '';
+        this.loading = true;
+        const data = { cat_id: this.cat_id, id: this.groupDetailsData.id }
+        this.dataService.editGroupDataSend(data).subscribe(data => {
+          this.cat_id = '';
+          this.loading = false;
+          this.getGroupDetailsByName();
+        },
+          error => {
+            this.loading = false;
+            alert('Sorry there is some error.')
+          });
+      }
+      else {
+        this.group_name = '';
+        this.short_desc = '';
+        this.phone = '';
+        this.email = '';
+        this.postal_code = '';
+        this.long_desc = '';
+        this.city = '';
+        this.year_est = '';
+        this.cat_id = this.groupDetailsData.cat_id;
+        this.country = '';
+      }
+    }
+    else if (type == 'address') {
+      if (this.address) {
+        this.group_name = '';
+        this.phone = '';
+        this.email = '';
+        this.short_desc = '';
+        this.long_desc = '';
+        this.year_est = '';
+        this.postal_code = '';
+        this.city = '';
+        this.country = '';
+        this.cat_id = '';
+        this.loading = true;
+        if (localStorage.getItem("address")) {
+          let addressData = JSON.parse(localStorage.getItem("address"));
+          const data = { address: addressData.address, lat: addressData.lat, lng: addressData.lng, id: this.groupDetailsData.id };
+          this.dataService.editGroupDataSend(data).subscribe(data => {
+            this.cat_id = '';
+            this.loading = false;
+            this.getGroupDetailsByName();
+          },
+            error => {
+              this.loading = false;
+              alert('Sorry there is some error.')
+            });
+        }
+
+      }
+      else {
+        setTimeout(function () {
+          let autocomplete = new google.maps.places.Autocomplete(
+    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+            { types: ['geocode'] });
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+            localStorage.setItem("address", JSON.stringify(address_data));
+
+          });
+        }, 100)
+        this.group_name = '';
+        this.short_desc = '';
+        this.phone = '';
+        this.email = '';
+        this.postal_code = '';
+        this.long_desc = '';
+        this.city = '';
+        this.year_est = '';
+        this.cat_id = '';
+        this.country = '';
+        this.address = this.groupDetailsData.address;
+
+        // this.addressEdit.nativeElement.style.display = "block";
+      }
+    }
+
+
+  }
+
+  private validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
   public requestGroupAction(pid, type) {
     this.loading = true;
@@ -772,22 +1192,22 @@ export class GroupComponent implements OnInit {
   }
   public updateGroup() {
     this.loading = true;
-   
+
     const data1 = this.form.value;
-      data1.id = this.groupDetailsData.id;
+    data1.id = this.groupDetailsData.id;
     this.loading = true;
-        const data = { group_name: this.group_name, id: this.groupDetailsData.id }
-        this.dataService.editGroupDataSend(data1).subscribe(data1 => {
-         // this.group_name = '';
-          this.loading = false;
-          this.editAbtActiveTab ='';
-          this.getGroupDetailsByName();
-        },
-          error => {
-            this.loading = false;
-            alert('Sorry there is some error.')
-          });
-    
+    const data = { group_name: this.group_name, id: this.groupDetailsData.id }
+    this.dataService.editGroupDataSend(data1).subscribe(data1 => {
+      // this.group_name = '';
+      this.loading = false;
+      this.editAbtActiveTab = '';
+      this.getGroupDetailsByName();
+    },
+      error => {
+        this.loading = false;
+        alert('Sorry there is some error.')
+      });
+
 
   }
 }
