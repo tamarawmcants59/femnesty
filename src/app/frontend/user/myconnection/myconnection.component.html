@@ -11,7 +11,7 @@
 				<div class="middlePart connection-middle">
 					<div class="connectionsPart new-connection-request">
                <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
-                <div class="row" *ngIf="(reqSuccessMsg != '')">
+                <!--<div class="row" *ngIf="(reqSuccessMsg != '')">
                     <div class="alert alert-success" role="alert" *ngIf="(reqSuccessMsg != '')">
                             {{reqSuccessMsg}}
                     </div>
@@ -20,7 +20,7 @@
                     <div class="alert alert-danger" role="alert" *ngIf="(reqErrorMsg != '')">
                             {{reqErrorMsg}}
                     </div>
-                </div>
+                </div>-->
                 <h2 *ngIf="userRequestFrndList?.length > 0">CONNECTION REQUESTS</h2>
                 <ul class="contn-box" *ngIf="userRequestFrndList?.length > 0">
                     <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">

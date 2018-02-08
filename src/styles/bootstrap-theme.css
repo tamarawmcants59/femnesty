@@ -2700,7 +2700,7 @@ background: #fff !important;}
 }
 
 .profPhoto .img {
-    background-size: cover;
+    background-size: cover !important;
     background-position: center center;
     background-repeat: no-repeat;
 }
