@@ -22,10 +22,18 @@
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/user/myconnection']">
+                <a [routerLink]="['/user/myconnection']" *ngIf="!connectionsCount">
                     <span class="iconWidth">
                         <img src="assets/images/icon2.png">
-                    </span>CONNECTIONS</a>
+                    </span>CONNECTIONS
+                   
+                </a>
+                <a [routerLink]="['/user/myconnection']" *ngIf="connectionsCount">
+                    <span class="iconWidth badge" style="width:25px;float:left;background-color:#BB1926">
+                     {{connectionsCount}}
+                    </span> &nbsp;CONNECTIONS
+                   
+                </a>
             </li>
             <li>
                 <a [routerLink]="['/group/find']">

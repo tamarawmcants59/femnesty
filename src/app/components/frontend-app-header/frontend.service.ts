@@ -29,6 +29,13 @@ export class FrontendService {
   getContactUsPageDetails(){
     return this.apiService.get(`/enrichment/app_contactus_content`).map(data => data);
   }
+  getConnectionsCount(user_id)
+  {
+    return this.apiService.post(
+      `/users/app_user_friendlistcount`,
+      user_id
+  ).map(data => data);
+  }
   getAdvisoryContent(){
     return this.apiService.get(`/enrichment/app_advisory_content`).map(data => data);
   }

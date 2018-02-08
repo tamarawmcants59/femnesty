@@ -22,7 +22,7 @@ export class UserSidebar implements OnInit {
   public onlineUserList = [];
   public firebasOnlineUserList: any;
   public HeaderNavCls: string = '';
-  
+  connectionsCount:any;
   constructor(
     private el: ElementRef,
     lc: NgZone,
@@ -76,8 +76,25 @@ export class UserSidebar implements OnInit {
     parentElement.removeChild(nativeElement);
     this.getUserDetails();
     this.getConnectionList();
+    this.getConnectionCount();
   }
+getConnectionCount()
+{
+  const loginUserId = localStorage.getItem("loginUserId");
+  this._service.getConnectionsCount({user_id:loginUserId}).subscribe(data => {
+    const details = data;
+    if (details.Ack == "1") {
+      this.connectionsCount = details.FriendCount.count;
+      //console.log(this.currentUserLoginDet);
+    } else {
 
+    }
+  },
+    error => {
+
+    }
+  );
+}
   public getUserDetails() {
     const loginUserId = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
     if (loginUserId != 0) {

@@ -19,10 +19,13 @@ export class GroupComponent implements OnInit {
   public showProfileCrop = false;
   modalErrorMsg: any;
   croppedImage: any = '';
+  isShowPrivateGroupAction = false;
+  actionId: any;
   public isGroupId = "";
   public groupDetailsData: any;
   public group_name: any;
   public year_est: any;
+  IsShowRejectMessage = false;
   public cat_id: any;
   public country: any;
   public city: any;
@@ -133,9 +136,36 @@ export class GroupComponent implements OnInit {
     this.getGroupDetailsByName();
     this.getHubCategories();
     this.getTotCounteyList();
+
   }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
+  }
+
+  checkPrivateGroupsStatus() {
+    const loginUserId = localStorage.getItem("loginUserId");
+    const data = { user_id: loginUserId, group_id: this.isGroupId };
+    this.loading = true;
+    this.dataService.checkPrivateGroupsStatus(data).subscribe(data => {
+      if (data.Ack == 1) {
+        this.loading = false;
+        if (data.RequestsList[0].request_type == "0") {
+          this.isShowPrivateGroupAction = true;
+          this.actionId = data.RequestsList[0].id;
+        }
+        else {
+          this.actionId = "";
+          this.isShowPrivateGroupAction = false;
+        }
+
+      }
+      else {
+        this.loading = false;
+      }
+    }, error => {
+      this.loading = false;
+    })
+
   }
   public getTotCounteyList() {
     this.dataService.getCountryList().subscribe(data => {
@@ -184,6 +214,26 @@ export class GroupComponent implements OnInit {
       this.searchErrorMessage = '';
     }
 
+  }
+  acceptReject(status) {
+    this.loading = true;
+    const data = { "id": this.actionId, "request_type": status };
+    this.dataService.responsePrivateGroupRequestByUser(data).subscribe(
+      data => {
+        this.loading = false;
+        if (status == "2") {
+          this.getGroupDetailsByName();
+        }
+        else {
+          this.isShowPrivateGroupAction=false;
+          this.IsShowRejectMessage = true;
+        }
+
+      },
+      error => {
+        alert(error);
+        this.loading = false;
+      });
   }
   openUpdateCoverProModal(updateCoverPictureModal) {
 
@@ -299,6 +349,7 @@ export class GroupComponent implements OnInit {
             this.getUserPostDetails();
             this.getGroupMemberList();
             this.checkMyFrndList();
+            this.checkPrivateGroupsStatus();
           }
           else {
             this.router.navigateByUrl('/user/edit_profile/activity');
