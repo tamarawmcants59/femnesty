@@ -6,47 +6,70 @@
               <user-sidebar></user-sidebar>
           </div>
           <div class="col-md-6 flex-middle">
+                <div class="row" *ngIf="(successMsg != '')">
+                        <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                            {{successMsg}}
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="(errorMsg != '')">
+                        <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                            {{errorMsg}}
+                        </div>
+                    </div>
+                <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
               <div class="middlePart">
                   <div class="MyGroups-list">
-                  	<h2>Edit Profile <span><a class="btn btn-primary">Update</a></span></h2>
+                  	<h2>Edit Profile <span><button class="btn btn-primary" type="submit" value="Update">Update</button><!--<a class="btn btn-primary">Update</a>--></span></h2>
                   </div>
               </div>
               <div class="middlePart">
                   <div class="MyGroups-list edit-forms">
                   	<h5>Basic Overview  </h5>
                   	<div class="menu">
-                  		<form class="login-form">
+                  		
                   			<div class="form-group row">
                                  <div class="col-md-6">
                                    <label>First Name</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Erik"> 
-                                 </div>
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name" placeholder="Enter your first name"> 
+                                   <div class="text-danger pull-left" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
+                                </div>
                                  <div class="col-md-6">
                                    <label>Last Name</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Sandberg"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name" placeholder="Enter your last name"> 
+                                   <div class="text-danger pull-left" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Email</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="erik@gillbogroup.com"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.email" formControlName="email" readonly="readonly"> 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Date of Birth</label>
                                    <ul>
                                    	<li>
-                                   		 <select class="form-control-plaintext">
-                                           <option>1994</option>
+                                   		 <select class="form-control-plaintext" [(ngModel)]="dobyear" formControlName="dobyear">
+                                           <option value="1994">1994</option>
                                         </select>
                                    	</li>
                                    	<li>
-                                   		 <select class="form-control-plaintext">
-                                           <option>Nov</option>
+                                   		 <select class="form-control-plaintext" [(ngModel)]="dobmonth" formControlName="dobmonth">
+                                           <option value="01">Jan</option>
+                                           <option value="02">Feb</option>
+                                           <option value="03">Mar</option>
+                                           <option value="04">Apr</option>
+                                           <option value="05">May</option>
+                                           <option value="06">June</option>
+                                           <option value="07">July</option>
+                                           <option value="08">Aug</option>
+                                           <option value="09">Oct</option>
+                                           <option value="11">Nov</option>
+                                           <option value="12">Dec</option>
                                         </select>
                                    	</li>
                                    	<li>
-                                   		 <select class="form-control-plaintext">
-                                           <option>17</option>
+                                   		 <select class="form-control-plaintext" [(ngModel)]="dobdate" formControlName="dobdate">
+                                           <option value="17">17</option>
                                         </select>
                                    	</li>
                                    </ul>
@@ -55,47 +78,51 @@
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Location</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Stockholm"> 
-                                 </div>
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address" placeholder="Enter your address"> 
+                                   <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
+                                </div>
                                  <div class="col-md-6">
                                    <label>Mobile Number</label>
                                    <div>
-                                   		<div class="code"><input type="text" class="form-control-plaintext" placeholder="+46"></div>
-                                   		<div class="num"><input type="text" class="form-control-plaintext" placeholder="073 031 93 76"></div>
+                                   		<div class="code"><input type="text" class="form-control-plaintext" [(ngModel)]="mobcode" formControlName="mobcode" placeholder="+46"></div>
+                                   		<div class="num"><input type="text" class="form-control-plaintext" [(ngModel)]="mobnumber" formControlName="mobnumber"
+                                            placeholder="Enter your mobile number"></div>
                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Website</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="www.gillbogroup.com"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.website" formControlName="website"
+                                   placeholder="Enter Website"> 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Occupation</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Project Manager"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation" placeholder="Enter your occupation"> 
+                                   <div class="text-danger pull-left" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Education</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Bachelor's degree in Finance"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.education" formControlName="education" placeholder="Enter your education" > 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Favorite Quotes</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Balla Balla Balla - Klimpen"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.favourite_quotes" formControlName="favourite_quotes" placeholder="Enter your favourite Quote" > 
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Marriage Status</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="In a Relationship"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.marriage_status" formControlName="marriage_status" placeholder="Enter your marriage status"> 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Children</label>
-                                   <input type="text" class="form-control-plaintext" placeholder="Yes"> 
+                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.children" formControlName="children" placeholder="Are you childern"> 
                                 </div>
                             </div>
-                  	</form>
+                  	
 					</div>
                   </div>
               </div>
@@ -105,11 +132,11 @@
                   	<div class="form-group row">
                          <div class="col-md-6">
                             <label>Change Password</label>
-                            <input type="password" class="form-control-plaintext" placeholder="************"> 
+                            <input type="password" formControlName="password" class="form-control-plaintext" placeholder="************"> 
                          </div>
                          <div class="col-md-6">
                              <label>Confirm Password</label>
-                             <input type="text" class="form-control-plaintext" placeholder=""> 
+                             <input type="text" formControlName="cnfpassword" class="form-control-plaintext" placeholder=""> 
                          </div>
                          <div class="col-md-12"><p (click)="report(closeConfirmModal)">Close down your Femnesty Account?</p></div>
                      </div>
@@ -138,7 +165,9 @@
       				</div>
                   </div>
               </div>
+            </form>
           </div>
+
           <div class="col-md-3 flex-right">
               <app-user-prfrsidebar></app-user-prfrsidebar>
           </div>
