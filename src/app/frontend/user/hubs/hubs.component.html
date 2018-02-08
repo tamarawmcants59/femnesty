@@ -15,8 +15,8 @@
 							<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
 						</a>-->
 						<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
-                                <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
-                            </a>
+							<img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;" />
+						</a>
 					</div>
 					<div class="hubDes">
 						<!-- <input class="text-center" type="text" [(ngModel)]="title" *ngIf="title"> -->
@@ -103,137 +103,170 @@
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='editHub'}">
 								<div class="innerRightPart right-map-details HUB-Dtls">
 									<h2 *ngIf="!title">{{hubDetails.title}}</h2>
-									
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>TITLE</span>
-											<p>From TLC to the pointer sisters, check out the top girl groups ever.</p>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/check-icon.png" alt="" /></a></div>
-											<span>TITLE</span>
-											<div class="form-group"><input class="form-control" type="text"></div>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>DESCRIPTION</span>
-											<p>At Billboard.com, we're celebrating Girl Group Week by looking at the biggest songs, best music videos, current state of girl groups, drafting our dream girl groups, scoping out post-girl group solo songs and a whole lot more.</p>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/check-icon.png" alt="" /></a></div>
-											<span>DESCRIPTION</span>
-											<div class="form-group"><textarea class="form-control" rows="6"></textarea></div>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>DATE</span>
-											<p>eb 01, 12:00 AM - 12:00 AM</p>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>ORGANIZER</span>
-											<p>Emily</p>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>EMAIL</span>
-											<p>emily@em.com</p>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>PHONE</span>
-											<p>98765432100</p>
-										</div>
-										<div class="item">
-											<div class="edit"><a><img src="assets/images/pencil-icon.png" alt="" /></a></div>
-											<span>WEBSITE</span>
-											<p>Public</p>
-										</div>
-									
-									<p *ngIf="title">
-										<input class="text-center" type="text" [(ngModel)]="title" *ngIf="title">
-									</p>
-									<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title',hubDetails)">
-										<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -34px;margin-right: 34px;"></i>
-									</a>
-									<p class="HUB-Dtls-txt" *ngIf="!description">{{hubDetails.description}}</p>
-									<p class="HUB-Dtls-txt">
-										<input class="text-center" type="text" [(ngModel)]="description" *ngIf="description">
-									</p>
-									<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description',hubDetails)">
-										<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -34px;margin-right: 34px;"></i>
-									</a>
-
-									<p class="info" *ngIf="hubDetails.type=='R'">
-										{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}}, {{hubDetails.day}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
-									<p class="info" *ngIf="hubDetails.type!='R'">
-										<span>Date:</span> {{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>
-									<p class="info" *ngIf="!organizer">
-										<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer',hubDetails)">
-											<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -9px;margin-right: 34px;"></i>
-										</a>
-										<span>Organizer:</span> {{hubDetails.organizer}}</p>
-									<p class="info" *ngIf="organizer">
-										<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer',hubDetails)">
-											<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -3px;margin-right: 34px;"></i>
-										</a>
-										<span>Organizer:</span>
-										<input class="text-center" type="text" [(ngModel)]="organizer" *ngIf="organizer">
-
-										<p class="info" *ngIf="!email">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email',hubDetails)">
-												<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -3px;margin-right: 34px;"></i>
+									<div class="alert alert-danger" role="alert" *ngIf="erroMsg">
+										{{erroMsg}}
+									</div>
+									<div class="item" *ngIf="!title">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('title',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
 											</a>
-											<span>Email:</span> {{hubDetails.email}}</p>
-										<p class="info" *ngIf="email">
-											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email',hubDetails)">
-												<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -2px;margin-right: 34px;"></i>
+										</div>
+										<span>TITLE</span>
+										<p>{{hubDetails.title}}</p>
+									</div>
+									<div class="item" *ngIf="title">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('title',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
 											</a>
-											<span>Email:</span>
-											<input class="text-center" type="text" [(ngModel)]="email" *ngIf="email">
-											<p class="info" *ngIf="!phone">
-												<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone',hubDetails)">
-													<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -2px;margin-right: 34px;"></i>
-												</a>
-												<span>Phone:</span> {{hubDetails.phone}}</p>
-											<p class="info" *ngIf="phone">
-												<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone',hubDetails)">
-													<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: 3px;margin-right: 34px;"></i>
-												</a>
-												<span>Phone:</span>
-												<input class="text-center" type="text" [(ngModel)]="phone" *ngIf="phone">
-												<p class="info" *ngIf="!website">
-													<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website',hubDetails)">
-														<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: 5px;margin-right: 34px;"></i>
-													</a>
-													<span>Website:</span> {{hubDetails.website}}</p>
-												<p class="info" *ngIf="website">
-													<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website',hubDetails)">
-														<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: 5px;margin-right: 34px;"></i>
-													</a>
-													<span>Website:</span>
-													<input class="text-center" type="text" [(ngModel)]="website" *ngIf="website"> </p>
+										</div>
+										<span>TITLE</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="title" *ngIf="title">
+										</div>
+									</div>
+									<div class="item" *ngIf="!description">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('description',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DESCRIPTION</span>
+										<p>{{hubDetails.description}}</p>
+									</div>
+									<div class="item" *ngIf="description">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('description',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DESCRIPTION</span>
+										<div class="form-group">
+											<textarea class="form-control" rows="6" [(ngModel)]="description" *ngIf="description"></textarea>
+										</div>
+									</div>
+									<div class="item">
+										<div class="edit">
+											<a href="javascript:void(0)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>DATE</span>
+										<p>eb 01, 12:00 AM - 12:00 AM</p>
+									</div>
+									<div class="item" *ngIf="!organizer">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('organizer',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>ORGANIZER</span>
+										<p>{{hubDetails.organizer}}</p>
+									</div>
 
-												<p class="info" *ngIf="!address">
-													<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address',hubDetails)">
-														<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: 8px;margin-right: 34px;"></i>
-													</a>
-													<span>Address:</span> {{hubDetails.address}}</p>
-												<p class="info" *ngIf="address">
-													<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address',hubDetails)">
-														<i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: 8px;margin-right: 34px;"></i>
-													</a>
-													<span>Address:</span>
-													<input type="text" class="form-control-plaintext" value="" placeholder="Type anything and you will get a location *" id="autocomplete"
-													 #addressEdit>
+									<div class="item" *ngIf="organizer">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('organizer',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>ORGANIZER</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="organizer" *ngIf="organizer">
+										</div>
+									</div>
+									<div class="item" *ngIf="!email">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('email',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>EMAIL</span>
+										<p>{{hubDetails.email}}</p>
+									</div>
 
-													<p class="info">
-														<span>Privacy:</span> {{hubDetails.type=='O'?'Public':'Private'}}</p>
+									<div class="item" *ngIf="email">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('email',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>EMAIL</span>
+										<div class="form-group">
+											<input class="form-control" type="email" [(ngModel)]="email" *ngIf="email">
+										</div>
+									</div>
+									<div class="item" *ngIf="!phone">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('phone',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>PHONE</span>
+										<p>{{hubDetails.phone}}</p>
+									</div>
+									<div class="item" *ngIf="phone">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('phone',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>PHONE</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="phone" *ngIf="phone">
+										</div>
+									</div>
+									<div class="item" *ngIf="!website">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('website',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>WEBSITE</span>
+										<p>{{hubDetails.website}}</p>
+									</div>
+									<div class="item" *ngIf="website">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('website',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>WEBSITE</span>
+										<div class="form-group">
+											<input class="form-control" type="text" [(ngModel)]="website" *ngIf="website">
+										</div>
+									</div>
+									<div class="item" *ngIf="!address">
+										<div class="edit">
+											<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openEdit('address',hubDetails)">
+												<img src="assets/images/pencil-icon.png" alt="" />
+											</a>
+										</div>
+										<span>ADDRESS</span>
+										<p>{{hubDetails.address}}</p>
+									</div>
+									<div class="item" *ngIf="address">
+										<div class="edit">
+											<a href="javascript:void(0)" (click)="openEdit('address',hubDetails)">
+												<img src="assets/images/check-icon.png" alt="" />
+											</a>
+										</div>
+										<span>ADDRESS</span>
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="Type anything and you will get a location *" id="autocomplete" #addressEdit>
+										</div>
+									</div>
+									<div class="item">
+										<span>PRIVACY</span>
+										<p>{{hubDetails.type=='O'?'Public':'Private'}}</p>
+									</div>
+
 								</div>
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
 								<div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-									 {{successMsg}}
+									{{successMsg}}
 								</div>
 								<!-- <div class="form-group row">
 									<div class="col-sm-12">
@@ -250,12 +283,12 @@
 									</div>
 								</div> -->
 								<div class="connections">
-									
+
 									<h3 style="margin-top: 0px;">INVITE</h3>
 									<div class="row">
 										<div class="form-group co,l-md-12 col-sm-12">
 											<input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
-												[(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
+											 [(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
 										</div>
 									</div>
 									<h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length>0">FILTERED CONNECTIONS</h3>
@@ -271,8 +304,7 @@
 												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
 													<h2>{{joinFrnd.first_name}}</h2>
 												</a>
-												<button type="button" class="btn btn-primary"
-													(click)="sendInvites(joinFrnd.id)">INVITE</button>
+												<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd.id)">INVITE</button>
 											</div>
 										</li>
 									</ul>
@@ -280,7 +312,7 @@
 									<ul class="contn-box" *ngIf="hubDetails.attenders && hubDetails.attenders.length > 0">
 										<li *ngFor="let user of hubDetails.attenders">
 											<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}">
-												<img src="{{user.profile_image}}" alt="{{user.name}}" title="{{user.name}}" class="img  rounded" style="width:20%"/>
+												<img src="{{user.profile_image}}" alt="{{user.name}}" title="{{user.name}}" class="img  rounded" style="width:20%" />
 											</a>
 										</li>
 									</ul>
@@ -299,14 +331,13 @@
 												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
 													<h2>{{joinFrnd.first_name}}</h2>
 												</a>
-												<button type="button" class="btn btn-primary"
-													(click)="sendInvites(joinFrnd.id)">INVITE</button>
+												<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd.id)">INVITE</button>
 											</div>
 										</li>
 									</ul>
 
 									<a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
-									
+
 								</div>
 							</div>
 						</div>
@@ -472,14 +503,14 @@
 	</div>
 </section>
 <ng-template #updateCoverPictureModal let-c="close" let-d="dismiss">
-		<div class="modal-header">
-			<h4 class="modal-title">Change Image</h4>
-			<button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			<!-- <div class="img result" *ngIf="!coverCroppedImage">
+	<div class="modal-header">
+		<h4 class="modal-title">Change Image</h4>
+		<button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<!-- <div class="img result" *ngIf="!coverCroppedImage">
 				<img [src]="groupDetailsData?.group_image" style="width:100%; height:100%">
 			</div>
 			<div class="img result" *ngIf="coverCroppedImage">
@@ -499,29 +530,29 @@
 					</div>
 				</div>
 			</div> -->
-			<div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
-					{{modalErrorMsg}}
-				</div>
-			<div class="img result" *ngIf="!IsShowCropperCoverImage">
-					<img [src]="hubDetails.image" style="width:100%; height:100%">
-				</div>
-				<div class="inner-bg">
-						<div class="icon-change">
-							<div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
-								<input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
-							</div>
-						</div>
-					</div>
-					<div class="upload-demo">
-						<div class="upload-demo-wrap">
-							<div id="upload-demo"></div>
-						</div>
-					</div>
-	
+		<div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
+			{{modalErrorMsg}}
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>
-			<button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
-			<button type="button" class="btn modal-btn-black btn-default" (click)="UploadCoverImg(hubDetails)">Change</button>
+		<div class="img result" *ngIf="!IsShowCropperCoverImage">
+			<img [src]="hubDetails.image" style="width:100%; height:100%">
 		</div>
-	</ng-template>
+		<div class="inner-bg">
+			<div class="icon-change">
+				<div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+					<input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
+				</div>
+			</div>
+		</div>
+		<div class="upload-demo">
+			<div class="upload-demo-wrap">
+				<div id="upload-demo"></div>
+			</div>
+		</div>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>
+		<button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+		<button type="button" class="btn modal-btn-black btn-default" (click)="UploadCoverImg(hubDetails)">Change</button>
+	</div>
+</ng-template>

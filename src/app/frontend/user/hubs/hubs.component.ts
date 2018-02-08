@@ -24,6 +24,7 @@ export class HubsComponent implements OnInit {
   public loginUserId: any;
   searchErrorMessage: any;
   modalErrorMsg: any;
+  erroMsg: any;
   public IsShowCropperCoverImage = false;
   croppedImage: any = '';
   public hubSlug = '';
@@ -407,10 +408,15 @@ export class HubsComponent implements OnInit {
     }
 
   }
+  private validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
   }
   openEdit(type, hubDetails) {
+    this.erroMsg = '';
     if (type == 'title') {
       this.IsShowAddress = true;
       if (this.title) {
@@ -503,22 +509,29 @@ export class HubsComponent implements OnInit {
     else if (type == 'email') {
       this.IsShowAddress = true;
       if (this.email) {
-        this.title = '';
-        this.description = '';
-        this.organizer = '';
-        this.phone = '';
-        this.website = '';
-        this.loading = true;
-        const data = { email: this.email, id: this.hubDetails.id, user_id: hubDetails.user_id }
-        this.hubService.editHubDetails(data).subscribe(data => {
-          this.email = '';
-          this.loading = false;
-          this.getHubDetails();
-        },
-          error => {
+        if (this.validateEmail(this.email)) {
+          this.title = '';
+          this.description = '';
+          this.organizer = '';
+          this.phone = '';
+          this.website = '';
+          this.loading = true;
+          const data = { email: this.email, id: this.hubDetails.id, user_id: hubDetails.user_id }
+          this.hubService.editHubDetails(data).subscribe(data => {
+            this.email = '';
             this.loading = false;
-            alert('Sorry there is some error.')
-          });
+            this.getHubDetails();
+          },
+            error => {
+              this.loading = false;
+              alert('Sorry there is some error.')
+            });
+        }
+        else {
+          this.erroMsg = "Please give a valid email.";
+          window.scrollTo(0,0);
+        }
+
       }
       else {
         this.title = '';
