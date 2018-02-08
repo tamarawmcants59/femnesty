@@ -1,4 +1,4 @@
-<section class="section  visitingProfile">
+<section class="section section2 visitingProfile">
 	<div class="container-fluid">
 		<div class="row flex-profile">
 			<!--<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>-->
@@ -8,29 +8,9 @@
 				</div>
 			</div>
 			<div class="col-md-6 flex-middle">
-				<div class="middlePart">
-					<div>
-            <h2>Online Connection</h2>
-            <ul class="onlineList" *ngIf="totalMyOnlineConList.length>0">
-                <li *ngFor="let friendData of totalMyOnlineConList">
-                    <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
-                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
-                    </a>
-                    <div class="greenIcon"></div>
-                </li>
-    
-            </ul>
-            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">Load More</a>
-            <ul class="onlineList" *ngIf="totalMyOnlineConList.length == 0">
-                    <li >
-                            Nothing more to show
-                    </li>
-        
-                </ul>
-                
-        </div>
-					<div class="connectionsPart">
-            <!-- <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
+				<div class="middlePart connection-middle">
+					<div class="connectionsPart new-connection-request">
+               <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
                 <div class="row" *ngIf="(reqSuccessMsg != '')">
                     <div class="alert alert-success" role="alert" *ngIf="(reqSuccessMsg != '')">
                             {{reqSuccessMsg}}
@@ -41,7 +21,7 @@
                             {{reqErrorMsg}}
                     </div>
                 </div>
-                <h2 *ngIf="userRequestFrndList?.length > 0">Friend Requests</h2>
+                <h2 *ngIf="userRequestFrndList?.length > 0">CONNECTION REQUESTS</h2>
                 <ul class="contn-box" *ngIf="userRequestFrndList?.length > 0">
                     <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
                             <div class="friend-boxImage">
@@ -51,17 +31,41 @@
                             </div>
                             <div class="friend-boxText">
                                 <h4>{{friendData.name}}</h4>
-                                <p>{{friendData.bio | limitTo : 30}}</p>
+                                <!--<p>{{friendData.bio | limitTo : 30}}</p>-->
                             </div>
-                            <div class="sendmsg">
-                                <a (click)="acceptFriendRequest(friendData.id)"><span><img alt="" src="assets/images/check.png"></span>&nbsp;&nbsp;ACCEPT</a>
-                                <a (click)="rejectFriendRequest(friendData.id)"><span><img alt="" src="assets/images/cancel.png"></span>&nbsp;&nbsp;IGNORE</a>
+                            <div class="sendmsg new-acpt-reject">
+                                <a (click)="acceptFriendRequest(friendData.id)"><img alt="" src="assets/images/check-black.png"><b>ACCEPT</b></a>
+                                <a (click)="rejectFriendRequest(friendData.id)" class="ignore"><img alt="" src="assets/images/cancel-red.png"><b>IGNORE</b></a>
                             </div>
-                            <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
+                            <!--<div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>-->
                         </li>
                 </ul>
-            </div>     -->
-            <h2>All Connections</h2>
+            </div>
+					</div>
+					<div class="online-connerction">
+		            <h2>ONLINE CONNECTIONS</h2>
+		            <ul class="onlineList" *ngIf="totalMyOnlineConList.length>0">
+		                <li *ngFor="let friendData of totalMyOnlineConList">
+		                    <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
+		                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+		                    </a>
+		                    <div class="greenIcon"></div>
+		                </li>
+		    
+		            </ul>
+		            <a class="only-load-more" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">Load More</a>
+		            <!--<a class="only-load-more">Load More</a>-->
+		            <ul class="onlineList" *ngIf="totalMyOnlineConList.length == 0">
+		                    <li >
+		                            Nothing more to show
+		                    </li>
+		        
+		                </ul>
+		                
+		        </div>
+					
+					<div class="connectionsPart all-connection-new">    
+            <h2>ALL CONNECTIONS</h2>
             <ul class="contn-box" *ngIf="totalMyConList?.length > 0">
                 <li class="friend-box-list" *ngFor="let friendData of totalMyConList">
                     <div class="friend-boxImage">
@@ -80,7 +84,7 @@
                     <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
                 </li>
             </ul>
-            <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">Load More</a>
+            <a class="view-more-down" style="margin-bottom: 0" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">Load More</a>
             <div class="connections">
                 <div class="likePart" *ngIf="userFrndList.length == 0">
                     <div class="row">
@@ -90,19 +94,24 @@
                     </div>
                 </div>
             </div>
-        </div>
+        		</div>
 				</div>
 			</div>
 			<div class="col-md-3 flex-right">
 				<div class="rightPart">
 					<div class="innerRightPart right-map-details HUB-Dtls">
 						<h2>Search</h2>
-            <div class="form-group">
-              <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
-              <button type="button" (click)="searchConnection()">
-                  <i class="icon ion-ios-search"></i>
-              </button>
-          </div>
+						<div class="inline-search">
+							<div class="input-group">
+							  <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
+							  <span class="input-group-btn">							  
+								  	<button type="button" (click)="searchConnection()" class="btn btn-default">
+								     <!-- <i class="icon ion-ios-search"></i>-->
+								      <img src="assets/images/search-icon.png" alt="" />
+								  	</button>
+							  </span>
+							</div>
+						</div>
 					</div>
 
           <div class="innerRightPart latest-article">
@@ -120,7 +129,7 @@
             </div>
             </div>
         </div>
-        <div class="innerRightPart">
+        <div class="innerRightPart right-share-new">
           <div class="article-add-holder article-add-holder1">
             <h3>SHARE YOUR STORY</h3>
             <p>Femnesty is always looking for strong, positive contributors to join our team.</p>
@@ -128,7 +137,7 @@
           </div>
         </div>
 
-        <div class="innerRightPart">
+        <div class="innerRightPart right-share-new">
           <div class="article-add-holder article-add-holder1">
             <h3>START A HUB</h3>
             <p> Make a difference where you are, start a Hub today. </p>
