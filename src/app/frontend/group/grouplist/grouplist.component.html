@@ -34,7 +34,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="MyGroups-list" #myGroupsList>
+                        <div class="MyGroups-list" #myGroupsList *ngIf="IsShowMyGrp">
                             <h5 class="mt-0">MY GROUPS</h5>
                             <ul class="search-list">
                                 <li *ngFor="let grpData of totalMyGrpList">
@@ -54,28 +54,33 @@
                                 </li>
                             </ul>
                             <a class="view-more-down" style="margin: 10px 0 0 0" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreMy()">View More</a>
+                            <a style="margin: 10px 0 0 0" href="javascript:void(0)" *ngIf="IsShowNothingForMy">Nothing More to Show</a>
                         </div>
-                        <div class="MyGroups-list" #topGroupsList>
-                            <h5 class="mt-0">TOP GROUPS</h5>
-                            <ul class="search-list">
-                                <li *ngFor="let grpData of groupList">
-                                    <a [routerLink]="['/group/details',grpData.group_uname]">
-                                        <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
-                                    </a>
-                                    <div class="right-side">
-                                        <h4>
-                                            <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name | limitTo : 20}}</a>
-                                        </h4>
-                                        <!--<small class="text">{{grpData.short_desc}}</small>-->
-                                        <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
-                                        <!-- <p class="txt-red">By {{grpData.name}}</p> -->
-                                        <p class="txt-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>
-                                        <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
-                                    </div>
-                                </li>
-                            </ul>
-                            <a class="view-more-down" style="margin: 10px 0 0 0" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMoreTop()">View More</a>
+                        <div #topGroupsList *ngIf="IsShowTopGrp">
+                            <div class="MyGroups-list">
+                                <h5 class="mt-0">TOP GROUPS</h5>
+                                <ul class="search-list">
+                                    <li *ngFor="let grpData of groupList">
+                                        <a [routerLink]="['/group/details',grpData.group_uname]">
+                                            <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
+                                        </a>
+                                        <div class="right-side">
+                                            <h4>
+                                                <a [routerLink]="['/group/details',grpData.group_uname]">{{grpData.group_name | limitTo : 20}}</a>
+                                            </h4>
+                                            <!--<small class="text">{{grpData.short_desc}}</small>-->
+                                            <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
+                                            <!-- <p class="txt-red">By {{grpData.name}}</p> -->
+                                            <p class="txt-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>
+                                            <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
+                                        </div>
+                                    </li>
+                                </ul>
+                                <a class="view-more-down" style="margin: 10px 0 0 0" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMoreTop()">View More</a>
+                                <a style="margin: 10px 0 0 0" href="javascript:void(0)" *ngIf="IsShowNothingForTop">Nothing More to Show</a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 <!--<ul class="search-list">
@@ -93,25 +98,25 @@
                 </ul>-->
             </div>
             <div class="col-md-3 flex-right">
-            <div class="obj-center">
-                            <a [routerLink]="['/group/add_group']" class="btn btn-primary" href="javascript:void(0)">Create A Group</a>
-                        </div>
+                <div class="obj-center">
+                    <a [routerLink]="['/group/add_group']" class="btn btn-primary" href="javascript:void(0)">Create A Group</a>
+                </div>
                 <div class="rightPart">
                     <div class="innerRightPart new-group-section">
-                         <h2>BROWSE GROUPS</h2>
+                        <h2>BROWSE GROUPS</h2>
                         <div class="inline-search">
-                            <div class="input-group">     
+                            <div class="input-group">
                                 <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">
                                 <span class="input-group-btn">
-                                	<button type="button" (click)="searchGroup()"  class="btn btn-default">
-                               	 		<!--<i class="icon ion-ios-search"></i>-->
-                                 		<img src="assets/images/search-icon.png" alt="" />
-                                	</button>
+                                    <button type="button" (click)="searchGroup()" class="btn btn-default">
+                                        <!--<i class="icon ion-ios-search"></i>-->
+                                        <img src="assets/images/search-icon.png" alt="" />
+                                    </button>
                                 </span>
                             </div>
                         </div>
                         <ul class="filter-reslt">
-                            
+
                             <li>
                                 <a href="javascript:void(0);" (click)="scrollToMyGroup()">My Groups
                                     <span>({{totalMyGrpList?.length}})</span>
