@@ -123,20 +123,7 @@ export class AboutCompanyComponent implements OnInit {
   
       });
 
-      setTimeout(() => {
-        //debugger;
-        let autocomplete = new google.maps.places.Autocomplete(
-                    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-          { types: ['geocode'] });
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-          var place = autocomplete.getPlace();
-          this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-          localStorage.setItem("address", JSON.stringify(this.searchData));
-          //localStorage.setItem("lat", place.geometry.location.lat());
-          //localStorage.setItem("lng", place.geometry.location.lng());
-        });
-  
-      }, 1000);
+     
    }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -401,6 +388,24 @@ export class AboutCompanyComponent implements OnInit {
   }
 
   public editAboutToggleTab(data: any) {
+    if(data=='address')
+    {
+
+      setTimeout(() => {
+        //debugger;
+        let autocomplete = new google.maps.places.Autocomplete(
+                    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+          { types: ['geocode'] });
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+          var place = autocomplete.getPlace();
+          this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+          localStorage.setItem("address", JSON.stringify(this.searchData));
+          //localStorage.setItem("lat", place.geometry.location.lat());
+          //localStorage.setItem("lng", place.geometry.location.lng());
+        });
+  
+      }, 1000);
+    }
     this.editAbtActiveTab = data;
     this.successMsg = '';
     this.errorMsg = '';

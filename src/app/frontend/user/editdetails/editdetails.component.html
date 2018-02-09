@@ -19,7 +19,7 @@
                 <form class="login-form" [formGroup]="form" (ngSubmit)="updateAccount(form.value)" #loginForm="ngForm">
               <div class="middlePart">
                   <div class="MyGroups-list">
-                  	<h2>Edit Profile <span><button class="btn btn-primary" type="submit" value="Update">Update</button><!--<a class="btn btn-primary">Update</a>--></span></h2>
+                  	<h2>Account Details <span><button class="btn btn-primary" type="submit" value="Update">Update</button><!--<a class="btn btn-primary">Update</a>--></span></h2>
                   </div>
               </div>
               <div class="middlePart">
@@ -30,19 +30,19 @@
                   			<div class="form-group row">
                                  <div class="col-md-6">
                                    <label>First Name</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.first_name" formControlName="first_name" placeholder="Enter your first name"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.first_name" formControlName="first_name" placeholder="Enter your first name"> 
                                    <div class="text-danger pull-left" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">First Name Required</div>
                                 </div>
                                  <div class="col-md-6">
                                    <label>Last Name</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.last_name" formControlName="last_name" placeholder="Enter your last name"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.last_name" formControlName="last_name" placeholder="Enter your last name"> 
                                    <div class="text-danger pull-left" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">Last Name Required</div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Email</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.email" formControlName="email" readonly="readonly"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.email" formControlName="email" readonly="readonly"> 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Date of Birth</label>
@@ -122,7 +122,7 @@
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Location</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.address" formControlName="address" placeholder="Enter your address"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.address" formControlName="address" placeholder="Enter your address"> 
                                    <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
                                 </div>
                                  <div class="col-md-6">
@@ -137,33 +137,33 @@
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Website</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.website" formControlName="website"
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.website" formControlName="website"
                                    placeholder="Enter Website"> 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Occupation</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.occupation" formControlName="occupation" placeholder="Enter your occupation"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.occupation" formControlName="occupation" placeholder="Enter your occupation"> 
                                    <div class="text-danger pull-left" *ngIf="!form.controls['occupation'].valid && form.controls['occupation'].touched">Occupation Required</div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Education</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.education" formControlName="education" placeholder="Enter your education" > 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.education" formControlName="education" placeholder="Enter your education" > 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Favorite Quotes</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.favourite_quotes" formControlName="favourite_quotes" placeholder="Enter your favourite Quote" > 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.favourite_quotes" formControlName="favourite_quotes" placeholder="Enter your favourite Quote" > 
                                 </div>
                             </div>
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Marriage Status</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.marriage_status" formControlName="marriage_status" placeholder="Enter your marriage status"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.marriage_status" formControlName="marriage_status" placeholder="Enter your marriage status"> 
                                  </div>
                                  <div class="col-md-6">
                                    <label>Children</label>
-                                   <input type="text" class="form-control-plaintext" [(ngModel)]="loginUserDet.children" formControlName="children" placeholder="Are you childern"> 
+                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.children" formControlName="children" placeholder="Are you childern"> 
                                 </div>
                             </div>
                   	

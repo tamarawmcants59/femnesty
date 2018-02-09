@@ -151,7 +151,6 @@ export class EditdetailsComponent implements OnInit {
     this.dayList.push({ "text": "31", "id": "31" });
   }
   public calculateAge(event, type) {
-    debugger;
     var IsCheck = false;
     if (type == 'y') {
       if (this.dobdate && this.dobmonth) {
@@ -208,7 +207,6 @@ export class EditdetailsComponent implements OnInit {
       };
       this.dataService.getUserDetById(dataUserDet)
         .subscribe(data => {
-          debugger;
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {

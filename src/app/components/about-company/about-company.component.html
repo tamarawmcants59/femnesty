@@ -179,7 +179,7 @@
                             <div *ngIf="editAbtActiveTab=='address'">
                                 <button class="check" type="submit"></button>
                                 <h5>ADDRESS</h5>
-                                <P><input type="text" class="form-control-plaintext" [(ngModel)]="publicCmpDet.address" formControlName="address" id="autocomplete"></P>
+                                <P><input type="text" class="form-control-plaintext" placeholder="Type anything to get location" formControlName="address" id="autocomplete"></P>
                                     <div class="text-danger pull-left" *ngIf="!form.controls['address'].valid && form.controls['address'].touched">Address Required</div>
                             </div>
                         </li>
