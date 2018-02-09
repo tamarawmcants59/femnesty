@@ -33,6 +33,7 @@ import { PopupmodalComponent } from './post-card/popupmodal.component';
 import { DateTimePickerModule } from 'ngx-datetime-picker';
 import { BetaRestrictionComponent } from './beta-restriction/beta-restriction.component';
 import { PostListnerService } from './../service/post.listner.service';
+import { AboutCompanyComponent } from './about-company/about-company.component';
 @NgModule({ 
     declarations: [
         UserSidebar,
@@ -47,7 +48,8 @@ import { PostListnerService } from './../service/post.listner.service';
         HubCreateComponent,
        PopupmodalComponent,
        BetaRestrictionComponent,
-       OtherUserPrfrsidebarComponent
+       OtherUserPrfrsidebarComponent,
+       AboutCompanyComponent
     ],
     imports: [
         CommonModule,
@@ -78,7 +80,8 @@ import { PostListnerService } from './../service/post.listner.service';
         PopupmodalComponent,
         Ng4GeoautocompleteModule,
         BetaRestrictionComponent,
-        OtherUserPrfrsidebarComponent
+        OtherUserPrfrsidebarComponent,
+        AboutCompanyComponent
     ],
     providers: [
         HubService,

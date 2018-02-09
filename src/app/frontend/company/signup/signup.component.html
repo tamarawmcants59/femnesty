@@ -4,10 +4,10 @@
         <div class="sign-form" style="margin-top: 110px;">
             <h2>Company</h2>
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
-                <strong>Error!</strong> {{errorMsg}}
+                {{errorMsg}}
             </div>
             <div class="alert alert-success" role="alert" *ngIf="successMsg">
-                    Please check your email and ativate your account, then <a (click)="companyLogin()" href="javascript:;">login</a>
+                    Please check your email and ativate your account. <!--then <a (click)="companyLogin()" href="javascript:;">login</a>-->
             </div>
            
             <form [formGroup]="form" (ngSubmit)="checkSignup(form.value)" class="row form-area" #signupForm="ngForm">    
@@ -61,14 +61,14 @@
                     </div> -->
                 </div>
                 
-                <div class="form-group col-md-6">
+                <!--<div class="form-group col-md-6">
                     <input type="password" placeholder="Password" name="password" validateEqual="cpassword" reverse="true" class="form-control" [formControl]="password">
                     <div class="text-danger" *ngIf="!password.valid && password.touched">Password required.</div>
                 </div>
                 <div class="form-group col-md-6">
                     <input type="password" placeholder="Confirm Password" name="cpassword" validateEqual="password" reverse="false" class="form-control" [formControl]="cpassword">
                     <div class="text-danger" *ngIf="!cpassword.valid && cpassword.touched">Confirm password required and the passwords must match.</div>                   
-                </div>
+                </div>-->
                 <div class="form-group col-md-12">
                     <p>
                         <input type="checkbox" id="test1" [formControl]="agreetab" />
