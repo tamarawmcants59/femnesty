@@ -9,6 +9,10 @@
         <a *ngIf="userImgList?.length > 6" [routerLink]="['/user/other_all_photo']" class="viewAll text-center">View All</a>
         <!--<a href="#" class="viewAll text-center">View All</a>-->
     </div>
+    <div class="innerRightPart" *ngIf="userImgList?.length == 0">
+        <h2>Photos</h2>
+        <p>This user hasn't added photo's yet</p>
+    </div>
     <!--<div class="innerRightPart share-story">
         <h1>Share your story</h1>
         <p>Femnesty is always looking for strong, positive contributors to join our team.</p>

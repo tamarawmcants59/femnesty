@@ -41,7 +41,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="photoImage" *ngIf="groupImgList.length == 0 && (groupDetailsData1?.group_type=='1' || (!isJoinGroup &&  groupDetailsData1?.group_type=='2'))">
+        <ul class="photoImage" *ngIf=" isJoinGroup &&  groupDetailsData1?.group_type=='2'">
             <li>
                 <a href="Javascript: void(0);">
                     <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
@@ -73,8 +73,8 @@
                 </a>
             </li>
         </ul>
-        <div *ngIf=" isJoinGroup &&  groupDetailsData1?.group_type=='2'">
-            You have no permission
+        <div *ngIf="groupImgList.length == 0 && (groupDetailsData1?.group_type=='1' || groupDetailsData1?.group_type=='2')">
+            <p>{{groupData.group_name}} hasn't added photo's yet</p>
         </div>
         <a *ngIf="totlalGroupImgList?.length > 5" [routerLink]="['/user/group_all_photo',groupData.group_uname]" class="viewAll text-center">View All</a>
     </div>
