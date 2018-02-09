@@ -1,5 +1,5 @@
-<section class="section about-content-area visitingProfile">
-    <div class="container">
+<section class="section section2 about-content-area visitingProfile">
+    <div class="container-fluid">
         <div class="row flex-profile">
             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
             <div class="col-md-3 flex-left">
@@ -10,7 +10,7 @@
 
                 </div>
             </div>
-            <div class="col-md-6 flex-middle">
+            <div class="col-md-6 flex-middle pd-5">
                 <div class="middlePart">
                     <div class="topPart" [ngStyle]="{'background-image':'url('+groupDetailsData?.group_image+')'}">
                         <input name="myfile" type="file" (change)="fileChangePost($event)" style="display:none;" #fileTypeEdit>
