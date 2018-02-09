@@ -26,8 +26,8 @@ export class EditdetailsComponent implements OnInit {
  
   public mobnumber:any;
   public mobcode:any;
-
-
+  validAge=true;
+  dayList = [];
 
 
   constructor(
@@ -138,8 +138,64 @@ export class EditdetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getUserDetails();
+    this.dayList.push({ "text": "1", "id": "1" }); this.dayList.push({ "text": "2", "id": "2" }); this.dayList.push({ "text": "3", "id": "3" });
+    this.dayList.push({ "text": "4", "id": "4" }); this.dayList.push({ "text": "5", "id": "5" }); this.dayList.push({ "text": "6", "id": "6" });
+    this.dayList.push({ "text": "7", "id": "7" }); this.dayList.push({ "text": "8", "id": "8" }); this.dayList.push({ "text": "9", "id": "9" });
+    this.dayList.push({ "text": "10", "id": "10" }); this.dayList.push({ "text": "11", "id": "11" }); this.dayList.push({ "text": "12", "id": "12" });
+    this.dayList.push({ "text": "13", "id": "13" }); this.dayList.push({ "text": "14", "id": "14" }); this.dayList.push({ "text": "15", "id": "15" });
+    this.dayList.push({ "text": "16", "id": "16" }); this.dayList.push({ "text": "17", "id": "17" }); this.dayList.push({ "text": "18", "id": "18" });
+    this.dayList.push({ "text": "19", "id": "19" }); this.dayList.push({ "text": "20", "id": "20" }); this.dayList.push({ "text": "21", "id": "21" });
+    this.dayList.push({ "text": "22", "id": "22" }); this.dayList.push({ "text": "23", "id": "23" }); this.dayList.push({ "text": "24", "id": "25" });
+    this.dayList.push({ "text": "25", "id": "25" }); this.dayList.push({ "text": "26", "id": "26" }); this.dayList.push({ "text": "27", "id": "27" });
+    this.dayList.push({ "text": "28", "id": "28" }); this.dayList.push({ "text": "29", "id": "29" }); this.dayList.push({ "text": "30", "id": "30" });
+    this.dayList.push({ "text": "31", "id": "31" });
   }
+  public calculateAge(event, type) {
+    debugger;
+    var IsCheck = false;
+    if (type == 'y') {
+      if (this.dobdate && this.dobmonth) {
+        IsCheck = true;
+      }
+    }
+    else if (type == 'm') {
+      if (this.dobdate && this.dobyear) {
+        IsCheck = true;
+      }
+    }
+    else if (type == 'd') {
+      if (this.dobmonth && this.dobyear) {
+        IsCheck = true;
+      }
+    }
+    if (IsCheck) {
+      var birthday;
+      if (type == 'y') {
+        birthday = this.dobyear + "/" + this.dobmonth+ "/" + this.dobdate;
+      }
+      else if (type == 'm') {
+        birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
+      }
+      else if (type == 'd') {
+        birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
+      }
 
+      var today = new Date();
+      var birthDate = new Date(birthday);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      if (age >= 16) {
+        this.validAge = true;
+      }
+      else {
+        this.validAge = false;
+      }
+    }
+
+  }
   report(closeConfirmModal){ 
     this.modalService.open(closeConfirmModal);
   }
@@ -152,6 +208,7 @@ export class EditdetailsComponent implements OnInit {
       };
       this.dataService.getUserDetById(dataUserDet)
         .subscribe(data => {
+          debugger;
           const details = data;
           //console.log(details);
           if (details.Ack == "1") {
