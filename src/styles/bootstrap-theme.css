@@ -5472,14 +5472,13 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 	width: 138px;
 	height: auto;
 	background: #272727;
-	border: solid 1px #ededed;
-	border-radius: 3px;
-	box-shadow: 4px 4px 2px #eeeeee;
+	border: solid 1px #272727;
 	position: absolute;
 	right: 15px;
-	z-index: 10000;
+	z-index: 1;
 	top: 0px;
 	overflow: hidden;
+	padding: 15px;
 	
 }
 
@@ -5487,17 +5486,28 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 	display:  block;
 	color: #fff;
 	font-weight: normal;
-	width: 208 !important;
-	margin: 0 10px !important;
+	margin: 0 3px !important;
 	border-bottom: solid 1px #323232;
 	text-align: left;
 	clear: both;
-	padding: 12px 0;
+	padding: 7px 0;
+	font-size: 11px;
 }
 .post-drop-box a:last-child{
 	border: none; 
 }
-
+.post-drop-box .closed{
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	z-index: 2;
+	width: 8px;
+	height: 8px;
+}
+.post-drop-box .closed a{
+	margin: 0 !important;
+	padding: 0;
+}
 .sp-hover{
 	
 }
