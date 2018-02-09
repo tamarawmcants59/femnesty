@@ -41,6 +41,38 @@
                 </a>
             </li>
         </ul>
+        <ul class="photoImage" *ngIf="groupImgList.length == 0 && (groupDetailsData1?.group_type=='1' || (!isJoinGroup &&  groupDetailsData1?.group_type=='2'))">
+            <li>
+                <a href="Javascript: void(0);">
+                    <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
+                </a>
+            </li>
+            <li>
+                <a href="Javascript: void(0);">
+                    <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
+                </a>
+            </li>
+            <li>
+                <a href="Javascript: void(0);">
+                    <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
+                </a>
+            </li>
+            <li>
+                <a href="Javascript: void(0);">
+                    <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
+                </a>
+            </li>
+            <li>
+                <a href="Javascript: void(0);">
+                    <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
+                </a>
+            </li>
+            <li>
+                <a href="Javascript: void(0);">
+                    <div class="img" style=" background-image: url(assets/images/lock.jpg); "></div>
+                </a>
+            </li>
+        </ul>
         <div *ngIf=" isJoinGroup &&  groupDetailsData1?.group_type=='2'">
             You have no permission
         </div>
