@@ -220,14 +220,14 @@
                                     <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
                                         <h4 class="commentee-name">{{cmtList.name}}</h4>
                                     </a>
-                                    <a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
+                                    <!--<a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
                                         <i style="color:#BB1926" class="fa fa-trash"></i>
                                     </a>
                                     <a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">
                                         <i style="color:#BB1926" class="fa fa-edit"></i>
-                                    </a>
+                                    </a>-->
                                 </div>
-                                <p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                                <!--<p class="post-date">{{cmtList.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>-->
                                 <div class="commenteeComment">
                                     <p>{{cmtList.comment}}</p>
                                     <ul>
@@ -243,9 +243,10 @@
                                             </a>
                                             <a *ngIf="cmtList.likecount>0" (click)="userPostLikeListPopup(cmtList.id, postlikemodal)">{{cmtList.likecount}} likes</a>
                                         </li>
+                                        <li><a>-</a></li>
                                         <li>
                                             <a (click)="userSubPostComment(cmtList.id,cmtList)" href="Javascript:void(0);">
-                                                <i class="fa fa-commenting-o"></i>
+                                                <!--<i class="fa fa-commenting-o"></i>-->REPLY
                                             </a>
                                         </li>
                                     </ul>
@@ -253,8 +254,11 @@
                             </div>
                             <div *ngIf="cmtList.reply?.length > 0">
                                 <div *ngFor="let cmtReply of cmtList.reply; let subkey = index">
+                                
                                     <div *ngIf="!cmtReply.hide_div" class="sub-reply-comment-wrapper">
+                                    <div class="left-comment-content-arrow"><img src="assets/images/arrow-r.jpg" alt="" /></div>
                                         <div class="left-comment-content">
+                                        
                                             <a [routerLink]="['/user/profile',cmtReply.display_name]">
                                                 <div class="user-image" [ngStyle]="{'background-image':'url('+cmtReply.profile_image_url+')', 'background-position': 'center', 'background-repeat': 'no-repeat','background-size': 'center'}"></div>
                                             </a>
@@ -262,15 +266,23 @@
                                         <div class="right-comment-content">
                                             <div class="profTextPart">
                                                 <div class="heading" style="width:100%;height:auto;overflow: hidden;">
-                                                    <h4 style="float:left" class="commentee-name">{{cmtReply.name}}</h4>
-                                                    <a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">
+                                                    <h4 style="float:left; width: 100%" class="commentee-name">{{cmtReply.name}} 
+                                                    <span>
+                                                    <a class="icondown"><i class="icon ion-chevron-down"></i></a>
+                                                    </span>
+                                                    </h4>
+                                                    <!--<a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">
                                                         <i class="fa fa-trash" style="color:#BB1926"></i>
                                                     </a>
                                                     <a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">
                                                         <i class="fa fa-edit" style="color:#BB1926"></i>
-                                                    </a>
+                                                    </a>-->
+                                                    <div class="post-drop-box">
+                										<a>Edit</a>
+                										<a>Delete</a>
+                            						</div>
                                                 </div>
-                                                <p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                                                <!--<p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>-->
                                                 <div class="commenteeComment">
                                                     <p>{{cmtReply.comment}}</p>
                                                     <ul>

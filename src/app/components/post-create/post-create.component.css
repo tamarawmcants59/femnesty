@@ -1,0 +1,15 @@
+.btn.btn-default {
+    background: #f0f0f0;
+    color: #fff;
+    border: 0;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-family: 'montserratmedium';
+    font-size: 13px !important;
+}
+.btn.btn-default:hover {
+	background: #bb1926;
+}
