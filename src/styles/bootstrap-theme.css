@@ -5968,7 +5968,7 @@ ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-s
 .new-chat-section .message-writing-wrap .attach-file{height: 34px;}
 .messagePart ul li .badge.connection-badge{font-size:10px;font-weight: normal;padding: 0;width:19px;height: 19px;text-align: center;line-height: 19px;border-radius:100%;margin-right: 7px;display: block;width: 19px !important;}
 
-
+.feedhover {left: 0 !important;}
 
 
 

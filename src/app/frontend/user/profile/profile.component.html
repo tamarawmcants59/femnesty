@@ -1,4 +1,4 @@
-<section class="section about-content-area visitingProfile">
+<section class="section section2 about-content-area visitingProfile">
   <div class="container-fluid">
       <div class="row flex-profile">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
@@ -7,7 +7,7 @@
                 <user-sidebar></user-sidebar>
             </div>
           </div>
-          <div class="col-md-6 flex-middle">
+          <div class="col-md-6 flex-middle pd-5">
               <div class="middlePart">
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
                   </div>
@@ -48,7 +48,7 @@
                       <div class="tab-content">
                           <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                               <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
-                              <div *ngIf="userPostList?.length > 0">
+                              <div class="allpost" *ngIf="userPostList?.length > 0">
                                   <div class="likePart" *ngFor="let postData of userPostList">
                                       <app-post-card [postData]="postData"></app-post-card>
                                   </div>
