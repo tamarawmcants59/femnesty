@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
   public showImgDive: boolean = false;
   public showCoverImgDive: boolean = false;
   public adminStatusObj:object ={};
+  public groupPostDetData: object = {};
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   @ViewChild("profileImageType") profileImageType: ElementRef;
   @ViewChild("addressEdit") addressEdit: ElementRef;
@@ -529,7 +530,7 @@ export class ProfileComponent implements OnInit {
             this.otherProfileDet = data.CompanyDetails[0];
             //console.log(this.otherProfileDet.id);
             this.otherProfileId = this.otherProfileDet.id;
-
+            this.groupPostDetData = { activitytype: '3', activityid: this.isloginUserId };
             this.getUserPostDetails();
             //this.getConnectionList();
             //this.checkMyFrndData();
