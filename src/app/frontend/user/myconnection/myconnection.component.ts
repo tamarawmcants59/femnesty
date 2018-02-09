@@ -183,7 +183,45 @@ public firebasOnlineUserList: any;
       
     }
   }
+public acceptFriendRequest(request_id) {
+      this.loading = true;
+      this.successMsg='';
+      this.errorMsg='';
+      let requestJsonData={"id": request_id};
+      this.dataService.acceptFrndRequest(requestJsonData)
+        .subscribe(
+              data => {
+                  this.loading = false;
+                  if(data.Ack==1){
+                    this.successMsg=data.msg;
+                    this.getPendingFrndList();
+                  }else{
+                    this.errorMsg='You have already send the friend request';
+                  }
+        },
+        error => {
+          alert(error);
+        });
+  }
 
+  public rejectFriendRequest(request_id) {
+      this.loading = true;
+      this.successMsg='';
+      this.errorMsg='';
+      let requestJsonData={"id": request_id};
+      this.dataService.rejectFrndRequest(requestJsonData).subscribe(data => {
+          this.loading = false;
+          if(data.Ack==1){
+            this.successMsg=data.msg;
+            this.getPendingFrndList();
+          }else{
+            this.errorMsg='You have already send the friend request';
+          }
+        },
+        error => {
+          alert(error);
+        });
+  }
   public searchConnection() { 
     if (this.search_group != '') {
 
