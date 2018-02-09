@@ -5544,7 +5544,10 @@ header .dropdown-menu{min-width: 218px;}
 	padding: 17px;
 	background: #fff;
 }
-
+.pd-5{
+	padding-left: 3px !important;
+	padding-right: 3px !important;
+}
 @media screen and (max-width:767px) {
 	.pd-5{
 	padding-left: 15px !important;
