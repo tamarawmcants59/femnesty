@@ -4638,10 +4638,10 @@ section h1:after{
 		.founder.gray h3.text-red{
 			font-size: 22px !important;
 		}
-		.container{
+		/*.container{
 			padding-left: 25px !important;
 			padding-right: 25px !important;
-		}
+		}*/
 
 }
 @media screen and (max-width:480px) {
@@ -4691,7 +4691,7 @@ section h1:after{
 	padding: 45px 0 !important;
 }
 section h1{
-	font-size: 30px !important;
+	font-size: 24px;
 }
 .mentor-partner h2{
     font-size: 30px !important;
@@ -5303,38 +5303,41 @@ padding: 9px 15px;
 	
 .mid-sec h1{
 	font-size: 24px !important;
-	margin-bottom: 15px !important;
-	padding-bottom: 15px !important;
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
 	line-height: 36px !important;
-	text-align: center;
+	text-align: left;
 }
 .mid-sec p{
-	text-align: center;
+	text-align: left;
 }
 .mid-sec{
-	padding: 50px 0 !important;
+	padding: 10px 0;
 }
 .pdl-0{
-	padding-left: 15px !important;
+	padding-left: 0 !important;
 }
 .pdr-30{
-	padding-right: 15px !important;
+	padding-right: 0 !important;
 }
 .mid-sec h3{
-	text-align: center;
+	text-align: left;
 }
 .p-sec{
 	padding: 40px 0 !important;
 }
 .p-sec h1{
-	font-size: 24px;
+	font-size: 24px !important;
 	margin-bottom: 20px;
 	text-align: center;
-	line-height: 36px !important;
+	line-height: 26px !important;
 }
 
 .p-sec p{
-	text-align: center;
+	text-align: left;
+}
+.p-sec{
+	padding:10px 0 !important;
 }
 }
 
@@ -5464,27 +5467,27 @@ header .nav.navbar-nav li.nav-item.dropdown .dropdown-menu a:hover{
 	color:#fff;
 }
 .post-drop-box{
-	width: 228px;
+	width: 138px;
 	height: auto;
-	background: #fff;
+	background: #272727;
 	border: solid 1px #ededed;
 	border-radius: 3px;
 	box-shadow: 4px 4px 2px #eeeeee;
 	position: absolute;
-	right: 0;
+	right: 15px;
 	z-index: 10000;
-	top: 20px;
+	top: 0px;
 	overflow: hidden;
 	
 }
 
 .post-drop-box a{ 
 	display:  block;
-	color: #000;
+	color: #fff;
 	font-weight: normal;
 	width: 208 !important;
 	margin: 0 10px !important;
-	border-bottom: solid 1px #ededed;
+	border-bottom: solid 1px #323232;
 	text-align: left;
 	clear: both;
 	padding: 12px 0;
@@ -5627,6 +5630,14 @@ header .dropdown-menu{min-width: 218px;}
 .h2.text-red{
 	font-size: 22px !important;
 	line-height: 26px !important;
+}
+.contact-right{
+	padding: 20px;
+}
+.p-sec h1{
+	font-size: 24px !important;
+	line-height: 26px !important;
+	text-align: left;
 }
 }
 
