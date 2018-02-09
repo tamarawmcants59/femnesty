@@ -43,14 +43,14 @@ export class SignupComponent implements OnInit {
   ) {
     this.form = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
-      'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
+      'mobile_number': ['', Validators.compose([Validators.required, Validators.minLength(10),,Validators.pattern('[0-9][0-9]+')])],
       'company_name': ['', Validators.compose([Validators.required])],
       //'website': ['', Validators.compose([Validators.required,Validators.pattern('https?://.+')])],
       'website': ['', Validators.compose([Validators.required])],
       //'company_type': ['', Validators.compose([Validators.required])],
       'agreetab': ['', Validators.compose([Validators.required])],
-      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'cpassword': ['', Validators.compose([Validators.required])]
+      //'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+      //'cpassword': ['', Validators.compose([Validators.required])]
     });
 
     this.email = this.form.controls['email'];
@@ -61,7 +61,7 @@ export class SignupComponent implements OnInit {
     
     //this.company_type = this.form.controls['compant_type'];
     this.agreetab = this.form.controls['agreetab'];
-    this.cpassword = this.form.controls['cpassword'];
+    //this.cpassword = this.form.controls['cpassword'];
 
     this.afAuth.authState.do(user => {
       if (user) {
@@ -70,12 +70,11 @@ export class SignupComponent implements OnInit {
     }).subscribe();
    }
 
-  ngOnInit() {
-
+  ngOnInit() {   
+    //console.log();
   }
 
   public checkEmail(values:Object):void { 
-    debugger;
     if(values!=''){
       let signupCheckEmail={
         "email": values,
@@ -176,10 +175,12 @@ public checkCompanyurl(values:Object){
     this.loading = true;
    if (this.form.valid) {
      //console.log(values);
-     this.user_id =localStorage.getItem("isLoggedIn");
+     //localStorage.getItem("loginUserId")
+     this.user_id =localStorage.getItem("loginUserId");
+     let userloginDet=JSON.parse(localStorage.getItem('currentUser'));
      let signupJsonData={
        "email": this.email.value.toString(), 
-       "txt_password": this.password.value.toString(),
+       "txt_password": userloginDet.txt_password,
        "company_name": this.company_name.value.toString(),
        "website": this.website.value.toString(),
        "mobile_number": this.mobile_number.value.toString(),

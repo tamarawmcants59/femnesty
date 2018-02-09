@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   public lat: 0;
   public lng: 0;
   public isAdmin = false;
+  public isSuperAdmin = false;
   public isloginUser: any;
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
   public isFollowRequest = true;
   public showImgDive: boolean = false;
   public showCoverImgDive: boolean = false;
+  public adminStatusObj:object ={};
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   @ViewChild("profileImageType") profileImageType: ElementRef;
   @ViewChild("addressEdit") addressEdit: ElementRef;
@@ -512,11 +514,18 @@ export class ProfileComponent implements OnInit {
         .subscribe(data => {
           //console.log(data);
           if (data.Ack == "1") {
-            if (data.CompanyDetails[0].is_admin == "1") {
+            //this.isloginUserId = localStorage.getItem("loginUserId");
+            //if (data.CompanyDetails[0].is_admin == "1" ) {
+            if (data.CompanyDetails[0].company_uid == this.isloginUserId) {
+              this.isloginUserId=data.CompanyDetails[0].id;
               this.isAdmin = true;
-            }
-            else
+              this.isSuperAdmin = true;
+            }else if(data.CompanyDetails[0].id == this.isloginUserId){
+              this.isAdmin = true;
+            }else{
               this.isAdmin = false;
+            }
+            this.adminStatusObj ={'isAdmin':this.isAdmin,'isSuperAdmin':this.isSuperAdmin}; 
             this.otherProfileDet = data.CompanyDetails[0];
             //console.log(this.otherProfileDet.id);
             this.otherProfileId = this.otherProfileDet.id;

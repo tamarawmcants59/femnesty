@@ -77,8 +77,11 @@
                             <li [ngClass]="{'active' : activeTab=='activity'}">
                                 <a (click)="toggleTab('activity')">Activity</a>
                             </li>
-                            <li [ngClass]="{'active' : activeTab=='about'}">
+                            <li *ngIf="!isAdmin" [ngClass]="{'active' : activeTab=='about'}">
                                 <a (click)="toggleTab('about')">About</a>
+                            </li>
+                            <li *ngIf="isAdmin" [ngClass]="{'active' : activeTab=='about_edit'}">
+                                <a (click)="toggleTab('about_edit')">About</a>
                             </li>
                             <li [ngClass]="{'active' : activeTab=='contact'}">
                                 <a (click)="toggleTab('contact')">Contact</a>
@@ -110,7 +113,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="tab-content">
-                                                    <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+                                                    <div class="tab-pane fade in active">
                                                         <ul class="ulList">
                                                             <div class="menu">
                                                                 <div class="">
@@ -335,6 +338,9 @@
                                     </div>
 
                                 </div>
+                            </div>
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about_edit'}">
+                                <app-about-company [companyID]="otherProfileDet.id" [adminStatus]="adminStatusObj"></app-about-company>
                             </div>
                             <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
                                 <div class="connectionsPart">
