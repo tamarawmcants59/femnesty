@@ -1,3 +1,4 @@
+
 <header class="navbar-fixed-top header-inner" *ngIf="userloggedIn != 1  && (getCurrentPageName =='/user/signup' || getCurrentPageName=='/user/forgotpassword')">
     <!-- login header -->
     <div class="header-top headerTopPart">
@@ -383,7 +384,7 @@
 
                                     <li>
                                         <!--<a [routerLink]="['/company']">Create company</a>-->
-                                        <a [routerLink]="['/user/edit_details']">Edit Profile</a>
+                                        <a [routerLink]="['/user/edit_details']">Account Details</a>
                                         <a [routerLink]="['/user/edit_profile/about']">Privacy Settings</a>
                                     </li>
                                     <!--<li><a [routerLink]="['/user/mycmplist']">List company</a></li>
