@@ -289,12 +289,13 @@
                                     <i class="icon ion-ios-filing-outline" style="font-size: 32px;"></i>
                                     <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                                 </a>
-                                <a *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownToggle class="dropdown-toggle sp-hover" id="dropdownMenuButton" data-toggle="dropdown"
+                                <a *ngIf="chatHeads && chatHeads.length > 0" class="dropdown-toggle sp-hover" id="dropdownMenuButton" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <i class="icon ion-ios-filing-outline" style="font-size: 32px;"></i>
                                     <span *ngIf="chatHeads && chatHeads.length > 0" class="badge" style="background-color: red">{{chatHeads.length}}</span>
                                 </a>
-                                <div *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownMenu class="dropdown-menu msg-item-worp" aria-labelledby="dropdownMenuButton">
+                                <div *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownMenu class="dropdown-menu msg-item-worp new-msg-dropdown" aria-labelledby="dropdownMenuButton">
+                                    <div class="text-top"><span>LATEST MESSAGES</span> <b>NEW MESSAGE</b></div>
                                     <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
                                         <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread notify-box-top" href="javascript:void(0)">
                                             <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />
@@ -309,6 +310,7 @@
 
                                         <!-- <a href="" class="viewall">View all</a> -->
                                     </div>
+                                    <span href="" class="view-all">VIEW ALL</span>
                                 </div>
                             </li>
                             <li class="sp-hover">

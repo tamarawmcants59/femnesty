@@ -1,22 +1,23 @@
-<section class="section about-content-area visitingProfile">
+<section class="section section2 about-content-area visitingProfile">
     <div class="container-fluid">
         <div class="row flex-profile">
             <div class="col-md-3 flex-left">
                 <user-sidebar></user-sidebar>
             </div>
             <div class="col-md-6 flex-middle">
-            	<div class="middlePart">
+            	<!--<div class="middlePart">
                 	  <div class="notification-wrap">
                         <h2>Chat list</h2>
                     </div>
-                </div><br/>
+                </div><br/>-->
                 <div class="middlePart">
-                    <div class="notification-wrap new-chat-section">
+                    <div class="notification-wrap new-conversations-section">
+                    		<h2>MY CONVERSATIONS</h2>
                         <ul>
                             <li *ngFor="let chatHead of chatHeads" style="cursor:pointer">
                                 <div class="image-area">
                                     <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
-                                        <img src="{{chatHead.userDetails.image_url}}" style="width:50px" alt="" />
+                                        <img src="{{chatHead.userDetails.image_url}}" style="width:58px" alt="" />
                                     </div>
                                 </div>
                                 <div class="text-area">
@@ -30,9 +31,7 @@
                                     <div style="display:block">
                                         <a *ngIf="chatHead.message.file" download href="{{chatHead.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
                                     </div>
-                                    <div class="clearfix">
-
-                                    </div>
+                                    
                                     <p class="time">{{chatHead.created | timeAgo}}</p>
                                 </div>
                             </li>
@@ -40,6 +39,7 @@
                                 <p>No message found</p>
                             </li> 
                         </ul>
+								<a href="" class="only-load-more">Load More</a>
                     </div>
                 </div>
             </div>
