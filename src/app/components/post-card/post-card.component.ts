@@ -49,6 +49,7 @@ export class PostCardComponent implements OnInit {
   public delPostType: any;
   public delPostKey: any;
   public delPostData: any;
+  IsShowSubCommentAction:any;
   public blockPostId: any;
   public blockPostType: any;
   public blockPostKey: any;
@@ -107,9 +108,38 @@ export class PostCardComponent implements OnInit {
   ngOnInit() {
 
   }
+  toggleSubComment(id)
+  {
+    if(!this.IsShowSubCommentAction)
+    {
+      this.IsShowSubCommentAction=[];
+    }
+    if(this.IsShowSubCommentAction[id])
+    {
+      this.IsShowSubCommentAction[id]=false;
+    }
+    else
+    {
+      
+      this.IsShowSubCommentAction[id]=true;
+    }
+    
+  }
 
   deletePost(confirmmodal, post_id, type, comments = null, delkey = null) {
-    this.IsShowOption= !this.IsShowOption;
+    //this.IsShowOption= !this.IsShowOption;
+    if(this.IsShowSubCommentAction && this.IsShowSubCommentAction[post_id])
+    {
+      this.IsShowSubCommentAction[post_id]=false;
+    }
+    if(this.IsShowOption==false)
+    {
+
+    }
+    else
+    {
+      this.IsShowOption=false;
+    }
     //this.open(confirmmodal);
     this.delPostId = post_id;
     this.delPostType = type;
@@ -395,7 +425,20 @@ export class PostCardComponent implements OnInit {
 
   }
   openCommentEditModal(postData1, editcommentModal) { 
-    this.IsShowOption= !this.IsShowOption;
+    debugger;
+    if(this.IsShowSubCommentAction && this.IsShowSubCommentAction[postData1.id])
+    {
+      this.IsShowSubCommentAction[postData1.id]=false;
+    }
+    if(this.IsShowOption==false)
+    {
+
+    }
+    else
+    {
+      this.IsShowOption=false;
+    }
+    //this.IsShowOption= !this.IsShowOption;
     if (postData1.comment) {
       this.editCommentText = postData1.comment;
       this.editCommentTextId = postData1.id;
@@ -418,7 +461,7 @@ export class PostCardComponent implements OnInit {
 
   }
 
-  public editComment(comment,id) {
+  public editComment(postData,comment,id) {
    // alert(JSON.stringify(postData1))
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");

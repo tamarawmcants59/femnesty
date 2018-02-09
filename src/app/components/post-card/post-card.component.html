@@ -268,7 +268,7 @@
                                                 <div class="heading" style="width:100%;height:auto;overflow: hidden;">
                                                     <h4 style="float:left; width: 100%" class="commentee-name">{{cmtReply.name}} 
                                                     <span>
-                                                    <a class="icondown"><i class="icon ion-chevron-down"></i></a>
+                                                    <a class="icondown"><i class="icon ion-chevron-down" (click)="toggleSubComment(cmtReply.id)"></i></a>
                                                     </span>
                                                     </h4>
                                                     <!--<a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">
@@ -277,9 +277,9 @@
                                                     <a style="float:right" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">
                                                         <i class="fa fa-edit" style="color:#BB1926"></i>
                                                     </a>-->
-                                                    <div class="post-drop-box">
-                										<a>Edit</a>
-                										<a>Delete</a>
+                                                    <div class="post-drop-box" *ngIf="IsShowSubCommentAction && IsShowSubCommentAction[cmtReply.id]">
+                										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">Edit</a>
+                										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
                             						</div>
                                                 </div>
                                                 <!--<p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>-->
@@ -536,7 +536,7 @@
             
             <div class="col-md-3">
 
-                <button class="btn modal-btn-primary" type="button" (click)="editComment(editCommentText,editCommentTextId)">Edit Comment</button>
+                <button class="btn modal-btn-primary" type="button" (click)="editComment(postData,editCommentText,editCommentTextId)">Edit Comment</button>
             </div>
             <div class="col-md-3">
                 <button type="button" class="btn modal-btn-primary" (click)="c('Close click')" #closeEditModal>Cancel</button>
