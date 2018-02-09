@@ -159,7 +159,15 @@
                             <div class="form-group row">
                                  <div class="col-md-6">
                                    <label>Marriage Status</label>
-                                   <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.marriage_status" formControlName="marriage_status" placeholder="Enter your marriage status"> 
+                                   <!-- <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.marriage_status" formControlName="marriage_status" placeholder="Enter your marriage status">  -->
+                                   <select class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.marriage_status" formControlName="marriage_status">
+                                        <option value="Married">Married</option>
+                                        <option value="Engaged">Engaged</option>
+                                        <option value="In a Relationship">In a Relationship</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widow">Widow</option>
+                                      </select>
                                  </div>
                                  <div class="col-md-6">
                                    <label>Children</label>
