@@ -34,4 +34,11 @@
 .n-social{
 	margin-top: 22px !important;
 }
-
+@media screen and (max-width:767px) {
+	.section h1{
+		font-size: 24px !important;
+		text-align: left;
+		margin-top: 0;
+		margin-bottom: 25px;
+	}
+}
