@@ -79,6 +79,7 @@
                 <i class="icon ion-chevron-down"></i>
             </a>
             <div class="post-drop-box" *ngIf="IsShowOption">
+            <div class="closed"><a href=""><img src="assets/images/cross.png" alt="" /></a></div>
                 <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" (click)="openEditModal(postData,editModal)">
                     Edit
                 </a>
