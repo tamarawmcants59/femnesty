@@ -1,4 +1,57 @@
 
+<div [ngClass]="{'feedhover': IsShowFeedForm }" class="feedback-n" >
+        <span (click)="openForm()" *ngIf="isShowPlus">
+          <i class="fa fa-plus" style="color: red;
+          cursor: pointer;"></i>
+        </span>
+        <span (click)="closeForm()" *ngIf="!isShowPlus">
+          <i class="fa fa-minus" style="color: red;
+            cursor: pointer;"></i>
+        </span>
+        <a href="javascript:void(0)">FEEDBACK
+        </a>
+      
+      </div>
+      <div class="feedback-from" *ngIf="IsShowFeedForm">
+          <div class="alert alert-success" role="alert" *ngIf="successMsg">
+              {{successMsg}}
+            </div>
+            <div class="" role="alert" *ngIf="errorMsg">
+                 {{errorMsg}}
+              </div>
+        <form [formGroup]="rForm" (ngSubmit)="sendFeedBack()">
+            <div class="from">
+                <p>Help us improve Femnesty, we appreciate hearing from you. </p>
+                <textarea class="form-control" placeholder="How has your experience been using our website? Is there anything else 
+            we can do better? 
+            " rows="5" formControlName="description"></textarea>
+                <div class="form-group-new">
+                  <input class="form-control" [(ngModel)]="loginUserDet.email" placeholder="E-mail" type="text" formControlName="email">
+                </div>
+                <div class="rate">
+                  <h2>Rate your experience</h2>
+                  <p>
+                    <rating formControlName="rating"  [float]="true"></rating>
+                  </p>
+                </div>
+                <div class="rate">
+                  <h2>Can we contact you about your feedback?</h2>
+                  <p>
+                    <label class="checkbox-inline">
+                      <input type="radio" value="1" name="feedback" formControlName="feedback">Yes
+                    </label>
+                    <label class="checkbox-inline" >
+                      <input type="radio" value="2" name="feedback" formControlName="feedback">No
+                    </label>
+                  </p>
+                </div>
+              </div>
+              <div class="btn-area">
+                <button class="btn btn-primary" type="submit">SUBMIT</button>
+              </div>
+        </form>
+        
+      </div>
 <header class="navbar-fixed-top header-inner" *ngIf="userloggedIn != 1  && (getCurrentPageName =='/user/signup' || getCurrentPageName=='/user/forgotpassword')">
     <!-- login header -->
     <div class="header-top headerTopPart">

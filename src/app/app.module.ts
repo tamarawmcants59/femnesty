@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { UserSidebar } from "./components/user-sidebar";
 // Import containers
 //import {MatDialogModule} from '@angular/material/dialog';
-
+import {RatingModule} from "ng2-rating";
 import {
   FrontendLayout
 } from './containers';
@@ -77,6 +77,7 @@ import { AppRoutingModule } from './app.routing';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     NgbModule.forRoot(),
     FormsModule,
+    RatingModule,
     AngularFireDatabaseModule,
     //BrowserAnimationsModule,
     //HttpClientModule,
