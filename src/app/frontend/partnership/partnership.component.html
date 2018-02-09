@@ -27,7 +27,7 @@
 
 
 
-    <section class="mid-sec join-champion">
+    <!--<section class="mid-sec join-champion">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -75,10 +75,10 @@
 
             </div>
         </div>
-    </section>
-<!--<section *ngIf="partnerShipContent"  [innerHTML]="partnerShipContent.middle_content">
-</section>-->
-    <section class="p-sec">
+    </section>-->
+<section class="mid-sec join-champion" *ngIf="partnerShipContent"  [innerHTML]="partnerShipContent.middle_content">
+</section>
+    <!--<section class="p-sec">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -106,10 +106,10 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!--<section *ngIf="partnerShipContent"  [innerHTML]="partnerShipContent.below_content">
-
     </section>-->
+    <section class="p-sec" *ngIf="partnerShipContent"  [innerHTML]="partnerShipContent.below_content">
+
+    </section>
 
 
 

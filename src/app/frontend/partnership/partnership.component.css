@@ -73,7 +73,25 @@
 	line-height: 24px;
 }
 .spb-row h1{
-	line-height: 36px !important;
-	margin-bottom: 20px !important;
+	line-height: 36px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+@media screen and (max-width:767px) {
+	.section h1{
+		font-size: 24px !important;
+		text-align: left;
+		margin-top: 0;
+		margin-bottom: 25px;
+	}
+.spb-row h1{
+	font-size: 24px !important;
+	text-align: left;
+	margin-top: 0;
+	margin-bottom: 25px;
 	margin-top: 20px !important;
+}
+.mid-sec{
+	padding:0 !important;
+}
 }
