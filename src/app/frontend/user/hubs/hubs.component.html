@@ -66,7 +66,7 @@
 								<div>
 									<app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
 								</div>
-								<div *ngIf="groupPostList?.length > 0">
+								<div class="allpost" *ngIf="groupPostList?.length > 0">
 									<div *ngFor="let postData of groupPostList">
 										<app-post-card [postData]="postData"></app-post-card>
 									</div>
