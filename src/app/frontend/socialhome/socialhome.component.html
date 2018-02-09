@@ -51,20 +51,20 @@
     </form>
     
   </div>
-<section class="section about-content-area visitingProfile">
+<section class="section about-content-area visitingProfile section2">
   <div class="container-fluid">
       <div class="row flex-profile">
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
         <div class="col-md-3 flex-left">
             <user-sidebar *ngIf="isLoggedIn == '1'"></user-sidebar>
         </div>
-        <div class="col-md-6 flex-middle">
+        <div class="col-md-6 flex-middle pd-5">
          
             <div class="tabPart">
           <div *ngIf="(isLoggedIn == '1')">
               <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
           </div>
-          <div *ngIf="userPostList?.length > 0">
+          <div class="allpost" *ngIf="userPostList?.length > 0">
               <div *ngFor="let postData of userPostList">
                   <app-post-card [postData]="postData"></app-post-card>                
               </div>

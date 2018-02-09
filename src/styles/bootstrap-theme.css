@@ -2781,10 +2781,10 @@ background: #fff !important;}
     border-right: 0px;
     border-top: none;
     border-bottom: 1px solid #f0f0f0;
-    height: 100px;
+    height: 60px;
     box-shadow: none !important;
     font-size: 14px;
-    padding: 20px;
+    padding: 0;
 }
 
 .upload-btn-wrapper {
@@ -2845,17 +2845,19 @@ background: #fff !important;}
 
 .likePart {
     background: #fff;
-    margin-top: 30px;
-    padding: 20px;
+    /*margin-top: 30px;*/
+    padding: 0 0 15px;
    
 }
 .likePart .imageParts .profImageP .img{width:46px !important;height:46px !important;margin:0}
 .commentPart {
     background: #fff;
     margin-top: 0;
-    padding: 20px;
-    background: #f0f0f0;
+    padding: 15px 0;
 	border-top: solid 1px #dddfe2;
+	border-bottom: solid 1px #dddfe2;
+	overflow: hidden;
+	margin-bottom: 15px;
      
 }
 .commentPart .likeComment{/*width:calc(100% - 40px);padding: 20px 0;*/margin: 0 auto;}
@@ -2910,10 +2912,9 @@ background: #fff !important;}
 
 .userComment p {
     color: #4e4e4e;
-    
-    font-size: 15px;
+    font-size: 14px;
     line-height: 18px;
-    margin: 20px 0;
+    margin: 17px 0 14px;
     
     letter-spacing: 1px;
 }
@@ -2928,8 +2929,9 @@ background: #fff !important;}
 }
 
 .userComment ul li a {
-    color: #7e7e7e;
-    font-size:12px;
+    color: #7a7a7a;
+    font-size:10px;
+    font-family: 'sanchezregular';
     
 }
 
@@ -3553,14 +3555,24 @@ background: #fff !important;}
 /********* Visiting-other-profile ********/
 
 .reply-comment-wrapper {
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     flex-wrap: nowrap;
-    padding: 0 20px;
+    padding: 15px 0 0px;
+    border-top: solid 1px #dddfe2;
 }
 
 .reply-comment-wrapper .left-comment-content {
     margin-right: 10px;
+    
+}
+.left-comment-content-arrow{
+	position: absolute;
+	width: 14px;
+	height: 12px;
+	top: 10px;
+	left: -25px;
+	z-index: 1000;
 }
 
 .reply-comment-wrapper .left-comment-content .user-image {
@@ -3577,9 +3589,9 @@ background: #fff !important;}
 
 .reply-comment-wrapper .right-comment-content .commentee-name {
     margin-top: 0;
-    margin-bottom: 2px;
-    font-size: 16px;
-    color:#bb1926;
+    margin-bottom: 0;
+    font-size: 12px;
+    color:#000;
 }
 
 .profTextPart p.post-date {
@@ -3588,19 +3600,21 @@ background: #fff !important;}
 
 .commenteeComment {
     margin: 5px 0 10px;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .commenteeComment p {
-    color: #4e4e4e;
-    font-size: 14px;
-    line-height: 18px;
+    color: #414141;
+    font-size: 11px;
+    line-height: 13px;
     margin: 0;
 }
 
 .sub-reply-comment-wrapper {
     display: flex;
     flex-wrap: nowrap;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    position: relative;
 }
 
 .sub-reply-comment-wrapper:last-child {
@@ -3608,8 +3622,8 @@ background: #fff !important;}
 }
 
 .sub-reply-comment-wrapper .left-comment-content .user-image {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     overflow: hidden;
     background-size: cover !important;
@@ -4393,7 +4407,10 @@ font-weight: normal;padding: 2px 5px;}
 .profPhoto .img{background: #fff;}
 
 .mobile-navs ul li:hover .dropdown-menu{display: block;}
-.commenteeComment ul li a{color: #bb1926}
+.commenteeComment ul li a{color: #a0a0a0; font-size: 10px; text-transform: uppercase; font-family: 'montserratmedium';}
+.commenteeComment ul li a i{
+	color:#bb1926;
+}
 
 .tabPart ul.edit-forms{padding: 35px 45px;overflow: hidden;}
 .tab-content .tab-pane .connectionsPart{padding: 15px}
@@ -5521,8 +5538,16 @@ header .dropdown-menu{min-width: 218px;}
 .pdr-35{
 	padding-right:35px; 
 }
+.allpost{
+	padding: 17px;
+	background: #fff;
+}
 
 @media screen and (max-width:767px) {
+	.pd-5{
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
 	.before-login-home .nav.navbar-nav.navbar-right span{top: 8px !important;color:#fff !important;}
 	.sign-form .text-danger{position: relative;bottom:0}
   .team-right p {
@@ -5866,7 +5891,13 @@ input[type=text]:focus, textarea:focus {
 
 .event-details-font p{font-size:14px;}
 
-
+.commentee-name{
+	display: block;
+}
+.commentee-name span{
+	float: right;
+	
+}
 
 
 

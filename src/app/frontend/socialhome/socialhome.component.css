@@ -14,4 +14,8 @@
 .rate .checkbox-inline input[type="radio"]{display: inline;vertical-align: top;margin: 0;margin-right:5px}
 .rate .checkbox-inline{padding-left: 0;}
 
+.pd-5{
+	padding-left: 3px;
+	padding-right: 3px;
+}
 
