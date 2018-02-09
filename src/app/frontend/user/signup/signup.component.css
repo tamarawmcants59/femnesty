@@ -6,3 +6,21 @@
 	font-size: 12px !important;
 	font-family: 'montserratmedium' !important;
 }
+.form-group ul{
+	
+}
+.form-group ul li{
+	width: 30%;
+	float: left;
+	margin-right: 2%;
+}
+.form-control-plaintext {
+	background: #f7f7f7;
+	border: none;
+	box-shadow: none;
+	height: 38px;
+	font-size: 12px;
+	padding: 6px 15px;
+	font-family: 'sanchezregular';
+	color: #727272;
+  }

@@ -21,7 +21,7 @@
                          <ul>
                             <li class="form-search search-icon sp-hover">
                                 <div class="form-group">
-                                    <span>LOGIN</span>
+                                    <span>Sign In</span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email">
@@ -30,7 +30,7 @@
                                     <input type="password" class="form-control" placeholder="PASSWORD" [(ngModel)]="password">
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-blank" type="button" (click)="checkLogin(messageModal)">login</button>
+                                    <button class="btn btn-blank" type="button" (click)="checkLogin(messageModal)">Sign In</button>
                                 </div>
                                 <div class="form-group">
                                     <a [routerLink]="['/user/forgotpassword']">FORGOT PASSWORD?</a>
@@ -38,7 +38,7 @@
                             </li>
                         </ul>
 						<ul class="pull-right right-social-login">
-                    		<li><span>LOGIN USING</span></li>
+                    		<li><span>SIGNIN USING</span></li>
                     		<li><a href=""><i class="fa fa-facebook"></i></a></li>
                     		<li><a href=""><i class="fa fa-linkedin"></i></a></li>
                     		<li><a href=""><i class="fa fa-twitter"></i></a> </li>
@@ -164,7 +164,7 @@
                     <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
                     <li class="sp-hover" *ngIf="userloggedIn != 1">
                         <a routerLinkActive="active" [routerLink]="['/user/signup']" style="padding-top: 0px;">
-                            <button>Login</button>
+                            <button>Sign In</button>
                         </a>
                     </li>
                 </ul>
