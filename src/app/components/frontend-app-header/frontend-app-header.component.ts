@@ -26,7 +26,6 @@ export class FrontendAppHeader {
   successMsg: any;
   errorMsg: any;
   title: any;
-  public shhover = '';
   public submitted: boolean = false;
   loading = false;
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
@@ -42,9 +41,6 @@ export class FrontendAppHeader {
   public articleArr = [];
   public email: any;
   public password: any;
-  public rForm: FormGroup;
-  public IsShowFeedForm = false;
-  public isShowPlus = true;
   constructor(
     private el: ElementRef,
     lc: NgZone,
@@ -58,8 +54,7 @@ export class FrontendAppHeader {
     private afAuth: AngularFireAuth,
     private cd: ChangeDetectorRef,
     private loginService: UserService,
-    private modalService: NgbModal,
-    private fb: FormBuilder
+    private modalService: NgbModal
   ) {
     // this.loginForm = builder.group({
     //   'email': ['', Validators.compose([Validators.required, Validators.email])],
@@ -67,13 +62,6 @@ export class FrontendAppHeader {
     // });
     // this.email = this.loginForm.controls['email'];
     // this.password = this.loginForm.controls['password'];
-
-    this.rForm = fb.group({
-      'description': [null, Validators.compose([Validators.required])],
-      'email': [null, Validators.compose([Validators.required, Validators.email])],
-      'feedback': [null, Validators.compose([Validators.required])],
-      'rating': [null, Validators.compose([Validators.required])],
-    });
     this.afAuth.authState.do(user => {
       if (user) {
         this.currentFireUserId = user.uid;
@@ -131,23 +119,7 @@ export class FrontendAppHeader {
       ]]
     });
   }
-  sendFeedBack() {
-    this.loading = true;
-    this._service.giveFeedback(this.rForm.value).subscribe(data => {
-      if (data.Ack == "1") {
-        this.successMsg=data.msg;
-        this.loading = false;
-        this.rForm.reset();
-      }
-      else if(data.Ack == "0"){
-        this.errorMsg=data.msg;
-        this.loading = false;
-      }
-    }, error => {
-      this.loading = false;
-      console.log('Something went wrong!');
-    });
-  }
+
   //wait for the component to render completely
   ngOnInit(): void {
     //console.log(this.currentUserDet);
@@ -210,16 +182,7 @@ export class FrontendAppHeader {
   ngOnChanges(): void {
     this.show = false;
   }
-  openForm() {
-    this.shhover = "feedhover";
-    this.IsShowFeedForm = true;
-    this.isShowPlus = false;
-  }
-  closeForm() {
-    this.shhover = "";
-    this.isShowPlus = true;
-    this.IsShowFeedForm = false;
-  }
+
   public getFemnestyEvent(){
     this._service.getArticalListData().subscribe(data=>{
         let details=data;
