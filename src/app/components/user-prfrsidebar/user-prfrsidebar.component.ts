@@ -7,6 +7,7 @@ import { UserService } from "../../frontend/user/user.service";
 })
 export class UserPrfrsidebarComponent implements OnInit {
   public loginUserId = "";
+  public loginUserDetRight="";
   public userImgList = [];
   public userGrpList = [];
   public latestHubList = [];
@@ -17,6 +18,9 @@ export class UserPrfrsidebarComponent implements OnInit {
     private dataService: UserService
   ) {
     this.loginUserId = localStorage.getItem("loginUserId");
+    let localCurr= localStorage.getItem("currentUser");
+    this.loginUserDetRight = JSON.parse(localCurr);
+    //console.log(this.loginUserDetRight);
   }
 
   ngOnInit() {

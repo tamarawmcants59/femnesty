@@ -34,6 +34,9 @@
             <div class="img" [ngStyle]="{'background-image':'url('+imageList.file_name+')'}"></div>
         </li>       
       </ul>
+      <div *ngIf="companyImageList?.length == 0">
+            <p>{{profileData.company_name}} hasn't added photo's yet</p>
+      </div>
     </div>
 
 <div class="innerRightPart right-map-details right-sharing">
