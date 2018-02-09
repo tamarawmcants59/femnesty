@@ -23,6 +23,10 @@ export class GrouplistComponent implements OnInit {
   search_group: string;
   public errorMsg: string;
   public filteredTitle: any;
+  IsShowNothingForMy = false;
+  IsShowMyGrp = true;
+  IsShowTopGrp = true;
+  IsShowNothingForTop = false;
   public aboutActiveTab: string = 'find';
   private categoryListWithCount: any = [];
   @ViewChild("topGroupsList") topGroupsList: ElementRef;
@@ -103,14 +107,18 @@ export class GrouplistComponent implements OnInit {
     this.myGrpList = [];
     if (!this.topGroupsList) {
       this.router.navigateByUrl('/group/find');
-      const self = this;
-      setTimeout(function () {
-        self.topGroupsList.nativeElement.scrollIntoView();
-      }, 200);
+      // const self = this;
+      // setTimeout(function () {
+      //   self.topGroupsList.nativeElement.scrollIntoView();
+      // }, 200);
+      this.IsShowTopGrp = true;
+      this.IsShowMyGrp = false;
 
     }
     else {
-      this.topGroupsList.nativeElement.scrollIntoView();
+      this.IsShowTopGrp = true;
+      this.IsShowMyGrp = false;
+      //this.topGroupsList.nativeElement.scrollIntoView();
     }
 
   }
@@ -119,13 +127,17 @@ export class GrouplistComponent implements OnInit {
     this.myGrpList = [];
     if (!this.myGroupsList) {
       this.router.navigateByUrl('/group/find');
-      const self = this;
-      setTimeout(function () {
-        self.myGroupsList.nativeElement.scrollIntoView();
-      }, 200);
+      // const self = this;
+      // setTimeout(function () {
+      //   self.myGroupsList.nativeElement.scrollIntoView();
+      // }, 200);
+      this.IsShowTopGrp = false;
+      this.IsShowMyGrp = true;
     }
     else {
-      this.myGroupsList.nativeElement.scrollIntoView();
+      this.IsShowTopGrp = false;
+      this.IsShowMyGrp = true;
+     // this.myGroupsList.nativeElement.scrollIntoView();
     }
 
   }
@@ -138,10 +150,14 @@ export class GrouplistComponent implements OnInit {
     };
     this.dataService.getGroupListByCategoryId(data).subscribe(data => {
       if (data.Ack == "1") {
+        this.IsShowTopGrp = false;
+        this.IsShowMyGrp = false;
         this.myGrpList = data.ActiveGroupList
         this.errorMsg = "";
       }
       else if (data.Ack == "0") {
+        this.IsShowTopGrp = false;
+        this.IsShowMyGrp = false;
         this.myGrpList = [];
         this.errorMsg = 'No record found.';
       }
@@ -188,9 +204,11 @@ export class GrouplistComponent implements OnInit {
     this.groupList = [];
     if (this.totalGroupList.length > this.topListPageSize) {
       this.IsShowTopViewMore = true;
+      this.IsShowNothingForTop = false;
     }
     else {
       this.IsShowTopViewMore = false;
+      this.IsShowNothingForTop = true;
     }
     for (let i = 0; i < this.topListPageSize; i++) {
       if (this.totalGroupList[i]) {
@@ -242,9 +260,11 @@ export class GrouplistComponent implements OnInit {
     this.totalMyGrpList = [];
     if (this.totalListOfMyGroups.length > this.myListPageSize) {
       this.IsShowMyViewMore = true;
+      this.IsShowNothingForMy = false;
     }
     else {
       this.IsShowMyViewMore = false;
+      this.IsShowNothingForMy = true;
     }
     for (let i = 0; i < this.myListPageSize; i++) {
       if (this.totalListOfMyGroups[i]) {

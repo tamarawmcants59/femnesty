@@ -283,7 +283,17 @@ export class HubCreateComponent implements OnInit {
     if (data.response == true)
       this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
   }
+   formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
   public createHub() {
     if (this.postform.valid) {
       /*console.log(this.postform.value.type);
@@ -375,6 +385,14 @@ export class HubCreateComponent implements OnInit {
             userValue.lat = lat;
             userValue.lng = lng;
           }
+          if(userValue.date)
+          {
+          userValue.date=this.formatDate(userValue.date);
+          }
+          if(userValue.recurring_end)
+          {
+          userValue.recurring_end=this.formatDate(userValue.recurring_end);
+          }
           this.hubService.createNewHub(userValue).subscribe(
             data => {
               this.showPostImgDive = false;
@@ -389,7 +407,7 @@ export class HubCreateComponent implements OnInit {
               localStorage.setItem("lat", '');
               localStorage.setItem("lng", '');
               this.postform.reset();
-              this.aboutActiveTab = 'overview';
+              //this.aboutActiveTab = 'overview';
               window.scrollTo(0, 0);
               this.getHubList();
             },
