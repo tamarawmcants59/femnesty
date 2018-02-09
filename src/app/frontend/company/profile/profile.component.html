@@ -9,6 +9,7 @@
             </div>
             <div class="col-md-6 flex-middle">
                 <div class="middlePart">
+
                     <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
                         <input name="myfile1" type="file" (change)="coverFileChangePost($event)" style="display:none;" #fileTypeEdit>
                         <a href="javascript:void(0)" (click)="openFile()" *ngIf="isAdmin">
@@ -91,6 +92,9 @@
 
                         <div class="tab-content">
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
+                                <div *ngIf="isAdmin">
+                                    <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
+                                </div>
                                 <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
                                 <div *ngIf="userPostList?.length > 0">
                                     <div *ngFor="let postData of userPostList">
@@ -340,7 +344,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about_edit'}">
-                                <app-about-company *ngIf="otherProfileDet" [companyID]="otherProfileDet.id" [adminStatus]="adminStatusObj"></app-about-company>
+                                <app-about-company [companyID]="otherProfileDet.id" [adminStatus]="adminStatusObj"></app-about-company>
                             </div>
                             <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
                                 <div class="connectionsPart">

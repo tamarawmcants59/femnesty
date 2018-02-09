@@ -33,6 +33,8 @@ export class CmpEditprofileComponent implements OnInit {
   modalErrorMsg: any;
   public showCoverCrop = false;
   public showProfileCrop = false;
+  public isAdmin:boolean=false;
+  public isSuperAdmin:boolean=false;
   croppedImage: any = '';
   coverCroppedImage: any = '';
   public editSubAdminId: string = '';
@@ -48,7 +50,7 @@ export class CmpEditprofileComponent implements OnInit {
     company_mission: '',
     company_vission: ''
   };
-
+  public adminStatusObj:object ={};
   returnUrl: string;
   errorMsg: string = '';
   errorFriendrMsg: string = '';
@@ -335,6 +337,8 @@ export class CmpEditprofileComponent implements OnInit {
   }
 
   public getUserDetails() {
+    
+
     const loginUserId = localStorage.getItem("loginUserId");
     localStorage.setItem("groupAdmin", loginUserId);
     if (loginUserId != '') {
@@ -352,11 +356,13 @@ export class CmpEditprofileComponent implements OnInit {
               this.autocompleteSettings['inputString'] = details.UserDetails[0].address;
               this.com_website = details.UserDetails[0].website;
               //alert(this.com_website);
+              this.isAdmin=true;
+              this.isSuperAdmin=true;
               this.cmpId = details.UserDetails[0].id;
               this.getSubadminListByAdmin();
             } else if (details.UserDetails[0].user_type == 'CSA') {
               this.cmpId = details.UserDetails[0].company_uid;
-
+              this.isAdmin=true;
               this.dataService.getUserDetById({ "id": parseInt(this.cmpId) }).subscribe(data => {
                 if (data.Ack == "1") {
                   this.publicCmpDet = data.UserDetails[0];
@@ -366,6 +372,7 @@ export class CmpEditprofileComponent implements OnInit {
 
                 });
             }
+            this.adminStatusObj ={'isAdmin':this.isAdmin,'isSuperAdmin':this.isSuperAdmin};
             this.groupPostDetData = { activitytype: '3', activityid: this.cmpId };
           } else {
             this.router.navigate(['/user/profile']);
