@@ -45,6 +45,7 @@ export class EditprofileComponent implements OnInit {
   public userFrndList = [];
   public previousUrl: string;
   public userRequestFrndList = [];
+  public userSearchFrndList =[];
 
   prfImageData: any;
   coverImageData: any;
@@ -167,6 +168,7 @@ export class EditprofileComponent implements OnInit {
     this.getUserPostDetails();
     this.getConnectionList();
     this.getPendingFrndList();
+    this.submitSearchUser();
   }
   public calculateAge(birthday) {
     var today = new Date();
@@ -586,6 +588,24 @@ export class EditprofileComponent implements OnInit {
       });
   }
 
+  public submitSearchUser() {
+    /*const loginUserId = localStorage.getItem("loginUserId");
+      var result,
+      userValue = {'suname':'','user_id':loginUserId};
+      this.dataService.searchFrndListByName(userValue).subscribe(
+        data => {
+          if(data.Ack=='1'){
+              //console.log(data.FriendListById);
+              this.userSearchFrndList=data.FriendListById;
+          }else{
+            this.userSearchFrndList=[];
+          }
+        },
+        error => {
+        // alert(error);
+        });*/
+        //console.log(this.userSearchFrndList);
+  }
   /*public checkInputValue(values:Object,inputname):void {
     if(values!=''){
       console.log(values);
