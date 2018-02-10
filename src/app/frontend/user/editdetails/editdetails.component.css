@@ -25,11 +25,12 @@
   background: #f7f7f7;
   border: none;
   box-shadow: none;
-  height: 38px;
+  height: 39px;
   font-size: 12px;
   padding: 6px 15px;
   font-family: 'sanchezregular';
   color: #727272;
+  border: 1px solid #e7e7e7;
 }
 
 .edit-forms h3 {

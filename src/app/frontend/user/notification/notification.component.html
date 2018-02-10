@@ -1,16 +1,14 @@
-<section class="section about-content-area visitingProfile">
+<section class="section section2 about-content-area visitingProfile">
     <div class="container-fluid">
         <div class="row flex-profile">
             <div class="col-md-3 flex-left">
                 <user-sidebar></user-sidebar>
             </div>
-            <div class="col-md-6 flex-middle">
-                <div class="middlePart">
-                	  <div class="notification-wrap">
-                        <h2>Your notification</h2>
-                    </div>
-                </div><br/>
-                <div class="notification-wrap notfi-padding">
+            <div class="col-md-6 flex-middle pd-5">                
+                <div class="notification-wrap new-notifi-box">
+                		 <div class="new-notifi-header">
+                		 	<h2>NOTIFICATIONS</h2> <a href="">SETTINGS</a>    
+                		 </div>
                       <ul>
                           <li *ngFor="let notiData of userNotiList" [ngClass]="{'unread' : notiData.is_view=='0'}">
                               <div class="image-area">
@@ -23,11 +21,27 @@
                               </div>
                               <div class="text-area">
                                   <a href="javascript:void(0)" (click)="go_notification_details(notiData.link,notiData.id)">
-                                    <h4>{{notiData.name}}</h4>
-                                  </a>
-                                  <p class="desc">{{notiData.message}}</p>                                  
+                                    <h4>{{notiData.name}}<span>{{notiData.message}}</span></h4>
+                                    <p class="desc">{{notiData.created_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                                  </a>                                                                 
                               </div>
-                              <p class="time">{{notiData.created_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
+                              <div _ngcontent-c5="" class="notify-right"> 
+							            <a _ngcontent-c5="" class="icondown" href="javascript:void(0)">
+							                <i _ngcontent-c5="" class="icon ion-chevron-down"></i>
+							            </a>
+											<div _ngcontent-c5="" class="post-drop-box">
+							            <div _ngcontent-c5="" class="closed"><a _ngcontent-c5="" href=""><img _ngcontent-c5="" alt="" src="assets/images/cross.png"></a></div>
+												<a _ngcontent-c5="" href="javascript:void(0)" title="Edit">
+							                    Hide Notification
+							               </a>
+							               <a _ngcontent-c5="" href="javascript:void(0)" title="Delete">
+							                    Turn off these notifications
+							               </a>
+							               <a _ngcontent-c5="" href="javascript:void(0)" title="Delete">
+							                    Mark as unread
+							               </a>
+							            </div>
+						       		</div>
                           </li>
                       </ul>
                   </div>

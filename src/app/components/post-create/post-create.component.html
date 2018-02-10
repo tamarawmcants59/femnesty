@@ -74,10 +74,10 @@
                 </ul>
 					 <!--<div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Thoughts Required</div>-->
             </div>
-            <div class="col-md-2">
+           <!-- <div class="col-md-2">
                 <button type="submit" class="btn btn-default">Cancel</button>
-            </div>
-            <div class="col-md-3">
+            </div>-->
+            <div class="col-md-5">
                 <button type="submit" (click)="submitPost(postform.value)" class="btn btn-primary" [disabled]="!postForm.valid">Post</button>
             </div>
         </div>

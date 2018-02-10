@@ -2519,6 +2519,7 @@ background: #fff !important;}
 
 .messagePart ul li {
     margin-bottom: 2px;
+    overflow: hidden;
 }
 
 .messagePart ul li:last-child {
@@ -4301,7 +4302,7 @@ margin-top:30px;
 .contn-box li.friend-box-list .friend-boxImage{ margin-right: 25px}
 .contn-box li.friend-box-list .friend-boxImage a .img{width:105px; height:105px; border-radius: 100%; background-size: cover !important; background-repeat: no-repeat !important; background-position: center center !important;}
 .contn-box li.friend-box-list .friend-boxText h4{}
-.contn-box li.friend-box-list .friend-boxText{text-align:left !important; width:42%; margin-right: 50px}
+.contn-box li.friend-box-list .friend-boxText{text-align:left !important; width:30%; margin-right: 50px}
 .contn-box li.friend-box-list .friend-boxText p{font-size: 16px; color:#585858; margin-bottom: 5px; }
 .contn-box li.friend-box-list .sendmsg a{font-size: 13px; color:#000; text-transform: uppercase; white-space: nowrap;  margin: 7px 0;display: inline-block;}
 
@@ -5686,7 +5687,9 @@ line-height: 31px;padding: 0;left:0}
 .right-social-login li a{margin-top: 15px !important;display: block;}
 .alert-success, .alert-danger{background: none !important;background-image: none;box-shadow: none!important;border: 0;}
 
-
+.feedback-modal{display: none;position: fixed;top:0;left:0;width:100%;height: 100%;background: rgba(0,0,0,.50);z-index: 9999;transition: ease all .1s;}
+.feedback-n.feedhover + .feedback-modal{display: block;}
+.feedback-n,.feedback-from{z-index: 99999;}
 
 /*****************************************/
 
