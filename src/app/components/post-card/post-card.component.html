@@ -217,18 +217,19 @@
                         </div>
                         <div class="right-comment-content">
                             <div class="profTextPart">
-                                <div class="heading" style="width:100%;height:auto;overflow: hidden;">
+                                <div class="heading" style="width:100%;height:auto; position: relative;">
                                     <!--<a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;"></a>-->
                                         <h4 class="commentee-name">{{cmtList.name}}
                                             <span>
                                             <a class="icondown"><i class="icon ion-chevron-down" (click)="toggleSubMainComment(cmtList.id)"></i></a>
                                             </span>
-                                        </h4>
-                                        <div class="post-drop-box" *ngIf="IsShowSubMainCommentAction && IsShowSubMainCommentAction[cmtList.id]">
+                                            <div style="right: 0;" class="post-drop-box" *ngIf="IsShowSubMainCommentAction && IsShowSubMainCommentAction[cmtList.id]">
                                                 <div class="closed"><a (click)="toggleSubMainComment(cmtList.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
                                                 <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>
                                                 <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">Delete</a>
                                             </div>
+                                        </h4>
+                                        
                                     <!--<a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
                                         <i style="color:#BB1926" class="fa fa-trash"></i>
                                     </a>
