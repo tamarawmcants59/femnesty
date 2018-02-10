@@ -50,6 +50,7 @@ export class PostCardComponent implements OnInit {
   public delPostKey: any;
   public delPostData: any;
   IsShowSubCommentAction:any;
+  IsShowSubMainCommentAction:any;
   public blockPostId: any;
   public blockPostType: any;
   public blockPostKey: any;
@@ -108,6 +109,23 @@ export class PostCardComponent implements OnInit {
   ngOnInit() {
 
   }
+  toggleSubMainComment(id){
+    
+    if(!this.IsShowSubMainCommentAction)
+    {
+      this.IsShowSubMainCommentAction=[];
+    }
+    if(this.IsShowSubMainCommentAction[id])
+    {
+      this.IsShowSubMainCommentAction[id]=false;
+    }
+    else
+    {
+      
+      this.IsShowSubMainCommentAction[id]=true;
+    }
+  }
+
   toggleSubComment(id)
   {
     if(!this.IsShowSubCommentAction)
