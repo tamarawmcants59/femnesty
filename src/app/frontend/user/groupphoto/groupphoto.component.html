@@ -1,4 +1,4 @@
-<section class="section about-content-area visitingProfile">
+<section class="section section2 about-content-area visitingProfile">
     <div class="container-fluid">
         <div class="row flex-profile">
             <div class="col-md-3 flex-left">
@@ -6,7 +6,7 @@
                   <app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>
               </div>
             </div>
-            <div class="col-md-6 flex-middle">
+            <div class="col-md-6 flex-middle pd-5">
                 <div class="middlePart">
                     <div class="topPart" [ngStyle]="{'background-image':'url('+groupDetailsData.group_image+')'}">
                       </div>
@@ -46,7 +46,7 @@
             <!--<div class="col-md-3 flex-right">
                   <app-user-prfrsidebar></app-user-prfrsidebar>
             </div>-->
-            <div class="col-md-3" *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)">
+            <div class="col-md-3 flex-right" *ngIf="(groupDetailsData.group_type=='1' || !isJoinGroup)">
                 <app-group-rightbar [groupData]="groupDetailsData" [groupPId]="isGroupId"></app-group-rightbar>
             </div>
         </div>
