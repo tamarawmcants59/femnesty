@@ -43,9 +43,20 @@ export class EditprofileComponent implements OnInit {
   public loginUserDet: any;
   public userPostList = [];
   public userFrndList = [];
+  public filetredFriendList = [];
   public previousUrl: string;
   public userRequestFrndList = [];
   public userSearchFrndList =[];
+  public suggestshow = false;
+  public divshow = true;
+  IsShowTopViewMore = false;
+  IsShowTopViewMore1 = false;
+  public totalserchFrndList = [];
+  searchErrorMessage:any;
+  private connectionsPageSize = 5;
+  private connectionsPageSize1 = 5;
+  public groupMemberList1 = [];
+  public totalmember:number=0;
 
   prfImageData: any;
   coverImageData: any;
@@ -196,6 +207,22 @@ export class EditprofileComponent implements OnInit {
         //console.log(details);
         if (details.Ack == "1") {
           this.userFrndList = details.FriendListById;
+          this.totalmember = this.userFrndList.length;
+          
+          if (this.userFrndList.length > 6) { 
+            this.IsShowTopViewMore1 = true;
+            for (let i = 0; i < this.userFrndList.length; i++) {
+              if (this.groupMemberList1.length < 6) {
+                this.groupMemberList1.push(this.userFrndList[i]);
+              }
+            }
+            //alert(JSON.stringify(this.groupMemberList1))
+          }else { 
+            this.IsShowTopViewMore = false;
+            this.groupMemberList1 = this.userFrndList;
+          }
+
+          //this.userFrndList = details.FriendListById;
         } else {
 
         }
@@ -589,27 +616,135 @@ export class EditprofileComponent implements OnInit {
   }
 
   public submitSearchUser() {
-    /*const loginUserId = localStorage.getItem("loginUserId");
+    const loginUserId = localStorage.getItem("loginUserId");
       var result,
       userValue = {'suname':'','user_id':loginUserId};
       this.dataService.searchFrndListByName(userValue).subscribe(
         data => {
           if(data.Ack=='1'){
+             let searchResult = data.FriendListById.filter(item => item.user_type == 'C' && item.request_type != '2');
+             this.userSearchFrndList=searchResult;
               //console.log(data.FriendListById);
-              this.userSearchFrndList=data.FriendListById;
+              //this.userSearchFrndList=data.FriendListById;
+              //console.log(this.userSearchFrndList);
           }else{
             this.userSearchFrndList=[];
           }
         },
         error => {
         // alert(error);
-        });*/
-        //console.log(this.userSearchFrndList);
+        });
+      
   }
-  /*public checkInputValue(values:Object,inputname):void {
-    if(values!=''){
-      console.log(values);
-      console.log(inputname);
+  
+  searchConnections(value) {
+    this.divshow = true;
+    if (value) {
+      this.IsShowTopViewMore = false;
+      value = value.toLowerCase();
+      let searchResult = this.userSearchFrndList.filter(item => {
+        if (item.name.toLowerCase().search(value) !== -1) {
+          return item;
+        }
+      });
+      if (searchResult && searchResult.length>3) { 
+        this.IsShowTopViewMore = true;
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          if(this.filetredFriendList.length < 3)
+          {
+          this.filetredFriendList.push(searchResult[i]);
+          }
+        }
+        this.totalserchFrndList = searchResult;
+       // alert(JSON.stringify(searchResult.length))
+      }else  if (searchResult && searchResult.length) {
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          this.filetredFriendList.push(searchResult[i]);
+        }
+        this.totalserchFrndList = searchResult;
+      }
+      else {
+        this.IsShowTopViewMore = false;
+        this.filetredFriendList = [];
+        this.searchErrorMessage = "No record found.";
+      }
     }
-  }*/
+    else {
+      this.IsShowTopViewMore = true;
+      this.filetredFriendList = [];
+      this.searchErrorMessage = '';
+    }
+   
+  }
+
+  public divhide(sts){
+    if(sts == 1)
+    {
+      this.suggestshow = false;
+      this.divshow = true;
+    }
+    else{
+      this.suggestshow = true;
+      this.divshow = false;
+    }
+  }
+
+  viewMore() {
+    this.connectionsPageSize = this.connectionsPageSize + 3;
+    this.filetredFriendList = [];
+    if (this.totalserchFrndList.length > this.connectionsPageSize) {
+      this.IsShowTopViewMore = true;
+    }
+    else {
+      this.IsShowTopViewMore = false;
+    }
+    for (let i = 0; i < this.connectionsPageSize; i++) {
+      if (this.totalserchFrndList[i]) {
+        this.filetredFriendList.push(this.totalserchFrndList[i]);
+      }
+
+    }
+  }
+
+  public sendFriendRequest(friend_id) {
+      this.loading = true;
+      this.successMsg='';
+      this.errorMsg='';
+      const loginUserId = localStorage.getItem("loginUserId");
+      let requestJsonData={"user_id": loginUserId, "friend_id": friend_id};
+      this.dataService.sendFrndRequest(requestJsonData).subscribe(data => {
+          this.loading = false;
+          //console.log(data);
+          if(data.Ack == '1'){
+            this.successMsg='Connection request Sent';
+            this.submitSearchUser();
+          }else{
+            this.errorMsg='You have already send the friend request';
+          }
+          //console.log(data);
+          //this.postform.reset();
+        },
+        error => {
+          //alert(error);
+        });
+  }
+
+  viewMore1() {
+    this.connectionsPageSize1 = this.connectionsPageSize1 + 6;
+    this.groupMemberList1 = [];
+    if (this.userFrndList.length > this.connectionsPageSize1) {
+      this.IsShowTopViewMore1 = true;
+    }else {
+      this.IsShowTopViewMore1 = false;
+    }
+    for (let i = 0; i < this.connectionsPageSize1; i++) {
+      if (this.userFrndList[i]) {
+        this.groupMemberList1.push(this.userFrndList[i]);
+      }
+
+    }
+  }
+
 }
