@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 export class NotificationComponent implements OnInit {
   public userNotiList = [];
   public repoUrl='';
+  public IsShowSubMainCommentAction:any;
+
   constructor(
     private dataService: UserService,
     private router: Router
@@ -59,4 +61,17 @@ export class NotificationComponent implements OnInit {
     });
     //alert(id);
   }
+
+  togglenotiList(id){
+    
+    if(!this.IsShowSubMainCommentAction){
+      this.IsShowSubMainCommentAction=[];
+    }
+    if(this.IsShowSubMainCommentAction[id]){
+      this.IsShowSubMainCommentAction[id]=false;
+    }else{
+      this.IsShowSubMainCommentAction[id]=true;
+    }
+  }
+
 }
