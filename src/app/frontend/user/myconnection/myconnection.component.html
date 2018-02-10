@@ -57,7 +57,7 @@
 		            <!--<a class="only-load-more">Load More</a>-->
 		            <ul class="onlineList" *ngIf="totalMyOnlineConList && totalMyOnlineConList.length == 0">
 		                    <li >
-		                            Nothing more to show
+		                            No online Connections
 		                    </li>
 		        
 		                </ul>
@@ -89,7 +89,7 @@
                 <div class="likePart" *ngIf="userFrndList && userFrndList.length == 0">
                     <div class="row">
                         <div class="col-md-10">
-                            <div class="nothing">No connection found</div>
+                            <div class="nothing">No Connection</div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
 			<div class="col-md-3 flex-right">
 				<div class="rightPart">
 					<div class="innerRightPart right-map-details HUB-Dtls">
-						<h2>Search</h2>
+						<h2>SEARCH CONNECTION</h2>
 						<div class="inline-search">
 							<div class="input-group">
 							  <input class="form-control" placeholder="Search" [(ngModel)]="search_group" type="text">

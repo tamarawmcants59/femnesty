@@ -1,3 +1,4 @@
+
 <div [ngClass]="{'feedhover': IsShowFeedForm }" class="feedback-n" >
     <span (click)="openForm()" *ngIf="isShowPlus">
       <i class="fa fa-plus" style="color: red;
@@ -11,6 +12,7 @@
     </a>
   
   </div>
+  <div class="feedback-modal"></div>
   <div class="feedback-from" *ngIf="IsShowFeedForm">
       <div class="alert alert-success" role="alert" *ngIf="successMsg">
           {{successMsg}}
