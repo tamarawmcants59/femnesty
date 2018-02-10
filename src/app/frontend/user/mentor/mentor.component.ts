@@ -32,7 +32,7 @@ becomeMetorContent:any;
     this.form = builder.group({
       name: ['', [
         Validators.required,
-        Validators.pattern('([a-zA-Z])+([a-zA-Z])+'),
+        Validators.pattern('^$|^[A-Za-z\d ]+$'),
         Validators.minLength(3)
       ]],
       email: ['', [
