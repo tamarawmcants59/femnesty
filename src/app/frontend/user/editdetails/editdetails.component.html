@@ -226,11 +226,11 @@
                             <h5>Email Notification Settings</h5>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-12 mb-15">
-                                        <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" >
-                                        <label class="acpt-cond-after" for="styled-checkbox-1">New Connection Request</label>
+                                    <div class="col-md-12 mb-15" *ngFor="let data of accountSettings">
+                                        <input class="styled-checkbox" id="styled-checkbox-{{data.id}}" type="checkbox" (change)="checkChange(data.id,$event.target.checked)">
+                                        <label class="acpt-cond-after" for="styled-checkbox-{{data.id}}">{{data.settings_name}}</label>
                                     </div>
-                                    <div class="col-md-12 mb-15">
+                                    <!-- <div class="col-md-12 mb-15">
                                         <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" >
                                         <label class="acpt-cond-after" for="styled-checkbox-2">Comment on Your Post</label>
                                     </div>
@@ -241,7 +241,7 @@
                                     <div class="col-md-12 mb-15">
                                         <input class="styled-checkbox" id="styled-checkbox-4" type="checkbox">
                                         <label class="acpt-cond-after" for="styled-checkbox-4">Acceptance/decline of Hub invitation</label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

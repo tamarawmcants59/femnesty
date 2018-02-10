@@ -807,7 +807,6 @@ export class HubsComponent implements OnInit {
           this.isShowPicker = false;
           this.loading = true;
           let data;
-          debugger;
           if (hubDetails.type == "O") {
             data = { hub_date: this.editDate, id: this.hubDetails.id, user_id: hubDetails.user_id, start_time: this.start_time, end_time: this.end_time };
           }
@@ -837,7 +836,6 @@ export class HubsComponent implements OnInit {
         this.category_id = '';
         this.isShowPicker = true;
         if (hubDetails.type == 'O') {
-          debugger;
           if (hubDetails[16])
             this.editDate = new Date(hubDetails[16]);
           else

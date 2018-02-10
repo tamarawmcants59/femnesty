@@ -20,7 +20,6 @@ export class OtherAllphotoComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.getUserDetails();
   }
   viewMore() {

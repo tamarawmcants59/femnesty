@@ -123,6 +123,10 @@ export class UserService {
     return this.apiService.get(`/enrichment/apparticledetailsbyslug/${slug}`)
       .map(data => data);
   }
+  getEmailNotficationSettings() {
+    return this.apiService.get(`/enrichment/app_noti_settings`)
+      .map(data => data);
+  }
 
   apparticleWithCat() {
     return this.apiService.get(`/enrichment/apparticleWithCat`)
