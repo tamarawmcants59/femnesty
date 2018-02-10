@@ -12,16 +12,22 @@
 
                     <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_img+')'}">
                         <input name="myfile1" type="file" (change)="coverFileChangePost($event)" style="display:none;" #fileTypeEdit>
-                        <a href="javascript:void(0)" (click)="openFile()" *ngIf="isAdmin">
+                        <!-- <a href="javascript:void(0)" (click)="openFile()" *ngIf="isAdmin">
                             <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
+                        </a> -->
+                        <a href="javascript:void(0)" *ngIf="isAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
+                            	<img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;margin-right:-22px" />
                         </a>
                     </div>
                     <div class="profPhoto">
 
                         <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.profile_image+')'}">
                             <input name="myfile" type="file" (change)="fileChangePost($event)" style="display:none;" #profileImageType>
-                            <a href="javascript:void(0)" (click)="openProFile()" *ngIf="isAdmin">
+                            <!-- <a href="javascript:void(0)" (click)="openProFile()" *ngIf="isAdmin">
                                 <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
+                            </a> -->
+                             <a href="javascript:void(0)" (click)="openUpdateProModal(updateProfilePictureModal)" *ngIf="isAdmin">
+                                    <img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;margin-right:39px" />
                             </a>
                         </div>
                     </div>
@@ -364,3 +370,73 @@
         </div>
     </div>
 </section>
+
+<ng-template class="crop-modal" #updateCoverPictureModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Change Image</h4>
+            <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
+                {{modalErrorMsg}}
+            </div>
+            <div class="img result" *ngIf="!IsShowCropperCoverImage">
+                <img [src]="otherProfileDet?.cover_img" style="width:100%; height:100%">
+            </div>
+            <div class="inner-bg">
+                <div class="icon-change">
+                    <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+                        <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
+                    </div>
+                </div>
+            </div>
+            <div class="upload-demo">
+                <div class="upload-demo-wrap">
+                    <div id="upload-demo"></div>
+                </div>
+            </div>
+    
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>
+            <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+            <button type="button" class="btn modal-btn-black btn-default" (click)="UpdateCoverImg()">Change</button>
+        </div>
+    </ng-template>
+
+    <ng-template #updateProfilePictureModal let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Image</h4>
+                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
+                    {{modalErrorMsg}}
+                </div>
+                <div class="img result" *ngIf="!IsShowCropperProfileImage">
+                    <img [src]="otherProfileDet?.profile_image" style="width:100%; height:100%">
+                </div>
+                <div class="inner-bg">
+                    <div class="icon-change">
+                        <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+                            <input type="file" id="upload" accept="image/*" (change)="cropperChange($event)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="upload-demo">
+                    <div class="upload-demo-wrap">
+                        <div id="upload-demo"></div>
+                    </div>
+                </div>
+        
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-btn-primary" (click)="resetPro()">Remove Image</button>
+                <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+                <button type="button" class="btn modal-btn-black btn-default" (click)="UpdateProImg()">Change</button>
+            </div>
+        </ng-template>

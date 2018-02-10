@@ -29,5 +29,48 @@
 .grp-rqsts ul li .btn.btn-default{background: #373737; box-shadow:none; text-shadow:none; color:#fff; border-radius:50px; border: 0}
 .grp-rqsts ul li .btn.btn-default:hover{background: #000; transition: ease all 0.2s}
 
+.demo-wrap {
+    border-bottom: 1px solid #ddd;
+    padding-top: 20px;
+  }
+  
+  .upload-demo .upload-demo-wrap,
+  .upload-demo .upload-result,
+  .upload-demo.ready .upload-msg {
+    display: none;
+  }
+  
+  .upload-msg {
+    text-align: center;
+    padding: 50px;
+    font-size: 22px;
+    color: #aaa;
+    width: 260px;
+    margin: 50px auto;
+    border: 1px solid #aaa;
+  }
+  
+  .upload-demo.ready .upload-demo-wrap {
+    display: block;
+  }
+  
+  .upload-demo-wrap {
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .demo-wrap .container {
+    padding-bottom: 10px;
+  }
+  
+  .grid {
+    width: 100%;
+    max-width: 1140px;
+    min-width: 755px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
 
 

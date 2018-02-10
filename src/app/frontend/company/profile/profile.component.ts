@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CompanyService } from "../company.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 declare var google: any;
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,20 +16,26 @@ export class ProfileComponent implements OnInit {
   public isloginUserId: any;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
+  public IsShowCropperProfileImage = false;
   public otherProfileDet: any;
   public otherProfileId: any;
   public website: any;
   public mobile_number: any;
   public state: any;
   public city: any;
+  public showProfileCrop = false;
   public bio: any;
+  croppedImage: any = '';
+  $uploadCrop: any;
   public company_mission: any;
   public company_vission: any;
+  public IsShowCropperCoverImage = false;
   public address: any;
   public lat: 0;
   public lng: 0;
   public isAdmin = false;
   public isSuperAdmin = false;
+  modalErrorMsg: any;
   public isloginUser: any;
   prfCropperSettings: CropperSettings;
   coverCropperSettings: CropperSettings;
@@ -47,7 +56,7 @@ export class ProfileComponent implements OnInit {
   public isFollowRequest = true;
   public showImgDive: boolean = false;
   public showCoverImgDive: boolean = false;
-  public adminStatusObj:object ={};
+  public adminStatusObj: object = {};
   public groupPostDetData: object = {};
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   @ViewChild("profileImageType") profileImageType: ElementRef;
@@ -56,7 +65,8 @@ export class ProfileComponent implements OnInit {
     private dataService: CompanyService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isloginUser = localStorage.getItem("isLoggedIn");
@@ -97,8 +107,136 @@ export class ProfileComponent implements OnInit {
     //this.coverCropperSettings.minHeight = 100;
     this.coverImageData = {};
   }
+  cropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperProfileImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
+  resetPro() {
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperProfileImage = false;
+  }
   openFile() {
     this.fileTypeEdit.nativeElement.click();
+  }
+  resetCover() {
+
+    $(".upload-demo-wrap").hide();
+    this.IsShowCropperCoverImage = false;
+  }
+  public UpdateCoverImg() {
+    debugger;
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          "id": that.otherProfileDet.id,
+          "cover_img": resp
+        };
+        that.dataService.updateImgService(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.showImgDive = false;
+            that.getCompanyDetailsByname();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+    });
+  }
+  coverCropperChange(event) {
+    $(".upload-demo-wrap").show();
+    this.IsShowCropperCoverImage = true;
+    const image: any = new Image();
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
+      $('.upload-demo').addClass('ready');
+      image.src = loadEvent.target.result;
+      that.$uploadCrop.croppie('bind', {
+        url: image.src
+      }).then(function () {
+        console.log('jQuery bind complete');
+      });
+    };
+    myReader.readAsDataURL(file);
+  }
+  openUpdateProModal(updateProfilePictureModal) {
+    this.modalErrorMsg = '';
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 200,
+          height: 200,
+          type: 'circle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalService.open(updateProfilePictureModal);
+  }
+  public UpdateProImg() {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const that = this;
+    this.$uploadCrop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function (resp) {
+      if (resp == 'data:,') {
+        that.loading = false;
+        that.modalErrorMsg = 'please upload an image to save.';
+      }
+      else {
+        const uploadJsonData = {
+          "id": that.otherProfileDet.id,
+          "profile_image": resp
+        };
+        that.dataService.updateImgService(uploadJsonData)
+          .subscribe(
+          data => {
+            that.loading = false;
+            that.showImgDive = false;
+            that.getCompanyDetailsByname();
+            window.location.reload();
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+    });
+
+
   }
   UploadPrfImg() {
     this.loading = true;
@@ -122,6 +260,29 @@ export class ProfileComponent implements OnInit {
   }
   openProFile() {
     this.profileImageType.nativeElement.click();
+  }
+  openUpdateCoverProModal(updateCoverPictureModal) {
+
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    this.modalErrorMsg = '';
+    // this.showCoverCrop = false;
+    // this.coverCroppedImage = '';
+    // this.modalService.open(updateCoverPictureModal);
+    setTimeout(() => {
+      this.$uploadCrop = $('#upload-demo').croppie({
+        viewport: {
+          width: 615,
+          height: 195,
+          type: 'rectangle'
+        },
+        enableExif: true
+      });
+    }, 100);
+    this.showProfileCrop = false;
+    this.croppedImage = '';
+    this.modalService.open(updateCoverPictureModal);
   }
   ngOnInit() {
     let autocomplete = new google.maps.places.Autocomplete(
@@ -518,15 +679,15 @@ export class ProfileComponent implements OnInit {
             //this.isloginUserId = localStorage.getItem("loginUserId");
             //if (data.CompanyDetails[0].is_admin == "1" ) {
             if (data.CompanyDetails[0].company_uid == this.isloginUserId) {
-              this.isloginUserId=data.CompanyDetails[0].id;
+              this.isloginUserId = data.CompanyDetails[0].id;
               this.isAdmin = true;
               this.isSuperAdmin = true;
-            }else if(data.CompanyDetails[0].id == this.isloginUserId){
+            } else if (data.CompanyDetails[0].id == this.isloginUserId) {
               this.isAdmin = true;
-            }else{
+            } else {
               this.isAdmin = false;
             }
-            this.adminStatusObj ={'isAdmin':this.isAdmin,'isSuperAdmin':this.isSuperAdmin}; 
+            this.adminStatusObj = { 'isAdmin': this.isAdmin, 'isSuperAdmin': this.isSuperAdmin };
             this.otherProfileDet = data.CompanyDetails[0];
             //console.log(this.otherProfileDet.id);
             this.otherProfileId = this.otherProfileDet.id;
