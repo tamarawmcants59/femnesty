@@ -55,7 +55,7 @@
 	                					</span>
                             </div>
                         </div>-->
-                        <ul class="connectionlist" *ngIf="userFrndList?.length > 0">
+                        <ul class="connectionlist new-connection-list" *ngIf="userFrndList?.length > 0">
                             <li *ngFor="let friendData of userFrndList">
                                 <div class="image-area">
                                     <a [routerLink]="['/user/profile',friendData.display_name]">
@@ -68,6 +68,7 @@
                                     <a [routerLink]="['/user/chat',friendData.friend_id]">
                                         <p>Chat</p>
                                     </a>
+                                    <div _ngcontent-c0="" class="time">5.43PM</div>
                                     <!--<p>You: Stop screming Susan!</p>-->
                                 </div>
                             </li>
