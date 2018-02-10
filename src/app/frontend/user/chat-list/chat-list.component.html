@@ -14,13 +14,13 @@
                     <div class="notification-wrap new-conversations-section">
                     		<h2>MY CONVERSATIONS</h2>
                         <ul>
-                            <li *ngFor="let chatHead of chatHeads" style="cursor:pointer">
-                                <div class="image-area">
+                            <li *ngFor="let chatHead of chatHeads; let key = index" style="cursor:pointer">
+                                <div class="image-area" *ngIf="(key < 6 || showLi)">
                                     <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
                                         <img  *ngIf="chatHead.userDetails" src="{{chatHead.userDetails.image_url}}" style="width:58px" alt="" />
                                     </div>
                                 </div>
-                                <div class="text-area">
+                                <div class="text-area" *ngIf="(key < 6 || showLi)">
                                     <a [routerLink]="['/user/chat',chatHead.from_user_id]">
                                         <h4 *ngIf="chatHead.userDetails">{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
                                     </a>
@@ -28,9 +28,9 @@
                                     <p class="desc" *ngIf="chatHead.message.file">
                                         Sent you a file
                                     </p>
-                                    <div style="display:block">
+                                    <!--<div style="display:block">
                                         <a *ngIf="chatHead.message.file" download href="{{chatHead.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
-                                    </div>
+                                    </div>-->
                                     
                                     <p class="time">{{chatHead.created | timeAgo}}</p>
                                 </div>
@@ -39,7 +39,7 @@
                                 <p>No message found</p>
                             </li> 
                         </ul>
-								<a href="" class="only-load-more">Load More</a>
+                        <a (click)="show_more()" class="only-load-more">Load More</a>
                     </div>
                 </div>
             </div>

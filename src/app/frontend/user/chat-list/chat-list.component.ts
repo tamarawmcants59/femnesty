@@ -12,6 +12,7 @@ import { UserService } from '../../user/user.service';
 export class ChatListComponent implements OnInit {
   chatHeads: any[];
   userFrndList = [];
+  public showLi:boolean=false;
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   constructor(private db: AngularFirestore, private userService: UserService) { }
 
@@ -21,12 +22,43 @@ export class ChatListComponent implements OnInit {
   }
 
   getUnreadMessages() {
+    /*const db_chat = firebase.firestore();
+    //const citiesRef = this.db.collection("Messages");
+    const queryChat =db_chat.collection("Messages").orderBy('created').get()
+    .then(function(querySnapshot) {
+      
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            //console.log(doc.id, " => ", doc.data());
+            console.log(doc.id, " => ", doc.data());
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });*/
+
+    /*$scope.empArray = Object.keys($scope.employees)
+    .map(function (value, index) {
+        return { joinDate: new Date(value), values: $scope.employees[value] }
+    }
+    );*/
+    /*const queryChat = this.db.collection("Messages", ref => {
+      return ref.where('to_user_id', '==', this.loginUserId).orderBy("created", "desc");
+       //ref.orderBy('created');
+    });*/
+    //console.log(queryChat);
     var newArray = [];
     const messages = this.db.collection('Messages', ref => {
       return ref.where('to_user_id', '==', this.loginUserId);
+       //ref.orderBy('created');
     }).snapshotChanges().map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data();
+        /*const data1 = action.payload.doc.data();
+        const data2 = Object.keys(data1).map(function (value, index) {
+            return { created: new Date(value), values: data1[value] }
+        });
+        console.log(data2);*/
         var isFound = false;
         var index;
         if (newArray.length > 0) {
@@ -36,6 +68,8 @@ export class ChatListComponent implements OnInit {
               index = i;
               break;
             }
+            //console.log(isFound);
+            //console.log(index);
           }
           if (isFound) {
             if (index) {
@@ -68,7 +102,7 @@ export class ChatListComponent implements OnInit {
   fillUserDetails() {
     this.chatHeads.map(ch => {
       this.userService.getUserDetById({ id: ch.from_user_id }).subscribe(res => {
-        console.log(res);
+        //console.log(res);
         ch['userDetails'] = res.UserDetails[0];
       });
     });
@@ -91,5 +125,9 @@ export class ChatListComponent implements OnInit {
 
         });
     }
+  }
+
+  public show_more(){
+    this.showLi = true;
   }
 }
