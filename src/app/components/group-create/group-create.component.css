@@ -426,3 +426,15 @@ ng4geo-autocomplete.auto-text-input input {
   margin: 0 auto;
   overflow: hidden;
 }
+@media (min-width: 767px) {
+	.modal-body{
+		padding:10px !important;
+	}
+	.modal-body .img{
+		height: auto !important;
+	}
+.img{
+		height: auto !important;
+		margin-bottom: 0;
+  }
+}

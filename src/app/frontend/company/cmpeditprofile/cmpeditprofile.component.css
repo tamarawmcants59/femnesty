@@ -1,6 +1,5 @@
 .result {
-    margin-top: 30px;
-    border: 1px solid rgba(125,125,125,0.6);
+   
     display: inline-block;
     padding: 1px;
 }
@@ -522,4 +521,17 @@ background-size: cover;
 
 .profPhoto .img .inner-bg i {
   font-size: 40px
+}
+
+@media (min-width: 767px) {
+	.modal-body{
+		padding:10px !important;
+	}
+	.modal-body .img{
+		height: auto !important;
+	}
+.img{
+		height: auto !important;
+		margin-bottom: 0;
+  }
 }
