@@ -10,7 +10,7 @@
 			<div class="col-md-6 flex-middle pd-5">
 				<div class="middlePart connection-middle">
 					<div class="connectionsPart new-connection-request">
-               <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList?.length > 0">
+               <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList && userRequestFrndList?.length > 0">
                 <!--<div class="row" *ngIf="(reqSuccessMsg != '')">
                     <div class="alert alert-success" role="alert" *ngIf="(reqSuccessMsg != '')">
                             {{reqSuccessMsg}}
@@ -21,8 +21,8 @@
                             {{reqErrorMsg}}
                     </div>
                 </div>-->
-                <h2 *ngIf="userRequestFrndList?.length > 0">CONNECTION REQUESTS</h2>
-                <ul class="contn-box" *ngIf="userRequestFrndList?.length > 0">
+                <h2 *ngIf="userRequestFrndList && userRequestFrndList?.length > 0">CONNECTION REQUESTS</h2>
+                <ul class="contn-box" *ngIf="userRequestFrndList && userRequestFrndList?.length > 0">
                     <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
                             <div class="friend-boxImage">
                             <a [routerLink]="['/user/profile',friendData.display_name]">
@@ -44,7 +44,7 @@
 					</div>
 					<div class="online-connerction">
 		            <h2>ONLINE CONNECTIONS</h2>
-		            <ul class="onlineList" *ngIf="totalMyOnlineConList.length>0">
+		            <ul class="onlineList" *ngIf="totalMyOnlineConList && totalMyOnlineConList.length>0">
 		                <li *ngFor="let friendData of totalMyOnlineConList">
 		                    <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
 		                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
@@ -55,7 +55,7 @@
 		            </ul>
 		            <a class="only-load-more" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">Load More</a>
 		            <!--<a class="only-load-more">Load More</a>-->
-		            <ul class="onlineList" *ngIf="totalMyOnlineConList.length == 0">
+		            <ul class="onlineList" *ngIf="totalMyOnlineConList && totalMyOnlineConList.length == 0">
 		                    <li >
 		                            Nothing more to show
 		                    </li>
@@ -66,7 +66,7 @@
 					
 					<div class="connectionsPart all-connection-new">    
             <h2>ALL CONNECTIONS</h2>
-            <ul class="contn-box" *ngIf="totalMyConList?.length > 0">
+            <ul class="contn-box" *ngIf="totalMyConList && totalMyConList?.length > 0">
                 <li class="friend-box-list" *ngFor="let friendData of totalMyConList">
                     <div class="friend-boxImage">
                       <a [routerLink]="['/user/profile',friendData.display_name]">
@@ -86,7 +86,7 @@
             </ul>
             <a class="view-more-down" style="margin-bottom: 0" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">Load More</a>
             <div class="connections">
-                <div class="likePart" *ngIf="userFrndList.length == 0">
+                <div class="likePart" *ngIf="userFrndList && userFrndList.length == 0">
                     <div class="row">
                         <div class="col-md-10">
                             <div class="nothing">No connection found</div>
@@ -116,7 +116,7 @@
 
           <div class="innerRightPart latest-article">
             <h2>Latest Articles</h2>
-            <div *ngIf="latestArticles?.length > 0">
+            <div *ngIf="latestArticles && latestArticles?.length > 0">
             <div class="hubMet hubMet2" *ngFor="let articleData of latestArticles">
                  <a [routerLink]="['/articles/details',articleData.slug]">
                       <div class="img" [ngStyle]="{'background-image':'url('+articleData.image_url+')'}"></div>
