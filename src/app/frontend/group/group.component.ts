@@ -75,7 +75,7 @@ export class GroupComponent implements OnInit {
   public editAbtActiveTab: any;
   public form: FormGroup;
 public suggestshow = false;
-public divshow = true;
+public divshow = false;
 public groupMemberList1 = [];
 public totalgrupmember = [];
 public totalmember:number=0;
@@ -230,16 +230,61 @@ public invitediv = '';
       else {
         this.IsShowTopViewMore = false;
         this.filetredFriendList = [];
-        this.searchErrorMessage = "No record found.";
+        this.searchErrorMessage = "No connections found.";
       }
     }
     else {
+      this.divshow = false;
       this.IsShowTopViewMore = true;
       this.filetredFriendList = [];
       this.searchErrorMessage = '';
     }
    
   }
+
+  searchFrndConnections(value) {
+    this.divshow = true;
+    if (value) {
+      this.IsShowTopViewMore = false;
+      value = value.toLowerCase();
+      let searchResult = this.userFrndList.filter(item => {
+        if (item.name.toLowerCase().search(value) !== -1) {
+          return item;
+        }
+      });
+      if (searchResult && searchResult.length>3) { 
+        this.IsShowTopViewMore = true;
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          if(this.filetredFriendList.length < 3)
+          {
+          this.filetredFriendList.push(searchResult[i]);
+          }
+        }
+        this.totalserchFrndList = searchResult;
+       // alert(JSON.stringify(searchResult.length))
+      }else  if (searchResult && searchResult.length) {
+        this.filetredFriendList = [];
+        for (var i = 0; i < searchResult.length; i++) {
+          this.filetredFriendList.push(searchResult[i]);
+        }
+        this.totalserchFrndList = searchResult;
+      }
+      else {
+        this.IsShowTopViewMore = false;
+        this.filetredFriendList = [];
+        this.searchErrorMessage = "No connections found.";
+      }
+    }
+    else {
+      this.divshow = false;
+      this.IsShowTopViewMore = true;
+      this.filetredFriendList = [];
+      this.searchErrorMessage = '';
+    }
+   
+  }
+
   acceptReject(status) {
     this.loading = true;
     const data = { "id": this.actionId, "request_type": status };

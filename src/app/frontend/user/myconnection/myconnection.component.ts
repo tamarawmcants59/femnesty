@@ -61,6 +61,7 @@ public search_group = '';
  private myListPageSize =5;
  private myListOnPageSize =5;
 public errorMsg:any;
+public  userRequArr=[];
 
 public currentFireUserId: string;
 public onlineUserList1 = [];
@@ -289,8 +290,7 @@ public acceptFriendRequest(request_id) {
               }
             }
 
-          }
-          else {
+          }else {
             this.IsShowMyViewMoreOn = false;
             this.totalMyOnlineConList = this.onlineUserList1;
           }
@@ -335,6 +335,8 @@ public acceptFriendRequest(request_id) {
 
   public getPendingFrndList(){
     const loginUserId = localStorage.getItem("loginUserId");
+    //this.userRequArr=[];
+    let viewNotiIdStr='';
     if(loginUserId!=''){
         let dataUserDet ={
           "user_id": loginUserId
@@ -344,11 +346,22 @@ public acceptFriendRequest(request_id) {
               let details=data;
               if (details.Ack=="1") {
                   this.userRequestFrndList = details.PendingFriendListById;
+                  /*this.userRequestFrndList.forEach(element => {
+                      if(element.id!=''){
+                        //this.userRequArr.push(element.id);
+                        viewNotiIdStr+=element.id+',';
+                      }
+                  });
+                  if(viewNotiIdStr!=''){
+                    this.dataService.updateViewNotiById({'ids':viewNotiIdStr}).subscribe(data => {
+                      },
+                      error => {
+                      }); 
+                  }*/
               }
           },
           error => {
-          }
-        ); 
+          }); 
       }else{
       }
   }

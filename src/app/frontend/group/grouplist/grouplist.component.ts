@@ -40,7 +40,7 @@ export class GrouplistComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.router.events.subscribe(event => {
+    /*this.router.events.subscribe(event => {
       if (event.constructor.name === "ResolveStart") {
         const eventObj: any = event;
         const self = this;
@@ -55,7 +55,7 @@ export class GrouplistComponent implements OnInit {
 
 
       }
-    });
+    });*/
     this.activatedRoute.params.subscribe((params: Params) => {
       this.aboutActiveTab = params['slug_name'];
       //console.log(this.bookSlugName);

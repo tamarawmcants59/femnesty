@@ -73,6 +73,9 @@ export class EditprofileComponent implements OnInit {
     private modalService: NgbModal,
   ) {
     //super();
+    this.route.params.subscribe((params: Params) => {
+      this.activeTab = params['type'];
+    });
     const getUserDet = localStorage.getItem("currentUser");
     this.loginUserDet = JSON.parse(getUserDet);
     this.prfCropperSettings = new CropperSettings();
