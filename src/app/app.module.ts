@@ -46,6 +46,15 @@ const APP_COMPONENTS = [
   FrontendAppFooter
 ];
 
+/*const config = {
+  apiKey: 'AIzaSyCBG0msyUgcLXPjSptsr-z6-wfPq9_fThM',
+  authDomain: 'femnesty-natit.firebaseapp.com',
+  databaseURL: 'https://femnesty-natit.firebaseio.com',
+  projectId: 'femnesty-natit',
+  storageBucket: 'femnesty-natit.appspot.com',
+  messagingSenderId: '833178589421'
+};*/
+
 const config = {
   apiKey: 'AIzaSyCBG0msyUgcLXPjSptsr-z6-wfPq9_fThM',
   authDomain: 'femnesty-natit.firebaseapp.com',
@@ -54,6 +63,7 @@ const config = {
   storageBucket: 'femnesty-natit.appspot.com',
   messagingSenderId: '833178589421'
 };
+
 firebase.initializeApp(config);
 
 // Import routing module

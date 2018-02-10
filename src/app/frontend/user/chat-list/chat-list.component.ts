@@ -24,9 +24,9 @@ export class ChatListComponent implements OnInit {
   getUnreadMessages() {
     /*const db_chat = firebase.firestore();
     //const citiesRef = this.db.collection("Messages");
-    const queryChat =db_chat.collection("Messages").orderBy('created').get()
+    const queryChat =db_chat.collection("Messages").where('to_user_id', '==', this.loginUserId).get()
     .then(function(querySnapshot) {
-      
+      //console.log(querySnapshot);
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             //console.log(doc.id, " => ", doc.data());
@@ -52,13 +52,14 @@ export class ChatListComponent implements OnInit {
       return ref.where('to_user_id', '==', this.loginUserId);
        //ref.orderBy('created');
     }).snapshotChanges().map(actions => {
+
       return actions.map(action => {
         const data = action.payload.doc.data();
         /*const data1 = action.payload.doc.data();
         const data2 = Object.keys(data1).map(function (value, index) {
             return { created: new Date(value), values: data1[value] }
         });
-        console.log(data2);*/
+        console.log(data);*/
         var isFound = false;
         var index;
         if (newArray.length > 0) {

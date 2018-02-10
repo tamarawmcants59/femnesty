@@ -187,8 +187,9 @@
                                             </li>
                                             <a class="view-more-down" style="margin:20px 0 0" href="javascript:void(0)" *ngIf="IsShowTopViewMore1" (click)="viewMore1()">Show More</a>
                                         </ul>
-                                        <h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length>0">SUGGESTED CONNECTIONS<span *ngIf="suggestshow && filetredFriendList.length>0" (click)="divhide(1)">SHOW</span><span *ngIf="!suggestshow && filetredFriendList.length>0" (click)="divhide(2)">HIDE</span></h3>
-                                        <h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>
+                                        <h3 style="margin-top: 0px;" *ngIf="divshow">SUGGESTED CONNECTIONS<span *ngIf="suggestshow && filetredFriendList.length>0" (click)="divhide(1)">SHOW</span><span *ngIf="!suggestshow && filetredFriendList.length>0" (click)="divhide(2)">HIDE</span></h3>
+                                        <div class="nothing" *ngIf="searchErrorMessage" style="padding-bottom: 50px;"> No connections found.</div>
+                                        <!--<h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>-->
                                         <!-- <ul class="friend-box" *ngIf="filetredFriendList?.length > 0">
                                             <li class="friend-box-list" *ngFor="let joinFrnd of filetredFriendList;let i=index">
                                                 <div class="friend-boxImage">
@@ -210,7 +211,7 @@
                                             <li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
                                                	<div class="media-left">
                                                     <a [routerLink]="['/user/profile',joinFrnd.display_name]">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
+                                                        <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}" style="height: 62px !important;"></div>
                                                     </a>
                                                 </div>
                                                 <div class="media-body media-middle">
@@ -378,7 +379,62 @@
                             </div>
                             <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
                                 <div class="connectionsPart">
-                                    <div class="connections">
+                        <div class="connections invite-member-new">
+                            
+                            <h3 style="margin-top: 0px;">INVITE FRIEND TO JOIN GROUP</h3>
+                            <div class="row">
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
+                                        [(ngModel)]="searchFrnduName" (ngModelChange)="searchFrndConnections($event)">
+                                </div>
+                            </div>
+                            <h3 style="margin-top: 0px;">MEMBERS <span> {{groupMemberList1?.length}} ATTENDANTS</span></h3>
+                            <ul class="contn-box" *ngIf="groupMemberList1?.length > 0">
+                                <li class="friend-box-list" *ngFor="let friendData of groupMemberList1">
+                                    <div class="friend-boxImage">
+                                        <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
+                                                <div class="img" [ngStyle]="{'background-image':'url('+friendData?.profile_image+')'}" style="width:70px;height:75px;"></div>
+                                        </a>
+                                    </div>
+                                    <!--<div class="friend-boxText">
+                                        <h4>{{friendData.name}}</h4>
+                                    </div>-->
+                                </li>
+                                <a class="view-more-down" style="margin:20px 0 0" href="javascript:void(0)" *ngIf="IsShowTopViewMore1" (click)="viewMore1()">Show More</a>
+                            </ul>
+                            <h3 style="margin-top: 0px;" *ngIf="divshow">SUGGESTED CONNECTIONS<span *ngIf="suggestshow && filetredFriendList.length>0" (click)="divhide(1)">SHOW</span><span *ngIf="!suggestshow && filetredFriendList.length>0" (click)="divhide(2)">HIDE</span></h3>
+                            <!--<h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>-->
+                            
+                            <ul class="media-list connections" *ngIf="filetredFriendList && filetredFriendList?.length > 0 && divshow">
+                                <li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
+                                        <div class="media-left">
+                                        <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                            <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}" style="height:62px !important"></div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                            <h2>{{joinFrnd.name}}</h2>
+                                        </a>                                                   
+                                    </div>
+                                    <div class="media-right media-middle">
+                                        <div class="button-holder-width">
+                                            <button type="button" class="btn btn-primary"
+                                            (click)="inviteFrndAsGroupMember(joinFrnd.friend_id)">INVITE</button>
+                                            <button class="btn btn-black btn-default">
+                                                HIDE
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <a class="view-more-down" style="margin:20px 0 0;padding-bottom: 50px;" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
+                                <div class="nothing" *ngIf="!IsShowTopViewMore" style="padding-bottom: 50px;">Nothing More To Show</div>
+                            </ul>
+                            <div class="nothing" *ngIf="searchErrorMessage" style="padding-bottom: 50px;"> No connections found.</div>
+                        </div>
+
+
+                                    <!--<div class="connections">
                                         <h3 style="margin-top: 0px;">Invite friend to join group</h3>
                                         <ul class="friend-box" *ngIf="userFrndList?.length > 0">
                                             <li class="friend-box-list" *ngFor="let joinFrnd of userFrndList">
@@ -402,7 +458,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
 
                             </div>

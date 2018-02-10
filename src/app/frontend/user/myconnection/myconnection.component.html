@@ -9,8 +9,8 @@
 			</div>
 			<div class="col-md-6 flex-middle pd-5">
 				<div class="middlePart connection-middle">
-					<div class="connectionsPart new-connection-request">
-               <div class="connectionsPart find-friend-section" *ngIf="userRequestFrndList && userRequestFrndList?.length > 0">
+					<div class="connectionsPart new-connection-request" *ngIf="userRequestFrndList && userRequestFrndList?.length > 0">
+               <div class="connectionsPart find-friend-section" >
                 <!--<div class="row" *ngIf="(reqSuccessMsg != '')">
                     <div class="alert alert-success" role="alert" *ngIf="(reqSuccessMsg != '')">
                             {{reqSuccessMsg}}
@@ -55,12 +55,11 @@
 		            </ul>
 		            <a class="only-load-more" href="javascript:void(0)" *ngIf="IsShowMyViewMoreOn" (click)="viewMoreOnConnection()">Load More</a>
 		            <!--<a class="only-load-more">Load More</a>-->
-		            <ul class="onlineList" *ngIf="totalMyOnlineConList && totalMyOnlineConList.length == 0">
-		                    <li >
-		                            No online Connections
-		                    </li>
-		        
-		                </ul>
+		            <ul class="onlineList" *ngIf="!totalMyOnlineConList || totalMyOnlineConList.length == 0">
+                        <li >
+                                No online Connections
+                        </li>
+                    </ul>
 		                
 		        </div>
 					
@@ -89,7 +88,7 @@
                 <div class="likePart" *ngIf="userFrndList && userFrndList.length == 0">
                     <div class="row">
                         <div class="col-md-10">
-                            <div class="nothing">No Connection</div>
+                            <div class="nothing">No Connections</div>
                         </div>
                     </div>
                 </div>

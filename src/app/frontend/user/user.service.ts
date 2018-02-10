@@ -448,6 +448,10 @@ export class UserService {
   getGroupListByCategoryId(data){
     return this.apiService.post(`/users/appgrouplistbycategory`,data).map(data => data);
   }
+  
+  updateViewNotiById(data){
+    return this.apiService.post(`/users/app_upis_read`,data).map(data => data);
+  }
 
   getLatestHubs(user_id) {
     return this.apiService.put(`/hub/latest_hubs/` + user_id + '/4').map(data => data);
