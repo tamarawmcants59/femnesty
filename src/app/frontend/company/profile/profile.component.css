@@ -87,11 +87,14 @@
 .profPhoto .img .inner-bg i {
   font-size: 40px
 }
-@media (min-width: 768px) {
+@media (min-width: 767px) {
 	.modal-body{
 		padding:10px !important;
 	}
 	.modal-body .img{
 		height: auto !important;
 	}
+	.img{
+		height: auto !important
+  }
 }
