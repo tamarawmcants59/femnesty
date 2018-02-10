@@ -17,9 +17,13 @@
                         <!-- <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openFile()">
                             <i class="fa fa-pencil" style="color: #bd1927;float: right;margin-top: -7px;margin-right: -1px;"></i>
                         </a> -->
-                        <a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
+                        <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
                             	<img src="assets/images/pencil-icon.png" alt="" style="width:17px;height:18px;float:right;margin-right:-22px" />
-                        </a>
+                        </a>-->
+                        <div class="change-img" *ngIf="IsGroupAdmin" (click)="openUpdateCoverProModal(updateCoverPictureModal)">
+                                <i class="fa fa-camera"></i>
+                                <div class="txt">Upload Group Banner Photo</div>
+                            </div>
                     </div>
                     <div class="profDes">
                         <h2 class="text-center">{{groupDetailsData?.group_name}}</h2>
