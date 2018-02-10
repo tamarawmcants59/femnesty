@@ -425,7 +425,6 @@ export class PostCardComponent implements OnInit {
 
   }
   openCommentEditModal(postData1, editcommentModal) { 
-    debugger;
     if(this.IsShowSubCommentAction && this.IsShowSubCommentAction[postData1.id])
     {
       this.IsShowSubCommentAction[postData1.id]=false;

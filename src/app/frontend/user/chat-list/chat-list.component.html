@@ -17,12 +17,12 @@
                             <li *ngFor="let chatHead of chatHeads" style="cursor:pointer">
                                 <div class="image-area">
                                     <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
-                                        <img src="{{chatHead.userDetails.image_url}}" style="width:58px" alt="" />
+                                        <img  *ngIf="chatHead.userDetails" src="{{chatHead.userDetails.image_url}}" style="width:58px" alt="" />
                                     </div>
                                 </div>
                                 <div class="text-area">
                                     <a [routerLink]="['/user/chat',chatHead.from_user_id]">
-                                        <h4>{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
+                                        <h4 *ngIf="chatHead.userDetails">{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
                                     </a>
                                     <p class="desc">{{chatHead.message.text}}</p>
                                     <p class="desc" *ngIf="chatHead.message.file">
@@ -35,7 +35,7 @@
                                     <p class="time">{{chatHead.created | timeAgo}}</p>
                                 </div>
                             </li>
-                            <li *ngIf="chatHeads.length==0">
+                            <li *ngIf="chatHeads && chatHeads.length==0">
                                 <p>No message found</p>
                             </li> 
                         </ul>
@@ -55,7 +55,7 @@
 	                					</span>
                             </div>
                         </div>-->
-                        <ul class="connectionlist new-connection-list" *ngIf="userFrndList?.length > 0">
+                        <ul class="connectionlist new-connection-list" *ngIf="userFrndList && userFrndList?.length > 0">
                             <li *ngFor="let friendData of userFrndList">
                                 <div class="image-area">
                                     <a [routerLink]="['/user/profile',friendData.display_name]">

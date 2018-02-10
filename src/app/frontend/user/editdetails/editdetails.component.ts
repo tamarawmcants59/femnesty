@@ -5,7 +5,8 @@ import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from
 import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { UserService } from "../user.service";
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
-
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-editdetails',
   templateUrl: './editdetails.component.html',
@@ -14,19 +15,20 @@ import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper'
 export class EditdetailsComponent implements OnInit {
   public loginUserDet: any;
   public form: FormGroup;
+  qtd: any = [];
   public editAbtActiveTab: string = '';
   errorMsg: string = '';
   successMsg: string = '';
   public loading = false;
+  public accountSettings: any = [];
+  noti_settings: any;
+  public dobmonth: any;
+  public dobyear: any;
+  public dobdate: any;
 
-
-  public dobmonth:any;
-  public dobyear:any;
-  public dobdate:any;
- 
-  public mobnumber:any;
-  public mobcode:any;
-  validAge=true;
+  public mobnumber: any;
+  public mobcode: any;
+  validAge = true;
   dayList = [];
 
 
@@ -35,7 +37,7 @@ export class EditdetailsComponent implements OnInit {
     private builder: FormBuilder,
     private dataService: UserService,
     private router: Router,
-  ) { 
+  ) {
     this.form = builder.group({
       first_name: ['', [
         Validators.required,
@@ -68,7 +70,7 @@ export class EditdetailsComponent implements OnInit {
         Validators.required,
       ]],
       website: ['', [
-        
+
       ]],
 			/*dob: ['', [
 			   Validators.required,
@@ -124,6 +126,10 @@ export class EditdetailsComponent implements OnInit {
         //Validators.minLength(3)
       ]]
       ,
+      // user_settings: ['', [
+      //   //Validators.required,
+      //   //Validators.minLength(3)
+      // ]],
       password: ['', [
         //Validators.required,
         //Validators.minLength(3)
@@ -134,8 +140,58 @@ export class EditdetailsComponent implements OnInit {
         //Validators.minLength(3)
       ]]
     });
+    this.dataService.getEmailNotficationSettings().subscribe(data => {
+      if (data.Ack == 1) {
+        this.accountSettings = data.NotiSettings;
+      }
+    }, error => {
+      console.log(error);
+    })
   }
+  checkChange(id, event) {
+    if (!this.noti_settings) {
+      this.noti_settings = [];
+    }
+    var isFound = false;
+    var index;
+    if (this.noti_settings.length > 0) {
+      for (var i = 0; i < this.noti_settings.length; i++) {
+        if (this.noti_settings[i] == id) {
+          index = i;
+          isFound = true;
+          break;
+        }
+      }
+    }
+    if (!isFound) {
+      this.noti_settings.push(id);
+    }
+    else {
+      if (index) {
+        //var newValue = this.noti_settings.pop(index);
+        var newArray = [];
+        for (var i = 0; i < this.noti_settings.length; i++) {
+          if (i != index) {
+            newArray.push(this.noti_settings[i]);
+          }
+        }
+        this.noti_settings = newArray;
+      }
+      else if (index == 0) {
+        var newArray = [];
+        for (var i = 0; i < this.noti_settings.length; i++) {
+          if (i != 0) {
+            newArray.push(this.noti_settings[i]);
+          }
+        }
+        this.noti_settings = newArray;
+      }
+    }
 
+
+
+
+  }
   ngOnInit() {
     this.getUserDetails();
     this.dayList.push({ "text": "1", "id": "1" }); this.dayList.push({ "text": "2", "id": "2" }); this.dayList.push({ "text": "3", "id": "3" });
@@ -170,7 +226,7 @@ export class EditdetailsComponent implements OnInit {
     if (IsCheck) {
       var birthday;
       if (type == 'y') {
-        birthday = this.dobyear + "/" + this.dobmonth+ "/" + this.dobdate;
+        birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
       }
       else if (type == 'm') {
         birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
@@ -195,7 +251,7 @@ export class EditdetailsComponent implements OnInit {
     }
 
   }
-  report(closeConfirmModal){ 
+  report(closeConfirmModal) {
     this.modalService.open(closeConfirmModal);
   }
   public getUserDetails() {
@@ -212,7 +268,7 @@ export class EditdetailsComponent implements OnInit {
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
             if (this.loginUserDet.dob) {
-              
+
               var res = this.loginUserDet.dob.split("-");
               this.dobmonth = res[1]
               this.dobyear = res[0]
@@ -220,20 +276,35 @@ export class EditdetailsComponent implements OnInit {
               //alert(res[0])
               //this.loginUserDet.dateOfBirth = new Date(this.loginUserDet.dob);
             }
+
+            if (this.loginUserDet.noti_settings) {
+              var newArray = this.loginUserDet.noti_settings;
+              setTimeout(function () {
+
+                $('[id^="styled-checkbox-"]').each(function () {
+                  var number = this.id.split('_').pop();
+                  number=number.split('-')[2];
+                  if (newArray.includes(number)) {
+                    $(this).prop('checked', true);
+                  }
+
+                });
+
+              }, 100);
+            }
             if (this.loginUserDet.mobile_number) {
               //alert(this.loginUserDet.mobile_number)
               var res = this.loginUserDet.mobile_number.split("-");
-              if(this.mobnumber = res[1])
-              {
+              if (this.mobnumber = res[1]) {
                 this.mobnumber = res[1]
-              this.mobcode = res[0]
+                this.mobcode = res[0]
               }
-              else{
+              else {
                 this.mobnumber = res[0]
                 this.mobcode = '+00';
               }
-              
-              
+
+
             }
           } else {
 
@@ -253,11 +324,18 @@ export class EditdetailsComponent implements OnInit {
     const result = {},
       userValue = this.form.value;
     userValue.id = loginUserId;
-    const dateOfBirth = this.form.value.dobyear + '-' + this.form.value.dobmonth  + '-' + this.form.value.dobdate;
-      const mobile = this.form.value.mobcode + '-' +  this.form.value.mobnumber;
-      userValue.mobile_number = mobile;
-      //alert(JSON.stringify(userValue))
+    const dateOfBirth = this.form.value.dobyear + '-' + this.form.value.dobmonth + '-' + this.form.value.dobdate;
+    const mobile = this.form.value.mobcode + '-' + this.form.value.mobnumber;
+    userValue.mobile_number = mobile;
+    //alert(JSON.stringify(userValue))
     userValue.dob = dateOfBirth;
+    if (this.noti_settings && this.noti_settings.length) {
+      this.noti_settings = this.noti_settings.toString();
+      userValue.noti_settings = this.noti_settings;
+    }
+    else {
+      userValue.noti_settings = "";
+    }
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {

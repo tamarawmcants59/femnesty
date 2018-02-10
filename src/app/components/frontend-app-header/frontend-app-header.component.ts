@@ -248,16 +248,57 @@ export class FrontendAppHeader {
 
   }
   getUnreadMessages() {
+    var newArray=[];
     const messages = this.db.collection('Messages', ref => {
-      return ref.where('to_user_id', '==', this.loginUserId).where('is_read', '==', false);
+      return ref.where('to_user_id', '==', this.loginUserId);
     }).snapshotChanges().map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data();
+        var isFound=false;
+        var index;
+        if(newArray.length>0)
+        {
+          for(var i=0;i<newArray.length;i++)
+          {
+            if(newArray[i].from_user_id==data.from_user_id)
+            {
+              isFound=true;
+              index=i;
+              break;
+            }
+          }
+          if(isFound)
+          {
+             if(index)
+             {
+               newArray[index].message.text=data.message.text;
+             }
+             else if(index==0)
+             {
+              newArray[index].message.text=data.message.text;
+             }
+             
+          }
+          else
+          {
+            newArray.push(data);
+          }
+        }
+        else
+        {
+          newArray.push(data);
+        }
+        
         const id = action.payload.doc.id;
         return { id, ...data };
       });
     });
     messages.subscribe(data => {
+      if(newArray && newArray.length)
+      {
+        this.chatHeads=newArray;
+      }
+      else
       this.chatHeads = data;
       this.fillUserDetails();
     });
