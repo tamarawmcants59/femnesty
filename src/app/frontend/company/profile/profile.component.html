@@ -386,7 +386,7 @@
     <div class="modal-header">
         <h4 class="modal-title">Change Image</h4>
         <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-            <span aria-hidden="true">&times;</span>
+          <!--  <span aria-hidden="true">&times;</span>-->
         </button>
     </div>
     <div class="modal-body">
@@ -394,24 +394,44 @@
             {{modalErrorMsg}}
         </div>
         <div class="img result" *ngIf="!IsShowCropperCoverImage">
-            <img [src]="otherProfileDet?.cover_img" style="width:100%; height:100%">
+            <img [src]="otherProfileDet?.cover_img" class="crop-img">
         </div>
-        <div class="inner-bg">
+        <!--<div class="inner-bg">
             <div class="icon-change">
                 <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
                     <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="upload-demo">
             <div class="upload-demo-wrap">
                 <div id="upload-demo"></div>
             </div>
         </div>
+        <div class="edit-option">
+        	<ul>
+        		<li>
+        			<a><img src="assets/images/move.png" alt="" /></a>
+        			<span>Move</span>
+        		</li>
+        		<li>
+        			<a><img src="assets/images/crop.png" alt="" /></a>
+        			<span>Crop</span>
+        		</li>
+        		<li>
+        			<a href="Javascript:void(0);">
+        			<label style="padding: 0; margin: 0; line-height: 1px;" for="upload1"> <img src="assets/images/photo.png" alt="" /></label>
+        			<input type="file" id="upload1" style="display: none;" accept="image/*" (change)="coverCropperChange($event)" />
+        			</a>
+        			<span>CHANGE IMAGE</span>
+        		</li>
+        	</ul>
+        </div>
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>
+    <a class="remove" (click)="resetCover()">REMOVE IMAGE</a>
+        <!--<button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>-->
         <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
         <button type="button" class="btn modal-btn-black btn-default" (click)="UpdateCoverImg()">Change</button>
     </div>
@@ -431,13 +451,13 @@
         <div class="img result" *ngIf="!IsShowCropperProfileImage">
             <img [src]="otherProfileDet?.profile_image" class="crop-img">
         </div>
-        <div class="inner-bg">
+        <!--<div class="inner-bg">
             <div class="icon-change">
                 <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
                     <input type="file" id="upload" accept="image/*" (change)="cropperChange($event)" />
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="upload-demo">
             <div class="upload-demo-wrap">
                 <div id="upload-demo"></div>
@@ -454,7 +474,10 @@
         			<span>Crop</span>
         		</li>
         		<li>
-        			<a (change)="cropperChange($event)"><img src="assets/images/photo.png" alt="" /></a>
+        			<a href="Javascript:void(0);">
+        			<label style="padding: 0; margin: 0; line-height: 1px;" for="upload"> <img src="assets/images/photo.png" alt="" /></label>
+        			<input type="file" id="upload" style="display: none;" accept="image/*" (change)="cropperChange($event)" />
+        			</a>
         			<span>CHANGE IMAGE</span>
         		</li>
         	</ul>
@@ -462,8 +485,9 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn modal-btn-primary" (click)="resetPro()">Remove Image</button>
-        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn modal-btn-black btn-default" (click)="UpdateProImg()">Change</button>
+    <a class="remove" (click)="resetPro()">REMOVE IMAGE</a>
+        <!--<button type="button" class="btn modal-btn-primary" (click)="resetPro()">Remove Image</button>-->
+        <button type="button" class="btn modal-btn-primary btn-cancel" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-primary" (click)="UpdateProImg()">Change</button>
     </div>
 </ng-template>

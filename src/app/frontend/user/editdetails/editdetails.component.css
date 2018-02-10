@@ -108,6 +108,9 @@ label{
     height: 12px !important;
  
 }
+.modal-body{
+	padding:0 60px 60px;
+}
 .modal-body h4{
 	font-size: 24px;
 	color: #222222;
@@ -136,14 +139,9 @@ label{
 	font-size: 50px !important;
 	color: #ccc !important;
 }
-@media (min-width: 768px){
-.modal-body{
-	width: 700px !important;
-	border-radius: 0 !important;
-	background: #fff;
-	padding: 40px;
-	margin: 0 auto !important;
-	box-shadow: none !important;
-	background: #fff;
+
+@media screen and (max-width:767px){
+	.modal-body{
+	padding:0 15px 15px;
 }
 }

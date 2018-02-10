@@ -138,7 +138,7 @@ export class ProfileComponent implements OnInit {
     this.IsShowCropperCoverImage = false;
   }
   public UpdateCoverImg() {
-    debugger;
+    //debugger;
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const that = this;
