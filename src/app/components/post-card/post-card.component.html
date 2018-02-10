@@ -79,7 +79,7 @@
                 <i class="icon ion-chevron-down"></i>
             </a>
             <div class="post-drop-box" *ngIf="IsShowOption">
-            <div class="closed"><a href=""><img src="assets/images/cross.png" alt="" /></a></div>
+            <div class="closed"><a (click)="toggleOptions()" ><img src="assets/images/cross.png" alt="" /></a></div>
                 <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" (click)="openEditModal(postData,editModal)">
                     Edit
                 </a>
@@ -218,9 +218,17 @@
                         <div class="right-comment-content">
                             <div class="profTextPart">
                                 <div class="heading" style="width:100%;height:auto;overflow: hidden;">
-                                    <a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;">
-                                        <h4 class="commentee-name">{{cmtList.name}}</h4>
-                                    </a>
+                                    <!--<a [routerLink]="['/user/profile',cmtList.display_name]" style="float:left;"></a>-->
+                                        <h4 class="commentee-name">{{cmtList.name}}
+                                            <span>
+                                            <a class="icondown"><i class="icon ion-chevron-down" (click)="toggleSubMainComment(cmtList.id)"></i></a>
+                                            </span>
+                                        </h4>
+                                        <div class="post-drop-box" *ngIf="IsShowSubMainCommentAction && IsShowSubMainCommentAction[cmtList.id]">
+                                                <div class="closed"><a (click)="toggleSubMainComment(cmtList.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
+                                                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>
+                                                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">Delete</a>
+                                            </div>
                                     <!--<a style="float:right;" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">
                                         <i style="color:#BB1926" class="fa fa-trash"></i>
                                     </a>
@@ -279,6 +287,7 @@
                                                         <i class="fa fa-edit" style="color:#BB1926"></i>
                                                     </a>-->
                                                     <div class="post-drop-box" *ngIf="IsShowSubCommentAction && IsShowSubCommentAction[cmtReply.id]">
+                                                        <div class="closed"><a (click)="toggleSubComment(cmtReply.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
                 										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">Edit</a>
                 										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
                             						</div>
