@@ -74,10 +74,13 @@
                             <li [ngClass]="{'active' : activeTab=='connections'}">
                                 <a (click)="toggleTab('connections')">Connections</a>
                             </li>
-                            <li>
+                            <li [ngClass]="{'active' : activeTab=='invite'}">
+                                <a (click)="toggleTab('invite')">Invite</a>
+                            </li>
+                            <!--<li>
                                 <a [routerLink]="['/user/find_friends']">Invite</a>
                             </li>
-                            <!-- <li [ngClass]="{'active' : activeTab=='group'}"><a (click)="toggleTab('group')">Group</a></li> -->
+                             <li [ngClass]="{'active' : activeTab=='group'}"><a (click)="toggleTab('group')">Group</a></li> -->
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
@@ -352,14 +355,103 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='group'}">
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='group'}">
                                 <div class="connectionsPart">
                                     <!--<h2>Groups</h2>-->
                                     <div class="connections">
                                         <app-group-create></app-group-create>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='invite'}">
+                    <div class="connectionsPart">
+                        <div class="connections invite-member-new">
+                            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                                {{successMsg}}
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+                                {{errorMsg}}
+                            </div>
+                            <h3 style="margin-top: 0px;">INVITE</h3>
+                            <div class="row">
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <input class="form-control-plaintext form-control " placeholder="Enter name of connection" style="height: 46px;" type="text"
+                                        [(ngModel)]="searchName" (ngModelChange)="searchConnections($event)">
+                                </div>
+                            </div>
+                            <h3 style="margin-top: 0px;">MY CONNECTIONS</h3>
+                            <ul class="contn-box" *ngIf="groupMemberList1?.length > 0">
+                                <li class="friend-box-list" *ngFor="let friendData of groupMemberList1">
+                                <div class="friend-boxImage">
+                                    <a [routerLink]="['/user/profile',friendData.display_name]" title="{{friendData.name}}">
+                                        <div class="img" [ngStyle]="{'background-image':'url('+friendData?.profile_image+')'}" style="width:70px;height:75px;"></div>
+                                    </a>
+                                </div>
+                                </li>
+                                <a class="view-more-down" style="margin:20px 0 0" href="javascript:void(0)" *ngIf="IsShowTopViewMore1" (click)="viewMore1()">Show More</a>
+                            </ul>
+
+                            <h3 style="margin-top: 0px;" *ngIf="filetredFriendList.length>0">SUGGESTED CONNECTIONS<span *ngIf="suggestshow && filetredFriendList.length>0" (click)="divhide(1)">SHOW</span><span *ngIf="!suggestshow && filetredFriendList.length>0" (click)="divhide(2)">HIDE</span></h3>
+                            <h3 style="margin-top: 0px;" *ngIf="searchErrorMessage" class="aler alert-danger">{{searchErrorMessage}}</h3>
+                            
+                            <ul class="media-list connections" *ngIf="filetredFriendList?.length > 0 && divshow">
+                                <li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
+                                <div class="media-left">
+                                    <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                        <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd.profile_image+')'}" style="height:62px !important;"></div>
+                                    </a>
+                                </div>
+                                    <div class="media-body media-middle">
+                                        <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                            <h2>{{joinFrnd.name}}</h2>
+                                        </a>                                                   
+                                    </div>
+                                    <div class="media-right media-middle">
+                                        <div class="button-holder-width">
+                                            <button *ngIf="joinFrnd.user_type=='C' && !joinFrnd.request_type" type="button" class="btn btn-primary"
+                                            (click)="sendFriendRequest(joinFrnd.id)">CONNECT</button>
+
+                                            <p *ngIf="joinFrnd.request_type == '1' " class="req_style" >Friend Request Sent</p>
+                                            <p *ngIf="joinFrnd.request_type == '3' " class="req_style">Friend Request Rejected</p>
+                                            <!--<button *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
+                                            <button class="btn btn-black btn-default">
+                                                HIDE
+                                            </button>-->
+                                        </div>
+                                    </div>
+                                </li>
+                                <a class="view-more-down" style="margin:20px 0 0;padding-bottom: 50px;" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
+                                <div class="nothing" *ngIf="!IsShowTopViewMore" style="padding-bottom: 50px;">Nothing More To Show</div>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                                <!--<div class="connectionsPart">
+                                    <div class="connections">
+                                        <ul class="friend-box" *ngIf="userSearchFrndList?.length > 0">
+                                            <li class="friend-box-list" *ngFor="let sfriendData of userSearchFrndList">
+                                                <div class="friend-boxImage">
+                                                <a *ngIf="sfriendData.user_type=='C'" [routerLink]="['/user/profile',sfriendData.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+sfriendData.profile_image+')'}"></div>
+                                                </a>
+                                                <a *ngIf="sfriendData.user_type=='CA'" [routerLink]="['/company/profile',sfriendData.company_slug]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+sfriendData.profile_image+')'}"></div>
+                                                </a>
+                                                </div>
+                                                <div class="friend-boxText">
+                                                    <h2 *ngIf="sfriendData.user_type=='CA'">{{sfriendData.company_name}}</h2>
+                                                    <h2 *ngIf="sfriendData.user_type=='C'">{{sfriendData.name}}</h2>
+                                                    <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='C'" type="button" class="btn btn-primary" (click)="sendFriendRequest(sfriendData.id)">CONNECT</button>
+                                                    <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==1" type="button" class="btn btn-primary" (click)="unflow_company(sfriendData.id,sfriendData)">UnFollow</button>	
+                                                    <button *ngIf="!sfriendData.request_type && sfriendData.user_type=='CA' && sfriendData.follow==0" type="button" class="btn btn-primary" (click)="sendFollowRequest(sfriendData.id,sfriendData)">Follow</button>	
+                                                    <p *ngIf="sfriendData.request_type == '1' " class="req_style" >Friend Request Send</p>
+                                                    <p *ngIf="sfriendData.request_type == '3' " class="req_style">Friend Request Rejected</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -430,8 +522,8 @@
     <div class="modal-footer">
     <a class="remove" (click)="resetPro()">REMOVE IMAGE</a>
         <!--<button type="button" class="btn modal-btn-primary" (click)="resetPro()">Remove Image</button>-->
-        <button type="button" class="btn modal-btn-primary btn-cancel" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn modal-btn-primary" (click)="UploadPrfImg()">Change</button>
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="UploadPrfImg()">Change</button>
     </div>
 </ng-template>
 
@@ -494,7 +586,7 @@
     <div class="modal-footer">
         <!--<button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>-->
         <a class="remove" (click)="resetCover()">REMOVE IMAGE</a>
-        <button type="button" class="btn modal-btn-primary btn-cancel" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn modal-btn-primary" (click)="UploadCoverImg()">Change</button>
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="UploadCoverImg()">Change</button>
     </div>
 </ng-template>

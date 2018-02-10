@@ -77,7 +77,6 @@ export class FindfriendsComponent implements OnInit {
               data => {
                   this.loading = false;
                   if(data.Ack=='1'){
-                      //console.log(data.FriendListById);
                       this.userSearchFrndList=data.FriendListById;
                   }else{
                     this.userSearchFrndList=[];
