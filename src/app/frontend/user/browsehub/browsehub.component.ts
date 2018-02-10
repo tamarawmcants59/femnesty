@@ -14,8 +14,8 @@ export class BrowsehubComponent implements OnInit {
   public allCategories;
   public lat;
   public lng;
-  currentLat = 0;
-  currentLng = 0;
+  currentLat : any;
+  currentLng :any;
   private search_con;
   public search_date;
   public latestArticles = [];
@@ -86,7 +86,16 @@ export class BrowsehubComponent implements OnInit {
     //console.log('search keyword', this.search_con);
     //const search_data = { keyword: this.search_con};
     const self = this;
-    this.hubService.getAllHubs(this.loginUserId, this.search_data).subscribe(data => {
+    if(this.currentLat==0)
+    {
+      this.currentLat="";
+    }
+    if(this.currentLng==0)
+    {
+      this.currentLng="";
+    }
+    const data={search_data:this.search_data,currentLat:this.currentLat,currentLng:this.currentLng};
+    this.hubService.getAllHubs(this.loginUserId, data).subscribe(data => {
       if (data.Ack == 1) {
         this.allHubs = data.details;
         if (self.allHubs.length && self.allHubs.length > 0) {
