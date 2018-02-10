@@ -392,7 +392,7 @@
 
                                     <!--<li><a [routerLink]="['/user/mentor']">Join mentor</a></li>-->
                                     <li *ngIf="userloggedIn == 1">
-                                        <a href="Javascript: void(0)" (click)="userLogout()">Logout</a>
+                                        <a href="Javascript: void(0)" (click)="userLogout()">Sign Out</a>
                                     </li>
                                 </ul>
                                 <ul class="dropdown-menu" role="menu" *ngIf="currentUserDet.user_type=='CA' || currentUserDet.user_type=='CSA'">
@@ -420,7 +420,7 @@
                                     </li>
                                     <!-- <li><a [routerLink]="['/company/profile',currentUserDet.company_slug]">View Company Profile</a></li> -->
                                     <li *ngIf="userloggedIn == 1">
-                                        <a href="Javascript: void(0)" (click)="userLogout()">Logout</a>
+                                        <a href="Javascript: void(0)" (click)="userLogout()">Sign Out</a>
                                     </li>
                                 </ul>
                             </li>
@@ -514,7 +514,7 @@
                             <a [routerLink]="['/company/profile',currentUserDet.company_slug]">View Company Profile</a>
                         </li>
                         <li *ngIf="userloggedIn == 1">
-                            <a href="Javascript: void(0)" (click)="userLogout()">Logout</a>
+                            <a href="Javascript: void(0)" (click)="userLogout()">Sign Out</a>
                         </li>
                     </ul>
                 </div>
