@@ -6003,3 +6003,87 @@ ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-s
 	margin-bottom: 15px !important;
 
 }
+.edit-option{
+	padding: 10px 0;
+	width: 100%;
+	clear: both;
+}
+.edit-option ul{
+	padding: 0;
+	margin: 0;
+}
+.edit-option ul li{
+	float: left;
+	margin: 0 10px;
+	padding: 5px 20px;
+	list-style-type: none;
+}
+.edit-option ul li:last-child{
+	float: right;
+}
+.edit-option ul li a{
+	display: block;
+	text-align: center;
+	margin-bottom: 12px;
+	cursor: pointer;
+}
+.edit-option ul li span{
+	display: block;
+	text-align: center;
+	font-size: 10px;
+	color: #222222;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-family: 'montserratmedium';
+}
+.crop-img{
+	width: auto;
+	height: auto;
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+.ready{
+	width: 100%;
+	margin-bottom: 95px;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 746px;
+    margin: 290px auto;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  .modal-content {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  .modal-sm {
+    width: 300px;
+  }
+  .modal-title{
+  	font-size: 12px;
+  	color: #222222;
+  	font-family: 'montserratmedium';
+  	text-transform: uppercase;
+  	width: 90%;
+  	float: left;
+  }
+  .modal-dialog button.close{
+  	width: 20px;
+  	height: 20px;
+  	background: url('../assets/images/close-btn.png');
+  	background-position: center;
+  	background-repeat: no-repeat;
+  }
+  .modal-header{
+  	padding: 19px !important;
+  }
+  .modal-body{
+  	height: auto;
+  	overflow: hidden;
+  	margin-bottom: 10px;
+  }
+}
