@@ -2471,7 +2471,7 @@ background: #fff !important;}
     background: #fff;
     /*margin-top: 150px;*/
 }
-.middlePart .profDes{padding:30px 60px 60px;}
+.middlePart .profDes{padding:30px 60px 40px;}
 
 .profImage{margin: 17px auto 26px;}
 .profImage .img {
@@ -5563,11 +5563,19 @@ header .dropdown-menu{min-width: 218px;}
 	padding-left: 3px !important;
 	padding-right: 3px !important;
 }
+.pd-7{
+	padding-left: 7px !important;
+	padding-right: 7px !important;
+}
 @media screen and (max-width:767px) {
-	.pd-5{
+.pd-5{
 	padding-left: 15px !important;
 	padding-right: 15px !important;
 }
+/*.pd-7{
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}*/
 	.before-login-home .nav.navbar-nav.navbar-right span{top: 8px !important;color:#fff !important;}
 	.sign-form .text-danger{position: relative;bottom:0}
   .team-right p {
