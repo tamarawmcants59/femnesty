@@ -14,7 +14,7 @@
                     <div class="notification-wrap new-conversations-section">
                     		<h2>MY CONVERSATIONS</h2>
                         <ul>
-                            <li *ngFor="let chatHead of chatHeads; let key = index" style="cursor:pointer">
+                            <li *ngFor="let chatHead of chatHeads; let key = index" style="cursor:pointer" [ngClass]="{'unread':chatHead.is_read === false}">
                                 <div class="image-area" *ngIf="(key < 6 || showLi)">
                                     <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
                                         <img  *ngIf="chatHead.userDetails" src="{{chatHead.userDetails.image_url}}" style="width:58px" alt="" />

@@ -92,7 +92,7 @@ export class ChatListComponent implements OnInit {
       }
       else
         this.chatHeads = data;
-
+      //console.log(this.chatHeads);
       this.fillUserDetails();
     });
   }

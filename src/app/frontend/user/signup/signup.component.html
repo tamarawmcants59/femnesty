@@ -6,6 +6,9 @@
             <div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
                 {{errorMsg}}
             </div>
+            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                {{successMsg}}
+            </div>
             <div class="sign-up-social">
                 <span>Connect with: </span>
                 <!--<cuppa-oauth [authConfig]="config"></cuppa-oauth>-->
@@ -160,12 +163,12 @@
                 </div>
                 <div class="form-group col-md-6">
                     <p>
-                        <input type="checkbox" id="test2" [formControl]="agreetab" />
+                        <input type="checkbox" id="test2" [formControl]="privacyTab" />
                         <label for="test2">I agree to the
                             <a class="text-red" [routerLink]="['/page/privacy-policy']" target="_blank">Privacy Policy</a>
                         </label>
                     </p>
-                    <div class="text-danger" *ngIf="!agreetab.valid">I agree to the Privacy policy</div>
+                    <div class="text-danger" *ngIf="!privacyTab.valid">I agree to the Privacy policy</div>
 
                 </div>
                 <div class="form-group col-md-12">
