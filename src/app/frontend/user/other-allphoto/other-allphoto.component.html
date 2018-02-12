@@ -27,8 +27,9 @@
                       <div class="tab-content">
                           <div class="tab-pane fade in active">
                               <div class="shareYourThought">
+                              <h4>All Other Photo</h4>
                               	<div class="row">
-									<div class="col-md-4" *ngFor="let imgData of userImgList">
+									<div class="col-sm-3 col-xs-4 pd-7" *ngFor="let imgData of userImgList">
 	                					<div class="img" [ngStyle]="{'background-image':'url('+imgData.image_url+')'}"></div>
 	            					</div>
 	            					<!-- <div class="col-md-4">
