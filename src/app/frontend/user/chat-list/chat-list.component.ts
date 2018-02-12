@@ -49,53 +49,49 @@ export class ChatListComponent implements OnInit {
     //console.log(queryChat);
     var newArray = [];
     const messages = this.db.collection('Messages', ref => {
-      return ref.where('to_user_id', '==', this.loginUserId);
-       //ref.orderBy('created');
+      return ref.where('to_user_id', '==', this.loginUserId).orderBy('created', 'desc');
     }).snapshotChanges().map(actions => {
-
       return actions.map(action => {
         const data = action.payload.doc.data();
-        /*const data1 = action.payload.doc.data();
-        const data2 = Object.keys(data1).map(function (value, index) {
-            return { created: new Date(value), values: data1[value] }
-        });
-        console.log(data);*/
-        var isFound = false;
-        var index;
-        if (newArray.length > 0) {
-          for (var i = 0; i < newArray.length; i++) {
-            if (newArray[i].from_user_id == data.from_user_id) {
-              isFound = true;
-              index = i;
-              break;
-            }
-            //console.log(isFound);
-            //console.log(index);
-          }
-          if (isFound) {
-            if (index) {
-              newArray[index].message.text = data.message.text;
-            }
-            else if (index == 0) {
-              newArray[index].message.text = data.message.text;
-            }
+        newArray.push(data);
 
-          }
-          else {
-            newArray.push(data);
-          }
-        }
-        else {
-          newArray.push(data);
-        }
+        const id = action.payload.doc.id;
+        return { id, ...data };
       });
     });
     messages.subscribe(data => {
-      if (newArray && newArray.length) {
-        this.chatHeads = newArray;
+      
+      var isFound = false;
+      var index;
+      var finalArray = [];
+      if (data && data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+          if (i == 0) {
+            finalArray.push(data[i]);
+          }
+          else {
+            var isfound=false;
+            for (var j = 0; j < finalArray.length; j++) {
+              if (finalArray[j].from_user_id == data[i]["from_user_id"]) {
+                isfound=true;
+                break;
+              }
+              else {
+                isfound=false;
+                //finalArray.push(data[i]);
+              }
+            }
+            if(isfound==false)
+            {
+              finalArray.push(data[i]);
+            }
+          }
+        }
+        this.chatHeads = finalArray;
       }
       else
         this.chatHeads = data;
+
       this.fillUserDetails();
     });
   }
