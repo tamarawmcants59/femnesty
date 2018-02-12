@@ -13,3 +13,8 @@
 .btn.btn-default:hover {
 	background: #bb1926;
 }
+.uploadVideo i{
+	font-size: 12px;
+	margin-left: 5px;
+	color: #e6e6e6;
+}

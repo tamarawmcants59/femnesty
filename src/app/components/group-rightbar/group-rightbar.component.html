@@ -79,7 +79,7 @@
         <a *ngIf="totlalGroupImgList?.length > 5" [routerLink]="['/user/group_all_photo',groupData.group_uname]" class="viewAll text-center">View All</a>
     </div>
 
-    <div class="innerRightPart right-map-details right-sharing">
+    <div style="position: relative;" class="innerRightPart right-map-details right-sharing">
         <h2>Share</h2>
         <ul>
             <li>
@@ -99,7 +99,7 @@
                 <img height="40" src="assets/images/socila-icon-1.png" />
             </li>
         </ul>
-        <div *ngIf="IsShowOption" class="form-group">
+        <div *ngIf="IsShowOption" class="form-group box">
             {{repoUrl}}
         </div>
     </div>
