@@ -40,15 +40,18 @@
     </div>
 
 <div class="innerRightPart right-map-details right-sharing">
-  <h2>Share</h2>
-      <ul>
-        <li><a (click)="open(confirmmodal)" class="fa fa-facebook" style="background: #395899"></a></li>
-        <li><a ceiboShare [linkedIn]="{url:repoUrl, text:profileData.bio}" class="fa fa-linkedin" style="background: #19699c"></a></li>
-        <li><a ceiboShare [twitter]="{url:repoUrl, text:profileData.bio}" class="fa fa-twitter" style="background: #499bcd"></a></li>
-        <li>
-            <img height="40" src="assets/images/socila-icon-1.png" />
-        </li>
+    <h2>Share</h2>
+        <ul>
+            <li><a (click)="open(confirmmodal)" class="fa fa-facebook" style="background: #395899"></a></li>
+            <li><a ceiboShare [linkedIn]="{url:repoUrl, text:profileData.bio}" class="fa fa-linkedin" style="background: #19699c"></a></li>
+            <li><a ceiboShare [twitter]="{url:repoUrl, text:profileData.bio}" class="fa fa-twitter" style="background: #499bcd"></a></li>
+            <li (click)="copy_link()">
+                <img height="40" src="assets/images/socila-icon-1.png" />
+            </li>
         </ul>
+        <div *ngIf="IsShowOption" class="form-group">
+            {{repoUrl}}
+        </div>
     </div>
   </div>
 

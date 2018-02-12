@@ -331,32 +331,36 @@
 
                                     
                                 </div>-->
-
-                                    <h2>Follower List</h2>
-                                    <div class="connections">
-                                        <ul class="friend-box" *ngIf="userFollowerList?.length > 0">
-                                            <li class="friend-box-list" *ngFor="let followData of userFollowerList">
-                                                <div class="friend-boxImage">
-                                                    <a [routerLink]="['/user/profile',followData.display_name]">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+followData.profile_image+')'}"></div>
-                                                    </a>
-                                                </div>
-                                                <div class="friend-boxText">
-                                                    <a [routerLink]="['/user/profile',followData.display_name]">
-                                                        <h2>{{followData.name}}</h2>
-                                                    </a>
-                                                    <a [routerLink]="['/user/profile',followData.display_name]" class="btn btn-primary">View Profile</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="likePart" *ngIf="!userFollowerList">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <div class="nothing">No employee found</div>
+                                    
+                                <div class="connections invite-member-new">
+                                    <h2 style="margin-top: 0px;">Follower List</h2>
+                                    <ul class="media-list connections" *ngIf="userFollowerList?.length > 0">
+                                        <li class="media" *ngFor="let joinFrnd of userFollowerList;let i=index">
+                                            <div class="media-left">
+                                                <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}" style="height: 62px !important;"></div>
+                                                </a>
+                                            </div>
+                                            <div class="media-body media-middle">
+                                                <a [routerLink]="['/user/profile',joinFrnd.display_name]">
+                                                    <h2>{{joinFrnd.name}}</h2>
+                                                </a>                                                   
+                                            </div>
+                                            <div class="media-right media-middle">
+                                                <div class="button-holder-width">
+                                                    <button class="btn btn-primary"
+                                                    [routerLink]="['/user/profile',joinFrnd.display_name]">View Profile</button>
+                                                    
+                                                    <!--<button class="btn btn-black btn-default">
+                                                        HIDE
+                                                    </button>-->
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </li>
+                                    </ul>
+
+                                    <div class="nothing" *ngIf="userFollowerList?.length == 0" style="padding-bottom: 50px;">No follower found</div>
+                                </div>
 
                                 </div>
                             </div>
