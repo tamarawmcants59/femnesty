@@ -389,9 +389,11 @@ export class FrontendAppHeader {
       }
       else
         this.chatHeads = data;
-
+        //console.log(this.chatHeads);
       this.fillUserDetails();
     });
+    
+
   }
 
   fillUserDetails() {

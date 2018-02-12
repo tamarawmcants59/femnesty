@@ -39,6 +39,7 @@ export class SignupComponent implements OnInit {
   public submitted: boolean = false;
   returnUrl: string;
   errorMsg: string = '';
+  successMsg: string = '';
   public minDate = new Date();
   public loading = false;
   public checkEmailExist: boolean = false;
@@ -197,11 +198,13 @@ export class SignupComponent implements OnInit {
   }
 
   public checkSignup(values: Object): void {
+    this.successMsg='';
     this.submitted = true;
     this.loading = true;
     if (this.form.valid) {
-      const dateOfBirth = this.dob.value.getFullYear() + '-' + ('0' + (this.dob.value.getMonth() + 1)).slice(-2) + '-'
-        + ('0' + this.dob.value.getDate()).slice(-2);
+      //const dateOfBirth = this.dob.value.getFullYear() + '-' + ('0' + (this.dob.value.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dob.value.getDate()).slice(-2);
+      const dateOfBirth = this.form.controls['year'].value + '-' + ('0' + (this.form.controls['month'].value + 1)).slice(-2) + '-' + ('0' + this.form.controls['day'].value).slice(-2);  
+        
       let signupJsonData = {
         "email": this.email.value.toString(),
         "txt_password": this.password.value.toString(),
@@ -216,8 +219,9 @@ export class SignupComponent implements OnInit {
           let details = data;
           if (details.Ack == "1") {
             this.loading = false;
-            localStorage.setItem('signupSuccessMsg', 'You have successfully signup.Please check your email to activate your account.');
-            this.router.navigate(['/user/login']);
+            //localStorage.setItem('signupSuccessMsg', 'You have successfully signup.Please check your email to activate your account.');
+            this.successMsg='You have successfully signup. Please check your email to activate your account.';
+            this.router.navigate(['/user/signup']);
             return false;
           } else {
             //alert('Invalid login');

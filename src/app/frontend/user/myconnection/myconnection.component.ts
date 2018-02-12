@@ -196,6 +196,7 @@ public acceptFriendRequest(request_id) {
                   if(data.Ack==1){
                     this.successMsg=data.msg;
                     this.getPendingFrndList();
+                    window.location.reload();
                   }else{
                     this.errorMsg='You have already send the friend request';
                   }
@@ -215,6 +216,7 @@ public acceptFriendRequest(request_id) {
           if(data.Ack==1){
             this.successMsg=data.msg;
             this.getPendingFrndList();
+            window.location.reload();
           }else{
             this.errorMsg='You have already send the friend request';
           }

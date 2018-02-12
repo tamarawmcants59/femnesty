@@ -298,11 +298,11 @@
                                 <div *ngIf="chatHeads && chatHeads.length > 0" ngbDropdownMenu class="dropdown-menu msg-item-worp new-msg-dropdown" aria-labelledby="dropdownMenuButton">
                                     <div class="text-top"><span>LATEST MESSAGES</span> <b>NEW MESSAGE</b></div>
                                     <div class="innr" *ngIf="chatHeads && chatHeads.length > 0">
-                                        <a (click)="openChat(chat)" *ngFor="let chat of chatHeads" class="msg-item unread notify-box-top" href="javascript:void(0)">
+                                        <a (click)="openChat(chat)" [ngClass]="{'unread':chat.is_read === false}" *ngFor="let chat of chatHeads" class="msg-item notify-box-top" href="javascript:void(0)">
                                             <img class="img" *ngIf="chat.userDetails" src="{{chat.userDetails.image_url}}" />
                                             <div *ngIf="chat.userDetails" class="txt">
                                                 <div class="upr">
-                                                    <div class="name">{{chat.userDetails.first_name}} {{chat.userDetails.last_name}}</div>
+                                                    <div class="name">{{chat.userDetails.first_name}} {{chat.userDetails.last_name}} </div>
                                                     <div class="time">{{chat.created | date}}</div>
                                                 </div>
                                                 <div class="msg">{{chat.message.text}}</div>
@@ -567,7 +567,6 @@
     <div class="modal-header">
         <h4 class="modal-title">{{title}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
