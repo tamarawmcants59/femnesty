@@ -1,0 +1,165 @@
+.MyGroups-list h2{
+	font-size: 22px !important;
+	 padding: 0 !important;
+	 margin: 0 !important;
+	 line-height: 40px !important;
+	 height: 40px;
+}
+.MyGroups-list h2 span{
+	float: right;
+	padding: 0 !important;
+}
+.MyGroups-list{
+	padding: 25px !important;
+}
+.MyGroups-list .btn-primary{
+	padding: 0 !important;
+	width: 140px !important;
+	height: 40px !important;
+	text-align: center !important;
+	border-radius: 3px !important;
+	line-height: 40px !important;
+}
+.MyGroups-list{
+	margin-bottom: 0;
+}
+.middlePart{
+	margin-bottom: 20px;
+}
+.middlePart h5{
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #222222;
+	padding: 25px 25px 10px;
+	line-height: 14px;
+	font-family: 'montserratmedium';
+	margin: 0;
+}
+.middlePart .f-item{	
+	border-bottom: solid 1px #e8e8e8;
+	overflow: hidden;
+	padding: 12px 0 5px;
+}
+.middlePart .f-item:last-child{	
+	border-bottom: 0;
+	padding-bottom: 15px;
+}
+
+.middlePart .f-item .desc{
+	padding: 0 25px;
+}
+.middlePart .f-item .desc p{
+	font-size: 14px;
+	color: #222222;
+	line-height: 18px;
+	margin-bottom: 5px;
+}
+.middlePart .f-item .desc ul{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+.middlePart .f-item .desc ul li{
+	padding: 5px 0 0;
+	float: left;
+	width: 22%;
+	margin-right: 2%;
+	list-style-type: none;
+}
+[type="checkbox"]:not(:checked) + label::before, [type="checkbox"]:checked + label::before {
+  
+    border: 0px solid #373636 !important;
+    background: #e8e8e8 !important;
+    box-shadow: none !important;
+    width: 12px !important;
+    height: 12px !important;
+ 
+}
+.middlePart .f-item .friend-box-list{
+	min-height:auto;
+	padding: 0 25px;
+	display: flex;
+	position: relative;
+	webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.middlePart .f-item .friend-box-list .img {
+    width: 40px;
+    height: 40px;
+    margin: 0;   
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: center center !important;
+	margin-right: 20px;
+	object-fit: cover;
+	
+}
+.middlePart .f-item .friend-box-list .img img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.middlePart .f-item .friend-boxText {
+    text-align: left !important;
+    width: 40%;
+    margin-right: 20px;
+    
+}
+.middlePart .f-item .friend-boxText h4 {
+    font-size: 16px;
+    color: #000000;
+}
+
+.middlePart .f-item .new-acpt-reject{
+	margin-left: auto; 
+	font-size: 12px; 
+	color: #202020; 
+	padding: 10px;
+}
+.middlePart .f-item .new-acpt-reject a{
+	font-size: 10px;
+	text-transform: uppercase;
+	padding: 0 5px;
+	color: #202020;
+}
+.middlePart .f-item .new-acpt-reject a.red{
+	color: #bd1a27;
+}
+label{
+	font-size: 12px;
+	color:#aeaeae !important;
+	font-family: 'sanchezregular';
+	font-weight: normal;
+}
+@media screen and (max-width:767px){
+	.middlePart .f-item .desc ul li{
+		float: none;
+		width: 100%;
+		margin: 0px 0 5px;
+	}
+	.middlePart .f-item .friend-box-list{
+		padding: 0 15px;
+	}
+	.middlePart .f-item .friend-box-list .img{
+		width: 100%;
+		margin:  0 auto;
+		text-align: center;
+	}
+	.middlePart .f-item .friend-boxText{
+		width:100%;
+		text-align: center;
+		margin: 0 auto;
+	}
+	.middlePart .f-item .friend-boxText h4{
+		text-align: center;
+	}
+	.middlePart .f-item .friend-box-list{
+	display: block;
+	}
+	.middlePart .f-item .new-acpt-reject{
+		text-align: center;
+		padding: 5px;
+	}
+}
