@@ -966,6 +966,10 @@ export class HubsComponent implements OnInit {
       });
 
   }
+  
+  public copy_link(){
+
+  }
 
   public openBetaInfo(content) {
     this.modalService.open(content);
