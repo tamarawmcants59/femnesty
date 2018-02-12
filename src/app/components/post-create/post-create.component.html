@@ -64,14 +64,35 @@
                             <input type="file" name="myfile" (change)="fileChangePost($event)" />
                         </div>
                     </li>
-                    <li *ngIf="postType.activitytype==''">
+                   <!-- <li *ngIf="postType.activitytype==''">
                         <p class="connectionsonly-check">
                         		<input class="" formControlName="is_connection" id="ConnectionsOnly" value="1" type="checkbox">
 	                        	<i class="icon ion-ios-people-outline"></i>
-	                        	<label for="ConnectionsOnly"> Connections Only </label>                    			
+	                        	<label for="ConnectionsOnly"> Connections Only </label>
+	                        	   <a class="icondown" href="javascript:void(0)" (click)="togglePostOptions()">
+                <i class="icon ion-chevron-down"></i>
+            </a>                  			
+                        </p>
+                    </li>-->
+                    <li *ngIf="postType.activitytype==''">
+                        <p class="connectionsonly-check">	
+	                        	<label for="ConnectionsOnly"> Connections Only </label>
+	                        	   <a class="icondown" href="javascript:void(0)" (click)="togglePostOptions()">
+                					<i class="icon ion-chevron-down"></i>
+            					  </a>                  			
                         </p>
                     </li>
                 </ul>
+              
+            <div class="post-drop-box" *ngIf="IsShowListOption">
+            	<div class="closed"><a (click)="togglePostOptions()" ><img src="assets/images/cross.png" alt="" /></a></div>
+                <a title="Edit" href="javascript:void(0)">
+                    Edit
+                </a>
+                <a href="javascript:void(0)">
+                    Delete
+                </a>
+            </div>
 					 <!--<div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Thoughts Required</div>-->
             </div>
            <!-- <div class="col-md-2">

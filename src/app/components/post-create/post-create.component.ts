@@ -26,7 +26,8 @@ export class PostCreateComponent implements OnInit {
   successMsg= '';
   errorMsg= '';
   postImgData='';
-
+  IsShowListOption= false;
+	
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
@@ -124,6 +125,10 @@ export class PostCreateComponent implements OnInit {
   public deleteImg() {
     this.postImgData='';
     this.showPostImgDive = false;
+  }
+  
+  public togglePostOptions(){ 
+    this.IsShowListOption= !this.IsShowListOption;
   }
 
 }

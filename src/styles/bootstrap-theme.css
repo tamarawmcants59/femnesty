@@ -6137,6 +6137,17 @@ ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-s
 	font-size: 20px;
 	line-height: 20px;
 }
+.box{
+	padding: 15px;
+	border: solid 1px #ffe5a6;
+	overflow: hidden;
+	position: absolute;
+	z-index: 100;
+	top: 120px;
+	background: #fff7e3;
+	right: 0;
+	font-size: 12px;
+}
 @media screen and (max-width:767px) {
 	.modal-dialog {
     margin: 188px auto;
