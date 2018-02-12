@@ -39,7 +39,7 @@
                                 <p>No message found</p>
                             </li> 
                         </ul>
-                        <a (click)="show_more()" class="only-load-more">Load More</a>
+                        <a (click)="show_more()" class="only-load-more" *ngIf="!showLi">Load More</a>
                     </div>
                 </div>
             </div>

@@ -24,6 +24,7 @@ import { MycmplistComponent } from "./mycmplist/mycmplist.component";
 import { MyconnectionComponent } from './myconnection/myconnection.component';
 import {OtherAllphotoComponent} from './other-allphoto/other-allphoto.component';
 import { EditdetailsComponent } from './editdetails/editdetails.component';
+import { PrivacySettingsComponent } from './privacy-settings/privacy-settings.component';
 
 const routes: Routes = [
   {
@@ -88,6 +89,14 @@ const routes: Routes = [
     component: EditdetailsComponent,
     data: {
       title: 'Edit Details'
+    }
+  },
+  {
+    path: 'privacy_settings',
+    canActivate: [AuthGuard],
+    component: PrivacySettingsComponent,
+    data: {
+      title: 'Privacy Settings'
     }
   },
   {

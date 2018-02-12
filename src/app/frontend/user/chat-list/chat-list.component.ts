@@ -13,6 +13,7 @@ export class ChatListComponent implements OnInit {
   chatHeads: any[];
   userFrndList = [];
   public showLi:boolean=false;
+  //public showAllLi:boolean=false;
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   constructor(private db: AngularFirestore, private userService: UserService) { }
 
