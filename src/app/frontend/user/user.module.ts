@@ -42,6 +42,7 @@ import { GroupphotoComponent } from './groupphoto/groupphoto.component';
 import { MycmplistComponent } from './mycmplist/mycmplist.component';
 import { MyconnectionComponent } from './myconnection/myconnection.component';
 import { EditdetailsComponent } from './editdetails/editdetails.component';
+import { PrivacySettingsComponent } from './privacy-settings/privacy-settings.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -111,7 +112,8 @@ export function provideConfig() {
     MycmplistComponent,
     MyconnectionComponent,
     OtherAllphotoComponent,
-    EditdetailsComponent
+    EditdetailsComponent,
+    PrivacySettingsComponent
     //ImageCropperComponent
   ],
   providers: [
