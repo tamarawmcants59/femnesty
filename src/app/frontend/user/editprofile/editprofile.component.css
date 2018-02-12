@@ -182,6 +182,10 @@ ng4geo-autocomplete.auto-text-input input {
   margin: 0 auto;
   overflow: hidden;
 }
+.contn-box li.friend-box-list{
+	margin:0 3px 10px !important;
+}
+.invite-member-new .contn-box li.friend-box-list .friend-boxImage a .img{margin: 0;width:83px !important;height:83px !important;object-fit:cover;}
 @media (min-width: 767px) {
 	.modal-body{
 		padding:10px !important;
