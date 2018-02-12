@@ -3,7 +3,8 @@
         <div class="row flex-profile">
             <div class="col-md-3 flex-left">
               <div *ngIf="isUserLogin == 1">
-                  <app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>
+                    <user-sidebar></user-sidebar>
+                  <!--<app-group-leftbar [groupData]="groupDetailsData"></app-group-leftbar>-->
               </div>
             </div>
             <div class="col-md-6 flex-middle pd-5">

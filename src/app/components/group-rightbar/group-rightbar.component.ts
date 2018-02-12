@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges, SimpleChange, ElementRef } fro
 import { UserService } from "../../frontend/user/user.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 //import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-group-rightbar',
@@ -23,6 +24,7 @@ export class GroupRightbarComponent implements OnInit {
   public showMemberDiv: boolean = false;
   public groupDetailsData1: any;
   public isJoinGroup: boolean = true;
+  public repoUrl = '';
   //public myStyle={};
   //public memberHideClass:string='isHideDiv';
 
@@ -51,10 +53,12 @@ export class GroupRightbarComponent implements OnInit {
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
+    private router: Router,
     public elementRef: ElementRef
   ) {
     this.isloginUserId = localStorage.getItem("loginUserId");
     this.isUserLogin = localStorage.getItem("isLoggedIn");
+    this.repoUrl = environment.website_url + this.router.url;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -209,3 +213,27 @@ export class GroupRightbarComponent implements OnInit {
   }
 }
 
+export declare class FacebookParams {
+  u: string;
+}
+
+export class GooglePlusParams {
+  url: string
+}
+
+export class LinkedinParams {
+  url: string
+}
+
+export declare class PinterestParams {
+  url: string;
+  media: string;
+  description: string;
+}
+
+export class TwitterParams {
+  text: string;
+  url: string;
+  hashtags: string;
+  via: string;
+}

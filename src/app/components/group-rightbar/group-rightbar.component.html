@@ -79,4 +79,25 @@
         <a *ngIf="totlalGroupImgList?.length > 5" [routerLink]="['/user/group_all_photo',groupData.group_uname]" class="viewAll text-center">View All</a>
     </div>
 
+    <div class="innerRightPart right-map-details right-sharing">
+        <h2>Share</h2>
+        <ul>
+            <li>
+                <app-beta-restriction [height]="'40'" [image]="'assets/images/facebook.png'">
+                </app-beta-restriction>
+            </li>
+            <!-- <li ceiboShare [facebook]="{u: repoUrl}">
+                <img src="assets/images/facebook.png" />
+            </li> -->
+            <li ceiboShare [linkedIn]="{url:repoUrl, text:groupData.long_desc}">
+                <img height="40" src="assets/images/linkedin.png" />
+            </li>
+            <li ceiboShare [twitter]="{url:repoUrl, text:groupData.long_desc}">
+                <img height="40" src="assets/images/twitter.png" />
+            </li>
+            <li>
+                <img height="40" src="assets/images/socila-icon-1.png" />
+            </li>
+        </ul>
+    </div>
 </div>
