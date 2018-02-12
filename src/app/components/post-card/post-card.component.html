@@ -80,22 +80,25 @@
             </a>
             <div class="post-drop-box" *ngIf="IsShowOption">
             <div class="closed"><a (click)="toggleOptions()" ><img src="assets/images/cross.png" alt="" /></a></div>
-                <a title="Edit" href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" (click)="openEditModal(postData,editModal)">
+                <a title="Edit" href="javascript:void(0)" *ngIf="IsloginUserId == postData.user_id" (click)="openEditModal(postData,editModal)">
                     Edit
                 </a>
-                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                <a href="javascript:void(0)" *ngIf="IsloginUserId == postData.user_id" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     Delete
                 </a>
+                <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
+                    Delete
+                </a>-->
                 <!-- <a href="javascript:void(0)" *ngIf="IsGroupAdmin && postData.file_name != ''" title="Delete" (click)="deletePost(confirmmodal,postData.id,'P',postData)">
                     Delete
                 </a> -->
                 <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>-->
-                <a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
+                <!--<a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
-                </a>
-                <a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
+                </a>-->
+                <a href="javascript:void(0)" *ngIf="IsloginUserId != postData.user_id" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
                     Report
                 </a>
             </div>
@@ -225,8 +228,12 @@
                                             </span>
                                             <div style="right: 0;" class="post-drop-box" *ngIf="IsShowSubMainCommentAction && IsShowSubMainCommentAction[cmtList.id]">
                                                 <div class="closed"><a (click)="toggleSubMainComment(cmtList.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
-                                                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>
-                                                <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">Delete</a>
+                                                <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>-->
+                                                <a href="javascript:void(0)" *ngIf="IsloginUserId == cmtList.user_id" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>
+                                                <a href="javascript:void(0)" *ngIf="IsloginUserId == cmtList.user_id" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">Delete</a>
+                                                <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtList.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtList.id,'C')">
+                                                    Report
+                                                </a>
                                             </div>
                                         </h4>
                                         
@@ -290,7 +297,10 @@
                                                     <div class="post-drop-box" *ngIf="IsShowSubCommentAction && IsShowSubCommentAction[cmtReply.id]">
                                                         <div class="closed"><a (click)="toggleSubComment(cmtReply.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
                 										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">Edit</a>
-                										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
+                                                        <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
+                                                        <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtReply.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtReply.id,'C')">
+                                                            Report
+                                                        </a>
                             						</div>
                                                 </div>
                                                 <!--<p class="post-date">{{cmtReply.c_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>-->
@@ -425,6 +435,19 @@
         <div class="modal-footer">
             <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
             <button type="button" class="btn modal-btn-black btn-default" (click)="confirmReport(); c('Close click')">Confirm</button>
+        </div>
+    </ng-template>
+    
+    <ng-template #reportCmtConfirmModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Confirm!</h4>
+        </div>
+        <div class="modal-body">
+            <h4>Would you like to report this comment?</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+            <button type="button" class="btn modal-btn-black btn-default" (click)="confirmCmtReport(); c('Close click')">Confirm</button>
         </div>
     </ng-template>
 

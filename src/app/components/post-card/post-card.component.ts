@@ -56,6 +56,7 @@ export class PostCardComponent implements OnInit {
   public blockPostKey: any;
   public blockPostData: any;
   public reportPostId: any;
+  public reportCmtId: any;
   public reportPostType: any;
   public reportPostKey: any;
   public reportPostData: any;
@@ -182,6 +183,13 @@ export class PostCardComponent implements OnInit {
     this.reportPostKey = delkey;
     this.modalService.open(reportConfirmModal);
   }
+
+  reportComment(reportCmtConfirmModal, comment_id, type){ 
+    this.reportCmtId ='';
+    this.reportCmtId = comment_id;
+    this.modalService.open(reportCmtConfirmModal);
+  }
+
   confirmReport()
   {
     let data={
@@ -203,6 +211,22 @@ export class PostCardComponent implements OnInit {
         console.log(error);
       })
   }
+  
+  confirmCmtReport(){
+    let data={
+      "id":this.reportCmtId,
+      "user_id":this.IsloginUserId
+      }
+      this.loading=true;
+      this.dataService.reportComment(data).subscribe(data => {
+        if (data.Ack == "1") {
+         this.loading=false;
+        }
+      }, error => {
+        this.loading=false;
+      });
+  }
+
   confirmBlock()
   {
     let data={
