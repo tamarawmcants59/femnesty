@@ -18,6 +18,7 @@ export class CompanyRightbarComponent implements OnInit {
   public isCompanyId: number;
   public profileId: number;
   public repoUrl = '';
+  public IsShowOption= false;
 
   @Input() profileData: {
     id: number;
@@ -122,6 +123,10 @@ export class CompanyRightbarComponent implements OnInit {
   public open(content) {
     this.modalService.open(content);
   } 
+
+  public copy_link(){
+    this.IsShowOption= !this.IsShowOption;
+  }
 }
 
 

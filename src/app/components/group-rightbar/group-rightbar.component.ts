@@ -25,8 +25,7 @@ export class GroupRightbarComponent implements OnInit {
   public groupDetailsData1: any;
   public isJoinGroup: boolean = true;
   public repoUrl = '';
-  //public myStyle={};
-  //public memberHideClass:string='isHideDiv';
+  public IsShowOption= false;
 
   @Input() groupData: {
     id: number;
@@ -202,6 +201,10 @@ export class GroupRightbarComponent implements OnInit {
   }
   deleteImg(data) {
     alert();
+  }
+
+  public copy_link(){
+    this.IsShowOption= !this.IsShowOption;
   }
 
   public showAllMember() {

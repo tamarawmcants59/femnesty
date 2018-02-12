@@ -67,6 +67,7 @@ export class HubsComponent implements OnInit {
   public startDateString;
   public endDateString;
   public description: any;
+  public IsShowOption= false;
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
   @ViewChild("addressEdit") addressEdit: ElementRef;
   constructor(
@@ -966,9 +967,9 @@ export class HubsComponent implements OnInit {
       });
 
   }
-  
-  public copy_link(){
 
+  public copy_link(){
+    this.IsShowOption= !this.IsShowOption;
   }
 
   public openBetaInfo(content) {
