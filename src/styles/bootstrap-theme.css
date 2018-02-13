@@ -5990,6 +5990,16 @@ ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-s
 .new-chat-section .message-writing-wrap .attach-file{height: 34px;}
 .messagePart ul li .badge.connection-badge{font-size:10px;font-weight: normal;padding: 0;width:19px;height: 19px;text-align: center;line-height: 19px;border-radius:100%;margin-right: 7px;display: block;width: 19px !important;}
 
+.header-notify:hover a span{display: none;}
+
+.MyGroups-list.with-right-button button{font-size: 10px !important;
+padding: 9px 22px;
+text-transform: uppercase;position: absolute;right:0;top:50%;transform: translateY(-50%);width: 165px;}
+.MyGroups-list.with-right-button .right-side{padding-right:170px;position: relative;width:calc(100% - 105px) !important;}
+
+.btn.btn-primary.attend-hub-button{font-size: 10px !important;padding: 9px 22px;text-transform: uppercase;margin-top: 15px;}
+
+
 .feedhover {left: 0 !important;}
 .navbar-nav > li > .dropdown-menu.new-msg-dropdown .view-all{font-size: 10px !important;
     text-transform: uppercase;
@@ -6162,4 +6172,6 @@ ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-s
     border-radius: 0 !important;
     border: none !important;
   }
+  .MyGroups-list.with-right-button button{position: relative;right:auto;top:0;transform: none;margin-top:10px}
+  .MyGroups-list.with-right-button .right-side{padding-right: 0}
 }
