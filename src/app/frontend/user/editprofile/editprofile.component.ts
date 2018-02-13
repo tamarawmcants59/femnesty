@@ -38,7 +38,7 @@ export class EditprofileComponent implements OnInit {
   reqSuccessMsg: string = '';
   userTabActiveStr: string = '';
   public minDate = new Date();
-  public validAge = false;
+  public validAge = true;
   public loading = false;
   public loginUserDet: any;
   public userPostList = [];
@@ -57,6 +57,12 @@ export class EditprofileComponent implements OnInit {
   private connectionsPageSize1 = 5;
   public groupMemberList1 = [];
   public totalmember:number=0;
+  public dayList = [];
+  public dobmonth: any;
+  public dobyear: any;
+  public dobdate: any;
+  public mobnumber: any;
+  public mobcode: any;
 
   prfImageData: any;
   coverImageData: any;
@@ -123,28 +129,27 @@ export class EditprofileComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]],
-			/*email: ['', [
-				Validators.required,
-				//BasicValidators.email
-				Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-			]],*/
-      mobile_number: ['', [
+		  mobcode: ['', [
+        Validators.required,
+        Validators.minLength(2)
+      ]],
+      mobnumber: ['', [
         Validators.required,
         Validators.minLength(10)
       ]],
-      dob: ['', [
+      dobmonth: ['', [
         Validators.required,
-        Validators.minLength(10)
       ]],
-			/*dob: ['', [
-			   Validators.required,
-			   Validators.minLength(3)
-			 ]],
-			country: ['', [
-			   Validators.required,
-			   Validators.minLength(3)
-			 ]],*/
-      state: ['', [
+      dobyear: ['', [
+        Validators.required,
+      ]],
+      dobdate: ['', [
+        Validators.required,
+      ]],
+      website: ['', [
+
+      ]],
+		  state: ['', [
         Validators.required,
         Validators.minLength(3)
       ]],
@@ -164,7 +169,31 @@ export class EditprofileComponent implements OnInit {
         //Validators.required,
         //Validators.minLength(3)
       ]]
-
+      ,
+      email: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      education: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      favourite_quotes: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      marriage_status: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
+      ,
+      children: ['', [
+        //Validators.required,
+        //Validators.minLength(3)
+      ]]
     });
     //console.log(this.cropper);
 
@@ -178,27 +207,71 @@ export class EditprofileComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.groupPostDetData = { activitytype: '', activityid: '' };
 
+    this.dayList.push({ "text": "1", "id": "1" }); this.dayList.push({ "text": "2", "id": "2" }); this.dayList.push({ "text": "3", "id": "3" });
+    this.dayList.push({ "text": "4", "id": "4" }); this.dayList.push({ "text": "5", "id": "5" }); this.dayList.push({ "text": "6", "id": "6" });
+    this.dayList.push({ "text": "7", "id": "7" }); this.dayList.push({ "text": "8", "id": "8" }); this.dayList.push({ "text": "9", "id": "9" });
+    this.dayList.push({ "text": "10", "id": "10" }); this.dayList.push({ "text": "11", "id": "11" }); this.dayList.push({ "text": "12", "id": "12" });
+    this.dayList.push({ "text": "13", "id": "13" }); this.dayList.push({ "text": "14", "id": "14" }); this.dayList.push({ "text": "15", "id": "15" });
+    this.dayList.push({ "text": "16", "id": "16" }); this.dayList.push({ "text": "17", "id": "17" }); this.dayList.push({ "text": "18", "id": "18" });
+    this.dayList.push({ "text": "19", "id": "19" }); this.dayList.push({ "text": "20", "id": "20" }); this.dayList.push({ "text": "21", "id": "21" });
+    this.dayList.push({ "text": "22", "id": "22" }); this.dayList.push({ "text": "23", "id": "23" }); this.dayList.push({ "text": "24", "id": "25" });
+    this.dayList.push({ "text": "25", "id": "25" }); this.dayList.push({ "text": "26", "id": "26" }); this.dayList.push({ "text": "27", "id": "27" });
+    this.dayList.push({ "text": "28", "id": "28" }); this.dayList.push({ "text": "29", "id": "29" }); this.dayList.push({ "text": "30", "id": "30" });
+    this.dayList.push({ "text": "31", "id": "31" });
+
     this.getUserDetails();
     this.getUserPostDetails();
     this.getConnectionList();
     this.getPendingFrndList();
     this.submitSearchUser();
   }
-  public calculateAge(birthday) {
-    var today = new Date();
-    var birthDate = new Date(birthday);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+  
+  public calculateAge(event, type) {
+    var IsCheck = false;
+    if (type == 'y') {
+      if (this.dobdate && this.dobmonth) {
+        IsCheck = true;
+      }
     }
-    if (age >= 16) {
-      this.validAge = true;
+    else if (type == 'm') {
+      if (this.dobdate && this.dobyear) {
+        IsCheck = true;
+      }
     }
-    else {
-      this.validAge = false;
+    else if (type == 'd') {
+      if (this.dobmonth && this.dobyear) {
+        IsCheck = true;
+      }
     }
+    if (IsCheck) {
+      var birthday;
+      if (type == 'y') {
+        birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
+      }
+      else if (type == 'm') {
+        birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
+      }
+      else if (type == 'd') {
+        birthday = this.dobyear + "/" + this.dobmonth + "/" + this.dobdate;
+      }
+
+      var today = new Date();
+      var birthDate = new Date(birthday);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      if (age >= 16) {
+        this.validAge = true;
+      }
+      else {
+        this.validAge = false;
+      }
+    }
+
   }
+
   public getConnectionList() {
     const loginUserId = localStorage.getItem("loginUserId");
     if (loginUserId != '') {
@@ -265,8 +338,24 @@ export class EditprofileComponent implements OnInit {
           //console.log(details);
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
-            if (this.loginUserDet.dob) {
+            /*if (this.loginUserDet.dob) {
               this.loginUserDet.dateOfBirth = new Date(this.loginUserDet.dob);
+            }*/
+            if (this.loginUserDet.dob) {
+              let res = this.loginUserDet.dob.split("-");
+              this.dobmonth = res[1]
+              this.dobyear = res[0]
+              this.dobdate = res[2]
+            }
+            if (this.loginUserDet.mobile_number) {
+              let res = this.loginUserDet.mobile_number.split("-");
+              if (this.mobnumber = res[1]) {
+                this.mobnumber = res[1]
+                this.mobcode = res[0]
+              }else {
+                this.mobnumber = res[0]
+                this.mobcode = '+00';
+              }
             }
           } else {
 
@@ -321,27 +410,21 @@ export class EditprofileComponent implements OnInit {
     const result = {},
       userValue = this.form.value;
     userValue.id = loginUserId;
-    let dateOfBirth;
-    if (this.form.value.dob) {
-      dateOfBirth = this.form.value.dob.getFullYear() + '-' + ('0' + (this.form.value.dob.getMonth() + 1)).slice(-2) + '-'
-        + ('0' + this.form.value.dob.getDate()).slice(-2);
-      userValue.dob = dateOfBirth;
-    }
+    const dateOfBirth = this.form.value.dobyear + '-' + this.form.value.dobmonth + '-' + this.form.value.dobdate;
+    const mobile = this.form.value.mobcode + '-' + this.form.value.mobnumber;
+    userValue.mobile_number = mobile;
+    userValue.dob = dateOfBirth;
+    userValue.noti_settings = "";
 
-    this.dataService.updateAccountDet(userValue)
-      .subscribe(
-      data => {
+    this.dataService.updateAccountDet(userValue).subscribe(data => {
         this.editAbtActiveTab = '';
         const details = data;
-        //console.log
         localStorage.setItem('currentUser', JSON.stringify(details.UserDetails));
         localStorage.setItem('userName', details.UserDetails.first_name);
         localStorage.setItem('profile_image', details.UserDetails.image_url);
         this.loading = false;
         this.successMsg = 'Data updated successfully';
-        if (dateOfBirth)
-          this.loginUserDet.dob = dateOfBirth;
-        //this.router.navigateByUrl('/user/profile');
+        this.loginUserDet.dob = dateOfBirth;
         this.router.navigate(['/user/edit_profile/about']);
       },
       error => {
@@ -349,6 +432,7 @@ export class EditprofileComponent implements OnInit {
       });
 
   }
+
   coverCropperChange(event) {
     $(".upload-demo-wrap").show();
     this.IsShowCropperCoverImage = true;
