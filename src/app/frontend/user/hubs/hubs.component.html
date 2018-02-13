@@ -143,7 +143,7 @@
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='editHub'}">
 								<div class="innerRightPart right-map-details HUB-Dtls">
-									<h2 *ngIf="!title">{{hubDetails.title}}</h2>
+									<h2 *ngIf="!title">{{hubDetails.title}} <span>fields with <i>*</i> are required</span></h2>
 									<div class="alert alert-danger" role="alert" *ngIf="erroMsg">
 										{{erroMsg}}
 									</div>
@@ -153,7 +153,7 @@
 												<img src="assets/images/pencil-icon.png" alt="" />
 											</a>
 										</div>
-										<span>TITLE</span>
+										<span>TITLE<i>*</i></span>
 										<p>{{hubDetails.title}}</p>
 									</div>
 									<div class="item" *ngIf="title">
@@ -359,7 +359,37 @@
 										<span>PRIVACY</span>
 										<p>{{hubDetails.type=='O'?'Public':'Private'}}</p>
 									</div>
-
+									<div class="item item-last">
+										<span>STARTS</span>
+										<p>Monday, 1 February, 12:00 AM - 13:00 AM</p>
+										<input class="styled-checkbox" id="styled-checkbox" type="checkbox">
+                              <label class="acpt-cond-after" for="styled-checkbox">All day event?</label>
+									</div>
+									<div class="item item-last">
+										<span>ENDS</span>
+										<p>Monday, 1 February, 12:00 AM - 13:00 AM</p>										
+									</div>
+									<div class="item item-last">
+										<span>RECURRENCE</span>
+										<div class="clearfix"></div>
+										<input class="styled-checkbox" id="styled-checkbox1" type="checkbox">
+                              <label class="acpt-cond-after" for="styled-checkbox1">Yes</label>
+                              <div class="clearfix"></div>
+                              <input class="styled-checkbox" id="styled-checkbox1" type="checkbox">
+                              <label class="acpt-cond-after" for="styled-checkbox1">No</label>
+									</div>
+									<div class="item item-last">
+										<span>ENDS</span>
+										<p><span>DAY:</span> <em>S</em> <em class="active">M</em> <em>T</em> <em>W</em> <em>T</em> <em>F</em> <em>S</em></p>										
+									</div>
+									<div class="item item-last">
+										<span>ENDS</span>
+										<p><span>STARTS:</span>	12:00 AM	<span style="margin-left:30px;">ENDS:</span> 4:00 PM	</p>									
+									</div>
+									<div class="item item-last">										
+										<p><span>END DATE:</span> Monday, 12 December</p>						
+									</div>
+									
 								</div>
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
