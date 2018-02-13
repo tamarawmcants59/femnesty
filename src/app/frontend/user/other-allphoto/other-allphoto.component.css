@@ -1,4 +1,4 @@
-.img{
+.shareYourThought .img{
 	height: 125px;
 	object-fit: cover;
 	margin-bottom: 14px !important;
@@ -11,12 +11,12 @@
 	padding: 5px 0 5px 15px;
 }
 @media screen and (max-width:767px) {
-.img{
+.shareYourThought .img{
 	object-fit: cover;
 	width: 100%;
 	height: 115px;
 }
-.img img{
+.shareYourThought .img img{
 	width: 100%;
 	height: auto;
 }

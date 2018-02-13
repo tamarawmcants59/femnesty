@@ -278,25 +278,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <label>Favorite Quotes</label>
-                                                <input type="text" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.favourite_quotes" formControlName="favourite_quotes"
-                                                    placeholder="Enter your favourite Quote">
+                                                <textarea type="text" style="width:100%;height:93px" class="form-control-plaintext" *ngIf="loginUserDet" [(ngModel)]="loginUserDet.favourite_quotes" formControlName="favourite_quotes" placeholder="Enter your favourite Quote"></textarea>
                                             </div>
                                         </div>
+                                         <button class="btn btn-primary save-changes-style" type="submit" value="Update" [disabled]="!loginForm.valid && !validAge" >Save Changes</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="middlePart">
+                            <!--<div class="middlePart">
                                 <div class="MyGroups-list">
                                     <h2>
                                         <span>
                                             <button class="btn btn-primary" type="submit" value="Update" [disabled]="!loginForm.valid && !validAge" >Save Changes</button>
-                                            <!--<a class="btn btn-primary">Update</a>-->
+                                           
                                         </span>
                                     </h2>
                                 </div>
-                            </div>
+                            </div>-->
                                 </form>
                                 <!--<div class="new-tabs">
                                     <ul class="nav nav-tabs">
