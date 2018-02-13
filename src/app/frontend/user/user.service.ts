@@ -375,6 +375,10 @@ export class UserService {
   getUserAllNotiData(form_data){
     return this.apiService.post(`/users/appnotificationall`,form_data ).map(data => data);
   }
+
+  getUserUnreadAllNotiData(form_data){
+    return this.apiService.post(`/users/appunreadnotificationall`,form_data ).map(data => data);
+  }
   
   editNotificationById(form_data){
     return this.apiService.post(`/users/appallupdateNotifiisreaded`,form_data ).map(data => data);
