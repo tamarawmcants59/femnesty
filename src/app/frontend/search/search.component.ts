@@ -34,7 +34,8 @@ export class SearchComponent implements OnInit {
 
   public getSearchResult() {
     const dataUserDet = {
-      "keyword": this.searchKeyword
+      "keyword": this.searchKeyword,
+      "user_id": this.isloginUserId
     };
     this.dataService.getUserSearchdata(dataUserDet).subscribe(data => {
       if (data.Ack == "1") {

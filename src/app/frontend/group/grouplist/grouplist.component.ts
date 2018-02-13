@@ -162,7 +162,7 @@ export class GrouplistComponent implements OnInit {
         this.myGrpList = [];
         this.errorMsg = 'No record found.';
       }
-      console.log(this.myGrpList);
+      //console.log(this.myGrpList);
     }, error => {
       console.log("Error");
     });
@@ -175,7 +175,7 @@ export class GrouplistComponent implements OnInit {
     };
     this.dataService.getAllGrpList(this.isloginUserId).subscribe(data => {
       if (data.Ack == "1") {
-        console.log(data.ActiveGroupList);
+        //console.log(data.ActiveGroupList);
         if (data.ActiveGroupList.length > 5) {
           this.IsShowTopViewMore = true;
           this.groupList = [];

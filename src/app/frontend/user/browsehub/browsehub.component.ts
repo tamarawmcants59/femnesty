@@ -123,7 +123,7 @@ export class BrowsehubComponent implements OnInit {
         {
           this.lng = data.lng;
         }
-        
+        //console.log(this.allHubs);
       }
     },
       error => {
@@ -184,6 +184,16 @@ export class BrowsehubComponent implements OnInit {
     // else if (event.keyCode == 38) {
     //   // action
     // }
+  }
+
+  public attendHubDetails(hubId) {
+    const attendData = { hub_id: hubId, user_id: this.loginUserId };
+    this.hubService.attendHub(attendData).subscribe(data => {
+      location.reload();
+    },
+      error => {
+        console.log('Something went wrong!');
+      });
   }
 
 }

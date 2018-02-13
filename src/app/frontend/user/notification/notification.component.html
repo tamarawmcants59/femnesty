@@ -31,9 +31,9 @@
                                 </a>
                                 <div _ngcontent-c5="" class="post-drop-box" *ngIf="IsShowSubMainCommentAction && IsShowSubMainCommentAction[notiData.id]">
                                     <div _ngcontent-c5="" class="closed"><a _ngcontent-c5="" (click)="togglenotiList(notiData.id)"><img _ngcontent-c5="" alt="" src="assets/images/cross.png"></a></div>
-                                    <a _ngcontent-c5="" href="javascript:void(0)" title="Hide Notification">Hide Notification</a>
+                                    <a (click)="notificationAction(notiData.id,'H')" title="Hide Notification">Hide Notification</a>
                                     <a _ngcontent-c5="" href="javascript:void(0)" title="Turn off these notifications"> Turn off these notifications</a>
-                                    <a _ngcontent-c5="" href="javascript:void(0)" title="Mark as unread">Mark as unread </a>
+                                    <a (click)="notificationAction(notiData.id,'R')" title="Mark as unread">Mark as unread </a>
                                 </div>
                             </div>
                           </li>
