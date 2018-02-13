@@ -109,6 +109,13 @@
     height: 25px;
     background-repeat: no-repeat;
 }
+
+.HUB-Dtls .item{padding: 20px 0;margin: 0}
+.HUB-Dtls .item p{margin: 0}
+.HUB-Dtls .item .edit{top:50%;transform: translateY(-50%);}
+
+
+
 @media (min-width: 767px) {
 	.modal-body{
 		padding:10px !important;
