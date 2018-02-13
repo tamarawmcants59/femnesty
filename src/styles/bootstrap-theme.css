@@ -5998,6 +5998,9 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
 .MyGroups-list.with-right-button .right-side{padding-right:170px;position: relative;width:calc(100% - 105px) !important;}
 
 .btn.btn-primary.attend-hub-button{font-size: 10px !important;padding: 9px 22px;text-transform: uppercase;margin-top: 15px;}
+.btn.btn-primary.save-changes-style{display: block;margin: 23px auto 5px;font-size: 11px !important;}
+
+
 
 
 .feedhover {left: 0 !important;}
