@@ -67,11 +67,17 @@
 						<p class="all-hb">ALL HUBS NEAR BY</p>
 						<ul>
 							<li *ngFor="let hub of allHubs">
-								<a [routerLink]="['/user/hub_details/',hub.slug]">
+								<a *ngIf="hub.privacy == 'O' || (hub.privacy == 'P' && (hub.member_type == 1 || hub.member_type == 4))" [routerLink]="['/user/hub_details/',hub.slug]">
 									<div class="round-image" [ngStyle]="{'background-image':'url('+hub.image+')'}"></div>
 								</a>
+								<a *ngIf="hub.privacy == 'P' && hub.member_type == 2" href="Javascript: void(0);">
+									<div class="round-image" [ngStyle]="{'background-image':'url(assets/images/lock.jpg)'}"></div>
+								</a>
 								<aside>
-									<a [routerLink]="['/user/hub_details/',hub.slug]">
+									<a *ngIf="hub.privacy == 'O' || (hub.privacy == 'P' && (hub.member_type == 1 || hub.member_type == 4))" [routerLink]="['/user/hub_details/',hub.slug]">
+										<h2>{{hub.title}}</h2>
+									</a>
+									<a *ngIf="hub.privacy == 'P' && hub.member_type == 2" href="Javascript: void(0);">
 										<h2>{{hub.title}}</h2>
 									</a>
 									<p class="black-text">{{hub.address}}</p>
@@ -79,9 +85,9 @@
 									<p class="red-text" *ngIf="hub.type=='R'">{{hub.recurring_start}} - {{hub.recurring_end}}, {{hub.day}} @ {{hub.start_time}} - {{hub.end_time}}</p>
 									<p class="red-text" *ngIf="hub.type=='R'">Recurring </p>
 									<div class="bottom-links-wrap">
-										<a [routerLink]="['/user/hub_details/',hub.slug]">
+										<a *ngIf="hub.privacy == 'O' || (hub.privacy == 'P' && (hub.member_type == 1 || hub.member_type == 4))" [routerLink]="['/user/hub_details/',hub.slug]">
 											<i class="ion-ios-information-outline"></i> READ MORE</a>
-										<a href="http://www.google.com/calendar/event?
+										<a *ngIf="hub.privacy == 'O' || (hub.privacy == 'P' && (hub.member_type == 1 || hub.member_type == 4))" href="http://www.google.com/calendar/event?
 																	action=TEMPLATE
 																	&text={{hub.title}}
 																	&dates={{hub.startDateString}}/{{hub.endDateString}}
@@ -90,8 +96,11 @@
 																	" target="_blank" rel="nofollow">
 											<i class="ion-android-calendar"></i> ADD TO CALENDAR
 										</a>
+										<a *ngIf="hub.privacy == 'P' && hub.member_type == 2">
+											<i class="ion-ios-information-outline"></i> PRIVATE HUB</a>
 										<div class="clearfix"></div>
-										<button class="btn btn-primary attend-hub-button" type="button">ATTEND HUB</button>
+										<button *ngIf="hub.privacy == 'O' && hub.member_type == 2" class="btn btn-primary attend-hub-button" type="button" (click)="attendHubDetails(hub.id)">ATTEND HUB</button>
+										<button *ngIf="hub.privacy == 'P' && hub.member_type == 2" class="btn btn-primary attend-hub-button" type="button" (click)="attendHubDetails(hub.id)">REQUEST TO ATTEND</button>
 									</div>
 								</aside>
 							</li>

@@ -469,4 +469,12 @@ export class UserService {
   {
       return this.apiService.get(`/hub/categories`).map(data => data);
   }
+
+  deleteNotification(data){
+    return this.apiService.post(`/users/app_noti_hide`,data).map(data => data);
+  }
+
+  unreadNotification(data){
+    return this.apiService.post(`/users/app_markas_unread`,data).map(data => data);
+  }
 }
