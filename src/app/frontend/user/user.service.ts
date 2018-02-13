@@ -134,7 +134,7 @@ export class UserService {
   }
   
   getAllGrpList(form_data) {
-    return this.apiService.get(`/users/appactivegrouplist`,form_data).map(data => data);
+    return this.apiService.get(`/users/appactivegrouplist/${form_data}`).map(data => data);
   }
 
   getUserFrndListById(form_data) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../user/user.service";
+import { window } from 'rxjs/operator/window';
 
 @Component({
   selector: 'app-grouplist',
@@ -161,7 +162,7 @@ export class GrouplistComponent implements OnInit {
         this.myGrpList = [];
         this.errorMsg = 'No record found.';
       }
-
+      console.log(this.myGrpList);
     }, error => {
       console.log("Error");
     });
@@ -172,8 +173,9 @@ export class GrouplistComponent implements OnInit {
     const dataUserDet = {
       "user_id": this.isloginUserId
     };
-    this.dataService.getAllGrpList(dataUserDet).subscribe(data => {
+    this.dataService.getAllGrpList(this.isloginUserId).subscribe(data => {
       if (data.Ack == "1") {
+        console.log(data.ActiveGroupList);
         if (data.ActiveGroupList.length > 5) {
           this.IsShowTopViewMore = true;
           this.groupList = [];
@@ -345,4 +347,22 @@ export class GrouplistComponent implements OnInit {
     }
     this.router.navigateByUrl('/group/find');
   }
+
+  public joinGroupRequest(join_grpid) {
+    if (join_grpid != '') {
+        const dataUserDet = {
+          "group_id": join_grpid,
+          "user_id": this.isloginUserId
+        };
+        this.dataService.joinGroupRequestByUser(dataUserDet).subscribe(data => {
+          //console.log(data);
+          //this.router.navigateByUrl('/group/find');
+          location.reload();
+        },
+        error => {
+
+        });
+    }
+  }
+
 }
