@@ -57,7 +57,7 @@
                             <a style="margin: 10px 0 0 0" href="javascript:void(0)" *ngIf="IsShowNothingForMy">Nothing More to Show</a>
                         </div>
                         <div #topGroupsList *ngIf="IsShowTopGrp">
-                            <div class="MyGroups-list">
+                            <div class="MyGroups-list with-right-button">
                                 <h5 class="mt-0">TOP GROUPS</h5>
                                 <ul class="search-list">
                                     <li *ngFor="let grpData of groupList">
@@ -73,6 +73,7 @@
                                             <!-- <p class="txt-red">By {{grpData.name}}</p> -->
                                             <p class="txt-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>
                                             <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
+                                            <button _ngcontent-c0="" class="btn btn-primary" type="button">JOIN GROUP</button>
                                         </div>
                                     </li>
                                 </ul>
