@@ -314,11 +314,31 @@
                                     <a [routerLink]="['/user/chat/list']" class="view-all">VIEW ALL</a>
                                 </div>
                             </li>
-                            <li class="sp-hover">
+                            <li ngbDropdown class="dropdown sp-hover">
                                 <a [routerLink]="['/user/notification']">
                                     <i class="icon ion-android-globe"></i>
-                                    <span *ngIf="userNotiCnt > 0" class="badge" style="background-color:red">{{userNotiCnt}}</span>
+                                    <span *ngIf="userNotiCnt > 0" class="badge notiCntCls" style="background-color:red">{{userNotiCnt}}</span>
                                 </a>
+                                <div ngbDropdownMenu class="dropdown-menu msg-item-worp new-msg-dropdown" aria-labelledby="dropdownMenuButton">
+                                    <div class="text-top"><span>LATEST MESSAGES</span> <!--<b>NEW MESSAGE</b>--></div>
+                                    <div class="innr" *ngIf="allNotiData && allNotiData.length > 0">
+                                        <a href="{{notiData.link}}" [ngClass]="{'unread':notiData.is_view == '0'}" *ngFor="let notiData of allNotiData" class="msg-item notify-box-top">
+                                            <img class="img" *ngIf="notiData.profile_image" src="{{notiData.profile_image}}" />
+                                            <div class="txt">
+                                                <div class="upr">
+                                                    <div class="name">{{notiData.name}} </div>
+                                                    <div class="time">{{notiData.created_date | date}}</div>
+                                                </div>
+                                                <div class="msg">{{notiData.message}}</div>
+                                            </div>
+                                        </a>
+                                        <!-- <a href="" class="viewall">View all</a> -->
+                                    </div>
+                                    <div class="innr" *ngIf="allNotiData && allNotiData.length == 0">
+                                        <p>No notification found.</p>
+                                    </div>
+                                    <a *ngIf="allNotiData && allNotiData.length > 0" [routerLink]="['/user/notification']" class="view-all">VIEW ALL</a>
+                                </div>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav user-account">

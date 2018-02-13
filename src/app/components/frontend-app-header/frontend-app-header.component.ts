@@ -18,6 +18,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class FrontendAppHeader {
   pageConData = [];
   artCatData = [];
+  allNotiData = [];
   public loginForm: FormGroup;
   HeaderNavCls: string = '';
   HeaderTopCls: string = '';
@@ -494,7 +495,7 @@ export class FrontendAppHeader {
         const details = data;
         if (details.Ack == "1") {
           this.currentUserDet = details.UserDetails[0];
-          //console.log(this.currentUserDet);
+          this.myAllNotificationList();
         }
       },
         error => {
@@ -504,4 +505,32 @@ export class FrontendAppHeader {
     }
 
   }
+  
+  public myAllNotificationList(){
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "user_id": parseInt(loginUserId)
+      };
+      if(this.userNotiCnt>0){
+        this.loginService.getUserUnreadAllNotiData(dataUserDet).subscribe(data => {
+          if (data.Ack == "1") {
+            this.allNotiData = data.AllNotification;
+          }
+        },
+        error => {
+        });
+      }else{
+        this.loginService.getUserAllNotiData(dataUserDet).subscribe(data => {
+          if (data.Ack == "1") {
+            this.allNotiData = data.AllNotification;
+          }
+        },
+        error => {
+        });
+
+      }
+    } 
+  }
+  
 }
