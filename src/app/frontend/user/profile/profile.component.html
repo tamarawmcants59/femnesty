@@ -54,18 +54,25 @@
                       <div class="tab-content">
                           <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                               <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
-                              <div class="allpost" *ngIf="userPostList?.length > 0">
+                              <div class="allpost" *ngIf="userPostList?.length > 0 && (otherProfileDet?.id==isloginUserId || checkIsFriend)">
                                   <div class="likePart" *ngFor="let postData of userPostList">
                                       <app-post-card [postData]="postData"></app-post-card>
                                   </div>
                               </div>
-                              <div class="likePart" *ngIf="userPostList?.length == 0">
+                              <div class="likePart" *ngIf="userPostList?.length == 0 && (checkIsFriend || otherProfileDet?.id==isloginUserId)">
                                   <div class="row">
                                       <div class="col-md-10">
-                                          <div class="nothing">Nothing more to show</div>
+                                          <div class="nothing">Nothing more to show.</div>
                                       </div>
                                   </div>
                               </div>
+                              <div class="likePart" *ngIf="!checkIsFriend && otherProfileDet?.id!=isloginUserId">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="nothing">You have no permission to show the activiety.</div>
+                                    </div>
+                                </div>
+                            </div>
                           </div>
                           <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
                             <div class="new-tabs">
