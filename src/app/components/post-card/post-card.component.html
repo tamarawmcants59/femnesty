@@ -3,13 +3,16 @@
         <div class="col-md-10">
             <div class="imageParts">
                 <div class="profImageP">
-                    <a [routerLink]="['/user/profile',postData.display_name]">
+                    <a *ngIf="postData.post_type != 3" [routerLink]="['/user/profile',postData.display_name]">
                         <div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div>
                     </a>
-
+                    <a *ngIf="postData.post_type == 3">
+                        <div class="img" [ngStyle]="{'background-image':'url(assets/images/anonymous.jpg)'}"></div>
+                        <!-- <img class="img" src="assets/images/anonymous.jpg" alt="" /> -->
+                    </a>
                 </div>
                 <div class="profTextPart">
-                    <a [routerLink]="['/user/profile',postData.display_name]">
+                    <a *ngIf="postData.post_type != 3" [routerLink]="['/user/profile',postData.display_name]">
                         <h2>{{postData.name}}</h2>
                     </a>
                     <!-- <p>{{postData.created_date_mod}}</p> -->
@@ -81,9 +84,13 @@
                     <li>
                         <a href="javascript: void(0);">{{postData.commentcount}} Comments</a>
                     </li>
-                    <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==2">
-                        <a href="javascript: void(0);">
-                            <i style="font-size: 16px;" class="ion-ios-people"></i> Connection</a>
+                    <li >
+                        <a href="javascript: void(0);" *ngIf=" postData.post_type==2">
+                            <i style="font-size: 16px;" class="ion-ios-people"></i> Connection Only</a>
+                            <a href="javascript: void(0);" *ngIf=" postData.post_type==1">
+                                <i style="font-size: 16px;" class="ion-ios-people"></i> Members</a>
+                                <a href="javascript: void(0);" *ngIf=" postData.post_type==3">
+                                    <i style="font-size: 16px;" class="ion-ios-people"></i> Anonymous</a>
                     </li>
                     <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1">
                         <a href="javascript: void(0);">
