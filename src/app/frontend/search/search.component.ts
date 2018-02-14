@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FrontendService } from "../../components/frontend-app-header/frontend.service"
+import { UserService } from "../user/user.service";
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -14,6 +15,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private dataService: FrontendService,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
     private router: Router
@@ -46,5 +48,21 @@ export class SearchComponent implements OnInit {
       error => {
 
       });
+  }
+
+  public joinGroupRequest(join_grpid) {
+    if (join_grpid != '') {
+        const dataUserDet = {
+          "group_id": join_grpid,
+          "user_id": this.isloginUserId
+        };
+        this.userService.joinGroupRequestByUser(dataUserDet).subscribe(data => {
+          //location.reload();
+          this.getSearchResult();
+        },
+        error => {
+
+        });
+    }
   }
 }
