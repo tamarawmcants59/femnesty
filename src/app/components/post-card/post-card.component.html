@@ -98,6 +98,9 @@
                 <!--<a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>-->
+                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
+                    Block
+                </a>
                 <a href="javascript:void(0)" *ngIf="IsloginUserId != postData.user_id" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
                     Report
                 </a>

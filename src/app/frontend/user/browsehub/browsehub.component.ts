@@ -19,7 +19,7 @@ export class BrowsehubComponent implements OnInit {
   private search_con;
   public search_date;
   public latestArticles = [];
-  public search_data = { keyword: '', cat_id: '', search_date: '' };
+  public search_data = { keyword: '', cat_id: '', search_date: '',currentLat:'', currentLng:''};
   constructor(private hubService: HubService, private dataService: UserService, ) {
     this.loginUserId = localStorage.getItem("loginUserId");
   }
@@ -94,7 +94,10 @@ export class BrowsehubComponent implements OnInit {
     {
       this.currentLng="";
     }
-    const data={search_data:this.search_data,currentLat:this.currentLat,currentLng:this.currentLng};
+    //const data={search_data:this.search_data,currentLat:this.currentLat,currentLng:this.currentLng};
+    const data=this.search_data;
+    data.currentLat=this.currentLat;
+    data.currentLng=this.currentLng;
     this.hubService.getAllHubs(this.loginUserId, data).subscribe(data => {
       if (data.Ack == 1) {
         this.allHubs = data.details;
