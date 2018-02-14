@@ -465,6 +465,11 @@ export class UserService {
   {
     return this.apiService.post(`/users/appLeaveGroup`,data).map(data => data);
   }
+  
+  checkTheBlockUser(data){
+    return this.apiService.post(`/enrichment/app_blocktruefalse`,data).map(data => data);
+  }
+
   getHubCategories()
   {
       return this.apiService.get(`/hub/categories`).map(data => data);
