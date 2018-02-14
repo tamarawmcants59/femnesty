@@ -97,6 +97,7 @@ export class PostCreateComponent implements OnInit {
           this.loading = false;
           this.successMsg = 'Successfully posted.';
           this.postImgData='';
+          this.is_connection=2;
           this.postform.controls['description'].setValue('');
           this._postListnerService.onPostAdd('add');
           this.getUserPostDetails.emit();
