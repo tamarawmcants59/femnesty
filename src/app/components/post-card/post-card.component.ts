@@ -166,13 +166,19 @@ export class PostCardComponent implements OnInit {
     this.delPostKey = delkey;
     this.modalService.open(confirmmodal);
   }
-  blockUser(blockConfirmModal, post_id, type, comments = null, delkey = null)
+  /*blockUser(blockConfirmModal, post_id, type, comments = null, delkey = null)
   {
     this.IsShowOption= !this.IsShowOption;
     this.blockPostId = post_id;
     this.blockPostType = type;
     this.blockPostData = comments;
     this.blockPostKey = delkey;
+    this.modalService.open(blockConfirmModal);
+  }*/
+  public blockUser(blockConfirmModal, post_id, type){
+    this.IsShowOption= !this.IsShowOption;
+    this.blockPostId = post_id;
+    this.blockPostType = type;
     this.modalService.open(blockConfirmModal);
   }
   report(reportConfirmModal, post_id, type, comments = null, delkey = null)
@@ -233,20 +239,28 @@ export class PostCardComponent implements OnInit {
       "login_id":this.IsloginUserId
       }
       this.loading=true;
-      this.dataService.blockPost(data).subscribe(data => {
-        if (data.Ack == "1") {
-         this.loading=false;
-         if (this.blockPostKey != null) {
-          this.blockPostData[this.blockPostKey].hide_div = true;
-        } else {
-          this.blockPostData.hide_post_div = true;
-        }
-        location.reload();
-        }
-      }, error => {
-        this.loading=false;
-        console.log(error);
-      })
+      if(this.blockPostType=='P'){
+        this.dataService.blockPost(data).subscribe(data => {
+          if (data.Ack == "1") {
+            this.loading=false;
+            location.reload();
+          }
+        }, error => {
+          this.loading=false;
+          console.log(error);
+        })
+      }else if(this.blockPostType=='C'){
+        this.dataService.blockComment(data).subscribe(data => {
+          if (data.Ack == "1") {
+            this.loading=false;
+            location.reload();
+          }
+        }, error => {
+          this.loading=false;
+          console.log(error);
+        })
+      }
+      
   }
   confirmPostDelete() {
     let data = { "post_id": this.delPostId, "post_type": this.delPostType };

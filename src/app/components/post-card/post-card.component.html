@@ -1,47 +1,3 @@
-<!--<div class="likePop">
-<div class="item">
-
-<div class="row">
-    <div class="col-md-8">
-        <div class="imageParts">
-            <div class="profImageP">
-                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
-            </div>
-            <div class="profTextPart">
-                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
-                <p>{{postData.created_date_mod}}</p>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <p style="text-align: right;"><button _ngcontent-c2="" class="btn btn-primary" type="submit">View Profile</button></p>
-    </div>
-</div>
-</div>
-	<div class="item">
-<div class="row">
-    <div class="col-md-8">
-        <div class="imageParts">
-            <div class="profImageP">
-                <a [routerLink]="['/user/profile',postData.display_name]"><div class="img" [ngStyle]="{'background-image':'url('+postData.profile_image+')'}"></div></a>
-            </div>
-            <div class="profTextPart">
-                <a [routerLink]="['/user/profile',postData.display_name]"><h2>{{postData.name}}</h2></a>
-                <p>{{postData.created_date_mod}}</p>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <p style="text-align: right;"><button _ngcontent-c2="" class="btn btn-primary" type="submit">View Profile</button></p>
-    </div>
-</div>
-</div>
-</div>-->
-<!--<button mat-button (click)="openDialog()">Open dialog</button>
-<button mat-raised-button (click)="openDialog()">Pick one</button>-->
-
 <div class="likePart" *ngIf="!postData.hide_post_div">
     <div class="row">
         <div class="col-md-10">
@@ -98,7 +54,7 @@
                 <!--<a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>-->
-                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
+                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P')">
                     Block
                 </a>
                 <a href="javascript:void(0)" *ngIf="IsloginUserId != postData.user_id" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
@@ -234,6 +190,10 @@
                                                 <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>-->
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId == cmtList.user_id" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId == cmtList.user_id" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">Delete</a>
+                                                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtList.user_id)" title="Block" (click)="blockUser(blockConfirmModal,cmtList.id,'C')">
+                                                    Block
+                                                </a>
+
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtList.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtList.id,'C')">
                                                     Report
                                                 </a>
@@ -299,8 +259,11 @@
                                                     </a>-->
                                                     <div class="post-drop-box" *ngIf="IsShowSubCommentAction && IsShowSubCommentAction[cmtReply.id]">
                                                         <div class="closed"><a (click)="toggleSubComment(cmtReply.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
-                										<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">Edit</a>
-                                                        <a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtReply.user_id)" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
+                										<a href="javascript:void(0)" *ngIf=" IsloginUserId == cmtReply.user_id" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">Edit</a>
+                                                        <a href="javascript:void(0)" *ngIf=" IsloginUserId == cmtReply.user_id" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
+                                                        <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtReply.user_id)" title="Block" (click)="blockUser(blockConfirmModal,cmtReply.id,'C')">
+                                                            Block
+                                                        </a>
                                                         <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtReply.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtReply.id,'C')">
                                                             Report
                                                         </a>
