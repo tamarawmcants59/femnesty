@@ -86,13 +86,13 @@
               
             <div class="post-drop-box" *ngIf="IsShowListOption">
             	<div class="closed"><a (click)="togglePostOptions()" ><img src="assets/images/cross.png" alt="" /></a></div>
-                <a title="Edit" href="javascript:void(0)" (click)="select_post_type(2)">
+                <a title="Edit" href="javascript:void(0)" (click)="select_post_type(2);togglePostOptions()">
                     Connection Only
                 </a>
-                <a href="javascript:void(0)" (click)="select_post_type(1)">
+                <a href="javascript:void(0)" (click)="select_post_type(1);togglePostOptions()">
                     Members
                 </a>
-                <a href="javascript:void(0)" (click)="select_post_type(3)">
+                <a href="javascript:void(0)" (click)="select_post_type(3);togglePostOptions()">
                     Anonymous
                 </a>
             </div>
