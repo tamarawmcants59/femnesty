@@ -227,11 +227,10 @@ export class PostCardComponent implements OnInit {
       });
   }
 
-  confirmBlock()
-  {
+  public confirmBlock(){
     let data={
-      "id":this.blockPostId,
-      "user_id":this.IsloginUserId
+      "postid":this.blockPostId,
+      "login_id":this.IsloginUserId
       }
       this.loading=true;
       this.dataService.blockPost(data).subscribe(data => {
@@ -242,6 +241,7 @@ export class PostCardComponent implements OnInit {
         } else {
           this.blockPostData.hide_post_div = true;
         }
+        location.reload();
         }
       }, error => {
         this.loading=false;
