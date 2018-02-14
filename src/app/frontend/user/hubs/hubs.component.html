@@ -107,7 +107,7 @@
 												<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
 										</p>
 										<p *ngIf="hubDetails.type!='R'">
-											<em>{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+											{{hubDetails.hub_date}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}
 										</p>
 									</div>
 									<div class="item">
@@ -219,14 +219,14 @@
 										<span *ngIf="hubDetails.type=='R'">STARTS<i>*</i></span>
 										<span *ngIf="hubDetails.type!='R'">DATE<i>*</i></span>
 										<p *ngIf="hubDetails.type=='R'">
-											<em>{{hubDetails.recurring_start | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+											{{hubDetails.recurring_start | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}
 										</p>
 										<p *ngIf="hubDetails.type!='R'">
-											<em>{{hubDetails.hub_date_new | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+											{{hubDetails.hub_date_new | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}
 										</p>
 										<span *ngIf="hubDetails.type=='R'">ENDS<i>*</i></span>
 										<p *ngIf="hubDetails.type=='R'">
-											<em>{{hubDetails.recurring_end | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+											{{hubDetails.recurring_end | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}
 										</p>
 									</div>
 									<div class="item" *ngIf="isShowPicker && hubDetails.type=='O'">
