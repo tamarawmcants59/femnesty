@@ -67,7 +67,7 @@ export class SocialService {
   }
 
   blockComment(data){
-    return this.apiService.post(`/enrichment/app_block_post`,data).map(data => data);
+    return this.apiService.post(`/enrichment/app_block_comment`,data).map(data => data);
   }
 
   reportPost(data)
