@@ -74,9 +74,9 @@
             </a>                  			
                         </p>
                     </li>-->
-                    <li *ngIf="postType.activitytype==''">
+                    <li>
                         <p class="connectionsonly-check">	
-	                        	<label for="ConnectionsOnly"> Connections Only </label>
+	                        	<label for="ConnectionsOnly"> {{selected_post_type}} </label>
 	                        	   <a class="icondown" href="javascript:void(0)" (click)="togglePostOptions()">
                 					<i class="icon ion-chevron-down"></i>
             					  </a>                  			
@@ -86,11 +86,14 @@
               
             <div class="post-drop-box" *ngIf="IsShowListOption">
             	<div class="closed"><a (click)="togglePostOptions()" ><img src="assets/images/cross.png" alt="" /></a></div>
-                <a title="Edit" href="javascript:void(0)">
-                    Edit
+                <a title="Edit" href="javascript:void(0)" (click)="select_post_type(2)">
+                    Connection Only
                 </a>
-                <a href="javascript:void(0)">
-                    Delete
+                <a href="javascript:void(0)" (click)="select_post_type(1)">
+                    Members
+                </a>
+                <a href="javascript:void(0)" (click)="select_post_type(3)">
+                    Anonymous
                 </a>
             </div>
 					 <!--<div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Thoughts Required</div>-->
