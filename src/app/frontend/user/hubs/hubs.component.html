@@ -162,7 +162,7 @@
 												<img src="assets/images/check-icon.png" alt="" />
 											</a>
 										</div>
-										<span>TITLE</span>
+										<span>TITLE<i>*</i></span>
 										<div class="form-group">
 											<input class="form-control" type="text" [(ngModel)]="title" *ngIf="title">
 										</div>
@@ -216,14 +216,17 @@
 												<img src="assets/images/pencil-icon.png" alt="" />
 											</a>
 										</div>
-										<span>DATE</span>
+										<span *ngIf="hubDetails.type=='R'">STARTS<i>*</i></span>
+										<span *ngIf="hubDetails.type!='R'">DATE<i>*</i></span>
 										<p *ngIf="hubDetails.type=='R'">
-											<em>{{hubDetails.recurring_start}} to {{hubDetails.recurring_end}},
-												<br/> {{hubDetails.day}},
-												<br/> {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+											<em>{{hubDetails.recurring_start | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
 										</p>
 										<p *ngIf="hubDetails.type!='R'">
-											<em>{{hubDetails.hub_date_new}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+											<em>{{hubDetails.hub_date_new | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
+										</p>
+										<span *ngIf="hubDetails.type=='R'">ENDS<i>*</i></span>
+										<p *ngIf="hubDetails.type=='R'">
+											<em>{{hubDetails.recurring_end | dateTimeFormat: 'MMM dd, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</em>
 										</p>
 									</div>
 									<div class="item" *ngIf="isShowPicker && hubDetails.type=='O'">
@@ -232,7 +235,7 @@
 												<img src="assets/images/check-icon.png" alt="" />
 											</a>
 										</div>
-										<span>DATE</span>
+										<span>DATE<i>*</i></span>
 										<div class="form-group">
 											<ngx-date-picker class="" *ngIf="editDate" [(ngModel)]="editDate" [disableInput]="true" [min]="minDate"></ngx-date-picker>
 											<ngx-time-picker [disableInput]="true" *ngIf="start_time" [(ngModel)]="start_time"></ngx-time-picker>
@@ -245,7 +248,7 @@
 												<img src="assets/images/check-icon.png" alt="" />
 											</a>
 										</div>
-										<span>DATE</span>
+										<span>DATE<i>*</i></span>
 										<div class="form-group">
 											<ngx-date-picker class="" *ngIf="editDate" [(ngModel)]="editDate" [disableInput]="true"></ngx-date-picker>
 											<ngx-date-picker class="" *ngIf="recurring_end" [(ngModel)]="recurring_end" [disableInput]="true"></ngx-date-picker>
@@ -280,7 +283,7 @@
 												<img src="assets/images/pencil-icon.png" alt="" />
 											</a>
 										</div>
-										<span>EMAIL</span>
+										<span>EMAIL<i>*</i></span>
 										<p>{{hubDetails.email}}</p>
 									</div>
 
@@ -290,7 +293,7 @@
 												<img src="assets/images/check-icon.png" alt="" />
 											</a>
 										</div>
-										<span>EMAIL</span>
+										<span>EMAIL<i>*</i></span>
 										<div class="form-group">
 											<input class="form-control" type="email" [(ngModel)]="email" *ngIf="email">
 										</div>
@@ -359,37 +362,43 @@
 										<span>PRIVACY</span>
 										<p>{{hubDetails.type=='O'?'Public':'Private'}}</p>
 									</div>
+									<div *ngIf="hubDetails.type=='R'">
 									<div class="item item-last">
 										<span>STARTS</span>
-										<p>Monday, 1 February, 12:00 AM - 13:00 AM</p>
+										<p>{{hubDetails.day}}, {{hubDetails.recurring_start | dateTimeFormat: 'dd MMM, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}} </p>
 										<input class="styled-checkbox" id="styled-checkbox" type="checkbox">
-                              <label class="acpt-cond-after" for="styled-checkbox">All day event?</label>
+                              <!--<label class="acpt-cond-after" for="styled-checkbox">All day event?</label>-->
 									</div>
 									<div class="item item-last">
 										<span>ENDS</span>
-										<p>Monday, 1 February, 12:00 AM - 13:00 AM</p>										
+										<p>{{hubDetails.day}}, {{hubDetails.recurring_end | dateTimeFormat: 'dd MMM, yyyy'}}, {{hubDetails.start_time}} - {{hubDetails.end_time}}</p>										
 									</div>
-									<div class="item item-last">
+									<!--<div class="item item-last">
 										<span>RECURRENCE</span>
 										<div class="clearfix"></div>
 										<input class="styled-checkbox" id="styled-checkbox1" type="checkbox">
-                              <label class="acpt-cond-after" for="styled-checkbox1">Yes</label>
-                              <div class="clearfix"></div>
-                              <input class="styled-checkbox" id="styled-checkbox1" type="checkbox">
-                              <label class="acpt-cond-after" for="styled-checkbox1">No</label>
+										<label class="acpt-cond-after" for="styled-checkbox1">Yes</label>
+										<div class="clearfix"></div>
+										<input class="styled-checkbox" id="styled-checkbox1" type="checkbox">
+										<label class="acpt-cond-after" for="styled-checkbox1">No</label>
+									</div>-->
+									<div class="item item-last">
+										<p><span>DAY:</span> 
+											<em [ngClass]="{'active':hubDetails.day == 'Sunday'}">S</em> 
+											<em [ngClass]="{'active':hubDetails.day == 'Monday'}">M</em> 
+											<em [ngClass]="{'active':hubDetails.day == 'Tuesday'}">T</em> 
+											<em [ngClass]="{'active':hubDetails.day == 'Wednesday'}">W</em> 
+											<em [ngClass]="{'active':hubDetails.day == 'Thursday'}">T</em> 
+											<em [ngClass]="{'active':hubDetails.day == 'Friday'}">F</em>
+											<em [ngClass]="{'active':hubDetails.day == 'Saturday'}">S</em>
+										</p>										
 									</div>
 									<div class="item item-last">
-										<span>ENDS</span>
-										<p><span>DAY:</span> <em>S</em> <em class="active">M</em> <em>T</em> <em>W</em> <em>T</em> <em>F</em> <em>S</em></p>										
+										<p><span>STARTS:</span>	{{hubDetails.start_time}}	<span style="margin-left:30px;">ENDS:</span> {{hubDetails.end_time}}	</p>									
 									</div>
-									<div class="item item-last">
-										<span>ENDS</span>
-										<p><span>STARTS:</span>	12:00 AM	<span style="margin-left:30px;">ENDS:</span> 4:00 PM	</p>									
+									<div class="item item-last">									<p><span>END DATE:</span> {{hubDetails.day}}, {{hubDetails.recurring_end | dateTimeFormat: 'dd MMM'}}</p>		</div>
 									</div>
-									<div class="item item-last">										
-										<p><span>END DATE:</span> Monday, 12 December</p>						
-									</div>
-									
+
 								</div>
 							</div>
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='invite'}">
