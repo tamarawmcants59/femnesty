@@ -21,6 +21,8 @@ export class PostCreateComponent implements OnInit {
   @Output() getUserPostDetails: EventEmitter<any> = new EventEmitter();
   public form: FormGroup;
   public postform: FormGroup;
+  public selected_post_type = 'Connection Only';
+  public is_connection = 2;
   loading: boolean;
   showPostImgDive: boolean;
   successMsg= '';
@@ -78,7 +80,7 @@ export class PostCreateComponent implements OnInit {
     //return false;
   }*/
 
-  public submitPost() {
+  public submitPost() { 
     this.successMsg= '';
     this.errorMsg= '';
     this.loading = true;
@@ -86,6 +88,7 @@ export class PostCreateComponent implements OnInit {
     const result = {},
     userValue = this.postform.value;
     userValue.user_id = loginUserId;
+    userValue.post_type = this.is_connection;
     userValue.file_name = this.postImgData;
     //console.log(userValue);
     if(userValue.description!='' || userValue.file_name!=''){
@@ -130,5 +133,22 @@ export class PostCreateComponent implements OnInit {
   public togglePostOptions(){ 
     this.IsShowListOption= !this.IsShowListOption;
   }
-
+public select_post_type(id)
+{
+  if(id == 1)
+  {
+    this.selected_post_type = 'Members';
+    this.is_connection = 1;
+  }
+  else if(id == 2)
+  {
+    this.selected_post_type = 'Connection Only';
+    this.is_connection = 2;
+  }
+  else if(id==3)
+  {
+    this.selected_post_type = 'Anonymous';
+    this.is_connection = 3;
+  }
+}
 }
