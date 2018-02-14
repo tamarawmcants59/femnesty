@@ -3428,10 +3428,11 @@ background: #fff !important;}
 
 .live-chat .chat-header {
     background: #bb1926;
-    border-radius: 5px 5px 0 0;
+    border-radius: 3px 3px 0 0;
     color: #fff;
     cursor: pointer;
     padding: 0 15px;
+    height: 30px;
 }
 
 .live-chat h4:before {
@@ -3445,7 +3446,10 @@ background: #fff !important;}
 }
 
 .live-chat h4 {
-    font-size: 12px;
+    font-size: 10px;
+    font-family: 'montserratmedium';
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .live-chat h5 {
@@ -3453,19 +3457,32 @@ background: #fff !important;}
     margin-bottom: 0;
     margin-top: 0;
     background: #f8e8e9;
+    color: #414141;
 }
 
 .live-chat form {
-    padding: 10px;
+    padding: 10px 15px;
+    position: relative;
 }
-
+.live-chat form button{
+	background: none;border:0;color:#000000;font-size:10px !important;font-family: 'montserratmedium';text-transform: uppercase;font-weight: normal;position: absolute;right:0;background: url('../assets/images/plus-icon-send.png')no-repeat left center;padding: 0 0 0 20px;text-shadow: none;top: 16px;right: 15px;}
 .live-chat input[type="text"] {
-    border: 1px solid #ccc;
     border-radius: 3px;
     padding: 8px;
     outline: none;
     width: 100%;
+    padding: 0;
+    box-shadow: none;
+    outline: none;
+    border:0;
+    min-height: 27px;
 }
+#live-chat ul#chat-container-popup li{padding: 0 15px;}
+#live-chat ul#chat-container-popup li .round-image-holder{width:34px;height:34px;overflow: hidden;}
+#live-chat ul#chat-container-popup li .round-image-holder img{width:34px;height:34px;object-fit:cover;}
+#live-chat ul#chat-container-popup li .text-area h5{padding: 8px 15px;border-radius: 18px;}
+#live-chat ul#chat-container-popup li.right-section .image-area{margin-right: 0;margin-left:10px;}
+#live-chat ul#chat-container-popup{border-bottom:2px solid #edeced;}
 
 .chat-message-counter {
     background: #e62727;
@@ -3484,9 +3501,8 @@ background: #fff !important;}
 }
 
 .chat-close {
-    background: #fff;
     border-radius: 50%;
-    color: #BB1926;
+    color: #94141f;
     display: block;
     float: right;
     font-size: 13px;
@@ -3494,9 +3510,11 @@ background: #fff !important;}
     line-height: 24px;
     margin: 4px 0 0;
     text-align: center;
-    width: 20px;
+    width: auto;
 }
-
+.chat-close:hover{
+	color:#94141f;
+}
 .chat {
     background: #fff;
     border-left: 1px solid #ddd;

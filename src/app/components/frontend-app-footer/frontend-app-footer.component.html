@@ -97,7 +97,7 @@
             <ul #scrollMe id="chat-container-popup" class="chat-history" *ngIf="chats">
                 <li class="clearfix21 {{chat.cssClass}}" *ngFor="let chat of chats">
                 	<div class="image-area">
-                		<div class="round-image-holder" style="background: url('assets/images/img-1.jpg') no-repeat center center;">
+                		<div class="round-image-holder">
                     	 	<img *ngIf="chat.isSelf" src="{{thisUser.image_url}}" width="32" height="32" alt="" />
                    		 	<img *ngIf="!chat.isSelf" src="{{withUser.image_url}}" width="32" height="32" alt="" />
                    		</div>
@@ -109,13 +109,15 @@
                         <img class="img img-responsive" style="border-radius: 3%" *ngIf="chat.message.image" src="{{chat.message.image}}" />
                         <a *ngIf="chat.message.file" download href="{{chat.message.file}}" class="btn btn-info btn-xs pull-right" target="_blank"><i class="fa fa-fw fa-download"></i> download</a>
                         <div class="clearfix"></div>
-                         <p class="date">{{chat.created | date}}</p>
+                         <!--<p class="date">{{chat.created | date}}</p>-->
+                         
                     </div>
                 </li>
             </ul>
             <form (submit)="sendMessage()">
                 <fieldset>
                     <input name="message" type="text" [(ngModel)]="message" placeholder="Type your message">
+                    <button>SEND</button>
                 </fieldset>
             </form>
         </div>
