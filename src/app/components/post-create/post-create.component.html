@@ -61,7 +61,7 @@
                     <li>
                         <div class="upload-btn-wrapper uploadButtonPart">
                             <button class="btn">Upload Image</button>
-                            <input type="file" name="myfile" (change)="fileChangePost($event)" />
+                            <input type="file" name="myfile" accept="image/x-png,image/gif,image/jpeg" (change)="fileChangePost($event)" />
                         </div>
                     </li>
                    <!-- <li *ngIf="postType.activitytype==''">

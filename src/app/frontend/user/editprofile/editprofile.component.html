@@ -513,12 +513,12 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <h2>Friends</h2>
+                                    <h2>Connections</h2>
                                     <ul class="contn-box" *ngIf="userFrndList?.length > 0">
                                         <li class="friend-box-list" *ngFor="let friendData of userFrndList">
                                             <div class="friend-boxImage">
                                                 <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                    <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                    <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}" style="height: 105px !important;"></div>
                                                 </a>
                                             </div>
                                             <div class="friend-boxText">

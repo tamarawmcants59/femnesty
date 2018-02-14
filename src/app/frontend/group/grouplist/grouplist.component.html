@@ -18,7 +18,7 @@
                             </div>
                             <ul class="search-list">
                                 <li *ngFor="let grpData of myGrpList">
-                                    <a *ngIf="grpData.group_type == 2 || (grpData.group_type == 1 && (grpData.member_type == 1 ||grpData.member_type == 2))" [routerLink]="['/group/details',grpData.group_uname]">
+                                    <a *ngIf="grpData.group_type == 2 || (grpData.group_type == 1 && grpData.member_type != 3)" [routerLink]="['/group/details',grpData.group_uname]">
                                         <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
                                     </a>
                                     <a *ngIf="grpData.group_type == 1 && grpData.member_type == 3" href="Javascript: void(0)">
@@ -35,7 +35,8 @@
                                         <p class="s-desc">{{grpData.short_desc | limitTo : 50}}</p>
                                         <!-- <p class="txt-red">By {{grpData.name}}</p> -->
                                         <!--<p class="text-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>-->
-                                        <button *ngIf="grpData.member_type=='3'" class="btn btn-primary" type="button" (click)="joinGroupRequest(grpData.id)">Request to Join</button>
+                                        <button *ngIf="grpData.group_type == 1  && grpData.member_type=='3'" class="btn btn-primary" type="button" (click)="joinGroupRequest(grpData.id)">Request to Join</button>
+                                        <button *ngIf="grpData.group_type == 2  &&   grpData.member_type=='3'" class="btn btn-primary" type="button" (click)="joinGroupRequest(grpData.id)">Join Group</button>
                                     </div>
                                 </li>
                             </ul>
@@ -67,7 +68,7 @@
                                 <h5 class="mt-0">TOP GROUPS</h5>
                                 <ul class="search-list">
                                     <li *ngFor="let grpData of groupList">
-                                        <a *ngIf="grpData.group_type == 2 || (grpData.group_type == 1 && (grpData.member_type == 1 ||grpData.member_type == 2))" [routerLink]="['/group/details',grpData.group_uname]">
+                                        <a *ngIf="grpData.group_type == 2 || (grpData.group_type == 1 && grpData.member_type != 3)" [routerLink]="['/group/details',grpData.group_uname]">
                                             <div class="left-side" [ngStyle]="{'background-image':'url('+grpData.group_image+')'}"></div>
                                         </a>
                                         <a *ngIf="grpData.group_type == 1 && grpData.member_type == 3" href="Javascript: void(0)">
@@ -86,7 +87,8 @@
                                             
                                             <!--<p class="txt-red">{{grpData.member_type=='1'?'Admin':grpData.member_type=='2'?'Member':'Not Member'}}</p>-->
                                             <!--<a [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>-->
-                                            <button *ngIf="grpData.member_type=='3'" class="btn btn-primary" type="button" (click)="joinGroupRequest(grpData.id)">Request to Join</button>
+                                            <button *ngIf="grpData.group_type == 1  &&   grpData.member_type=='3'" class="btn btn-primary" type="button" (click)="joinGroupRequest(grpData.id)">Request to Join</button>
+                                            <button *ngIf="grpData.group_type == 2  &&   grpData.member_type=='3'" class="btn btn-primary" type="button" (click)="joinGroupRequest(grpData.id)">Join Group</button>
                                         </div>
                                     </li>
                                 </ul>
