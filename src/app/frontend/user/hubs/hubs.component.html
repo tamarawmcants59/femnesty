@@ -67,7 +67,7 @@
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
-								<div>
+								<div *ngIf="((IsGroupAdmin || hubDetails.hub_invite_status=='1') && !isBlockUser)">
 									<app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
 								</div>
 								<div class="allpost" *ngIf="groupPostList?.length > 0">

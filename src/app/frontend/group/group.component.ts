@@ -66,6 +66,7 @@ export class GroupComponent implements OnInit {
   public successMsg: string = '';
   public errorMsg: string = '';
   public isJoinGroup: boolean = true;
+  public isBlockUser: boolean = false;
   public allgroupstatusset = '';
   public loading = false;
   public groupPostDetData: object = {};
@@ -411,11 +412,13 @@ public invitediv = '';
             if (this.isloginUserId == data.GroupDetails[0].user_id) {
               this.IsGroupAdmin = true;
             }
+            
             localStorage.setItem("groupAdmin", data.GroupDetails[0].user_id);
             this.groupPostDetData = { activitytype: '2', activityid: this.isGroupId };
             //this.groupPidData = { 'groupId': this.isGroupId};
             //console.log(this.groupPidData);
             //this.getUserPostDetails();
+            this.checkBlockUser();
             this.getUserPostDetails();
             this.getGroupMemberList();
             this.checkMyFrndList();
@@ -429,6 +432,26 @@ public invitediv = '';
         error => {
 
         });
+    }
+  }
+  
+  public checkBlockUser(){
+    const loginUserId = localStorage.getItem("loginUserId");
+    if(this.isGroupId!=''){
+        let dataUserDet ={
+          "group_id": this.isGroupId,
+          "login_id": loginUserId
+        };
+        //console.log(dataUserDet);
+        this.dataService.checkTheBlockUser(dataUserDet).subscribe(data => {
+            let details=data;
+            if (data.blocked) {
+              this.isBlockUser = true;
+            }
+        },
+        error => {
+          
+        }); 
     }
   }
 

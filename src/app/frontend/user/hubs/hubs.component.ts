@@ -32,6 +32,7 @@ export class HubsComponent implements OnInit {
   public hubList = [];
   recurring_end: any;
   public IsShowCropperCoverImage = false;
+  public isBlockUser: boolean = false;
   croppedImage: any = '';
   public hubSlug = '';
   start_time: any;
@@ -232,7 +233,7 @@ export class HubsComponent implements OnInit {
         this.endDateString = new Date(data.details.end_date).toISOString().replace(/[-:.]/g, "").replace('000Z', "Z");
 
         this.groupPostDetData = { activitytype: '4', activityid: this.hubDetails.id };
-
+        this.checkBlockUser();
         this.getUserPostDetails();
         this.getUnivitedUsers();
       }
@@ -242,6 +243,23 @@ export class HubsComponent implements OnInit {
       });
   }
 
+  public checkBlockUser(){
+    if(this.hubDetails.id!=''){
+        let dataUserDet ={
+          "group_id": this.hubDetails.id,
+          "login_id": this.loginUserId
+        };
+        this.dataService.checkTheBlockUser(dataUserDet).subscribe(data => {
+            let details=data;
+            if (data.blocked) {
+              this.isBlockUser = true;
+            }
+        },
+        error => {
+          
+        }); 
+    }
+  }
 
   public getUserPostDetails() {
     if (this.hubDetails.id != '') {
