@@ -244,7 +244,7 @@ public acceptFriendRequest(request_id) {
         }
       });
       this.totalMyConList = myGrplistData;
-
+//console.log('hello'+this.totalMyConList);
       if (this.totalMyConList.length > 0) {
         this.errorMsg = '';
       }
