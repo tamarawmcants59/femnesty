@@ -7,6 +7,12 @@
               </div>
             </div>
             <div class="col-md-6 flex-middle pd-5">
+					<div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+							{{successMsg}}
+						</div>
+						<div class="alert alert-danger" role="alert" *ngIf="(errorMsg != '')">
+							{{errorMsg}}
+						</div>
 					<form [formGroup]="form" (ngSubmit)="hello(form.value)" class="row form-area" #privacyForm="ngForm">
                 <div class="middlePart">
                      <div class="MyGroups-list">
@@ -19,7 +25,7 @@
 				</div>
 				
                 <div class="middlePart">
-                	<h5>Be found or Not</h5>
+					<h5>Be found or Not</h5>
                 	<div class="f-item">
                 		<div class="desc">
                 			<p>Full Name visible or just First name?</p>
