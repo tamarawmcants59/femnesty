@@ -25,12 +25,12 @@
                 			<p>Full Name visible or just First name?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="name_visible" value="1" [(ngModel)]="get_value.name_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Full Name</label>
+                					<input class="styled-radio" id="test1"  type="radio" formControlName="name_visible" value="1" [(ngModel)]="get_value.name_visible">
+                                	<label class="acpt-cond-after" for="test1">Full Name</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio" formControlName="name_visible" value="2" type="radio" [(ngModel)]="get_value.name_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">First Name Only</label>
+                					<input class="styled-radio" id="test2" formControlName="name_visible" value="2" type="radio" [(ngModel)]="get_value.name_visible">
+                                	<label class="acpt-cond-after" for="test2">First Name Only</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -40,12 +40,12 @@
                 			<p>Want your name to be visible in search engine?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="name_visible_in_search_engine" value="1" [(ngModel)]="get_value.name_visible_in_search_engine">
-                                	<label class="acpt-cond-after" for="styled-checkbox">yes</label>
+                					<input class="styled-radio" id="test3"  type="radio" formControlName="name_visible_in_search_engine" value="1" [(ngModel)]="get_value.name_visible_in_search_engine">
+                                	<label class="acpt-cond-after" for="test3">yes</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="name_visible_in_search_engine" value="0" [(ngModel)]="get_value.name_visible_in_search_engine">
-                                	<label class="acpt-cond-after" for="styled-checkbox">No</label>
+                					<input class="styled-radio" id="test4"  type="radio" formControlName="name_visible_in_search_engine" value="0" [(ngModel)]="get_value.name_visible_in_search_engine">
+                                	<label class="acpt-cond-after" for="test4">No</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -55,12 +55,12 @@
                 			<p>Want to be found by your email address?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="found_email_address" value="1" [(ngModel)]="get_value.found_email_address">
-                                	<label class="acpt-cond-after" for="styled-checkbox">yes</label>
+                					<input class="styled-radio" id="test5"  type="radio" formControlName="found_email_address" value="1" [(ngModel)]="get_value.found_email_address">
+                                	<label class="acpt-cond-after" for="test5">yes</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="found_email_address" value="0" [(ngModel)]="get_value.found_email_address">
-                                	<label class="acpt-cond-after" for="styled-checkbox">No</label>
+                					<input class="styled-radio" id="test6"  type="radio" formControlName="found_email_address" value="0" [(ngModel)]="get_value.found_email_address">
+                                	<label class="acpt-cond-after" for="test6">No</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -70,12 +70,12 @@
                 			<p>Want to be found by your phone number?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="found_phone_number" value="1" [(ngModel)]="get_value.found_phone_number">
-                                	<label class="acpt-cond-after" for="styled-checkbox">yes</label>
+                					<input class="styled-radio" id="test7"  type="radio" formControlName="found_phone_number" value="1" [(ngModel)]="get_value.found_phone_number">
+                                	<label class="acpt-cond-after" for="test7">yes</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="found_phone_number" value="0" [(ngModel)]="get_value.found_phone_number">
-                                	<label class="acpt-cond-after" for="styled-checkbox">No</label>
+                					<input class="styled-radio" id="test8"  type="radio" formControlName="found_phone_number" value="0" [(ngModel)]="get_value.found_phone_number">
+                                	<label class="acpt-cond-after" for="test8">No</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -85,12 +85,12 @@
                 			<p>Want your Profile Picture to be visible?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="profile_picture_picture" value="1" [(ngModel)]="get_value.profile_picture_picture">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test9"  type="radio" formControlName="profile_picture_picture" value="1" [(ngModel)]="get_value.profile_picture_picture">
+                                	<label class="acpt-cond-after" for="test9">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="profile_picture_picture" value="0" [(ngModel)]="get_value.profile_picture_picture">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test10"  type="radio" formControlName="profile_picture_picture" value="0" [(ngModel)]="get_value.profile_picture_picture">
+                                	<label class="acpt-cond-after" for="test10">All Members</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -103,16 +103,16 @@
                 			<p>Have your Date of Birth visible?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="dob_visible" value="2" [(ngModel)]="get_value.dob_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test11"  type="radio" formControlName="dob_visible" value="2" [(ngModel)]="get_value.dob_visible">
+                                	<label class="acpt-cond-after" for="test11">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="dob_visible" value="0" [(ngModel)]="get_value.dob_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test12"  type="radio" formControlName="dob_visible" value="0" [(ngModel)]="get_value.dob_visible">
+                                	<label class="acpt-cond-after" for="test12">All Members</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="dob_visible" value="1" [(ngModel)]="get_value.dob_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Only you</label>
+                					<input class="styled-radio" id="test13"  type="radio" formControlName="dob_visible" value="1" [(ngModel)]="get_value.dob_visible">
+                                	<label class="acpt-cond-after" for="test13">Only you</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -122,16 +122,16 @@
                 			<p>Have your Email address visible?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="email_visible" value="2" [(ngModel)]="get_value.email_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test14"  type="radio" formControlName="email_visible" value="2" [(ngModel)]="get_value.email_visible">
+                                	<label class="acpt-cond-after" for="test14">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="email_visible" value="0" [(ngModel)]="get_value.email_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test15"  type="radio" formControlName="email_visible" value="0" [(ngModel)]="get_value.email_visible">
+                                	<label class="acpt-cond-after" for="test15">All Members</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="email_visible" value="1" [(ngModel)]="get_value.email_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Only you</label>
+                					<input class="styled-radio" id="test16"  type="radio" formControlName="email_visible" value="1" [(ngModel)]="get_value.email_visible">
+                                	<label class="acpt-cond-after" for="test16">Only you</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -141,16 +141,16 @@
                 			<p>Have your mobile number visible?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="phone_visible" value="2" [(ngModel)]="get_value.phone_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test17"  type="radio" formControlName="phone_visible" value="2" [(ngModel)]="get_value.phone_visible">
+                                	<label class="acpt-cond-after" for="test17">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="phone_visible" value="0" [(ngModel)]="get_value.phone_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test18"  type="radio" formControlName="phone_visible" value="0" [(ngModel)]="get_value.phone_visible">
+                                	<label class="acpt-cond-after" for="test18">All Members</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="phone_visible" value="1" [(ngModel)]="get_value.phone_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Only you</label>
+                					<input class="styled-radio" id="test19"  type="radio" formControlName="phone_visible" value="1" [(ngModel)]="get_value.phone_visible">
+                                	<label class="acpt-cond-after" for="test19">Only you</label>
                                 </li>
                 			</ul>
                 		</div>
@@ -190,12 +190,12 @@
                 			<p>Allow your connections to view your activities</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="allow_connetion" value="1" [(ngModel)]="get_value.allow_connetion">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Yes</label>
+                					<input class="styled-radio" id="test20"  type="radio" formControlName="allow_connetion" value="1" [(ngModel)]="get_value.allow_connetion">
+                                	<label class="acpt-cond-after" for="test20">Yes</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="allow_connetion" value="0" [(ngModel)]="get_value.allow_connetion">
-                                	<label class="acpt-cond-after" for="styled-checkbox">No</label>
+                					<input class="styled-radio" id="test21"  type="radio" formControlName="allow_connetion" value="0" [(ngModel)]="get_value.allow_connetion">
+                                	<label class="acpt-cond-after" for="test21">No</label>
                                 </li>
                                 
                 			</ul>
@@ -206,12 +206,12 @@
                 			<p>By default have all your post set as</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="all_post" value="1" [(ngModel)]="get_value.all_post">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test22"  type="radio" formControlName="all_post" value="1" [(ngModel)]="get_value.all_post">
+                                	<label class="acpt-cond-after" for="test22">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="all_post" value="0" [(ngModel)]="get_value.all_post">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test23"  type="radio" formControlName="all_post" value="0" [(ngModel)]="get_value.all_post">
+                                	<label class="acpt-cond-after" for="test23">All Members</label>
                                 </li>
                                 
                 			</ul>
@@ -222,12 +222,12 @@
                 			<p>Your Groups visibility</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="group_visible" value="1" [(ngModel)]="get_value.group_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test24"  type="radio" formControlName="group_visible" value="1" [(ngModel)]="get_value.group_visible">
+                                	<label class="acpt-cond-after" for="test24">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="group_visible" value="0" [(ngModel)]="get_value.group_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test25"  type="radio" formControlName="group_visible" value="0" [(ngModel)]="get_value.group_visible">
+                                	<label class="acpt-cond-after" for="test25">All Members</label>
                                 </li>
                                 
                 			</ul>
@@ -238,12 +238,12 @@
                 			<p>Your Hubs visibility</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="hub_visible" value="1" [(ngModel)]="get_value.hub_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test26"  type="radio" formControlName="hub_visible" value="1" [(ngModel)]="get_value.hub_visible">
+                                	<label class="acpt-cond-after" for="test26">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="hub_visible" value="0" [(ngModel)]="get_value.hub_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test27"  type="radio" formControlName="hub_visible" value="0" [(ngModel)]="get_value.hub_visible">
+                                	<label class="acpt-cond-after" for="test27">All Members</label>
                                 </li>
                                 
                 			</ul>
@@ -254,12 +254,12 @@
                 			<p>Your Photo visibility</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="photo_visible" value="1" [(ngModel)]="get_value.photo_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input class="styled-radio" id="test28"  type="radio" formControlName="photo_visible" value="1" [(ngModel)]="get_value.photo_visible">
+                                	<label class="acpt-cond-after" for="test28">Connections</label>
                                 </li>
                                 <li>
-                					<input  class="styled-radio"  type="radio" formControlName="photo_visible" value="0" [(ngModel)]="get_value.photo_visible">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input  class="styled-radio" id="test29"  type="radio" formControlName="photo_visible" value="0" [(ngModel)]="get_value.photo_visible">
+                                	<label class="acpt-cond-after" for="test29">All Members</label>
                                 </li>
                                 
                 			</ul>
@@ -270,16 +270,16 @@
                 			<p>Who can see your connection list?</p>
                 			<ul>
                 				<li>
-                					<input  class="styled-radio"  type="radio" formControlName="see_connection_list" value="1" [(ngModel)]="get_value.see_connection_list">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Connections</label>
+                					<input  class="styled-radio" id="test30"  type="radio" formControlName="see_connection_list" value="1" [(ngModel)]="get_value.see_connection_list">
+                                	<label class="acpt-cond-after" for="test30">Connections</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="see_connection_list" value="0" [(ngModel)]="get_value.see_connection_list">
-                                	<label class="acpt-cond-after" for="styled-checkbox">All Members</label>
+                					<input class="styled-radio" id="test31"  type="radio" formControlName="see_connection_list" value="0" [(ngModel)]="get_value.see_connection_list">
+                                	<label class="acpt-cond-after" for="test31">All Members</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="see_connection_list" value="2" [(ngModel)]="get_value.see_connection_list">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Only You</label>
+                					<input class="styled-radio" id="test32"  type="radio" formControlName="see_connection_list" value="2" [(ngModel)]="get_value.see_connection_list">
+                                	<label class="acpt-cond-after" for="test32">Only You</label>
                                 </li>
                                 
                 			</ul>
@@ -290,12 +290,12 @@
                 			<p>Have your Name visible when submitting a book reviews?</p>
                 			<ul>
                 				<li>
-                					<input class="styled-radio"  type="radio" formControlName="name_visible_book_review" value="1" [(ngModel)]="get_value.name_visible_book_review">
-                                	<label class="acpt-cond-after" for="styled-checkbox">First Name</label>
+                					<input class="styled-radio" id="test33" type="radio" formControlName="name_visible_book_review" value="1" [(ngModel)]="get_value.name_visible_book_review">
+                                	<label class="acpt-cond-after" for="test33">First Name</label>
                                 </li>
                                 <li>
-                					<input class="styled-radio"  type="radio" formControlName="name_visible_book_review" value="0" [(ngModel)]="get_value.name_visible_book_review">
-                                	<label class="acpt-cond-after" for="styled-checkbox">Femnesty Member</label>
+                					<input class="styled-radio" id="test34" type="radio" formControlName="name_visible_book_review" value="0" [(ngModel)]="get_value.name_visible_book_review">
+                                	<label class="acpt-cond-after" for="test34">Femnesty Member</label>
                                 </li>
                                 
                 			</ul>
