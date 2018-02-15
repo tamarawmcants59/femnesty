@@ -24,13 +24,24 @@
                         </li>
                         <li *ngFor="let grpData of searchData.groupresult">
                             <div *ngIf="grpData.group_type == 1 || (grpData.group_type == 2 && grpData.member_type != 3)" class="left-side" [ngStyle]="{'background-image':'url('+grpData.image+')'}"></div>
-                            <div *ngIf="grpData.group_type == 2 && grpData.member_type == 3" class="left-side" [ngStyle]="{'background-image':'url(assets/images/lock.jpg)'}"></div>
+                            <div *ngIf="grpData.group_type == 2 && grpData.member_type == '3'" class="left-side" [ngStyle]="{'background-image':'url(assets/images/lock.jpg)'}"></div>
                             <div class="right-side">
                               <h4>{{grpData.group_name}}</h4>
                               <small class="text" style="max-height: 32px;overflow:hidden">{{grpData.short_desc}}</small>
-                              <a *ngIf="grpData.member_type != 3" [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
+                              <a *ngIf="grpData.member_type != '3'" [routerLink]="['/group/details',grpData.group_uname]" class="more">View Group</a>
                               <a *ngIf="grpData.group_type == 2  && grpData.member_type=='3'" class="more" (click)="joinGroupRequest(grpData.id)">Request to Join</a>
                               <a *ngIf="grpData.group_type == 1  &&   grpData.member_type=='3'" class="more" (click)="joinGroupRequest(grpData.id)">Join Group</a>
+                            </div>
+                          </li>
+                          <li *ngFor="let hubData of searchData.hubresult">
+                            <div *ngIf="hubData.privacy == 'O' || (hubData.privacy == 'P' && hubData.member_type != '2')" class="left-side" [ngStyle]="{'background-image':'url('+hubData.image+')'}"></div>
+                            <div *ngIf="hubData.privacy == 'P' && hubData.member_type == '2'" class="left-side" [ngStyle]="{'background-image':'url(assets/images/lock.jpg)'}"></div>
+                            <div class="right-side">
+                              <h4>{{hubData.title}}</h4>
+                              <small class="text" style="max-height: 32px;overflow:hidden">{{hubData.description | limitTo : 200}}</small>
+                              <a *ngIf="hubData.member_type != '2'" [routerLink]="['/user/hub_details/',hubData.slug]" class="more">View Hub</a>
+                              <a *ngIf="hubData.privacy == 'O' && hubData.member_type == '2'" class="more" (click)="attendHubDetails(hubData.id)">ATTEND HUB</a>
+                              <a *ngIf="hubData.privacy == 'P' && hubData.member_type == '2'" class="more" (click)="attendHubDetails(hubData.id)">REQUEST TO ATTEND</a>
                             </div>
                           </li>
                       <li *ngFor="let friendData of searchData.userresult">
@@ -72,6 +83,7 @@
                         <li>COMPANYS <span>({{searchData.companyresult?.length}})</span></li>
                         <li>ARTICLES <span>({{searchData.articleresult?.length}})</span></li>
                         <li>GROUPS  <span>({{searchData.groupresult?.length}})</span></li>
+                        <li>HUBS  <span>({{searchData.hubresult?.length}})</span></li>
                         <li>EVENTS <span>({{searchData.eventresult?.length}})</span></li>
                       </ul>
                     </div>

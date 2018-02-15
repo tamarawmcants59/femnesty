@@ -57,7 +57,7 @@
                 <!--<a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>-->
-                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P')">
+                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id) || (checkGrpAdminId == '' && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P')">
                     Block
                 </a>
                 <a href="javascript:void(0)" *ngIf="IsloginUserId != postData.user_id" title="Report" (click)="report(reportConfirmModal,postData.id,'P',postData)">
@@ -85,16 +85,9 @@
                         <a href="javascript: void(0);">{{postData.commentcount}} Comments</a>
                     </li>
                     <li >
-                        <a href="javascript: void(0);" *ngIf=" postData.post_type==2">
-                            <i style="font-size: 16px;" class="ion-ios-people"></i> Connection Only</a>
-                            <a href="javascript: void(0);" *ngIf=" postData.post_type==1">
-                                <i style="font-size: 16px;" class="ion-ios-people"></i> Members</a>
-                                <a href="javascript: void(0);" *ngIf=" postData.post_type==3">
-                                    <i style="font-size: 16px;" class="ion-ios-people"></i> Anonymous</a>
-                    </li>
-                    <li *ngIf="IsloginUserId==postData.user_id && postData.post_type==1">
-                        <a href="javascript: void(0);">
-                            <i class="ion-android-globe"></i> Public</a>
+                        <a href="javascript: void(0);" *ngIf=" postData.post_type==2"> <i style="font-size: 16px;" class="ion-ios-people"></i> Connection Only</a>
+                        <a href="javascript: void(0);" *ngIf=" postData.post_type==1"> <i style="font-size: 16px;" class="ion-android-globe"></i> Members</a>
+                        <a href="javascript: void(0);" *ngIf=" postData.post_type==3"><i style="font-size: 16px;" class="ion-ios-people"></i> Anonymous</a>
                     </li>
                 </ul>
             </div>
@@ -197,7 +190,7 @@
                                                 <!--<a href="javascript:void(0)" *ngIf="IsGroupAdmin || (!IsGroupAdmin && IsloginUserId == cmtList.user_id)" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>-->
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId == cmtList.user_id" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtList,editcommentModal)">Edit</a>
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId == cmtList.user_id" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtList.id,'C',postData.comments,key)">Delete</a>
-                                                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtList.user_id)" title="Block" (click)="blockUser(blockConfirmModal,cmtList.id,'C')">
+                                                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtList.user_id) || (checkGrpAdminId == '' && IsloginUserId != cmtList.user_id)" title="Block" (click)="blockUser(blockConfirmModal,cmtList.id,'C')">
                                                     Block
                                                 </a>
 
@@ -268,7 +261,7 @@
                                                         <div class="closed"><a (click)="toggleSubComment(cmtReply.id)" ><img src="assets/images/cross.png" alt="" /></a></div>
                 										<a href="javascript:void(0)" *ngIf=" IsloginUserId == cmtReply.user_id" title="Edit" class="userSubDelBth" (click)="openCommentEditModal(cmtReply,editcommentModal)">Edit</a>
                                                         <a href="javascript:void(0)" *ngIf=" IsloginUserId == cmtReply.user_id" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
-                                                        <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtReply.user_id)" title="Block" (click)="blockUser(blockConfirmModal,cmtReply.id,'C')">
+                                                        <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtReply.user_id) || (checkGrpAdminId == '' && IsloginUserId != cmtReply.user_id)" title="Block" (click)="blockUser(blockConfirmModal,cmtReply.id,'C')">
                                                             Block
                                                         </a>
                                                         <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtReply.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtReply.id,'C')">
