@@ -22,6 +22,8 @@ export class PostCardComponent implements OnInit {
   public postCmtId: any;
   public subPostCmtId: any;
   public showmore = false;
+  public ignorePostId:any;
+  public ignorePostType:any;
   showPostImgDive: boolean;
   loading = false;
   editPostText: any;
@@ -181,6 +183,14 @@ export class PostCardComponent implements OnInit {
     this.blockPostType = type;
     this.modalService.open(blockConfirmModal);
   }
+
+  public ignorePost(ignoreConfirmModal, post_id, type){
+    //this.IsShowOption= !this.IsShowOption;
+    this.ignorePostId = post_id;
+    this.ignorePostType = type;
+    this.modalService.open(ignoreConfirmModal);
+  }
+
   report(reportConfirmModal, post_id, type, comments = null, delkey = null)
   { this.IsShowOption= !this.IsShowOption;
     this.reportPostId = post_id;
@@ -231,6 +241,35 @@ export class PostCardComponent implements OnInit {
       }, error => {
         this.loading=false;
       });
+  }
+  
+  public confirmIgnore(){
+    let data={
+      "id":this.ignorePostId
+      }
+      this.loading=true;
+      if(this.ignorePostType=='P'){
+        this.dataService.ignorePost(data).subscribe(data => {
+          if (data.Ack == "1") {
+            this.loading=false;
+            location.reload();
+          }
+        }, error => {
+          this.loading=false;
+          console.log(error);
+        })
+      }else if(this.ignorePostType=='C'){
+        this.dataService.ignoreComment(data).subscribe(data => {
+          if (data.Ack == "1") {
+            this.loading=false;
+            location.reload();
+          }
+        }, error => {
+          this.loading=false;
+          console.log(error);
+        })
+      }
+      
   }
 
   public confirmBlock(){

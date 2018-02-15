@@ -65,6 +65,14 @@ export class SocialService {
   blockPost(data){
     return this.apiService.post(`/enrichment/app_block_post`,data).map(data => data);
   }
+  
+  ignorePost(data){
+    return this.apiService.post(`/users/app_user_blockpost`,data).map(data => data);
+  }
+
+  ignoreComment(data){
+    return this.apiService.post(`/users/app_user_ignorecomment`,data).map(data => data);
+  }
 
   blockComment(data){
     return this.apiService.post(`/enrichment/app_block_comment`,data).map(data => data);
