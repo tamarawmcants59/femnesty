@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="tabPart">
-                        <ul class="nav nav-pills" *ngIf="isloginUserId !='' && (groupDetailsData?.group_type=='1' || !isJoinGroup)">
+                        <ul class="nav nav-pills" *ngIf="isloginUserId !='' && (groupDetailsData?.group_type=='1' || !isJoinGroup) && !isBlockUser">
                             <li [ngClass]="{'active' : activeTab=='activity'}">
                                 <a (click)="toggleTab('activity')">Group Activity</a>
                             </li>
@@ -95,25 +95,46 @@
                                 <a (click)="toggleTab('group')">Group Details</a>
                             </li>
                         </ul>
+                        <ul class="nav nav-pills" *ngIf="isBlockUser">
+                            <li [ngClass]="{'active' : activeTab=='activity'}">
+                                <a href="Javascript:void(0);">Group Activity</a>
+                            </li>
+                            <li>
+                                <a href="Javascript:void(0);">Send Message</a>
+                            </li>
+                            <li>
+                                <a href="Javascript:void(0);">Invite Friend</a>
+                            </li>
+                            <li>
+                                <a href="Javascript:void(0);">Group Details</a>
+                            </li>
+                        </ul>
+                        
 
                         <div class="tab-content" *ngIf="(groupDetailsData?.group_type=='1' || !isJoinGroup)">
                             <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                                 <div *ngIf="(groupDetailsData.user_id == isloginUserId || (!isJoinGroup && !isBlockUser))">
                                     <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
                                 </div>
-                                <div class="allpost" *ngIf="groupPostList?.length > 0">
+                                <div class="allpost" *ngIf="groupPostList?.length > 0 && !isBlockUser">
                                     <div *ngFor="let postData of groupPostList">
                                         <app-post-card [postData]="postData"></app-post-card>
                                     </div>
                                 </div>
-                                <div class="likePart" *ngIf="groupPostList?.length == 0">
+                                <div class="likePart" *ngIf="groupPostList?.length == 0 && !isBlockUser">
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="nothing">Nothing more to show</div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="likePart" *ngIf="isBlockUser">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="nothing">Sorry! You have been blocked from this group.</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div id="menu1" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='about'}">
                                 <div class="connectionsPart">

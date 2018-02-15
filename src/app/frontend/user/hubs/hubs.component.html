@@ -51,7 +51,7 @@
 						</p>
 					</div>
 					<div class="tabPart">
-						<ul class="nav nav-pills">
+						<ul class="nav nav-pills" *ngIf="!isBlockUser">
 							<li [ngClass]="{'active':activeTab=='posts'}">
 								<a (click)="activeTab='posts'">Hub Activity</a>
 							</li>
@@ -65,20 +65,39 @@
 								<a (click)="activeTab='invite'">Invite Member</a>
 							</li>
 						</ul>
+						<ul class="nav nav-pills" *ngIf="isBlockUser">
+							<li [ngClass]="{'active':activeTab=='posts'}">
+								<a href="Javascript:void(0);">Hub Activity</a>
+							</li>
+							<li>
+								<a href="Javascript:void(0);">Hub Details</a>
+							</li>
+							<li>
+								<a href="Javascript:void(0);">Invite Member</a>
+							</li>
+						</ul>
+						
 						<div class="tab-content">
 							<div class="tab-pane fade" [ngClass]="{'in active' : activeTab=='posts'}">
 								<div *ngIf="((IsGroupAdmin || hubDetails.hub_invite_status=='1') && !isBlockUser)">
 									<app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
 								</div>
-								<div class="allpost" *ngIf="groupPostList?.length > 0">
+								<div class="allpost" *ngIf="groupPostList?.length > 0 && !isBlockUser">
 									<div *ngFor="let postData of groupPostList">
 										<app-post-card [postData]="postData"></app-post-card>
 									</div>
 								</div>
-								<div class="likePart" *ngIf="groupPostList?.length == 0">
+								<div class="likePart" *ngIf="groupPostList?.length == 0 && !isBlockUser">
 									<div class="row">
 										<div class="col-md-10">
 											<div class="nothing">Nothing more to show</div>
+										</div>
+									</div>
+								</div>
+								<div class="likePart" *ngIf="isBlockUser">
+									<div class="row">
+										<div class="col-md-10">
+											<div class="nothing">Sorry! You have been blocked from this hub.</div>
 										</div>
 									</div>
 								</div>
@@ -577,7 +596,7 @@
 
 					<div class="innerRightPart right-map-details attending HUB-Dtls">
 						<h2>Attending</h2>
-						<ul>
+						<ul *ngIf="!isBlockUser">
 							<li *ngFor="let user of hubDetails.attenders">
 								<a [routerLink]="['/user/profile',user.display_name]" title="{{user.name}}">
 									<img src="{{user.profile_image}}" alt="{{user.name}}" title="{{user.name}}" />
@@ -585,6 +604,9 @@
 							</li>
 						</ul>
 						<a href="javascript:void(0);" *ngIf="hubDetails.attenders>12" class="viewAll text-center" (click)="activeTab='invite'">View All ({{hubDetails.attenders.length}})</a>
+						<div *ngIf="isBlockUser">
+							You have no permission
+						</div>
 					</div>
 					<!-- <div class="innerRightPart latest-article">
 						<h2>Latest Articles</h2>
@@ -616,7 +638,7 @@
 <button mat-icon-button shareButton="linkedin">
 	<i class="fa fa-linkedin"></i>
 </button>-->
-						<ul>
+						<ul *ngIf="!isBlockUser">
 							<li>
 								<app-beta-restriction [height]="'40'" [image]="'assets/images/facebook.png'">
 								</app-beta-restriction>
