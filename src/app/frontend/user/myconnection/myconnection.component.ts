@@ -244,6 +244,26 @@ public acceptFriendRequest(request_id) {
         }
       });
       this.totalMyConList = myGrplistData;
+
+
+      // if (this.onlineUserList1.length > 5) {
+      //   this.IsShowMyViewMoreOn = true;
+      //   this.totalMyOnlineConList = [];
+      //   for (let i = 0; i < this.onlineUserList1.length; i++) {
+      //     if (this.totalMyOnlineConList.length < 5) {
+      //       this.totalMyOnlineConList.push(this.onlineUserList1[i]);
+      //     }
+      //   }
+
+      // }else {
+      //   this.IsShowMyViewMoreOn = false;
+      //   this.totalMyOnlineConList = this.onlineUserList1;
+      // }
+
+
+
+
+      //this.onlineUserList1 = myGrplistData;
 //console.log('hello'+this.totalMyConList);
       if (this.totalMyConList.length > 0) {
         this.errorMsg = '';
