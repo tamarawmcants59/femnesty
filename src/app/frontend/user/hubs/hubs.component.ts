@@ -377,7 +377,6 @@ export class HubsComponent implements OnInit {
     const attendData = { hub_id: this.hubDetails.id, user_id: this.loginUserId };
     this.hubService.uninvitedUsers(attendData).subscribe(data => {
       if (data.Ack == 1) {
-        console.log('uninvited', data.details);
         // this.uninvitedUsers = data.details;
         // this.uninvitedUsers.forEach((color: { first_name: string, id: string }) => {
         //   console.log(color);
@@ -403,7 +402,6 @@ export class HubsComponent implements OnInit {
 
         this.totalUninvitedUsers = data.details;
         this.totalUninvitedUsers.forEach((color: { first_name: string, id: string }) => {
-          console.log(color);
           this.items.push({
             id: color.id,
             text: color.first_name
