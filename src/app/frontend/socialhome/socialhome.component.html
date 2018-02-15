@@ -79,7 +79,7 @@
                       </div>
                   </div>
               </div>
-              <button (click)="getUserPostDetails()" *ngIf="loadmore == 0">Load More</button>
+              <a class="view-more-down" style="margin: 20px auto 0;display: table;" (click)="getUserPostDetails()" *ngIf="loadmore == 0">Show More</a>
             <div>
               <img src="assets/images/Loading_icon.gif" *ngIf="loading == 'true'"></div>
             </div>
