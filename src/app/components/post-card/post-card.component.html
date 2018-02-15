@@ -57,6 +57,9 @@
                 <!--<a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>-->
+                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId == postData.user_id  && postData.group_type == 1)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,postData.id,'P')">
+                    Ignore
+                </a>
                 <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id) || (checkGrpAdminId == '' && IsloginUserId != postData.user_id && postData.group_type==1)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P')">
                     Block
                 </a>
@@ -193,7 +196,9 @@
                                                 <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtList.user_id) || (checkGrpAdminId == '' && IsloginUserId != cmtList.user_id  && postData.group_type == 1)" title="Block" (click)="blockUser(blockConfirmModal,cmtList.id,'C')">
                                                     Block
                                                 </a>
-
+                                                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId == postData.user_id  && postData.group_type == 1)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,cmtList.id,'C')">
+                                                    Ignore
+                                                </a>
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtList.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtList.id,'C')">
                                                     Report
                                                 </a>
@@ -263,6 +268,9 @@
                                                         <a href="javascript:void(0)" *ngIf=" IsloginUserId == cmtReply.user_id" title="Delete" class="userSubDelBth" (click)="deletePost(confirmmodal,cmtReply.id,'C',cmtList.reply,subkey)">Delete</a>
                                                         <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtReply.user_id) || (checkGrpAdminId == '' && IsloginUserId != cmtReply.user_id  && postData.group_type == 1)" title="Block" (click)="blockUser(blockConfirmModal,cmtReply.id,'C')">
                                                             Block
+                                                        </a>
+                                                        <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId == postData.user_id  && postData.group_type == 1)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,cmtReply.id,'C')">
+                                                            Ignore
                                                         </a>
                                                         <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtReply.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtReply.id,'C')">
                                                             Report
@@ -388,6 +396,19 @@
     <div class="modal-footer">
         <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
         <button type="button" class="btn modal-btn-black btn-default" (click)="confirmBlock(); c('Close click')">Confirm</button>
+    </div>
+</ng-template>
+
+<ng-template #ignoreConfirmModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm!</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Would you like to ignore this post?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn modal-btn-primary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn modal-btn-black btn-default" (click)="confirmIgnore(); c('Close click')">Confirm</button>
     </div>
 </ng-template>
 
