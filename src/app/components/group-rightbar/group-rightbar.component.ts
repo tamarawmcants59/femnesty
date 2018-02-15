@@ -26,6 +26,7 @@ export class GroupRightbarComponent implements OnInit {
   public isJoinGroup: boolean = true;
   public repoUrl = '';
   public IsShowOption= false;
+  public isBlockUser: boolean = false;
 
   @Input() groupData: {
     id: number;
@@ -75,13 +76,13 @@ export class GroupRightbarComponent implements OnInit {
     this.getGroupPhotoList();
     this.getGroupMemberList();
     this.activatedRoute.params.subscribe((params: Params) => {
-      console.log(params);
       //alert(params['gname']);
       if (params['gname'])
         this.groupNameByUrl = params['gname'];
       else
         this.groupNameByUrl = params['gid'];
       this.getGroupDetailsByName();
+      this.checkBlockUser();
     });
 
   }
@@ -213,6 +214,28 @@ export class GroupRightbarComponent implements OnInit {
     localStorage.setItem("invitediv",'1');
     //this.groupMemberList = this.totalGroupMemberList;
     window.location.reload();
+  }
+
+  public checkBlockUser(){
+    const loginUserId = localStorage.getItem("loginUserId");
+    if(this.isGroupId!=''){
+        let dataUserDet ={
+          "group_id": this.isGroupId,
+          "login_id": loginUserId,
+          "group_type":2
+        };
+        //console.log(dataUserDet);
+        this.dataService.checkTheBlockUser(dataUserDet).subscribe(data => {
+            let details=data;
+            if (data.blocked) {
+              this.isBlockUser = true;
+            }
+            //console.log(this.isBlockUser);
+        },
+        error => {
+          
+        }); 
+    }
   }
 }
 

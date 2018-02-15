@@ -440,7 +440,8 @@ public invitediv = '';
     if(this.isGroupId!=''){
         let dataUserDet ={
           "group_id": this.isGroupId,
-          "login_id": loginUserId
+          "login_id": loginUserId,
+          "group_type":2
         };
         //console.log(dataUserDet);
         this.dataService.checkTheBlockUser(dataUserDet).subscribe(data => {

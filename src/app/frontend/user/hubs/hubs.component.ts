@@ -247,7 +247,8 @@ export class HubsComponent implements OnInit {
     if(this.hubDetails.id!=''){
         let dataUserDet ={
           "group_id": this.hubDetails.id,
-          "login_id": this.loginUserId
+          "login_id": this.loginUserId,
+          "group_type":4
         };
         this.dataService.checkTheBlockUser(dataUserDet).subscribe(data => {
             let details=data;
