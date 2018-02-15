@@ -56,8 +56,9 @@
 <section class="section about-content-area visitingProfile section2">
   <div class="container-fluid">
       <div class="row flex-profile">
-          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-        <div class="col-md-3 flex-left">
+          <!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+       
+          <div class="col-md-3 flex-left">
             <user-sidebar *ngIf="isLoggedIn == '1'"></user-sidebar>
         </div>
         <div class="col-md-6 flex-middle pd-5">
@@ -66,18 +67,21 @@
           <div *ngIf="(isLoggedIn == '1')">
               <app-post-create [postType]="groupPostDetData" (getUserPostDetails)="getUserPostDetails()"></app-post-create>
           </div>
-          <div class="allpost" *ngIf="userPostList?.length > 0">
-              <div *ngFor="let postData of userPostList">
+          <div class="allpost" *ngIf="userPostList[0]?.length > 0">
+              <div *ngFor="let postData of userPostList[0]">
                   <app-post-card [postData]="postData"></app-post-card>                
               </div>
               </div>
-              <div class="likePart" *ngIf="userPostList?.length == 0">
+              <div class="likePart" *ngIf="loadmore == 1">
                   <div class="row">
                       <div class="col-md-10">
                           <div class="nothing">Nothing more to show</div>
                       </div>
                   </div>
               </div>
+              <button (click)="getUserPostDetails()" *ngIf="loadmore == 0">Load More</button>
+            <div>
+              <img src="assets/images/Loading_icon.gif" *ngIf="loading == 'true'"></div>
             </div>
           
         </div>
