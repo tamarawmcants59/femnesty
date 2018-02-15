@@ -28,7 +28,8 @@ export class SocialhomeComponent implements OnInit {
   public postCmtId: any;
   public showCmtDiv:boolean = false;
   public groupPostDetData: object ={ };
-  
+  public load_more_value =0;
+  public loadmore = 0;
   public rForm: FormGroup;
   public IsShowFeedForm = false;
   public isShowPlus = true;
@@ -84,7 +85,7 @@ export class SocialhomeComponent implements OnInit {
 scroll()
 {
   let st = (window.innerHeight + window.scrollY);
-  console.log(st);
+ // console.log(st);
 }
   public getLastFourArticle(){
     this.dataService.getFourArticleList()
@@ -103,23 +104,40 @@ scroll()
   }
 
   public getUserPostDetails(){
-    
+    this.loading = true;
+    this.load_more_value+= 1;
+
     if(this.isLoggedIn=='1'){
         let dataUserDet ={
           "user_id": this.IsloginUserId,
-          "page_no": 1
+          "page_no": this.load_more_value
         };
         this.dataService.getUserPostById(dataUserDet)
         .subscribe(data => {
+
               let details=data;
               if (details.Ack=="1") {
-                this.userPostList = details.AllPost;
-              }else{
+                if( this.load_more_value == 1)
+                {
+                  this.userPostList.push(details.AllPost);
+                }
+                else{
+                  for (let i = 0; i < details.AllPost.length; i++) {
+                    //this.myGrpList.push(goodFriends[i]);
+                    this.userPostList[0].push(details.AllPost[i]);
+                  }
+                  this.loadmore = 0;
+                }
                 
+               // this.userPostList = this.userPostList[0];
+                console.log(this.userPostList)
+              }else{
+                this.loadmore = 1;
               }
+              this.loading = false;
           },
           error => {
-            
+            this.loading = false;
           }
         ); 
       }else{
