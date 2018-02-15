@@ -107,7 +107,30 @@ public get_privacy_setting(){
   };
  this.dataService.getuserPrivacy(dataUserDet)
         .subscribe(data => {
-          this.get_value = data.user_privacy;
+          if(data.Ack == 1)
+          {
+            this.get_value = data.user_privacy;
+          }
+          else{ 
+            this.get_value = {
+              "name_visible": "1",
+             "name_visible_in_search_engine": "1",
+              "found_email_address": "1",
+              "found_phone_number": "1",
+               "profile_picture_picture":"1",
+             "dob_visible": "1",
+              "email_visible": "1",
+               "phone_visible": "1",
+              "allow_connetion":"1",
+             "all_post":"1",
+              "group_visible":"1",
+               "hub_visible": "1",
+               "photo_visible":"1",
+               "see_connection_list":"1",
+               "name_visible_book_review": "1"
+            };
+          }
+          
         },
         error => {
           this.loading = false;
