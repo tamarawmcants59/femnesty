@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from "../../frontend/user/user.service";
@@ -7,6 +7,7 @@ import { SelectModule } from "../../../../node_modules/ng2-select";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 // import { Ng4GeoautocompleteModule } from "../../../../node_modules/ng4-geoautocomplete";
 // import { AmazingTimePickerService } from 'amazing-time-picker';
+import { MapsAPILoader } from '@agm/core';
 
 declare var google: any;
 declare var jquery: any;
@@ -48,12 +49,8 @@ export class HubCreateComponent implements OnInit {
   public hubRequestList = [];
   public searchData = { address: '', lat: '', lng: '' };
   public today = new Date().toJSON().split('T')[0];
-  public autocompleteSettings: any = {
-    showSearchButton: false,
-    showCurrentLocation: false,
-    inputPlaceholderText: 'Type anything and you will get a location *',
-  };
   public hubReqTab = 1;
+  @ViewChild("addressEdit") public searchElementRef: ElementRef;
 
   constructor(
     private builder: FormBuilder,
@@ -61,50 +58,29 @@ export class HubCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private hubService: HubService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
   ) {
-    /*init */
-    setTimeout(() => {
-      //debugger;
-      let autocomplete = new google.maps.places.Autocomplete(
-                  /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-        { types: ['geocode'] });
-      google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        var place = autocomplete.getPlace();
-        this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-        localStorage.setItem("address", place.formatted_address);
-        localStorage.setItem("lat", place.geometry.location.lat());
-        localStorage.setItem("lng", place.geometry.location.lng());
+
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
       });
-
-    }, 1000);
-
-
-
-    this.router.events.subscribe(event => {
-      const eventObj: any = event;
-      const self = this;
-      if (event.constructor.name === "ResolveStart") {
-        if (eventObj.state.url.includes('create_hub/create')) {
-          setTimeout(() => {
-            // debugger;
-            let autocomplete = new google.maps.places.Autocomplete(
-                    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-              { types: ['geocode'] });
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-              var place = autocomplete.getPlace();
-              this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-              localStorage.setItem("address", place.formatted_address);
-              localStorage.setItem("lat", place.geometry.location.lat());
-              localStorage.setItem("lng", place.geometry.location.lng());
-            });
-          }, 1000);
-
-        }
-
-
-      }
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          let place = autocomplete.getPlace();
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          localStorage.setItem("address", place.formatted_address);
+          localStorage.setItem("lat", place.geometry.location.lat());
+          localStorage.setItem("lng", place.geometry.location.lng());
+        });
+      });
     });
+
     this.postform = builder.group({
       id: ['', []],
       title: ['', [
@@ -200,26 +176,7 @@ export class HubCreateComponent implements OnInit {
 
     this.addForm = { type: 'O', category_id: '', privacy: 'O' };
     this.searchData = { address: '', lat: '', lng: '' };
-    this.autocompleteSettings['inputString'] = '';
-
-    setTimeout(() => {
-      // debugger;
-      let autocomplete = new google.maps.places.Autocomplete(
-               /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-        { types: ['geocode'] });
-      google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        var place = autocomplete.getPlace();
-        //console.log(place);
-        this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-        localStorage.setItem("address", place.formatted_address);
-        localStorage.setItem("lat", place.geometry.location.lat());
-        localStorage.setItem("lng", place.geometry.location.lng());
-        //console.log(this.searchData);
-      });
-    }, 1000);
-
-    // this.autocompleteSettings['inputPlaceholderText'] = 'This is the placeholder text after doing some external operation after some time';
-    // this.autocompleteSettings = Object.assign({},this.autocompleteSettings);
+    
   }
 
   public checkValidation() {
@@ -279,10 +236,7 @@ export class HubCreateComponent implements OnInit {
 
   }
 
-  autoCompleteCallback1(data: any): any {
-    if (data.response == true)
-      this.searchData = { address: data.data.description, lat: data.data.geometry.location.lat, lng: data.data.geometry.location.lng };
-  }
+  
    formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -437,24 +391,12 @@ export class HubCreateComponent implements OnInit {
       hub.recurring_end = new Date(hub.recurring_end);
     }
     this.addForm = hub;
-    //this.autocompleteSettings['inputString'] = hub.address;
+    
     //this.searchData = { address: hub.address, lat: hub.lat, lng: hub.lng };
     this.aboutActiveTab = 'create';
     this.successMsg = '';
     this.postImgData = '';
-    setTimeout(() => {
-      // debugger;
-      let autocomplete = new google.maps.places.Autocomplete(
-               /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-        { types: ['geocode'] });
-      google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        var place = autocomplete.getPlace();
-        this.searchData = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-        localStorage.setItem("address", place.formatted_address);
-        localStorage.setItem("lat", place.geometry.location.lat());
-        localStorage.setItem("lng", place.geometry.location.lng());
-      });
-    }, 1000);
+    
   }
 
   public editGroupTab(groupId) {

@@ -166,7 +166,7 @@
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>-->
-                    <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" id="autocomplete">
+                    <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" #addressEdit>
                     <!-- <input type="text" class="form-control-plaintext" 
                       [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
                     <!-- <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div> -->

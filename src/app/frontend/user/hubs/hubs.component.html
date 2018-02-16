@@ -366,15 +366,16 @@
 										<span>ADDRESS</span>
 										<p>{{hubDetails.address}}</p>
 									</div>
-									<div class="item" *ngIf="address">
+									<div class="item" [ngClass]="address ? 'showEditAddress' : 'hideEditAddress'">
 										<div class="edit">
 											<a href="javascript:void(0)" (click)="openEdit('address',hubDetails)">
 												<img src="assets/images/check-icon.png" alt="" />
 											</a>
 										</div>
 										<span>ADDRESS</span>
+										
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="Type anything and you will get a location *" id="autocomplete" #addressEdit>
+											<input class="form-control" type="text" placeholder="Type anything and you will get a location *" value="{{hubDetails.address}}" #addressEdit>
 										</div>
 									</div>
 									<div class="item">

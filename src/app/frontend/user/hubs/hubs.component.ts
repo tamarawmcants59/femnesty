@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HubService } from "../../../components/hub-create/hub.service";
 import { UserService } from "../user.service";
-import { AgmCoreModule } from '@agm/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SelectModule } from "../../../../../node_modules/ng2-select";
 // import { ShareButtons } from "@ngx-share/core";
 import { environment } from '../../../../environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MapsAPILoader } from '@agm/core';
+
 declare var google: any;
 declare var jquery: any;
 declare var $: any;
@@ -70,14 +71,16 @@ export class HubsComponent implements OnInit {
   public description: any;
   public IsShowOption= false;
   @ViewChild("fileTypeEdit") fileTypeEdit: ElementRef;
-  @ViewChild("addressEdit") addressEdit: ElementRef;
+  @ViewChild("addressEdit") public searchElementRef: ElementRef;
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private hubService: HubService,
     private builder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
   ) {
     this.postform = builder.group({
       user_ids: ['', [
@@ -96,6 +99,7 @@ export class HubsComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     // let autocomplete = new google.maps.places.Autocomplete(
     //   /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
     //   { types: ['geocode'] });
@@ -105,6 +109,29 @@ export class HubsComponent implements OnInit {
     //   localStorage.setItem("address", JSON.stringify(address_data));
 
     // });
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          //let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          let place = autocomplete.getPlace();
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          
+          let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+          localStorage.setItem("address", JSON.stringify(address_data));
+          //set latitude, longitude and zoom
+          //this.latitude = place.geometry.location.lat();
+          //this.longitude = place.geometry.location.lng();
+          
+        });
+      });
+    });
     this.getHubDetails();
     this.getHubCategories();
     this.getLastFourArticle();
@@ -894,21 +921,26 @@ export class HubsComponent implements OnInit {
               this.loading = false;
               alert('Sorry there is some error.')
             });
+          localStorage.setItem("address",'');
+        }else{
+          this.address = '';
         }
 
-      }
-      else {
-        setTimeout(function () {
-          let autocomplete = new google.maps.places.Autocomplete(
-    /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-            { types: ['geocode'] });
-          google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-            localStorage.setItem("address", JSON.stringify(address_data));
+      }else {
+    //     setTimeout(function () {
+    //       let autocomplete = new google.maps.places.Autocomplete(
+    // /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+    //         { types: ['geocode'] });
+    //       google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    //         var place = autocomplete.getPlace();
+    //         let address_data = { address: place.formatted_address, lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+    //         localStorage.setItem("address", JSON.stringify(address_data));
 
-          });
-        }, 100)
+    //       });
+    //     }, 100)
+        
+        //load Places Autocomplete
+        
         this.title = '';
         this.description = '';
         this.email = ''

@@ -82,7 +82,8 @@ export function provideConfig() {
       tertiaryColour: '#ffffff'
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
+      apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk',
+      libraries: ['places']
     }),
     SelectModule,
     DateTimePickerModule

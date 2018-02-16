@@ -209,3 +209,6 @@ letter-spacing: 0;
 	.HUB-Dtls h2{line-height: 16px;}
 }
 
+.showEditAddress{display: block !important;}
+.hideEditAddress{display: none !important;}
+
