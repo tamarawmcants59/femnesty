@@ -294,7 +294,8 @@ export class HubsComponent implements OnInit {
       const dataUserDet = {
         "page_no": 1,
         "group_id": this.hubDetails.id,
-        "type": '4'
+        "type": '4',
+        "login_id":this.loginUserId
       };
       this.dataService.getGroupPostById(dataUserDet)
         .subscribe(data => {
