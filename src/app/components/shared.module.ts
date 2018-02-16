@@ -62,7 +62,8 @@ import { AboutCompanyComponent } from './about-company/about-company.component';
         SelectModule,
         Ng4GeoautocompleteModule.forRoot(),
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk'
+            apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk',
+            libraries: ['places']
           }),
           DateTimePickerModule
     ],

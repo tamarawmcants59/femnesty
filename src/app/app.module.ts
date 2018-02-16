@@ -27,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 // Import containers
 //import {MatDialogModule} from '@angular/material/dialog';
 import {RatingModule} from "ng2-rating";
+//import { AgmCoreModule } from 'angular2-google-maps/core';
+
 import {
   FrontendLayout
 } from './containers';
@@ -89,10 +91,10 @@ import { AppRoutingModule } from './app.routing';
     FormsModule,
     RatingModule,
     AngularFireDatabaseModule,
-    //BrowserAnimationsModule,
-    //HttpClientModule,
-    // ShareModule.forRoot()
-    //MatDialogModule
+    /*AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyDYFY2fp_meJiSEKve5pDJk9Kzr_oDOlPk',
+        libraries: ['places']
+    })*/
     
   ],
   exports: [],
