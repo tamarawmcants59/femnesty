@@ -13,19 +13,23 @@ export class OtherUserPrfrsidebarComponent implements OnInit {
   public totalLatestHubList = [];
   totalPageSize = 5;
   public IsShowViewMore = false;
+  public get_value:object={};
+  public is_friend:any;
   constructor(
     private dataService: UserService
   ) {
     this.loginUserId = localStorage.getItem("otherProfileId");
+    this.is_friend = localStorage.getItem("is_friend");
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.getLatestHub();
     this.getUserPhotoList();
     this.getUserGroupList();
+    this.get_privacy_setting();
   }
 
-  public getUserPhotoList() {
+  public getUserPhotoList() { 
     if (this.loginUserId != '') {
       const dataUserDet = {
         "id": this.loginUserId
@@ -98,5 +102,50 @@ export class OtherUserPrfrsidebarComponent implements OnInit {
 
     });
   }
+
+  public get_privacy_setting(){ 
+    // const loginUserId = localStorage.getItem("loginUserId");
+    // alert(loginUserId)
+    
+     const dataUserDet = {
+       "id": this.loginUserId,
+       
+     };
+    this.dataService.getuserPrivacy(dataUserDet)
+           .subscribe(data => {
+             console.log(data)
+             if(data.Ack == 1)
+             { 
+               this.get_value = data.user_privacy;
+               
+               
+             }
+             else{ 
+               this.get_value = {
+                 "name_visible": "1",
+                "name_visible_in_search_engine": "1",
+                 "found_email_address": "1",
+                 "found_phone_number": "1",
+                  "profile_picture_picture":"1",
+                "dob_visible": "1",
+                 "email_visible": "1",
+                  "phone_visible": "1",
+                 "allow_connetion":"1",
+                "all_post":"1",
+                 "group_visible":"1",
+                  "hub_visible": "1",
+                  "photo_visible":"1",
+                  "see_connection_list":"1",
+                  "name_visible_book_review": "1"
+               };
+             }
+             
+           },
+           error => {
+             //this.loading = false;
+           }
+           );
+   }
+
 
 }

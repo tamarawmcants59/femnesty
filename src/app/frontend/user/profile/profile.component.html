@@ -54,7 +54,7 @@
                       <div class="tab-content">
                           <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                               <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
-                              <div class="allpost" *ngIf="userPostList?.length > 0 && (otherProfileDet?.id==isloginUserId || checkIsFriend)">
+                              <div class="allpost" *ngIf="userPostList?.length > 0 && (otherProfileDet?.id==isloginUserId || checkIsFriend) && get_value.allow_connetion == 1">
                                   <div class="likePart" *ngFor="let postData of userPostList">
                                       <app-post-card [postData]="postData"></app-post-card>
                                   </div>
@@ -66,7 +66,7 @@
                                       </div>
                                   </div>
                               </div>
-                              <div class="likePart" *ngIf="!checkIsFriend && otherProfileDet?.id!=isloginUserId">
+                              <div class="likePart" *ngIf="(!checkIsFriend && otherProfileDet?.id!=isloginUserId) || get_value.allow_connetion == 0">
                                 <div class="row">
                                     <div class="col-md-10">
                                         <div class="nothing">You have no permission to see the activity.</div>
@@ -83,13 +83,17 @@
                                             <h5>FULL NAME</h5>
                                             <p>{{otherProfileDet?.first_name}} {{otherProfileDet?.last_name}}</p>
                                         </li>
-                                        <li>
+                                        <li *ngIf="(get_value.email_visible == 2 && checkIsFriend) || get_value.email_visible == 0">
                                             <h5>EMAIL</h5>
-                                            <p>{{otherProfileDet?.email}}</p>
+                                            <p>{{otherProfileDet?.email}}{{ get_value.email_visible}}</p>
                                         </li>
-                                        <li>
+                                        <li *ngIf=" (get_value.phone_visible == 2 && checkIsFriend) || get_value.phone_visible == 0">
                                             <h5>MOBILE NO</h5>
                                             <p>{{otherProfileDet?.mobile_number}}</p>
+                                        </li>
+                                        <li *ngIf=" (get_value.dob_visible == 2 && checkIsFriend) || get_value.dob_visible == 0">
+                                            <h5>DATE OF BIRTH</h5>
+                                            <p>{{otherProfileDet?.dob}}</p>
                                         </li>
                                         <li>
                                             <h5>OCCUPATION</h5>
@@ -170,7 +174,7 @@
                               </div>-->
                           </div>
                           <div id="menu2" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='connections'}">
-                              <div class="connectionsPart">
+                              <div class="connectionsPart" *ngIf="get_value.see_connection_list == 0 || (get_value.see_connection_list ==1 && checkIsFriend )">
                                   <!--<h2>Connections</h2>
                                   <div class="connections">
                                         <ul class="friend-box" *ngIf="userFrndList?.length > 0">
@@ -215,6 +219,10 @@
                                             <div class="dwn-arrow"><i class="icon ion-chevron-down"></i></div>
                                         </li>
                                     </ul>
+                              </div>
+                              <div class="connectionsPart" *ngIf="get_value.see_connection_list == 2 || (get_value.see_connection_list ==1 && !checkIsFriend )">
+                                  
+                                  <div class="nothing">You don't have permission to see this</div>
                               </div>
                           </div>
                           <div id="menu3" class="tab-pane fade" [ngClass]="{' in active' : activeTab=='group'}">

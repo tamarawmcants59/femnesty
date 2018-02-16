@@ -29,7 +29,7 @@ export class PostCreateComponent implements OnInit {
   errorMsg= '';
   postImgData='';
   IsShowListOption= false;
-	
+  public get_value:any;
   constructor(
     private builder: FormBuilder,
     private dataService: UserService,
@@ -63,6 +63,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.get_privacy_setting();
     //console.log(this.postType.activitytype);
   }
 
@@ -152,4 +153,49 @@ public select_post_type(id)
     this.is_connection = 3;
   }
 }
+public get_privacy_setting(){ 
+   const loginUserId = localStorage.getItem("loginUserId");
+  // alert(loginUserId)
+  
+   const dataUserDet = {
+     "id": loginUserId,
+     
+   };
+  this.dataService.getuserPrivacy(dataUserDet)
+         .subscribe(data => {
+           console.log(data)
+           if(data.Ack == 1)
+           { 
+             this.get_value = data.user_privacy;
+             //alert(this.get_value.all_post)
+             //this.is_connection = this.get_value.all_post;
+             this.select_post_type(this.get_value.all_post)
+           }
+           else{ 
+             this.get_value = {
+               "name_visible": "1",
+              "name_visible_in_search_engine": "1",
+               "found_email_address": "1",
+               "found_phone_number": "1",
+                "profile_picture_picture":"1",
+              "dob_visible": "1",
+               "email_visible": "1",
+                "phone_visible": "1",
+               "allow_connetion":"1",
+              "all_post":"1",
+               "group_visible":"1",
+                "hub_visible": "1",
+                "photo_visible":"1",
+                "see_connection_list":"1",
+                "name_visible_book_review": "1"
+             };
+           }
+           
+         },
+         error => {
+           //this.loading = false;
+         }
+         );
+ }
+
 }

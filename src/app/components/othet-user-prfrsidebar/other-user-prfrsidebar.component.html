@@ -1,5 +1,5 @@
 <div class="rightPart"> 
-    <div class="innerRightPart" *ngIf="userImgList?.length > 0">
+    <div class="innerRightPart" *ngIf="userImgList?.length > 0 && (get_value.photo_visible == 0 || (get_value.photo_visible ==1 && is_friend == '1' ))">
         <h2>Photos</h2>
         <ul class="photoImage">
             <li *ngFor="let imgData of userImgList | slice:0:6;">
@@ -9,9 +9,13 @@
         <a *ngIf="userImgList?.length > 6" [routerLink]="['/user/other_all_photo']" class="viewAll text-center">View All</a>
         <!--<a href="#" class="viewAll text-center">View All</a>-->
     </div>
-    <div class="innerRightPart" *ngIf="userImgList?.length == 0">
+    <div class="innerRightPart" *ngIf="userImgList?.length == 0 && (get_value.photo_visible == 0 || (get_value.photo_visible ==1 && is_friend == '1' ))">
         <h2>Photos</h2>
         <p>This user hasn't added photo's yet</p>
+    </div>
+    <div class="innerRightPart" *ngIf="get_value.photo_visible ==1 && is_friend == '0'">
+        <h2>Photos</h2>
+        <p>You don't have permission to see this.</p>
     </div>
     <!--<div class="innerRightPart share-story">
         <h1>Share your story</h1>
@@ -25,7 +29,7 @@
         </div>
     </div>-->
 	
-	 <div class="innerRightPart" *ngIf="latestHubList?.length > 0">
+	 <div class="innerRightPart" *ngIf="latestHubList?.length > 0 && (get_value.hub_visible == 0 || (get_value.hub_visible ==1 && is_friend == '1' ))">
         <h2 style="margin-bottom: 0">MY ATTENDING HUBS</h2>
         <div class="hubMet hubMet1 group">
             <div class="row" *ngFor="let hubData of latestHubList">
@@ -47,7 +51,7 @@
         <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowViewMore" (click)="viewMore()">View More</a>
     </div>
 	
-    <div class="innerRightPart" *ngIf="userGrpList?.length > 0">
+    <div class="innerRightPart" *ngIf="userGrpList?.length > 0 && (get_value.group_visible == 0 || (get_value.group_visible ==1 && is_friend == '1' ))">
         <h2 style="margin-bottom: 0">Groups</h2>
         <div class="hubMet hubMet1 group" *ngFor="let grpData of userGrpList">
             <div class="row">

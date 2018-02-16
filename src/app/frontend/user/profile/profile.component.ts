@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   public errorMsg: string = '';
   public checkIsFriend:boolean = false;
   public sendrequest = false;
+  public get_value:object={};
   constructor(
     private dataService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit {
             this.getConnectionList();
             this.checkMyFrndData();
             this.getUserGroupList();
+            this.get_privacy_setting();
           }
         },
         error => {
@@ -76,9 +78,12 @@ export class ProfileComponent implements OnInit {
           const details = data;
           if (details.msg == "Friend" && details.Ack == "1") {
             this.checkIsFriend = true;
+            localStorage.setItem("is_friend",'1');
           }else{
             this.checkIsFriend = false;
+            localStorage.setItem("is_friend",'0');
           }
+         
         },
         error => {
 
@@ -177,4 +182,48 @@ export class ProfileComponent implements OnInit {
         this.router.navigateByUrl('/user/login');
       }
     }
+    public get_privacy_setting(){ 
+     // const loginUserId = localStorage.getItem("loginUserId");
+     // alert(loginUserId)
+     
+      const dataUserDet = {
+        "id": this.otherProfileId,
+        
+      };
+     this.dataService.getuserPrivacy(dataUserDet)
+            .subscribe(data => {
+              console.log(data)
+              if(data.Ack == 1)
+              { 
+                this.get_value = data.user_privacy;
+                
+                
+              }
+              else{ 
+                this.get_value = {
+                  "name_visible": "1",
+                 "name_visible_in_search_engine": "1",
+                  "found_email_address": "1",
+                  "found_phone_number": "1",
+                   "profile_picture_picture":"1",
+                 "dob_visible": "1",
+                  "email_visible": "1",
+                   "phone_visible": "1",
+                  "allow_connetion":"1",
+                 "all_post":"1",
+                  "group_visible":"1",
+                   "hub_visible": "1",
+                   "photo_visible":"1",
+                   "see_connection_list":"1",
+                   "name_visible_book_review": "1"
+                };
+              }
+              
+            },
+            error => {
+              //this.loading = false;
+            }
+            );
+    }
+
 }
