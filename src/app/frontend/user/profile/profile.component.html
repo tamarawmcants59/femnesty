@@ -12,9 +12,9 @@
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
                   </div>
                   <div class="profPhoto">
-                      <div *ngIf="(get_value.profile_picture_picture == 1 && checkIsFriend) || get_value.profile_picture_picture == 0" class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.image_url+')'}">
+                      <div *ngIf="(get_value.profile_picture_picture == 1 && checkIsFriend) || get_value.profile_picture_picture == 0 || isloginUserId == otherProfileId" class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.image_url+')'}">
                       </div>
-                      <div *ngIf="get_value.profile_picture_picture == 1 && !checkIsFriend" class="img" [ngStyle]="{'background-image':'url(assets/images/no_image.png)'}">
+                      <div *ngIf="get_value.profile_picture_picture == 1 && !checkIsFriend && isloginUserId != otherProfileId" class="img" [ngStyle]="{'background-image':'url(assets/images/no_image.png)'}">
                     </div>
                   </div>
                  
