@@ -62,7 +62,7 @@ public search_group = '';
  private myListOnPageSize =5;
 public errorMsg:any;
 public  userRequArr=[];
-
+public search_array=[];
 public currentFireUserId: string;
 public onlineUserList1 = [];
 public firebasOnlineUserList: any;
@@ -167,7 +167,8 @@ public firebasOnlineUserList: any;
     // this.totalMyGrpList = this.totalListOfMyGroups;
     this.myListPageSize=this.myListPageSize+5;
     this.totalMyConList=[];
-    if(this.userFrndList.length>this.myListPageSize)
+    
+    if(this.search_array.length>this.myListPageSize)
     {
       this.IsShowMyViewMore=true;
     }
@@ -177,9 +178,9 @@ public firebasOnlineUserList: any;
     }
     for(let i=0;i<this.myListPageSize;i++)
     {
-      if(this.userFrndList[i])
+      if(this.search_array[i])
       {
-        this.totalMyConList.push(this.userFrndList[i]);
+        this.totalMyConList.push(this.search_array[i]);
       }
       
     }
@@ -243,22 +244,24 @@ public acceptFriendRequest(request_id) {
           return item1;
         }
       });
-      this.totalMyConList = myGrplistData;
+      //this.totalMyConList = myGrplistData;
+      this.search_array = myGrplistData;
 
+      if (this.search_array.length > 5) {
+        this.IsShowMyViewMoreOn = true;
+        this.IsShowMyViewMoreOn = false;
+        this. totalMyConList = [];
+        for (let i = 0; i < this.search_array.length; i++) {
+          if ( this.totalMyConList.length < 5) {
+            this.totalMyConList.push(this.search_array[i]);
+          }
+        }
 
-      // if (this.onlineUserList1.length > 5) {
-      //   this.IsShowMyViewMoreOn = true;
-      //   this.totalMyOnlineConList = [];
-      //   for (let i = 0; i < this.onlineUserList1.length; i++) {
-      //     if (this.totalMyOnlineConList.length < 5) {
-      //       this.totalMyOnlineConList.push(this.onlineUserList1[i]);
-      //     }
-      //   }
-
-      // }else {
-      //   this.IsShowMyViewMoreOn = false;
-      //   this.totalMyOnlineConList = this.onlineUserList1;
-      // }
+      }else {
+        this.IsShowMyViewMore = false;
+        this.IsShowMyViewMoreOn = false;
+        this.totalMyConList = this.search_array;
+      }
 
 
 

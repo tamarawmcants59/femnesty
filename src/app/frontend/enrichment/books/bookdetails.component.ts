@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { EnrichmentService } from "../enrichment.service";
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
+import { UserService } from "../../user/user.service";
 import { Meta } from '@angular/platform-browser';
 //import { ShareButtons } from '@ngx-share/core';
 
@@ -24,10 +25,13 @@ export class BookdetailsComponent implements OnInit {
   public repoUrl = '';
   public isloginUser = '';
   public loginUserDetails: any;
+  public permission_members:any;
   pageSize = 5;
   public IsShowRatingViewMore = false;
+  public get_value:any;
   constructor(
     private builder: FormBuilder,
+    private dataService: UserService,
     private _book_details: EnrichmentService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -54,6 +58,7 @@ export class BookdetailsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.bookSlugName = params['slug'];
+      this.get_privacy_setting();
       //console.log(this.bookSlugName);
     });
 
@@ -89,7 +94,52 @@ export class BookdetailsComponent implements OnInit {
       }
     );
   }
-
+  public get_privacy_setting(){ 
+    const loginUserId = localStorage.getItem("loginUserId");
+   // alert(loginUserId)
+   
+    const dataUserDet = {
+      "id": loginUserId,
+      
+    };
+   this.dataService.getuserPrivacy(dataUserDet)
+          .subscribe(data => {
+            if(data.Ack == 1)
+            { 
+              this.get_value = data.user_privacy;
+              if(this.get_value.name_visible_book_review == 0)
+              {
+                this.permission_members = 1;
+                this.loginUserDetails.first_name='Femnesty Member';
+              }
+              
+            }
+            else{ 
+              this.get_value = {
+                "name_visible": "1",
+               "name_visible_in_search_engine": "1",
+                "found_email_address": "1",
+                "found_phone_number": "1",
+                 "profile_picture_picture":"1",
+               "dob_visible": "1",
+                "email_visible": "1",
+                 "phone_visible": "1",
+                "allow_connetion":"1",
+               "all_post":"1",
+                "group_visible":"1",
+                 "hub_visible": "1",
+                 "photo_visible":"1",
+                 "see_connection_list":"1",
+                 "name_visible_book_review": "1"
+              };
+            }
+            
+          },
+          error => {
+            //this.loading = false;
+          }
+          );
+  }
 
   public submitPost() {
     const userValue = this.postform.value;
