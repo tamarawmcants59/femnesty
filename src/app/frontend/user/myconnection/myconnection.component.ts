@@ -55,6 +55,7 @@ export class MyconnectionComponent implements OnInit {
   public userRequestFrndList =[];
   public IsShowMyViewMore = false;
   public IsShowMyViewMoreOn = false;
+  public searchIsShowMyViewMore = false;
  public totalMyConList :any;
  public totalMyOnlineConList :any;
 public search_group = '';
@@ -168,13 +169,35 @@ public firebasOnlineUserList: any;
     this.myListPageSize=this.myListPageSize+5;
     this.totalMyConList=[];
     
-    if(this.search_array.length>this.myListPageSize)
+    if(this.userFrndList.length>this.myListPageSize)
     {
       this.IsShowMyViewMore=true;
     }
     else
     {
       this.IsShowMyViewMore=false;
+    }
+    for(let i=0;i<this.myListPageSize;i++)
+    {
+      if(this.userFrndList[i])
+      {
+        this.totalMyConList.push(this.userFrndList[i]);
+      }
+      
+    }
+  }
+
+  viewMoreConnectionSearch() {
+    this.myListPageSize=this.myListPageSize+5;
+    this.totalMyConList=[];
+    
+    if(this.search_array.length>this.myListPageSize)
+    {
+      this.searchIsShowMyViewMore=true;
+    }
+    else
+    {
+      this.searchIsShowMyViewMore=false;
     }
     for(let i=0;i<this.myListPageSize;i++)
     {
@@ -185,13 +208,14 @@ public firebasOnlineUserList: any;
       
     }
   }
+  
+
 public acceptFriendRequest(request_id) {
       this.loading = true;
       this.successMsg='';
       this.errorMsg='';
       let requestJsonData={"id": request_id};
-      this.dataService.acceptFrndRequest(requestJsonData)
-        .subscribe(
+      this.dataService.acceptFrndRequest(requestJsonData).subscribe(
               data => {
                   this.loading = false;
                   if(data.Ack==1){
@@ -226,17 +250,13 @@ public acceptFriendRequest(request_id) {
           alert(error);
         });
   }
-  public searchConnection() { 
+  public searchConnection() {
+    
     if (this.search_group != '') {
-
+      this.IsShowMyViewMore = false;
+      this.IsShowMyViewMoreOn = false;
       this.search_group = this.search_group.toLowerCase();
-      let goodFriends = this.userFrndList.filter(item => {
-        if (item.first_name
-          .toLowerCase().search(this.search_group) !== -1) {
-          return item;
-        }
-      });
-      // this.groupList = goodFriends;
+      
       let myGrplistData = this.userFrndList.filter(item1 => {
         if (item1.first_name
           .toLowerCase().search(this.search_group) !== -1) {
@@ -248,8 +268,8 @@ public acceptFriendRequest(request_id) {
       this.search_array = myGrplistData;
 
       if (this.search_array.length > 5) {
-        this.IsShowMyViewMoreOn = true;
-        this.IsShowMyViewMoreOn = false;
+        this.searchIsShowMyViewMore = true;
+        //this.IsShowMyViewMoreOn = false;
         this. totalMyConList = [];
         for (let i = 0; i < this.search_array.length; i++) {
           if ( this.totalMyConList.length < 5) {
@@ -258,14 +278,10 @@ public acceptFriendRequest(request_id) {
         }
 
       }else {
-        this.IsShowMyViewMore = false;
-        this.IsShowMyViewMoreOn = false;
+        
+        this.searchIsShowMyViewMore = false;
         this.totalMyConList = this.search_array;
       }
-
-
-
-
       //this.onlineUserList1 = myGrplistData;
 //console.log('hello'+this.totalMyConList);
       if (this.totalMyConList.length > 0) {
@@ -274,8 +290,7 @@ public acceptFriendRequest(request_id) {
       else
         this.errorMsg = 'No record found.';
     } else {
-      //this.getAllGroupList();
-      //this.getUserGroupList();
+      this.getConnectionList();
     }
    // this.router.navigateByUrl('/group/find');
   }
