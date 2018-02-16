@@ -343,7 +343,8 @@ export class EditprofileComponent implements OnInit {
             }*/
             if (this.loginUserDet.dob) {
               let res = this.loginUserDet.dob.split("-");
-              this.dobmonth = res[1]
+              let res_month = res[1].replace("0", "");
+              this.dobmonth = parseInt(res_month)-1;
               this.dobyear = res[0]
               this.dobdate = res[2]
             }
@@ -410,12 +411,12 @@ export class EditprofileComponent implements OnInit {
     const result = {},
       userValue = this.form.value;
     userValue.id = loginUserId;
-    const dateOfBirth = this.form.value.dobyear + '-' + this.form.value.dobmonth + '-' + this.form.value.dobdate;
+    let selMonth=parseInt(this.form.value.dobmonth)+1;
+    const dateOfBirth = this.form.value.dobyear + '-' + selMonth + '-' + this.form.value.dobdate;
     const mobile = this.form.value.mobcode + '-' + this.form.value.mobnumber;
     userValue.mobile_number = mobile;
     userValue.dob = dateOfBirth;
     userValue.noti_settings = "";
-
     this.dataService.updateAccountDet(userValue).subscribe(data => {
         this.editAbtActiveTab = '';
         const details = data;
