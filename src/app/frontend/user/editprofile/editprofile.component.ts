@@ -350,7 +350,7 @@ export class EditprofileComponent implements OnInit {
             }
             if (this.loginUserDet.mobile_number) {
               let res = this.loginUserDet.mobile_number.split("-");
-              if (this.mobnumber = res[1]) {
+              if (this.mobnumber = res[1]) { 
                 this.mobnumber = res[1]
                 this.mobcode = res[0]
               }else {

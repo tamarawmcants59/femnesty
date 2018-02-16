@@ -488,7 +488,8 @@ public invitediv = '';
       const dataUserDet = {
         "page_no": 1,
         "group_id": this.isGroupId,
-        "type": '2'
+        "type": '2',
+        "login_id":this.isloginUserId
       };
       this.dataService.getGroupPostById(dataUserDet)
         .subscribe(data => {
