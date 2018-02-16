@@ -134,17 +134,17 @@
                         <ul class="filter-reslt">
 
                             <li>
-                                <a href="javascript:void(0);" (click)="scrollToMyGroup()">My Groups
+                                <a href="javascript:void(0);" [ngStyle]="{'font-weight':search_data.cat_id=='my_grp'?'800':'200'}" (click)="scrollToMyGroup()">My Groups
                                     <span>({{totalMyGrpList?.length}})</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" (click)="scrollToTopGroups()">Top Groups
+                                <a href="javascript:void(0)" [ngStyle]="{'font-weight':search_data.cat_id=='top_grp'?'800':'200'}" (click)="scrollToTopGroups()">Top Groups
                                     <span>({{groupList?.length}})</span>
                                 </a>
                             </li>
                             <li *ngFor="let item of categoryListWithCount">
-                                <a style="cursor:pointer;" (click)="getCatDetails(item.id,item.title)">{{item.title}}
+                                <a style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==item.id?'800':'200'}" (click)="getCatDetails(item.id,item.title)">{{item.title}}
                                     <span>({{item.group_count}})</span>
                                 </a>
                             </li>

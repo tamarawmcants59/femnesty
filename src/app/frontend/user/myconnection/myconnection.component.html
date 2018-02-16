@@ -60,10 +60,8 @@
                                 No online Connections
                         </li>
                     </ul>
-		                
 		        </div>
-					
-					<div class="connectionsPart all-connection-new">    
+			<div class="connectionsPart all-connection-new">    
             <h2>ALL CONNECTIONS</h2>
             <ul class="contn-box" *ngIf="totalMyConList && totalMyConList?.length > 0">
                 <li class="friend-box-list" *ngFor="let friendData of totalMyConList">
@@ -84,6 +82,7 @@
                 </li>
             </ul>
             <a class="view-more-down" style="margin-bottom: 0" href="javascript:void(0)" *ngIf="IsShowMyViewMore" (click)="viewMoreConnection()">Load More</a>
+            <a class="view-more-down" style="margin-bottom: 0" href="javascript:void(0)" *ngIf="searchIsShowMyViewMore" (click)="viewMoreConnectionSearch()">Load More</a>
             <div class="connections">
                 <div class="likePart" *ngIf="userFrndList && userFrndList.length == 0">
                     <div class="row">

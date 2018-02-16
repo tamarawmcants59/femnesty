@@ -32,6 +32,8 @@ export class GrouplistComponent implements OnInit {
   private categoryListWithCount: any = [];
   @ViewChild("topGroupsList") topGroupsList: ElementRef;
   @ViewChild("myGroupsList") myGroupsList: ElementRef;
+  public search_data = {cat_id: ''};
+
   constructor(private dataService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -104,6 +106,7 @@ export class GrouplistComponent implements OnInit {
   }
 
   scrollToTopGroups() {
+    this.search_data.cat_id = 'top_grp';
     this.errorMsg = '';
     this.myGrpList = [];
     if (!this.topGroupsList) {
@@ -124,6 +127,7 @@ export class GrouplistComponent implements OnInit {
 
   }
   scrollToMyGroup() {
+    this.search_data.cat_id = 'my_grp';
     this.errorMsg = '';
     this.myGrpList = [];
     if (!this.myGroupsList) {
@@ -143,7 +147,7 @@ export class GrouplistComponent implements OnInit {
 
   }
   private getCatDetails(id, title) {
-    //this.aboutActiveTab='find';
+    this.search_data.cat_id = id;
     this.filteredTitle = title.toUpperCase();
     let data = {
       "category_id": id,
@@ -288,6 +292,7 @@ export class GrouplistComponent implements OnInit {
   }
 
   public searchGroup() {
+    this.filteredTitle = this.search_group.toUpperCase();
     if (this.search_group != '') {
 
       // //this.getConnectionList();
