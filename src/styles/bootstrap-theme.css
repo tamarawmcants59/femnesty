@@ -5702,7 +5702,7 @@ width: 115px;
 font-size: 10px !important;
 height: 32px;
 line-height: 31px;padding: 0;left:0}
-.login-head-form li .form-group input{height: 32px;left:0;width:250px; text-transform: inherit !important;}
+.login-head-form li .form-group input{height: 32px;left:0;width:250px; text-transform: inherit !important; box-shadow: none !important;}
 .login-head-form li .form-group a{color: #fff;text-decoration:none;line-height: 34px;opacity: .30;font-family: 'montserratmedium';margin: 0 20px;}
 .login-head-form li .form-group a:hover{opacity: 1;color: #fff !important;}
 .login-head-form li:last-child{border-right:0}

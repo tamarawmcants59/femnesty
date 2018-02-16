@@ -105,7 +105,6 @@ export class PageComponent implements OnInit {
         //console.log(details);
         if (details.Ack=="1") {
             this.pageDetData = details.ContentAllBySlug[0];
-            //console.log(this.pageDetData);
             return false;
         }else{
             //localStorage.setItem('isLoggedIn', '1');

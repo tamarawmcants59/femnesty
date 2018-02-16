@@ -39,6 +39,9 @@ export class ActivationlinkComponent implements OnInit {
         "id": this.userPIdEncode
       };
       this.dataService.userActivationLink(signupJsonData).subscribe(data => {
+          setTimeout(() => {
+            this.router.navigateByUrl('/user/signup');
+          }, 5000);
             return false;
         },
         error => {
