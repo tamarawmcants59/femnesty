@@ -13,7 +13,7 @@
         <h2>Photos</h2>
         <p>This user hasn't added photo's yet</p>
     </div>
-    <div class="innerRightPart" *ngIf="get_value.photo_visible ==1 && is_friend == '0'">
+    <div class="innerRightPart" *ngIf="get_value.photo_visible ==1 && is_friend == '0' && isloginUserId != loginUserId">
         <h2>Photos</h2>
         <p>You don't have permission to see this.</p>
     </div>
