@@ -59,6 +59,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
     this.isComponentActive = true;
     //console.log(firebase.firestore.FieldValue.serverTimestamp());
+    //this.scrollToBottom();
     this.getConnectionList();
   }
 
@@ -68,7 +69,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    //this.scrollToBottom();
   }
 
   scrollToBottom(): void {
@@ -113,6 +114,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       //console.log(this.chats);
       this.updateUserOfMessages();
     });
+    this.scrollToBottom();
   }
 
   updateUserOfMessages() {
@@ -157,7 +159,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         //console.log('error with fb: ', err);
       });
       this.message = '';
-      //console.log(this.message);
+      this.scrollToBottom();
     }
   }
 
