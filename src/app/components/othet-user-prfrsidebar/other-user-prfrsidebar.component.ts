@@ -15,9 +15,11 @@ export class OtherUserPrfrsidebarComponent implements OnInit {
   public IsShowViewMore = false;
   public get_value:object={};
   public is_friend:any;
+  public isloginUserId:any;
   constructor(
     private dataService: UserService
   ) {
+    this.isloginUserId = localStorage.getItem("loginUserId");
     this.loginUserId = localStorage.getItem("otherProfileId");
     this.is_friend = localStorage.getItem("is_friend");
   }

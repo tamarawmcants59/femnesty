@@ -12,12 +12,15 @@
                   <div class="topPart" [ngStyle]="{'background-image':'url('+otherProfileDet?.cover_image_url+')'}">
                   </div>
                   <div class="profPhoto">
-                      <div class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.image_url+')'}">
+                      <div *ngIf="(get_value.profile_picture_picture == 1 && checkIsFriend) || get_value.profile_picture_picture == 0" class="img" [ngStyle]="{'background-image':'url('+otherProfileDet?.image_url+')'}">
                       </div>
+                      <div *ngIf="get_value.profile_picture_picture == 1 && !checkIsFriend" class="img" [ngStyle]="{'background-image':'url(assets/images/no_image.png)'}">
+                    </div>
                   </div>
                  
                   <div class="profDes">
-                      <h2 class="text-center">{{otherProfileDet?.name}}</h2>
+                      <h2 class="text-center" *ngIf="get_value.name_visible == 1">{{otherProfileDet?.name}}</h2>
+                      <h2 class="text-center" *ngIf="get_value.name_visible == 2">{{otherProfileDet?.first_name}}</h2>
                       <p class="text-center">{{otherProfileDet?.bio}}</p>
                       <p class="text-center addressP" *ngIf="otherProfileDet?.address">{{otherProfileDet?.address}}, {{otherProfileDet?.city}}</p>
                       <p class="text-center">
@@ -54,7 +57,7 @@
                       <div class="tab-content">
                           <div class="tab-pane fade" [ngClass]="{' in active' : activeTab=='activity'}">
                               <!--<app-post-create (getUserPostDetails)="getUserPostDetails()"></app-post-create>-->
-                              <div class="allpost" *ngIf="userPostList?.length > 0 && (otherProfileDet?.id==isloginUserId || checkIsFriend) && get_value.allow_connetion == 1">
+                              <div class="allpost" *ngIf="userPostList?.length > 0 && (otherProfileDet?.id==isloginUserId || checkIsFriend) && (get_value.allow_connetion == 1 || otherProfileDet?.id==isloginUserId)">
                                   <div class="likePart" *ngFor="let postData of userPostList">
                                       <app-post-card [postData]="postData"></app-post-card>
                                   </div>
