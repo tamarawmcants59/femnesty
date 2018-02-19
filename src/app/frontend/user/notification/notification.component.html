@@ -10,8 +10,8 @@
                 		 	<h2>NOTIFICATIONS</h2> <a href="">SETTINGS</a>    
                 		 </div>
                       <ul>
-                          <li *ngFor="let notiData of userNotiList" [ngClass]="{'unread' : notiData.is_view=='0'}">
-                              <div class="image-area">
+                          <li *ngFor="let notiData of userNotiList; let key = index" [ngClass]="{'unread' : notiData.is_view=='0'}">
+                              <div *ngIf="!notiData.hide_div" class="image-area">
                                   <!--<a [routerLink]="['/user/profile',notiData.display_name]">
                                     <div class="noti-image" [ngStyle]="{'background-image':'url('+notiData.profile_image+')'}"></div>
                                   </a>{{repoUrl+'/'+notiData.link}}-->
@@ -19,23 +19,24 @@
                                     <div class="noti-image" [ngStyle]="{'background-image':'url('+notiData.profile_image+')'}"></div>
                                   </a>
                               </div>
-                              <div class="text-area">
+                              <div *ngIf="!notiData.hide_div" class="text-area">
                                   <a href="javascript:void(0)" (click)="go_notification_details(notiData.link,notiData.id)">
-                                    <h4>{{notiData.name}}<span>{{notiData.message}}</span></h4>
+                                    <h4>{{notiData.name}}<span> {{notiData.message}}</span></h4>
                                     <p class="desc">{{notiData.created_date | dateTimeFormat: 'dd MMM yyyy h:m a'}}</p>
                                   </a>                                                                 
                               </div>
-                            <div _ngcontent-c5="" class="notify-right"> 
+                            <div *ngIf="!notiData.hide_div" class="notify-right"> 
                                 <a _ngcontent-c5="" class="icondown" (click)="togglenotiList(notiData.id)">
                                     <i _ngcontent-c5="" class="icon ion-chevron-down"></i>
                                 </a>
                                 <div _ngcontent-c5="" class="post-drop-box" *ngIf="IsShowSubMainCommentAction && IsShowSubMainCommentAction[notiData.id]">
                                     <div _ngcontent-c5="" class="closed"><a _ngcontent-c5="" (click)="togglenotiList(notiData.id)"><img _ngcontent-c5="" alt="" src="assets/images/cross.png"></a></div>
-                                    <a (click)="notificationAction(notiData.id,'H')" title="Hide Notification">Hide Notification</a>
+                                    <a (click)="notificationAction(notiData.id,'H',key)" title="Hide Notification">Hide Notification</a>
                                     <a _ngcontent-c5="" href="javascript:void(0)" title="Turn off these notifications"> Turn off these notifications</a>
-                                    <a (click)="notificationAction(notiData.id,'R')" title="Mark as unread">Mark as unread </a>
+                                    <a (click)="notificationAction(notiData.id,'R',key)" title="Mark as unread">Mark as unread </a>
                                 </div>
                             </div>
+                            
                           </li>
                       </ul>
                   </div>

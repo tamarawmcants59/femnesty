@@ -138,6 +138,7 @@ export class FrontendAppHeader {
       let self = this;
       setInterval(function () {
         self.userNotiCountList();
+        self.myAllNotificationList();
       }, 5000)
     }
 
