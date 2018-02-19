@@ -62,20 +62,23 @@ export class NotificationComponent implements OnInit {
     //alert(id);
   }
 
-  public notificationAction(noti_id,type){
+  public notificationAction(noti_id,type,key){
     if(type=='H' && noti_id!=''){
       this.dataService.deleteNotification({ "id": noti_id }).subscribe(res => {
         if(res.Ack == 1)
         {
-          //this.router.navigate([url]);
+          this.userNotiList[key].hide_div = true;
         }
       }); 
     }else if(type=='R' && noti_id!=''){
       this.dataService.unreadNotification({ "id": noti_id }).subscribe(res => {
-        //console.log(res);
+        if(res.Ack==1){
+          this.getAllNotificationList();
+        }
       }); 
     }
-    location.reload();
+    this.togglenotiList(noti_id);
+    //location.reload();
   }
   
   togglenotiList(id){
