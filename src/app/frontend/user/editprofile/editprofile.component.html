@@ -490,7 +490,7 @@
                                             <li class="friend-box-list" *ngFor="let friendData of userRequestFrndList">
                                                 <div class="friend-boxImage">
                                                     <a [routerLink]="['/user/profile',friendData.display_name]">
-                                                        <div class="img" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
+                                                        <div class="img" style="height: 105px !important;" [ngStyle]="{'background-image':'url('+friendData.profile_image+')'}"></div>
                                                     </a>
                                                 </div>
                                                 <div class="friend-boxText">
