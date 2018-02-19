@@ -10,6 +10,7 @@ import { UserService } from "../user.service";
 export class BrowsehubComponent implements OnInit {
   public isloginUser = 1;
   public loginUserId: any;
+  public searchCatName: any;
   public allHubs;
   public allCategories;
   public lat;
@@ -144,8 +145,9 @@ export class BrowsehubComponent implements OnInit {
     this.getAllHubs();
   }
 
-  public searchByCategory(id) {
+  public searchByCategory(id,name=null) {
     this.search_data.cat_id = id;
+    this.searchCatName=name;
     this.getAllHubs();
   }
 
