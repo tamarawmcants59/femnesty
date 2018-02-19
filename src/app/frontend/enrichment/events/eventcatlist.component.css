@@ -6,10 +6,27 @@
 
 .book-pic1{height:145px;}
 .book-pic1 a div{height:100%; width:100%}
-
+.article-add-holder p{
+	height:130px;
+}
+.pd-7{
+	padding: 7px;
+}
 @media screen and (max-width:767px) {
 	.inner-banner-section{margin-top: 170px;}
 	.inner-banner-section .container .video-info{left: 15px}
+	.article-add-holder p{
+		height: auto;
+	}
+	.section{
+		padding: 20px 0 !important;
+	}
+	.mb-50{
+		margin-bottom: 0;
+	}
+	.pd-7{
+	padding: 0 15px !important;
+}
 }
 
 .top-articles .article-image-holder {
@@ -22,5 +39,10 @@
 	text-transform:  inherit !important; 
 }
 .section{
-	padding: 70px 0 20px !important;
+	padding: 70px 0 20px;
+}
+.article-add-holder span{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }

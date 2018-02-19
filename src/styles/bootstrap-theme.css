@@ -6209,9 +6209,13 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
     box-shadow: none !important;
     border-radius: 0 !important;
     border: none !important;
+    width: 100% !important;
   }
   .MyGroups-list.with-right-button button{position: relative;right:auto;top:0;transform: none;margin-top:10px}
   .MyGroups-list.with-right-button .right-side{padding-right: 0}
+  .middlePart .profDes{
+  	padding: 30px 15px 40px;
+  }
 }
 
 .alert-success, .alert-danger {

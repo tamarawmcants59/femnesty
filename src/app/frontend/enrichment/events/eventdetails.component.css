@@ -26,4 +26,35 @@
 .mb-30{
 	margin-bottom: 30px !important
 }
-
+.Sponsors{
+	padding: 0 0 70px;
+}
+.Sponsors h2{
+	font-size: 24px;
+	color: #363636;
+	margin-bottom: 50px;
+	font-family: 'sanchezregular';
+	margin-top: 0px;
+	line-break: 24px;
+}
+.sp-image{
+	width: auto;
+	height: 71px;
+	margin-bottom: 15px;
+}
+.sp-image img{
+	width: auto;
+	height: 71px;
+	object-fit: cover;
+	
+}
+@media screen and (max-width:767px){
+	.sp-image{
+		margin: 0 auto 15px;
+		text-align: center;
+		display: block;
+	}
+	.sp-image img{
+		text-align: center;
+	}
+}
