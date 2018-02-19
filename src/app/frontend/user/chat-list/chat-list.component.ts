@@ -13,6 +13,9 @@ export class ChatListComponent implements OnInit {
   chatHeads: any[];
   userFrndList = [];
   public showLi:boolean=false;
+  public search_con: string;
+  public onlineUserList = [];
+  public firebasOnlineUserList: any;
   //public showAllLi:boolean=false;
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0) || 0;
   constructor(private db: AngularFirestore, private userService: UserService) { }
@@ -108,6 +111,7 @@ export class ChatListComponent implements OnInit {
 
   public getConnectionList() {
     if (this.loginUserId != 0) {
+      let onlineUsersRef = firebase.database().ref('presence/');
       const dataUserDet = {
         "user_id": this.loginUserId
       };
@@ -116,6 +120,20 @@ export class ChatListComponent implements OnInit {
           const details = data;
           if (details.Ack == "1") {
             this.userFrndList = details.FriendListById;
+            //console.log(this.userFrndList);
+            onlineUsersRef.on('value', (snapshot)=> {
+              for (let key in snapshot.val()) {
+                  if (snapshot.val()[key].online && snapshot.val()[key].userid!=this.loginUserId) {
+                    let onlineUserDet = details.FriendListById.filter(item => item.friend_id == snapshot.val()[key].userid);
+                    let checkOnlineUserlist = this.onlineUserList.filter(item => item.friend_id == snapshot.val()[key].userid);
+                    if(onlineUserDet.length>0 && checkOnlineUserlist.length==0){
+                      onlineUserDet[0].is_online=true;
+                      //console.log(onlineUserDet);
+                      //this.onlineUserList.push(onlineUserDet[0]);
+                    }
+                  }
+              }
+            });
             //console.log(this.userFrndList);
           }
         },
@@ -127,5 +145,21 @@ export class ChatListComponent implements OnInit {
 
   public show_more(){
     this.showLi = true;
+  }
+
+  public searchConnection() {
+    //console.log(this.search_con);
+    if (this.loginUserId != 0 && this.search_con!='') {
+      this.search_con = this.search_con.toLowerCase();
+      //this.getConnectionList();
+      let goodFriends = this.userFrndList.filter(item => {
+        if(item.name.toLowerCase().search(this.search_con)!==-1){
+          return item;
+        }
+      });
+      this.userFrndList = goodFriends;
+    }else{
+      this.getConnectionList();
+    }
   }
 }

@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../user/user.service';
 import { Promise } from 'q';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-chat',
@@ -15,6 +16,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollMe') private myChatContainer: ElementRef;
 
+  chatHeads: any[];
   chats: any[];
   userFrndList=[];
   loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
@@ -226,6 +228,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
           if (details.Ack == "1") {
             this.userFrndList = details.FriendListById;
             //console.log(this.userFrndList);
+            this.getUnreadMessages();
           } 
         },
         error => {
@@ -234,12 +237,74 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
+  getUnreadMessages() {
+    
+    var newArray = [];
+    const messages = this.db.collection('Messages', ref => {
+      return ref.where('to_user_id', '==', this.loginUserId).orderBy('created', 'desc');
+    }).snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data();
+        newArray.push(data);
+        const id = action.payload.doc.id;
+        return { id, ...data };
+      });
+    });
+    messages.subscribe(data => {
+      
+      var isFound = false;
+      var index;
+      var finalArray = [];
+      if (data && data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+          if (i == 0) {
+            finalArray.push(data[i]);
+          }
+          else {
+            var isfound=false;
+            for (var j = 0; j < finalArray.length; j++) {
+              if (finalArray[j].from_user_id == data[i]["from_user_id"]) {
+                isfound=true;
+                break;
+              }
+              else {
+                isfound=false;
+                //finalArray.push(data[i]);
+              }
+            }
+            if(isfound==false)
+            {
+              finalArray.push(data[i]);
+            }
+          }
+        }
+        this.chatHeads = finalArray;
+      }
+      else
+        this.chatHeads = data;
+
+        if(this.chatHeads.length>0){
+          this.chatHeads.forEach(element => {
+            let getUserLastMsg = this.userFrndList.filter(item => item.friend_id == element.from_user_id);
+            getUserLastMsg[0].is_lastMsg=element.created;
+            getUserLastMsg[0].is_message=element.message;
+            /*if(element.count>0){
+              this.AllArtCnt+=element.count;
+            }*/
+          });
+          
+        }
+    });
+    
+  }
+
+
   public searchConnection() {
     //console.log(this.search_con);
     if (this.loginUserId != 0 && this.search_con!='') {
-      //this.getConnectionList();
+      this.search_con = this.search_con.toLowerCase();
       let goodFriends = this.userFrndList.filter(item => {
-        if(item.name.search(this.search_con)!==-1){
+        if(item.name.toLowerCase().search(this.search_con)!==-1){
           return item;
         }
       });
