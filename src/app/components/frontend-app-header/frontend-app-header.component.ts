@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FrontendService } from "./frontend.service";
 // import { ArticleService } from "../../frontend/article/article.service";
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserService } from "../../frontend/user/user.service";
@@ -49,6 +49,7 @@ export class FrontendAppHeader {
     private router: Router,
     private _service: FrontendService,
     //private artService: ArticleService,
+    private activatedRoute: ActivatedRoute,
     private builder: FormBuilder,
     private _chatListnerService: ChatListnerService,
     private db: AngularFirestore,
@@ -68,8 +69,15 @@ export class FrontendAppHeader {
         this.currentFireUserId = user.uid;
       }
     }).subscribe();
+    
     //console.log(this.router.url);
     this.getCurrentPageName = this.router.url;
+    if(this.getCurrentPageName!=''){
+      var res = this.getCurrentPageName.split("/");
+      if(res[2] && res[2]=='account_verification'){
+        this.getCurrentPageName='/user/signup';
+      }
+    }
     //let returnUrl = this.route.snapshot.queryParams['returnUrl'];
     /*this.route.params.subscribe((params: Params) => {
 
