@@ -399,7 +399,8 @@ public invitediv = '';
   public getGroupDetailsByName() {
     if (this.groupNameByUrl != '') {
       const dataUserDet = {
-        "group_slug": this.groupNameByUrl
+        "group_slug": this.groupNameByUrl,
+        "login_id":localStorage.getItem("loginUserId")
       };
       this.dataService.getGrpDetBySlug(dataUserDet)
         .subscribe(data => {
@@ -507,7 +508,8 @@ public invitediv = '';
   public getGroupMemberList() {
     if (this.isGroupId != '') {
       const dataUserDet = {
-        "group_id": this.isGroupId
+        "group_id": this.isGroupId,
+        "login_id":this.isloginUserId
       };
       this.dataService.getGroupMemberListById(dataUserDet)
         .subscribe(data => {

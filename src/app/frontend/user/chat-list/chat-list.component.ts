@@ -102,7 +102,7 @@ export class ChatListComponent implements OnInit {
 
   fillUserDetails() {
     this.chatHeads.map(ch => {
-      this.userService.getUserDetById({ id: ch.from_user_id }).subscribe(res => {
+      this.userService.getChatUserDetById({ id: ch.from_user_id,login_id:this.loginUserId }).subscribe(res => {
         //console.log(res);
         ch['userDetails'] = res.UserDetails[0];
       });

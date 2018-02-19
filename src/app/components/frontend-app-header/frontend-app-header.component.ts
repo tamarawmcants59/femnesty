@@ -408,7 +408,7 @@ export class FrontendAppHeader {
 
   fillUserDetails() {
     this.chatHeads.map(ch => {
-      this._service.getUserDetById({ id: ch.from_user_id }).subscribe(res => {
+      this._service.getChatUserDetById({ id: ch.from_user_id,login_id:localStorage.getItem("loginUserId")}).subscribe(res => {
         ch['userDetails'] = res.UserDetails[0];
       });
     });

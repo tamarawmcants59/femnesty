@@ -61,6 +61,13 @@ export class UserService {
       form_data
     ).map(data => data);
   }
+  getChatUserDetById(form_data: { id: any,login_id:any }) {
+    //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)
+    return this.apiService.post(
+      `/users/appchatuserdetails`,
+      form_data
+    ).map(data => data);
+  }
 
   userSignup(form_data) {
     return this.apiService.post(

@@ -12,7 +12,13 @@ export class FrontendService {
   ) {
       //alert("ffffffffff");
   }
-
+  getChatUserDetById(form_data: { id: any,login_id:any }) {
+    //return this.apiService.get(`/enrichment/apparticlecatsbyslug/${slug}`)
+    return this.apiService.post(
+      `/users/appchatuserdetails`,
+      form_data
+    ).map(data => data);
+  }
   getAllPageData(){
     return this.apiService.get(`/enrichment/appcontentallbyslug/all`)
       .map(data => data);

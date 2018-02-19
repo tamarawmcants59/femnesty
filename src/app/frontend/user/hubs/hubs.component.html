@@ -471,7 +471,7 @@
 										<li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
 											<div class="media-left">
 												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
-													<div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
+													<div class="img" style="height: 62px !important;" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
 												</a>
 											</div>
 											<div class="media-body media-middle">
