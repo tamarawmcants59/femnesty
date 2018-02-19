@@ -47,7 +47,7 @@
             </div>
             <div class="right-text-hold">
                 <h3 style="margin-bottom: 30px">{{articleListData[0].title}}</h3>
-                <p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>
+                <!--<p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>-->
                 <!--<p class="font-weight-bold">By {{articleListData[0].author_name}}</p>-->
                 <!--<p class="text-gray">{{articleListData[0].short_desc | limitTo : 250}}</p>-->
                 <!--<ul class="social-link mt-30">
@@ -64,7 +64,7 @@
                         <span>5</span>
                     </li>
                 </ul>-->
-                <a [routerLink]="['/enrichment/eventdetails',articleListData[0].slug]" class="btn btn-primary">Read more</a>
+                <a [routerLink]="['/enrichment/eventdetails',articleListData[0].slug]" class="btn btn-primary">Events Near Me</a>
             </div>
         </div>
     </div>

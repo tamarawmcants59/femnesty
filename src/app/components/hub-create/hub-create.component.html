@@ -71,7 +71,8 @@
             {{createErrorMsg}}
           </div>
           <!-- <h3>Create Hub</h3> -->
-          <h3>&nbsp;</h3>
+          <h3>CREATE A HUB</h3>
+          
           <p>Short description on what a hub is and what is required to make
             <br> a hub and also what they are used for.</p>
           <div class="menu">
@@ -80,6 +81,7 @@
                 <div class="form-group row">
                   <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
                   <div class="col-sm-12">
+                  <h5>HUB NAME/TITLE</h5>
                     <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
                     <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title *">
                     <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub title Required.</div>
@@ -88,6 +90,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                  <h5>CATEGORY</h5>
                     <select class="form-control-plaintext" [(ngModel)]="addForm.category_id" required formControlName="category_id">
                       <option value='' selected>Select Category *</option>
                       <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
@@ -97,67 +100,20 @@
                     <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category required.</div>
                   </div>
                 </div>
+<div class="form-group row">
+                  <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
+                  <div class="col-sm-12">
+                  <h5>VENUE</h5>
+                    <input type="hidden" class="form-control-plaintext" >
+                    <input type="text" class="form-control-plaintext" placeholder="E.g. Resturant, Address *">
+                    <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">E.g. Resturant, Address Required.</div>
+                  </div>
+                </div>
+                
 
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <div class="col-sm-3">
-                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="O" (change)="checkValidation()"> One Time
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="R" (change)="checkValidation()"> Recurring
-                    </div>
-                    <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
-                  </div>
-                </div>
-
-                <!-- <div class="form-group row" *ngIf="addForm.type=='R'">
-                  <div class="col-sm-12">
-                    <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_start" formControlName="recurring_start" [min]="today" >
-                    <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter Recurring Start date</div>
-                  </div>
-                </div> -->
-
-
-                <div class="form-group row half-time">
-                  <div class="col-sm-6">
-
-
-                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
-                  </div>
-                  <div class="col-sm-6" *ngIf="addForm.type=='R'">
-
-                    <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
-                      [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
-                  </div>
-                </div>
-
-                <!--<div class="form-group row" >
-                  
-                </div>-->
-
-                <div class="form-group row half-time">
-                  <div class="col-sm-6">
-
-                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
-                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
-                  </div>
-                  <div class="col-sm-6">
-                    <ngx-time-picker [disableInput]="true" formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
-
-
-
-                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
+                  <h5>organizer</h5>
                     <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer *">
                     <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer required.</div>
                   </div>
@@ -165,6 +121,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                  <h5>location</h5>
                     <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>-->
                     <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" #addressEdit>
                     <!-- <input type="text" class="form-control-plaintext" 
@@ -175,6 +132,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                  <h5>Website</h5>
                     <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
                     <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
                   </div>
@@ -189,6 +147,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                  <h5>Contact E-mail</h5>
                     <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail *"
                       email>
                     <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Enter valid email.</div>
@@ -197,6 +156,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                  <h5>Contact Phone</h5>
                     <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone *">
                     <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone required.</div>
                   </div>
@@ -205,11 +165,127 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12">
+                  <h5>Description</h5>
                     <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description *"></textarea>
                     <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description required.</div>
                   </div>
                 </div>
+				<div class="form-group row">
+                  <div class="col-sm-12">
+                  	<h5>HUB NAME/TITLE</h5>
+                    <div class="col-sm-3">
+                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="O" (change)="checkValidation()"> One Time
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="R" (change)="checkValidation()"> Recurring
+                    </div>
+                    <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
+                  </div>
+                </div>
 
+                <div class="form-group row half-time">
+                <div class="col-sm-12">
+                	<h5>Starts</h5>
+                
+                  <div class="col-sm-4 pdr-5 pdl-0">
+                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
+                  </div>
+                  <div class="col-sm-4 pdl-5">
+
+                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
+                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
+                  </div>
+                  <div class="col-sm-4 pdl-5">
+                   	<p><input class="styled-radio" id="test1"  type="radio" formControlName="name_visible" value="1">
+                    <label class="acpt-cond-after" for="test1">ALL DAY EVENT?</label></p>
+                    <p><input class="styled-radio" id="test2"  type="radio" formControlName="name_visible" value="1">
+                    <label class="acpt-cond-after" for="test2">recurring event?</label></p>
+                  </div>
+                  <div class="col-sm-6" *ngIf="addForm.type=='R'">
+
+                    <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
+                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
+                      [min]="today"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
+                  </div>
+                </div>
+</div>
+
+<div class="form-group row half-time">
+                <div class="col-sm-12">
+                	<h5>Ends</h5>
+                
+                  <div class="col-sm-4 pdr-5 pdl-0">
+                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
+                  </div>
+                  <div class="col-sm-4 pdl-5">
+
+                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
+                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
+                  </div>
+                  
+                  <div class="col-sm-6" *ngIf="addForm.type=='R'">
+
+                    <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
+                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
+                      [min]="today"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
+                  </div>
+                </div>
+</div>
+
+                <!--<div class="form-group row" >
+                  
+                </div>-->
+
+                <div class="form-group row half-time">
+                  <div class="col-sm-3">
+
+                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
+                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
+                  </div>
+                  <div class="col-sm-3">
+                    <ngx-time-picker [disableInput]="true" formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
+
+
+
+                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                	<div class="col-sm-12">
+                	<h5>RECURRENCE</h5>
+                		<ul>
+                			<li class="red-txt">S</li>
+                			<li>M</li>
+                			<li>T</li>
+                			<li>W</li>
+                			<li>T</li>
+                			<li>F</li>
+                			<li>S</li>
+                		</ul>
+                	</div>
+                </div>
+                <div class="form-group row half-time">
+                <div class="col-sm-12">
+                	<h5>LAST DATE</h5>
+                
+                  <div class="col-sm-4 pdr-5 pdl-0">
+                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
+                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
+                  </div>
+                  
+                </div>
+				</div>
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <div class="col-sm-3">
