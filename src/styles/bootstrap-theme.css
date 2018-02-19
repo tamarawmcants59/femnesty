@@ -6202,3 +6202,34 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
   .MyGroups-list.with-right-button button{position: relative;right:auto;top:0;transform: none;margin-top:10px}
   .MyGroups-list.with-right-button .right-side{padding-right: 0}
 }
+
+.alert-success, .alert-danger {
+    -webkit-animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 5s;
+    animation: seconds 1.0s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 5s;
+    position: relative;
+      
+  }
+  @-webkit-keyframes seconds {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      left: -9999px; 
+      position: absolute;   
+    }
+  }
+  @keyframes seconds {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      left: -9999px;
+      position: absolute;     
+    }
+  }
