@@ -16,9 +16,11 @@
                         <ul>
                             <li *ngFor="let chatHead of chatHeads; let key = index" style="cursor:pointer" [ngClass]="{'unread':chatHead.is_read === false}">
                                 <div class="image-area" *ngIf="(key < 6 || showLi)">
+                                    <a [routerLink]="['/user/chat',chatHead.from_user_id]">
                                     <div class="noti-image" style="background: url('images/img-1.jpg') no-repeat center center;">
                                         <img  *ngIf="chatHead.userDetails" src="{{chatHead.userDetails.image_url}}" style="width:58px" alt="" />
                                     </div>
+                                    </a>
                                 </div>
                                 <div class="text-area" *ngIf="(key < 6 || showLi)">
                                     <a [routerLink]="['/user/chat',chatHead.from_user_id]">

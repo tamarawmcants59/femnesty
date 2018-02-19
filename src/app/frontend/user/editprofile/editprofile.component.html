@@ -182,6 +182,7 @@
                                                     </li>
                                                     <li>
                                                         <select class="form-control-plaintext" [(ngModel)]="dobmonth" formControlName="dobmonth" (ngModelChange)="calculateAge($event,'m')">
+                                                            <option value="">Month</option>
                                                             <option value="0">Jan</option>
                                                             <option value="1">Feb</option>
                                                             <option value="2">Mar</option>
@@ -715,8 +716,10 @@
         <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
             {{modalErrorMsg}}
         </div>
-        <div class="img result img-responsive" *ngIf="!IsShowCropperCoverImage">
+
+        <div class="img result" *ngIf="!IsShowCropperCoverImage">
             <img [src]="loginUserDet.cover_image_url" class="crop-img">
+
         </div>
         <div class="upload-demo">
             <div class="upload-demo-wrap">

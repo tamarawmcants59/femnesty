@@ -77,15 +77,18 @@ export class UserSidebar implements OnInit {
     this.getUserDetails();
     this.getConnectionList();
     this.getConnectionCount();
+    let self = this;
+    setInterval(function () {
+      self.getConnectionCount();
+    }, 5000)
   }
-getConnectionCount()
-{
+getConnectionCount(){
   const loginUserId = localStorage.getItem("loginUserId");
   this._service.getConnectionsCount({user_id:loginUserId}).subscribe(data => {
     const details = data;
     if (details.Ack == "1") {
       this.connectionsCount = details.FriendCount.count;
-      //console.log(this.currentUserLoginDet);
+      //console.log(this.connectionsCount);
     } else {
 
     }
