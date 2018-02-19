@@ -137,7 +137,7 @@ export class FrontendAppFooter implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   getWithUser(user_id) {
-    return this.userService.getUserDetById({ id: user_id }).subscribe(res => {
+    return this.userService.getChatUserDetById({ id: user_id,login_id:this.loginUserId }).subscribe(res => {
       this.withUser = res.UserDetails[0];
     });
   }

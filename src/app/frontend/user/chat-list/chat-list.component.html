@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="text-area" *ngIf="(key < 6 || showLi)">
                                     <a [routerLink]="['/user/chat',chatHead.from_user_id]">
-                                        <h4 *ngIf="chatHead.userDetails">{{chatHead.userDetails.first_name}} {{chatHead.userDetails.last_name}}</h4>
+                                        <h4 *ngIf="chatHead.userDetails">{{chatHead.userDetails.name}}</h4>
                                     </a>
                                     <p class="desc">{{chatHead.message.text}}</p>
                                     <p class="desc" *ngIf="chatHead.message.file">
