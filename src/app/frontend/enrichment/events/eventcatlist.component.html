@@ -13,7 +13,7 @@
     <div class="mb-50" *ngFor="let catArticle of articleListData">
         <!--<h2 class="">{{catArticle.name}}</h2>-->
         <div class="row" *ngIf="catArticle.all_eventbycat?.length>0">
-            <div style="padding: 7px;" class="col-md-4 col-sm-6" *ngFor="let articleData of catArticle.all_eventbycat">
+            <div class="col-md-4 col-sm-6 pd-7" *ngFor="let articleData of catArticle.all_eventbycat">
             <div class="gray">
                 <div class="article-image-holder">
                     <a  [routerLink]="['/enrichment/eventdetails',articleData.slug]"> 
@@ -35,3 +35,4 @@
     </div>
 </div>
 </section>
+

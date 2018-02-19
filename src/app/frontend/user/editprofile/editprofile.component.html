@@ -670,25 +670,8 @@
             {{modalErrorMsg}}
         </div>
         <div class="img result" *ngIf="!IsShowCropperProfileImage">
-            <img [src]="loginUserDet.image_url" class="crop-img">
+            <img [src]="loginUserDet.image_url" class="crop-img img-responsive">
         </div>
-        <!-- <div class="img result" *ngIf="croppedImage">
-                <img [src]="croppedImage" style="width:100%; height:100%">
-    
-    
-            </div>
-    
-            <div class="col-md-12" *ngIf="showProfileCrop">
-                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="200"
-                    format="png" (imageCropped)="imageCropped($event)"></image-cropper>
-            </div> -->
-        <!--<div class="inner-bg">
-            <div class="icon-change">
-                <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
-                    <input type="file" id="upload" accept="image/*" (change)="cropperChange($event)" />
-                </div>
-            </div>
-        </div>-->
         <div class="upload-demo">
             <div class="upload-demo-wrap">
                 <div id="upload-demo"></div>
@@ -733,26 +716,11 @@
         <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
             {{modalErrorMsg}}
         </div>
+
         <div class="img result" *ngIf="!IsShowCropperCoverImage">
-            <img [src]="loginUserDet.cover_image_url" class="crop-img img-responsive">
+            <img [src]="loginUserDet.cover_image_url" class="crop-img">
+
         </div>
-        <!-- <div class="img result" *ngIf="croppedImage">
-                    <img [src]="croppedImage" style="width:100%; height:100%">
-        
-        
-                </div>
-        
-                <div class="col-md-12" *ngIf="showProfileCrop">
-                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="200"
-                        format="png" (imageCropped)="imageCropped($event)"></image-cropper>
-                </div> -->
-        <!--<div class="inner-bg">
-            <div class="icon-change">
-                <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
-                    <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
-                </div>
-            </div>
-        </div>-->
         <div class="upload-demo">
             <div class="upload-demo-wrap">
                 <div id="upload-demo"></div>

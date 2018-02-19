@@ -196,6 +196,10 @@ ng4geo-autocomplete.auto-text-input input {
 	.img{
 		height: auto !important
   }
+  .edit-option ul li{
+  	    padding: 5px 15px;
+  }
+ 
 }
 
 
@@ -300,3 +304,9 @@ label{
 	margin-top: 30px;
 	color: #222222;
 }
+.crop-img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+  
