@@ -72,7 +72,7 @@ export class NotificationComponent implements OnInit {
       }); 
     }else if(type=='R' && noti_id!=''){
       this.dataService.unreadNotification({ "id": noti_id }).subscribe(res => {
-        
+        //console.log(res);
       }); 
     }
     location.reload();
