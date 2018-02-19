@@ -1728,7 +1728,7 @@ footer {
 }
 
 .single-article.section h1 {
-    font-size: 36px;
+    font-size: 30px;
 }
 
 .single-article p a {
@@ -1827,7 +1827,7 @@ footer {
         line-height: 47px;
     }
     .section h1 {
-        font-size: 35px;
+        font-size: 30px;
         line-height: 40px;
     }
     blockquote p,
@@ -1894,7 +1894,7 @@ footer {
     }
     .banner{background-size: cover;background-position: right center;}
     .section h1 {
-        font-size: 35px;
+        font-size: 30px;
     }
     .section {
         padding: 50px 0
@@ -4614,7 +4614,7 @@ color: #707070;width:100%}
 	padding: 45px 0 !important;
 }
 section h1{
-	font-size: 36px !important;
+	font-size: 30px !important;
 	width:100% !important;text-align: center;
 }
 section h1:after{
@@ -6181,9 +6181,20 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
 }
 
 
+.login-form h5{
+	font-size: 11px;
+	color: #202020;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-family: 'montserratregular';
+	margin-top: 0 !important;
+}
 
-
-
+.right-img-hold img{
+	width: 100%;
+	height: auto;
+	object-fit:cover;
+}
 
 @media screen and (max-width:767px) {
 	.modal-dialog {
