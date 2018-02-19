@@ -100,9 +100,9 @@
                                 <div class="text-area">
                                     <h5><a [routerLink]="['/user/profile',friendData.display_name]"> {{friendData.name}} </a></h5>
                                     
-                                    <!--<a [routerLink]="['/user/chat',friendData.friend_id]">
+                                    <a [routerLink]="['/user/chat',friendData.friend_id]">
                                         <p>Chat</p>
-                                    </a>-->
+                                    </a>
                                     <!--<p>You: Stop screming Susan!</p>-->
                                     <div class="time" *ngIf="friendData.is_lastMsg">{{friendData.is_lastMsg | dateTimeFormat: 'h:m a'}}</div>
                                 </div>
