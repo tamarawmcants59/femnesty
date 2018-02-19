@@ -105,6 +105,10 @@
 								</aside>
 							</li>
 						</ul>
+						<div *ngIf="allHubs.length == 0">
+							<div class="nothing" style="font-size: 18px;">No hubs for {{searchCatName}}</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -136,9 +140,9 @@
 							</div>
 						</div>-->
 						<ul class="filter-reslt">
-							<li (click)="searchByCategory('')" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==''?'800':'200'}">All Hubs</li>
+							<li (click)="searchByCategory('','All Hubs')" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==''?'800':'200'}">All Hubs</li>
 							<li *ngFor="let cat of allCategories" style="cursor:pointer;" [ngStyle]="{'font-weight':search_data.cat_id==cat.id?'800':'200'}"
-							 (click)="searchByCategory(cat.id)">{{cat.title}}
+							 (click)="searchByCategory(cat.id,cat.title)">{{cat.title}}
 								<span *ngIf="cat.hubs">({{cat.hubs}})</span>
 								<span *ngIf="!cat.hubs">(0)</span>
 							</li>
