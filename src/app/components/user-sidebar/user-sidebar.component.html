@@ -13,20 +13,20 @@
     </div>
     <div class="messagePart">
         <ul>
-                <li>
-                        <a [routerLink]="['/social_home']">
-                            <span class="iconWidth">
-                                <img src="assets/images/feed-icon.png">
-                            </span>MY FEED
-                            <span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
-                        </a>
-                    </li>
+            <li>
+                <a [routerLink]="['/social_home']">
+                    <span class="iconWidth">
+                        <img src="assets/images/feed-icon.png">
+                    </span>MY FEED
+                    <!--<span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>-->
+                </a>
+            </li>
             <li>
                 <a [routerLink]="['/user/chat/list']">
                     <span class="iconWidth">
                         <img src="assets/images/icon1.png">
                     </span>MESSAGES
-                    <span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
+                    <!--<span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>-->
                 </a>
             </li>
             <li>

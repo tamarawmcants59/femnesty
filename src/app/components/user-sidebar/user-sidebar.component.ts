@@ -85,7 +85,7 @@ getConnectionCount()
     const details = data;
     if (details.Ack == "1") {
       this.connectionsCount = details.FriendCount.count;
-      //console.log(this.currentUserLoginDet);
+      console.log(this.connectionsCount);
     } else {
 
     }
