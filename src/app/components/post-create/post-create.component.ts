@@ -163,7 +163,6 @@ public get_privacy_setting(){
    };
   this.dataService.getuserPrivacy(dataUserDet)
          .subscribe(data => {
-           console.log(data)
            if(data.Ack == 1)
            { 
              this.get_value = data.user_privacy;
