@@ -4434,7 +4434,7 @@ font-weight: normal;padding: 2px 5px;}
 	color:#bb1926;
 }
 
-.tabPart ul.edit-forms{padding: 35px 45px;overflow: hidden;}
+.tabPart ul.edit-forms{padding: 35px 45px;}
 .tab-content .tab-pane .connectionsPart{padding: 15px}
 ng4geo-autocomplete.auto-text-input input{
 background: #f7f7f7;
@@ -6195,7 +6195,10 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
 	height: auto;
 	object-fit:cover;
 }
-
+.saveChanges{
+	overflow: hidden;
+	padding-bottom: 20px;
+}
 @media screen and (max-width:767px) {
 	.modal-dialog {
     margin: 188px auto;
@@ -6219,6 +6222,10 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
   .form-group{
   	clear: both !important;
   }
+  .shareYourThought .btn.btn-default{
+	width: 100% !important;
+	margin-top: 15px;
+}
 }
 
 .alert-success, .alert-danger {
@@ -6251,9 +6258,3 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
       position: absolute;     
     }
   }
-@media screen and (max-width:767px) {
-.shareYourThought .btn.btn-default{
-	width: 100% !important;
-	margin-top: 15px;
-}
-}
