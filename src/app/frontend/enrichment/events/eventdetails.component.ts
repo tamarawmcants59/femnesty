@@ -43,7 +43,6 @@ export class EventdetailsComponent implements OnInit {
         }*/
         
         this.articleData = details.EventListBySlug[0];
-        //console.log(this.articleData);
       } else {
         return false;
       }

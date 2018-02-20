@@ -46,18 +46,18 @@ export class TeamComponent implements OnInit {
         Validators.pattern('^[0-9]*$')
       ]],
       qualification: ['', [
-        //Validators.required,
+        Validators.required,
         //Validators.minLength(10)
-        Validators.pattern('([a-zA-Z0-9])+([0-9a-zA-Z])+')
+        Validators.pattern('[a-zA-Z0-9 ]+')
       ]],
       message: ['', [
         Validators.required,
         //Validators.minLength(3)
       ]],
-      image: ['', [
+      /*image: ['', [
         //Validators.required,
         //Validators.minLength(3)
-      ]]
+      ]]*/
     });
   }
 
@@ -66,9 +66,9 @@ export class TeamComponent implements OnInit {
 
   public mentor() {
     const userValue = this.form.value;
-    userValue.image = this.postImgData;
+    //userValue.image = this.postImgData;
+    userValue.image = '';
     this.dataService.teampostData(userValue).subscribe(data => {
-      console.log(data);
       if (data.Ack == "1") {
         this.showPostImgDive = false;
         this.postImgData='';

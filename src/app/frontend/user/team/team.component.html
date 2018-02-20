@@ -30,6 +30,7 @@
       </div>
       <div class="form-group col-lg-6">
           <input type="text" placeholder="Certification / Qualification" class="form-control" formControlName="qualification">
+          <div class="text-danger" *ngIf="!form.controls['qualification'].valid && form.controls['qualification'].touched">Certification / Qualification Required</div>
       </div>
       <div class="form-group col-lg-12">
           <textarea rows="6" placeholder="Your Message" class="form-control" formControlName="message"></textarea>
