@@ -754,4 +754,10 @@ export class HubCreateComponent implements OnInit {
     this.postform.reset();
   }
 
+  public getStartDate(data: any) {
+    let newDay = new Date(data).getDay();
+    this.day=newDay;
+    //console.log(newDay);
+  }
+  
 }
