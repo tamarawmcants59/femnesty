@@ -243,7 +243,8 @@ export class PostCardComponent implements OnInit {
   
   public confirmIgnore(){
     let data={
-      "id":this.ignorePostId
+      "id":this.ignorePostId,
+      "login_id":this.IsloginUserId
       }
       this.loading=true;
       if(this.ignorePostType=='P'){
