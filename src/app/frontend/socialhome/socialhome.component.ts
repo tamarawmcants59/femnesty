@@ -28,7 +28,7 @@ export class SocialhomeComponent implements OnInit {
   public postCmtId: any;
   public showCmtDiv:boolean = false;
   public groupPostDetData: object ={ };
-  public load_more_value =0;
+  public load_more_value =1;
   public loadmore = 0;
   public rForm: FormGroup;
   public IsShowFeedForm = false;
@@ -36,6 +36,7 @@ export class SocialhomeComponent implements OnInit {
   public loginUserId: number = parseInt(localStorage.getItem("loginUserId"), 0);
   public homepageCls = '';
   public shhover = '';
+  public pageCount = false;
 
   constructor(
     private builder:FormBuilder, 
@@ -105,32 +106,37 @@ scroll()
 
   public getUserPostDetails(){
     this.loading = true;
-    this.load_more_value+= 1;
+    //this.load_more_value+= 1;
+    //this.load_more_value = 1;
 
     if(this.isLoggedIn=='1'){
+      if(!this.pageCount){
+        this.load_more_value = 1;
+      }
         let dataUserDet ={
           "user_id": this.IsloginUserId,
           "page_no": this.load_more_value
         };
-        this.dataService.getUserPostById(dataUserDet)
-        .subscribe(data => {
-
+        this.dataService.getUserPostById(dataUserDet).subscribe(data => {
               let details=data;
               if (details.Ack=="1") {
-                if( this.load_more_value == 1)
-                {
-                  this.userPostList.push(details.AllPost);
-                }
-                else{
+                if( this.load_more_value == 1 && !this.pageCount){
+                  if(this.userPostList.length>0){
+                    this.userPostList = [];
+                    this.userPostList.push(details.AllPost);
+                  }else{
+                    this.userPostList.push(details.AllPost);
+                  }
+                  this.pageCount = false;
+                }else if(this.load_more_value > 1 && this.pageCount){
                   for (let i = 0; i < details.AllPost.length; i++) {
                     //this.myGrpList.push(goodFriends[i]);
                     this.userPostList[0].push(details.AllPost[i]);
                   }
                   this.loadmore = 0;
+                  this.pageCount = false;
                 }
-                
                // this.userPostList = this.userPostList[0];
-                console.log(this.userPostList)
               }else{
                 this.loadmore = 1;
               }
@@ -161,7 +167,12 @@ scroll()
       }
   }
 
-  public submitPost() {
+  public loadmoreData() {
+    this.load_more_value+= 1;
+    this.pageCount=true;
+    this.getUserPostDetails();
+  }
+  /*public submitPost() {
     this.loading = true;
     var result,
     userValue = this.postform.value;
@@ -184,7 +195,7 @@ scroll()
         alert(error);
       });
 
-  }
+  }*/
   onScroll()
   {
     alert();

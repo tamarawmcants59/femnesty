@@ -24,6 +24,9 @@ export class PostCardComponent implements OnInit {
   public showmore = false;
   public ignorePostId:any;
   public ignorePostType:any;
+  public ignorePostData:any;
+  public ignorePostKey:any;
+  
   showPostImgDive: boolean;
   loading = false;
   editPostText: any;
@@ -51,6 +54,7 @@ export class PostCardComponent implements OnInit {
   public delPostType: any;
   public delPostKey: any;
   public delPostData: any;
+  public ignorePostCmtData: any;
   IsShowSubCommentAction:any;
   IsShowSubMainCommentAction:any;
   public blockPostId: any;
@@ -129,19 +133,13 @@ export class PostCardComponent implements OnInit {
     }
   }
 
-  toggleSubComment(id)
-  {
-    if(!this.IsShowSubCommentAction)
-    {
+  toggleSubComment(id){
+    if(!this.IsShowSubCommentAction){
       this.IsShowSubCommentAction=[];
     }
-    if(this.IsShowSubCommentAction[id])
-    {
+    if(this.IsShowSubCommentAction[id]){
       this.IsShowSubCommentAction[id]=false;
-    }
-    else
-    {
-      
+    }else{
       this.IsShowSubCommentAction[id]=true;
     }
     
@@ -149,16 +147,12 @@ export class PostCardComponent implements OnInit {
 
   deletePost(confirmmodal, post_id, type, comments = null, delkey = null) {
     //this.IsShowOption= !this.IsShowOption;
-    if(this.IsShowSubCommentAction && this.IsShowSubCommentAction[post_id])
-    {
+    if(this.IsShowSubCommentAction && this.IsShowSubCommentAction[post_id]){
       this.IsShowSubCommentAction[post_id]=false;
     }
-    if(this.IsShowOption==false)
-    {
+    if(this.IsShowOption==false) {
 
-    }
-    else
-    {
+    }else{
       this.IsShowOption=false;
     }
     //this.open(confirmmodal);
@@ -184,11 +178,15 @@ export class PostCardComponent implements OnInit {
     this.modalService.open(blockConfirmModal);
   }
 
-  public ignorePost(ignoreConfirmModal, post_id, type){
+  public ignorePost(ignoreConfirmModal, post_id, type,ignoreData = null, delkey = null){
     //this.IsShowOption= !this.IsShowOption;
+    this.ignorePostData = ignoreData;
+    this.ignorePostKey = delkey;
+
     this.ignorePostId = post_id;
     this.ignorePostType = type;
     this.modalService.open(ignoreConfirmModal);
+    
   }
 
   report(reportConfirmModal, post_id, type, comments = null, delkey = null)
@@ -252,7 +250,12 @@ export class PostCardComponent implements OnInit {
         this.dataService.ignorePost(data).subscribe(data => {
           if (data.Ack == "1") {
             this.loading=false;
-            location.reload();
+            //location.reload();
+            if (this.ignorePostKey != null) {
+              this.ignorePostData[this.ignorePostKey].hide_div = true;
+            } else {
+              this.ignorePostData.hide_post_div = true;
+            }
           }
         }, error => {
           this.loading=false;
@@ -262,7 +265,12 @@ export class PostCardComponent implements OnInit {
         this.dataService.ignoreComment(data).subscribe(data => {
           if (data.Ack == "1") {
             this.loading=false;
-            location.reload();
+            //location.reload();
+            if (this.ignorePostKey != null) {
+              this.ignorePostData[this.ignorePostKey].hide_div = true;
+            } else {
+              this.ignorePostData.hide_post_div = true;
+            }
           }
         }, error => {
           this.loading=false;
