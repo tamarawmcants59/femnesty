@@ -320,9 +320,9 @@
                                     <span *ngIf="userNotiCnt > 0" class="badge notiCntCls" style="background-color:red">{{userNotiCnt}}</span>
                                 </a>
                                 <div ngbDropdownMenu class="dropdown-menu msg-item-worp new-msg-dropdown" aria-labelledby="dropdownMenuButton">
-                                    <div class="text-top"><span>LATEST MESSAGES</span> <!--<b>NEW MESSAGE</b>--></div>
+                                    <div class="text-top"><span>LATEST NOTIFICATIONS</span> <!--<b>NEW MESSAGE</b>--></div>
                                     <div class="innr" *ngIf="allNotiData && allNotiData.length > 0">
-                                        <a href="{{notiData.link}}" [ngClass]="{'unread':notiData.is_view == '0'}" *ngFor="let notiData of allNotiData" class="msg-item notify-box-top">
+                                        <a href="{{siteUrl+notiData.link}}" [ngClass]="{'unread':notiData.is_view == '0'}" *ngFor="let notiData of allNotiData" class="msg-item notify-box-top">
                                             <img class="img" *ngIf="notiData.profile_image" src="{{notiData.profile_image}}" />
                                             <div class="txt">
                                                 <div class="upr">

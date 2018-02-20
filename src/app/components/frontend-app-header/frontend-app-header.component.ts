@@ -11,6 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserService } from "../../frontend/user/user.service";
 //import { ChangeDetectorRef } from '@angular/core/src/change_detection/change_detector_ref';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'frontend-app-header',
   templateUrl: './frontend-app-header.component.html'
@@ -21,6 +22,7 @@ export class FrontendAppHeader {
   allNotiData = [];
   public loginForm: FormGroup;
   HeaderNavCls: string = '';
+  siteUrl: string = '';
   HeaderTopCls: string = '';
   lastScrollTop: number = 100;
   chatHeads: any[];
@@ -69,7 +71,7 @@ export class FrontendAppHeader {
         this.currentFireUserId = user.uid;
       }
     }).subscribe();
-    
+    this.siteUrl=environment.website_url+'/';
     //console.log(this.router.url);
     this.getCurrentPageName = this.router.url;
     if(this.getCurrentPageName!=''){
