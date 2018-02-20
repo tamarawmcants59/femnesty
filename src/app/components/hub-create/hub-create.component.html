@@ -123,7 +123,7 @@
                     <div class="col-sm-12">
                     <h5>Venu</h5>
                       <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>-->
-                      <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" #addressEdit>
+                      <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Eg. Resturant, Address *" #addressEdit>
                       <!-- <input type="text" class="form-control-plaintext" 
                         [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
                       <!-- <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div> -->
@@ -137,8 +137,7 @@
                       <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
                     </div>
                   </div>
-  <div class="form-group row">
-                   
+                  <div class="form-group row">
                     <div class="col-sm-12">
                     <h5>COST</h5>
                     <input type="number" class="form-control-plaintext" [(ngModel)]="addForm.cost" formControlName="cost" placeholder="Cost">
@@ -201,7 +200,7 @@
                     <h5>Starts</h5>
                   
                     <div class="col-sm-4 pdr-5 pdl-0">
-                      <ngx-date-picker class="" formControlName="recurring_start" [(ngModel)]="addForm.recurring_start" [disableInput]="true" [min]="minDate" (dateChanged)="onDateChanged($event)"></ngx-date-picker>
+                      <ngx-date-picker class="" formControlName="recurring_start" [(ngModel)]="addForm.recurring_start" [disableInput]="true" [min]="minDate" (selectedDateChange)="getStartDate($event)"></ngx-date-picker>
                       <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
                       <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter date</div>
                     </div>
@@ -280,28 +279,28 @@
                     <div class="col-sm-12">
                     <h5>RECURRENCE</h5>
                       <ul>
-                        <li class="red-txt">S</li>
+                        <li [ngClass]="(day=='0')?'red-txt':''">S</li>
                         <li [ngClass]="(day=='1')?'red-txt':''">M</li>
-                        <li>T</li>
-                        <li>W</li>
-                        <li>T</li>
-                        <li>F</li>
-                        <li>S</li>
+                        <li [ngClass]="(day=='2')?'red-txt':''">T</li>
+                        <li [ngClass]="(day=='3')?'red-txt':''">W</li>
+                        <li [ngClass]="(day=='4')?'red-txt':''">T</li>
+                        <li [ngClass]="(day=='5')?'red-txt':''">F</li>
+                        <li [ngClass]="(day=='6')?'red-txt':''">S</li>
                       </ul>
                     </div>
                   </div>
-                  <div class="form-group row half-time">
-                  <div class="col-sm-12">
-                    <h5>LAST DATE</h5>
-                  
-                    <div class="col-sm-4 pdr-5 pdl-0" *ngIf="addForm.type=='R'">
-                      <ngx-date-picker class="" formControlName="recurring_end" [(ngModel)]="addForm.recurring_end" [disableInput]="true" [min]="minDate"></ngx-date-picker>
-                      <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
-                      <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter last date</div>
-                    </div>
+                  <div class="form-group row half-time" *ngIf="addForm.type=='R'">
+                    <div class="col-sm-12">
+                      <h5>LAST DATE</h5>
                     
+                      <div class="col-sm-4 pdr-5 pdl-0">
+                        <ngx-date-picker class="" formControlName="recurring_end" [(ngModel)]="addForm.recurring_end" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+                        <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
+                        <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter last date</div>
+                      </div>
+                      
+                    </div>
                   </div>
-          </div>
                   <div class="form-group row">
                     <div class="col-sm-12">
                       <div class="col-sm-3">
