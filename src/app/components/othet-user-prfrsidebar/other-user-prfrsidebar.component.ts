@@ -79,24 +79,26 @@ export class OtherUserPrfrsidebarComponent implements OnInit {
 
     }
   }
-  public getLatestHub() {
+  public getLatestHub() { 
     this.dataService.getLatestHubs(this.loginUserId).subscribe(data => {
-      if (data.Ack == "1") {
-        this.totalLatestHubList = data.details2;
-        if (data.details2.length > 5) {
+      if (data.Ack == "1") { 
+        this.totalLatestHubList = data.details;
+        //alert(JSON.stringify( this.totalLatestHubList))
+        if (data.details.length > 5) {
           this.IsShowViewMore = true;
           this.latestHubList = [];
-          for (let i = 0; i < data.details2.length; i++) {
+          for (let i = 0; i < data.details.length; i++) {
             if (this.latestHubList.length < 5) {
-              this.latestHubList.push(data.details2[i]);
+              this.latestHubList.push(data.details[i]);
             }
           }
 
         }
         else {
           this.IsShowViewMore = false;
-          this.latestHubList = data.ActiveGroupList;
+          this.latestHubList = this.totalLatestHubList;
         }
+       
         //  this.latestHubList = data.details2;
         //console.log(this.groupMemberList);
       }
