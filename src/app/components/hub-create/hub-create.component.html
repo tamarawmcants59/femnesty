@@ -1,508 +1,528 @@
 <div class="row">
-  <div class="col-md-12 col-sm-12">
-    <div class="new-tabs">
-      <!-- <ul class="nav nav-tabs">
-        <li>
-          <a [routerLink]="['/user/hubs']">Find Hubs</a>
-        </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
-          <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
-        </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='create'}">
-          <a (click)="aboutToggleTab('create');resetAddPage();">Create Hub</a>
-        </li>
-        <li [ngClass]="{'active' : aboutActiveTab=='request'}">
-          <a (click)="aboutToggleTab('request');getMyHubRequest()">Hub Request</a>
-        </li>
-      </ul> -->
+    <div class="col-md-12 col-sm-12">
+      <div class="new-tabs">
+        <!-- <ul class="nav nav-tabs">
+          <li>
+            <a [routerLink]="['/user/hubs']">Find Hubs</a>
+          </li>
+          <li [ngClass]="{'active' : aboutActiveTab=='overview'}">
+            <a (click)="aboutToggleTab('overview');getHubList()">Hub List</a>
+          </li>
+          <li [ngClass]="{'active' : aboutActiveTab=='create'}">
+            <a (click)="aboutToggleTab('create');resetAddPage();">Create Hub</a>
+          </li>
+          <li [ngClass]="{'active' : aboutActiveTab=='request'}">
+            <a (click)="aboutToggleTab('request');getMyHubRequest()">Hub Request</a>
+          </li>
+        </ul> -->
+      </div>
     </div>
+  
+    <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
+      <div class="tab-content">
+        <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
+          <ul class="ulList">
+            <div class="menu">
+              <!-- <h3>Hub List</h3> -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+                    {{successMsg}}
+                  </div>
+                  <!--<pre>{{groupList}}</pre>-->
+                  <ul class="uilist connection-box" *ngIf="hubList?.length > 0">
+                    <li class="connectionList" *ngFor="let groupData of hubList">
+                      <div class="connectionImage">
+                        <a [routerLink]="['/user/hub_details/',groupData.slug]">
+                          <div class="img" [ngStyle]="{'background-image':'url('+groupData.image+')'}"></div>
+                        </a>
+                      </div>
+                      <div class="connectionText">
+                        <a [routerLink]="['/user/hub_details',groupData.slug]">
+                          <h2>{{groupData.title}}</h2>
+                        </a>
+                        <!-- <p>{{groupData.title}} members</p> -->
+                        <p *ngIf="groupData.privacy == 'O'">Public hub</p>
+                        <p *ngIf="groupData.privacy == 'P'">Private hub</p>
+                        <button type="button" class="btn btn-primary" (click)="editHubTab(groupData)">Edit Hub</button>
+                      </div>
+                    </li>
+                  </ul>
+                  <div *ngIf="hubList?.length == 0">
+                      <div class="col-md-12">
+                          <p class="nothing">No hub found.</p>
+                      </div>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='create'">
+      <div class="tab-content">
+        <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='create'}">
+          <ul class="ulList edit-forms">
+            <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
+              {{successMsg}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="(createErrorMsg != '')">
+              {{createErrorMsg}}
+            </div>
+            <!-- <h3>Create Hub</h3> -->
+            <h3>CREATE A HUB</h3>
+            
+            <p>Short description on what a hub is and what is required to make
+              <br> a hub and also what they are used for.</p>
+            <div class="menu">
+              <form class="login-form" [formGroup]="postform" (ngSubmit)="createHub()" #createGroupForm="ngForm">
+                <div class="">
+                  <div class="form-group row">
+                    <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
+                    <div class="col-sm-12">
+                    <h5>HUB NAME/TITLE</h5>
+                      <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
+                      <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title *">
+                      <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub title Required.</div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>CATEGORY</h5>
+                      <select class="form-control-plaintext" [(ngModel)]="addForm.category_id" required formControlName="category_id">
+                        <option value='' selected>Select Category *</option>
+                        <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
+                      </select>
+  
+                      <!-- <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title"> -->
+                      <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category required.</div>
+                    </div>
+                  </div>
+  <!-- <div class="form-group row">
+                   
+                    <div class="col-sm-12">
+                    <h5>VENUE</h5>
+                      <input type="hidden" class="form-control-plaintext" >
+                      <input type="text" class="form-control-plaintext" placeholder="E.g. Resturant, Address *">
+                      <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">E.g. Resturant, Address Required.</div>
+                    </div>
+                  </div> -->
+                  
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>organizer</h5>
+                      <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer *">
+                      <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer required.</div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>Venu</h5>
+                      <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>-->
+                      <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" #addressEdit>
+                      <!-- <input type="text" class="form-control-plaintext" 
+                        [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
+                      <!-- <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div> -->
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>Website</h5>
+                      <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
+                      <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
+                    </div>
+                  </div>
+  <div class="form-group row">
+                   
+                    <div class="col-sm-12">
+                    <h5>COST</h5>
+                    <input type="number" class="form-control-plaintext" [(ngModel)]="addForm.cost" formControlName="cost" placeholder="Cost">
+                    <div class="text-danger" *ngIf="!postform.controls['cost'].valid && postform.controls['cost'].touched">Please enter cost</div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                    <div class="col-sm-12">
+                      <input type="number" class="form-control-plaintext" [(ngModel)]="addForm.cost" formControlName="cost" placeholder="Cost">
+                      <div class="text-danger" *ngIf="!postform.controls['cost'].valid && postform.controls['cost'].touched">Please enter cost</div>
+                    </div>
+                  </div> -->
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>Contact E-mail</h5>
+                      <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail *"
+                        email>
+                      <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Enter valid email.</div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>Contact Phone</h5>
+                      <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone *">
+                      <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone required.</div>
+                    </div>
+                  </div>
+  
+  
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                    <h5>Description</h5>
+                      <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description *"></textarea>
+                      <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description required.</div>
+                    </div>
+                  </div>
+          <div class="form-group row">
+                    <div class="col-sm-12">
+                      <!-- <h5>HUB NAME/TITLE</h5> -->
+                      <div class="col-sm-3">
+                          
+                        <input type="radio" class="styled-radio" id="test11" formControlName="type" [(ngModel)]="addForm.type" value="O" (change)="checkValidation()">
+                        <label class="acpt-cond-after" for="test11">One Time</label> 
+                      </div>
+                      <div class="col-sm-3">
+                          <!-- <input type="radio" class="styled-radio" id="test11" formControlName="type" [(ngModel)]="addForm.type" value="O" (change)="checkValidation()">
+                          <label class="acpt-cond-after" for="test11">One Time</label>  -->
+  
+                        <input type="radio" class="styled-radio" id="test12" formControlName="type" [(ngModel)]="addForm.type" value="R" (change)="checkValidation()">
+                        <label class="acpt-cond-after" for="test12"> Recurring</label>
+                      </div>
+                      <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row half-time">
+                  <div class="col-sm-12">
+                    <h5>Starts</h5>
+                  
+                    <div class="col-sm-4 pdr-5 pdl-0">
+                      <ngx-date-picker class="" formControlName="recurring_start" [(ngModel)]="addForm.recurring_start" [disableInput]="true" [min]="minDate" (dateChanged)="onDateChanged($event)"></ngx-date-picker>
+                      <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
+                      <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter date</div>
+                    </div>
+                    <div class="col-sm-4 pdl-5" >
+  
+                      <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
+                      <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
+                      <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
+                    </div>
+                    <!-- <div class="col-sm-4 pdl-5">
+                       <p><input class="styled-radio" id="test1"  type="radio" formControlName="name_visible" value="1">
+                      <label class="acpt-cond-after" for="test1">ALL DAY EVENT?</label></p>
+                      <p><input class="styled-radio" id="test2"  type="radio" formControlName="name_visible" value="1">
+                      <label class="acpt-cond-after" for="test2">recurring event?</label></p>
+                    </div> -->
+                    <!-- <div class="col-sm-6" *ngIf="addForm.type=='R'">
+  
+                      <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
+                     
+                      <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
+                    </div> -->
+                  </div>
   </div>
-
-  <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='overview'">
-    <div class="tab-content">
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='overview'}">
-        <ul class="ulList">
-          <div class="menu">
-            <!-- <h3>Hub List</h3> -->
-            <div class="row">
-              <div class="col-md-12">
+  
+  <div class="form-group row half-time">
+                  <div class="col-sm-12">
+                    <h5>Ends</h5>
+                    <!-- <div class="col-sm-6" *ngIf="addForm.type=='R'">
+  
+                        <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
+                       
+                        <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
+                      </div> -->
+                    <div class="col-sm-4 pdr-5 pdl-0" >
+                      <ngx-date-picker class="" formControlName="recurring_start" [(ngModel)]="addForm.recurring_start" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+                      
+                      <div class="text-danger" *ngIf="!postform.controls['recurring_start'].valid && postform.controls['recurring_start'].touched">Please enter date</div>
+                    </div>
+                    <div class="col-sm-4 pdl-5" >
+  
+                      <ngx-time-picker [disableInput]="true" formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
+                      
+                      <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter end time</div>
+                    </div>
+                    
+                    <!-- <div class="col-sm-6" *ngIf="addForm.type=='R'">
+  
+                      <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
+                      
+                      <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
+                    </div> -->
+                  </div>
+  </div>
+  
+                  <!--<div class="form-group row" >
+                    
+                  </div>-->
+  
+                  <!-- <div class="form-group row half-time">
+                    <div class="col-sm-3">
+  
+                      <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
+                      
+                      <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
+                    </div>
+                    <div class="col-sm-3">
+                      <ngx-time-picker [disableInput]="true" formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
+  
+  
+  
+                     
+                      <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
+                    </div>
+                  </div> -->
+                  <div class="form-group row" *ngIf="addForm.type=='R'">
+                    <div class="col-sm-12">
+                    <h5>RECURRENCE</h5>
+                      <ul>
+                        <li class="red-txt">S</li>
+                        <li [ngClass]="(day=='1')?'red-txt':''">M</li>
+                        <li>T</li>
+                        <li>W</li>
+                        <li>T</li>
+                        <li>F</li>
+                        <li>S</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group row half-time">
+                  <div class="col-sm-12">
+                    <h5>LAST DATE</h5>
+                  
+                    <div class="col-sm-4 pdr-5 pdl-0" *ngIf="addForm.type=='R'">
+                      <ngx-date-picker class="" formControlName="recurring_end" [(ngModel)]="addForm.recurring_end" [disableInput]="true" [min]="minDate"></ngx-date-picker>
+                      <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
+                      <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter last date</div>
+                    </div>
+                    
+                  </div>
+          </div>
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="col-sm-3">
+  
+                        <input type="radio" [(ngModel)]="addForm.privacy" id="test13" checked class="styled-radio" formControlName="privacy" value="O"> 
+                        <label class="acpt-cond-after" for="test13">Public</label>
+                      </div>
+                      <div class="col-sm-3">
+  
+                        <input type="radio" [(ngModel)]="addForm.privacy" id="test14" class="styled-radio" formControlName="privacy" value="P"> 
+                        <label class="acpt-cond-after" for="test14">Private</label>
+                      </div>
+                      <div class="text-danger" *ngIf="!postform.controls['privacy'].valid && postform.controls['privacy'].touched">Privacy Required</div>
+                    </div>
+                  </div>
+                  <div class="form-group row" *ngIf="addForm.privacy=='P'">
+                    <div class="col-sm-12">
+                      <!-- <select class="form-control-plaintext" multiple>
+                        <option value="{{ user.id }}" *ngFor="let user of userSearchFrndList">{{ user?.name }}</option>
+                      </select> -->
+                      <ng-select [multiple]="true" [(ngModel)]="addForm.friends" formControlName="friends" [items]="items" placeholder="No city selected"></ng-select>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Hub Image</label>
+                    <div class="col-sm-8">
+                      <div class="upload-btn-wrapper uploadButtonPart">
+                        <button class="btn" (click)="openUpdateCoverProModal(updateCoverPictureModal)" type="button">Upload Image</button>
+                        <!-- <input type="file" name="myfile" (change)="fileChangePost($event)" /> -->
+                      </div>
+                      <div class="" *ngIf="showPostImgDive">
+                        <span class="result" *ngIf="postImgData">
+                          <img [src]="postImgData" [height]="100">
+                        </span>
+                      </div>
+                      <span class="result" *ngIf="coverImgData">
+                          <img [src]="coverImgData" [height]="100">
+                      </span>
+                      <div class="" *ngIf="!showPostImgDive && addForm.image">
+                        <span class="result" *ngIf="addForm.image">
+                          <img [src]="addForm.image" [height]="100">
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="saveChanges">
+  
+                    <!--<button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">Create</button>
+                    <button type="submit" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel</button>-->
+  
+                    <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">{{addForm.id?'Update':'Create'}} Hub</button> &nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel</button>
+                  </div>
+                </div>
+              </form>
+  
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='request'">
+      <div class="tab-content">
+  
+        <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='request'}">
+          <ul class="ulList">
+            <div class="menu">
+              <!-- <h3>Hub Request</h3> -->
+              <div class="grp-rqsts" *ngIf="hubRequestList?.length > 0">
                 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
                   {{successMsg}}
                 </div>
                 <!--<pre>{{groupList}}</pre>-->
-                <ul class="uilist connection-box" *ngIf="hubList?.length > 0">
-                  <li class="connectionList" *ngFor="let groupData of hubList">
-                    <div class="connectionImage">
-                      <a [routerLink]="['/user/hub_details/',groupData.slug]">
-                        <div class="img" [ngStyle]="{'background-image':'url('+groupData.image+')'}"></div>
-                      </a>
-                    </div>
-                    <div class="connectionText">
-                      <a [routerLink]="['/user/hub_details',groupData.slug]">
-                        <h2>{{groupData.title}}</h2>
-                      </a>
-                      <!-- <p>{{groupData.title}} members</p> -->
-                      <p *ngIf="groupData.privacy == 'O'">Public hub</p>
-                      <p *ngIf="groupData.privacy == 'P'">Private hub</p>
-                      <button type="button" class="btn btn-primary" (click)="editHubTab(groupData)">Edit Hub</button>
-                    </div>
-                  </li>
-                </ul>
-                <div *ngIf="hubList?.length == 0">
-                    <div class="col-md-12">
-                        <p class="nothing">No hub found.</p>
-                    </div>  
-                </div>
-              </div>
-            </div>
-          </div>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='create'">
-    <div class="tab-content">
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='create'}">
-        <ul class="ulList edit-forms">
-          <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-            {{successMsg}}
-          </div>
-          <div class="alert alert-danger" role="alert" *ngIf="(createErrorMsg != '')">
-            {{createErrorMsg}}
-          </div>
-          <!-- <h3>Create Hub</h3> -->
-          <h3>CREATE A HUB</h3>
-          
-          <p>Short description on what a hub is and what is required to make
-            <br> a hub and also what they are used for.</p>
-          <div class="menu">
-            <form class="login-form" [formGroup]="postform" (ngSubmit)="createHub()" #createGroupForm="ngForm">
-              <div class="">
-                <div class="form-group row">
-                  <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
-                  <div class="col-sm-12">
-                  <h5>HUB NAME/TITLE</h5>
-                    <input type="hidden" *ngIf="addForm.id" [(ngModel)]="addForm.id" class="form-control-plaintext" required formControlName="id">
-                    <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title *">
-                    <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">Hub title Required.</div>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>CATEGORY</h5>
-                    <select class="form-control-plaintext" [(ngModel)]="addForm.category_id" required formControlName="category_id">
-                      <option value='' selected>Select Category *</option>
-                      <option value="{{ catlist.id }}" *ngFor="let catlist of catList">{{ catlist?.title }}</option>
-                    </select>
-
-                    <!-- <input type="text" [(ngModel)]="addForm.title" class="form-control-plaintext" required formControlName="title" placeholder="Hub Name/Title"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['category_id'].valid && postform.controls['category_id'].touched">Category required.</div>
-                  </div>
-                </div>
-<div class="form-group row">
-                  <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Hub Title</label> -->
-                  <div class="col-sm-12">
-                  <h5>VENUE</h5>
-                    <input type="hidden" class="form-control-plaintext" >
-                    <input type="text" class="form-control-plaintext" placeholder="E.g. Resturant, Address *">
-                    <div class="text-danger" *ngIf="!postform.controls['title'].valid && postform.controls['title'].touched">E.g. Resturant, Address Required.</div>
-                  </div>
-                </div>
-                
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>organizer</h5>
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.organizer" required formControlName="organizer" placeholder="Organizer *">
-                    <div class="text-danger" *ngIf="!postform.controls['organizer'].valid && postform.controls['organizer'].touched">Organizer required.</div>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>location</h5>
-                    <!--<ng4geo-autocomplete [userSettings]="autocompleteSettings" (componentCallback)="autoCompleteCallback1($event)" class="auto-text-input"></ng4geo-autocomplete>-->
-                    <input type="text" class="form-control-plaintext" value="{{addForm.address}}" formControlName="address" placeholder="Type anything and you will get a location *" #addressEdit>
-                    <!-- <input type="text" class="form-control-plaintext" 
-                      [(ngModel)]="addForm.address" required formControlName="address" placeholder="Venue"> -->
-                    <!-- <div class="text-danger" *ngIf="!postform.controls['address'].valid && postform.controls['address'].touched">Venue Required</div> -->
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>Website</h5>
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.website" formControlName="website" placeholder="Website">
-                    <div class="text-danger" *ngIf="!postform.controls['website'].valid && postform.controls['website'].touched">Please enter Website</div>
-                  </div>
-                </div>
-
-                <!-- <div class="form-group row">
-                  <div class="col-sm-12">
-                    <input type="number" class="form-control-plaintext" [(ngModel)]="addForm.cost" formControlName="cost" placeholder="Cost">
-                    <div class="text-danger" *ngIf="!postform.controls['cost'].valid && postform.controls['cost'].touched">Please enter cost</div>
-                  </div>
-                </div> -->
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>Contact E-mail</h5>
-                    <input type="email" class="form-control-plaintext" [(ngModel)]="addForm.email" required formControlName="email" placeholder="Contact E-mail *"
-                      email>
-                    <div class="text-danger" *ngIf="!postform.controls['email'].valid && postform.controls['email'].touched">Enter valid email.</div>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>Contact Phone</h5>
-                    <input type="text" class="form-control-plaintext" [(ngModel)]="addForm.phone" required formControlName="phone" placeholder="Contact Phone *">
-                    <div class="text-danger" *ngIf="!postform.controls['phone'].valid && postform.controls['phone'].touched">Phone required.</div>
-                  </div>
-                </div>
-
-
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                  <h5>Description</h5>
-                    <textarea class="form-control-plaintext" [(ngModel)]="addForm.description" required formControlName="description" placeholder="Description *"></textarea>
-                    <div class="text-danger" *ngIf="!postform.controls['description'].valid && postform.controls['description'].touched">Description required.</div>
-                  </div>
-                </div>
-				<div class="form-group row">
-                  <div class="col-sm-12">
-                  	<h5>HUB NAME/TITLE</h5>
-                    <div class="col-sm-3">
-                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="O" (change)="checkValidation()"> One Time
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="radio" class="input_radio" formControlName="type" [(ngModel)]="addForm.type" value="R" (change)="checkValidation()"> Recurring
-                    </div>
-                    <div class="text-danger" *ngIf="!postform.controls['type'].valid && postform.controls['type'].touched">Hub Type Required</div>
-                  </div>
-                </div>
-
-                <div class="form-group row half-time">
-                <div class="col-sm-12">
-                	<h5>Starts</h5>
-                
-                  <div class="col-sm-4 pdr-5 pdl-0">
-                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
-                  </div>
-                  <div class="col-sm-4 pdl-5">
-
-                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
-                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
-                  </div>
-                  <div class="col-sm-4 pdl-5">
-                   	<p><input class="styled-radio" id="test1"  type="radio" formControlName="name_visible" value="1">
-                    <label class="acpt-cond-after" for="test1">ALL DAY EVENT?</label></p>
-                    <p><input class="styled-radio" id="test2"  type="radio" formControlName="name_visible" value="1">
-                    <label class="acpt-cond-after" for="test2">recurring event?</label></p>
-                  </div>
-                  <div class="col-sm-6" *ngIf="addForm.type=='R'">
-
-                    <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
-                      [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
-                  </div>
-                </div>
-</div>
-
-<div class="form-group row half-time">
-                <div class="col-sm-12">
-                	<h5>Ends</h5>
-                
-                  <div class="col-sm-4 pdr-5 pdl-0">
-                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
-                  </div>
-                  <div class="col-sm-4 pdl-5">
-
-                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
-                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
-                  </div>
-                  
-                  <div class="col-sm-6" *ngIf="addForm.type=='R'">
-
-                    <ngx-date-picker class="" [(ngModel)]="addForm.recurring_end" [disableInput]="true" formControlName="recurring_end" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.recurring_end" formControlName="recurring_end"
-                      [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['recurring_end'].valid && postform.controls['recurring_end'].touched">Please enter Recurring End date</div>
-                  </div>
-                </div>
-</div>
-
-                <!--<div class="form-group row" >
-                  
-                </div>-->
-
-                <div class="form-group row half-time">
-                  <div class="col-sm-3">
-
-                    <ngx-time-picker [disableInput]="true" formControlName="start_time" [(ngModel)]="addForm.start_time"></ngx-time-picker>
-                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.start_time" formControlName="start_time"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['start_time'].valid && postform.controls['start_time'].touched">Please enter start time</div>
-                  </div>
-                  <div class="col-sm-3">
-                    <ngx-time-picker [disableInput]="true" formControlName="end_time" [(ngModel)]="addForm.end_time"></ngx-time-picker>
-
-
-
-                    <!-- <input type="time" class="form-control-plaintext" [(ngModel)]="addForm.end_time" formControlName="end_time"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['end_time'].valid && postform.controls['end_time'].touched">Please enter End Time</div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                	<div class="col-sm-12">
-                	<h5>RECURRENCE</h5>
-                		<ul>
-                			<li class="red-txt">S</li>
-                			<li>M</li>
-                			<li>T</li>
-                			<li>W</li>
-                			<li>T</li>
-                			<li>F</li>
-                			<li>S</li>
-                		</ul>
-                	</div>
-                </div>
-                <div class="form-group row half-time">
-                <div class="col-sm-12">
-                	<h5>LAST DATE</h5>
-                
-                  <div class="col-sm-4 pdr-5 pdl-0">
-                    <ngx-date-picker class="" formControlName="date" [(ngModel)]="addForm.date" [disableInput]="true" [min]="minDate"></ngx-date-picker>
-                    <!-- <input type="date" class="form-control-plaintext" [(ngModel)]="addForm.date" formControlName="date" [min]="today"> -->
-                    <div class="text-danger" *ngIf="!postform.controls['date'].valid && postform.controls['date'].touched">Please enter date</div>
-                  </div>
-                  
-                </div>
-				</div>
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <div class="col-sm-3">
-                      <input type="radio" [(ngModel)]="addForm.privacy" checked class="input_radio" formControlName="privacy" value="O"> Public
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="radio" [(ngModel)]="addForm.privacy" class="input_radio" formControlName="privacy" value="P"> Private
-                    </div>
-                    <div class="text-danger" *ngIf="!postform.controls['privacy'].valid && postform.controls['privacy'].touched">Privacy Required</div>
-                  </div>
-                </div>
-                <div class="form-group row" *ngIf="addForm.privacy=='P'">
-                  <div class="col-sm-12">
-                    <!-- <select class="form-control-plaintext" multiple>
-                      <option value="{{ user.id }}" *ngFor="let user of userSearchFrndList">{{ user?.name }}</option>
-                    </select> -->
-                    <ng-select [multiple]="true" [(ngModel)]="addForm.friends" formControlName="friends" [items]="items" placeholder="No city selected"></ng-select>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-4 col-form-label">Hub Image</label>
-                  <div class="col-sm-8">
-                    <div class="upload-btn-wrapper uploadButtonPart">
-                      <button class="btn" (click)="openUpdateCoverProModal(updateCoverPictureModal)" type="button">Upload Image</button>
-                      <!-- <input type="file" name="myfile" (change)="fileChangePost($event)" /> -->
-                    </div>
-                    <div class="" *ngIf="showPostImgDive">
-                      <span class="result" *ngIf="postImgData">
-                        <img [src]="postImgData" [height]="100">
-                      </span>
-                    </div>
-                    <span class="result" *ngIf="coverImgData">
-                        <img [src]="coverImgData" [height]="100">
-                    </span>
-                    <div class="" *ngIf="!showPostImgDive && addForm.image">
-                      <span class="result" *ngIf="addForm.image">
-                        <img [src]="addForm.image" [height]="100">
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="saveChanges">
-
-                  <!--<button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">Create</button>
-                  <button type="submit" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel</button>-->
-
-                  <button type="submit" class="btn btn-primary" [disabled]="!createGroupForm.valid">{{addForm.id?'Update':'Create'}} Hub</button> &nbsp;&nbsp;
-                  <button type="button" class="btn btn-primary" (click)="aboutActiveTab='overview'">Cancel</button>
-                </div>
-              </div>
-            </form>
-
-          </div>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-12 col-sm-12 group-list" *ngIf="aboutActiveTab=='request'">
-    <div class="tab-content">
-
-      <div class="tab-pane fade" [ngClass]="{'in active' : aboutActiveTab=='request'}">
-        <ul class="ulList">
-          <div class="menu">
-            <!-- <h3>Hub Request</h3> -->
-            <div class="grp-rqsts" *ngIf="hubRequestList?.length > 0">
-              <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">
-                {{successMsg}}
-              </div>
-              <!--<pre>{{groupList}}</pre>-->
-              <div class="connectionsPart">
-                <ul class="hub-listing">
-                  <li>
-                    <div class="date caption">Date</div>
-                    <div class="title caption">Title</div>
-                    <div class="action caption">Action</div>
-                  </li>
-                  <li *ngFor="let groupData of hubRequestList">
-                    <div class="date">
-                      <span *ngIf="groupData.type!='R'">{{groupData.hub_date}}</span>
-                      <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}
-
-                        <br/> {{groupData.day}}
-                      </span>
-                      
-                      <br />{{groupData.start_time}} - {{groupData.end_time}}
-                      <!--<span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>-->
-                    </div>
-                    <div class="title">
-                      <a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
-                        {{groupData.title}}
-                      </a>
-                    </div>
-                    <div class="action">
-
-                      <span *ngIf="groupData.status == '2'" class="rejected-text">Rejected</span>
-                      <span *ngIf="groupData.status == '1'" class="accepted-text">Accepted</span>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-primary1">Unfollow</a>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
-                      <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
-
-                    </div>
-                  </li>
-                </ul>
-
-                <div class="new-tabs">
-                  <ul class="nav nav-tabs">
-                    <li [ngClass]="{'active' : hubReqTab==1}">
-                      <a (click)="hubReqTab=1" role="tab" data-toggle="tab">Attending</a>
+                <div class="connectionsPart">
+                  <ul class="hub-listing">
+                    <li>
+                      <div class="date caption">Date</div>
+                      <div class="title caption">Title</div>
+                      <div class="action caption">Action</div>
                     </li>
-                    <li [ngClass]="{'active' : hubReqTab==0}">
-                      <a (click)="hubReqTab=0" role="tab" data-toggle="tab">Not Responded yet</a>
-                    </li>
-                    <li [ngClass]="{'active' : hubReqTab==2}">
-                      <a (click)="hubReqTab=2" role="tab" data-toggle="tab">Rejected</a>
+                    <li *ngFor="let groupData of hubRequestList">
+                      <div class="date">
+                        <span *ngIf="groupData.type!='R'">{{groupData.hub_date}}</span>
+                        <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}
+  
+                          <br/> {{groupData.day}}
+                        </span>
+                        
+                        <br />{{groupData.start_time}} - {{groupData.end_time}}
+                        <!--<span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>-->
+                      </div>
+                      <div class="title">
+                        <a [routerLink]="['/user/hub_details',groupData.slug]" class="hub-listing-title">
+                          {{groupData.title}}
+                        </a>
+                      </div>
+                      <div class="action">
+  
+                        <span *ngIf="groupData.status == '2'" class="rejected-text">Rejected</span>
+                        <span *ngIf="groupData.status == '1'" class="accepted-text">Accepted</span>
+                        <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-primary1">Unfollow</a>
+                        <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
+                        <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
+  
+                      </div>
                     </li>
                   </ul>
-                  <div class="tab-content">
-                    <div class="tab-pane fade in active" id="attend">
-                      <ul class="hub-listing subcontent">
-                        <li class="mobile-off">
-                          <div class="date caption labc">Date</div>
-                          <div class="title caption labc">Title</div>
-                          <div class="action caption labc">Action</div>
-                        </li>
-                        <li *ngFor="let groupData of hubRequestList" style="margin-bottom:0px;border-bottom:0px;">
-
-                          <div *ngIf="groupData.status==hubReqTab">
-                            <div class="date labc">
-                              <span *ngIf="groupData.type!='R'">{{groupData.hub_date}}</span>
-                              <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}, {{groupData.day}}</span>
-                              <br />{{groupData.start_time}} - {{groupData.end_time}}
-                              <!--<span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>-->
+  
+                  <div class="new-tabs">
+                    <ul class="nav nav-tabs">
+                      <li [ngClass]="{'active' : hubReqTab==1}">
+                        <a (click)="hubReqTab=1" role="tab" data-toggle="tab">Attending</a>
+                      </li>
+                      <li [ngClass]="{'active' : hubReqTab==0}">
+                        <a (click)="hubReqTab=0" role="tab" data-toggle="tab">Not Responded yet</a>
+                      </li>
+                      <li [ngClass]="{'active' : hubReqTab==2}">
+                        <a (click)="hubReqTab=2" role="tab" data-toggle="tab">Rejected</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade in active" id="attend">
+                        <ul class="hub-listing subcontent">
+                          <li class="mobile-off">
+                            <div class="date caption labc">Date</div>
+                            <div class="title caption labc">Title</div>
+                            <div class="action caption labc">Action</div>
+                          </li>
+                          <li *ngFor="let groupData of hubRequestList" style="margin-bottom:0px;border-bottom:0px;">
+  
+                            <div *ngIf="groupData.status==hubReqTab">
+                              <div class="date labc">
+                                <span *ngIf="groupData.type!='R'">{{groupData.hub_date}}</span>
+                                <span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}, {{groupData.day}}</span>
+                                <br />{{groupData.start_time}} - {{groupData.end_time}}
+                                <!--<span *ngIf="groupData.type=='R'">{{groupData.recurring_start}} - {{groupData.recurring_end}}</span>-->
+                              </div>
+  
+                              <div class="title labc">
+                                <a [routerLink]="['/user/hub_details',groupData.slug]">
+                                  {{groupData.title}}
+                                </a>
+                              </div>
+                              <div class="action labc">
+                                <span *ngIf="groupData.status == '2'" class="rejected-text">Rejected</span>
+                                <span *ngIf="groupData.status == '1'" class="accepted-text">Accepted</span>
+                                <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-primary1">Unfollow</a>
+                                <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
+                                <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
+  
+                              </div>
                             </div>
-
-                            <div class="title labc">
-                              <a [routerLink]="['/user/hub_details',groupData.slug]">
-                                {{groupData.title}}
-                              </a>
-                            </div>
-                            <div class="action labc">
-                              <span *ngIf="groupData.status == '2'" class="rejected-text">Rejected</span>
-                              <span *ngIf="groupData.status == '1'" class="accepted-text">Accepted</span>
-                              <a href="javascript:void(0);" *ngIf="groupData.status == '1'" (click)="rejectHubRequest(groupData)" class="btn btn-primary1">Unfollow</a>
-                              <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="acceptHubRequest(groupData)" class="btn btn-primary1">Accept</a>
-                              <a href="javascript:void(0);" *ngIf="groupData.status == '0'" (click)="rejectHubRequest(groupData)" class="btn btn-black btn-default">Reject</a>
-
-                            </div>
-                          </div>
-
-                        </li>
-                      </ul>
+  
+                          </li>
+                        </ul>
+                      </div>
+  
                     </div>
-
                   </div>
                 </div>
               </div>
+              <div *ngIf="hubRequestList?.length == 0">
+                  <div class="col-md-12">
+                      <p class="nothing">No Hub request found.</p>
+                  </div>  
+              </div>
             </div>
-            <div *ngIf="hubRequestList?.length == 0">
-                <div class="col-md-12">
-                    <p class="nothing">No Hub request found.</p>
-                </div>  
-            </div>
-          </div>
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<ng-template #updateCoverPictureModal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Upload Image</h4>
-        <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-            <!--<span aria-hidden="true">&times;</span>-->
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
-            {{modalErrorMsg}}
-        </div>
-        <!--<div class="inner-bg">
-            <div class="icon-change">
-                <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
-                    <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
-                </div>
-            </div>
-        </div>-->
-        <div class="upload-demo">
-            <div class="upload-demo-wrap">
-                <div id="upload-demo"></div>
-            </div>
-        </div>
-		<div class="edit-option">
-        	<ul>
-        		<li>
-        			<a><img src="assets/images/move.png" alt="" /></a>
-        			<span>Move</span>
-        		</li>
-        		<li>
-        			<a><img src="assets/images/crop.png" alt="" /></a>
-        			<span>Crop</span>
-        		</li>
-        		<li>
-        			<a href="Javascript:void(0);">
-        			<label style="padding: 0; margin: 0; line-height: 1px;" for="upload"> <img src="assets/images/photo.png" alt="" /></label>
-        			<input type="file" id="upload" style="display: none;" accept="image/*" (change)="coverCropperChange($event)" />
-        			</a>
-        			<span>CHANGE IMAGE</span>
-        		</li>
-        	</ul>
-        </div>
-    </div>
-    <div class="modal-footer">
-    <a class="remove" (click)="resetCover()">REMOVE IMAGE</a>
-        <!--<button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>-->
-        <button type="button" class="btn modal-btn-primary btn-cancel" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn modal-btn-primary" (click)="closeModal()">Ok</button>
-    </div>
-</ng-template>
+  
+  <ng-template #updateCoverPictureModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+          <h4 class="modal-title">Upload Image</h4>
+          <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+              <!--<span aria-hidden="true">&times;</span>-->
+          </button>
+      </div>
+      <div class="modal-body">
+          <div class="alert alert-danger" role="alert" *ngIf="modalErrorMsg">
+              {{modalErrorMsg}}
+          </div>
+          <!--<div class="inner-bg">
+              <div class="icon-change">
+                  <div class=" btn modal-btn-black btn-default" style="float:right;">Change Image
+                      <input type="file" id="upload" accept="image/*" (change)="coverCropperChange($event)" />
+                  </div>
+              </div>
+          </div>-->
+          <div class="upload-demo">
+              <div class="upload-demo-wrap">
+                  <div id="upload-demo"></div>
+              </div>
+          </div>
+      <div class="edit-option">
+            <ul>
+              <li>
+                <a><img src="assets/images/move.png" alt="" /></a>
+                <span>Move</span>
+              </li>
+              <li>
+                <a><img src="assets/images/crop.png" alt="" /></a>
+                <span>Crop</span>
+              </li>
+              <li>
+                <a href="Javascript:void(0);">
+                <label style="padding: 0; margin: 0; line-height: 1px;" for="upload"> <img src="assets/images/photo.png" alt="" /></label>
+                <input type="file" id="upload" style="display: none;" accept="image/*" (change)="coverCropperChange($event)" />
+                </a>
+                <span>CHANGE IMAGE</span>
+              </li>
+            </ul>
+          </div>
+      </div>
+      <div class="modal-footer">
+      <a class="remove" (click)="resetCover()">REMOVE IMAGE</a>
+          <!--<button type="button" class="btn modal-btn-primary" (click)="resetCover()">Remove Image</button>-->
+          <button type="button" class="btn modal-btn-primary btn-cancel" (click)="c('Close click')">Cancel</button>
+          <button type="button" class="btn modal-btn-primary" (click)="closeModal()">Ok</button>
+      </div>
+  </ng-template>

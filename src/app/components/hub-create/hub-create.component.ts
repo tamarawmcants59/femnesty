@@ -50,6 +50,7 @@ export class HubCreateComponent implements OnInit {
   public searchData = { address: '', lat: '', lng: '' };
   public today = new Date().toJSON().split('T')[0];
   public hubReqTab = 1;
+  public day:any;
   @ViewChild("addressEdit") public searchElementRef: ElementRef;
 
   constructor(
@@ -90,9 +91,9 @@ export class HubCreateComponent implements OnInit {
       description: ['', [
         Validators.required
       ]],
-      // address: ['', [
-      //   Validators.required
-      // ]],
+      address: ['',''],
+      cost: ['',''],
+      name_visible:['',''],
       organizer: ['', [
         Validators.required
       ]],
@@ -102,15 +103,12 @@ export class HubCreateComponent implements OnInit {
       website: ['', [
         //Validators.required
       ]],
-      date: ['', [
-        Validators.required
+      recurring_start: ['', [
+        //Validators.required
       ]],
-      start_time: ['', [
-        Validators.required
-      ]],
-      end_time: ['', [
-        Validators.required
-      ]],
+      last_date: [''],
+      start_time: [''],
+      end_time: [''],
       type: ['', [
         Validators.required
       ]],
@@ -177,6 +175,53 @@ export class HubCreateComponent implements OnInit {
     this.addForm = { type: 'O', category_id: '', privacy: 'O' };
     this.searchData = { address: '', lat: '', lng: '' };
     
+  }
+  public onDateChanged(date)
+  {
+   // alert('here');
+  }
+  public set_day()
+  { //alert('here');
+    if (this.postform.get('type').value == 'R') {
+      let starts_date = this.postform.get('date').value;
+      this.day = new Date(starts_date).getDay();
+    //   let result = '';
+    //   switch (day) {
+    //     case 0: {
+    //       result = 'Sunday';
+    //       break;
+    //     }
+    //     case 1: {
+    //       result = 'Monday';
+    //       break;
+    //     }
+    //     case 2: {
+    //       result = 'Tuesday';
+    //       break;
+    //     }
+    //     case 3: {
+    //       result = 'Wednesday';
+    //       break;
+    //     }
+    //     case 4: {
+    //       result = 'Thursday';
+    //       break;
+    //     }
+    //     case 5: {
+    //       result = 'Friday';
+    //       break;
+    //     }
+    //     case 6: {
+    //       result = 'Saturday';
+    //       break;
+    //     }
+    //     default: {
+    //       result = 'Sunday';
+    //       break;
+    //     }
+    //   }
+    //  this.day = result;
+    }
   }
 
   public checkValidation() {
@@ -265,7 +310,7 @@ export class HubCreateComponent implements OnInit {
             const date = new Date(this.hubList[i].date);
             date.setHours(0, 0, 0, 0);
             let date1 = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-            let compareDate = this.postform.value.date;
+            let compareDate = this.postform.value.recurring_start;
             compareDate.setHours(0, 0, 0, 0);
             let compareDate1 = compareDate.getDate() + "/" + (compareDate.getMonth() + 1) + "/" + compareDate.getFullYear();
             if (this.postform.value.type == "O") {
@@ -280,7 +325,7 @@ export class HubCreateComponent implements OnInit {
               }
             }
             else if (this.postform.value.type == "R") {
-              let from = new Date(this.postform.value.date);
+              let from = new Date(this.postform.value.recurring_start);
               from.setHours(0, 0, 0, 0);
               let to = new Date(this.postform.value.recurring_end);
               to.setHours(0, 0, 0, 0);
@@ -303,7 +348,7 @@ export class HubCreateComponent implements OnInit {
             from.setHours(0, 0, 0, 0);
             let to = new Date(this.hubList[i].recurring_end);
             to.setHours(0, 0, 0, 0);
-            let check = this.postform.value.date;
+            let check = this.postform.value.recurring_start;
             check.setHours(0, 0, 0, 0);
             if (check >= from && check <= to) {
               this.createErrorMsg = "A hub already exists on the entered date.";
@@ -347,6 +392,8 @@ export class HubCreateComponent implements OnInit {
           {
           userValue.recurring_end=this.formatDate(userValue.recurring_end);
           }
+          //alert(JSON.stringify(userValue))
+
           this.hubService.createNewHub(userValue).subscribe(
             data => {
               this.showPostImgDive = false;
