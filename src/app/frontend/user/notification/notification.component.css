@@ -13,7 +13,9 @@
 .notify-right .icondown{margin-top: 15px;margin-right: 10px;}
 .notify-right .post-drop-box{width:202px;}
 
-
+.post-drop-box{
+	top: 22px !important;
+}
 
 
 
