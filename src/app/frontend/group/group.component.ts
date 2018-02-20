@@ -405,6 +405,7 @@ public invitediv = '';
       this.dataService.getGrpDetBySlug(dataUserDet)
         .subscribe(data => {
           //console.log(data);
+          //alert(JSON.stringify(data))
           if (data.Ack == "1") {
             this.groupDetailsData = data.GroupDetails[0];
             //alert(JSON.stringify(this.groupDetailsData))
@@ -1250,7 +1251,9 @@ public invitediv = '';
         this.loading = true;
         if (localStorage.getItem("address")) {
           let addressData = JSON.parse(localStorage.getItem("address"));
-          const data = { address: addressData.address, lat: addressData.lat, lng: addressData.lng, id: this.groupDetailsData.id };
+          //alert(JSON.stringify(addressData))
+          //lat: addressData.lat, lng: addressData.lng,
+          const data = { address: addressData.address, id: this.groupDetailsData.id };
           this.dataService.editGroupDataSend(data).subscribe(data => {
             this.cat_id = '';
             this.loading = false;
