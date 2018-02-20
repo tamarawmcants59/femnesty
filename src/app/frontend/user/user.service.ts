@@ -393,12 +393,10 @@ getuserPrivacy(form_data) {
   ).map(data => data);
 }
 
-getblock_list(form_data) { 
-  return this.apiService.post(
-    `/users/get_post_block_user`,
-    form_data
-  ).map(data => data);
-}
+  getblock_list(form_data) { 
+    return this.apiService.post(`/users/get_post_block_user`, form_data).map(data => data);
+  }
+  
   getUserAllNotiData(form_data){
     return this.apiService.post(`/users/appnotificationall`,form_data ).map(data => data);
   }

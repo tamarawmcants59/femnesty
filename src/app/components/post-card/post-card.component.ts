@@ -290,7 +290,7 @@ export class PostCardComponent implements OnInit {
         this.dataService.blockPost(data).subscribe(data => {
           if (data.Ack == "1") {
             this.loading=false;
-            location.reload();
+            //location.reload();
           }
         }, error => {
           this.loading=false;
@@ -300,7 +300,7 @@ export class PostCardComponent implements OnInit {
         this.dataService.blockComment(data).subscribe(data => {
           if (data.Ack == "1") {
             this.loading=false;
-            location.reload();
+            //location.reload();
           }
         }, error => {
           this.loading=false;
