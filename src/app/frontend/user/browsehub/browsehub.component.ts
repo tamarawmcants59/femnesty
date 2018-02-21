@@ -113,24 +113,26 @@ export class BrowsehubComponent implements OnInit {
         this.allCategories = data.categories;
         if(data.lat==0)
         {
-          if(this.currentLat!=''){
+          /*if(this.currentLat!=''){
             this.lat=this.currentLat;
           }else{
             this.lat= 51.5050328;
-          }
-          
+          }*/
+          this.lat= 51.5050328;
         }
         else
         {
           this.lat = data.lat;
         }
+        
         if(data.lng==0)
         {
-          if(this.currentLng!=''){
+          /*if(this.currentLng!=''){
             this.lng=this.currentLng;
           }else{
             this.lng= -0.08745629999998;
-          }
+          }*/
+          this.lng= -0.08745629999998;
         }
         else
         {

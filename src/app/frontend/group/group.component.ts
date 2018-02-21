@@ -577,7 +577,7 @@ public invitediv = '';
           else {
             this.allgroupstatusset = '';
           }
-
+          console.log(this.allgroupstatusset);
         }
       },
         error => { });
