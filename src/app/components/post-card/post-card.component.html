@@ -57,7 +57,7 @@
                 <!--<a href="javascript:void(0)" *ngIf="(!IsGroupAdmin && IsloginUserId != postData.user_id)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P',postData)">
                     Block
                 </a>-->
-                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId != postData.user_id  && postData.group_type == 1)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,postData.id,'P',postData)">
+                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId != postData.user_id)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,postData.id,'P',postData)">
                     Ignore
                 </a>
                 <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != postData.user_id) || (checkGrpAdminId == '' && IsloginUserId != postData.user_id && postData.group_type==1)" title="Block" (click)="blockUser(blockConfirmModal,postData.id,'P')">
@@ -196,7 +196,7 @@
                                                 <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtList.user_id) || (checkGrpAdminId == '' && IsloginUserId != cmtList.user_id  && postData.group_type == 1)" title="Block" (click)="blockUser(blockConfirmModal,cmtList.id,'C')">
                                                     Block
                                                 </a>
-                                                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId != cmtList.user_id  && postData.group_type == 1)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,cmtList.id,'C',postData.comments,key)">
+                                                <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId != cmtList.user_id)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,cmtList.id,'C',postData.comments,key)">
                                                     Ignore
                                                 </a>
                                                 <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtList.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtList.id,'C')">
@@ -269,7 +269,7 @@
                                                         <a href="javascript:void(0)" *ngIf="(IsGroupAdmin && IsloginUserId != cmtReply.user_id) || (checkGrpAdminId == '' && IsloginUserId != cmtReply.user_id  && postData.group_type == 1)" title="Block" (click)="blockUser(blockConfirmModal,cmtReply.id,'C')">
                                                             Block
                                                         </a>
-                                                        <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId != cmtReply.user_id  && postData.group_type == 1)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,cmtReply.id,'C',cmtList.reply,subkey)">
+                                                        <a href="javascript:void(0)" *ngIf="(IsGroupAdmin) || (checkGrpAdminId == '' && IsloginUserId != cmtReply.user_id)" title="Ignore" (click)="ignorePost(ignoreConfirmModal,cmtReply.id,'C',cmtList.reply,subkey)">
                                                             Ignore
                                                         </a>
                                                         <a href="javascript:void(0)" *ngIf="IsloginUserId != cmtReply.user_id" title="Report" (click)="reportComment(reportCmtConfirmModal,cmtReply.id,'C')">

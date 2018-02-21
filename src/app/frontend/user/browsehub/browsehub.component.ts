@@ -113,7 +113,12 @@ export class BrowsehubComponent implements OnInit {
         this.allCategories = data.categories;
         if(data.lat==0)
         {
-          this.lat=this.currentLat;
+          if(this.currentLat!=''){
+            this.lat=this.currentLat;
+          }else{
+            this.lat= 51.5050328;
+          }
+          
         }
         else
         {
@@ -121,7 +126,11 @@ export class BrowsehubComponent implements OnInit {
         }
         if(data.lng==0)
         {
-          this.lng=this.currentLng;
+          if(this.currentLng!=''){
+            this.lng=this.currentLng;
+          }else{
+            this.lng= -0.08745629999998;
+          }
         }
         else
         {
