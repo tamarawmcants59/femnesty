@@ -10,6 +10,7 @@
 
 <section class="section p-16">
   <div class="container">
+        <ngx-loading *ngIf="loading" [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
       <h1 *ngIf="shareYorStoryContent">{{shareYorStoryContent.below_header_heading}}</h1>
       <p *ngIf="shareYorStoryContent">{{shareYorStoryContent.below_header_content}}</p>
 <div class="alert alert-success" role="alert" *ngIf="(successMsg != '')">

@@ -268,13 +268,15 @@ export class EditdetailsComponent implements OnInit {
           if (details.Ack == "1") {
             this.loginUserDet = details.UserDetails[0];
             if (this.loginUserDet.dob) {
-
-              var res = this.loginUserDet.dob.split("-");
-              this.dobmonth = res[1]
+              let res = this.loginUserDet.dob.split("-");
+              let res_month = res[1].replace("0", "");
+              this.dobmonth = parseInt(res_month)-1;
               this.dobyear = res[0]
               this.dobdate = res[2]
               //alert(res[0])
               //this.loginUserDet.dateOfBirth = new Date(this.loginUserDet.dob);
+            }else{
+              this.validAge = false;
             }
 
             if (this.loginUserDet.noti_settings) {
@@ -322,9 +324,10 @@ export class EditdetailsComponent implements OnInit {
     this.loading = true;
     const loginUserId = localStorage.getItem("loginUserId");
     const result = {},
-      userValue = this.form.value;
+    userValue = this.form.value;
     userValue.id = loginUserId;
-    const dateOfBirth = this.form.value.dobyear + '-' + this.form.value.dobmonth + '-' + this.form.value.dobdate;
+    let selMonth=parseInt(this.form.value.dobmonth)+1;
+    const dateOfBirth = this.form.value.dobyear + '-' + selMonth + '-' + this.form.value.dobdate;
     const mobile = this.form.value.mobcode + '-' + this.form.value.mobnumber;
     userValue.mobile_number = mobile;
     //alert(JSON.stringify(userValue))

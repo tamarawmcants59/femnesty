@@ -21,7 +21,7 @@
                         <div class="MyGroups-list">
                             <h2>Account Details
                                 <span>
-                                    <button class="btn btn-primary" type="submit" value="Update">Update</button>
+                                    <button class="btn btn-primary" type="submit" value="Update" [disabled]="!validAge">Update</button>
                                     <!--<a class="btn btn-primary">Update</a>-->
                                 </span>
                             </h2>
@@ -101,6 +101,7 @@
                                             </li>
                                             <li>
                                                 <select class="form-control-plaintext" [(ngModel)]="dobmonth" formControlName="dobmonth" (ngModelChange)="calculateAge($event,'d')">
+                                                    <option value="">Month</option>
                                                     <option value="0">Jan</option>
                                                     <option value="1">Feb</option>
                                                     <option value="2">Mar</option>

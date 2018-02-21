@@ -202,8 +202,9 @@ export class SignupComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     if (this.form.valid) {
+      let selMonth=parseInt(this.form.controls['month'].value)+1;
       //const dateOfBirth = this.dob.value.getFullYear() + '-' + ('0' + (this.dob.value.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dob.value.getDate()).slice(-2);
-      const dateOfBirth = this.form.controls['year'].value + '-' + ('0' + (this.form.controls['month'].value + 1)).slice(-2) + '-' + ('0' + this.form.controls['day'].value).slice(-2);  
+      const dateOfBirth = this.form.controls['year'].value + '-' + ('0' + (selMonth)).slice(-2) + '-' + ('0' + this.form.controls['day'].value).slice(-2);  
         
       let signupJsonData = {
         "email": this.email.value.toString(),
@@ -213,9 +214,8 @@ export class SignupComponent implements OnInit {
         "occupation": this.occupation.value.toString(),
         'dob': dateOfBirth
       };
-
-      this.dataService.userSignup(signupJsonData)
-        .subscribe(data => {
+      console.log(signupJsonData);
+      /*this.dataService.userSignup(signupJsonData).subscribe(data => {
           let details = data;
           if (details.Ack == "1") {
             this.loading = false;
@@ -233,8 +233,7 @@ export class SignupComponent implements OnInit {
         },
         error => {
           this.loading = false;
-        }
-        );
+        });*/
     } else {
       alert('INVALID FORM');
 
