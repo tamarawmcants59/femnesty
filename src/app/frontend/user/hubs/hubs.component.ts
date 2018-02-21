@@ -981,6 +981,10 @@ export class HubsComponent implements OnInit {
     this.IsShowTopViewMore = false;
     this.filetredFriendList = [];
   }
+  public hideInvites(data,id)
+  {
+    data.is_blocked = true;
+  }
   public sendInvites(data,id) {
     
     data.is_send = true;

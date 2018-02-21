@@ -228,7 +228,8 @@
                                         </ul> -->
                                         <ul class="media-list connections" *ngIf="filetredFriendList?.length > 0 && divshow">
                                             <li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
-                                               	<div class="media-left">
+                                                <div *ngIf="!joinFrnd.is_blocked">   
+                                                <div class="media-left">
                                                     <a [routerLink]="['/user/profile',joinFrnd.display_name]">
                                                         <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}" style="height: 62px !important;"></div>
                                                     </a>
@@ -240,14 +241,16 @@
                                                 </div>
                                                 <div class="media-right media-middle">
                                                 	 <div class="button-holder-width">
-	                                                	 <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && qtd[joinFrnd.friend_id]!=true" type="button" class="btn btn-primary"
-	                                                        (click)="addGroupMember(joinFrnd.friend_id)">INVITE</button>
-	                                                    <button *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button>
-	                                                    <button class="btn btn-black btn-default">
+	                                                	 <button *ngIf="joinFrnd.friend_id!=isloginUserId && isloginUserId !='' && !joinFrnd.is_send" type="button" class="btn btn-primary"
+                                                            (click)="addGroupMember(joinFrnd,joinFrnd.friend_id)" >INVITE</button>
+                                                            <button type="button" class="btn btn-primary" *ngIf="joinFrnd.is_send">INVITE SEND</button>
+	                                                    <!-- <button *ngIf="qtd[joinFrnd.friend_id]==true" type="button" class="btn btn-primary" (click)="addGroupMember(joinFrnd.friend_id)">Invitation Sent</button> -->
+	                                                    <button class="btn btn-black btn-default" (click)="hideInvites(joinFrnd,joinFrnd.friend_id)">
 	                                                    	HIDE
 	                                                    </button>
                                                     </div>
                                                 </div>
+                                            </div>
                                             </li>
                                             <a class="view-more-down" style="margin:20px 0 0;padding-bottom: 50px;" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>
                                             <div class="nothing" *ngIf="!IsShowTopViewMore" style="padding-bottom: 50px;">Nothing More To Show</div>
@@ -426,7 +429,8 @@
                             
                             <ul class="media-list connections" *ngIf="filetredFriendList && filetredFriendList?.length > 0 && divshow">
                                 <li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
-                                        <div class="media-left">
+                                    <div *ngIf="joinFrnd.is_blocked == 0">
+                                    <div class="media-left">
                                         <a [routerLink]="['/user/profile',joinFrnd.display_name]">
                                             <div class="img" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}" style="height:62px !important"></div>
                                         </a>
@@ -439,11 +443,14 @@
                                     <div class="media-right media-middle">
                                         <div class="button-holder-width">
                                             <button type="button" class="btn btn-primary"
-                                            (click)="inviteFrndAsGroupMember(joinFrnd.friend_id)">INVITE</button>
-                                            <button class="btn btn-black btn-default">
+                                            (click)="inviteFrndAsGroupMember(joinFrnd,joinFrnd.friend_id)" *ngIf="!joinFrnd.is_send">INVITE</button>
+                                            <button type="button" class="btn btn-primary"
+                                             *ngIf="joinFrnd.is_send">INVITE SEND</button>
+                                            <button class="btn btn-black btn-default" (click)="hideInvites(joinFrnd,joinFrnd.id)">
                                                 HIDE
                                             </button>
                                         </div>
+                                    </div>
                                     </div>
                                 </li>
                                 <a class="view-more-down" style="margin:20px 0 0;padding-bottom: 50px;" href="javascript:void(0)" *ngIf="IsShowTopViewMore" (click)="viewMore()">Show More</a>

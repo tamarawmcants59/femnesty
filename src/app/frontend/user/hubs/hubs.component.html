@@ -468,7 +468,8 @@
 										<span (click)="resetFilter()">HIDE</span>
 									</h3>
 									<ul class="media-list connections" *ngIf="filetredFriendList?.length > 0">
-										<li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index">
+										<li class="media" *ngFor="let joinFrnd of filetredFriendList;let i=index" >
+											<div *ngIf="!joinFrnd.is_blocked">
 											<div class="media-left">
 												<a [routerLink]="['/user/profile',joinFrnd.display_name]">
 													<div class="img" style="height: 62px !important;" [ngStyle]="{'background-image':'url('+joinFrnd?.profile_image+')'}"></div>
@@ -484,11 +485,12 @@
 												<div class="button-holder-width">
 													<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd,joinFrnd.id)" *ngIf="!joinFrnd.is_send">INVITE</button>
 													<button type="button" class="btn btn-primary" *ngIf="joinFrnd.is_send">INVITE SEND</button>
-													<button class="btn btn-black btn-default">
+													<button class="btn btn-black btn-default" (click)="hideInvites(joinFrnd,joinFrnd.id)">
 														HIDE
 													</button>
 												</div>
 											</div>
+										</div>
 										</li>
 									</ul>
 

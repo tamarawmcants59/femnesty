@@ -775,7 +775,8 @@ public invitediv = '';
     }
   }
 
-  public inviteFrndAsGroupMember(join_uid) {
+  public inviteFrndAsGroupMember(data,join_uid) {
+    data.is_send = true;
     this.loading = true;
     if (join_uid != '') {
       const dataUserDet = {
@@ -800,9 +801,13 @@ public invitediv = '';
         });
     }
   }
-
-  public addGroupMember(join_uid, index) {
-
+  public hideInvites(data,id)
+  { 
+    data.is_blocked = true;
+  }
+  public addGroupMember(data,join_uid, index) {
+  
+    data.is_send = true;
 
     this.loading = true;
     if (join_uid != '') {
