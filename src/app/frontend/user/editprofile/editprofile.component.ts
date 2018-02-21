@@ -347,6 +347,8 @@ export class EditprofileComponent implements OnInit {
               this.dobmonth = parseInt(res_month)-1;
               this.dobyear = res[0]
               this.dobdate = res[2]
+            }else{
+              this.validAge = false;
             }
             if (this.loginUserDet.mobile_number) {
               let res = this.loginUserDet.mobile_number.split("-");

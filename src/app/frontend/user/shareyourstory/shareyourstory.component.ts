@@ -10,6 +10,7 @@ import { FrontendService } from '../../../components/frontend-app-header/fronten
 export class ShareyourstoryComponent implements OnInit {
   public form: FormGroup;
   public allArticlecat = [];
+  public loading = false;
   postImgData: any;
   showPostImgDive: boolean;
   public loginUserId: any;
@@ -89,6 +90,7 @@ export class ShareyourstoryComponent implements OnInit {
   }
 
   public shareStoryArticle() {
+    this.loading = true;
     const userValue = this.form.value;
     userValue.user_id = this.loginUserId;
     userValue.image = this.postImgData;
@@ -97,6 +99,7 @@ export class ShareyourstoryComponent implements OnInit {
       //console.log(data);
       if (data.Ack == "1") {
         this.showPostImgDive = false;
+        this.loading = false;
         this.postImgData = '';
         this.successMsg = 'Successfully posted for approval.';
         this.form.reset();
