@@ -507,4 +507,8 @@ getuserPrivacy(form_data) {
   unreadNotification(data){
     return this.apiService.post(`/users/app_markas_unread`,data).map(data => data);
   }
+  
+  NotificationOff(data){
+    return this.apiService.post(`/users/app_notification_off`,data).map(data => data);
+  }
 }

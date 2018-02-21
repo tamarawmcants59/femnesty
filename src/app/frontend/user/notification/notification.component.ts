@@ -93,4 +93,22 @@ export class NotificationComponent implements OnInit {
     }
   }
 
+  public sendNotificationoff(noti_id,key){
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId != '') {
+      const dataUserDet = {
+        "user_id": loginUserId,
+        "id": noti_id
+      };
+      this.dataService.NotificationOff(dataUserDet).subscribe(data => {
+          if (data.Ack == "1") {
+            this.notificationAction(noti_id,'H',key)
+          }
+        },
+        error => {
+        });
+    }
+  }
+
+
 }
