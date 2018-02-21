@@ -39,7 +39,7 @@
                                         <div class="img" [ngStyle]="{'background-image':'url('+gimgdata.file_name+')'}"></div>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <a class="only-load-more" style="margin-top:6px">Load More</a>
+                                    <a class="only-load-more" style="margin-top:6px" *ngIf="IsShowTopViewMore" (click)="viewMore()">Load More</a>
                                 </div>
                               </div>
                             </div>

@@ -35,7 +35,7 @@
                   (setPopupAction)="setPopupAction($event)">
                 </emoji-input>-->
                 
-                <textarea class="form-control" rows="5" id="comment" formControlName="description" placeholder="Share your thoughts..."></textarea>
+                <textarea class="form-control" rows="5" id="comment" formControlName="description" (ngModelChange)="checkTextData($event)" placeholder="Share your thoughts..."></textarea>
                 <!--<i
                 (click)="toggled = !toggled"
                 [(emojiPickerIf)]="toggled"
@@ -104,7 +104,8 @@
                 <button type="submit" class="btn btn-default">Cancel</button>
             </div>-->
             <div class="col-md-5">
-            	<button type="button" class="btn btn-default">Cancel</button>
+                <button type="button" (click)="cancelPost()" class="btn btn-default" [disabled]="!postCmtTest">Cancel</button>
+                
                 <button type="submit" (click)="submitPost(postform.value)" class="btn btn-primary pull-right" [disabled]="!postForm.valid">Post</button>
             </div>
         </div>
