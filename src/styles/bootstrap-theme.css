@@ -5777,7 +5777,7 @@ background: url(../assets/images/down-arrow-gray.png)no-repeat left center;backg
 
 .only-load-more{color: #a8a8a8;text-transform: uppercase;font-size:12px;font-family: 'montserratmedium';letter-spacing: 1px;display: block;text-align: center;cursor: pointer;}
 
-.view-more-down:hover,.only-load-more:hover{color: #bf1a28}
+.view-more-down:hover,.only-load-more:hover,.view-more-down:focus,.view-more-down:active{color: #bf1a28}
 
 
 .right-share-new{padding: 56px 23px} 
@@ -5965,7 +5965,7 @@ input[type=text]:focus, textarea:focus {
 	
 }
 .nothing-more-show{display: block;text-align: center;font-size:12px;color:#7e7e7e}
-.nothing-more-show:hover{color:#bb1926;}
+.nothing-more-show:hover,.nothing-more-show:focus,.nothing-more-show:active{color:#7e7e7e;}
 
 /**********drop-down*********************/
 .new-msg-dropdown{width:433px;background: #fff !important;padding: 0}
@@ -6011,7 +6011,7 @@ ul.connectionlist.new-connection-list li .text-area p{font-size:10px;color: #707
 ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-size:9px;position: absolute;top:0}
 
 .new-chat-section .chat-holder ul li .text-area h5{font-size: 14px;letter-spacing: 0;padding: 23px 20px;}
-.new-chat-section .chat-holder{height: 645px;}
+.new-chat-section .chat-holder{height: 400px;}
 .new-chat-section .message-writing-wrap{padding-top: 0}
 .new-chat-section .message-writing-wrap textarea.form-control{padding: 25px 16px;}
 .new-chat-section .message-writing-wrap .form-group{margin-bottom: 0;}
