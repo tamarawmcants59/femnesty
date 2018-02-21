@@ -23,6 +23,7 @@ export class PostCreateComponent implements OnInit {
   public postform: FormGroup;
   public selected_post_type = 'Connection Only';
   public is_connection = 2;
+  public postCmtTest:boolean = false;
   loading: boolean;
   showPostImgDive: boolean;
   successMsg= '';
@@ -96,6 +97,7 @@ export class PostCreateComponent implements OnInit {
       this.dataService.postDataSend(userValue).subscribe(data => {
           this.showPostImgDive = false;
           this.loading = false;
+          this.postCmtTest=false;
           this.successMsg = 'Successfully posted.';
           this.postImgData='';
           this.is_connection=2;
@@ -125,11 +127,13 @@ export class PostCreateComponent implements OnInit {
       //console.log(image.src);
     };
     myReader.readAsDataURL(file);
+    this.postCmtTest=true;
   }
   
   public deleteImg() {
     this.postImgData='';
     this.showPostImgDive = false;
+    this.postCmtTest=false;
   }
   
   public togglePostOptions(){ 
@@ -196,5 +200,22 @@ public get_privacy_setting(){
          }
          );
  }
+
+  public checkTextData(values: Object): void {
+      if (values != '') {
+        this.postCmtTest=true;
+      } else {
+        this.postCmtTest=false;
+      }
+  }
+  
+  public cancelPost() {
+    this.postImgData='';
+    this.is_connection=2;
+    this.postform.controls['description'].setValue('');
+    this.postCmtTest=false;
+    this.showPostImgDive = false;
+  }
+  
 
 }

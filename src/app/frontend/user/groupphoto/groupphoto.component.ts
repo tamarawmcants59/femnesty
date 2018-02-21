@@ -14,6 +14,9 @@ export class GroupphotoComponent implements OnInit {
   public isGroupId="";
   public groupDetailsData: object = { };
   public groupImgList = [];
+  public totaluserImgList = [];
+  IsShowTopViewMore = false;
+  private myListPageSize = 6;
 
   constructor(
     private dataService: UserService,
@@ -63,11 +66,42 @@ export class GroupphotoComponent implements OnInit {
       this.dataService.getGroupImgListById(dataUserDet).subscribe(data => {
           //console.log(data);
           if (data.Ack == "1") {
-              this.groupImgList = data.AllImageByGroupId;
+              //this.groupImgList = data.AllImageByGroupId;
+
+              if (data.AllImageByGroupId.length > 6) {
+                this.IsShowTopViewMore = true;
+                this.groupImgList = [];
+                for (let i = 0; i < data.AllImageByGroupId.length; i++) {
+                  if (this.groupImgList.length < 6) {
+                    this.groupImgList.push(data.AllImageByGroupId[i]);
+                  }
+                }
+              }
+              else {
+                this.IsShowTopViewMore = false;
+                this.groupImgList = data.AllImageByGroupId;
+              }
+              this.totaluserImgList = data.AllImageByGroupId;
           } 
       },error => {
 
       });
+    }
+  }
+
+  viewMore() {
+    this.myListPageSize = this.myListPageSize + 6;
+    this.groupImgList = [];
+    if (this.totaluserImgList.length > this.myListPageSize) {
+      this.IsShowTopViewMore = true;
+    }
+    else {
+      this.IsShowTopViewMore = false;
+    }
+    for (let i = 0; i < this.myListPageSize; i++) {
+      if (this.totaluserImgList[i]) {
+        this.groupImgList.push(this.totaluserImgList[i]);
+      }
     }
   }
 }
