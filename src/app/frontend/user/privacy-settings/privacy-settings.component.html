@@ -173,7 +173,7 @@
                 				<h4>{{blockdata.name}}</h4>
                 			</div>
                 			<div class="new-acpt-reject">
-                				<a href="javascript:void(0)">PROFILE</a>  |  <a class="red" href="javascript:void(0)" (click)="unblock_user(blockdata.id)">UNBLOCK USER</a>
+                				<a [routerLink]="['/user/profile',blockdata.display_name]">PROFILE</a>  |  <a class="red" href="javascript:void(0)" (click)="unblock_user(blockdata.id)">UNBLOCK USER</a>
                 			</div>
                 		</div>
                 	</div>

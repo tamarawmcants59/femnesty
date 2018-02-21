@@ -151,7 +151,7 @@ public get_block_list(){
           if(data.Ack == 1)
           {
             this.block_user = data.block_user;
-            console.log(this.block_user)
+            
           }
           else
           {
@@ -177,13 +177,13 @@ public unblock_user(id){
         .subscribe(data => {
           if(data.Ack == 1)
           {
-            this.get_block_list()
+            this.get_block_list();
           }
           else
           {
             
           }
-          
+          location.reload();
         },
         error => {
           this.loading = false;
