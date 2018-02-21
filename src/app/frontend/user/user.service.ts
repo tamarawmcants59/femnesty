@@ -511,4 +511,12 @@ getuserPrivacy(form_data) {
   NotificationOff(data){
     return this.apiService.post(`/users/app_notification_off`,data).map(data => data);
   }
+  
+  close_account(data){
+    return this.apiService.post(`/users/app_close_account`,data).map(data => data);
+  }
+  
+  unblock_user(data){
+    return this.apiService.post(`/enrichment/app_unblock_user`,data).map(data => data);
+  }
 }
