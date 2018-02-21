@@ -148,7 +148,8 @@ export class EditdetailsComponent implements OnInit {
       console.log(error);
     })
   }
-  checkChange(id, event) {
+  public checkChange(id, event) {
+    
     if (!this.noti_settings) {
       this.noti_settings = [];
     }
@@ -186,9 +187,10 @@ export class EditdetailsComponent implements OnInit {
         }
         this.noti_settings = newArray;
       }
+      
     }
 
-
+    //alert(JSON.stringify(this.noti_settings))
 
 
   }
@@ -273,6 +275,8 @@ export class EditdetailsComponent implements OnInit {
               this.dobmonth = parseInt(res_month)-1;
               this.dobyear = res[0]
               this.dobdate = res[2]
+              
+              //alert(JSON.stringify(this.loginUserDet))
               //alert(res[0])
               //this.loginUserDet.dateOfBirth = new Date(this.loginUserDet.dob);
             }else{
@@ -291,9 +295,13 @@ export class EditdetailsComponent implements OnInit {
                   }
 
                 });
-
+                
               }, 100);
+              this.noti_settings = this.loginUserDet.noti_settings.split(',');
             }
+            
+            
+                //alert(JSON.stringify(this.noti_settings))
             if (this.loginUserDet.mobile_number) {
               //alert(this.loginUserDet.mobile_number)
               var res = this.loginUserDet.mobile_number.split("-");
@@ -339,6 +347,7 @@ export class EditdetailsComponent implements OnInit {
     else {
       userValue.noti_settings = "";
     }
+    //alert(JSON.stringify(userValue))
     this.dataService.updateAccountDet(userValue)
       .subscribe(
       data => {
