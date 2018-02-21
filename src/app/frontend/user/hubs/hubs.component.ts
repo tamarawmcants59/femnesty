@@ -981,7 +981,10 @@ export class HubsComponent implements OnInit {
     this.IsShowTopViewMore = false;
     this.filetredFriendList = [];
   }
-  public sendInvites(id) {
+  public sendInvites(data,id) {
+    
+    data.is_send = true;
+    
     const userValue = this.postform.value;
     userValue.hub_id = this.hubDetails.id;
     userValue.user_ids = [];
@@ -989,6 +992,7 @@ export class HubsComponent implements OnInit {
     this.hubService.sendInvites(userValue).subscribe(data => {
       if (data.Ack == 1) {
         this.successMsg = 'Request Sent Successfully';
+        
         //this.postform.reset();
         //this.filetredFriendList = [];
         if (this.filetredFriendList.length == 1) {

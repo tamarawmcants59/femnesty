@@ -482,7 +482,8 @@
 											</div>
 											<div class="media-right media-middle">
 												<div class="button-holder-width">
-													<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd.id)">INVITE</button>
+													<button type="button" class="btn btn-primary" (click)="sendInvites(joinFrnd,joinFrnd.id)" *ngIf="!joinFrnd.is_send">INVITE</button>
+													<button type="button" class="btn btn-primary" *ngIf="joinFrnd.is_send">INVITE SEND</button>
 													<button class="btn btn-black btn-default">
 														HIDE
 													</button>
