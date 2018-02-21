@@ -46,7 +46,7 @@
         </div>
         <a class="btn btn-primary" href="javascript:void(0)" *ngIf="IsShowViewMore" (click)="viewMore()">View More</a>
     </div>
-    <div class="innerRightPart" *ngIf="!latestHubList">
+    <div class="innerRightPart" *ngIf="!latestHubList && latestHubList?.length == 0">
             <h2 style="margin-bottom: 0">MY ATTENDING HUBS</h2>
             <div class="hubMet hubMet1 group">
                 
@@ -72,7 +72,7 @@
 
         </div>
     </div>
-    <div class="innerRightPart" *ngIf="!userGrpList">
+    <div class="innerRightPart" *ngIf="userGrpList && userGrpList?.length == 0">
             <h2 style="margin-bottom: 0">Groups</h2>
             <div class="hubMet hubMet1 group">
                 <div class="row">
