@@ -166,4 +166,29 @@ public get_block_list(){
 }
 
 
+
+public unblock_user(id){ 
+  
+  const dataUserDet = {
+    "id": id,
+    
+  };
+ this.dataService.unblock_user(dataUserDet)
+        .subscribe(data => {
+          if(data.Ack == 1)
+          {
+            this.get_block_list()
+          }
+          else
+          {
+            
+          }
+          
+        },
+        error => {
+          this.loading = false;
+        }
+        );
+}
+
 }

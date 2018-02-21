@@ -4,7 +4,10 @@ import { ViewChild } from '@angular/core';
 import { FormControl, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { UserService } from "../user.service";
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+import * as firebase from 'firebase';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -30,14 +33,24 @@ export class EditdetailsComponent implements OnInit {
   public mobcode: any;
   validAge = true;
   dayList = [];
-
+  public currentFireUserId: string = '';
 
   constructor(
     private modalService: NgbModal,
     private builder: FormBuilder,
     private dataService: UserService,
     private router: Router,
+    private db: AngularFirestore,
+    private afAuth: AngularFireAuth,
   ) {
+
+    this.afAuth.authState.do(user => {
+      if (user) {
+        this.currentFireUserId = user.uid;
+      }
+    }).subscribe();
+
+
     this.form = builder.group({
       first_name: ['', [
         Validators.required,
@@ -368,4 +381,46 @@ export class EditdetailsComponent implements OnInit {
       });
 
   }
+
+  public close_account()
+  {
+    this.loading = true;
+    const loginUserId = localStorage.getItem("loginUserId");
+    const dataUserDet = {
+      "user_id": parseInt(loginUserId)
+    };
+    this.dataService.close_account(dataUserDet)
+      .subscribe(
+      data => {
+        this.userLogout()
+      },
+      error => {
+        alert(error);
+      });
+  }
+
+  public userLogout() {
+    let usersRef = firebase.database().ref('presence/' + this.currentFireUserId);
+    let connectedRef = firebase.database().ref('.info/connected');
+    let fUserId = parseInt(localStorage.getItem("loginUserId"));
+    connectedRef.on('value', function (snapshot) {
+      usersRef.set({ online: false, userid: fUserId });
+      //usersRef.onDisconnect().remove();
+    });
+    //this.afAuth.logout();
+    firebase.auth().signOut().then(function () {
+      //console.log('Signed Out');
+    }, function (error) {
+      //console.error('Sign Out Error', error);
+    });
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("profile_image");
+    localStorage.removeItem("loginUserId");
+    localStorage.removeItem("groupAdmin");
+    this.router.navigateByUrl('/');
+    //return false;
+  }
+
 }
