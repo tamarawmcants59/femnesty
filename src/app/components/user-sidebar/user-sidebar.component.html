@@ -11,13 +11,13 @@
             </p>
         </a>
     </div>
-    <div class="messagePart">
+    <div class="messagePart left-link-section">
         <ul>
             <li>
                 <a [routerLink]="['/social_home']">
                     <span class="iconWidth">
                         <img src="assets/images/feed-icon.png">
-                    </span>MY FEED
+                    </span><b>MY FEED</b>
                     <!--<span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>-->
                 </a>
             </li>
@@ -25,7 +25,7 @@
                 <a [routerLink]="['/user/chat/list']">
                     <span class="iconWidth">
                         <img src="assets/images/icon1.png">
-                    </span>MESSAGES
+                    </span><b>MESSAGES</b>
                     <!--<span class="badge" style="background-color:red" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>-->
                 </a>
             </li>
@@ -33,13 +33,13 @@
                 <a [routerLink]="['/user/myconnection']" *ngIf="!connectionsCount">
                     <span class="iconWidth">
                         <img src="assets/images/icon2.png">
-                    </span>CONNECTIONS
+                    </span><b>CONNECTIONS</b>
                    
                 </a>
                 <a [routerLink]="['/user/myconnection']" *ngIf="connectionsCount">
                     <span class="iconWidth badge connection-badge" style="width:25px;float:left;background-color:#BB1926">
                      {{connectionsCount}}
-                    </span> &nbsp;CONNECTIONS
+                    </span><b>CONNECTIONS</b>
                    
                 </a>
             </li>
@@ -47,14 +47,15 @@
                 <a [routerLink]="['/group/find']">
                     <span class="iconWidth">
                         <img src="assets/images/icon3.png">
-                    </span>GROUPS</a>
+                    </span><b>GROUPS</b>
+                </a>
             </li>
             <!--<li><a [routerLink]="['/group']">Groups</a></li>-->
             <li>
                 <a [routerLink]="['/user/hubs']">
                     <span class="iconWidth">
                         <img src="assets/images/icon4.png">
-                    </span>Hubs</a>
+                    </span><b>Hubs</b></a>
             </li>
             <!-- <li>
                 <a [routerLink]="['/user/find_friends']">
