@@ -2515,7 +2515,8 @@ background: #fff !important;}
     text-transform: uppercase;
     color: #202020;
     font-size: 11px;
-    
+    display: block;
+    padding:2px 0;
 }
 
 .messagePart ul li {
@@ -2541,11 +2542,16 @@ background: #fff !important;}
     float: right;
     margin-top: 2px;
 }
+
+.messagePart.left-link-section ul li b{
+	font-weight: normal;display: inline-block;vertical-align: middle;
+}
 .iconWidth {
     width: 30px;
     display: inline-block;
 }
 .iconWidth img{width:18px;}
+.messagePart.left-link-section .iconWidth img{width:16px;}
 .onlineUsers {
     padding: 20px 0;
     border-bottom: 2px solid #f0f0f0;
@@ -5909,7 +5915,10 @@ input[type=text]:focus, textarea:focus {
 .invite-member-new .media-list.connections li .media-body h2{margin: 0;font-size:14px;color: #000000;text-align:left;}
 .invite-member-new .media-list.connections li .media-right button{font-size: 10px !important;padding: 9px 22px;text-transform: uppercase;margin: 3px 0;color:#fff;border-radius: 50px;border:0;min-width:92px;float:left;text-shadow: none;margin-left: 6px;}
 .invite-member-new .media-list.connections li .media-right button.btn-black{background: #373737;font-weight: normal;}
-.invite-member-new .media-list.connections li .media-right .button-holder-width{width:196px}
+.invite-member-new .media-list.connections li .media-right .button-holder-width{width: 236px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;}
 
 
 .modal-dialog{
@@ -5955,6 +5964,8 @@ input[type=text]:focus, textarea:focus {
 	float: right;
 	
 }
+.nothing-more-show{display: block;text-align: center;font-size:12px;color:#7e7e7e}
+.nothing-more-show:hover{color:#bb1926;}
 
 /**********drop-down*********************/
 .new-msg-dropdown{width:433px;background: #fff !important;padding: 0}
@@ -5995,6 +6006,7 @@ ul.connectionlist.new-connection-list li .image-area .round-image-holder{width:5
 ul.connectionlist.new-connection-list li .image-area{margin-right: 13px;}
 ul.connectionlist.new-connection-list li .text-area{position: relative;}
 ul.connectionlist.new-connection-list li .text-area h5{font-size:14px;margin-top:3px;color: #000}
+ul.connectionlist.new-connection-list li .text-area h5 a{color: #000}
 ul.connectionlist.new-connection-list li .text-area p{font-size:10px;color: #707070}
 ul.connectionlist.new-connection-list li .time{right: 10px;color: #bf1a27;font-size:9px;position: absolute;top:0}
 
@@ -6199,7 +6211,10 @@ text-transform: uppercase;position: absolute;right:0;top:50%;transform: translat
 	overflow: hidden;
 	padding-bottom: 20px;
 }
+.garybar{width: 100%;height:26px;background: #f7f7f7}
 @media screen and (max-width:767px) {
+	.tooltips:hover:after,.tooltips:hover:before{content: "" !important;width: 100px !important;height: 100px !important;border: 0 !important;border-width:0 !important;display: none !important;}
+
 	.modal-dialog {
     margin: 188px auto;
     border-radius: 0 !important;

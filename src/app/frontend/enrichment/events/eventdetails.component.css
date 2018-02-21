@@ -8,6 +8,7 @@
 }
 .single-article P{
 	font-size: 14px !important;
+	line-height: 18px;
 }
 .single-article P span{
 	color: #5e5e5e
