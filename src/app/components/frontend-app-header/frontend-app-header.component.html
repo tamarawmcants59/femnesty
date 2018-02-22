@@ -478,12 +478,17 @@
                             </span>
                             <!--<a routerLinkActive="active" href="javascript:void(0)" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mob_chevron_down"><span> <i class="icon ion-chevron-down"></i></span></a>-->
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink6">
-                                <a class="dropdown-item" [routerLink]="['/enrichment/books']">Books</a>
-                                <a class="dropdown-item" [routerLink]="['/enrichment/videos']">Videos</a>
-                                <a class="dropdown-item" [routerLink]="['/enrichment/category_details',artCatData.slug]">Femnesty Events</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/books']" (click)="toggleCollapse()">Books</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/videos']" (click)="toggleCollapse()">Videos</a>
+                                <a class="dropdown-item" [routerLink]="['/enrichment/category_details',artCatData.slug]" (click)="toggleCollapse()">Femnesty Events</a>
                                 <!--<a class="dropdown-item" [routerLink]="['/enrichment']">All</a>-->
                             </div>
                         </li>
+                        <li>
+                                        <!--<a [routerLink]="['/company']">Create company</a>-->
+                                        <a [routerLink]="['/user/edit_details']" (click)="toggleCollapse()">Account Details</a>
+                                        <a [routerLink]="['/user/privacy_settings']" (click)="toggleCollapse()">Privacy Settings</a>
+                                    </li>
                         <!--<li><a routerLinkActive="active" [routerLink]="['/page/contribute']">Contribute</a></li>-->
                         <!--<li style="position: relative;" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="Javascript:void(0)" id="navbarDropdownMenuLinkConUserLog1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

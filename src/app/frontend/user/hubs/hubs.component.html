@@ -33,8 +33,8 @@
 						<p class="mb-0" *ngIf="loginUserId!=hubDetails.user_id">
 							<button *ngIf="hubDetails.hub_invite_status=='1'" type="button" class="btn btn-primary" (click)="attendHub(hubDetails)">{{hubDetails.is_attending?'Unfollow':'Attend'}}</button>
 							<button *ngIf=" hubDetails.privacy =='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="attendHubDetails(hubDetails)">Attend</button>
-							<button *ngIf="hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-primary" (click)="acceptHubRequest()">Accept</button>
-							<button *ngIf=" hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0'" type="button" class="btn btn-default" (click)="rejectHubRequest()">Reject</button>
+							<button *ngIf="hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0' && hubDetails.hub_invite_status" type="button" class="btn btn-primary" (click)="acceptHubRequest()">Accept</button>
+							<button *ngIf=" hubDetails.privacy !='O' && hubDetails.hub_invite_status=='0' && hubDetails.hub_invite_status" type="button" class="btn btn-default" (click)="rejectHubRequest()">Reject</button>
 							<a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{hubDetails.title}}
 							&dates={{startDateString}}/{{endDateString}}
 							&details={{hubDetails.description}}
@@ -155,7 +155,7 @@
 									</div>
 									<div class="item">
 										<span>PRIVACY</span>
-										<p>{{hubDetails.type=='O'?'Public':'Private'}}</p>
+										<p>{{hubDetails.privacy=='O'?'Public':'Private'}}</p>
 									</div>
 
 								</div>
@@ -380,7 +380,7 @@
 									</div>
 									<div class="item">
 										<span>PRIVACY</span>
-										<p>{{hubDetails.type=='O'?'Public':'Private'}}</p>
+										<p>{{hubDetails.privacy=='O'?'Public':'Private'}}</p>
 									</div>
 									<div *ngIf="hubDetails.type=='R'">
 									<div class="item item-last">
@@ -575,7 +575,7 @@
 						</a>-->
 						<p class="info">
 							<span>Privacy:</span>
-							<em>{{hubDetails.type=='O'?'Public':'Private'}}</em>
+							<em>{{hubDetails.privacy=='O'?'Public':'Private'}}</em>
 						</p>
 					</div>
 
