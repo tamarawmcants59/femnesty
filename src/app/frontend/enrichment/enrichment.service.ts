@@ -96,5 +96,8 @@ export class EnrichmentService {
     return this.apiService
            .delete(`/articles/${articleSlug}/comments/${commentId}`);
   }*/
-
+  getArticleBySlug(slug){
+    return this.apiService.get(`/enrichment/apparticledetailsbyslug/${slug}`)
+      .map(data => data);
+  }
 }

@@ -11,6 +11,7 @@ import { environment } from '../../../../environments/environment';
 export class EventcatComponent implements OnInit {
   articleCatData=[];
   articleListData=[];
+  articleListData2=[];
   SlugName='';
   public repoUrl = '';
 
@@ -20,17 +21,19 @@ export class EventcatComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.activatedRoute.params.subscribe((params: Params) => {
         this.SlugName = params['slug'];
     });
     this.repoUrl=environment.website_url+this.router.url;
-
+//alert(this.SlugName)
     this.serviceData.getCatDetBySlug(this.SlugName).subscribe(data=>{
         let details=data;
+       // alert(JSON.stringify(details))
         if (details.Ack=="1") {
             this.articleCatData = details.EventCatBySlug[0];
             this.articleListData = details.TopEventByCat;
+           // alert(JSON.stringify(this.articleCatData))
             //console.log(this.articleListData)
             return false;
         }else{
@@ -39,9 +42,28 @@ export class EventcatComponent implements OnInit {
         
       },
       error => {
+        //alert('err')
         console.log('Something went wrong!');
       }
     );
+    this.serviceData.getArticleBySlug('start-by-taking-care-of-yourself').subscribe(data=>{
+      let details=data;
+     // alert(JSON.stringify(details))
+      if (details.Ack=="1") {
+          //this.articleCatData = details.ArticleListBySlug[0];
+          //alert(JSON.stringify(this.articleCatData))
+          this.articleListData2 =details.ArticleListBySlug[0];
+          //console.log(this.articleListData)
+          return false;
+      }else{
+          return false;
+      }
+      
+    },
+    error => {
+      console.log('Something went wrong!');
+    }
+  );
   }
 }
 
