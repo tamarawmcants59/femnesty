@@ -214,8 +214,8 @@ export class SignupComponent implements OnInit {
         "occupation": this.occupation.value.toString(),
         'dob': dateOfBirth
       };
-      console.log(signupJsonData);
-      /*this.dataService.userSignup(signupJsonData).subscribe(data => {
+      //console.log(signupJsonData);
+      this.dataService.userSignup(signupJsonData).subscribe(data => {
           let details = data;
           if (details.Ack == "1") {
             this.loading = false;
@@ -233,7 +233,7 @@ export class SignupComponent implements OnInit {
         },
         error => {
           this.loading = false;
-        });*/
+        });
     } else {
       alert('INVALID FORM');
 
